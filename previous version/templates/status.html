@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Status Dashboard - AutoAssistGroup Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff758f;
+            --secondary: #ff7eb3;
+            --urgent: #ff4757;
+            --fast: #ffa502;
+            --medium: #ff6b81;
+            --low: #2ed573;
+            --waiting: #ffcc00;
+        }
+
+        /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
+        
+        /* Normal base font size - READABLE */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Normal Cards */
+        .dashboard-card, .ticket-card, .stats-card {
+            padding: 1rem !important;
+            margin-bottom: 1rem !important;
+            border-radius: 0.5rem !important;
+        }
+
+        /* Normal Buttons */
+        button, .btn {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 0.875rem !important;
+            border-radius: 0.375rem !important;
+        }
+
+        /* Normal Headers */
+        h1 { font-size: 1.875rem !important; }
+        h2 { font-size: 1.5rem !important; }
+        h3 { font-size: 1.25rem !important; }
+        h4 { font-size: 1.125rem !important; }
+
+        /* Normal Spacing */
+        .p-6 { padding: 1.5rem !important; }
+        .p-4 { padding: 1rem !important; }
+        .m-6 { margin: 1.5rem !important; }
+        .m-4 { margin: 1rem !important; }
+        .mb-6 { margin-bottom: 1rem !important; }
+        .mb-4 { margin-bottom: 1rem !important; }
+
+        /* Normal Grid Gaps */
+        .gap-6 { gap: 1.5rem !important; }
+        .gap-4 { gap: 1rem !important; }
+        .gap-2 { gap: 0.5rem !important; }
+
+        /* Normal Icons */
+        .fas, .fab, .far {
+            font-size: 1.25rem !important;
+        }
+
+        .stats-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 0.75rem;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 117, 143, 0.15);
+        }
+
+        .status-chart-container {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+        }
+
+        .priority-badge {
+            font-size: 0.75rem;
+            padding: 0.375rem 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge-urgent { background-color: #fee2e2; color: #b91c1c; }
+        .badge-fast { background-color: #fef3c7; color: #92400e; }
+        .badge-medium { background-color: #fce7f3; color: #9d174d; }
+        .badge-low { background-color: #dcfce7; color: #166534; }
+        .badge-open { background-color: #dbeafe; color: #1e40af; }
+        .badge-waiting { background-color: #fef9c3; color: #854d0e; }
+        .badge-resolved { background-color: #dcfce7; color: #166534; }
+        .badge-closed { background-color: #f3f4f6; color: #374151; }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .nav-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen">
+        <!-- Navigation -->
+        <nav class="bg-white shadow-md">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <a href="/" class="flex items-center">
+                            <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
+                        </a>
+                        <div class="hidden md:flex space-x-4">
+                            <a href="/" class="px-3 py-2 rounded hover:bg-gray-100 transition">Tickets</a>
+                            <a href="/dashboard" class="px-3 py-2 rounded hover:bg-gray-100 transition">Dashboard</a>
+                            <a href="/status" class="px-3 py-2 rounded bg-pink-50 text-pink-600 font-medium">Status</a>
+                            <a href="/create-ticket" class="px-3 py-2 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                            {% if current_user_role == 'Administrator' %}
+                            <a href="/technicians" class="px-3 py-2 rounded hover:bg-gray-100 transition">Technicians</a>
+                            <a href="/members" class="px-3 py-2 rounded hover:bg-gray-100 transition">Members</a>
+                            <a href="/admin" class="px-3 py-2 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 md:space-x-4">
+                        {% if current_user %}
+                        <span class="hidden sm:inline text-gray-600 text-sm md:text-base">{{ current_user }}</span>
+                        <a href="/logout" class="px-2 py-1 md:px-3 md:py-2 rounded bg-gray-100 hover:bg-gray-200 transition text-xs md:text-sm">Logout</a>
+                        {% else %}
+                        <a href="/login" class="px-2 py-1 md:px-3 md:py-2 rounded bg-pink-500 hover:bg-pink-600 transition text-white text-xs md:text-sm">Login</a>
+                        {% endif %}
+                        
+                        <!-- Mobile menu button -->
+                        <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn" onclick="toggleMobileMenu()">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu (hidden by default) -->
+                <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
+                    <div class="flex flex-col space-y-2 pt-4">
+                        <a href="/" class="px-3 py-2 rounded hover:bg-gray-100 transition">Tickets</a>
+                        <a href="/dashboard" class="px-3 py-2 rounded hover:bg-gray-100 transition">Dashboard</a>
+                        <a href="/status" class="px-3 py-2 rounded bg-pink-50 text-pink-600 font-medium">Status</a>
+                        <a href="/create-ticket" class="px-3 py-2 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                        {% if current_user_role == 'Administrator' %}
+                        <a href="/technicians" class="px-3 py-2 rounded hover:bg-gray-100 transition">Technicians</a>
+                        <a href="/members" class="px-3 py-2 rounded hover:bg-gray-100 transition">Members</a>
+                        <a href="/admin" class="px-3 py-2 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Page Header -->
+        <div class="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-6">
+            <div class="container mx-auto px-4">
+                <h1 class="text-2xl md:text-3xl font-bold">Ticket Status Dashboard</h1>
+                <p class="text-pink-100 mt-2">Real-time overview of ticket status and performance metrics</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            
+            <!-- Overview Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white stats-card shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-pink-100 mr-4">
+                            <i class="fas fa-ticket-alt text-pink-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-500">Total Tickets</h3>
+                            <p class="text-3xl font-bold" style="color: var(--primary);">{{ total_tickets }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white stats-card shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-blue-100 mr-4">
+                            <i class="fas fa-folder-open text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-500">Active Tickets</h3>
+                            <p class="text-3xl font-bold text-blue-600">{{ active_tickets }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white stats-card shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-yellow-100 mr-4">
+                            <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-500">Pending Response</h3>
+                            <p class="text-3xl font-bold text-yellow-600">{{ waiting_tickets }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white stats-card shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-green-100 mr-4">
+                            <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-500">Resolved Today</h3>
+                            <p class="text-3xl font-bold text-green-600">{{ resolved_today }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Breakdown Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Status Distribution -->
+                <div class="status-chart-container">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6">
+                        <i class="fas fa-chart-pie mr-2 text-pink-600"></i>
+                        Status Distribution
+                    </h2>
+                    <div class="space-y-4">
+                        {% for status, count in status_counts.items() %}
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <span class="priority-badge rounded-full
+                                    {% if status == 'Open' %}badge-open
+                                    {% elif status == 'Waiting for Response' %}badge-waiting
+                                    {% elif status == 'Resolved' %}badge-resolved
+                                    {% elif status == 'Closed' %}badge-closed
+                                    {% else %}bg-gray-100 text-gray-700{% endif %}">
+                                    {{ status }}
+                                </span>
+                                <span class="text-gray-700 font-medium">{{ count }} tickets</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-sm text-gray-500">
+                                    {{ "%.1f"|format((count / total_tickets * 100) if total_tickets > 0 else 0) }}%
+                                </span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Priority Distribution -->
+                <div class="status-chart-container">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6">
+                        <i class="fas fa-exclamation-triangle mr-2 text-pink-600"></i>
+                        Priority Distribution
+                    </h2>
+                    <div class="space-y-4">
+                        {% for priority, count in priority_counts.items() %}
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <span class="priority-badge rounded-full
+                                    {% if priority == 'Urgent' %}badge-urgent
+                                    {% elif priority == 'Fast' %}badge-fast
+                                    {% elif priority == 'Medium' %}badge-medium
+                                    {% else %}badge-low{% endif %}">
+                                    {% if priority == 'Urgent' %}🚨{% elif priority == 'Fast' %}⚡{% elif priority == 'Medium' %}🕒{% else %}🐢{% endif %}
+                                    {{ priority }}
+                                </span>
+                                <span class="text-gray-700 font-medium">{{ count }} tickets</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-sm text-gray-500">
+                                    {{ "%.1f"|format((count / total_tickets * 100) if total_tickets > 0 else 0) }}%
+                                </span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Status Table -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">
+                        <i class="fas fa-list mr-2 text-pink-600"></i>
+                        Detailed Ticket Status
+                    </h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Ticket ID
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Subject
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Priority
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Created
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Assigned To
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for ticket in recent_tickets %}
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="/ticket/{{ ticket.ticket_id }}" class="text-pink-600 font-medium hover:text-pink-800">
+                                        #{{ ticket.ticket_id }}
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm text-gray-900 truncate max-w-xs">
+                                        {{ ticket.subject | default('No Subject') }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="priority-badge rounded-full
+                                        {% if ticket.status == 'Open' %}badge-open
+                                        {% elif ticket.status == 'Waiting for Response' %}badge-waiting
+                                        {% elif ticket.status == 'Resolved' %}badge-resolved
+                                        {% elif ticket.status == 'Closed' %}badge-closed
+                                        {% else %}bg-gray-100 text-gray-700{% endif %}">
+                                        {{ ticket.status }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="priority-badge rounded-full
+                                        {% if ticket.priority == 'Urgent' %}badge-urgent
+                                        {% elif ticket.priority == 'Fast' %}badge-fast
+                                        {% elif ticket.priority == 'Medium' %}badge-medium
+                                        {% else %}badge-low{% endif %}">
+                                        {% if ticket.priority == 'Urgent' %}🚨{% elif ticket.priority == 'Fast' %}⚡{% elif ticket.priority == 'Medium' %}🕒{% else %}🐢{% endif %}
+                                        {{ ticket.priority }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ ticket.formatted_date }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {% if ticket.assigned_to %}
+                                        <span class="text-green-600">
+                                            <i class="fas fa-user mr-1"></i>{{ ticket.assigned_to }}
+                                        </span>
+                                    {% else %}
+                                        <span class="text-gray-400">Unassigned</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination Controls -->
+                {% if pagination %}
+                <div class="pagination-container px-6 py-4 border-t border-gray-200 flex justify-center items-center space-x-4">
+                    <!-- Previous Button -->
+                    {% if pagination.has_prev %}
+                    <a href="?page={{ pagination.prev_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                       class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors">
+                        <i class="fas fa-chevron-left mr-1"></i> Previous
+                    </a>
+                    {% else %}
+                    <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+                        <i class="fas fa-chevron-left mr-1"></i> Previous
+                    </span>
+                    {% endif %}
+                    
+                    <!-- Page Numbers -->
+                    <div class="flex space-x-2">
+                        {% for page_num in range(1, pagination.total_pages + 1) %}
+                            {% if page_num == pagination.current_page %}
+                            <span class="px-3 py-2 bg-pink-600 text-white rounded-lg font-semibold">
+                                {{ page_num }}
+                            </span>
+                            {% elif page_num <= 3 or page_num > pagination.total_pages - 3 or (page_num >= pagination.current_page - 1 and page_num <= pagination.current_page + 1) %}
+                            <a href="?page={{ page_num }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                               class="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+                                {{ page_num }}
+                            </a>
+                            {% elif page_num == 4 and pagination.current_page > 5 %}
+                            <span class="px-3 py-2 text-gray-500">...</span>
+                            {% elif page_num == pagination.total_pages - 3 and pagination.current_page < pagination.total_pages - 4 %}
+                            <span class="px-3 py-2 text-gray-500">...</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Next Button -->
+                    {% if pagination.has_next %}
+                    <a href="?page={{ pagination.next_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                       class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors">
+                        Next <i class="fas fa-chevron-right ml-1"></i>
+                    </a>
+                    {% else %}
+                    <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+                        Next <i class="fas fa-chevron-right ml-1"></i>
+                    </span>
+                    {% endif %}
+                    
+                    <!-- Page Info -->
+                    <div class="text-sm text-gray-600 ml-4">
+                        Showing {{ ((pagination.current_page - 1) * pagination.per_page + 1) }} to 
+                        {{ pagination.current_page * pagination.per_page if pagination.current_page * pagination.per_page < pagination.total_tickets else pagination.total_tickets }} 
+                        of {{ pagination.total_tickets }} tickets
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Creation Method Stats -->
+            
+
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) {
+                mobileMenu.classList.toggle('hidden');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.querySelector('.mobile-menu-btn');
+            
+            if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html> 

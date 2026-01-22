@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if selected_role %}{{ selected_role|title }} Login{% else %}Login{% endif %} - AutoAssistGroup</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== COMPACT UI STYLES - UNIFIED HOMEPAGE STYLING ===== */
+        
+        /* Reduce base font size - EXTRA SMALL */
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem !important;
+            line-height: 1.3 !important;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Role-based body backgrounds - Full screen coverage */
+        body.role-admin {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        body.role-tech-director {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        body.role-user {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        body.role-default {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        /* Main container with 70% height constraint */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .login-card {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+            border-radius: 0.75rem !important;
+            max-width: 400px !important;
+            width: 100%;
+            max-height: 93vh  !important; /* 70% of viewport height */
+            overflow-y: auto;
+            padding: 2rem !important;
+            position: relative;
+        }
+
+        /* Scrollbar styling for login card */
+        .login-card::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .login-card::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+        }
+        
+        .login-card::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+        }
+        
+        .login-card::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Normal Buttons */
+        button, .btn {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 0.875rem !important;
+            border-radius: 0.375rem !important;
+        }
+
+        /* Normal Headers */
+        h1 { font-size: 1.875rem !important; }
+        h2 { font-size: 1.5rem !important; }
+        h3 { font-size: 1.25rem !important; }
+        h4 { font-size: 1.125rem !important; }
+
+        /* Normal Form Fields */
+        input, select, textarea {
+            padding: 0.75rem !important;
+            font-size: 1rem !important;
+            border-radius: 0.5rem !important;
+        }
+
+        /* Normal Icons */
+        .fas, .fab, .far {
+            font-size: 1.25rem !important;
+        }
+
+        .input-field {
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            transform: translateY(-2px);
+        }
+
+        /* Shake animation for error feedback */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+            20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.5s ease-in-out;
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+        }
+
+        /* Role-based input focus styles */
+        .role-admin .input-field:focus {
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+            border-color: #6366f1;
+        }
+        .role-tech-director .input-field:focus {
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+        }
+        .role-director .input-field:focus {
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+        }
+        .role-engineer .input-field:focus {
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+        .role-support .input-field:focus {
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2);
+            border-color: #8b5cf6;
+        }
+        .role-default .input-field:focus {
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .role-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: white;
+            margin: 0 auto 0.5rem;
+        }
+
+        /* Role-based icon backgrounds */
+        .role-admin .role-icon {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        }
+        .role-tech-director .role-icon {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .role-user .role-icon {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .role-default .role-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .login-btn {
+            transition: all 0.3s ease;
+        }
+
+        /* Role-based button backgrounds */
+        .role-admin .login-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        }
+        .role-tech-director .login-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .role-user .login-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .role-default .login-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .login-card {
+                max-height: 80vh !important; /* Allow more height on mobile */
+                padding: 1.5rem !important;
+                margin: 1rem;
+            }
+            
+            .login-container {
+                padding: 1rem 0.5rem;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .login-card {
+                max-height: 75vh !important;
+                padding: 2rem !important;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .login-card {
+                max-height: 70vh !important;
+                padding: 2.5rem !important;
+            }
+        }
+
+        /* Desktop devices (1025px+) */
+        @media (min-width: 1025px) {
+            .login-card {
+                padding: 3rem !important;
+                max-width: 450px !important;
+                max-height: 70vh !important;
+            }
+        }
+
+        /* Landscape mobile orientation */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .login-card {
+                max-height: 85vh !important;
+                padding: 1.5rem !important;
+            }
+            
+            .role-icon {
+                margin-bottom: 0.25rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="text-center mb-4 sm:mb-5">
+                <a href="/portal" class="inline-block mb-2">
+                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="w-8 h-8 sm:w-10 sm:h-10 mx-auto object-contain">
+                </a>
+                
+                {% if selected_role %}
+                <div class="role-icon">
+                    {% if selected_role == 'admin' %}
+                    <i class="fas fa-user-shield"></i>
+                    {% elif selected_role == 'tech-director' %}
+                    <i class="fas fa-tools"></i>
+                    {% elif selected_role == 'user' %}
+                    <i class="fas fa-laptop-code"></i>
+                    {% else %}
+                    <i class="fas fa-user"></i>
+                    {% endif %}
+                </div>
+                
+                <h1 class="text-base sm:text-lg font-semibold text-gray-800 mb-1">
+                    {% if selected_role == 'admin' %}
+                    Admin Portal
+                    {% elif selected_role == 'tech-director' %}
+                    Technical Director
+                    {% elif selected_role == 'user' %}
+                    User Portal
+                    {% else %}
+                    Portal Access
+                    {% endif %}
+                </h1>
+                <p class="text-xs text-gray-500">
+                    {% if selected_role == 'admin' %}
+                    Enter your administrator credentials
+                    {% elif selected_role == 'tech-director' %}
+                    Enter your technical director credentials
+                    {% elif selected_role == 'user' %}
+                    Enter your user credentials
+                    {% else %}
+                    Enter your login credentials
+                    {% endif %}
+                </p>
+                {% else %}
+                <div class="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="max-w-full max-h-full object-contain">
+                </div>
+                <h1 class="text-base sm:text-lg font-semibold text-gray-800">AutoAssistGroup</h1>
+                <p class="text-xs text-gray-500">Support Portal</p>
+                {% endif %}
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="mb-4 p-3 rounded-lg border border-red-200 bg-red-50 text-red-700 text-sm shadow-sm animate-pulse" id="error-message">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2 text-red-500"></i>
+                            <span class="font-medium">{{ message }}</span>
+                        </div>
+                    </div>
+                    <script>
+                        // Clear password field when there's an error
+                        document.getElementById('password').value = '';
+                        // Add shake animation to password field
+                        const passwordField = document.getElementById('password');
+                        passwordField.classList.add('animate-shake');
+                        setTimeout(() => {
+                            passwordField.classList.remove('animate-shake');
+                        }, 500);
+                        
+                        // Auto-hide error message after 5 seconds
+                        setTimeout(() => {
+                            const errorMessage = document.getElementById('error-message');
+                            if (errorMessage) {
+                                errorMessage.style.transition = 'opacity 0.5s ease-out';
+                                errorMessage.style.opacity = '0';
+                                setTimeout(() => {
+                                    errorMessage.style.display = 'none';
+                                }, 500);
+                            }
+                        }, 5000);
+                    </script>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <!-- Back to Portal Selection -->
+            <div class="text-center mb-4">
+                <a href="/portal" class="text-sm text-gray-500 hover:text-gray-700 inline-flex items-center">
+                    <i class="fas fa-arrow-left mr-1"></i>
+                    Back to Portal Selection
+                </a>
+            </div>
+            
+            <form action="/login{% if selected_role %}?role={{ selected_role }}{% endif %}" method="POST" id="loginForm">
+                <!-- Member Selection (if members available for this portal) -->
+                {% if members and members|length > 0 %}
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Select Account</label>
+                    <div class="grid gap-3 max-h-32 overflow-y-auto">
+                        {% for member in members %}
+                        <div class="member-option border border-gray-200 rounded-lg p-3 cursor-pointer hover:bg-gray-50 hover:border-blue-300 transition-all" 
+                             onclick="selectMember('{{ member._id }}', '{{ member.name }}', '{{ member.user_id }}')">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-gradient-to-br 
+                                    {% if member.role == 'Administrator' %}from-blue-500 to-blue-600
+                                    {% elif member.role == 'Technical Director' %}from-orange-500 to-orange-600
+                                    {% else %}from-gray-500 to-gray-600{% endif %}
+                                    rounded-full flex items-center justify-center text-white font-semibold mr-3">
+                                    {{ member.name[0].upper() }}
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900">{{ member.name }}</p>
+                                    <p class="text-sm text-gray-500">{{ member.role }}</p>
+                                    <p class="text-xs text-gray-400">ID: {{ member.user_id }}</p>
+                                </div>
+                                <div class="w-4 h-4 border-2 border-gray-300 rounded-full member-radio" data-member="{{ member._id }}"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <!-- Hidden member_id field -->
+                <input type="hidden" id="member_id" name="member_id" value="">
+                
+                <!-- OR Divider -->
+                <div class="flex items-center mb-4">
+                    <div class="flex-1 border-t border-gray-300"></div>
+                    <span class="px-3 text-sm text-gray-500">or enter manually</span>
+                    <div class="flex-1 border-t border-gray-300"></div>
+                </div>
+                {% endif %}
+                
+                <!-- Manual User ID Input -->
+                <div class="mb-4">
+                    <label for="user_id" class="block text-sm font-medium text-gray-700 mb-2">User ID</label>
+                    <input type="text" id="user_id" name="user_id" 
+                           class="input-field w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           placeholder="Enter your user ID">
+                </div>
+                
+                <!-- Password Input -->
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <div class="relative">
+                        <input type="password" id="password" name="password" required 
+                               class="input-field w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="Enter your password">
+                        <button type="button" 
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
+                                onclick="togglePasswordVisibility()">
+                            <i id="password-toggle-icon" class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Login Button -->
+                <button type="submit" 
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 {% if selected_role == 'admin' %}bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500{% elif selected_role == 'tech-director' %}bg-amber-600 hover:bg-amber-700 focus:ring-amber-500{% elif selected_role == 'user' %}bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500{% endif %}">
+                    <i class="fas fa-sign-in-alt mr-2"></i>
+                    {% if selected_role %}
+                        {% if selected_role == 'admin' %}
+                        Access Admin Portal
+                        {% elif selected_role == 'tech-director' %}
+                        Access Tech Director Portal
+                        {% elif selected_role == 'user' %}
+                        Access User Portal
+                        {% else %}
+                        Login
+                        {% endif %}
+                    {% else %}
+                    Login
+                    {% endif %}
+                </button>
+            </form>
+
+            
+        </div>
+    </div>
+
+    <script>
+        let selectedMemberId = '';
+        
+        function selectMember(memberId, memberName, userId) {
+            // Clear all selections
+            document.querySelectorAll('.member-option').forEach(option => {
+                option.classList.remove('bg-blue-50', 'border-blue-400');
+                option.querySelector('.member-radio').classList.remove('bg-blue-500', 'border-blue-500');
+                option.querySelector('.member-radio').classList.add('border-gray-300');
+            });
+            
+            // Select clicked member
+            event.currentTarget.classList.add('bg-blue-50', 'border-blue-400');
+            const radio = event.currentTarget.querySelector('.member-radio');
+            radio.classList.remove('border-gray-300');
+            radio.classList.add('bg-blue-500', 'border-blue-500');
+            
+            // Set form values
+            document.getElementById('member_id').value = memberId;
+            document.getElementById('user_id').value = userId;
+            selectedMemberId = memberId;
+            
+            // Focus password field
+            document.getElementById('password').focus();
+        }
+        
+        // Clear member selection when typing in user_id manually
+        document.getElementById('user_id').addEventListener('input', function() {
+            if (this.value !== selectedMemberId) {
+                document.getElementById('member_id').value = '';
+                document.querySelectorAll('.member-option').forEach(option => {
+                    option.classList.remove('bg-blue-50', 'border-blue-400');
+                    option.querySelector('.member-radio').classList.remove('bg-blue-500', 'border-blue-500');
+                    option.querySelector('.member-radio').classList.add('border-gray-300');
+                });
+                selectedMemberId = '';
+            }
+        });
+        
+        // Password visibility toggle function
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.getElementById('password-toggle-icon');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Apply role-based styling
+        function applyRoleStyling() {
+            const selectedRole = '{{ selected_role or "default" }}';
+            const roleClass = 'role-' + (selectedRole === 'user' ? 'user' : selectedRole === 'tech-director' ? 'tech-director' : selectedRole === 'admin' ? 'admin' : 'default');
+            
+            // Apply role class to body
+            document.body.className = roleClass;
+        }
+
+        // Initialize role styling on page load
+        document.addEventListener('DOMContentLoaded', applyRoleStyling);
+    </script>
+</body>
+</html>

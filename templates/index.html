@@ -1,0 +1,3692 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoAssistGroup Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff758f;
+            --secondary: #ff7eb3;
+            --urgent: #ff4757;
+            --fast: #ffa502;
+            --medium: #ff6b81;
+            --low: #2ed573;
+            --waiting: #ffcc00;
+        }
+
+        /* ===== NAVBAR STYLES ===== */
+        nav {
+            border-bottom: 1px solid #e5e7eb;
+            min-height: auto;
+        }
+
+        nav .responsive-container {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Reduce navbar height further */
+        nav .responsive-container .flex {
+            min-height: 2.5rem;
+        }
+
+        nav a {
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover {
+            transform: translateY(-1px);
+        }
+
+
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+        }
+
+        /* Custom max-width for 1920px constraint */
+        .max-w-1920 {
+            max-width: 1920px;
+        }
+
+        /* Responsive container with max-width */
+        .responsive-container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .responsive-container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .responsive-container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Navbar responsive adjustments */
+        @media (max-width: 768px) {
+            nav .responsive-container {
+                padding-top: 0.375rem;
+                padding-bottom: 0.375rem;
+            }
+
+            nav .responsive-container .flex {
+                min-height: 2rem;
+            }
+        }
+
+        .ticket-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            min-width: 0;
+            /* Allows flex items to shrink properly */
+            position: relative;
+            /* Required for absolute positioned red dot */
+        }
+
+        /* Warranty Details Styling */
+        .warranty-details {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 8px;
+            border-left: 3px solid #f59e0b;
+            width: 104%;
+            box-sizing: border-box;
+        }
+
+        .warranty-details-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 4x;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .warranty-keywords {
+            font-size: 0.6875rem;
+            color: #c2410c;
+            line-height: 1.22;
+        }
+
+        .warranty-details i {
+            font-size: 0.75rem;
+        }
+
+        /* ===== RED DOT NOTIFICATION SYSTEM ===== */
+        .unread-notification-dot {
+            position: absolute;
+            top: -1px;
+            left: 90%;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b7a 100%);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 3px 10px rgba(255, 71, 87, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 20;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Enhanced Red Dot Notification System for has_unread_reply */
+        .w-3.h-3.bg-red-500.rounded-full.animate-pulse {
+            position: relative !important;
+            left: 84.5vw;
+            width: 18px !important;
+            height: 18px !important;
+            background: linear-gradient(135deg, #ff0015 0%, #ff4b5d 100%) !important;
+            border-radius: 50% !important;
+            border: 2px solid white !important;
+            box-shadow: 0 3px 10px rgba(255, 71, 87, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+            z-index: 20 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            animation: enhancedPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+        }
+
+        /* Enhanced pulse animation for red dots */
+        @keyframes enhancedPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                box-shadow: 0 3px 10px rgba(255, 71, 87, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(255, 71, 87, 0.6), 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        /* Hover effect for red dots */
+        .w-3.h-3.bg-red-500.rounded-full.animate-pulse:hover {
+            transform: scale(1.2) !important;
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.8), 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Pulse animation for NEW badge */
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+
+
+
+
+
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        .unread-notification-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b7a 100%);
+            border-radius: 50%;
+            animation: notificationPulse 2s infinite;
+        }
+
+        @keyframes notificationPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .unread-notification-dot:hover {
+            transform: scale(1.3);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.6), 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .unread-notification-dot:hover::before {
+            animation-play-state: paused;
+        }
+
+        .unread-notification-dot::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ff4757;
+            border-radius: 50%;
+            opacity: 0;
+            animation: ripple 2s infinite;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .unread-notification-dot:hover::after {
+            animation-play-state: paused;
+        }
+
+        /* Additional pulsing glow effect */
+        .unread-notification-dot {
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        /* Make red dot more prominent with additional styling */
+        .unread-notification-dot {
+            position: relative;
+        }
+
+        .unread-notification-dot::before {
+            animation: notificationPulse 2s infinite, glowPulse 3s ease-in-out infinite;
+        }
+
+
+        .ticket-card:has(.unread-notification-dot) {
+            border: 2px solid #ff4757;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            50% {
+                box-shadow: 0 6px 20px rgba(255, 71, 87, 0.7), 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        .ticket-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 117, 143, 0.2);
+        }
+
+        .ticket-important {
+            background-color: #fff9f9;
+            border-left: 4px solid var(--primary);
+        }
+
+        .priority-urgent {
+            border-left: 4px solid var(--urgent);
+        }
+
+        .priority-fast {
+            border-left: 4px solid var(--fast);
+        }
+
+        .priority-medium {
+            border-left: 4px solid var(--medium);
+        }
+
+        .priority-low {
+            border-left: 4px solid var(--low);
+        }
+
+        .stats-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 0.75rem;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .priority-badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .badge-urgent {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .badge-fast {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-medium {
+            background-color: #fce7f3;
+            color: #9d174d;
+        }
+
+        .badge-low {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-waiting {
+            background-color: #fef9c3;
+            color: #854d0e;
+        }
+
+        .badge-technical {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-payment {
+            background-color: #e0e7ff;
+            color: #4338ca;
+        }
+
+        .badge-support {
+            background-color: #ede9fe;
+            color: #5b21b6;
+        }
+
+        .badge-warranty {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-spam {
+            background-color: #f3e8ff;
+            color: #7e22ce;
+        }
+
+        .badge-others {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .forwarded-badge {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            border-left: 3px solid #38bdf8;
+        }
+
+        .member-badge {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            font-weight: 600;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            animation: modalFadeIn 0.3s;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 117, 143, 0.2);
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+
+
+
+        .ticket-card.unread:hover {
+            background-color: #fed7d7;
+            transform: translateX(2px);
+            transition: all 0.2s ease;
+        }
+
+        .ticket-card.unread::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 12px;
+            height: 12px;
+            background-color: #ff4757;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #ff4757;
+            animation: notificationPulse 2s infinite;
+            z-index: 10;
+        }
+
+
+
+        /* Blue notification pulse for forwarded tickets */
+        @keyframes blueNotificationPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+                transform: scale(1);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+                transform: scale(1.05);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+                transform: scale(1);
+            }
+        }
+
+        .forwarded-notification-badge.blinking {
+            animation: blueNotificationPulse 1.5s infinite;
+        }
+
+        .alert-pulse {
+            animation: alertPulse 2s infinite;
+        }
+
+        @keyframes alertPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Fullscreen styles */
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .fullscreen-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .fullscreen-search {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        /* Date divider styles removed as requested */
+
+        .reload-btn {
+            transition: transform 0.3s ease;
+        }
+
+        .reload-btn:hover {
+            transform: rotate(180deg);
+        }
+
+        .reload-btn.loading {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-button {
+            padding: 0 15px;
+            border-radius: 5px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            opacity: 0.9;
+        }
+
+        /* New: Enhanced styling for fullscreen ticket cards */
+        .fullscreen .ticket-card {
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+            border: 1px solid #e9ecef;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            width: 100% !important;
+            max-width: none !important;
+        }
+
+        .fullscreen .ticket-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #ffd6dd;
+        }
+
+        /* Ensure fullscreen tickets display in single column like main page */
+        .fullscreen #fullscreenTicketsContainer {
+            max-width: none;
+        }
+
+        .fullscreen #fullscreenTicketsContainer .space-y-4 {
+            width: 100%;
+        }
+
+        /* New: Highlight for today/yesterday tickets */
+        .ticket-today {
+            border-left: 4px solid #4ade80;
+        }
+
+        .ticket-yesterday {
+            border-left: 4px solid #60a5fa;
+        }
+
+        .ticket-week {
+            border-left: 4px solid #fbbf24;
+        }
+
+        /* Comprehensive Responsive Design - Mobile First */
+
+        /* Base styles (mobile-first) */
+        .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Small mobile devices (320px - 480px) */
+        @media (max-width: 480px) {
+            .container {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+
+            /* Header responsive */
+            header h1 {
+                font-size: 1.875rem !important;
+                /* text-3xl equivalent */
+            }
+
+            header p {
+                font-size: 0.875rem;
+            }
+
+            .stats-card {
+                padding: 0.75rem;
+                text-align: center;
+            }
+
+            .stats-card .text-3xl {
+                font-size: 1.5rem !important;
+            }
+
+            .ticket-card {
+                padding: 0.875rem;
+            }
+
+            /* Navigation responsive */
+            nav .container {
+                padding: 0.5rem;
+            }
+
+            nav .hidden.md\\:flex {
+                display: none !important;
+            }
+
+            /* Search container */
+            .enhanced-search-container {
+                padding: 1rem;
+            }
+
+            .search-input-container input {
+                font-size: 0.875rem;
+                padding: 0.625rem 1rem 0.625rem 2.25rem;
+            }
+
+            /* Buttons and badges */
+            .px-3.py-2 {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+
+            .px-2.py-1 {
+                padding: 0.375rem 0.5rem;
+                font-size: 0.6875rem;
+            }
+        }
+
+        /* Mobile devices (481px - 768px) */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .stats-card {
+                padding: 1rem;
+            }
+
+            .ticket-card {
+                padding: 1rem;
+            }
+
+            /* Navigation */
+            nav .hidden.md\\:flex {
+                display: none !important;
+            }
+
+            /* Make mobile menu visible */
+            .mobile-menu-btn {
+                display: block !important;
+            }
+        }
+
+        /* Tablet devices (769px - 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            /* Show navigation items */
+            nav .hidden.md\\:flex {
+                display: flex !important;
+            }
+
+            .stats-card {
+                padding: 1.25rem;
+            }
+
+            .ticket-card {
+                padding: 1.25rem;
+            }
+
+            /* Adjust grid for tablets */
+            .grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-6 {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+
+        /* Laptop screens (1025px - 1440px) */
+        @media (min-width: 1025px) and (max-width: 1440px) {
+            .container {
+                max-width: 100%;
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .stats-card {
+                padding: 1.5rem;
+            }
+
+            .ticket-card {
+                padding: 1.5rem;
+            }
+
+            /* Optimize grid for laptops */
+            .grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-6 {
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+
+            /* Better spacing for laptop screens */
+            header {
+                margin-bottom: 2.5rem;
+            }
+
+            .enhanced-search-container {
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* Large desktop screens (1441px+) */
+        @media (min-width: 1441px) {
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .stats-card {
+                padding: 2rem;
+            }
+
+            .ticket-card {
+                padding: 2rem;
+            }
+
+            /* Full grid for large screens */
+            .grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-6 {
+                grid-template-columns: repeat(6, 1fr) !important;
+            }
+        }
+
+        /* Ultra-wide screens (1920px+) */
+        @media (min-width: 1920px) {
+            .container {
+                max-width: 1600px;
+            }
+
+            .stats-card {
+                padding: 2.5rem;
+            }
+
+            .ticket-card {
+                padding: 2.5rem;
+            }
+        }
+
+        /* Enhanced dropdown styles */
+        .custom-dropdown {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 0.75rem 2.5rem 0.75rem 2.75rem;
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .custom-dropdown:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(255, 117, 143, 0.15);
+            background: linear-gradient(135deg, #ffffff 0%, #fef7f7 100%);
+        }
+
+        .custom-dropdown:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 117, 143, 0.2);
+            background: linear-gradient(135deg, #ffffff 0%, #fef7f7 100%);
+        }
+
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .dropdown-arrow {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            pointer-events: none;
+            transition: transform 0.2s ease;
+        }
+
+        .dropdown-container:focus-within .dropdown-arrow {
+            transform: translateY(-50%) rotate(180deg);
+            color: var(--primary);
+        }
+
+        .enhanced-search-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .search-input-container {
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 117, 143, 0.2);
+            background: #ffffff;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            transition: color 0.3s ease;
+        }
+
+        .search-input-container:focus-within .search-icon {
+            color: var(--primary);
+        }
+
+        .clear-button {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border: 2px solid #d1d5db;
+            color: #6b7280;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .clear-button:hover {
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+            border-color: #9ca3af;
+            color: #374151;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .clear-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Enhanced responsiveness for dropdowns and search */
+        @media (max-width: 768px) {
+            .custom-dropdown {
+                min-width: auto;
+                width: 100%;
+                margin-bottom: 0.5rem;
+                padding: 0.5rem 2rem 0.5rem 2.25rem;
+                font-size: 0.875rem;
+            }
+
+            .dropdown-container {
+                width: 100%;
+            }
+
+            .enhanced-search-container .flex {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .search-input-container {
+                width: 100%;
+            }
+
+            .clear-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .enhanced-search-container .flex {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .search-input-container {
+                flex: 1;
+                min-width: 300px;
+            }
+        }
+
+        /* Fullscreen modal responsiveness */
+        @media (max-width: 1024px) {
+            .fullscreen-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .fullscreen-search {
+                margin: 1rem 0;
+            }
+        }
+
+        /* Line clamp utilities for text truncation */
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Responsive word breaking */
+        .break-words {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        /* Closed ticket styling - grayed out appearance */
+        .ticket-card[data-status="Closed"],
+        .ticket-card[data-status="Resolved"] {
+            opacity: 0.7;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .ticket-card[data-status="Closed"] h3,
+        .ticket-card[data-status="Resolved"] h3 {
+            color: #6b7280;
+        }
+
+        .ticket-card[data-status="Closed"]:hover,
+        .ticket-card[data-status="Resolved"]:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Notification animation */
+        .fixed.top-4.right-4 {
+            transform: translateX(100%);
+        }
+
+        /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
+
+        /* Normal base font size - READABLE */
+        body {
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Normal Cards */
+        .dashboard-card,
+        .ticket-card,
+        .stats-card {
+            padding: 1rem !important;
+            margin-bottom: 1rem !important;
+            border-radius: 0.5rem !important;
+        }
+
+        /* Normal Badges */
+        .badge,
+        .priority-badge,
+        .member-badge {
+            padding: 0.5rem 1rem !important;
+            font-size: 0.875rem !important;
+            font-weight: 500 !important;
+        }
+
+        /* Normal Buttons */
+        button,
+        .btn {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 0.875rem !important;
+            border-radius: 0.375rem !important;
+        }
+
+        /* Normal Headers */
+        h1 {
+            font-size: 1.875rem !important;
+        }
+
+        h2 {
+            font-size: 1.5rem !important;
+        }
+
+        h3 {
+            font-size: 1.25rem !important;
+        }
+
+        h4 {
+            font-size: 1.125rem !important;
+        }
+
+        /* Normal Spacing */
+        .p-6 {
+            padding: 1.5rem !important;
+        }
+
+        .p-4 {
+            padding: 1rem !important;
+        }
+
+        .m-6 {
+            margin: 1.5rem !important;
+        }
+
+        .m-4 {
+            margin: 1rem !important;
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem !important;
+        }
+
+        /* Normal Grid Gaps */
+        .gap-6 {
+            gap: 1.5rem !important;
+        }
+
+        .gap-4 {
+            gap: 1rem !important;
+        }
+
+        .gap-2 {
+            gap: 0.5rem !important;
+        }
+
+        /* Normal Icons */
+        .fas,
+        .fab,
+        .far {
+            font-size: 1.25rem !important;
+        }
+
+        /* Normal Ticket Cards Specific */
+        .ticket-card {
+            padding: 1rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .ticket-card h3 {
+            font-size: 1.125rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        .ticket-card p {
+            font-size: 1rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        /* ===== 1920px OPTIMIZATION STYLES ===== */
+
+        /* Optimize for 1920px displays */
+        @media (min-width: 1920px) {
+            .responsive-container {
+                max-width: 1920px !important;
+                padding-left: 2rem !important;
+                padding-right: 2rem !important;
+            }
+
+            .stats-card {
+                padding: 2rem !important;
+                margin-bottom: 2rem !important;
+            }
+
+            .ticket-card {
+                padding: 1.5rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .ticket-card h3 {
+                font-size: 1.25rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .ticket-card p {
+                font-size: 1.125rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+
+            .badge,
+            .priority-badge,
+            .member-badge {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 1rem !important;
+            }
+
+            button,
+            .btn {
+                padding: 1rem 2rem !important;
+                font-size: 1rem !important;
+            }
+
+            .fas,
+            .fab,
+            .far {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        /* Ultra-wide display optimization */
+        @media (min-width: 2560px) {
+            .responsive-container {
+                max-width: 2400px !important;
+                padding-left: 3rem !important;
+                padding-right: 3rem !important;
+            }
+
+            .stats-card {
+                padding: 3rem !important;
+                margin-bottom: 3rem !important;
+            }
+
+            .ticket-card {
+                padding: 2rem !important;
+                margin-bottom: 2rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="responsive-container py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-6">
+                    <a href="/" class="flex items-center">
+                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
+                    </a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="/" class="px-4 py-3 rounded bg-pink-50 text-pink-600 font-medium">Tickets</a>
+                        <a href="/dashboard" class="px-4 py-3 rounded hover:bg-gray-100 transition">Dashboard</a>
+                        <a href="/status" class="px-4 py-3 rounded hover:bg-gray-100 transition">Status</a>
+                        <a href="/create-ticket" class="px-4 py-3 rounded hover:bg-gray-100 transition">Create
+                            Ticket</a>
+                        {% if current_user_role == 'Administrator' %}
+                        <a href="/technicians" class="px-4 py-3 rounded hover:bg-gray-100 transition">Technicians</a>
+                        <a href="/members" class="px-4 py-3 rounded hover:bg-gray-100 transition">Members</a>
+                        <a href="/admin" class="px-4 py-3 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    {% if current_user %}
+                    <span class="hidden sm:inline text-gray-600 text-sm md:text-base">{{ current_user }}</span>
+                    <a href="/logout"
+                        class="px-2 py-1 md:px-3 md:py-2 rounded bg-gray-100 hover:bg-gray-200 transition text-xs md:text-sm">Logout</a>
+                    {% else %}
+                    <a href="/login"
+                        class="px-2 py-1 md:px-3 md:py-2 rounded bg-pink-500 hover:bg-pink-600 transition text-white text-xs md:text-sm">Login</a>
+                    {% endif %}
+
+                    <!-- Mobile menu button -->
+                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn"
+                        onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu (hidden by default) -->
+            <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
+                <div class="flex flex-col space-y-3 pt-4">
+                    <a href="/" class="px-4 py-3 rounded bg-pink-50 text-pink-600 font-medium">Tickets</a>
+                    <a href="/dashboard" class="px-4 py-3 rounded hover:bg-gray-100 transition">Dashboard</a>
+                    <a href="/status" class="px-4 py-3 rounded hover:bg-gray-100 transition">Status</a>
+                    <a href="/create-ticket" class="px-4 py-3 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                    {% if current_user_role == 'Administrator' %}
+                    <a href="/technicians" class="px-4 py-3 rounded hover:bg-gray-100 transition">Technicians</a>
+                    <a href="/members" class="px-4 py-3 rounded hover:bg-gray-100 transition">Members</a>
+                    <a href="/admin" class="px-4 py-3 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="assignModal" class="modal">
+        <div class="modal-content">
+            <h3 class="text-xl font-semibold mb-4">Confirm Ticket Assignment</h3>
+            <p class="mb-6" id="assignModalText"></p>
+            <div class="flex justify-end space-x-3">
+                <button id="cancelAssign"
+                    class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
+                    Cancel
+                </button>
+                <button id="confirmAssign"
+                    class="px-4 py-2 text-white rounded hover:opacity-90 transition bg-gradient-to-r from-pink-500 to-pink-600">
+                    Confirm Assignment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainContainer" class="responsive-container py-8 mt-4">
+        <header class="mb-6 md:mb-10 text-center">
+            <div class="flex flex-col items-center mb-3 md:mb-4">
+                <div class="w-16 h-8 md:w-20 md:h-10 mb-1 md:mb-2 flex items-center justify-center">
+                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="w-full h-full object-contain">
+                </div>
+                <h1 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">AutoAssistGroup Portal</h1>
+                <p class="text-xs md:text-sm text-pink-600">Customer Support Management System</p>
+            </div>
+
+            <div
+                class="flex flex-col sm:flex-row items-center justify-center sm:justify-end space-y-2 sm:space-y-0 sm:space-x-4">
+                <span class="text-sm md:text-base text-gray-600">Welcome, {{ current_user }}</span>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    {% if current_user_role == 'Administrator' %}
+                    <a href="/members" class="p-1.5 md:p-2 rounded-full hover:bg-gray-200 transition"
+                        title="Manage Members">
+                        <i class="fas fa-users-cog text-gray-600 text-lg md:text-xl"></i>
+                    </a>
+                    {% endif %}
+                    <a href="/create-ticket"
+                        class="px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:opacity-90 transition flex items-center text-sm md:text-base">
+                        <i class="fas fa-plus mr-1 md:mr-2"></i>
+                        <span class="hidden sm:inline">Create </span>Ticket
+                    </a>
+                    <button id="manualRefreshBtn"
+                        class="px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:opacity-90 transition flex items-center text-sm md:text-base"
+                        title="Check for new replies">
+                        <i class="fas fa-sync-alt mr-1 md:mr-2"></i>
+                        <span class="hidden sm:inline">Check </span>Updates
+                    </button>
+                    <a href="/logout" class="p-1.5 md:p-2 rounded-full hover:bg-gray-200 transition" title="Logout">
+                        <i class="fas fa-sign-out-alt text-gray-600 text-lg md:text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
+            <div class="bg-white stats-card shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-pink-100 mr-4">
+                        <i class="fas fa-ticket-alt text-pink-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-500">Total Tickets</h3>
+                        <p class="text-3xl font-bold" style="color: var(--primary);" data-stat="total">{{ total_tickets
+                            }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white stats-card shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-blue-100 mr-4">
+                        <i class="fas fa-folder-open text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-500">Open Tickets</h3>
+                        <p class="text-3xl font-bold" style="color: var(--medium);" data-stat="open">{{ open_tickets }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- New: Waiting for Response Stats Card -->
+            <div class="bg-white stats-card shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-yellow-100 mr-4">
+                        <i class="fas fa-clock text-yellow-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-500">Waiting for Response</h3>
+                        <p class="text-3xl font-bold" style="color: var(--waiting);" data-stat="waiting">{{
+                            waiting_tickets }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white stats-card shadow p-6">
+                <div class="flex flex-col">
+                    <h3 class="font-medium text-gray-500 mb-3">Priority Breakdown</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {% for priority, count in priorities.items() %}
+                        <span class="priority-badge rounded-full 
+                                {% if priority == 'Urgent' %}badge-urgent
+                                {% elif priority == 'Fast' %}badge-fast
+                                {% elif priority == 'Medium' %}badge-medium
+                                {% else %}badge-low{% endif %}" data-priority="{{ priority }}">
+                            {{ priority }}: {{ count }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white stats-card shadow p-6">
+                <div class="flex flex-col">
+                    <h3 class="font-medium text-gray-500 mb-3">Type Breakdown</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {% for classification, count in classifications.items() %}
+                        {% if classification in ['Support', 'Technical Issue', 'Warranty Claim', 'Payment', 'Spam',
+                        'Account'] %}
+                        <span class="priority-badge rounded-full 
+                                {% if classification == 'Support' %}badge-support
+                                {% elif classification == 'Technical Issue' %}badge-technical
+                                {% elif classification == 'Warranty Claim' %}badge-warranty
+                                {% else %}badge-others{% endif %}" data-classification="{{ classification }}">
+                            {% if classification == 'Warranty Claim' %}🛡️{% endif %}
+                            {{ classification }}: {{ count }}
+                        </span>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white stats-card shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-green-100 mr-4">
+                        <i class="fas fa-check-circle text-green-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-500">Resolved</h3>
+                        <p class="text-3xl font-bold" style="color: var(--low);" data-stat="resolved">{{
+                            resolved_tickets }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="enhanced-search-container mb-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="search-input-container">
+                    <input type="text" id="searchInput" placeholder="Search tickets by ID, subject, email..."
+                        class="search-input">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <div class="flex gap-3 flex-wrap">
+                    <div class="dropdown-container">
+                        <i class="fas fa-layer-group dropdown-icon"></i>
+                        <select id="typeFilter" class="custom-dropdown min-w-48">
+                            <option value="All">All Types</option>
+                            <option value="Technical Issue">Technical Issue</option>
+                            <option value="Payment">Payment</option>
+                            <option value="Support">Support</option>
+                            <option value="Spam">Spam</option>
+                            <option value="Warranty Claim">Warranty Claim</option>
+                            <option value="Account">Account</option>
+                        </select>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="dropdown-container">
+                        <i class="fas fa-exclamation-triangle dropdown-icon"></i>
+                        <select id="priorityFilter" class="custom-dropdown min-w-36">
+                            <option value="All">All Priority</option>
+                            <option value="Urgent">Urgent</option>
+                            <option value="Fast">Fast</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="dropdown-container">
+                        <i class="fas fa-tasks dropdown-icon"></i>
+                        <select id="statusFilter" class="custom-dropdown min-w-40">
+                            <option value="All">All Status</option>
+                            <option value="Open">Open</option>
+                            <option value="Waiting for Response">Waiting for Response</option>
+                            <option value="Resolved">Resolved</option>
+                        </select>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <button id="clearFilters" class="clear-button flex items-center">
+                        <i class="fas fa-times mr-2"></i> Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forwarded Tickets Section -->
+        {% if forwarded_tickets %}
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg shadow-lg overflow-hidden mb-6 border-l-4 ">
+            <div
+                class="px-6 py-4 border-b flex justify-between items-center bg-gradient-to-r from-blue-100 to-indigo-100">
+                <h2 class="text-xl font-semibold text-blue-800 flex items-center">
+                    <i class="fas fa-share mr-2"></i> Tickets Forwarded to You
+                </h2>
+                <span
+                    class="px-3 py-1 rounded-full text-sm font-medium bg-blue-600 text-white forwarded-notification-badge"
+                    id="forwardedBadge">
+                    {{ forwarded_tickets|length }} forwarded
+                </span>
+            </div>
+            <div class="space-y-3">
+                <!-- Show first 2 forwarded tickets (newest first) -->
+                {% for ticket in forwarded_tickets[:2] %}
+                <div
+                    class="flex items-start ticket-card p-4 hover:bg-blue-50 border-l-4 border-blue-400 bg-blue-25 rounded-r-lg">
+                    <div class="flex-1">
+                        <a href="/ticket/{{ ticket.ticket_id }}" class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <div class="flex items-center flex-wrap gap-2 mb-2">
+                                        <span class="font-bold text-gray-800">#{{ ticket.ticket_id }}</span>
+
+                                        <!-- Smart Warranty Detection Badge -->
+                                        {% if ticket.has_warranty %}
+                                        <span
+                                            class="px-2 py-1 text-xs rounded-full font-medium bg-green-100 text-green-800">
+                                            <i class="fas fa-shield-alt mr-1"></i> WARRANTY DETECTED
+                                        </span>
+                                        {% endif %}
+                                        <span class="px-2 py-1 text-xs rounded-full font-medium
+                                                {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
+                                                {% elif ticket.priority == 'Fast' %}bg-yellow-100 text-yellow-800
+                                                {% elif ticket.priority == 'Medium' %}bg-pink-100 text-pink-800
+                                                {% else %}bg-green-100 text-green-800{% endif %}">
+                                            {{ ticket.priority }}
+                                        </span>
+                                        {% if ticket.classification and ticket.classification in ['Technical Issue',
+                                        'Payment', 'Support', 'Warranty Claim', 'Spam', 'Account'] %}
+                                        <span
+                                            class="px-2 py-1 text-xs rounded-full font-medium bg-gray-100 text-gray-800">
+                                            {{ ticket.classification }}
+                                        </span>
+                                        {% endif %}
+                                        {% if ticket.assigned_to %}
+                                        <span
+                                            class="px-2 py-1 text-xs rounded-full font-medium {% if ticket.is_forwarded %}bg-blue-100 text-blue-800{% else %}bg-green-100 text-green-800{% endif %} border border-green-200">
+                                            {% if ticket.is_forwarded %}
+                                            <i class="fas fa-share mr-1"></i>
+                                            {% if ticket.assignment and ticket.assignment|length > 0 and
+                                            ticket.assignment[0].is_seen %}
+                                            Forwarded from {{ ticket.forwarded_from_name if ticket.forwarded_from_name
+                                            else 'Support Team' }} to {{ ticket.assigned_to }} (viewed)
+                                            {% else %}
+                                            Forwarded from {{ ticket.forwarded_from_name if ticket.forwarded_from_name
+                                            else 'Support Team' }} to {{ ticket.assigned_to }}
+                                            {% endif %}
+                                            {% else %}
+                                            <i class="fas a-check-circle mr-1"></i> Taken by {{ ticket.assigned_to }}
+                                            {% endif %}
+                                        </span>
+                                        {% if ticket.is_forwarded and ticket.forwarded_from_name %}
+                                        <span
+                                            class="px-2 py-1 text-xs rounded-full font-medium bg-gray-100 text-gray-700 border border-gray-200">
+                                            <i class="fas fa-user mr-1"></i>From {{ ticket.forwarded_from_name }} to {{
+                                            ticket.assigned_to }}
+                                        </span>
+                                        {% endif %}
+                                        {% endif %}
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-1 break-words line-clamp-2">{{
+                                        ticket.subject | default('No Subject') }}</h3>
+                                    <p class="text-gray-600 text-sm mb-3 line-clamp-2 break-words">{{ ticket.body |
+                                        default('No Body') }}</p>
+                                    <div class="flex flex-wrap items-center text-sm text-gray-500 gap-3">
+                                        <span class="truncate max-w-[150px] sm:max-w-[200px]"><i
+                                                class="fas fa-user mr-1"></i>{{ ticket.name | default('Anonymous')
+                                            }}</span>
+                                        <span class="truncate max-w-[150px] sm:max-w-[200px]"><i
+                                                class="fas fa-envelope mr-1"></i>{{ ticket.email | default('No Email')
+                                            }}</span>
+                                        <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date }}</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end space-y-2">
+                                    {% set creation_method = ticket.creation_method or 'auto-detect' %}
+                                    {% if creation_method == 'auto-detect' %}
+                                    {% if ticket.ticket_id and ticket.ticket_id.startswith('M') %}
+                                    {% set creation_method = 'manual' %}
+                                    {% elif ticket.thread_id or (ticket.email and '@' in ticket.email) or
+                                    ticket.ticket_id.startswith(('E', 'W', 'T', 'S', 'G', 'O')) or (ticket.ticket_id and
+                                    ticket.ticket_id|length > 4 and ticket.ticket_id[0:1] in ['E', 'W', 'T', 'S', 'G',
+                                    'O']) %}
+                                    {% set creation_method = 'email' %}
+                                    {% else %}
+                                    {% set creation_method = 'email' %}
+                                    {% endif %}
+                                    {% endif %}
+
+                                    <span
+                                        class="px-3 py-1 text-xs rounded-full font-medium 
+                                            {% if creation_method == 'manual' %}bg-blue-100 text-blue-700{% else %}bg-green-100 text-green-700{% endif %}"
+                                        title="{% if creation_method == 'manual' %}Created manually via system{% else %}Created from mail or web form{% endif %}">
+                                        {% if creation_method == 'manual' %}
+                                        <i class="fas fa-user-edit text-xs"></i> Manual
+                                        {% else %}
+                                        <i class="fas fa-envelope"></i> Mail
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!-- Show More Button (only if more than 2 tickets) -->
+                {% if forwarded_tickets|length > 2 %}
+                <div id="showMoreForwardedContainer" class="p-4 text-center border-t border-blue-100">
+                    <button id="showMoreForwardedBtn"
+                        class="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-all duration-200 text-sm font-medium"
+                        onclick="toggleMoreForwardedTickets()">
+                        <i class="fas fa-chevron-down mr-2"></i>
+                        Show {{ forwarded_tickets|length - 2 }} More Forwarded Ticket{% if forwarded_tickets|length - 2
+                        != 1 %}s{% endif %}
+                    </button>
+                </div>
+
+                <!-- Hidden Additional Tickets -->
+                <div id="moreForwardedTickets" class="hidden space-y-3 mt-3">
+                    {% for ticket in forwarded_tickets[2:] %}
+                    <div
+                        class="flex items-start ticket-card p-4 hover:bg-blue-50 border-l-4 border-blue-400 bg-blue-25 rounded-r-lg">
+                        <div class="flex-1">
+                            <a href="/ticket/{{ ticket.ticket_id }}" class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex-1">
+                                        <div class="flex items-center flex-wrap gap-2 mb-2">
+                                            <span class="font-bold text-gray-800">#{{ ticket.ticket_id }}</span>
+
+                                            <span class="px-2 py-1 text-xs rounded-full font-medium
+                                                    {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
+                                                    {% elif ticket.priority == 'Fast' %}bg-yellow-100 text-yellow-800
+                                                    {% elif ticket.priority == 'Medium' %}bg-pink-100 text-pink-800
+                                                    {% else %}bg-green-100 text-green-800{% endif %}">
+                                                {{ ticket.priority }}
+                                            </span>
+                                            {% if ticket.classification and ticket.classification in ['Technical Issue',
+                                            'Payment', 'Support', 'Warranty Claim', 'Spam', 'Account'] %}
+                                            <span
+                                                class="px-2 py-1 text-xs rounded-full font-medium bg-gray-100 text-gray-800">
+                                                {{ ticket.classification }}
+                                            </span>
+                                            {% endif %}
+                                            {% if ticket.assigned_to %}
+                                            <span
+                                                class="px-2 py-1 text-xs rounded-full font-medium {% if ticket.is_forwarded %}bg-blue-100 text-blue-800{% else %}bg-green-100 text-green-800{% endif %} border border-green-200">
+                                                {% if ticket.is_forwarded %}
+                                                <i class="fas fa-share mr-1"></i> Forwarded from {{
+                                                ticket.forwarded_from_name if ticket.forwarded_from_name else 'Support
+                                                Team' }} to {{ ticket.assigned_to }}
+                                                {% else %}
+                                                <i class="fas fa-check-circle mr-1"></i> Taken by {{ ticket.assigned_to
+                                                }}
+                                                {% endif %}
+                                            </span>
+                                            {% endif %}
+                                        </div>
+                                        <h3 class="text-lg font-semibold text-gray-800 mb-1 break-words line-clamp-2">{{
+                                            ticket.subject | default('No Subject') }}</h3>
+                                        <p class="text-gray-600 text-sm mb-3 line-clamp-2 break-words">{{ ticket.body |
+                                            default('No Body') }}</p>
+                                        <div class="flex flex-wrap items-center text-sm text-gray-500 gap-3">
+                                            <span class="truncate max-w-[150px] sm:max-w-[200px]"><i
+                                                    class="fas fa-user mr-1"></i>{{ ticket.name | default('Anonymous')
+                                                }}</span>
+                                            <span class="truncate max-w-[150px] sm:max-w-[200px]"><i
+                                                    class="fas fa-envelope mr-1"></i>{{ ticket.email | default('No
+                                                Email') }}</span>
+                                            <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end space-y-2">
+                                        <span
+                                            class="px-3 py-1 text-xs rounded-full font-medium {% if creation_method == 'manual' %}bg-blue-100 text-blue-700{% else %}bg-green-100 text-green-700{% endif %}"
+                                            title="{% if ticket.creation_method == 'manual' %}Created manually{% elif ticket.creation_method == 'email' %}Created from mail{% else %}Created from mail or web form{% endif %}">
+                                            {% if ticket.creation_method == 'manual' %}
+                                            <i class="fas fa-user-edit text-xs"></i> Manual
+                                            {% elif ticket.creation_method == 'email' %}
+                                            <i class="fas fa-envelope"></i> Email
+                                            {% else %}
+                                            <i class="fas fa-envelope"></i> Mail
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <!-- Show Less Button at bottom of expanded content -->
+                    <div class="p-4 text-center border-t border-blue-100">
+                        <button id="showLessForwardedBtn"
+                            class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-all duration-200 text-sm font-medium"
+                            onclick="toggleMoreForwardedTickets()">
+                            <i class="fas fa-chevron-up mr-2"></i>
+                            Show Less
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-4 border-b flex justify-between items-center bg-gradient-to-r from-pink-50 to-pink-100">
+                <h2 class="text-xl font-semibold text-pink-700 flex items-center">
+                    <i class="fas fa-list-ul mr-2"></i> Recent Tickets
+                </h2>
+                <div class="flex items-center space-x-3">
+                    <button id="fullscreenBtn"
+                        class="px-3 py-1 text-sm bg-pink-600 text-white rounded hover:bg-pink-700 transition">
+                        <i class="fas fa-expand mr-1"></i> Fullscreen
+                    </button>
+
+
+
+                    <span class="px-3 py-1 rounded-full text-sm font-medium bg-pink-600 text-white">
+                        Total: {{ total_tickets }}
+                    </span>
+                </div>
+            </div>
+            <div class="space-y-4 tickets-container" id="ticketsContainer">
+                {% for ticket in tickets %}
+                <div class="flex items-start ticket-card p-6 hover:bg-pink-50 bg-white rounded-lg border border-gray-200 shadow-sm
+                            {% if ticket.is_important %}ticket-important{% endif %}"
+                    data-ticket-id="{{ ticket.ticket_id }}" data-priority="{{ ticket.priority or 'Low' }}"
+                    data-classification="{{ ticket.classification or 'General' }}"
+                    data-status="{{ ticket.status or 'Open' }}" data-email="{{ ticket.email or '' }}"
+                    data-name="{{ ticket.name or '' }}" data-subject="{{ ticket.subject or '' }}"
+                    data-body="{{ ticket.body or '' }}">
+
+                    <!-- Red Dot Notification for New Conversations -->
+                    {% if ticket.has_unread_reply %}
+                    <span class="ml-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"
+                        title="New Reply - Ticket #{{ ticket.ticket_id }} has unread reply"></span>
+                    {% endif %}
+
+
+
+                    <div class="flex-1">
+                        <a href="/ticket/{{ ticket.ticket_id }}" class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <div class="flex items-center flex-wrap gap-2 mb-2">
+                                        <span
+                                            class="font-bold text-blue-800 bg-blue-50 px-2 py-1 rounded-lg border border-blue-200 text-sm">
+                                            <i class="fas fa-hashtag mr-1"></i>{{ ticket.ticket_id }}
+
+                                        </span>
+                                        <span class="px-2 py-1 text-xs rounded-full font-medium
+                                            {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
+                                            {% elif ticket.priority == 'Fast' %}bg-yellow-100 text-yellow-800
+                                            {% elif ticket.priority == 'Medium' %}bg-pink-100 text-pink-800
+                                            {% else %}bg-green-100 text-green-800{% endif %}">
+                                            {% if ticket.priority == 'Urgent' %}🚨{% elif ticket.priority == 'Fast'
+                                            %}⚡{% elif ticket.priority == 'Medium' %}🕒{% else %}🐢{% endif %}
+                                            {{ ticket.priority }}
+                                        </span>
+
+                                        <!-- Technician Badge -->
+                                        {% if ticket.technician_name %}
+                                        <span
+                                            class="technician-badge px-2 py-1 text-xs rounded-full font-medium bg-blue-100 text-blue-800">
+                                            👷 {{ ticket.technician_name }}
+                                        </span>
+                                        {% endif %}
+
+                                        {% if ticket.classification in ['Technical Issue', 'Payment', 'Support',
+                                        'Warranty Claim', 'Spam'] %}
+                                        <span
+                                            class="px-2 py-1 text-xs rounded-full font-medium
+                                            {% if ticket.classification == 'Technical Issue' %}bg-blue-100 text-blue-800
+                                            {% elif ticket.classification == 'Payment' %}bg-indigo-100 text-indigo-800
+                                            {% elif ticket.classification == 'Support' %}bg-purple-100 text-purple-800
+                                            {% elif ticket.classification == 'Warranty Claim' %}bg-green-100 text-green-800
+                                            {% elif ticket.classification == 'Spam' %}bg-pink-100 text-pink-800{% endif %}">
+                                            {% if ticket.classification == 'Technical Issue' %}🔧
+                                            {% elif ticket.classification == 'Payment' %}💳
+                                            {% elif ticket.classification == 'Support' %}🛎️
+                                            {% elif ticket.classification == 'Warranty Claim' %}🛡️
+                                            {% elif ticket.classification == 'Spam' %}🚫{% endif %}
+                                            {{ ticket.classification }}
+                                        </span>
+                                        {% endif %}
+                                        {% if ticket.assigned_to %}
+                                        <span
+                                            class="px-2 py-1 text-xs rounded-full font-medium {% if ticket.is_forwarded %}bg-blue-100 text-blue-800{% else %}bg-green-100 text-green-800{% endif %} border border-green-200">
+                                            {% if ticket.is_forwarded %}
+                                            <i class="fas fa-share mr-1"></i> Forwarded from {{
+                                            ticket.forwarded_from_name if ticket.forwarded_from_name else 'Support Team'
+                                            }} to {{ ticket.assigned_to }}
+                                            {% else %}
+                                            <i class="fas fa-check-circle mr-1"></i> Taken by {{ ticket.assigned_to }}
+                                            {% endif %}
+                                        </span>
+                                        {% endif %}
+                                        <span class="px-2 py-1 text-xs rounded-full font-medium
+                                            {% if ticket.status == 'Open' %}bg-blue-100 text-blue-800
+                                            {% elif ticket.status == 'Waiting for Response' %}bg-yellow-100 text-yellow-800
+                                            {% elif ticket.status == 'Closed' %}bg-gray-100 text-gray-700
+                                            {% elif ticket.status == 'Resolved' %}bg-green-100 text-green-800
+                                            {% else %}bg-green-100 text-green-800{% endif %}">
+                                            {% if ticket.status in ['Closed', 'Resolved'] %}
+                                            <i class="fas fa-lock mr-1"></i>
+                                            {% endif %}
+                                            {{ ticket.status }}
+                                        </span>
+
+                                        <!-- Extra CLOSED badge -->
+                                        {% if ticket.status == 'Closed' %}
+                                        <span
+                                            class="px-2 py-1 text-xs rounded-full font-bold bg-gray-200 text-gray-700">
+                                            🔒 CLOSED
+                                        </span>
+                                        {% elif ticket.status == 'Resolved' %}
+                                        <span
+                                            class="px-2 py-1 text-xs rounded-full font-bold bg-green-100 text-green-700">
+                                            ✅ RESOLVED
+                                        </span>
+                                        {% endif %}
+                                        {% if ticket.is_important %}
+                                        <span
+                                            class="px-2 py-1 text-xs rounded-full font-medium bg-pink-100 text-pink-800">
+                                            <i class="fas fa-star mr-1"></i> Important
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ ticket.subject | default('No
+                                        Subject') }}</h3>
+                                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ ticket.body | default('No
+                                        Body') }}</p>
+                                    <div class="flex flex-wrap items-center text-sm text-gray-500 gap-3">
+                                        <span><i class="fas fa-user mr-1"></i>{{ ticket.name | default('Anonymous')
+                                            }}</span>
+                                        <span><i class="fas fa-envelope mr-1"></i>{{ ticket.email | default('No Email')
+                                            }}</span>
+                                        <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date }}</span>
+                                    </div>
+
+                                    <!-- Warranty Details at bottom of ticket card -->
+                                    {% if ticket.classification == 'Warranty Claim' %}
+                                    <div class="warranty-details">
+                                        <div class="warranty-details-title">
+                                            <i class="fas fa-file-contract"></i>
+                                            Warranty Form Detected
+                                        </div>
+                                        <div class="warranty-keywords">
+                                            {% if ticket.attachments and ticket.attachments|length > 0 %}
+                                            • {{ ticket.attachments|length }} attachment{% if ticket.attachments|length
+                                            != 1 %}s{% endif %}
+                                            {% else %}
+                                            • Warranty claim ticket
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="flex flex-col items-end space-y-2">
+                                    <span
+                                        class="px-3 py-1 text-xs rounded-full font-medium {% if creation_method == 'manual' %}bg-blue-100 text-blue-700{% else %}bg-green-100 text-green-700{% endif %}"
+                                        title="{% if ticket.creation_method == 'manual' %}Created manually{% elif ticket.creation_method == 'email' %}Created from mail{% else %}Created from mail or web form{% endif %}">
+                                        {% if ticket.creation_method == 'manual' %}
+                                        <i class="fas fa-user-edit text-xs"></i> Manual
+                                        {% elif ticket.creation_method == 'email' %}
+                                        <i class="fas fa-envelope"></i> Email
+                                        {% else %}
+                                        <i class="fas fa-envelope"></i> Mail
+                                        {% endif %}
+                                    </span>
+
+                                    <div class="flex items-center space-x-2">
+                                        <button class="text-gray-400 hover:text-pink-600 important-btn"
+                                            data-ticket-id="{{ ticket.ticket_id }}" title="Mark as Important">
+                                            <i class="fas fa-star{% if not ticket.is_important %}-o{% endif %}"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if not tickets %}
+                <div class="p-6 text-center text-gray-500">
+                    No tickets found.
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Pagination Controls -->
+            {% if pagination %}
+            <div class="pagination-container px-6 py-4 border-t border-gray-200 flex justify-center items-center space-x-4">
+                <!-- Previous Button -->
+                {% if pagination.has_prev %}
+                <a href="?page={{ pagination.prev_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                   class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors">
+                    <i class="fas fa-chevron-left mr-1"></i> Previous
+                </a>
+                {% else %}
+                <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+                    <i class="fas fa-chevron-left mr-1"></i> Previous
+                </span>
+                {% endif %}
+                
+                <!-- Page Numbers -->
+                <div class="flex space-x-2">
+                    {% for page_num in range(1, pagination.total_pages + 1) %}
+                        {% if page_num == pagination.current_page %}
+                        <span class="px-3 py-2 bg-pink-600 text-white rounded-lg font-semibold">
+                            {{ page_num }}
+                        </span>
+                        {% elif page_num <= 3 or page_num > pagination.total_pages - 3 or (page_num >= pagination.current_page - 1 and page_num <= pagination.current_page + 1) %}
+                        <a href="?page={{ page_num }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                           class="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+                            {{ page_num }}
+                        </a>
+                        {% elif page_num == 4 and pagination.current_page > 5 %}
+                        <span class="px-3 py-2 text-gray-500">...</span>
+                        {% elif page_num == pagination.total_pages - 3 and pagination.current_page < pagination.total_pages - 4 %}
+                        <span class="px-3 py-2 text-gray-500">...</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                
+                <!-- Next Button -->
+                {% if pagination.has_next %}
+                <a href="?page={{ pagination.next_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                   class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors">
+                    Next <i class="fas fa-chevron-right ml-1"></i>
+                </a>
+                {% else %}
+                <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+                    Next <i class="fas fa-chevron-right ml-1"></i>
+                </span>
+                {% endif %}
+                
+                <!-- Page Info -->
+                <div class="text-sm text-gray-600 ml-4">
+                    Showing {{ ((pagination.current_page - 1) * pagination.per_page + 1) }} to 
+                    {{ pagination.current_page * pagination.per_page if pagination.current_page * pagination.per_page < pagination.total_tickets else pagination.total_tickets }} 
+                    of {{ pagination.total_tickets }} tickets
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+
+
+        <div id="fullscreenContainer" class="fullscreen hidden">
+            <div class="fullscreen-header">
+                <h2 class="text-xl font-semibold text-pink-700 flex items-center">
+                    <i class="fas fa-list-ul mr-2"></i> Recent Tickets
+                </h2>
+                <div class="flex items-center space-x-3">
+                    <button id="exitFullscreenBtn"
+                        class="px-3 py-1 text-sm bg-pink-600 text-white rounded hover:bg-pink-700 transition">
+                        <i class="fas fa-compress mr-1"></i> Exit Fullscreen
+                    </button>
+                    <button id="fullscreenReloadBtn"
+                        class="px-3 py-1 text-sm bg-white border border-pink-500 text-pink-500 rounded hover:bg-pink-50 transition reload-btn">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="fullscreen-search">
+                <div class="search-container">
+                    <div class="relative flex-grow">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        <input type="text" id="fullscreenSearchInput"
+                            placeholder="Search tickets by ID, subject, email..."
+                            class="pl-10 pr-4 py-2 w-full border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500">
+                    </div>
+                    <button id="fullscreenSearchBtn" class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="fullscreenTicketsContainer" class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Tickets will be loaded here -->
+            </div>
+        </div>
+
+        <script>
+            // ===== AUTO-REFRESH AND SESSION HEARTBEAT DISABLED =====
+            // All automatic page refreshing and session keep-alive functionality has been removed
+            // to prevent console spam and unnecessary network requests
+
+            // DOM Elements
+            const searchInput = document.getElementById('searchInput');
+            const typeFilter = document.getElementById('typeFilter');
+            const priorityFilter = document.getElementById('priorityFilter');
+            const statusFilter = document.getElementById('statusFilter');
+            const clearFilters = document.getElementById('clearFilters');
+            const ticketsContainer = document.getElementById('ticketsContainer');
+
+            // Store original tickets for filtering
+            let allTickets = [];
+
+            // Initialize tickets data from the page using data attributes
+            function initializeTicketsData() {
+                const ticketCards = document.querySelectorAll('.ticket-card');
+                allTickets = [];
+
+                ticketCards.forEach((card, index) => {
+                    // Try to get data from attributes first (if available)
+                    let ticketId = card.getAttribute('data-ticket-id');
+                    let priority = card.getAttribute('data-priority');
+                    let classification = card.getAttribute('data-classification');
+                    let status = card.getAttribute('data-status');
+                    let email = card.getAttribute('data-email');
+                    let name = card.getAttribute('data-name');
+                    let subject = card.getAttribute('data-subject');
+                    let body = card.getAttribute('data-body');
+
+                    // Fallback to DOM parsing if data attributes are not available
+                    if (!ticketId) {
+                        const link = card.querySelector('a[href*="/ticket/"]');
+                        if (link) {
+                            ticketId = link.href.split('/ticket/')[1];
+                        }
+                    }
+
+                    if (!subject) {
+                        subject = card.querySelector('h3')?.textContent || '';
+                    }
+
+                    if (!body) {
+                        body = card.querySelector('p')?.textContent || '';
+                    }
+
+                    if (!email) {
+                        const emailSpan = card.querySelector('.fa-envelope')?.parentElement;
+                        email = emailSpan ? emailSpan.textContent.replace(/.*📧\s*/, '').trim() : '';
+                    }
+
+                    if (!name) {
+                        const nameSpan = card.querySelector('.fa-user')?.parentElement;
+                        name = nameSpan ? nameSpan.textContent.replace(/.*👤\s*/, '').trim() : '';
+                    }
+
+                    if (!priority) {
+                        const priorityBadge = card.querySelector('.bg-red-100, .bg-yellow-100, .bg-pink-100, .bg-green-100');
+                        if (priorityBadge) {
+                            if (priorityBadge.classList.contains('bg-red-100')) priority = 'Urgent';
+                            else if (priorityBadge.classList.contains('bg-yellow-100')) priority = 'Fast';
+                            else if (priorityBadge.classList.contains('bg-pink-100')) priority = 'Medium';
+                            else priority = 'Low';
+                        } else {
+                            priority = 'Low';
+                        }
+                    }
+
+                    if (!classification) {
+                        // Look for classification badges
+                        const classBadges = card.querySelectorAll('.bg-gray-100');
+                        classBadges.forEach(badge => {
+                            const text = badge.textContent.trim();
+                            if (text.includes('Technical')) classification = 'Technical Issue';
+                            else if (text.includes('Payment')) classification = 'Payment';
+                            else if (text.includes('Support')) classification = 'Support';
+                            else if (text.includes('Warranty') || text.includes('WARRANTY')) classification = 'Warranty Claim';
+                            else if (text.includes('Spam')) classification = 'Spam';
+                            else if (text.includes('Account')) classification = 'Account';
+                        });
+
+                        if (!classification) classification = 'General';
+                    }
+
+                    if (!status) {
+                        status = 'Open'; // Default status
+                    }
+
+                    // Extract important status from CSS class
+                    const isImportant = card.classList.contains('ticket-important');
+
+                    // Check for warranty details section
+                    const warrantySection = card.querySelector('.warranty-details');
+                    const hasWarrantySection = warrantySection !== null;
+
+                    if (ticketId) {
+                        allTickets.push({
+                            element: card,
+                            ticketId: ticketId,
+                            subject: subject || '',
+                            body: body || '',
+                            email: email || '',
+                            name: name || '',
+                            priority: priority || 'Low',
+                            classification: classification || 'General',
+                            status: status || 'Open',
+                            isImportant: isImportant,
+                            hasWarrantySection: hasWarrantySection
+                        });
+
+
+                    }
+                });
+            }
+
+            // Improved filter function with better debugging
+            function filterTickets() {
+                if (!allTickets || allTickets.length === 0) {
+                    return;
+                }
+
+                const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+                const typeValue = typeFilter ? typeFilter.value : 'All';
+                const priorityValue = priorityFilter ? priorityFilter.value : 'All';
+                const statusValue = statusFilter ? statusFilter.value : 'All';
+
+                let visibleCount = 0;
+                allTickets.forEach(ticket => {
+                    let visible = true;
+
+                    // Search filter - check multiple fields
+                    if (query) {
+                        const searchText = `${ticket.ticketId} ${ticket.subject} ${ticket.body} ${ticket.email} ${ticket.name}`.toLowerCase();
+                        visible = visible && searchText.includes(query);
+                    }
+
+                    // Type/Classification filter
+                    if (typeValue !== 'All' && typeValue) {
+                        visible = visible && ticket.classification === typeValue;
+                    }
+
+                    // Priority filter
+                    if (priorityValue !== 'All' && priorityValue) {
+                        visible = visible && ticket.priority === priorityValue;
+                    }
+
+                    // Status filter
+                    if (statusValue !== 'All' && statusValue) {
+                        visible = visible && ticket.status === statusValue;
+                    }
+
+                    // Show/hide ticket with smooth animation
+                    if (visible) {
+                        ticket.element.style.display = 'flex';
+                        ticket.element.style.opacity = '1';
+                        ticket.element.style.transform = 'scale(1)';
+                        visibleCount++;
+                    } else {
+                        ticket.element.style.display = 'none';
+                        ticket.element.style.opacity = '0';
+                        ticket.element.style.transform = 'scale(0.95)';
+                    }
+                });
+
+                // Show "no results" message if no tickets are visible
+                handleNoResultsMessage(visibleCount);
+            }
+
+            // Handle no results message
+            function handleNoResultsMessage(visibleCount) {
+                const existingMessage = document.getElementById('noResultsMessage');
+
+                if (visibleCount === 0) {
+                    if (!existingMessage && ticketsContainer) {
+                        const noResultsDiv = document.createElement('div');
+                        noResultsDiv.id = 'noResultsMessage';
+                        noResultsDiv.className = 'text-center py-8 text-gray-500';
+                        noResultsDiv.innerHTML = `
+                        <div class="text-gray-400 mb-2">
+                            <i class="fas fa-search text-3xl"></i>
+                        </div>
+                        <p class="text-lg">No tickets found</p>
+                        <p class="text-sm">Try adjusting your search criteria</p>
+                    `;
+                        ticketsContainer.appendChild(noResultsDiv);
+                    }
+                } else {
+                    if (existingMessage) {
+                        existingMessage.remove();
+                    }
+                }
+            }
+
+            // Clear filters function  
+            function clearAllFilters() {
+                // Reset form inputs
+                if (searchInput) searchInput.value = '';
+                if (typeFilter) typeFilter.value = 'All';
+                if (priorityFilter) priorityFilter.value = 'All';
+                if (statusFilter) statusFilter.value = 'All';
+
+                // Show all tickets
+                if (allTickets) {
+                    allTickets.forEach(ticket => {
+                        ticket.element.style.display = 'flex';
+                        ticket.element.style.opacity = '1';
+                        ticket.element.style.transform = 'scale(1)';
+                    });
+                }
+
+                // Remove no results message
+                const existingMessage = document.getElementById('noResultsMessage');
+                if (existingMessage) {
+                    existingMessage.remove();
+                }
+            }
+
+            // Note: filterTickets function replaced with improved version above
+            // Filter results are handled by the improved filterTickets function above
+
+            // Debounce function for search input
+            function debounce(func, timeout = 300) {
+                let timer;
+                return (...args) => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => func.apply(this, args), timeout);
+                };
+            }
+
+            // Clear all filters
+            function clearAllFilters() {
+                searchInput.value = '';
+                typeFilter.value = 'All';
+                priorityFilter.value = 'All';
+                statusFilter.value = 'All';
+                filterTickets();
+            }
+
+            // Important button functionality
+            function initImportantButtons() {
+                document.querySelectorAll('.important-btn').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        try {
+                            const response = await fetch(`/api/tickets/${btn.dataset.ticketId}/important`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' }
+                            });
+
+                            const data = await response.json();
+                            if (response.ok && data.status === 'success') {
+                                const icon = btn.querySelector('i');
+                                if (icon && btn) {
+                                    const ticketCard = btn.closest('.ticket-card');
+                                    if (ticketCard) {
+                                        if (icon.classList.contains('fa-star-o')) {
+                                            icon.classList.replace('fa-star-o', 'fa-star');
+                                            ticketCard.classList.add('ticket-important');
+                                        } else {
+                                            icon.classList.replace('fa-star', 'fa-star-o');
+                                            ticketCard.classList.remove('ticket-important');
+                                        }
+                                    }
+                                }
+
+                                // Update the ticket data
+                                const ticket = allTickets.find(t => t.ticketId === btn.dataset.ticketId);
+                                if (ticket) {
+                                    ticket.isImportant = !ticket.isImportant;
+                                }
+                            } else {
+                                alert(data.message || 'Error toggling important status');
+                            }
+                        } catch (error) {
+                            console.error('Error:', error);
+                            alert('An error occurred while updating ticket status');
+                        }
+                    });
+                });
+            }
+
+
+
+            // ===== RED DOT NOTIFICATION SYSTEM =====
+
+            // Initialize red dot notifications
+            function initializeRedDotNotifications() {
+                const unreadDots = document.querySelectorAll('.unread-notification-dot');
+
+                unreadDots.forEach(dot => {
+                    dot.addEventListener('click', function () {
+                        const ticketCard = this.closest('.ticket-card');
+                        if (ticketCard) {
+                            // Highlight the ticket card
+                            ticketCard.style.transform = 'scale(1.02)';
+                            ticketCard.style.boxShadow = '0 8px 25px rgba(255, 71, 87, 0.3)';
+
+                            // Reset after animation
+                            setTimeout(() => {
+                                ticketCard.style.transform = '';
+                                ticketCard.style.boxShadow = '';
+                            }, 500);
+
+                            // Scroll to the ticket
+                            ticketCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    });
+                });
+            }
+
+            // Function to check for new unread tickets and update page title
+            function checkForNewUnreadTickets() {
+                const unreadCount = document.querySelectorAll('.w-3.h-3.bg-red-500.rounded-full.animate-pulse').length;
+                if (unreadCount > 0) {
+                    document.title = `(${unreadCount}) AutoAssistGroup - Tickets`;
+                } else {
+                    document.title = 'AutoAssistGroup - Tickets';
+                }
+            }
+
+            // Initialize everything when page loads
+            document.addEventListener('DOMContentLoaded', function () {
+                // Initialize tickets data
+                initializeTicketsData();
+
+                // Initialize important buttons
+                initImportantButtons();
+
+                initializeRedDotNotifications();
+                checkForNewUnreadTickets();
+                // Auto-refresh functionality removed
+
+                // Verify filter elements exist before attaching listeners
+                if (searchInput) {
+                    searchInput.addEventListener('input', debounce(filterTickets, 300));
+                }
+
+                if (typeFilter) {
+                    typeFilter.addEventListener('change', filterTickets);
+                }
+
+                if (priorityFilter) {
+                    priorityFilter.addEventListener('change', filterTickets);
+                }
+
+                if (statusFilter) {
+                    statusFilter.addEventListener('change', filterTickets);
+                }
+
+                if (clearFilters) {
+                    clearFilters.addEventListener('click', clearAllFilters);
+                }
+
+                // Add Enter key support for search
+                if (searchInput) {
+                    searchInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') filterTickets();
+                    });
+                }
+            });
+
+            // Mobile menu toggle function
+            function toggleMobileMenu() {
+                const mobileMenu = document.getElementById('mobileMenu');
+                if (mobileMenu) {
+                    mobileMenu.classList.toggle('hidden');
+                }
+            }
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function (event) {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const menuButton = document.querySelector('.mobile-menu-btn');
+
+                if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+
+            // Toggle forwarded tickets dropdown
+            function toggleMoreForwardedTickets() {
+                const moreTicketsDiv = document.getElementById('moreForwardedTickets');
+                const showMoreContainer = document.getElementById('showMoreForwardedContainer');
+
+                if (moreTicketsDiv && showMoreContainer) {
+                    if (moreTicketsDiv.classList.contains('hidden')) {
+                        moreTicketsDiv.classList.remove('hidden');
+                        showMoreContainer.style.display = 'none';
+                    } else {
+                        moreTicketsDiv.classList.add('hidden');
+                        showMoreContainer.style.display = 'block';
+                    }
+                }
+            }
+
+            // ===== FULLSCREEN FUNCTIONALITY =====
+
+            function initializeFullscreen() {
+                const fullscreenBtn = document.getElementById('fullscreenBtn');
+                const exitFullscreenBtn = document.getElementById('exitFullscreenBtn');
+                const fullscreenContainer = document.getElementById('fullscreenContainer');
+                const fullscreenTicketsContainer = document.getElementById('fullscreenTicketsContainer');
+                const fullscreenSearchInput = document.getElementById('fullscreenSearchInput');
+                const fullscreenSearchBtn = document.getElementById('fullscreenSearchBtn');
+                const fullscreenReloadBtn = document.getElementById('fullscreenReloadBtn');
+
+                // Enter fullscreen mode
+                if (fullscreenBtn) {
+                    fullscreenBtn.addEventListener('click', function () {
+                        showFullscreen();
+                    });
+                }
+
+                // Exit fullscreen mode
+                if (exitFullscreenBtn) {
+                    exitFullscreenBtn.addEventListener('click', function () {
+                        hideFullscreen();
+                    });
+                }
+
+                // Fullscreen search functionality
+                if (fullscreenSearchInput && fullscreenSearchBtn) {
+                    fullscreenSearchBtn.addEventListener('click', function () {
+                        filterFullscreenTickets();
+                    });
+
+                    fullscreenSearchInput.addEventListener('keypress', function (e) {
+                        if (e.key === 'Enter') {
+                            filterFullscreenTickets();
+                        }
+                    });
+
+                    fullscreenSearchInput.addEventListener('input', debounce(filterFullscreenTickets, 300));
+                }
+
+                // Fullscreen reload functionality
+                if (fullscreenReloadBtn) {
+                    fullscreenReloadBtn.addEventListener('click', function () {
+                        loadFullscreenTickets();
+                    });
+                }
+
+                // ESC key to exit fullscreen
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && fullscreenContainer && !fullscreenContainer.classList.contains('hidden')) {
+                        hideFullscreen();
+                    }
+                });
+            }
+
+            function showFullscreen() {
+                const fullscreenContainer = document.getElementById('fullscreenContainer');
+                if (fullscreenContainer) {
+                    fullscreenContainer.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                    loadFullscreenTickets();
+
+                    // Focus on search input for better UX
+                    const searchInput = document.getElementById('fullscreenSearchInput');
+                    if (searchInput) {
+                        setTimeout(() => searchInput.focus(), 100);
+                    }
+                }
+            }
+
+            function hideFullscreen() {
+                const fullscreenContainer = document.getElementById('fullscreenContainer');
+                if (fullscreenContainer) {
+                    fullscreenContainer.classList.add('hidden');
+                    document.body.style.overflow = ''; // Restore scrolling
+
+                    // Clear search
+                    const searchInput = document.getElementById('fullscreenSearchInput');
+                    if (searchInput) {
+                        searchInput.value = '';
+                    }
+                }
+            }
+
+            function loadFullscreenTickets() {
+                const fullscreenTicketsContainer = document.getElementById('fullscreenTicketsContainer');
+                const originalTicketsContainer = document.getElementById('ticketsContainer');
+
+                if (fullscreenTicketsContainer && originalTicketsContainer) {
+                    // Clone all ticket cards to fullscreen container
+                    const ticketCards = originalTicketsContainer.querySelectorAll('.ticket-card');
+                    fullscreenTicketsContainer.innerHTML = '';
+
+                    if (ticketCards.length === 0) {
+                        fullscreenTicketsContainer.innerHTML = `
+                        <div class="text-center py-12">
+                            <i class="fas fa-inbox text-4xl text-gray-300 mb-4"></i>
+                            <p class="text-gray-500">No tickets found</p>
+                        </div>
+                    `;
+                        return;
+                    }
+
+                    // Create a single column container for fullscreen tickets (like main index page)
+                    const columnContainer = document.createElement('div');
+                    columnContainer.className = 'space-y-4 p-6';
+
+                    ticketCards.forEach(card => {
+                        const clonedCard = card.cloneNode(true);
+
+                        // Remove any grid-specific classes and ensure full width
+                        clonedCard.classList.remove('grid', 'grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3', 'xl:grid-cols-4');
+                        clonedCard.classList.add('w-full');
+
+                        // Ensure important buttons work in fullscreen
+                        const importantBtn = clonedCard.querySelector('.important-btn');
+                        if (importantBtn) {
+                            const originalBtn = card.querySelector('.important-btn');
+                            if (originalBtn) {
+                                importantBtn.onclick = originalBtn.onclick;
+                            }
+                        }
+
+                        columnContainer.appendChild(clonedCard);
+                    });
+
+                    fullscreenTicketsContainer.appendChild(columnContainer);
+                }
+            }
+
+            function filterFullscreenTickets() {
+                const searchInput = document.getElementById('fullscreenSearchInput');
+                const fullscreenTicketsContainer = document.getElementById('fullscreenTicketsContainer');
+
+                if (!searchInput || !fullscreenTicketsContainer) return;
+
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                const ticketCards = fullscreenTicketsContainer.querySelectorAll('.ticket-card');
+
+                let visibleCount = 0;
+
+                ticketCards.forEach(card => {
+                    const subject = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+                    const body = card.querySelector('p')?.textContent?.toLowerCase() || '';
+                    const email = card.textContent.toLowerCase();
+                    const ticketId = card.querySelector('a[href*="/ticket/"]')?.href.split('/ticket/')[1] || '';
+
+                    const matchesSearch = !searchTerm ||
+                        subject.includes(searchTerm) ||
+                        body.includes(searchTerm) ||
+                        email.includes(searchTerm) ||
+                        ticketId.includes(searchTerm);
+
+                    if (matchesSearch) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Show "no results" message if needed
+                const existingNoResults = fullscreenTicketsContainer.querySelector('.no-results-message');
+                if (existingNoResults) {
+                    existingNoResults.remove();
+                }
+
+                if (visibleCount === 0 && searchTerm) {
+                    const noResultsDiv = document.createElement('div');
+                    noResultsDiv.className = 'no-results-message text-center py-12';
+                    noResultsDiv.innerHTML = `
+                    <i class="fas fa-search text-4xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500">No tickets found for "${searchTerm}"</p>
+                    <button class="mt-4 px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition" onclick="document.getElementById('fullscreenSearchInput').value = ''; filterFullscreenTickets();">
+                        Clear Search
+                    </button>
+                `;
+                    fullscreenTicketsContainer.appendChild(noResultsDiv);
+                }
+            }
+
+            // Initialize fullscreen when page loads
+            document.addEventListener('DOMContentLoaded', function () {
+                initializeFullscreen();
+                // Technician updates removed
+            });
+
+            // Global notification function
+            function showNotification(message, type = 'info', options = {}) {
+                const notification = document.createElement('div');
+                const bgColor = type === 'error' ? 'bg-red-500' :
+                    type === 'success' ? 'bg-green-500' :
+                        type === 'warning' ? 'bg-yellow-500' : 'bg-blue-500';
+
+                const icon = type === 'error' ? 'exclamation-circle' :
+                    type === 'success' ? 'check-circle' :
+                        type === 'warning' ? 'exclamation-triangle' : 'info-circle';
+
+                notification.className = `fixed top-4 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center space-x-2`;
+
+                let actionButton = '';
+                if (options.actionText && options.actionCallback) {
+                    actionButton = `<button class="ml-3 px-2 py-1 bg-white bg-opacity-20 rounded text-xs hover:bg-opacity-30 transition">${options.actionText}</button>`;
+                }
+
+                notification.innerHTML = `
+                    <i class="fas fa-${icon}"></i>
+                    <span>${message}</span>
+                    ${actionButton}
+                `;
+
+                // Add action button event listener if provided
+                if (options.actionText && options.actionCallback) {
+                    const btn = notification.querySelector('button');
+                    btn.addEventListener('click', options.actionCallback);
+                }
+
+                document.body.appendChild(notification);
+
+                // Remove notification after specified time or default 4 seconds
+                const duration = options.duration || 4000;
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, duration);
+            }
+
+            // Auto-refresh functionality completely removed
+            let lastUnreadCount = 0;
+            let lastTicketData = new Map(); // Store last known state of tickets
+            let refreshInterval;
+            let isRefreshing = false;
+
+            // Function to get current ticket data for comparison
+            function getCurrentTicketData() {
+                const ticketCards = document.querySelectorAll('.ticket-card');
+                const ticketData = new Map();
+
+                ticketCards.forEach(card => {
+                    const ticketId = card.getAttribute('data-ticket-id');
+                    if (ticketId) {
+                        const hasUnreadReply = card.querySelector('.w-3.h-3.bg-red-500.rounded-full.animate-pulse') !== null;
+                        const status = card.querySelector('.status-badge')?.textContent?.trim() || '';
+                        const lastUpdate = card.querySelector('.text-xs.text-gray-500')?.textContent?.trim() || '';
+
+                        ticketData.set(ticketId, {
+                            hasUnreadReply,
+                            status,
+                            lastUpdate
+                        });
+                    }
+                });
+
+                return ticketData;
+            }
+
+            // Auto-refresh function removed
+
+            // Function to trigger page refresh with user notification
+            function triggerPageRefresh() {
+                // Clear pending updates before refreshing
+                clearPendingUpdates();
+
+                // Show notification that page will refresh
+                const notification = document.createElement('div');
+                notification.className = 'fixed top-4 right-4 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center space-x-2';
+                notification.innerHTML = `
+                    <i class="fas fa-sync-alt animate-spin"></i>
+                    <span>New replies detected! Refreshing page...</span>
+                `;
+                document.body.appendChild(notification);
+
+                // Remove notification after 2 seconds and refresh
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                    window.location.reload();
+                }, 2000);
+            }
+
+            // API-based auto-refresh function removed
+
+            // Ticket updates auto-refresh function removed
+
+            // Initialize ticket data on page load
+            function initializeTicketData() {
+                lastTicketData = getCurrentTicketData();
+                lastUnreadCount = document.querySelectorAll('.unread-notification-dot').length;
+                // Auto-refresh logging removed
+
+                // Reply count tracking removed
+            }
+
+            // Initialize reply count tracking for all visible tickets
+            // Reply count tracking function removed
+
+            // Initialize on page load
+            initializeTicketData();
+
+            // Auto-refresh setup functions removed
+
+            // Auto-refresh intervals removed
+
+            // Check when user becomes active (tab focus, mouse movement, etc.)
+            document.addEventListener('visibilitychange', function () {
+                if (!document.hidden) {
+                    // User returned to tab, check for new replies immediately
+                    console.log('👁️ Tab became visible, checking for updates...');
+                    // Auto-refresh calls removed
+                }
+            });
+
+            // Check when user interacts with the page
+            document.addEventListener('mousemove', function () {
+                // Debounce mousemove events
+                // Auto-refresh timeout removed
+            });
+
+            // Check when user clicks or interacts
+            document.addEventListener('click', function () {
+                // Check for updates after user interaction
+                // Auto-refresh timeout removed
+            });
+
+            // User activity detection to avoid interrupting active work
+            let userActivityTimeout;
+            let isUserActive = false;
+            let isUserTyping = false;
+            let typingTimeout;
+            let focusedTicketId = null;
+            let focusedWorkStartTime = null;
+
+            function resetUserActivity() {
+                isUserActive = true;
+                clearTimeout(userActivityTimeout);
+                userActivityTimeout = setTimeout(() => {
+                    isUserActive = false;
+                }, 30000); // User considered inactive after 30 seconds of no activity
+            }
+
+            function setUserTyping(typing) {
+                isUserTyping = typing;
+                if (typing) {
+                    clearTimeout(typingTimeout);
+                    typingTimeout = setTimeout(() => {
+                        isUserTyping = false;
+                    }, 5000); // User stopped typing after 5 seconds
+                }
+            }
+
+            function setFocusedTicket(ticketId) {
+                if (focusedTicketId !== ticketId) {
+                    focusedTicketId = ticketId;
+                    focusedWorkStartTime = ticketId ? Date.now() : null;
+                    console.log(`🎯 User focused on ticket: ${ticketId || 'none'}`);
+                }
+            }
+
+            function isUserWorkingOnTicket(ticketId) {
+                return focusedTicketId === ticketId && focusedWorkStartTime &&
+                    (Date.now() - focusedWorkStartTime) < 300000; // 5 minutes
+            }
+
+            // Track user activity
+            ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+                document.addEventListener(event, resetUserActivity, true);
+            });
+
+            // Track typing activity specifically
+            document.addEventListener('keydown', function () {
+                setUserTyping(true);
+                resetUserActivity();
+            });
+
+            document.addEventListener('input', function () {
+                setUserTyping(true);
+                resetUserActivity();
+            });
+
+            // Track when user clicks on ticket cards (indicating focus)
+            document.addEventListener('click', function (e) {
+                if (e && e.target) {
+                    const ticketCard = e.target.closest('.ticket-card');
+                    if (ticketCard) {
+                        const ticketId = ticketCard.getAttribute('data-ticket-id');
+                        if (ticketId) {
+                            setFocusedTicket(ticketId);
+                        }
+                    }
+                }
+            });
+
+            // Track when user hovers over ticket cards
+            document.addEventListener('mouseenter', function (e) {
+                if (e && e.target) {
+                    const ticketCard = e.target.closest('.ticket-card');
+                    if (ticketCard) {
+                        const ticketId = ticketCard.getAttribute('data-ticket-id');
+                        if (ticketId) {
+                            setFocusedTicket(ticketId);
+                        }
+                    }
+                }
+            });
+
+            // Debounced refresh system to handle multiple rapid updates
+            let refreshTimeout;
+            let pendingRefresh = false;
+            let refreshPriority = 'normal'; // 'low', 'normal', 'high', 'critical'
+
+            function debouncedRefresh(priority = 'normal') {
+                // Update priority if this is more urgent
+                if (priority === 'critical' ||
+                    (priority === 'high' && refreshPriority !== 'critical') ||
+                    (priority === 'normal' && refreshPriority === 'low')) {
+                    refreshPriority = priority;
+                }
+
+                if (pendingRefresh) {
+                    // If already pending, update the timeout based on priority
+                    if (priority === 'critical') {
+                        clearTimeout(refreshTimeout);
+                        refreshTimeout = setTimeout(() => {
+                            pendingRefresh = false;
+                            refreshPriority = 'normal';
+                            smartRefresh();
+                        }, 500); // Critical updates refresh immediately
+                    }
+                    return;
+                }
+
+                pendingRefresh = true;
+                clearTimeout(refreshTimeout);
+
+                const delay = priority === 'critical' ? 500 :
+                    priority === 'high' ? 1000 :
+                        priority === 'normal' ? 2000 : 5000;
+
+                refreshTimeout = setTimeout(() => {
+                    pendingRefresh = false;
+                    refreshPriority = 'normal';
+                    smartRefresh();
+                }, delay);
+            }
+
+            // Smart update summary system
+            let pendingUpdates = [];
+
+            function addPendingUpdate(update) {
+                pendingUpdates.push(update);
+                // Keep only last 10 updates
+                if (pendingUpdates.length > 10) {
+                    pendingUpdates = pendingUpdates.slice(-10);
+                }
+            }
+
+            function getUpdateSummary() {
+                if (pendingUpdates.length === 0) return '';
+
+                const summary = pendingUpdates.map(update => {
+                    switch (update.type) {
+                        case 'new_reply':
+                            return `New reply to ticket #${update.ticketId}`;
+                        case 'status_change':
+                            return `Status changed for ticket #${update.ticketId}`;
+                        case 'new_ticket':
+                            return 'New ticket created';
+                        case 'priority_change':
+                            return `Priority changed for ticket #${update.ticketId}`;
+                        default:
+                            return update.message || 'Update available';
+                    }
+                }).join(', ');
+
+                return summary;
+            }
+
+            function clearPendingUpdates() {
+                pendingUpdates = [];
+            }
+
+            // Enhanced refresh function that respects user activity
+            function smartRefresh() {
+                if (isUserTyping) {
+                    console.log('🔄 User is typing, delaying refresh...');
+                    const updateSummary = getUpdateSummary();
+                    showNotification(`Updates detected: ${updateSummary}. Page will refresh when you finish typing.`, 'info', {
+                        actionText: 'Refresh Now',
+                        actionCallback: () => triggerPageRefresh()
+                    });
+                    // Wait until user stops typing
+                    setTimeout(() => {
+                        if (!isUserTyping) {
+                            triggerPageRefresh();
+                        } else {
+                            // If still typing, wait a bit more
+                            setTimeout(() => {
+                                if (!isUserTyping) {
+                                    triggerPageRefresh();
+                                } else {
+                                    showNotification('Updates are ready! Click the refresh button when convenient.', 'warning', {
+                                        actionText: 'Refresh Now',
+                                        actionCallback: () => triggerPageRefresh()
+                                    });
+                                }
+                            }, 15000);
+                        }
+                    }, 5000);
+                } else if (focusedTicketId && isUserWorkingOnTicket(focusedTicketId)) {
+                    console.log(`🔄 User is actively working on ticket ${focusedTicketId}, delaying refresh...`);
+                    showNotification(`Updates detected! Page will refresh when you're done working on ticket #${focusedTicketId}.`, 'info', {
+                        actionText: 'Refresh Now',
+                        actionCallback: () => triggerPageRefresh()
+                    });
+                    // Wait until user is done working on the focused ticket
+                    setTimeout(() => {
+                        if (!isUserWorkingOnTicket(focusedTicketId)) {
+                            triggerPageRefresh();
+                        } else {
+                            showNotification('Updates are ready! Click the refresh button when convenient.', 'warning', {
+                                actionText: 'Refresh Now',
+                                actionCallback: () => triggerPageRefresh()
+                            });
+                        }
+                    }, 20000);
+                } else if (isUserActive) {
+                    console.log('🔄 User is active, delaying refresh...');
+                    // Wait a bit longer if user is active
+                    setTimeout(() => {
+                        if (!isUserActive) {
+                            triggerPageRefresh();
+                        } else {
+                            // Show notification that refresh is pending
+                            showNotification('Updates detected! Page will refresh when you\'re done working.', 'info', {
+                                actionText: 'Refresh Now',
+                                actionCallback: () => triggerPageRefresh()
+                            });
+                        }
+                    }, 10000);
+                } else {
+                    triggerPageRefresh();
+                }
+            }
+
+            // Listen for messages from other pages (like ticket detail page)
+            window.addEventListener('message', function (event) {
+                if (event.data && event.data.type === 'replySent') {
+                    console.log('🔄 Reply sent message received, refreshing page...');
+                    setTimeout(() => debouncedRefresh('critical'), 1000); // Critical priority for replies sent
+                }
+            });
+
+            // Enhanced communication with ticket detail pages
+            function setupCrossPageCommunication() {
+                // Send a message to all ticket detail pages to establish communication
+                const ticketLinks = document.querySelectorAll('a[href*="/ticket/"]');
+                ticketLinks.forEach(link => {
+                    link.addEventListener('click', function (e) {
+                        // Get ticket ID for communication setup
+                        const ticketId = this.href.split('/ticket/')[1];
+
+                        // Let the natural link behavior work (opens in same tab)
+                        // The communication will be established when the page loads
+                    });
+                });
+            }
+
+            // Set up manual refresh button
+            function setupManualRefreshButton() {
+                const manualRefreshBtn = document.getElementById('manualRefreshBtn');
+                if (manualRefreshBtn) {
+                    manualRefreshBtn.addEventListener('click', async function () {
+                        // Disable button and show loading state
+                        this.disabled = true;
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin mr-1 md:mr-2"></i> Checking...';
+
+                        try {
+                            console.log('🔄 Manual refresh requested by user');
+
+                            // Clear any pending updates since user is manually checking
+                            clearPendingUpdates();
+
+                            // Run all update checks
+                            // Auto-refresh calls removed
+                            const hasUpdates = false;
+
+                            // If no updates found, show message
+                            if (!hasUpdates.some(result => result === true)) {
+                                showNotification('No new updates found', 'info');
+                            } else {
+                                showNotification('Updates found! Refreshing page...', 'success');
+                                setTimeout(() => triggerPageRefresh(), 1000);
+                            }
+
+                        } catch (error) {
+                            console.error('Error during manual refresh:', error);
+                            showNotification('Error checking for updates', 'error');
+                        } finally {
+                            // Re-enable button after a short delay
+                            setTimeout(() => {
+                                this.disabled = false;
+                                this.innerHTML = originalText;
+                            }, 2000);
+                        }
+                    });
+                }
+            }
+
+            // Listen for storage events (when other tabs update localStorage)
+            window.addEventListener('storage', function (event) {
+                if (event.key === 'newReplyAdded' || event.key === 'ticketUpdated') {
+                    console.log('🔄 Storage event detected, checking for updates...');
+                    setTimeout(() => debouncedRefresh('high'), 1000); // High priority for storage events
+                }
+            });
+
+            // Handle page refresh and navigation
+            window.addEventListener('beforeunload', function () {
+                // Save current state before page unloads
+                const currentState = {
+                    tickets: getCurrentTicketIds(),
+                    timestamp: Date.now(),
+                    scrollPosition: window.scrollY,
+                    activeFilters: getActiveFilters()
+                };
+                localStorage.setItem('pageState', JSON.stringify(currentState));
+            });
+
+            // Check if we're returning from a refresh
+            window.addEventListener('load', function () {
+                const savedState = localStorage.getItem('pageState');
+                if (savedState) {
+                    try {
+                        const state = JSON.parse(savedState);
+                        const timeSinceRefresh = Date.now() - state.timestamp;
+
+                        // If we refreshed recently (within last 30 seconds), check for updates
+                        if (timeSinceRefresh < 30000) {
+                            console.log('🔄 Page refreshed recently, checking for updates...');
+                            // Auto-refresh calls removed
+                        }
+
+                        // Restore scroll position
+                        if (state.scrollPosition) {
+                            setTimeout(() => {
+                                window.scrollTo(0, state.scrollPosition);
+                            }, 100);
+                        }
+
+                        // Clean up old state
+                        localStorage.removeItem('pageState');
+                    } catch (error) {
+                        console.error('Error parsing saved page state:', error);
+                    }
+                }
+            });
+
+            // Helper function to get active filters
+            function getActiveFilters() {
+                const filters = {};
+                const searchInput = document.getElementById('searchInput');
+                const priorityFilter = document.getElementById('priorityFilter');
+                const statusFilter = document.getElementById('statusFilter');
+                const classificationFilter = document.getElementById('classificationFilter');
+
+                if (searchInput) filters.search = searchInput.value;
+                if (priorityFilter) filters.priority = priorityFilter.value;
+                if (statusFilter) filters.status = statusFilter.value;
+                if (classificationFilter) filters.classification = classificationFilter.value;
+
+                return filters;
+            }
+        
+
+        // ===== REAL-TIME DASHBOARD UPDATES =====
+        let lastUpdateTime = Date.now();
+        let updateInterval = null;
+        let isUpdating = false;
+
+        // Dashboard update function removed
+
+        // Function to get current ticket IDs on the page
+        function getCurrentTicketIds() {
+            const ticketCards = document.querySelectorAll('.ticket-card');
+            const ticketIds = [];
+
+            ticketCards.forEach(card => {
+                const ticketLink = card.querySelector('a[href*="/ticket/"]');
+                if (ticketLink) {
+                    const href = ticketLink.getAttribute('href');
+                    const ticketId = href.split('/ticket/')[1];
+                    if (ticketId) {
+                        ticketIds.push(ticketId);
+                    }
+                }
+            });
+
+            return ticketIds;
+        }
+
+        // Function to update ticket list
+        async function updateTicketList(ticketUpdates) {
+                try {
+                    // Handle new tickets
+                    if (ticketUpdates.new_tickets && ticketUpdates.new_tickets.length > 0) {
+                        await addNewTickets(ticketUpdates.new_tickets);
+                    }
+
+                    // Handle updated tickets
+                    if (ticketUpdates.updated_tickets && ticketUpdates.updated_tickets.length > 0) {
+                        updateExistingTickets(ticketUpdates.updated_tickets);
+                    }
+
+                    // Handle removed tickets
+                    if (ticketUpdates.removed_tickets && ticketUpdates.removed_tickets.length > 0) {
+                        removeTickets(ticketUpdates.removed_tickets);
+                    }
+
+                } catch (error) {
+                    console.error('Error updating ticket list:', error);
+                }
+            }
+
+        // Function to add new tickets to the dashboard
+        async function addNewTickets(newTickets) {
+            try {
+                // Instead of dynamically adding tickets, trigger a full page refresh
+                // This ensures the new ticket appears at the top with proper sorting
+
+                // Store information about new tickets in localStorage for red dot alert management
+                const newTicketIds = newTickets.map(ticket => ticket.ticket_id);
+                const existingNewTickets = JSON.parse(localStorage.getItem('newTicketIds') || '[]');
+                const allNewTickets = [...new Set([...existingNewTickets, ...newTicketIds])];
+                localStorage.setItem('newTicketIds', JSON.stringify(allNewTickets));
+
+                // Show notification to user
+                const notification = document.createElement('div');
+                notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-pulse';
+                notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-bell mr-2"></i>
+                    <span>${newTickets.length} new ticket${newTickets.length > 1 ? 's' : ''} detected! Refreshing page...</span>
+                </div>
+            `;
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds and then refresh
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                    // Trigger full page refresh
+                    window.location.reload();
+                }, 3000);
+
+            } catch (error) {
+                console.error('Error handling new tickets:', error);
+            }
+        }
+
+
+
+        // Function to group tickets by date
+        function groupTicketsByDate(tickets) {
+                const grouped = {};
+
+                tickets.forEach(ticket => {
+                    const date = new Date(ticket.created_at || ticket.date);
+                    const today = new Date();
+                    const yesterday = new Date(today);
+                    yesterday.setDate(yesterday.getDate() - 1);
+
+                    let dateGroup;
+                    if (date.toDateString() === today.toDateString()) {
+                        dateGroup = 'Today';
+                    } else if (date.toDateString() === yesterday.toDateString()) {
+                        dateGroup = 'Yesterday';
+                    } else {
+                        const weekStart = new Date(today);
+                        weekStart.setDate(weekStart.getDate() - today.getDay());
+                        if (date >= weekStart) {
+                            dateGroup = 'This Week';
+                        } else {
+                            dateGroup = date.toLocaleDateString('en-US', {
+                                month: 'long',
+                                day: 'numeric',
+                                year: 'numeric'
+                            });
+                        }
+                    }
+
+                    if (!grouped[dateGroup]) {
+                        grouped[dateGroup] = [];
+                    }
+                    grouped[dateGroup].push(ticket);
+                });
+
+                return grouped;
+            }
+
+            // Function to create a new date section
+            function createDateSection(dateGroup) {
+                const section = document.createElement('div');
+                section.className = 'mb-6';
+                section.setAttribute('data-date-group', dateGroup);
+
+                section.innerHTML = `
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">${dateGroup}</h3>
+                <div class="space-y-3">
+                    <!-- Tickets will be added here -->
+                </div>
+            `;
+
+                return section;
+            }
+
+            // Function to create a ticket card
+            function createTicketCard(ticket) {
+                const card = document.createElement('div');
+                card.className = 'flex items-start ticket-card p-6 hover:bg-pink-50 bg-white rounded-lg border border-gray-200 shadow-sm';
+                card.setAttribute('data-ticket-id', ticket.ticket_id);
+                card.setAttribute('data-priority', ticket.priority || 'Low');
+                card.setAttribute('data-classification', ticket.classification || 'General');
+                card.setAttribute('data-status', ticket.status || 'Open');
+                card.setAttribute('data-email', ticket.email || '');
+                card.setAttribute('data-name', ticket.name || '');
+                card.setAttribute('data-subject', ticket.subject || '');
+                card.setAttribute('data-body', ticket.body || '');
+
+                // Check if this ticket should show the red dot alert
+                const newTicketIds = JSON.parse(localStorage.getItem('newTicketIds') || '[]');
+                const shouldShowNewBadge = newTicketIds.includes(ticket.ticket_id) || ticket.has_unread_reply === true;
+
+                // Create ticket card HTML matching the exact structure of existing tickets
+                card.innerHTML = `
+                <div class="flex-1">
+                    <a href="/ticket/${ticket.ticket_id}" class="flex-1">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-center flex-wrap gap-2 mb-2">
+                                    <span class="font-bold text-blue-800 bg-blue-50 px-2 py-1 rounded-lg border border-blue-200 text-sm">
+                                        <i class="fas fa-hashtag mr-1"></i>${ticket.ticket_id}
+                                        ${shouldShowNewBadge ? '<!-- Red Dot Alert for New Replies --><span class="ml-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" title="New Reply"></span>' : ''}
+                                    </span>
+                                    <span class="px-2 py-1 text-xs rounded-full font-medium ${getPriorityColor(ticket.priority)}">
+                                        ${getPriorityEmoji(ticket.priority)} ${ticket.priority}
+                                    </span>
+                                    
+                                    <!-- Technician Badge -->
+                                    ${ticket.technician_name ? `<span class="technician-badge px-2 py-1 text-xs rounded-full font-medium bg-blue-100 text-blue-800">👷 ${ticket.technician_name}</span>` : ''}
+                                    
+                                    <!-- Classification Badge -->
+                                    ${getClassificationBadge(ticket.classification)}
+                                    
+                                    <!-- Assignment Badge -->
+                                    ${ticket.assigned_to ? `<span class="px-2 py-1 text-xs rounded-full font-medium bg-green-100 text-green-800 border border-green-200"><i class="fas fa-check-circle mr-1"></i> Taken by ${ticket.assigned_to}</span>` : ''}
+                                    
+                                    <!-- Status Badge -->
+                                    <span class="px-2 py-1 text-xs rounded-full font-medium ${getStatusColor(ticket.status)}">
+                                        ${getStatusIcon(ticket.status)} ${ticket.status}
+                                    </span>
+                                    
+                                    <!-- Extra Status Badges -->
+                                    ${ticket.status === 'Closed' ? '<span class="px-2 py-1 text-xs rounded-full font-bold bg-gray-200 text-gray-700">🔒 CLOSED</span>' : ''}
+                                    ${ticket.status === 'Resolved' ? '<span class="px-2 py-1 text-xs rounded-full font-bold bg-green-100 text-green-700">✅ RESOLVED</span>' : ''}
+                                    
+                                    <!-- Important Badge -->
+                                    ${ticket.is_important ? '<span class="px-2 py-1 text-xs rounded-full font-medium bg-pink-100 text-pink-800"><i class="fas fa-star mr-1"></i> Important</span>' : ''}
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-800 mb-1">${ticket.subject || 'No Subject'}</h3>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-2">${ticket.body || 'No Body'}</p>
+                                <div class="flex flex-wrap items-center text-sm text-gray-500 gap-3">
+                                    <span><i class="fas fa-user mr-1"></i>${ticket.name || 'Anonymous'}</span>
+                                    <span><i class="fas fa-envelope mr-1"></i>${ticket.email || 'No Email'}</span>
+                                    <span><i class="fas fa-clock mr-1"></i>${formatDate(ticket.created_at || ticket.date)}</span>
+                                </div>
+                                
+                                <!-- Warranty Details -->
+                                ${ticket.classification === 'Warranty Claim' ? `
+                                <div class="warranty-details">
+                                    <div class="warranty-details-title">
+                                        <i class="fas fa-file-contract"></i>
+                                        Warranty Form Detected
+                                    </div>
+                                    <div class="warranty-keywords">
+                                        ${ticket.has_attachments ? `• ${ticket.has_attachments} attachment${ticket.has_attachments !== 1 ? 's' : ''}` : '• Warranty claim ticket'}
+                                    </div>
+                                </div>
+                                ` : ''}
+                            </div>
+                            <div class="flex flex-col items-end space-y-2">
+                                <span class="px-2 py-1 text-xs rounded-full font-medium bg-green-100 text-green-700" title="Created from mail">
+                                    <i class="fas fa-envelope"></i> Mail
+                                </span>
+                                <div class="flex items-center space-x-2">
+                                    <button class="text-gray-400 hover:text-pink-600 important-btn" data-ticket-id="${ticket.ticket_id}" title="Mark as Important">
+                                        <i class="fas fa-star-o"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            `;
+
+                return card;
+            }
+
+            // Helper function to get priority color
+            function getPriorityColor(priority) {
+                const colors = {
+                    'Urgent': 'bg-red-100 text-red-800',
+                    'Fast': 'bg-yellow-100 text-yellow-800',
+                    'Medium': 'bg-pink-100 text-pink-800',
+                    'Low': 'bg-green-100 text-green-800'
+                };
+                return colors[priority] || 'bg-gray-100 text-gray-800';
+            }
+
+            // Helper function to get priority emoji
+            function getPriorityEmoji(priority) {
+                const emojis = {
+                    'Urgent': '🚨',
+                    'Fast': '⚡',
+                    'Medium': '🕒',
+                    'Low': '🐢'
+                };
+                return emojis[priority] || '📋';
+            }
+
+            // Helper function to get classification badge
+            function getClassificationBadge(classification) {
+                if (!classification || !['Technical Issue', 'Payment', 'Support', 'Warranty Claim', 'Spam'].includes(classification)) {
+                    return '';
+                }
+
+                const badges = {
+                    'Technical Issue': 'bg-blue-100 text-blue-800',
+                    'Payment': 'bg-indigo-100 text-indigo-800',
+                    'Support': 'bg-purple-100 text-purple-800',
+                    'Warranty Claim': 'bg-green-100 text-green-800',
+                    'Spam': 'bg-pink-100 text-pink-800'
+                };
+
+                const icons = {
+                    'Technical Issue': '🔧',
+                    'Payment': '💳',
+                    'Support': '🛎️',
+                    'Warranty Claim': '🛡️',
+                    'Spam': '🚫'
+                };
+
+                return `<span class="px-2 py-1 text-xs rounded-full font-medium ${badges[classification]}">${icons[classification]} ${classification}</span>`;
+            }
+
+            // Helper function to get status color
+            function getStatusColor(status) {
+                const colors = {
+                    'Open': 'bg-blue-100 text-blue-800',
+                    'Waiting for Response': 'bg-yellow-100 text-yellow-800',
+                    'Closed': 'bg-gray-100 text-gray-700',
+                    'Resolved': 'bg-green-100 text-green-800'
+                };
+                return colors[status] || 'bg-green-100 text-green-800';
+            }
+
+            // Helper function to get status icon
+            function getStatusIcon(status) {
+                if (status === 'Closed' || status === 'Resolved') {
+                    return '<i class="fas fa-lock mr-1"></i>';
+                }
+                return '';
+            }
+
+            // Helper function to format date
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true
+                });
+            }
+
+            // Function to update existing tickets
+            function updateExistingTickets(updatedTickets) {
+                updatedTickets.forEach(ticketUpdate => {
+                    const ticketCard = document.querySelector(`[data-ticket-id="${ticketUpdate.ticket_id}"]`);
+                    if (ticketCard) {
+                        // Update status if changed
+                        if (ticketUpdate.status) {
+                            const statusElement = ticketCard.querySelector('.text-xs.text-gray-400');
+                            if (statusElement) {
+                                statusElement.textContent = ticketUpdate.status;
+                            }
+                        }
+
+                        // Update priority if changed
+                        if (ticketUpdate.priority) {
+                            const priorityBadge = ticketCard.querySelector('.priority-badge');
+                            if (priorityBadge) {
+                                priorityBadge.className = `priority-badge px-2 py-1 text-xs rounded-full font-medium ${getPriorityColor(ticketUpdate.priority)}`;
+                                priorityBadge.textContent = ticketUpdate.priority;
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Function to remove tickets
+            function removeTickets(removedTicketIds) {
+                removedTicketIds.forEach(ticketId => {
+                    const ticketCard = document.querySelector(`[data-ticket-id="${ticketId}"]`);
+                    if (ticketCard) {
+                        ticketCard.remove();
+                    }
+                });
+            }
+
+            // Function to update breakdowns
+            function updateBreakdowns(breakdowns) {
+                // Update priority breakdown
+                if (breakdowns.priorities) {
+                    Object.entries(breakdowns.priorities).forEach(([priority, count]) => {
+                        const element = document.querySelector(`[data-priority="${priority}"]`);
+                        if (element) {
+                            element.textContent = count;
+                        }
+                    });
+                }
+
+                // Update classification breakdown
+                if (breakdowns.classifications) {
+                    Object.entries(breakdowns.classifications).forEach(([classification, count]) => {
+                        const element = document.querySelector(`[data-classification="${classification}"]`);
+                        if (element) {
+                            element.textContent = count;
+                        }
+                    });
+                }
+            }
+
+            // Real-time updates removed
+
+            // Real-time updates removed
+
+            // Real-time updates initialization removed
+
+            // Function to update technician tag on the index page
+            function updateTechnicianTag(ticketId, technicianName) {
+                // Find the ticket card by ticket ID
+                const ticketLink = document.querySelector(`a[href*="/ticket/${ticketId}"]`);
+                if (!ticketLink) {
+                    return;
+                }
+                const ticketCard = ticketLink.closest('.ticket-card');
+                if (!ticketCard) {
+                    return;
+                }
+
+                // Find or create the technician badge
+                let technicianBadge = ticketCard.querySelector('.technician-badge');
+
+                if (technicianName) {
+                    // Create or update technician badge
+                    if (!technicianBadge) {
+                        technicianBadge = document.createElement('span');
+                        technicianBadge.className = 'technician-badge px-2 py-1 text-xs rounded-full font-medium bg-blue-100 text-blue-800';
+                        technicianBadge.innerHTML = `👷 ${technicianName}`;
+
+                        // Insert after priority badge but before classification badges
+                        const priorityBadge = ticketCard.querySelector('.priority-badge');
+                        if (priorityBadge) {
+                            priorityBadge.parentNode.insertBefore(technicianBadge, priorityBadge.nextSibling);
+                        } else {
+                            // Fallback: find the first classification badge and insert before it
+                            const firstClassBadge = ticketCard.querySelector('.bg-gray-100, .bg-blue-100, .bg-indigo-100, .bg-purple-100, .bg-green-100, .bg-pink-100');
+                            if (firstClassBadge) {
+                                firstClassBadge.parentNode.insertBefore(technicianBadge, firstClassBadge);
+                            } else {
+                                // Last resort: insert at the end of badges container
+                                const badgesContainer = ticketCard.querySelector('.flex.flex-wrap.items-center.gap-2');
+                                if (badgesContainer) {
+                                    badgesContainer.appendChild(technicianBadge);
+                                }
+                            }
+                        }
+                    } else {
+                        technicianBadge.innerHTML = `👷 ${technicianName}`;
+                    }
+                } else {
+                    // Remove technician badge if it exists
+                    if (technicianBadge) {
+                        technicianBadge.remove();
+                    }
+                }
+            }
+
+            // Function to remove red dot alert when ticket is clicked
+            function removeRedDotAlert(ticketId) {
+                try {
+                    // Find the ticket card
+                    const ticketCard = document.querySelector(`[data-ticket-id="${ticketId}"]`);
+                    if (ticketCard) {
+                        // Find and remove the red dot alert
+                        const redDot = ticketCard.querySelector('.w-3.h-3.bg-red-500.rounded-full.animate-pulse');
+                        if (redDot) {
+                            redDot.remove();
+                        }
+                    }
+
+                    // Remove from localStorage
+                    const newTicketIds = JSON.parse(localStorage.getItem('newTicketIds') || '[]');
+                    const updatedTicketIds = newTicketIds.filter(id => id !== ticketId);
+                    localStorage.setItem('newTicketIds', JSON.stringify(updatedTicketIds));
+
+                } catch (error) {
+                    console.error('Error removing red dot alert:', error);
+                }
+            }
+
+
+
+            // Function to handle ticket clicks and remove red dot alerts
+            function handleTicketClick(event) {
+                if (event && event.target) {
+                    const ticketCard = event.target.closest('.ticket-card');
+                    if (ticketCard) {
+                        const ticketId = ticketCard.getAttribute('data-ticket-id');
+                        if (ticketId) {
+                            // Remove the red dot alert if it exists
+                            removeRedDotAlert(ticketId);
+                        }
+                    }
+                }
+            }
+
+            // Add event delegation for ticket clicks
+            document.addEventListener('click', handleTicketClick);
+
+            // Function to clean up old new ticket IDs from localStorage
+            function cleanupOldNewTicketIds() {
+                try {
+                    const newTicketIds = JSON.parse(localStorage.getItem('newTicketIds') || '[]');
+                    if (newTicketIds.length > 0) {
+                        // Get current ticket IDs from the page
+                        const currentTicketIds = getCurrentTicketIds();
+
+                        // Remove IDs that are no longer on the page
+                        const validTicketIds = newTicketIds.filter(id => currentTicketIds.includes(id));
+
+                        if (validTicketIds.length !== newTicketIds.length) {
+                            localStorage.setItem('newTicketIds', JSON.stringify(validTicketIds));
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error cleaning up old new ticket IDs:', error);
+                }
+            }
+
+            // Function to initialize red dot alerts based on localStorage and server data
+            function initializeRedDotAlerts() {
+                try {
+                    // Check localStorage for new ticket IDs
+                    const newTicketIds = JSON.parse(localStorage.getItem('newTicketIds') || '[]');
+
+                    // Also check for tickets with has_unread_reply from the server
+                    const ticketCards = document.querySelectorAll('.ticket-card');
+
+                    let redDotCount = 0;
+                    let serverUnreadCount = 0;
+
+                    ticketCards.forEach((ticketCard, index) => {
+                        const ticketId = ticketCard.getAttribute('data-ticket-id');
+                        if (!ticketId) return;
+
+                        // Check if this ticket should show a red dot alert
+                        let shouldShowRedDot = false;
+                        let reason = '';
+
+                        // Check localStorage for new tickets
+                        if (newTicketIds.includes(ticketId)) {
+                            shouldShowRedDot = true;
+                            reason = 'localStorage';
+                        }
+
+                        // Check if ticket has unread reply from server data
+                        // Look for the red dot that was rendered by Jinja2 template
+                        const existingRedDot = ticketCard.querySelector('.w-3.h-3.bg-red-500.rounded-full.animate-pulse');
+                        if (existingRedDot) {
+                            shouldShowRedDot = true;
+                            reason = 'server_template';
+                            serverUnreadCount++;
+                        }
+
+                        // Add red dot alert if needed and doesn't exist
+                        if (shouldShowRedDot) {
+                            const existingRedDot = ticketCard.querySelector('.w-3.h-3.bg-red-500.rounded-full.animate-pulse');
+                            if (!existingRedDot) {
+                                const ticketIdSpan = ticketCard.querySelector('.font-bold.text-blue-800');
+                                if (ticketIdSpan) {
+                                    const redDot = document.createElement('span');
+                                    redDot.className = 'ml-1 w-3 h-3 bg-red-500 rounded-full animate-pulse';
+                                    redDot.title = `New Reply - ${reason}`;
+                                    ticketIdSpan.appendChild(redDot);
+                                }
+                            }
+                            redDotCount++;
+                        }
+                    });
+
+                    // Clean up old new ticket IDs
+                    cleanupOldNewTicketIds();
+
+                } catch (error) {
+                    console.error('Error initializing red dot alerts:', error);
+                }
+            }
+
+            // Initialize red dot alerts when page loads
+            document.addEventListener('DOMContentLoaded', () => {
+                // Initialize red dot alerts after a short delay to ensure DOM is ready
+                setTimeout(initializeRedDotAlerts, 1000);
+
+                // Set up periodic checks for unread tickets
+                setInterval(checkForNewUnreadTickets, 5000); // Check every 5 seconds
+
+                // Initial check
+                setTimeout(checkForNewUnreadTickets, 2000);
+            });
+
+            // Handle page visibility changes to restore red dot alerts when user returns
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    // Page became visible, restore red dot alerts
+                    setTimeout(initializeRedDotAlerts, 500);
+                }
+            });
+
+            // Session keep-alive functionality removed
+
+            // Real-time technician update functionality
+            function setupTechnicianUpdates() {
+                // Listen for messages from ticket detail page
+                window.addEventListener('message', function (event) {
+                    if (event.data && event.data.type === 'updateTechnicianTag') {
+                        updateTechnicianTag(event.data.ticketId, event.data.technicianName);
+                    }
+                });
+
+                // Also check localStorage for updates
+                function checkLocalStorageUpdates() {
+                    try {
+                        const updateData = localStorage.getItem('technicianUpdate');
+                        if (updateData) {
+                            const data = JSON.parse(updateData);
+                            if (data.type === 'updateTechnicianTag') {
+                                updateTechnicianTag(data.ticketId, data.technicianName);
+                                localStorage.removeItem('technicianUpdate');
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Error checking localStorage updates:', error);
+                    }
+                }
+
+                // Check localStorage every 2 seconds
+                setInterval(checkLocalStorageUpdates, 2000);
+            }
+
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,3302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoAssistGroup Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff758f;
+            --secondary: #ff7eb3;
+            --urgent: #ff4757;
+            --fast: #ffa502;
+            --medium: #ff6b81;
+            --low: #2ed573;
+        }
+
+        /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
+        
+        /* Normal base font size - READABLE */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Normal Cards */
+        .dashboard-card, .ticket-card, .stats-card {
+            padding: 1rem !important;
+            margin-bottom: 1rem !important;
+            border-radius: 0.5rem !important;
+        }
+
+        /* Normal Badges */
+        .badge, .priority-badge, .member-badge {
+            padding: 0.5rem 1rem !important;
+            font-size: 0.875rem !important;
+            font-weight: 500 !important;
+        }
+
+        /* Normal Buttons */
+        button, .btn {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 0.875rem !important;
+            border-radius: 0.375rem !important;
+        }
+        
+        /* Enhanced admin panel buttons - keep gradients but make normal size */
+        .admin-btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.3);
+            padding: 0.75rem 1.5rem !important;
+            font-size: 0.875rem !important;
+        }
+        
+        .admin-btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px -2px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Normal Headers */
+        h1 { font-size: 1.875rem !important; }
+        h2 { font-size: 1.5rem !important; }
+        h3 { font-size: 1.25rem !important; }
+        h4 { font-size: 1.125rem !important; }
+
+        /* Normal Spacing */
+        .p-6 { padding: 1.5rem !important; }
+        .p-4 { padding: 1rem !important; }
+        .m-6 { margin: 1.5rem !important; }
+        .m-4 { margin: 1rem !important; }
+        .mb-6 { margin-bottom: 1rem !important; }
+        .mb-4 { margin-bottom: 1rem !important; }
+
+        /* Normal Grid Gaps */
+        .gap-6 { gap: 1.5rem !important; }
+        .gap-4 { gap: 1rem !important; }
+        .gap-2 { gap: 0.5rem !important; }
+
+        /* Normal Icons */
+        .fas, .fab, .far {
+            font-size: 1.25rem !important;
+        }
+
+        /* ===== NAVBAR ENHANCEMENTS ===== */
+        
+        /* Ensure navbar is always visible */
+        nav {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* Enhanced navbar shadows */
+        nav.shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Ensure navbar container is always visible */
+        nav .container {
+            display: block !important;
+            visibility: visible !important;
+        }
+        
+        /* Ensure navigation links are visible on medium screens and larger */
+        nav .hidden.md\\:flex {
+            display: flex !important;
+            visibility: visible !important;
+        }
+        
+        /* Force navbar to always be visible regardless of screen size */
+        nav {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 9999 !important;
+            background: white !important;
+            border-bottom: 2px solid #e5e7eb !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        /* Ensure navbar test element is visible */
+        #mainNavbar .bg-red-500 {
+            display: block !important;
+            visibility: visible !important;
+            position: relative !important;
+            z-index: 10000 !important;
+        }
+        
+        /* Force all navbar content to be visible */
+        nav * {
+            visibility: visible !important;
+        }
+        
+        /* Override any Tailwind hidden classes in navbar */
+        nav .hidden {
+            display: block !important;
+            visibility: visible !important;
+        }
+        
+        /* Ensure navbar container is visible */
+        nav .container {
+            display: block !important;
+            visibility: visible !important;
+        }
+        
+        /* Override any conflicting hidden classes for navbar */
+        nav.hidden,
+        nav[style*="display: none"],
+        nav[style*="visibility: hidden"] {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Navbar link hover effects */
+        nav a {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ec4899, #8b5cf6);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Active link styling */
+        nav a.active {
+            background: linear-gradient(135deg, #fce7f3, #f3e8ff);
+            color: #7c3aed;
+            font-weight: 600;
+        }
+        
+        /* ===== 1920px OPTIMIZATION STYLES ===== */
+        
+        /* Optimize for 1920px displays */
+        @media (min-width: 1920px) {
+            .container {
+                max-width: 1920px !important;
+                padding-left: 2rem !important;
+                padding-right: 2rem !important;
+            }
+            
+            .dashboard-card, .ticket-card, .stats-card {
+                padding: 1.5rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .ticket-card h3 {
+                font-size: 1.25rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .badge, .priority-badge, .member-badge {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 1rem !important;
+            }
+            
+            button, .btn {
+                padding: 1rem 2rem !important;
+                font-size: 1rem !important;
+            }
+            
+            .fas, .fab, .far {
+                font-size: 1.5rem !important;
+            }
+            
+            .modal-content {
+                padding: 3rem !important;
+                max-width: 600px !important;
+            }
+        }
+        
+        /* Ultra-wide display optimization */
+        @media (min-width: 2560px) {
+            .container {
+                max-width: 2400px !important;
+                padding-left: 3rem !important;
+                padding-right: 3rem !important;
+            }
+            
+            .dashboard-card, .ticket-card, .stats-card {
+                padding: 2rem !important;
+                margin-bottom: 2rem !important;
+            }
+            
+            .modal-content {
+                padding: 4rem !important;
+                max-width: 800px !important;
+            }
+        }
+
+        /* Custom max-width for 1920px constraint */
+        .max-w-1920 {
+            max-width: 1920px;
+        }
+
+        .ticket-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid #f1f5f9;
+        }
+        
+        /* Prevent interactions with deleted tickets */
+        .ticket-card.deleting {
+            opacity: 0.7 !important;
+            pointer-events: none !important;
+            cursor: not-allowed !important;
+            position: relative;
+        }
+        
+        .ticket-card.deleting::after {
+            content: "DELETING...";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .ticket-card.deleting .ticket-link {
+            pointer-events: none !important;
+            cursor: not-allowed !important;
+            text-decoration: none !important;
+            color: #999 !important;
+        }
+        
+        .ticket-card.deleting .ticket-link:hover {
+            text-decoration: none !important;
+            color: #999 !important;
+        }
+        
+        /* Ticket fade in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Better card hover effects */
+        .management-section {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .management-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .ticket-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 117, 143, 0.2);
+        }
+
+        .ticket-important {
+            background-color: #fff9f9;
+            border-left: 4px solid var(--primary);
+        }
+
+        .priority-urgent { border-left: 4px solid var(--urgent); }
+        .priority-fast { border-left: 4px solid var(--fast); }
+        .priority-medium { border-left: 4px solid var(--medium); }
+        .priority-low { border-left: 4px solid var(--low); }
+
+        .portal-title { color: #2b2d42; }
+
+        .stats-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 0.75rem;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .logo-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .priority-badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .badge-urgent { background-color: #fee2e2; color: #b91c1c; }
+        .badge-fast { background-color: #fef3c7; color: #92400e; }
+        .badge-medium { background-color: #fce7f3; color: #9d174d; }
+        .badge-low { background-color: #dcfce7; color: #166534; }
+        .badge-technical { background-color: #dbeafe; color: #1e40af; }
+        .badge-payment { background-color: #e0e7ff; color: #4338ca; }
+        .badge-account { background-color: #ede9fe; color: #5b21b6; }
+        .badge-general { background-color: #f3e8ff; color: #7e22ce; }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .member-badge {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            font-weight: 600;
+        }
+
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: rgb(255, 235, 235);
+            margin: 2% auto;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            animation: modalFadeIn 0.3s;
+        }
+
+        /* Specific styling for role management modal - compact for better screen fit */
+        #roleModal .modal-content {
+            max-width: 520px;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding: 1rem;
+            margin: 5vh auto;
+        }
+
+        /* Custom scrollbar for modals */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Responsive adjustments for mobile */
+        @media (max-width: 640px) {
+            .modal-content {
+                margin: 2vh auto;
+                width: 95%;
+                padding: 1.5rem;
+                max-height: 85vh;
+            }
+            
+            #roleModal .modal-content {
+                max-width: none;
+                width: 95%;
+                max-height: 75vh;
+                padding: 0.75rem;
+                margin: 3vh auto;
+            }
+        }
+        
+        /* Additional optimization for smaller screens */
+        @media (max-width: 480px) {
+            #roleModal .modal-content {
+                max-height: 70vh;
+                padding: 0.5rem;
+                margin: 2vh auto;
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .member-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f3f5;
+        }
+
+        .member-item:last-child { border-bottom: none; }
+
+        .member-actions { display: flex; gap: 0.5rem; }
+
+        .action-btn {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .edit-btn { background-color: #e0f2fe; color: #0369a1; }
+        .edit-btn:hover { background-color: #bae6fd; }
+        .delete-btn { background-color: #fee2e2; color: #b91c1c; }
+        .delete-btn:hover { background-color: #fecaca; }
+
+        .add-member-btn {
+            background-color: #ecfdf5;
+            color: #047857;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-member-btn:hover { background-color: #d1fae5; }
+
+        .form-input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 117, 143, 0.2);
+        }
+
+        .loading { opacity: 0.7; pointer-events: none; }
+
+        /* Enhanced Responsive Design */
+        /* Container improvements */
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Better spacing for admin sections */
+        .admin-section {
+            margin-bottom: 2rem;
+        }
+        
+        .admin-section:last-child {
+            margin-bottom: 1rem;
+        }
+        
+        /* Improved stats cards layout */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Better management sections */
+        .management-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (min-width: 1024px) {
+            .management-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        /* Enhanced search section */
+        .search-section {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .search-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .search-controls {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        @media (min-width: 640px) {
+            .filter-group {
+                flex-direction: row;
+                gap: 0.5rem;
+            }
+        }
+        
+        /* Mobile responsive improvements */
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 0 0.75rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .management-section {
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        /* Remove unnecessary spacing */
+        .admin-section {
+            margin-bottom: 2rem;
+        }
+        
+        .admin-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Better section spacing */
+        .stats-grid + .admin-section {
+            margin-top: 0;
+        }
+        
+        /* Small mobile devices (320px - 480px) */
+        @media (max-width: 480px) {
+            .admin-container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+            
+            /* Smaller text on very small screens */
+            h1 {
+                font-size: 1.5rem !important;
+            }
+            
+            h2 {
+                font-size: 1.125rem !important;
+            }
+            
+            /* Better mobile stats cards */
+            .stats-card {
+                padding: 1rem !important;
+            }
+            
+            /* Mobile management sections */
+            .management-section .px-6 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            /* Header responsive */
+            h1, h2 {
+                font-size: 1.5rem !important;
+            }
+            
+            h3 {
+                font-size: 1.25rem !important;
+            }
+            
+            .stats-card {
+                padding: 0.75rem;
+                text-align: center;
+            }
+            
+            .ticket-card {
+                padding: 0.875rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            /* Buttons and badges */
+            .px-3.py-2, .px-4.py-2 {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+            
+            .px-2.py-1 {
+                padding: 0.375rem 0.5rem;
+                font-size: 0.6875rem;
+            }
+
+            /* Tables */
+            .overflow-x-auto {
+                -webkit-overflow-scrolling: touch;
+            }
+
+            table {
+                min-width: 600px;
+                font-size: 0.875rem;
+            }
+
+            /* Grid adjustments */
+            .grid {
+                grid-template-columns: 1fr !important;
+                gap: 0.75rem;
+            }
+
+            /* Navigation dropdown - hide on mobile */
+            .hidden.md\\:flex {
+                display: none !important;
+            }
+
+            /* Logo size adjustment */
+            .logo-container {
+                width: 60px;
+                height: 60px;
+            }
+
+            /* Mobile navigation menu */
+            .mobile-menu {
+                display: block !important;
+            }
+        }
+        
+        /* Mobile devices (481px - 768px) */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .stats-card {
+                padding: 1rem;
+            }
+            
+            .ticket-card {
+                padding: 1rem;
+            }
+            
+            /* Navigation */
+            .hidden.md\\:flex {
+                display: none !important;
+            }
+            
+            /* Navbar mobile optimizations */
+            nav .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            nav .flex {
+                gap: 0.5rem;
+            }
+
+            /* Grid adjustments */
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+            }
+
+            table {
+                font-size: 0.875rem;
+            }
+        }
+        
+        /* Tablet devices (769px - 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            
+            /* Show navigation items */
+            .hidden.md\\:flex {
+                display: flex !important;
+            }
+            
+            /* Navbar tablet optimizations */
+            nav .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            
+            nav .flex {
+                gap: 1rem;
+            }
+            
+            .stats-card {
+                padding: 1.25rem;
+            }
+            
+            .ticket-card {
+                padding: 1.25rem;
+            }
+
+            /* Grid adjustments */
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+            }
+        }
+
+        /* Touch-friendly buttons */
+        @media (max-width: 768px) {
+            button, .btn, a.btn {
+                min-height: 44px;
+                padding: 0.75rem 1rem;
+            }
+
+            /* Input fields */
+            input, select, textarea {
+                min-height: 44px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+
+
+
+        }
+
+        /* ===== SCROLLABLE SECTIONS FIX ===== */
+        
+        /* Hidden class for ticket visibility toggle */
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Fade in animation for tickets */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fadeIn {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        /* Management sections with proper scrolling */
+        .scrollable-section {
+            max-height: 400px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e0 #f7fafc;
+            padding-right: 8px; /* Space for scrollbar */
+        }
+        
+        /* Custom scrollbar for webkit browsers */
+        .scrollable-section::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .scrollable-section::-webkit-scrollbar-track {
+            background: #f7fafc;
+            border-radius: 4px;
+        }
+        
+        .scrollable-section::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 4px;
+        }
+        
+        .scrollable-section::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
+        }
+        
+        /* Status list specific styling */
+        #statusList {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        
+        /* Technician list specific styling */  
+        #technicianSummary {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        
+        /* Roles list specific styling */
+        #rolesList {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        
+        /* Member management modals */
+        .member-list-container {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        /* Better spacing in scrollable areas */
+        .scrollable-section .space-y-4 > * + * {
+            margin-top: 1rem;
+        }
+        
+        /* Ensure proper spacing for last items in scrollable sections */
+        .scrollable-section > *:last-child {
+            margin-bottom: 1rem;
+        }
+        
+        /* Mobile scrollable adjustments */
+        @media (max-width: 768px) {
+            .scrollable-section {
+                max-height: 300px;
+                padding-right: 4px;
+            }
+            
+            #statusList, #technicianSummary, #rolesList {
+                max-height: 250px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="min-h-screen">
+                <!-- Navigation -->
+        <nav class="bg-white shadow-lg border-b border-gray-100 sticky top-0 z-50" id="mainNavbar">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-6">
+                        <a href="/" class="flex items-center space-x-2 hover:opacity-80 transition">
+                            <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
+                        </a>
+                        <div class="hidden md:flex space-x-1">
+                            <a href="/" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Tickets</a>
+                            <a href="/dashboard" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Dashboard</a>
+                            <a href="/status" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Status</a>
+                            <a href="/create-ticket" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Create Ticket</a>
+                            <a href="/technicians" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Technicians</a>
+                            <a href="/members" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Members</a>
+                            <a href="/admin" class="px-4 py-2 rounded-lg bg-pink-100 text-pink-700 font-medium border border-pink-200 shadow-sm">Admin Panel</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3 md:space-x-4">
+                        {% if current_user %}
+                        <div class="hidden sm:flex items-center space-x-3">
+                            <span class="text-gray-700 text-sm font-medium">{{ current_user }}</span>
+                        </div>
+                        <a href="/logout" class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 hover:text-gray-800 transition-colors duration-200 text-gray-600 text-sm font-medium">Logout</a>
+                        {% else %}
+                        <a href="/login" class="px-4 py-2 rounded-lg bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 transition-all duration-200 text-white text-sm font-medium shadow-sm">Login</a>
+                        {% endif %}
+                        
+                        <!-- Mobile menu button -->
+                        <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 mobile-menu-btn transition-colors duration-200" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Page Header -->
+            
+
+        
+
+            <!-- Member Management Modal -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content">
+            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                <i class="fas fa-users-cog mr-2 text-pink-600"></i> Team Members Management
+            </h3>
+            <div id="memberList" class="mb-4"></div>
+            <button id="addMemberBtn" class="add-member-btn">
+                <i class="fas fa-plus"></i> Add New Member
+            </button>
+            <div id="memberForm" class="hidden mt-4">
+                <input type="hidden" id="editMemberId">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                    <input type="text" id="memberName" class="form-input" placeholder="Member name" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                    <select id="memberRole" class="form-input" required>
+                        <option value="">Select a role...</option>
+                        <!-- Options will be loaded dynamically from roles -->
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                    <select id="memberGender" class="form-input">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">User ID</label>
+                    <input type="text" id="memberUserId" class="form-input" placeholder="Unique User ID" required>
+                </div>
+                <div class="mb-4 relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <div class="relative">
+                        <input type="password" id="memberPassword" class="form-input pr-10" placeholder="Password" required>
+                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none password-toggle" data-target="memberPassword">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-4 relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                    <div class="relative">
+                        <input type="password" id="confirmPassword" class="form-input pr-10" placeholder="Confirm Password" required>
+                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none password-toggle" data-target="confirmPassword">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancelMemberForm" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
+                        Cancel
+                    </button>
+                    <button type="button" id="saveMember" class="px-4 py-2 text-white rounded hover:opacity-90 transition bg-gradient-to-r from-pink-500 to-pink-600">
+                        Save Member
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role Management Modal -->
+    <div id="roleModal" class="modal">
+        <div class="modal-content">
+            <h3 class="text-lg font-semibold mb-2 flex items-center">
+                <i class="fas fa-user-tag mr-2 text-purple-600"></i> Role Management
+            </h3>
+            <div id="roleForm">
+                <input type="hidden" id="editRoleId">
+                <div class="mb-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Role Name</label>
+                    <input type="text" id="roleName" class="form-input" placeholder="Role name" required>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                    <textarea id="roleDescription" class="form-input" placeholder="Role description" rows="2" required></textarea>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Level (1-3)</label>
+                    <select id="roleLevel" class="form-input">
+                        <option value="1">1 - Administrator</option>
+                        <option value="2">2 - Technical Director</option>
+                        <option value="3" selected>3 - User</option>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Color</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="color" id="roleColor" class="w-10 h-8 rounded border">
+                        <span class="text-xs text-gray-500">Choose a color for this role</span>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Permissions</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 max-h-24 overflow-y-auto p-1.5 border rounded-lg bg-gray-50 text-xs" id="permissionsContainer">
+                        <label class="flex items-center py-0.5">
+                            <input type="checkbox" value="ticket_management" class="mr-1.5 scale-90"> Ticket Management
+                        </label>
+                        <label class="flex items-center py-0.5">
+                            <input type="checkbox" value="user_management" class="mr-1.5 scale-90"> User Management
+                        </label>
+                        <label class="flex items-center py-0.5">
+                            <input type="checkbox" value="system_config" class="mr-1.5 scale-90"> System Config
+                        </label>
+                        <label class="flex items-center py-0.5">
+                            <input type="checkbox" value="reports" class="mr-1.5 scale-90"> Reports
+                        </label>
+                        <label class="flex items-center py-0.5">
+                            <input type="checkbox" value="technical_tools" class="mr-1.5 scale-90"> Technical Tools
+                        </label>
+                        <label class="flex items-center py-0.5">
+                            <input type="checkbox" value="customer_response" class="mr-1.5 scale-90"> Customer Response
+                        </label>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-2 mt-3">
+                    <button type="button" id="cancelRoleForm" class="px-3 py-1.5 text-sm bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
+                        Cancel
+                    </button>
+                    <button type="button" id="saveRole" class="px-3 py-1.5 text-sm text-white rounded hover:opacity-90 transition bg-gradient-to-r from-purple-500 to-purple-600">
+                        Save Role
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Enhanced Stats Cards -->
+        <div class="stats-grid mb-8">
+            <div class="bg-white stats-card shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-all">
+                <div class="flex items-center">
+                    <div class="p-4 rounded-full bg-gradient-to-br from-pink-100 to-pink-50 mr-4">
+                        <i class="fas fa-ticket-alt text-pink-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-500 text-sm">Total Tickets</h3>
+                        <p class="text-3xl font-bold" style="color: var(--primary);">{{ total_tickets }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white stats-card shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-all">
+                <div class="flex items-center">
+                    <div class="p-4 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 mr-4">
+                        <i class="fas fa-folder-open text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-500 text-sm">Open Tickets</h3>
+                        <p class="text-3xl font-bold" style="color: var(--medium);">{{ open_tickets }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white stats-card shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-all">
+                <div class="flex flex-col">
+                    <h3 class="font-medium text-gray-500 text-sm mb-3">Priority Breakdown</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {% for priority, count in priorities.items() %}
+                        <span class="priority-badge rounded-full 
+                            {% if priority == 'Urgent' %}badge-urgent
+                            {% elif priority == 'Fast' %}badge-fast
+                            {% elif priority == 'Medium' %}badge-medium
+                            {% else %}badge-low{% endif %}">
+                            {{ priority }}: {{ count }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    <h3 class="font-medium text-gray-500 mt-4 mb-2">Type Breakdown</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {% for cls, count in classifications.items() %}
+                        <span class="priority-badge rounded-full 
+                            {% if cls == 'Technical' %}badge-technical
+                            {% elif cls == 'Payment' %}badge-payment
+                            {% elif cls == 'Account' %}badge-account
+                            {% else %}badge-general{% endif %}">
+                            {{ cls }}: {{ count }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white stats-card shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-all">
+                <div class="flex items-center">
+                    <div class="p-4 rounded-full bg-gradient-to-br from-green-100 to-green-50 mr-4">
+                        <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-500 text-sm">Resolved</h3>
+                        <p class="text-3xl font-bold" style="color: var(--low);">{{ resolved_tickets }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Enhanced Ticket List -->
+        <div class="admin-section bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 mb-8">
+            <div class="px-6 py-5 border-b bg-gradient-to-r from-pink-50 to-pink-100">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                <h2 class="text-xl font-semibold text-pink-700 flex items-center">
+                    <i class="fas fa-list-ul mr-2"></i> Recent Tickets
+                </h2>
+                    <span class="px-4 py-2 rounded-full text-sm font-medium bg-pink-600 text-white">
+                    Total: {{ total_tickets }}
+                </span>
+                </div>
+            </div>
+                            <div class="divide-y divide-pink-100" id="ticketsContainer">
+                    {% for ticket in tickets %}
+                    <div class="flex items-start ticket-card p-6 hover:bg-pink-50 {% if ticket.is_important %}ticket-important{% endif %} {% if loop.index > 5 %}hidden{% endif %}" data-ticket-index="{{ loop.index }}" data-ticket-id="{{ ticket.ticket_id }}">
+                        <div class="flex-1">
+                            <a href="/ticket/{{ ticket.ticket_id }}" class="flex-1 ticket-link" data-ticket-id="{{ ticket.ticket_id }}">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <div class="flex items-center flex-wrap gap-2 mb-2">
+                                        <span class="font-bold text-blue-800 bg-blue-50 px-2 py-1 rounded border border-blue-200 text-sm">
+                                            <i class="fas fa-hashtag mr-1"></i>{{ ticket.ticket_id }}
+                                        </span>
+                                        <span class="px-2 py-1 text-xs rounded-full font-medium
+                                            {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
+                                            {% elif ticket.priority == 'Fast' %}bg-yellow-100 text-yellow-800
+                                            {% elif ticket.priority == 'Medium' %}bg-pink-100 text-pink-800
+                                            {% else %}bg-green-100 text-green-800{% endif %}">
+                                            {{ ticket.priority }}
+                                        </span>
+                                        <span class="px-2 py-1 text-xs rounded-full font-medium
+                                            {% if ticket.status == 'Open' %}bg-blue-100 text-blue-800
+                                            {% else %}bg-green-100 text-green-800{% endif %}">
+                                            <i class="fas fa-{% if ticket.status == 'Open' %}lock-open{% else %}lock{% endif %} mr-1"></i>
+                                            {{ ticket.status }}
+                                        </span>
+                                        {% if ticket.classification and ticket.classification in ['Technical Issue', 'Payment', 'Support', 'Warranty Claim', 'Spam', 'Account'] %}
+                                        <span class="px-2 py-1 text-xs rounded-full font-medium 
+                                            {% if ticket.classification == 'Technical Issue' %}bg-blue-100 text-blue-800
+                                            {% elif ticket.classification == 'Payment' %}bg-indigo-100 text-indigo-800
+                                            {% elif ticket.classification == 'Support' %}bg-purple-100 text-purple-800
+                                            {% elif ticket.classification == 'Warranty Claim' %}bg-green-100 text-green-800
+                                            {% elif ticket.classification == 'Spam' %}bg-pink-100 text-pink-800
+                                            {% else %}bg-gray-100 text-gray-800{% endif %}">
+                                            {% if ticket.classification == 'Technical Issue' %}🔧
+                                            {% elif ticket.classification == 'Payment' %}💳
+                                            {% elif ticket.classification == 'Support' %}🛎️
+                                            {% elif ticket.classification == 'Warranty Claim' %}🛡️
+                                            {% elif ticket.classification == 'Spam' %}🚫
+                                            {% else %}❓{% endif %}
+                                            {{ ticket.classification }}
+                                        </span>
+                                        {% endif %}
+                                        {% if ticket.is_important %}
+                                        <span class="px-2 py-1 text-xs rounded-full font-medium bg-pink-100 text-pink-800">
+                                            <i class="fas fa-star mr-1"></i> Important
+                                        </span>
+                                        {% endif %}
+
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ ticket.subject }}</h3>
+                                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ ticket.body }}</p>
+                                    <div class="flex flex-wrap items-center text-sm text-gray-500 gap-3">
+                                        <span><i class="fas fa-user mr-1"></i>{{ ticket.name }}</span>
+                                        <span><i class="fas fa-envelope mr-1"></i>{{ ticket.email }}</span>
+                                        <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date }}</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="text-gray-400 hover:text-pink-600 important-btn" data-ticket-id="{{ ticket.ticket_id }}" title="Mark as Important">
+                                        <i class="fas fa-star{% if not ticket.is_important %}-o{% endif %}"></i>
+                                    </button>
+                                    <button class="text-gray-400 hover:text-red-600 delete-ticket-btn" data-ticket-id="{{ ticket.ticket_id }}" title="Delete Ticket Permanently" onclick="event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); deleteTicket('{{ ticket.ticket_id }}'); return false;">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                            </div>
+                            {% endfor %}
+                        </div>
+            
+            <!-- Show More Button -->
+            {% if tickets|length > 5 %}
+            <div class="px-6 py-4 bg-gray-50 border-t">
+                <button id="showMoreTickets" class="w-full px-4 py-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition-all duration-200 shadow-md hover:shadow-lg font-medium">
+                    <i class="fas fa-chevron-down mr-2"></i>
+                    <span id="showMoreText">Show More Tickets ({{ tickets|length - 5 }} hidden)</span>
+                </button>
+            </div>
+                        {% endif %}
+        </div>
+
+        <!-- Technician Management Section -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+            <div class="px-6 py-4 border-b flex justify-between items-center bg-gradient-to-r from-blue-50 to-blue-100">
+                <h2 class="text-xl font-semibold text-blue-700 flex items-center">
+                    <i class="fas fa-tools mr-2"></i> Technician Management
+                </h2>
+                <button id="addTechnicianBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Add Technician
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="techniciansContainer">
+                    {% for technician in technicians %}
+                    <div class="technician-card bg-gray-50 rounded-lg p-4 border-l-4 border-blue-500" data-technician-id="{{ technician._id }}">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">{{ technician.name }}</h3>
+                                <p class="text-sm text-gray-600">
+                                    <i class="fas fa-calendar-plus mr-1"></i>
+                                    Added: {{ technician.created_at.strftime('%Y-%m-%d') if technician.created_at else 'N/A' }}
+                                </p>
+                                <span class="inline-block px-2 py-1 mt-2 text-xs rounded-full
+                                    {% if technician.is_active %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+                                    {% if technician.is_active %}Active{% else %}Inactive{% endif %}
+                                </span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="edit-technician-btn text-blue-600 hover:text-blue-800 p-1" data-technician-id="{{ technician._id }}" data-technician-name="{{ technician.name }}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                {% if technician.is_active %}
+                                <button class="deactivate-technician-btn text-red-600 hover:text-red-800 p-1" data-technician-id="{{ technician._id }}" data-technician-name="{{ technician.name }}">
+                                    <i class="fas fa-user-times"></i>
+                                </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Deleted Tickets Management -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8" id="deletedTicketsSection" style="display: none;">
+            <div class="px-6 py-4 border-b flex justify-between items-center bg-gradient-to-r from-red-50 to-red-100">
+                <h2 class="text-xl font-semibold text-red-700 flex items-center">
+                    <i class="fas fa-trash-restore mr-2"></i> Deleted Tickets
+                </h2>
+                <div class="flex space-x-2">
+                    <button id="refreshDeletedTickets" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                        <i class="fas fa-sync mr-2"></i> Refresh
+                    </button>
+                    <button id="hideDeletedTickets" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition">
+                        <i class="fas fa-eye-slash mr-2"></i> Hide
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="space-y-3" id="deletedTicketsList">
+                    <!-- Deleted tickets will be loaded here -->
+                </div>
+                <div class="text-center py-8" id="noDeletedTicketsMessage">
+                    <i class="fas fa-trash text-4xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500">No deleted tickets found.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Member Management -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+            <div class="px-6 py-4 border-b bg-gradient-to-r from-pink-50 to-pink-100">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xl font-semibold text-pink-700 flex items-center">
+                        <i class="fas fa-users-cog mr-2"></i> Member Management
+                    </h2>
+                    <button id="addMemberBtnMain" class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition">
+                        <i class="fas fa-plus mr-2"></i> Add Member
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="space-y-3" id="membersMainList">
+                    {% for member in members %}
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg" data-member-id="{{ member._id }}">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center">
+                                <span class="text-pink-600">{{ '👩' if member.gender == 'female' else '👨' }}</span>
+                            </div>
+                            <div>
+                                <div class="font-medium text-gray-900">{{ member.name }}</div>
+                                <div class="text-sm text-gray-500">{{ member.role }} • {{ member.user_id }}</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs px-2 py-1 rounded-full 
+                                {% if member.role == 'Administrator' %}bg-blue-100 text-blue-800
+                                {% elif member.role == 'Technical Director' %}bg-orange-100 text-orange-800
+                                {% else %}bg-green-100 text-green-800{% endif %}">
+                                {{ member.role }}
+                            </span>
+                            <button class="edit-member-btn-main p-2 text-pink-600 hover:bg-pink-100 rounded" data-member-id="{{ member._id }}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            {% if member.user_id not in ['admin001', 'marc001'] %}
+                            <button class="delete-member-btn-main p-2 text-red-600 hover:bg-red-100 rounded" data-member-id="{{ member._id }}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                    <h4 class="font-medium text-blue-800 mb-2">Portal Access Guide:</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                        <div class="flex items-center">
+                            <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                            <span><strong>Administrator:</strong> Admin Portal only</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-3 h-3 bg-orange-500 rounded-full mr-2"></span>
+                            <span><strong>Technical Director:</strong> Tech Portal only</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                            <span><strong>Other Roles:</strong> User Portal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technician Management Modal -->
+    <div id="technicianModal" class="modal">
+        <div class="modal-content">
+            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                <i class="fas fa-tools mr-2 text-blue-600"></i> <span id="technicianModalTitle">Add Technician</span>
+            </h3>
+            <form id="technicianForm">
+                <input type="hidden" id="editTechnicianId">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Technician Name</label>
+                    <input type="text" id="technicianName" class="form-input" placeholder="Enter technician name" required>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancelTechnicianForm" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
+                        Cancel
+                    </button>
+                    <button type="submit" id="saveTechnician" class="px-4 py-2 text-white rounded hover:opacity-90 transition bg-gradient-to-r from-blue-500 to-blue-600">
+                        Save Technician
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Template data -->
+    <script type="application/json" id="technicians-data">{{ technicians | tojson | safe }}</script>
+    
+    <script>
+        // Global members array
+        let members = [];
+        
+        // Initialize technicians data safely
+        let techniciansData = [];
+        try {
+            const dataElement = document.getElementById('technicians-data');
+            if (dataElement) {
+                techniciansData = JSON.parse(dataElement.textContent);
+            }
+        } catch (e) {
+            console.error('Error loading technicians data:', e);
+            techniciansData = [];
+        }
+
+
+        // Toast notification functions
+        function showSuccessToast(message) {
+            showToast(message, 'success');
+        }
+
+        function showErrorToast(message) {
+            showToast(message, 'error');
+        }
+        
+        // Enhanced loading state management
+        function setLoadingState(element, isLoading, originalText = 'Loading...') {
+            if (!element) return;
+            
+            if (isLoading) {
+                element.disabled = true;
+                element.dataset.originalText = element.textContent;
+                element.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>' + originalText;
+                element.classList.add('opacity-75', 'cursor-not-allowed');
+            } else {
+                element.disabled = false;
+                element.innerHTML = element.dataset.originalText || originalText;
+                element.classList.remove('opacity-75', 'cursor-not-allowed');
+            }
+        }
+        
+        // Add confirmation dialog for critical actions
+        function confirmAction(message, action) {
+            if (confirm(message)) {
+                action();
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full ${
+                type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+            }`;
+            toast.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            // Add to page
+            document.body.appendChild(toast);
+            
+            // Animate in
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Modal elements
+        const memberModal = document.getElementById('memberModal');
+        const memberList = document.getElementById('memberList');
+        const addMemberBtn = document.getElementById('addMemberBtn');
+        const memberForm = document.getElementById('memberForm');
+        const cancelMemberForm = document.getElementById('cancelMemberForm');
+        const saveMember = document.getElementById('saveMember');
+        const memberName = document.getElementById('memberName');
+        const memberRole = document.getElementById('memberRole');
+        const memberGender = document.getElementById('memberGender');
+        const memberUserId = document.getElementById('memberUserId');
+        const memberPassword = document.getElementById('memberPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const editMemberId = document.getElementById('editMemberId');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const manageMembersBtn = document.getElementById('manageMembersBtn');
+        const teamMembersList = document.getElementById('membersMainList');
+
+        // Initialize password toggles
+        function initPasswordToggles() {
+           
+            const toggles = document.querySelectorAll('.password-toggle');
+            
+            
+            toggles.forEach((toggle, index) => {
+                try {
+                toggle.addEventListener('click', () => {
+                    const targetId = toggle.dataset.target;
+                    const input = document.getElementById(targetId);
+                    const icon = toggle.querySelector('i');
+                        
+                        if (!input) {
+                            console.warn(`⚠️ Password input with ID '${targetId}' not found`);
+                            return;
+                        }
+                        
+                        if (!icon) {
+                            console.warn(`⚠️ Icon element not found in password toggle`);
+                            return;
+                        }
+                        
+                    input.type = input.type === 'password' ? 'text' : 'password';
+                    icon.classList.toggle('fa-eye');
+                    icon.classList.toggle('fa-eye-slash');
+                });
+                    console.log(`✅ Password toggle ${index + 1} initialized`);
+                } catch (e) {
+                    console.warn(`⚠️ Failed to initialize password toggle ${index + 1}:`, e);
+                }
+            });
+            
+            console.log('✅ Password Toggles initialized successfully');
+        }
+
+        // Show loading state
+        function setLoading(element, isLoading) {
+            element.classList.toggle('loading', isLoading);
+            element.disabled = isLoading;
+        }
+
+
+
+        // Render team members list
+        function renderTeamMembersList() {
+            if (!teamMembersList) {
+                console.warn('Team members list element not found');
+                return;
+            }
+            
+            if (!Array.isArray(members)) {
+                console.warn('Members data is not available');
+                return;
+            }
+            
+            teamMembersList.innerHTML = members.map(member => `
+                <div class="flex items-center">
+                    <span class="mr-2">${member.gender === 'female' ? '👩' : '👨'}</span>
+                    <span>${member.name} (${member.role})</span>
+                </div>
+            `).join('');
+        }
+
+        // Render member list in management modal
+        function renderMemberList() {
+            if (!memberList) {
+                console.warn('Member list element not found');
+                return;
+            }
+            
+            if (!Array.isArray(members)) {
+                console.warn('Members data is not available');
+                return;
+            }
+            
+            memberList.innerHTML = members.map(member => `
+                <div class="member-item">
+                    <div>
+                        <span class="font-medium">${member.name}</span>
+                        <span class="text-sm text-gray-500 ml-2">(${member.role})</span>
+                    </div>
+                    <div class="member-actions">
+                        <button class="action-btn edit-btn" data-member-id="${member.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" data-member-id="${member.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const member = members.find(m => m.id == btn.dataset.memberId);
+                    if (member) {
+                        editMemberId.value = member.id;
+                        memberName.value = member.name;
+                        memberRole.value = member.role;
+                        memberGender.value = member.gender;
+                        memberUserId.value = member.user_id;
+                        memberPassword.value = '';
+                        confirmPassword.value = '';
+                        memberPassword.required = false; // Password not required for edits
+                        confirmPassword.required = false;
+                        memberForm.classList.remove('hidden');
+                        addMemberBtn.classList.add('hidden');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    if (confirm(`Are you sure you want to delete this member?`)) {
+                        try {
+                            setLoading(btn, true);
+                            const response = await fetch(`/api/members?id=${btn.dataset.memberId}`, { method: 'DELETE' });
+                            if (response.ok) {
+                                await loadMembers();
+                                renderTeamMembersList();
+                                renderMemberList();
+                            } else {
+                                alert('Error deleting member');
+                            }
+                        } catch (error) {
+                            console.error('Error deleting member:', error);
+                            alert('An error occurred while deleting the member');
+                        } finally {
+                            setLoading(btn, false);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Load members
+        async function loadMembers() {
+            try {
+                const response = await fetch('/api/members');
+                if (response.ok) {
+                    members = (await response.json()).members;
+                } else {
+                    throw new Error('Failed to load members');
+                }
+            } catch (error) {
+                console.error('Error loading members:', error);
+                alert('Failed to load team members');
+            }
+        }
+
+        // Save member
+        async function saveMemberHandler() {
+            const id = editMemberId.value;
+            const name = memberName.value.trim();
+            const role = memberRole.value.trim();
+            const gender = memberGender.value;
+            const user_id = memberUserId.value.trim();
+            const password = memberPassword.value;
+            const confirmPass = confirmPassword.value;
+
+            // Input validation
+            if (!name || !role || !user_id) {
+                alert('Please fill in all required fields (Name, Role, User ID)');
+                return;
+            }
+
+            // Validate user_id uniqueness
+            if (members.some(m => m.user_id === user_id && (!id || m.id != id))) {
+                alert('User ID must be unique');
+                return;
+            }
+
+            // Password validation
+            if (!id || password || confirmPass) {
+                if (!password || !confirmPass) {
+                    alert('Please provide both password and confirmation');
+                    return;
+                }
+                if (password !== confirmPass) {
+                    alert('Passwords do not match');
+                    return;
+                }
+                if (password.length < 6) {
+                    alert('Password must be at least 6 characters long');
+                    return;
+                }
+            } else if (!id) {
+                alert('Password is required for new members');
+                return;
+            }
+
+            try {
+                setLoading(saveMember, true);
+                const payload = { id, name, role, gender, user_id };
+                if (password) payload.password = password;
+
+                const response = await fetch('/api/members', {
+                    method: id ? 'PUT' : 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    await loadMembers();
+                    renderTeamMembersList();
+                    renderMemberList();
+                    memberForm.classList.add('hidden');
+                    addMemberBtn.classList.remove('hidden');
+                    memberPassword.required = true; // Reset for next add
+                    confirmPassword.required = true;
+                } else {
+                    alert(data.message || 'Error saving member');
+                }
+            } catch (error) {
+                console.error('Error saving member:', error);
+                alert('An error occurred while saving the member');
+            } finally {
+                setLoading(saveMember, false);
+            }
+        }
+
+        // Initialize member management
+        function initMemberManagement() {
+            console.log('🚀 Initializing Member Management...');
+            
+            // Check if manageMembersBtn exists before adding event listener
+            if (manageMembersBtn) {
+                manageMembersBtn.addEventListener('click', () => memberModal.style.display = 'block');
+                console.log('✅ Manage members button initialized');
+            } else {
+                console.log('⚠️ Manage members button not found');
+            }
+            
+            if (addMemberBtn) {
+                addMemberBtn.addEventListener('click', () => {
+                    editMemberId.value = '';
+                    memberName.value = '';
+                    memberRole.value = 'Support';
+                    memberGender.value = 'male';
+                    memberUserId.value = '';
+                    memberPassword.value = '';
+                    confirmPassword.value = '';
+                    memberPassword.required = true;
+                    confirmPassword.required = true;
+                    document.querySelectorAll('.password-toggle i').forEach(icon => {
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    });
+                    document.querySelectorAll('input[type="password"]').forEach(input => input.type = 'password');
+                    memberForm.classList.remove('hidden');
+                    addMemberBtn.classList.add('hidden');
+                });
+                console.log('✅ Add member button initialized');
+            } else {
+                console.log('⚠️ Add member button not found');
+            }
+            
+            if (cancelMemberForm) {
+                cancelMemberForm.addEventListener('click', () => {
+                    memberForm.classList.add('hidden');
+                    addMemberBtn.classList.remove('hidden');
+                    memberPassword.required = true;
+                    confirmPassword.required = true;
+                });
+                console.log('✅ Cancel member form button initialized');
+            } else {
+                console.log('⚠️ Cancel member form button not found');
+            }
+            
+            if (saveMember) {
+                saveMember.addEventListener('click', saveMemberHandler);
+                console.log('✅ Save member button initialized');
+            } else {
+                console.log('⚠️ Save member button not found');
+            }
+            
+            console.log('✅ Member Management initialized successfully');
+        }
+
+        // Close modals
+        window.addEventListener('click', (event) => {
+            if (event.target === memberModal) {
+                memberModal.style.display = 'none';
+                memberForm.classList.add('hidden');
+                addMemberBtn.classList.remove('hidden');
+            }
+        });
+
+
+
+        // Initialize important buttons
+        function initImportantButtons() {
+            document.querySelectorAll('.important-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    try {
+                        setLoading(btn, true);
+                        const response = await fetch(`/api/tickets/${btn.dataset.ticketId}/important`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' }
+                        });
+
+                        if (response.ok) {
+                            const icon = btn.querySelector('i');
+                            const ticketCard = btn.closest('.ticket-card');
+                            const badges = ticketCard.querySelector('.flex-wrap');
+                            if (icon.classList.contains('fa-star-o')) {
+                                icon.classList.replace('fa-star-o', 'fa-star');
+                                ticketCard.classList.add('ticket-important');
+                                badges.insertAdjacentHTML('beforeend',
+                                    '<span class="px-2 py-1 text-xs rounded-full font-medium bg-pink-100 text-pink-800">' +
+                                    '<i class="fas fa-star mr-1"></i> Important</span>');
+                            } else {
+                                icon.classList.replace('fa-star', 'fa-star-o');
+                                ticketCard.classList.remove('ticket-important');
+                                const importantBadge = ticketCard.querySelector('.bg-pink-100 .fa-star');
+                                if (importantBadge) importantBadge.closest('span').remove();
+                            }
+                        } else {
+                            alert('Error toggling important status');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('An error occurred while updating ticket status');
+                    } finally {
+                        setLoading(btn, false);
+                    }
+                });
+            });
+        }
+
+
+
+        // Legacy initialization removed - replaced by main initialization below
+        
+        // Modern Event Listeners (moved from legacy initialization)
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            
+            // Technician Management
+            const technicianModal = document.getElementById('technicianModal');
+            const technicianForm = document.getElementById('technicianForm');
+            const addTechnicianBtn = document.getElementById('addTechnicianBtn');
+            const cancelTechnicianForm = document.getElementById('cancelTechnicianForm');
+            const technicianModalTitle = document.getElementById('technicianModalTitle');
+            const technicianName = document.getElementById('technicianName');
+            const editTechnicianId = document.getElementById('editTechnicianId');
+
+            // Add technician button
+            if (addTechnicianBtn && technicianModal && technicianForm) {
+                addTechnicianBtn.addEventListener('click', () => {
+                    technicianModalTitle.textContent = 'Add Technician';
+                    technicianForm.reset();
+                    editTechnicianId.value = '';
+                    technicianModal.style.display = 'block';
+                });
+            }
+
+            // Cancel technician form
+            if (cancelTechnicianForm && technicianModal) {
+                cancelTechnicianForm.addEventListener('click', () => {
+                    technicianModal.style.display = 'none';
+                });
+            }
+
+            // Close modal on outside click
+            technicianModal.addEventListener('click', (e) => {
+                if (e.target === technicianModal) {
+                    technicianModal.style.display = 'none';
+                }
+            });
+
+            // Technician form submission
+            technicianForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const isEdit = editTechnicianId.value !== '';
+                const name = technicianName.value.trim();
+                
+                if (!name) {
+                    alert('Please enter a technician name');
+                    return;
+                }
+
+                try {
+                    const url = isEdit 
+                        ? `/api/admin/technicians/${editTechnicianId.value}`
+                        : '/api/admin/technicians';
+                    
+                    const response = await fetch(url, {
+                        method: isEdit ? 'PUT' : 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name: name })
+                    });
+
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        showSuccessToast(result.message);
+                        technicianModal.style.display = 'none';
+                        // Reload page to show updated technicians
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        showErrorToast(result.message || 'An error occurred');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    showErrorToast('An error occurred while saving technician');
+                }
+            });
+
+            // Edit technician buttons
+            document.querySelectorAll('.edit-technician-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const technicianId = btn.dataset.technicianId;
+                    const technicianNameValue = btn.dataset.technicianName;
+                    
+                    technicianModalTitle.textContent = 'Edit Technician';
+                    editTechnicianId.value = technicianId;
+                    technicianName.value = technicianNameValue;
+                    technicianModal.style.display = 'block';
+                });
+            });
+
+            // Deactivate technician buttons
+            document.querySelectorAll('.deactivate-technician-btn').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const technicianId = btn.dataset.technicianId;
+                    const technicianNameValue = btn.dataset.technicianName;
+                    
+                    if (!confirm(`Are you sure you want to deactivate ${technicianNameValue}? They will no longer appear in new tickets but will remain in historical records.`)) {
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(`/api/admin/technicians/${technicianId}/deactivate`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        });
+
+                        const result = await response.json();
+                        
+                        if (response.ok) {
+                            showSuccessToast(result.message);
+                            // Reload page to show updated status
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 1000);
+                        } else {
+                            showErrorToast(result.message || 'An error occurred');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        showErrorToast('An error occurred while deactivating technician');
+                    }
+                });
+            });
+
+
+
+            
+            
+            
+            // Show deleted tickets section
+            document.getElementById('showDeletedTicketsBtn')?.addEventListener('click', function() {
+                const section = document.getElementById('deletedTicketsSection');
+                if (section.style.display === 'none') {
+                    section.style.display = 'block';
+                    loadDeletedTickets();
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+            document.getElementById('hideDeletedTickets')?.addEventListener('click', function() {
+                document.getElementById('deletedTicketsSection').style.display = 'none';
+            });
+            document.getElementById('refreshDeletedTickets')?.addEventListener('click', loadDeletedTickets);
+            document.getElementById('cleanupDataBtn')?.addEventListener('click', cleanupOldData);
+            document.getElementById('exportDataBtn')?.addEventListener('click', exportData);
+            
+            // Add event listeners for ticket deletion buttons
+            document.addEventListener('click', function(e) {
+                if (e && e.target) {
+                if (e.target.closest('.delete-ticket-btn')) {
+                    const ticketId = e.target.closest('.delete-ticket-btn').dataset.ticketId;
+                    deleteTicket(ticketId); // Permanent deletion only
+                } else if (e.target.closest('.permanent-delete-btn')) {
+                    const ticketId = e.target.closest('.permanent-delete-btn').dataset.ticketId;
+                    deleteTicket(ticketId, true); // Permanent deletion from deleted tickets list
+                    }
+                }
+            });
+        });
+        
+
+        
+
+
+        async function updateTicketTags() {
+            if (!confirm('This will update creation method tags for all tickets. Continue?')) return;
+            
+            try {
+                const response = await fetch('/api/admin/update-creation-methods', {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    showSuccessToast(`Updated ${data.updated_count} tickets successfully`);
+                } else {
+                    showErrorToast(data.message || 'Error updating ticket tags');
+                }
+            } catch (error) {
+                showErrorToast('Error updating ticket tags');
+            }
+        }
+
+        async function cleanupOldData() {
+            if (!confirm('This will permanently delete old tickets and replies older than 365 days. This action cannot be undone. Continue?')) return;
+            
+            try {
+                const response = await fetch('/api/admin/cleanup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ days: 365 })
+                });
+                
+                const data = await response.json();
+                if (response.ok && data.status === 'success') {
+                    showSuccessToast(`Cleaned up ${data.deleted_count || 0} old records successfully`);
+                } else {
+                    showErrorToast(data.message || 'Error cleaning up old data');
+                }
+            } catch (error) {
+                console.error('Error cleaning up data:', error);
+                showErrorToast('Error cleaning up old data');
+            }
+        }
+
+        async function exportSystemData() {
+            if (!confirm('This will export all system data to CSV files. Continue?')) return;
+            
+            try {
+                showSuccessToast('Starting data export...');
+                
+                const response = await fetch('/api/admin/export', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    // Trigger file download
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = `system-export-${new Date().toISOString().split('T')[0]}.zip`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                    showSuccessToast('Data exported successfully');
+                } else {
+                    const data = await response.json();
+                    showErrorToast(data.message || 'Error exporting data');
+                }
+            } catch (error) {
+                console.error('Error exporting data:', error);
+                showErrorToast('Error exporting system data');
+            }
+        }
+
+        // Duplicate functions removed - already defined above
+        
+        // Ticket Deletion Functions
+        async function deleteTicket(ticketId) {
+            try {
+                // IMMEDIATELY disable the ticket card to prevent any clicks
+                const ticketCards = document.querySelectorAll('.ticket-card');
+                let ticketCard = null;
+                
+                // Find the ticket card that contains the delete button with this ticket ID
+                for (let card of ticketCards) {
+                    const deleteBtn = card.querySelector(`.delete-ticket-btn[data-ticket-id="${ticketId}"]`);
+                    if (deleteBtn) {
+                        ticketCard = card;
+                        break;
+                    }
+                }
+                
+                if (ticketCard) {
+                    // IMMEDIATELY mark ticket as deleting and disable all interactions
+                    ticketCard.classList.add('deleting');
+                    ticketCard.setAttribute('data-deleting', 'true');
+                    ticketCard.style.pointerEvents = 'none';
+                    ticketCard.style.opacity = '0.7';
+                    
+                    // IMMEDIATELY disable ticket navigation before API call
+                    disableTicketNavigation(ticketCard);
+                    
+                    // CRITICAL: Prevent any navigation by removing href and adding click prevention
+                    const ticketLink = ticketCard.querySelector('.ticket-link');
+                    if (ticketLink) {
+                        // Remove href completely
+                        ticketLink.removeAttribute('href');
+                        // Add onclick that prevents navigation
+                        ticketLink.onclick = function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            showErrorToast('This ticket is being deleted. Please wait...');
+                            return false;
+                        };
+                        // Also prevent any default link behavior
+                        ticketLink.style.pointerEvents = 'none';
+                        ticketLink.style.cursor = 'not-allowed';
+                        ticketLink.style.textDecoration = 'none';
+                        ticketLink.style.color = '#999';
+                    }
+                    
+                    // Add immediate click prevention to the entire ticket card
+                    ticketCard.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showErrorToast('This ticket is being deleted. Please wait...');
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Also prevent mousedown events
+                    ticketCard.addEventListener('mousedown', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // And prevent any pointer events
+                    ticketCard.addEventListener('pointerdown', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent touch events on mobile
+                    ticketCard.addEventListener('touchstart', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent keyboard navigation
+                    ticketCard.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            return false;
+                        }
+                    }, { once: true, capture: true });
+                    
+                    // Prevent focus events
+                    ticketCard.addEventListener('focus', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent form submissions
+                    ticketCard.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent input changes
+                    ticketCard.addEventListener('change', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent input events
+                    ticketCard.addEventListener('input', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent paste events
+                    ticketCard.addEventListener('paste', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent copy events
+                    ticketCard.addEventListener('copy', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent cut events
+                    ticketCard.addEventListener('cut', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent selection events
+                    ticketCard.addEventListener('select', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent selection start events
+                    ticketCard.addEventListener('selectstart', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent drag events
+                    ticketCard.addEventListener('dragstart', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent drop events
+                    ticketCard.addEventListener('drop', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent dragover events
+                    ticketCard.addEventListener('dragover', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent dragenter events
+                    ticketCard.addEventListener('dragenter', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Prevent dragleave events
+                    ticketCard.addEventListener('dragleave', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }, { once: true, capture: true });
+                    
+                    // Show loading state
+                    showSuccessToast('Deleting ticket...');
+                }
+                
+                const response = await fetch(`/api/tickets/${ticketId}`, { method: 'DELETE' });
+                const data = await response.json();
+                
+                if (response.ok && data.status === 'success') {
+                    showSuccessToast('Ticket deleted successfully');
+                    
+                    if (ticketCard) {
+                        // Animate removal
+                        ticketCard.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        ticketCard.style.opacity = '0';
+                        ticketCard.style.transform = 'translateX(-100%)';
+                        
+                        setTimeout(() => {
+                            ticketCard.remove();
+                            updateTicketCount();
+                            updateShowMoreButton();
+                            
+                            // Check if we need to show more tickets after deletion
+                            const remainingTickets = document.querySelectorAll('.ticket-card');
+                            if (remainingTickets.length <= 5) {
+                                // Show all remaining tickets if 5 or fewer
+                                remainingTickets.forEach(ticket => ticket.classList.remove('hidden'));
+                                const showMoreBtn = document.getElementById('showMoreTickets');
+                                if (showMoreBtn) {
+                                    showMoreBtn.parentElement.style.display = 'none';
+                                }
+                            }
+                            
+                            // Update ticket list without page reload
+                            setTimeout(() => {
+                                refreshTicketList();
+                            }, 500);
+                        }, 300);
+                    }
+                } else {
+                    showErrorToast(data.message || 'Failed to delete ticket');
+                    
+                    // Re-enable the ticket card if deletion failed
+                    if (ticketCard) {
+                        ticketCard.classList.remove('deleting');
+                        ticketCard.style.pointerEvents = 'auto';
+                        ticketCard.style.opacity = '1';
+                        // Re-enable navigation
+                        const ticketLink = ticketCard.querySelector('.ticket-link');
+                        if (ticketLink) {
+                            ticketLink.setAttribute('href', `/ticket/${ticketId}`);
+                            ticketLink.style.pointerEvents = 'auto';
+                            ticketLink.style.cursor = 'pointer';
+                            ticketLink.style.textDecoration = 'underline';
+                            ticketLink.style.color = '#3b82f6';
+                        }
+                    }
+                }
+            } catch (error) {
+                showErrorToast('Error deleting ticket');
+                console.error('Error:', error);
+                
+                // Re-enable the ticket card if deletion failed
+                if (ticketCard) {
+                    ticketCard.classList.remove('deleting');
+                    ticketCard.style.pointerEvents = 'auto';
+                    ticketCard.style.opacity = '1';
+                    // Re-enable navigation
+                    const ticketLink = ticketCard.querySelector('.ticket-link');
+                    if (ticketLink) {
+                        ticketLink.setAttribute('href', `/ticket/${ticketId}`);
+                        ticketLink.style.pointerEvents = 'auto';
+                        ticketLink.style.cursor = 'pointer';
+                        ticketLink.style.textDecoration = 'underline';
+                        ticketLink.style.color = '#3b82f6';
+                    }
+                }
+            }
+        }
+
+        function updateTicketCount() {
+            const ticketsContainer = document.getElementById('ticketsContainer');
+            if (!ticketsContainer) return;
+            
+            const remainingTickets = ticketsContainer.querySelectorAll('.ticket-card').length;
+            
+            // Update the total count display
+            const countElement = document.querySelector('.bg-pink-600.text-white');
+            if (countElement) {
+                countElement.textContent = `Total: ${remainingTickets}`;
+            }
+            
+            // Update the show more button text if it exists
+            const showMoreText = document.getElementById('showMoreText');
+            if (showMoreText) {
+                const hiddenTickets = document.querySelectorAll('.ticket-card.hidden').length;
+                if (hiddenTickets > 0) {
+                    showMoreText.textContent = `Show More Tickets (${hiddenTickets} hidden)`;
+                } else {
+                    showMoreText.textContent = 'Show Less';
+                }
+            }
+            
+            console.log(`✅ Ticket count updated: ${remainingTickets} tickets remaining`);
+        }
+
+        // Show More Tickets Functionality
+        function initShowMoreButton() {
+            console.log('🚀 Initializing Show More Button...');
+            const showMoreBtn = document.getElementById('showMoreTickets');
+            if (showMoreBtn) {
+                console.log('✅ Show more button found, adding click listener');
+                showMoreBtn.addEventListener('click', toggleTicketsVisibility);
+                updateShowMoreButton();
+                console.log('✅ Show more button initialized successfully');
+            } else {
+                console.log('❌ Show more button not found in DOM');
+            }
+        }
+        
+        // Refresh ticket list from server
+        async function refreshTicketList() {
+            try {
+                // Instead of reloading the page, just update the ticket count
+                // This prevents navigation to deleted ticket URLs
+                updateTicketCount();
+                console.log('✅ Ticket list refreshed without page reload');
+            } catch (error) {
+                console.error('Error refreshing ticket list:', error);
+            }
+        }
+        
+        // Prevent clicking on deleted tickets
+        function preventDeletedTicketClicks() {
+            document.addEventListener('click', function(e) {
+                if (e && e.target) {
+                if (e.target.closest('.ticket-link')) {
+                    const ticketId = e.target.closest('.ticket-link').dataset.ticketId;
+                    const ticketCard = e.target.closest('.ticket-card');
+                    
+                    // Check if ticket is marked as deleted (has opacity 0, is being removed, or has no href)
+                    if (ticketCard && (
+                        ticketCard.style.opacity === '0' || 
+                        ticketCard.classList.contains('deleting') ||
+                        ticketCard.hasAttribute('data-deleting') ||
+                        !e.target.closest('.ticket-link').hasAttribute('href') ||
+                        ticketCard.style.pointerEvents === 'none'
+                    )) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showErrorToast('This ticket is being deleted or has been deleted. Please wait...');
+                        return false;
+                        }
+                    }
+                }
+            });
+            
+            // Also prevent any clicks on ticket cards that are being deleted
+            document.addEventListener('click', function(e) {
+                if (e && e.target) {
+                if (e.target.closest('.ticket-card')) {
+                    const ticketCard = e.target.closest('.ticket-card');
+                    
+                    if (ticketCard.classList.contains('deleting') || 
+                        ticketCard.hasAttribute('data-deleting') ||
+                        ticketCard.style.pointerEvents === 'none') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showErrorToast('This ticket is being deleted. Please wait...');
+                        return false;
+                        }
+                    }
+                }
+            });
+            
+            // CRITICAL: Global prevention for any navigation to deleted tickets
+            document.addEventListener('click', function(e) {
+                if (e && e.target) {
+                const link = e.target.closest('a[href*="/ticket/"]');
+                if (link) {
+                    const ticketId = link.href.split('/ticket/')[1];
+                    if (ticketId) {
+                        // Check if this ticket is being deleted
+                        const ticketCard = document.querySelector(`.ticket-card[data-ticket-id="${ticketId}"]`);
+                        if (ticketCard && (ticketCard.classList.contains('deleting') || ticketCard.hasAttribute('data-deleting'))) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            showErrorToast('This ticket is being deleted. Please wait...');
+                            return false;
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Completely disable ticket navigation for deleted tickets
+        function disableTicketNavigation(ticketCard) {
+            const ticketLink = ticketCard.querySelector('.ticket-link');
+            if (ticketLink) {
+                ticketLink.removeAttribute('href');
+                ticketLink.style.pointerEvents = 'none';
+                ticketLink.style.cursor = 'default';
+                ticketLink.style.textDecoration = 'none';
+                ticketLink.style.color = 'inherit';
+                
+                // Add a visual indicator that the ticket is being deleted
+                ticketLink.innerHTML += ' <span style="color: #ef4444; font-size: 0.75rem;">(Deleting...)</span>';
+            }
+        }
+
+        function toggleTicketsVisibility() {
+            console.log('🔄 Toggling tickets visibility...');
+            const hiddenTickets = document.querySelectorAll('.ticket-card.hidden');
+            const showMoreBtn = document.getElementById('showMoreTickets');
+            const showMoreText = document.getElementById('showMoreText');
+            const icon = showMoreBtn.querySelector('i');
+
+            console.log(`📊 Found ${hiddenTickets.length} hidden tickets`);
+
+            if (hiddenTickets.length > 0) {
+                // Show all hidden tickets
+                console.log('👁️ Showing all hidden tickets...');
+                hiddenTickets.forEach(ticket => {
+                    ticket.classList.remove('hidden');
+                    ticket.style.animation = 'fadeIn 0.3s ease-in-out';
+                });
+                showMoreText.textContent = 'Show Less';
+                icon.className = 'fas fa-chevron-up mr-2';
+                console.log('✅ All tickets are now visible');
+            } else {
+                // Hide tickets after the first 5
+                console.log('🙈 Hiding tickets after the first 5...');
+                const allTickets = document.querySelectorAll('.ticket-card');
+                allTickets.forEach((ticket, index) => {
+                    if (index >= 5) {
+                        ticket.classList.add('hidden');
+                        console.log(`🙈 Hidden ticket ${index + 1}: ${ticket.dataset.ticketId}`);
+                    }
+                });
+                updateShowMoreButton();
+                console.log('✅ Tickets hidden, showing first 5 only');
+            }
+        }
+
+        function updateShowMoreButton() {
+            const allTickets = document.querySelectorAll('.ticket-card');
+            const hiddenTickets = document.querySelectorAll('.ticket-card.hidden');
+            const showMoreBtn = document.getElementById('showMoreTickets');
+            const showMoreText = document.getElementById('showMoreText');
+            const icon = showMoreBtn?.querySelector('i');
+
+            console.log(`🔍 UpdateShowMoreButton: ${allTickets.length} total tickets, ${hiddenTickets.length} hidden`);
+
+            if (showMoreBtn) {
+                if (allTickets.length <= 5) {
+                    // Hide button if 5 or fewer tickets
+                    console.log('🚫 Hiding show more button (5 or fewer tickets)');
+                    showMoreBtn.parentElement.style.display = 'none';
+                } else {
+                    console.log('👁️ Showing show more button');
+                    showMoreBtn.parentElement.style.display = 'block';
+                    if (hiddenTickets.length > 0) {
+                        showMoreText.textContent = `Show More Tickets (${hiddenTickets.length} hidden)`;
+                        if (icon) icon.className = 'fas fa-chevron-down mr-2';
+                        console.log(`📝 Button text: Show More Tickets (${hiddenTickets.length} hidden)`);
+                    } else {
+                        showMoreText.textContent = 'Show Less';
+                        if (icon) icon.className = 'fas fa-chevron-up mr-2';
+                        console.log('📝 Button text: Show Less');
+                    }
+                }
+            } else {
+                console.log('❌ Show more button not found!');
+            }
+        }
+        
+        // Deleted Tickets Management
+        async function loadDeletedTickets() {
+            try {
+                const response = await fetch('/api/admin/tickets/deleted');
+                const data = await response.json();
+                
+                if (response.ok && data.status === 'success') {
+                    renderDeletedTickets(data.tickets);
+                } else {
+                    console.error('Failed to load deleted tickets:', data.message);
+                    document.getElementById('noDeletedTicketsMessage').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error loading deleted tickets:', error);
+                document.getElementById('noDeletedTicketsMessage').style.display = 'block';
+            }
+        }
+
+        function renderDeletedTickets(tickets) {
+            const container = document.getElementById('deletedTicketsList');
+            const noMessage = document.getElementById('noDeletedTicketsMessage');
+            
+            if (!tickets || tickets.length === 0) {
+                container.innerHTML = '';
+                noMessage.style.display = 'block';
+                return;
+            }
+            
+            noMessage.style.display = 'none';
+            container.innerHTML = tickets.map(ticket => `
+                <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200" data-ticket-id="${ticket.ticket_id}">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <span class="font-bold text-red-800 bg-red-100 px-2 py-1 rounded text-sm">
+                                <i class="fas fa-hashtag mr-1"></i>${ticket.ticket_id}
+                            </span>
+                            <h3 class="font-medium text-gray-800">${ticket.subject}</h3>
+                        </div>
+                        <div class="mt-1 text-sm text-gray-600">
+                            <span class="mr-4"><i class="fas fa-user mr-1"></i>${ticket.name}</span>
+                            <span class="mr-4"><i class="fas fa-envelope mr-1"></i>${ticket.email}</span>
+                            <span><i class="fas fa-calendar mr-1"></i>Deleted: ${new Date(ticket.deleted_at).toLocaleDateString()}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="restore-ticket-btn px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition" 
+                                data-ticket-id="${ticket.ticket_id}" title="Restore Ticket">
+                            <i class="fas fa-undo mr-1"></i> Restore
+                        </button>
+                        <button class="permanent-delete-btn px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                data-ticket-id="${ticket.ticket_id}" title="Delete Permanently">
+                            <i class="fas fa-trash mr-1"></i> Delete Forever
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function restoreTicket(ticketId) {
+            try {
+                const response = await fetch(`/api/tickets/${ticketId}/restore`, {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                if (response.ok && data.status === 'success') {
+                    showSuccessToast('Ticket restored successfully');
+                    
+                    // Remove from deleted tickets list
+                    const ticketRow = document.querySelector(`#deletedTicketsList [data-ticket-id="${ticketId}"]`);
+                    if (ticketRow) {
+                        ticketRow.style.transition = 'opacity 0.3s ease';
+                        ticketRow.style.opacity = '0';
+                        setTimeout(() => {
+                            ticketRow.remove();
+                            // Check if list is empty
+                            const remainingTickets = document.querySelectorAll('#deletedTicketsList [data-ticket-id]');
+                            if (remainingTickets.length === 0) {
+                                document.getElementById('noDeletedTicketsMessage').style.display = 'block';
+                            }
+                        }, 300);
+                    }
+                } else {
+                    showErrorToast(data.message || 'Error restoring ticket');
+                }
+            } catch (error) {
+                showErrorToast('Error restoring ticket');
+                console.error('Error:', error);
+            }
+        }
+        
+
+
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) {
+                mobileMenu.classList.toggle('hidden');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.querySelector('.mobile-menu-btn');
+            
+            if (mobileMenu && !mobileMenu.contains(event.target) && menuButton && !menuButton.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Initialize all features when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('🚀 Admin Panel Initializing...');
+            
+            try {
+                // Initialize UI components with error handling
+                console.log('🔧 Initializing UI components...');
+                
+                try {
+                initPasswordToggles();
+                    console.log('✅ Password toggles initialized');
+                } catch (e) {
+                    console.warn('⚠️ Password toggles initialization failed:', e);
+                }
+                
+                try {
+                initMemberManagement();
+                    console.log('✅ Member management initialized');
+                } catch (e) {
+                    console.warn('⚠️ Member management initialization failed:', e);
+                }
+                
+                try {
+                initMainMemberManagement();
+                    console.log('✅ Main member management initialized');
+                } catch (e) {
+                    console.warn('⚠️ Main member management initialization failed:', e);
+                }
+                
+                try {
+                initRoleManagement();
+                    console.log('✅ Role management initialized');
+                } catch (e) {
+                    console.warn('⚠️ Role management initialization failed:', e);
+                }
+                
+                try {
+                initShowMoreButton();
+                    console.log('✅ Show more button initialized');
+                } catch (e) {
+                    console.warn('⚠️ Show more button initialization failed:', e);
+                }
+                
+                try {
+                preventDeletedTicketClicks();
+                    console.log('✅ Deleted ticket click prevention initialized');
+                } catch (e) {
+                    console.warn('⚠️ Deleted ticket click prevention initialization failed:', e);
+                }
+                
+                console.log('🔧 Loading data...');
+                
+                // Load data in parallel for better performance
+                await Promise.all([
+                    loadMembers().catch(e => console.error('Failed to load members:', e)),
+                    loadRoles().catch(e => console.error('Failed to load roles:', e))
+                ]);
+                
+                console.log('🔧 Rendering UI components...');
+                
+                // Render UI components after data is loaded
+                try {
+                renderTeamMembersList();
+                    console.log('✅ Team members list rendered');
+                } catch (e) {
+                    console.warn('⚠️ Team members list rendering failed:', e);
+                }
+                
+                try {
+                renderMemberList();
+                    console.log('✅ Member list rendered');
+                } catch (e) {
+                    console.warn('⚠️ Member list rendering failed:', e);
+                }
+                
+                console.log('✅ Admin Panel Initialized Successfully');
+                showSuccessToast('Admin panel loaded successfully');
+                
+            } catch (error) {
+                console.error('❌ Error initializing admin panel:', error);
+                showErrorToast('Error loading admin panel');
+            }
+        });
+
+        // ============ MAIN MEMBER MANAGEMENT ============
+        
+        function initMainMemberManagement() {
+            const addMemberBtnMain = document.getElementById('addMemberBtnMain');
+            const memberModal = document.getElementById('memberModal');
+            
+            // Connect main add button to existing modal
+            if (addMemberBtnMain) {
+                addMemberBtnMain.addEventListener('click', () => {
+                    // Reset form for new member
+                    document.getElementById('editMemberId').value = '';
+                    document.getElementById('memberName').value = '';
+                    document.getElementById('memberRole').value = '';
+                    document.getElementById('memberGender').value = 'male';
+                    document.getElementById('memberUserId').value = '';
+                    document.getElementById('memberPassword').value = '';
+                    document.getElementById('confirmPassword').value = '';
+                    document.getElementById('memberPassword').required = true;
+                    document.getElementById('confirmPassword').required = true;
+                    
+                    // Show form and hide add button in modal
+                    document.getElementById('memberForm').classList.remove('hidden');
+                    document.getElementById('addMemberBtn').classList.add('hidden');
+                    
+                    // Open modal
+                    memberModal.style.display = 'block';
+                });
+            }
+            
+            // Connect edit buttons from main section
+            document.addEventListener('click', function(e) {
+                if (e && e.target) {
+                if (e.target.closest('.edit-member-btn-main')) {
+                    const memberId = e.target.closest('.edit-member-btn-main').dataset.memberId;
+                    const member = members.find(m => m.id === memberId || m._id === memberId);
+                    
+                    if (member) {
+                        // Fill form with member data
+                        document.getElementById('editMemberId').value = member.id || member._id;
+                        document.getElementById('memberName').value = member.name;
+                        document.getElementById('memberRole').value = member.role;
+                        document.getElementById('memberGender').value = member.gender;
+                        document.getElementById('memberUserId').value = member.user_id;
+                        document.getElementById('memberPassword').value = '';
+                        document.getElementById('confirmPassword').value = '';
+                        document.getElementById('memberPassword').required = false;
+                        document.getElementById('confirmPassword').required = false;
+                        
+                        // Show form and hide add button in modal
+                        document.getElementById('memberForm').classList.remove('hidden');
+                        document.getElementById('addMemberBtn').classList.add('hidden');
+                        
+                        // Open modal
+                        memberModal.style.display = 'block';
+                        }
+                    }
+                }
+            });
+            
+            // Connect delete buttons from main section
+            document.addEventListener('click', function(e) {
+                if (e && e.target) {
+                if (e.target.closest('.delete-member-btn-main')) {
+                    const memberId = e.target.closest('.delete-member-btn-main').dataset.memberId;
+                    const member = members.find(m => m.id === memberId || m._id === memberId);
+                    
+                    if (member && confirm(`Are you sure you want to delete ${member.name}?`)) {
+                        deleteMemberById(memberId);
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Delete member function
+        async function deleteMemberById(memberId) {
+            try {
+                const response = await fetch(`/api/members/${memberId}`, { method: 'DELETE' });
+                const data = await response.json();
+                
+                if (response.ok && data.status === 'success') {
+                    await loadMembers();
+                    updateMainMembersList();
+                    renderTeamMembersList();
+                    renderMemberList();
+                    showSuccessToast('Member deleted successfully');
+                } else {
+                    alert(data.message || 'Error deleting member');
+                }
+            } catch (error) {
+                console.error('Error deleting member:', error);
+                alert('An error occurred while deleting the member');
+            }
+        }
+        
+        // Update main members list
+        function updateMainMembersList() {
+            const membersMainList = document.getElementById('membersMainList');
+            if (!membersMainList) return;
+            
+            membersMainList.innerHTML = members.map(member => `
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg" data-member-id="${member.id}">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center">
+                            <span class="text-pink-600">${member.gender === 'female' ? '👩' : '👨'}</span>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">${member.name}</div>
+                            <div class="text-sm text-gray-500">${member.role} • ${member.user_id}</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs px-2 py-1 rounded-full ${
+                            member.role === 'Administrator' ? 'bg-blue-100 text-blue-800' :
+                            member.role === 'Technical Director' ? 'bg-orange-100 text-orange-800' :
+                            'bg-green-100 text-green-800'
+                        }">
+                            ${member.role}
+                        </span>
+                        <button class="edit-member-btn-main p-2 text-pink-600 hover:bg-pink-100 rounded" data-member-id="${member.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        ${!['admin001', 'marc001'].includes(member.user_id) ? `
+                            <button class="delete-member-btn-main p-2 text-red-600 hover:bg-red-100 rounded" data-member-id="${member.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Override the existing saveMemberHandler to also update main list
+        const originalSaveMemberHandler = saveMemberHandler;
+        saveMemberHandler = async function() {
+            await originalSaveMemberHandler();
+            updateMainMembersList(); // Update the main list when a member is saved
+        };
+
+        // ============ ROLES MANAGEMENT ============
+        
+        let roles = [];
+        
+        async function loadRoles() {
+            try {
+                const response = await fetch('/api/roles');
+                const data = await response.json();
+                // ✅ FILTER TO ONLY SHOW 3 CORE ROLES (matching server-side filter)
+                const allowedRoles = ['Administrator', 'Technical Director', 'User'];
+                roles = data.roles.filter(role => allowedRoles.includes(role.name));
+                updateRoleDropdowns();
+            } catch (error) {
+                console.error('Error loading roles:', error);
+            }
+        }
+        
+        function updateRoleDropdowns() {
+            const memberRoleSelect = document.getElementById('memberRole');
+            memberRoleSelect.innerHTML = '<option value="">Select a role...</option>';
+            
+            roles.forEach(role => {
+                const option = document.createElement('option');
+                option.value = role.name;
+                option.textContent = role.name;
+                memberRoleSelect.appendChild(option);
+            });
+        }
+        
+        function initRoleManagement() {
+            
+            
+            const roleModal = document.getElementById('roleModal');
+            const cancelRoleForm = document.getElementById('cancelRoleForm');
+            const saveRole = document.getElementById('saveRole');
+            
+            // Check if required elements exist before adding event listeners
+            if (!roleModal) {
+                
+                return;
+            }
+            
+            if (!cancelRoleForm) {
+               
+            } else {
+            // Cancel role form
+            cancelRoleForm.addEventListener('click', () => {
+                roleModal.style.display = 'none';
+            });
+                
+            }
+            
+            if (!saveRole) {
+               
+            } else {
+            // Save role
+            saveRole.addEventListener('click', saveRoleHandler);
+                
+            }
+            
+            // Edit role buttons
+            document.addEventListener('click', function(e) {
+                if (e && e.target) {
+                if (e.target.closest('.edit-role-btn')) {
+                    const roleId = e.target.closest('.edit-role-btn').dataset.roleId;
+                    editRole(roleId);
+                    }
+                }
+            });
+            
+            // Delete role buttons
+            document.addEventListener('click', function(e) {
+                if (e && e.target) {
+                if (e.target.closest('.delete-role-btn')) {
+                    const roleId = e.target.closest('.delete-role-btn').dataset.roleId;
+                    deleteRole(roleId);
+                    }
+                }
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', (event) => {
+                if (event.target === roleModal) {
+                    roleModal.style.display = 'none';
+                }
+            });
+            
+           
+        }
+        
+        function resetRoleForm() {
+            document.getElementById('editRoleId').value = '';
+            document.getElementById('roleName').value = '';
+            document.getElementById('roleDescription').value = '';
+            document.getElementById('roleLevel').value = '3';
+            document.getElementById('roleColor').value = '#6b7280';
+            
+            // Reset checkboxes
+            document.querySelectorAll('#permissionsContainer input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        }
+        
+        function editRole(roleId) {
+            const role = roles.find(r => r.id === roleId);
+            if (!role) return;
+            
+            document.getElementById('editRoleId').value = roleId;
+            document.getElementById('roleName').value = role.name;
+            document.getElementById('roleDescription').value = role.description;
+            document.getElementById('roleLevel').value = role.level;
+            document.getElementById('roleColor').value = role.color;
+            
+            // Set permissions checkboxes
+            document.querySelectorAll('#permissionsContainer input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = role.permissions && role.permissions.includes(checkbox.value);
+            });
+            
+            document.getElementById('roleModal').style.display = 'block';
+        }
+        
+        async function saveRoleHandler() {
+            const roleId = document.getElementById('editRoleId').value;
+            const name = document.getElementById('roleName').value.trim();
+            const description = document.getElementById('roleDescription').value.trim();
+            const level = parseInt(document.getElementById('roleLevel').value);
+            const color = document.getElementById('roleColor').value;
+            
+            if (!name || !description) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Get selected permissions
+            const permissions = Array.from(document.querySelectorAll('#permissionsContainer input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.value);
+            
+            const roleData = { name, description, level, color, permissions };
+            
+            try {
+                setLoading(document.getElementById('saveRole'), true);
+                
+                const method = roleId ? 'PUT' : 'POST';
+                const url = roleId ? `/api/roles/${roleId}` : '/api/roles';
+                
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(roleData)
+                });
+                
+                const data = await response.json();
+                if (response.ok && data.status === 'success') {
+                    await loadRoles();
+                    updateRolesList();
+                    document.getElementById('roleModal').style.display = 'none';
+                    showSuccessToast(roleId ? 'Role updated successfully' : 'Role created successfully');
+                } else {
+                    alert(data.message || 'Error saving role');
+                }
+            } catch (error) {
+                console.error('Error saving role:', error);
+                alert('An error occurred while saving the role');
+            } finally {
+                setLoading(document.getElementById('saveRole'), false);
+            }
+        }
+
+        async function deleteRole(roleId) {
+            const role = roles.find(r => r.id === roleId);
+            if (!role) return;
+            
+            if (confirm(`Are you sure you want to delete the "${role.name}" role? This action cannot be undone.`)) {
+                try {
+                    const response = await fetch(`/api/roles/${roleId}`, { method: 'DELETE' });
+                    const data = await response.json();
+                    
+                    if (response.ok && data.status === 'success') {
+                        await loadRoles();
+                        updateRolesList();
+                        showSuccessToast('Role deleted successfully');
+                    } else {
+                        alert(data.message || 'Error deleting role');
+                    }
+                } catch (error) {
+                    console.error('Error deleting role:', error);
+                    alert('An error occurred while deleting the role');
+                }
+            }
+        }
+        
+        function updateRolesList() {
+            const rolesList = document.getElementById('rolesList');
+            const coreRoles = ['Administrator', 'Technical Director', 'User'];
+            
+            rolesList.innerHTML = roles.map(role => `
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg" data-role-id="${role.id}">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-4 h-4 rounded-full role-color-indicator" data-color="${role.color}"></div>
+                        <div>
+                            <div class="font-medium text-gray-900">${role.name}</div>
+                            <div class="text-sm text-gray-500">${role.description || 'No description'}</div>
+                            <div class="text-xs text-gray-400">Level: ${role.level}</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">Core Role</span>
+                        <button class="edit-role-btn p-2 text-purple-600 hover:bg-purple-100 rounded" data-role-id="${role.id}" title="Edit role permissions and settings">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="p-2 text-gray-400 cursor-not-allowed" disabled title="Core roles cannot be deleted">
+                            <i class="fas fa-shield-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Apply colors to newly created indicators
+            applyColorIndicators();
+        }
+
+        // Function to apply colors to color indicators
+        function applyColorIndicators() {
+            // Apply colors to status indicators
+            document.querySelectorAll('.status-color-indicator').forEach(element => {
+                const color = element.getAttribute('data-color');
+                if (color) {
+                    element.style.backgroundColor = color;
+                }
+            });
+            
+            // Apply colors to role indicators  
+            document.querySelectorAll('.role-color-indicator').forEach(element => {
+                const color = element.getAttribute('data-color');
+                if (color) {
+                    element.style.backgroundColor = color;
+                }
+            });
+        }
+
+        // Initialize colors on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            applyColorIndicators();
+            
+            // Set up global unauthorized response handler
+            setupGlobalUnauthorizedHandler();
+        });
+        
+        // Global handler for unauthorized responses (401/403)
+        function setupGlobalUnauthorizedHandler() {
+            // Intercept all fetch requests to handle unauthorized responses
+            const originalFetch = window.fetch;
+            window.fetch = function(...args) {
+                return originalFetch.apply(this, args).then(response => {
+                    if (response.status === 401 || response.status === 403) {
+                          
+                        return response;
+                    }
+                    return response;
+                });
+            };
+            
+           
+        }
+
+        // Session heartbeat functionality removed
+
+
+
+
+        
+
+        
+        // Function to show user notifications
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 z-50 px-4 py-3 rounded-lg shadow-lg text-white text-sm max-w-sm transform transition-all duration-300 translate-x-full`;
+            
+            // Set colors based on type
+            switch (type) {
+                case 'success':
+                    notification.classList.add('bg-green-500');
+                    break;
+                case 'warning':
+                    notification.classList.add('bg-yellow-500');
+                    break;
+                case 'error':
+                    notification.classList.add('bg-red-500');
+                    break;
+                default:
+                    notification.classList.add('bg-blue-500');
+            }
+            
+            notification.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-3 text-white hover:text-gray-200">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 5000);
+        }
+        
+        // Session heartbeat functionality completely removed
+        
+        // ===== NAVBAR ENHANCEMENTS =====
+        
+        // Highlight current page in navbar
+        function highlightCurrentPage() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('nav a[href]');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+        
+        // Add smooth scroll behavior for navbar
+        function initNavbarEnhancements() {
+            // Highlight current page
+            highlightCurrentPage();
+            
+            // Add scroll effect to navbar
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                const navbar = document.querySelector('nav');
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scrolling down - add shadow
+                    navbar.classList.add('shadow-xl');
+                } else {
+                    // Scrolling up - remove shadow
+                    navbar.classList.remove('shadow-xl');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+            
+          
+        }
+        
+        // Initialize navbar enhancements when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+           
+            
+            // Debug: Check navbar element
+            const navbar = document.querySelector('nav');
+            if (navbar) {
+               
+                
+                // Check if navbar is being covered by other elements
+                const navbarRect = navbar.getBoundingClientRect();
+                
+                
+                // Ensure navbar is visible
+                navbar.style.display = 'block';
+                navbar.style.visibility = 'visible';
+                navbar.style.opacity = '1';
+                navbar.style.position = 'sticky';
+                navbar.style.top = '0';
+                navbar.style.zIndex = '9999';
+                
+                
+                // Force navbar to top
+                navbar.scrollIntoView({ behavior: 'auto', block: 'start' });
+            } else {
+                console.error('❌ Navbar element not found!');
+            }
+            
+            // Debug: Check all navigation elements
+            const navLinks = document.querySelectorAll('nav a');
+            
+            navLinks.forEach((link, index) => {
+               
+            });
+            
+            initNavbarEnhancements();
+        });
+    </script>
+
+        </div> <!-- End Main Content -->
+    </div> <!-- End min-h-screen -->
+</body>
+
+</html>

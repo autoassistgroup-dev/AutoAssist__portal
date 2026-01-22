@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technicians Management - AutoAssistGroup Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff758f;
+            --secondary: #ff7eb3;
+        }
+
+        /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
+        
+        /* Normal base font size - READABLE */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Normal Cards */
+        .dashboard-card, .ticket-card, .stats-card {
+            padding: 1rem !important;
+            margin-bottom: 1rem !important;
+            border-radius: 0.5rem !important;
+        }
+
+        /* Normal Buttons */
+        button, .btn {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 0.875rem !important;
+            border-radius: 0.375rem !important;
+        }
+
+        /* Normal Headers */
+        h1 { font-size: 1.875rem !important; }
+        h2 { font-size: 1.5rem !important; }
+        h3 { font-size: 1.25rem !important; }
+        h4 { font-size: 1.125rem !important; }
+
+        /* Normal Icons */
+        .fas, .fab, .far {
+            font-size: 1.25rem !important;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(255, 117, 143, 0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: #10b981;
+        }
+
+        .notification.error {
+            background-color: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="flex items-center">
+                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
+                    </a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="px-3 py-2 rounded hover:bg-gray-100 transition">Tickets</a>
+                        <a href="/dashboard" class="px-3 py-2 rounded hover:bg-gray-100 transition">Dashboard</a>
+                        <a href="/status" class="px-3 py-2 rounded hover:bg-gray-100 transition">Status</a>
+                        <a href="/create-ticket" class="px-3 py-2 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                        {% if current_user_role == 'Administrator' %}
+                        <a href="/technicians" class="px-3 py-2 rounded bg-pink-50 text-pink-600 font-medium">Technicians</a>
+                        <a href="/members" class="px-3 py-2 rounded hover:bg-gray-100 transition">Members</a>
+                        <a href="/admin" class="px-3 py-2 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    {% if current_user %}
+                    <span class="hidden sm:inline text-gray-600 text-sm md:text-base">{{ current_user }}</span>
+                    <a href="/logout" class="px-2 py-1 md:px-3 md:py-2 rounded bg-gray-100 hover:bg-gray-200 transition text-xs md:text-sm">Logout</a>
+                    {% else %}
+                    <a href="/login" class="px-2 py-1 md:px-3 md:py-2 rounded bg-pink-500 hover:bg-pink-600 transition text-white text-xs md:text-sm">Login</a>
+                    {% endif %}
+                    
+                    <!-- Mobile menu button -->
+                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu (hidden by default) -->
+            <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
+                <div class="flex flex-col space-y-2 pt-4">
+                    <a href="/" class="px-3 py-2 rounded hover:bg-gray-100 transition">Tickets</a>
+                    <a href="/dashboard" class="px-3 py-2 rounded hover:bg-gray-100 transition">Dashboard</a>
+                    <a href="/status" class="px-3 py-2 rounded hover:bg-gray-100 transition">Status</a>
+                    <a href="/create-ticket" class="px-3 py-2 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                    {% if current_user_role == 'Administrator' %}
+                    <a href="/technicians" class="px-3 py-2 rounded bg-pink-50 text-pink-600 font-medium">Technicians</a>
+                    <a href="/members" class="px-3 py-2 rounded hover:bg-gray-100 transition">Members</a>
+                    <a href="/admin" class="px-3 py-2 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+                <i class="fas fa-tools text-pink-600 mr-3"></i>Technicians Management
+            </h1>
+            <p class="text-gray-600">Manage field technicians and their information</p>
+        </div>
+
+        <!-- Add New Technician Button -->
+        <div class="mb-6 flex justify-between items-center">
+            <h2 class="text-xl font-semibold text-gray-700">All Technicians ({{ technicians|length }})</h2>
+            <button id="addTechnicianBtn" class="btn-primary text-white px-6 py-3 rounded-lg font-medium transition hover:shadow-lg">
+                <i class="fas fa-plus mr-2"></i>Add New Technician
+            </button>
+        </div>
+
+        <!-- Technicians Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="techniciansContainer">
+            {% for technician in technicians %}
+            <div class="card p-6 technician-card" data-technician-id="{{ technician._id }}">
+                <div class="text-center">
+                    <div class="bg-pink-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-hard-hat text-pink-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg text-gray-800 mb-1">{{ technician.name }}</h3>
+                    <p class="text-sm text-blue-600 font-medium mb-1">{{ technician.role or 'Technician' }}</p>
+                    <p class="text-sm text-gray-600 mb-3">{{ technician.email or 'No email' }}</p>
+                    <div class="flex items-center justify-center mb-4">
+                        {% if technician.is_active %}
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                            <i class="fas fa-check-circle mr-1"></i>Active
+                        </span>
+                        {% else %}
+                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
+                            <i class="fas fa-times-circle mr-1"></i>Inactive
+                        </span>
+                        {% endif %}
+                    </div>
+                    <div class="text-sm text-gray-500 mb-4">
+                        Added: {{ technician.created_at.strftime('%Y-%m-%d') if technician.created_at else 'N/A' }}
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="edit-technician flex-1 bg-blue-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-blue-600 transition" 
+                                data-technician-id="{{ technician._id }}" 
+                                data-technician-name="{{ technician.name }}"
+                                data-technician-role="{{ technician.role or '' }}"
+                                data-technician-email="{{ technician.email or '' }}">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </button>
+                        {% if technician.is_active %}
+                        <button class="deactivate-technician flex-1 bg-red-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-red-600 transition" 
+                                data-technician-id="{{ technician._id }}">
+                            <i class="fas fa-ban mr-1"></i>Deactivate
+                        </button>
+                        {% else %}
+                        <button class="activate-technician flex-1 bg-green-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-green-600 transition" 
+                                data-technician-id="{{ technician._id }}">
+                            <i class="fas fa-check mr-1"></i>Activate
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if not technicians %}
+        <div class="text-center py-12">
+            <div class="bg-gray-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-tools text-gray-400 text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-600 mb-2">No Technicians Found</h3>
+            <p class="text-gray-500 mb-6">Start by adding your first technician to the system.</p>
+            <button id="addFirstTechnicianBtn" class="btn-primary text-white px-6 py-3 rounded-lg font-medium transition hover:shadow-lg">
+                <i class="fas fa-plus mr-2"></i>Add First Technician
+            </button>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Add/Edit Technician Modal -->
+    <div id="technicianModal" class="modal">
+        <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modalTitle" class="text-xl font-semibold text-gray-800">Add New Technician</h3>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <form id="technicianForm">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-2">
+                        Technician Name <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="technicianName" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" 
+                           placeholder="Enter technician name" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-2">
+                        Role <span class="text-red-500">*</span>
+                    </label>
+                    <select id="technicianRole" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" required>
+                        <option value="">Select role</option>
+                        <option value="Technician">Technician</option>
+                        <option value="Senior Technician">Senior Technician</option>
+                        <option value="Lead Technician">Lead Technician</option>
+                        <option value="Specialist">Specialist</option>
+                    </select>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-medium mb-2">
+                        Email <span class="text-red-500">*</span>
+                    </label>
+                    <input type="email" id="technicianEmail" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" 
+                           placeholder="Enter email address" required>
+                </div>
+
+                <div class="flex space-x-3">
+                    <button type="button" id="cancelBtn" class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
+                        Cancel
+                    </button>
+                    <button type="submit" id="submitBtn" class="flex-1 btn-primary text-white px-4 py-2 rounded-lg transition hover:shadow-lg">
+                        <i class="fas fa-save mr-2"></i>Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+            <div class="text-center">
+                <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Confirm Action</h3>
+                <p id="confirmMessage" class="text-gray-600 mb-6">Are you sure you want to continue?</p>
+                <div class="flex space-x-3">
+                    <button id="cancelConfirm" class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
+                        Cancel
+                    </button>
+                    <button id="confirmAction" class="flex-1 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <span id="notificationMessage"></span>
+    </div>
+
+    <script>
+        let currentTechnicianId = null;
+        let currentAction = null;
+
+        // Elements
+        const technicianModal = document.getElementById('technicianModal');
+        const confirmModal = document.getElementById('confirmModal');
+        const technicianForm = document.getElementById('technicianForm');
+        const technicianName = document.getElementById('technicianName');
+        const technicianRole = document.getElementById('technicianRole');
+        const technicianEmail = document.getElementById('technicianEmail');
+        const modalTitle = document.getElementById('modalTitle');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notificationMessage');
+            
+            notificationMessage.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show modal
+        function showModal(modal) {
+            modal.classList.add('show');
+        }
+
+        // Hide modal
+        function hideModal(modal) {
+            modal.classList.remove('show');
+        }
+
+        // Add/Edit Technician
+        document.getElementById('addTechnicianBtn').addEventListener('click', () => {
+            currentTechnicianId = null;
+            modalTitle.textContent = 'Add New Technician';
+            technicianName.value = '';
+            technicianRole.value = '';
+            technicianEmail.value = '';
+            showModal(technicianModal);
+        });
+
+        document.getElementById('addFirstTechnicianBtn')?.addEventListener('click', () => {
+            currentTechnicianId = null;
+            modalTitle.textContent = 'Add New Technician';
+            technicianName.value = '';
+            technicianRole.value = '';
+            technicianEmail.value = '';
+            showModal(technicianModal);
+        });
+
+        // Edit Technician
+        document.querySelectorAll('.edit-technician').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentTechnicianId = btn.dataset.technicianId;
+                modalTitle.textContent = 'Edit Technician';
+                technicianName.value = btn.dataset.technicianName;
+                technicianRole.value = btn.dataset.technicianRole;
+                technicianEmail.value = btn.dataset.technicianEmail;
+                showModal(technicianModal);
+            });
+        });
+
+        // Close modals
+        document.getElementById('closeModal').addEventListener('click', () => hideModal(technicianModal));
+        document.getElementById('cancelBtn').addEventListener('click', () => hideModal(technicianModal));
+        document.getElementById('cancelConfirm').addEventListener('click', () => hideModal(confirmModal));
+
+        // Form submission
+        technicianForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = technicianName.value.trim();
+            const role = technicianRole.value.trim();
+            const email = technicianEmail.value.trim();
+
+            // Validate required fields
+            if (!name) {
+                showNotification('Please enter a technician name', 'error');
+                return;
+            }
+            if (!role) {
+                showNotification('Please select a role', 'error');
+                return;
+            }
+            if (!email) {
+                showNotification('Please enter an email address', 'error');
+                return;
+            }
+
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showNotification('Please enter a valid email address', 'error');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Saving...';
+
+            try {
+                const url = currentTechnicianId 
+                    ? `/api/admin/technicians/${currentTechnicianId}`
+                    : '/api/admin/technicians';
+                
+                const method = currentTechnicianId ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        name: name,
+                        role: role,
+                        email: email
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.status === 'success') {
+                    showNotification(data.message, 'success');
+                    hideModal(technicianModal);
+                    // PERFORMANCE FIX: Reduced reload delay
+                    setTimeout(() => window.location.reload(), 2500);
+                } else {
+                    showNotification(data.message || 'Error saving technician', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('An error occurred while saving', 'error');
+            }
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-save mr-2"></i>Save';
+        });
+
+        // Deactivate/Activate Technician
+        document.querySelectorAll('.deactivate-technician, .activate-technician').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentTechnicianId = btn.dataset.technicianId;
+                currentAction = btn.classList.contains('deactivate-technician') ? 'deactivate' : 'activate';
+                
+                const message = currentAction === 'deactivate' 
+                    ? 'Are you sure you want to deactivate this technician? They will no longer appear in dropdown lists.'
+                    : 'Are you sure you want to activate this technician? They will appear in dropdown lists.';
+                
+                document.getElementById('confirmMessage').textContent = message;
+                showModal(confirmModal);
+            });
+        });
+
+        // Confirm action
+        document.getElementById('confirmAction').addEventListener('click', async () => {
+            if (!currentTechnicianId || !currentAction) return;
+
+            try {
+                const url = currentAction === 'deactivate' 
+                    ? `/api/admin/technicians/${currentTechnicianId}/deactivate`
+                    : `/api/admin/technicians/${currentTechnicianId}`;
+                
+                const method = currentAction === 'deactivate' ? 'POST' : 'PUT';
+                const body = currentAction === 'activate' ? JSON.stringify({ is_active: true }) : null;
+
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: body
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.status === 'success') {
+                    showNotification(data.message, 'success');
+                    hideModal(confirmModal);
+                    // PERFORMANCE FIX: Reduced reload delay
+                    setTimeout(() => window.location.reload(), 2500);
+                } else {
+                    showNotification(data.message || 'Error updating technician', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('An error occurred', 'error');
+            }
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === technicianModal) hideModal(technicianModal);
+            if (e.target === confirmModal) hideModal(confirmModal);
+        });
+
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) {
+                mobileMenu.classList.toggle('hidden');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.querySelector('.mobile-menu-btn');
+            
+            if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Create Ticket</title>
+</head>
+<body>
+    <h1>Test Create Ticket</h1>
+    
+    <script>
+        // First, let's test if we can access the create ticket page
+        fetch('/create-ticket')
+            .then(response => {
+                console.log('Create ticket page status:', response.status);
+                if (response.status === 200) {
+                    console.log('✅ Create ticket page accessible');
+                } else {
+                    console.log('❌ Create ticket page not accessible, status:', response.status);
+                }
+            })
+            .catch(error => {
+                console.error('Error accessing create ticket page:', error);
+            });
+
+        // Test the API endpoint
+        fetch('/api/tickets/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => {
+            console.log('API endpoint status:', response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log('API response:', data);
+        })
+        .catch(error => {
+            console.error('API error:', error);
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - AutoAssistGroup</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
+        
+        /* Normal base font size - READABLE */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Normal Buttons */
+        button, .btn {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 0.875rem !important;
+            border-radius: 0.375rem !important;
+        }
+
+        /* Normal Headers */
+        h1 { font-size: 1.875rem !important; }
+        h2 { font-size: 1.5rem !important; }
+        h3 { font-size: 1.25rem !important; }
+        h4 { font-size: 1.125rem !important; }
+
+        /* Normal Icons */
+        .fas, .fab, .far {
+            font-size: 1.25rem !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="flex items-center">
+                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
+                    </a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="px-3 py-2 rounded bg-pink-50 text-pink-600 font-medium">Tickets</a>
+                        <a href="/dashboard" class="px-3 py-2 rounded hover:bg-gray-100 transition">Dashboard</a>
+                        <a href="/status" class="px-3 py-2 rounded hover:bg-gray-100 transition">Status</a>
+                        <a href="/create-ticket" class="px-3 py-2 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                        {% if current_user_role == 'Administrator' %}
+                        <a href="/technicians" class="px-3 py-2 rounded hover:bg-gray-100 transition">Technicians</a>
+                        <a href="/members" class="px-3 py-2 rounded hover:bg-gray-100 transition">Members</a>
+                        <a href="/admin" class="px-3 py-2 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    {% if current_user %}
+                    <span class="hidden sm:inline text-gray-600 text-sm md:text-base">{{ current_user }}</span>
+                    <a href="/logout" class="px-2 py-1 md:px-3 md:py-2 rounded bg-gray-100 hover:bg-gray-200 transition text-xs md:text-sm">Logout</a>
+                    {% else %}
+                    <a href="/login" class="px-2 py-1 md:px-3 md:py-2 rounded bg-pink-500 hover:bg-pink-600 transition text-white text-xs md:text-sm">Login</a>
+                    {% endif %}
+                    
+                    <!-- Mobile menu button -->
+                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu (hidden by default) -->
+            <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
+                <div class="flex flex-col space-y-2 pt-4">
+                    <a href="/" class="px-3 py-2 rounded bg-pink-50 text-pink-600 font-medium">Tickets</a>
+                    <a href="/dashboard" class="px-3 py-2 rounded hover:bg-gray-100 transition">Dashboard</a>
+                    <a href="/status" class="px-3 py-2 rounded hover:bg-gray-100 transition">Status</a>
+                    <a href="/create-ticket" class="px-3 py-2 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                    {% if current_user_role == 'Administrator' %}
+                    <a href="/technicians" class="px-3 py-2 rounded hover:bg-gray-100 transition">Technicians</a>
+                    <a href="/members" class="px-3 py-2 rounded hover:bg-gray-100 transition">Members</a>
+                    <a href="/admin" class="px-3 py-2 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="flex items-center justify-center p-4 min-h-screen">
+    <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+        <div class="text-center mb-6">
+            <a href="/">
+            <img src="/static/logo.png" alt="Logo" class="h-16 mx-auto">
+        </a>
+            <h1 class="text-2xl font-bold text-red-600 mt-4">Oops! Something went wrong</h1>
+        </div>
+        
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-circle text-red-500 mt-1"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-red-700">
+                        {{ error }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <a href="/" class="block text-center px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition">
+            <i class="fas fa-arrow-left mr-2"></i> Return to Dashboard
+        </a>
+    </div>
+    
+    <script>
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

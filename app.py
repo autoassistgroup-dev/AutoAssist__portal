@@ -1,0 +1,171 @@
+"""
+AutoAssistGroup Support Ticket Management System - Refactored Entry Point
+
+This is the new modular version of the application using Flask blueprints
+and a service-oriented architecture.
+
+Author: AutoAssistGroup Development Team
+Version: 3.0 (Refactored)
+"""
+
+import os
+import logging
+from flask import Flask
+from flask_cors import CORS
+from datetime import timedelta
+
+# Import configuration
+from config.settings import Config, get_config
+
+# Import middleware
+from middleware.error_handlers import register_error_handlers
+from middleware.session_manager import refresh_session, check_and_restore_session
+
+# Import routes
+from routes import register_blueprints
+
+# Import template filters
+from utils.template_filters import register_template_filters
+
+
+def create_app(config_class=None):
+    """
+    Application factory for creating Flask app instances.
+    
+    Args:
+        config_class: Configuration class to use (default from environment)
+        
+    Returns:
+        Flask application instance
+    """
+    # Create Flask app
+    app = Flask(__name__)
+    
+    # Load configuration
+    if config_class is None:
+        config = get_config()
+    else:
+        config = config_class()
+    
+    # Apply configuration
+    app.config.from_object(config)
+    app.secret_key = config.SECRET_KEY
+    
+    # Session configuration
+    app.config['SESSION_COOKIE_SECURE'] = config.SESSION_COOKIE_SECURE
+    app.config['SESSION_COOKIE_HTTPONLY'] = config.SESSION_COOKIE_HTTPONLY
+    app.config['SESSION_COOKIE_SAMESITE'] = config.SESSION_COOKIE_SAMESITE
+    app.config['SESSION_REFRESH_EACH_REQUEST'] = config.SESSION_REFRESH_EACH_REQUEST
+    app.config['PERMANENT_SESSION_LIFETIME'] = config.PERMANENT_SESSION_LIFETIME
+    app.config['MAX_CONTENT_LENGTH'] = config.MAX_CONTENT_LENGTH
+    
+    # Enable CORS
+    CORS(app)
+    
+    # Configure logging
+    _configure_logging(app)
+    
+    # Register error handlers
+    register_error_handlers(app)
+    
+    # Register template filters
+    register_template_filters(app)
+    
+    # Register blueprints (all routes are now in blueprints)
+    register_blueprints(app)
+    
+    # Register request hooks
+    _register_request_hooks(app)
+    
+    # Add security headers
+    @app.after_request
+    def set_security_headers(response):
+        response.headers['X-Content-Type-Options'] = 'nosniff'
+        return response
+    
+    # Add favicon route
+    @app.route('/favicon.ico')
+    def favicon():
+        """Handle favicon requests."""
+        return app.send_static_file('favicon.ico') if os.path.exists(
+            os.path.join(app.static_folder, 'favicon.ico')
+        ) else ('', 204)
+    
+    app.logger.info("Application initialized successfully (refactored version)")
+    
+    return app
+
+
+def _configure_logging(app):
+    """Configure application logging."""
+    is_production = os.environ.get('FLASK_ENV') == 'production'
+    log_level = logging.INFO if is_production else logging.DEBUG
+    
+    logging.basicConfig(
+        level=log_level,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[logging.StreamHandler()]
+    )
+    
+    # Reduce noise from third-party libraries
+    logging.getLogger('werkzeug').setLevel(logging.WARNING)
+    logging.getLogger('urllib3').setLevel(logging.WARNING)
+    logging.getLogger('pymongo').setLevel(logging.WARNING)
+    
+    # Add file handler in development
+    if not is_production:
+        try:
+            file_handler = logging.FileHandler('app.log')
+            file_handler.setFormatter(
+                logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+            )
+            logging.getLogger().addHandler(file_handler)
+        except Exception:
+            pass
+
+
+def _register_request_hooks(app):
+    """Register before/after request hooks."""
+    
+    @app.before_request
+    def before_request():
+        """Handle session management before each request."""
+        from flask import request, session
+        
+        # Skip for static files
+        if request.endpoint in ['static', 'favicon'] or request.path.startswith('/static/'):
+            return None
+        
+        # Skip for health checks
+        if request.endpoint in ['health.health_check', 'health.api_status']:
+            return None
+        
+        # Try to restore session if needed
+        if 'member_id' not in session:
+            check_and_restore_session()
+        
+        # Refresh existing sessions
+        if 'member_id' in session:
+            refresh_session()
+
+
+# Create the application
+app = create_app()
+
+
+if __name__ == '__main__':
+    # Get port from environment or default to 5000
+    port = int(os.environ.get('PORT', 5000))
+    debug = os.environ.get('FLASK_ENV') != 'production'
+    
+    print(f"""
+╔══════════════════════════════════════════════════════════════╗
+║     AutoAssistGroup Support System - Refactored Version      ║
+╠══════════════════════════════════════════════════════════════╣
+║  Running on: http://localhost:{port}                           ║
+║  Debug mode: {str(debug).lower():5s}                                        ║
+║  Environment: {os.environ.get('FLASK_ENV', 'development'):12s}                        ║
+╚══════════════════════════════════════════════════════════════╝
+    """)
+    
+    app.run(host='0.0.0.0', port=port, debug=debug)

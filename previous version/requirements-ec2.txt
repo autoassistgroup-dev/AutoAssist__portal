@@ -1,0 +1,41 @@
+# AutoAssistGroup Support System - EC2 Production Dependencies
+# Python 3.9+ required for AWS EC2 deployment
+
+# Core Flask framework
+Flask==2.3.3
+Flask-CORS==4.0.0
+Werkzeug==2.3.7
+
+# WSGI Server for production
+gunicorn==21.2.0
+
+# Database and MongoDB
+pymongo==4.5.0
+dnspython==2.4.2
+
+# HTTP requests and API integration
+requests==2.31.0
+
+# PDF generation and reports
+reportlab==4.0.4
+
+# Configuration management
+python-dotenv==1.0.0
+
+# Production server dependencies
+gevent==23.7.0
+gevent-websocket==0.10.1
+
+# Security and performance
+cryptography==41.0.7
+bcrypt==4.0.1
+
+# Monitoring and logging
+psutil==5.9.6
+
+# File handling
+Pillow==10.0.1
+
+# Additional utilities
+python-dateutil==2.8.2
+pytz==2023.3

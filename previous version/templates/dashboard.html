@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warranty Dashboard - AutoAssistGroup Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+         <!-- Chart.js for data visualization -->
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        :root {
+            --primary: #ff758f;
+            --secondary: #ff7eb3;
+            --urgent: #ff4757;
+            --fast: #ffa502;
+            --medium: #ff6b81;
+            --low: #2ed573;
+            --waiting: #ffcc00;
+        }
+
+        /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
+        
+        /* Normal base font size - READABLE */
+        body {
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Normal Cards */
+        .dashboard-card, .ticket-card, .stats-card {
+            padding: 1rem !important;
+            margin-bottom: 1rem !important;
+            border-radius: 0.5rem !important;
+        }
+
+        /* Normal Badges */
+        .badge, .priority-badge, .member-badge {
+            padding: 0.5rem 1rem !important;
+            font-size: 0.875rem !important;
+            font-weight: 500 !important;
+        }
+
+        /* Normal Buttons */
+        button, .btn {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 0.875rem !important;
+            border-radius: 0.375rem !important;
+        }
+
+        /* Normal Headers */
+        h1 { font-size: 1.875rem !important; }
+        h2 { font-size: 1.5rem !important; }
+        h3 { font-size: 1.25rem !important; }
+        h4 { font-size: 1.125rem !important; }
+
+        /* Normal Spacing */
+        .p-6 { padding: 1.5rem !important; }
+        .p-4 { padding: 1rem !important; }
+        .m-6 { margin: 1.5rem !important; }
+        .m-4 { margin: 1rem !important; }
+        .mb-6 { margin-bottom: 1rem !important; }
+        .mb-4 { margin-bottom: 1rem !important; }
+
+        /* Normal Grid Gaps */
+        .gap-6 { gap: 1.5rem !important; }
+        .gap-4 { gap: 1rem !important; }
+        .gap-2 { gap: 0.5rem !important; }
+
+        /* Normal Icons */
+        .fas, .fab, .far {
+            font-size: 1.25rem !important;
+        }
+        
+        /* Dashboard specific enhancements */
+        .dashboard-container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        /* Enhanced chart containers */
+        .chart-container {
+            position: relative;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 0.75rem;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            color: #334155;
+        }
+
+        /* ===== 1920px OPTIMIZATION STYLES ===== */
+        
+        /* Optimize for 1920px displays */
+        @media (min-width: 1920px) {
+            .dashboard-container {
+                max-width: 1920px !important;
+                padding-left: 2rem !important;
+                padding-right: 2rem !important;
+            }
+            
+            .dashboard-grid {
+                gap: 2rem !important;
+            }
+            
+            .chart-container {
+                padding: 2rem !important;
+                border-radius: 1rem !important;
+            }
+            
+            .stats-card {
+                padding: 2rem !important;
+                margin-bottom: 2rem !important;
+            }
+            
+            .ticket-card {
+                padding: 1.5rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .ticket-card h3 {
+                font-size: 1.25rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .badge, .priority-badge, .member-badge {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 1rem !important;
+            }
+            
+            button, .btn {
+                padding: 1rem 2rem !important;
+                font-size: 1rem !important;
+            }
+            
+            .fas, .fab, .far {
+                font-size: 1.5rem !important;
+            }
+        }
+        
+        /* Ultra-wide display optimization */
+        @media (min-width: 2560px) {
+            .dashboard-container {
+                max-width: 2400px !important;
+                padding-left: 3rem !important;
+                padding-right: 3rem !important;
+            }
+            
+            .dashboard-grid {
+                gap: 3rem !important;
+            }
+            
+            .chart-container {
+                padding: 3rem !important;
+            }
+            
+            .stats-card {
+                padding: 3rem !important;
+                margin-bottom: 3rem !important;
+            }
+        }
+
+        /* Custom max-width for 1440px constraint */
+        .max-w-1440 {
+            max-width: 1440px;
+        }
+
+        /* Dashboard card styling is now handled above in the main styles */
+        
+        /* Enhanced status colors */
+        .status-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .urgent-card {
+            border-left-color: #ef4444 !important;
+        }
+        
+        .warning-card {
+            border-left-color: #f59e0b !important;
+        }
+        
+        .success-card {
+            border-left-color: #10b981 !important;
+        }
+
+        /* Status colors */
+        .status-new { background-color: #ffedd5; color: #9a3412; }
+        .status-form-sent { background-color: #dbeafe; color: #1e40af; }
+        .status-awaiting-submission { background-color: #e9d5ff; color: #6b21a8; }
+        .status-under-review { background-color: #fef3c7; color: #92400e; }
+        .status-info-requested { background-color: #bfdbfe; color: #1e3a8a; }
+        .status-referred { background-color: #ddd6fe; color: #5b21b6; }
+        .status-approved { background-color: #bbf7d0; color: #166534; }
+        .status-declined { background-color: #fecaca; color: #991b1b; }
+        .status-closed { background-color: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
+        
+        /* Closed ticket styling - grayed out appearance */
+        .ticket-card[data-status="Closed"],
+        .ticket-card[data-status="Resolved"] {
+            opacity: 0.7;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .ticket-card[data-status="Closed"] .ticket-title,
+        .ticket-card[data-status="Resolved"] .ticket-title {
+            color: #6b7280;
+        }
+        
+        .ticket-card[data-status="Closed"]:hover,
+        .ticket-card[data-status="Resolved"]:hover {
+            opacity: 0.9;
+            transform: none;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.4rem;
+            border-radius: 9999px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+
+        /* Enhanced Warranty Detection Badges */
+        .warranty-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: linear-gradient(135deg, #f6ad55, #ed8936);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            animation: pulse-warranty 2s infinite;
+            z-index: 10;
+            box-shadow: 0 3px 8px rgba(246, 173, 85, 0.4);
+        }
+
+        @keyframes pulse-warranty {
+            0% { box-shadow: 0 0 0 0 rgba(246, 173, 85, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(246, 173, 85, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(246, 173, 85, 0); }
+        }
+
+        .attachment-badge {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.55rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            margin-left: 6px;
+        }
+
+        .ticket-card.warranty-detected {
+            border-left: 4px solid #f6ad55;
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 5%, #ffffff 15%);
+            position: relative;
+        }
+
+        .ticket-priority-high {
+            border-left-color: #ef4444 !important;
+        }
+
+        .ticket-priority-medium {
+            border-left-color: #f59e0b !important;
+        }
+
+        .ticket-priority-low {
+            border-left-color: #10b981 !important;
+        }
+
+        .attachment-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: rgba(79, 70, 229, 0.1);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #4f46e5;
+        }
+
+        .warranty-details {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 8px;
+            border-left: 3px solid #f59e0b;
+        }
+
+        .warranty-details-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .warranty-keywords {
+            font-size: 0.7rem;
+            color: #78350f;
+            opacity: 0.8;
+        }
+        
+        .filter-badge {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 0.15rem 0.4rem !important;
+            font-size: 0.55rem !important;
+        }
+        
+        .filter-badge:hover {
+            transform: scale(1.05);
+        }
+        
+        .filter-active {
+            box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary);
+        }
+        
+        .ticket-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        /* Match home page ticket layout */
+        .ticket-grid .ticket-card {
+            padding: 1.5rem !important;
+            margin-bottom: 0 !important;
+            border-radius: 0.5rem !important;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .ticket-grid .ticket-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ticket-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            min-width: 0;
+        }
+        
+        .ticket-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        /* Small mobile devices (320px - 480px) */
+        @media (max-width: 480px) {
+            .container {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            
+            /* Header responsive */
+            header h1 {
+                font-size: 1.5rem !important;
+            }
+            
+            .dashboard-card {
+                padding: 0.75rem;
+                text-align: center;
+            }
+            
+            .ticket-card {
+                padding: 0.875rem;
+            }
+            
+            /* Navigation responsive */
+            nav .container {
+                padding: 0.5rem;
+            }
+            
+            nav .hidden.md\\:flex {
+                display: none !important;
+            }
+            
+            /* Buttons and badges */
+            .px-3.py-2 {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+            
+            .px-2.py-1 {
+                padding: 0.375rem 0.5rem;
+                font-size: 0.6875rem;
+            }
+
+            /* Grid adjustments */
+            .ticket-grid {
+                gap: 0.75rem;
+            }
+            
+            .ticket-grid .ticket-card {
+                padding: 1rem !important;
+            }
+
+            /* Chart container */
+            .chart-container {
+                height: 250px !important;
+            }
+        }
+        
+        /* Mobile devices (481px - 768px) */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .dashboard-card {
+                padding: 1rem;
+            }
+            
+            .ticket-card {
+                padding: 1rem;
+            }
+            
+            /* Navigation */
+            nav .hidden.md\\:flex {
+                display: none !important;
+            }
+            
+            .mobile-menu-btn {
+                display: block !important;
+            }
+
+            /* Grid adjustments */
+            .ticket-grid {
+                gap: 1rem;
+            }
+            
+            .ticket-grid .ticket-card {
+                padding: 1.25rem !important;
+            }
+        }
+        
+        /* Tablet devices (769px - 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            
+            /* Show navigation items */
+            nav .hidden.md\\:flex {
+                display: flex !important;
+            }
+            
+            .dashboard-card {
+                padding: 1.25rem;
+            }
+            
+            .ticket-card {
+                padding: 1.25rem;
+            }
+
+            /* Grid adjustments */
+            .ticket-grid {
+                gap: 1.25rem;
+            }
+            
+            .ticket-grid .ticket-card {
+                padding: 1.5rem !important;
+            }
+        }
+
+        /* Desktop optimization */
+        @media (min-width: 1025px) {
+            .ticket-grid {
+                gap: 1.5rem;
+            }
+            
+            .ticket-grid .ticket-card {
+                padding: 1.5rem !important;
+            }
+        }
+
+        /* Line clamp utilities for text truncation */
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Responsive word breaking */
+        .break-words {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        /* Touch-friendly buttons */
+        @media (max-width: 768px) {
+            button, .btn, a.btn {
+                min-height: 44px;
+                padding: 0.75rem 1rem;
+            }
+            
+            .mobile-menu-btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        /* ✅ NEW: Attachment Display Styles */
+        .attachment-info {
+            margin-top: 8px;
+            padding: 8px;
+            background: #e7f3ff;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #1e40af;
+        }
+        
+        .attachment-list {
+            margin-top: 8px;
+        }
+        
+        .attachment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 6px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 4px;
+            margin-bottom: 4px;
+            font-size: 0.75rem;
+        }
+        
+        .attachment-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        
+        .attachment-name {
+            font-weight: 500;
+            color: #1e40af;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .attachment-size {
+            color: #6b7280;
+            font-size: 0.65rem;
+        }
+        
+        .attachment-actions {
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+        
+        .download-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 4px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: background-color 0.2s;
+        }
+        
+        .download-btn:hover {
+            background: #2563eb;
+        }
+        
+        .more-attachments {
+            padding: 4px 6px;
+            text-align: center;
+        }
+        
+        /* ===== ENHANCED MOBILE RESPONSIVENESS ===== */
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 0 0.75rem;
+            }
+            
+            .dashboard-card {
+                padding: 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            h1 {
+                font-size: 1.75rem !important;
+            }
+            
+            h2 {
+                font-size: 1.25rem !important;
+            }
+            
+            .text-5xl {
+                font-size: 2.5rem !important;
+            }
+            
+            .text-4xl {
+                font-size: 2rem !important;
+            }
+            
+            .chart-container {
+                padding: 0.75rem;
+            }
+            
+            .grid {
+                gap: 1rem !important;
+            }
+            
+            /* Stack grid items on mobile */
+            .lg\:col-span-2 {
+                grid-column: span 1 !important;
+            }
+        }
+        
+        /* Small mobile optimizations */
+        @media (max-width: 480px) {
+            .dashboard-container {
+                padding: 0 0.5rem;
+            }
+            
+            .dashboard-card {
+                padding: 0.75rem !important;
+            }
+            
+            h1 {
+                font-size: 1.5rem !important;
+            }
+            
+            h2 {
+                font-size: 1.125rem !important;
+            }
+            
+            .text-5xl {
+                font-size: 2rem !important;
+            }
+            
+            .text-2xl {
+                font-size: 1.5rem !important;
+            }
+            
+            /* Force single column */
+            .grid {
+                grid-template-columns: 1fr !important;
+                gap: 0.75rem !important;
+            }
+            
+            /* Better touch targets */
+            button, .btn {
+                min-height: 44px;
+                padding: 0.75rem 1rem !important;
+            }
+        }
+        
+        /* Tablet responsive */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .dashboard-container {
+                padding: 0 1rem;
+            }
+            
+            .grid {
+                gap: 1.25rem !important;
+            }
+        }
+        
+        /* Enhanced hover states for desktop */
+        @media (hover: hover) {
+            .dashboard-card:hover {
+                transform: translateY(-8px) !important;
+            }
+        }
+
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <a href="/">
+                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-10">
+                    </a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="px-3 py-2 rounded hover:bg-gray-100 transition">Tickets</a>
+                        <a href="/dashboard" class="px-3 py-2 rounded bg-pink-50 text-pink-600 font-medium">Dashboard</a>
+                        <a href="/status" class="px-3 py-2 rounded hover:bg-gray-100 transition">Status</a>
+                        <a href="/create-ticket" class="px-3 py-2 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                        {% if current_user_role == 'Administrator' %}
+                        <a href="/technicians" class="px-3 py-2 rounded hover:bg-gray-100 transition">Technicians</a>
+                        <a href="/members" class="px-3 py-2 rounded hover:bg-gray-100 transition">Members</a>
+                        <a href="/admin" class="px-3 py-2 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    {% if current_user %}
+                    <span class="hidden sm:inline text-gray-600 text-sm md:text-base">{{ current_user }}</span>
+                    <a href="/logout" class="px-2 py-1 md:px-3 md:py-2 rounded bg-gray-100 hover:bg-gray-200 transition text-xs md:text-sm">Logout</a>
+                    {% else %}
+                    <a href="/login" class="px-2 py-1 md:px-3 md:py-2 rounded bg-pink-500 hover:bg-pink-600 transition text-white text-xs md:text-sm">Login</a>
+                    {% endif %}
+                    
+                    <!-- Mobile menu button -->
+                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu (hidden by default) -->
+            <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
+                <div class="flex flex-col space-y-2 pt-4">
+                    <a href="/" class="px-3 py-2 rounded hover:bg-gray-100 transition">Tickets</a>
+                    <a href="/dashboard" class="px-3 py-2 rounded bg-pink-50 text-pink-600 font-medium">Dashboard</a>
+                    <a href="/status" class="px-3 py-2 rounded hover:bg-gray-100 transition">Status</a>
+                    <a href="/create-ticket" class="px-3 py-2 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                    {% if current_user_role == 'Administrator' %}
+                    <a href="/technicians" class="px-3 py-2 rounded hover:bg-gray-100 transition">Technicians</a>
+                    <a href="/members" class="px-3 py-2 rounded hover:bg-gray-100 transition">Members</a>
+                    <a href="/admin" class="px-3 py-2 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="dashboard-container py-6">
+        <header class="text-center mb-8">
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-2"> Dashboard</h1>
+    
+        </header>
+
+        <!-- Enhanced Dashboard Controls -->
+        <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-6 mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div class="flex flex-wrap gap-3">
+                                         <button id="refreshBtn" class="px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all flex items-center font-medium shadow-md">
+                         <i class="fas fa-sync-alt mr-2 text-lg"></i> <span class="hidden sm:inline">Refresh Data</span><span class="sm:hidden">Refresh</span>
+                     </button>
+            </div>
+            
+                                                                                                                                       <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                                    
+
+            </div>
+        </div>
+
+        <!-- Enhanced Date Range Selector -->
+        <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-6 mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2 flex items-center">
+                        <i class="fas fa-calendar-alt text-blue-500 mr-3 text-lg"></i> Dashboard Time Range
+                    </h2>
+                    <p class="text-sm text-gray-600">Filter all dashboard statistics by date range</p>
+                </div>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm font-medium text-gray-700 whitespace-nowrap">Quick Select:</label>
+                        <select id="dateRangeSelector" class="border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 min-w-40 transition-all">
+                            <option value="last_hour">Last Hour</option>
+                            <option value="one_day" selected>One Day</option>
+                            <option value="week">Week</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                    <div id="customDateRange" class="hidden flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                        <input type="date" id="startDate" class="border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all">
+                        <span class="text-gray-500 hidden sm:inline font-medium">to</span>
+                        <input type="date" id="endDate" class="border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all">
+                    </div>
+                    <button id="refreshDashboard" class="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-3 rounded-lg hover:from-pink-600 hover:to-pink-700 transition-all flex items-center whitespace-nowrap font-medium shadow-md">
+                        <i class="fas fa-sync-alt mr-2"></i> Apply Filter
+                    </button>
+                </div>
+            </div>
+            <div class="mt-4 text-sm text-gray-600 flex items-center justify-between">
+                <span id="currentDateRange">📊 Showing data for: One Day</span>
+                <span id="loadingIndicator" class="hidden text-blue-600">
+                    <i class="fas fa-spinner fa-spin mr-1"></i> Loading...
+                </span>
+            </div>
+        </div>
+
+        <!-- Enhanced Dashboard Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            
+            <!-- Ticket Status Breakdown -->
+            <div class="dashboard-card status-card bg-white rounded-xl shadow-lg col-span-1 lg:col-span-2">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">
+                    <i class="fas fa-chart-pie text-pink-500 mr-3 text-lg"></i> Ticket Status Breakdown
+                </h2>
+                <div class="flex flex-wrap gap-3 mb-6">
+                    {% for status, count in status_counts.items() %}
+                    <div class="badge status-{{ status|lower|replace(' ', '-')|replace('–', '') }}">
+                        {{ status }}: {{ count }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="chart-container">
+                    <div class="h-64 relative">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Outstanding Claims -->
+            <div class="dashboard-card urgent-card bg-white rounded-xl shadow-lg">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">
+                    <i class="fas fa-hourglass-half text-yellow-500 mr-3 text-lg"></i> Outstanding Claims
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg border border-red-100">
+                        <span class="text-red-700 font-semibold flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2 text-lg"></i> Overdue (>3 days)
+                        </span>
+                        <span class="font-bold text-2xl text-red-600">{{ overdue_tickets|length }}</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-yellow-50 rounded-lg border border-yellow-100">
+                        <span class="text-yellow-700 font-semibold flex items-center">
+                            <i class="fas fa-clock mr-2 text-lg"></i> Open 1-3 days
+                        </span>
+                        <span class="font-bold text-2xl text-yellow-600">{{ open_1_3_days|length }}</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg border border-green-100">
+                        <span class="text-green-700 font-semibold flex items-center">
+                            <i class="fas fa-calendar-day mr-2 text-lg"></i> Open today
+                        </span>
+                        <span class="font-bold text-2xl text-green-600">{{ open_today|length }}</span>
+                    </div>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <h3 class="font-semibold text-gray-700 mb-3">Most Urgent Tickets</h3>
+                    <div class="space-y-3">
+                        {% for ticket in overdue_tickets[:3] %}
+                        <a href="/ticket/{{ ticket.ticket_id }}" class="block p-4 rounded-lg bg-gradient-to-r from-red-50 to-red-100 hover:from-red-100 hover:to-red-200 transition-all border border-red-200 hover:shadow-md">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-blue-800 bg-blue-50 px-3 py-1 rounded-full border border-blue-200 text-sm">
+                                    <i class="fas fa-hashtag mr-1"></i>{{ ticket.ticket_id }}
+                                </span>
+                                <span class="text-sm text-gray-500">{{ ticket.created_at|format_datetime }}</span>
+                            </div>
+                            <p class="text-sm font-medium truncate text-gray-700">{{ ticket.subject }}</p>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Average Resolution Time -->
+            <div class="dashboard-card success-card bg-white rounded-xl shadow-lg">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">
+                    <i class="fas fa-stopwatch text-blue-500 mr-3 text-lg"></i> Average Resolution Time
+                </h2>
+                <div class="text-center mb-6 p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                    <div class="text-5xl font-bold text-blue-600 mb-2">
+                        {% if avg_resolution_time >= 24 %}
+                            {{ (avg_resolution_time / 24)|round(1) }}
+                            <span class="text-2xl">days</span>
+                        {% else %}
+                            {{ avg_resolution_time|round(1) }}
+                            <span class="text-2xl">hours</span>
+                        {% endif %}
+                    </div>
+                    <p class="text-blue-700 font-medium">from Open to Resolved</p>
+                </div>
+                <div class="chart-container">
+                    <div class="h-40 relative">
+                        <canvas id="resolutionTimeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Claim Outcomes Summary -->
+            <div class="dashboard-card status-card bg-white rounded-xl shadow-lg">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">
+                    <i class="fas fa-poll text-indigo-500 mr-3 text-lg"></i> Claim Outcomes Summary
+                </h2>
+                <div class="text-center mb-4 p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg">
+                    <div class="text-5xl font-bold text-indigo-600 mb-2">{{ total_claims }}</div>
+                    <p class="text-indigo-700 font-medium">total claims</p>
+                </div>
+                <div class="chart-container mb-4">
+                    <div class="h-40 relative">
+                        <canvas id="outcomesChart"></canvas>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <div class="p-3 bg-green-50 rounded-lg border border-green-200">
+                        <div class="text-2xl font-bold text-green-600">{{ approved_claims }}</div>
+                        <p class="text-sm text-green-700 font-medium">Approved</p>
+                        <p class="text-sm font-bold text-green-800">{{ approved_percent|round(1) }}%</p>
+                    </div>
+                    <div class="p-3 bg-red-50 rounded-lg border border-red-200">
+                        <div class="text-2xl font-bold text-red-600">{{ declined_claims }}</div>
+                        <p class="text-sm text-red-700 font-medium">Declined</p>
+                        <p class="text-sm font-bold text-red-800">{{ declined_percent|round(1) }}%</p>
+                    </div>
+                    <div class="p-3 bg-purple-50 rounded-lg border border-purple-200">
+                        <div class="text-2xl font-bold text-purple-600">{{ referred_claims }}</div>
+                        <p class="text-sm text-purple-700 font-medium">Referred</p>
+                        <p class="text-sm font-bold text-purple-800">{{ referred_percent|round(1) }}%</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Advisory-Related Rejections -->
+            <div class="dashboard-card warning-card bg-white rounded-xl shadow-lg">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">
+                    <i class="fas fa-exclamation-circle text-red-500 mr-3 text-lg"></i> Advisory-Related Rejections
+                </h2>
+                <div class="space-y-6">
+                    <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-semibold text-red-700">Uncompleted Advisories</span>
+                            <span class="font-bold text-xl text-red-600">{{ rejection_reasons.uncompleted_advisories }}</span>
+                        </div>
+                        <div class="w-full bg-red-200 rounded-full h-3">
+                            <div class="bg-red-500 h-3 rounded-full progress-bar transition-all duration-500" data-width="{% if declined_claims > 0 %}{{ (rejection_reasons.uncompleted_advisories / declined_claims * 100)|round(1) }}{% else %}0{% endif %}"></div>
+                        </div>
+                        <p class="text-sm text-red-600 mt-2 font-medium">{% if declined_claims > 0 %}{{ (rejection_reasons.uncompleted_advisories / declined_claims * 100)|round(1) }}%{% else %}0%{% endif %} of rejections</p>
+                    </div>
+                    <div class="p-4 bg-orange-50 rounded-lg border border-orange-200">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-semibold text-orange-700">No Fault Code Submitted</span>
+                            <span class="font-bold text-xl text-orange-600">{{ rejection_reasons.no_fault_code }}</span>
+                        </div>
+                        <div class="w-full bg-orange-200 rounded-full h-3">
+                            <div class="bg-orange-500 h-3 rounded-full progress-bar transition-all duration-500" data-width="{% if declined_claims > 0 %}{{ (rejection_reasons.no_fault_code / declined_claims * 100)|round(1) }}{% else %}0{% endif %}"></div>
+                        </div>
+                        <p class="text-sm text-orange-600 mt-2 font-medium">{% if declined_claims > 0 %}{{ (rejection_reasons.no_fault_code / declined_claims * 100)|round(1) }}%{% else %}0%{% endif %} of rejections</p>
+                    </div>
+                    <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-semibold text-yellow-700">Warranty Expired</span>
+                            <span class="font-bold text-xl text-yellow-600">{{ rejection_reasons.warranty_expired }}</span>
+                        </div>
+                        <div class="w-full bg-yellow-200 rounded-full h-3">
+                            <div class="bg-yellow-500 h-3 rounded-full progress-bar transition-all duration-500" data-width="{% if declined_claims > 0 %}{{ (rejection_reasons.warranty_expired / declined_claims * 100)|round(1) }}{% else %}0{% endif %}"></div>
+                        </div>
+                        <p class="text-sm text-yellow-600 mt-2 font-medium">{% if declined_claims > 0 %}{{ (rejection_reasons.warranty_expired / declined_claims * 100)|round(1) }}%{% else %}0%{% endif %} of rejections</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Performance -->
+            <div class="dashboard-card bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">
+                    <i class="fas fa-users text-green-500 mr-2"></i> Team Performance
+                </h2>
+                <div class="space-y-4">
+                    {% if team_performance and team_performance.items() %}
+                        {% for advisor, tickets_count in team_performance.items() %}
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">{{ advisor }}</span>
+                                <span class="text-sm font-medium">{{ tickets_count }} tickets</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full progress-bar" data-width="{% if team_performance.values()|max > 0 %}{{ (tickets_count / team_performance.values()|max * 100)|round(1) }}{% else %}0{% endif %}"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-8 text-gray-500">
+                            <i class="fas fa-users text-4xl mb-4 text-gray-300"></i>
+                            <p class="text-lg font-medium">No Team Performance Data</p>
+                            <p class="text-sm mt-2">No tickets have been assigned to team members yet.</p>
+                            <p class="text-xs mt-1 text-blue-600">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                Assign tickets to see performance metrics
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ticket List with Quick Filters -->
+        <div class="mt-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Active Tickets</h2>
+            
+            <!-- Search and Filter Form -->
+            <div class="mb-6 bg-white p-4 rounded-lg shadow-sm border">
+                <form method="GET" class="flex flex-wrap gap-4 items-end">
+                    <!-- Search Input -->
+                    <div class="flex-1 min-w-64">
+                        <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                        <input type="text" 
+                               id="search" 
+                               name="search" 
+                               value="{{ pagination.search_query if pagination else '' }}"
+                               placeholder="Search by ticket ID, subject, name, or email..."
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    
+                    <!-- Status Filter -->
+                    <div class="min-w-32">
+                        <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                        <select id="status" name="status" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="All" {% if not pagination or pagination.status_filter == 'All' %}selected{% endif %}>All Statuses</option>
+                            <option value="New" {% if pagination and pagination.status_filter == 'New' %}selected{% endif %}>New</option>
+                            <option value="Form Sent" {% if pagination and pagination.status_filter == 'Form Sent' %}selected{% endif %}>Form Sent</option>
+                            <option value="Awaiting Submission" {% if pagination and pagination.status_filter == 'Awaiting Submission' %}selected{% endif %}>Awaiting Submission</option>
+                            <option value="Under Review" {% if pagination and pagination.status_filter == 'Under Review' %}selected{% endif %}>Under Review</option>
+                            <option value="Info Requested" {% if pagination and pagination.status_filter == 'Info Requested' %}selected{% endif %}>Info Requested</option>
+                            <option value="Referred to Tech Director" {% if pagination and pagination.status_filter == 'Referred to Tech Director' %}selected{% endif %}>Referred</option>
+                            <option value="Closed" {% if pagination and pagination.status_filter == 'Closed' %}selected{% endif %}>Closed</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Priority Filter -->
+                    <div class="min-w-32">
+                        <label for="priority" class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                        <select id="priority" name="priority" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="All" {% if not pagination or pagination.priority_filter == 'All' %}selected{% endif %}>All Priorities</option>
+                            <option value="High" {% if pagination and pagination.priority_filter == 'High' %}selected{% endif %}>High</option>
+                            <option value="Medium" {% if pagination and pagination.priority_filter == 'Medium' %}selected{% endif %}>Medium</option>
+                            <option value="Low" {% if pagination and pagination.priority_filter == 'Low' %}selected{% endif %}>Low</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Per Page -->
+                    <div class="min-w-24">
+                        <label for="per_page" class="block text-sm font-medium text-gray-700 mb-1">Per Page</label>
+                        <select id="per_page" name="per_page" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="10" {% if pagination and pagination.per_page == 10 %}selected{% endif %}>10</option>
+                            <option value="20" {% if not pagination or pagination.per_page == 20 %}selected{% endif %}>20</option>
+                            <option value="50" {% if pagination and pagination.per_page == 50 %}selected{% endif %}>50</option>
+                            <option value="100" {% if pagination and pagination.per_page == 100 %}selected{% endif %}>100</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <i class="fas fa-search mr-2"></i>Filter
+                    </button>
+                    
+                    <!-- Clear Button -->
+                    <a href="/dashboard" class="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                        <i class="fas fa-times mr-2"></i>Clear
+                    </a>
+                </form>
+            </div>
+            
+            <!-- Quick Filters -->
+            <div class="mb-4 flex flex-wrap gap-2">
+                <div class="filter-badge badge status-new" data-filter="New">
+                    New
+                </div>
+                <div class="filter-badge badge status-form-sent" data-filter="Form Sent">
+                    Form Sent
+                </div>
+                <div class="filter-badge badge status-awaiting-submission" data-filter="Awaiting Submission">
+                    Awaiting Submission
+                </div>
+                <div class="filter-badge badge status-under-review" data-filter="Under Review">
+                    Under Review
+                </div>
+                <div class="filter-badge badge status-info-requested" data-filter="Info Requested">
+                    Info Requested
+                </div>
+                <div class="filter-badge badge status-referred" data-filter="Referred to Tech Director">
+                    Referred
+                </div>
+                <div class="filter-badge badge bg-gradient-to-r from-orange-400 to-orange-500 text-white border-orange-500" data-filter="warranty">
+                    <i class="fas fa-shield-alt mr-1"></i>
+                    Warranty Forms
+                </div>
+                <div class="filter-badge badge bg-purple-500 text-white border-purple-500" data-filter="attachments">
+                    <i class="fas fa-paperclip mr-1"></i>
+                    Has Attachments
+                </div>
+                <div class="filter-badge badge bg-gray-100 text-gray-700 border-gray-300" data-filter="Closed">
+                    <i class="fas fa-lock mr-1"></i>
+                    Closed
+                </div>
+                <div class="filter-badge badge bg-white border border-gray-200 text-gray-700" data-filter="all">
+                    Show All
+                </div>
+            </div>
+            
+                         <!-- Ticket Grid -->
+             <div class="ticket-grid">
+                 {% for ticket in all_tickets %}
+                 <div class="ticket-card {{ 'warranty-detected' if ticket.has_warranty else '' }} ticket-priority-{{ ticket.priority|lower if ticket.priority else 'medium' }}" 
+                      data-status="{{ ticket.status }}" 
+                      data-warranty="{{ 'true' if ticket.has_warranty else 'false' }}"
+                      data-has-attachments="{{ 'true' if ticket.has_attachments or ticket.attachments else 'false' }}"
+                      data-ticket-id="{{ ticket.ticket_id }}"
+                      data-priority="{{ ticket.priority or 'Medium' }}"
+                      data-classification="{{ ticket.classification or 'General' }}">
+                    
+                    <!-- Warranty Detection Badge -->
+                    {% if ticket.has_warranty %}
+                    <div class="warranty-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        Warranty Form
+                    </div>
+                    {% endif %}
+                    
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="badge status-{{ ticket.status|lower|replace(' ', '-')|replace('–', '') }}">
+                                {% if ticket.status in ['Closed', 'Resolved'] %}
+                                <i class="fas fa-lock mr-1"></i>
+                                {% endif %}
+                                {{ ticket.status }}
+                            </span>
+                            
+                                                         <!-- Extra prominent CLOSED badge for closed tickets -->
+                             {% if ticket.status == 'Closed' %}
+                             <span class="px-1.5 py-0.5 text-xs rounded-full font-bold bg-gray-200 text-gray-700 border border-gray-400">
+                                 🔒 CLOSED
+                             </span>
+                             {% elif ticket.status == 'Resolved' %}
+                             <span class="px-1.5 py-0.5 text-xs rounded-full font-bold bg-green-100 text-green-700 border border-green-300">
+                                 ✅ RESOLVED
+                             </span>
+                             {% endif %}
+                            {% if ticket.has_attachments %}
+                            <span class="attachment-badge">
+                                <i class="fas fa-paperclip"></i>
+                                {{ ticket.attachments|length if ticket.attachments else '?' }} file{{ 's' if (ticket.attachments|length if ticket.attachments else 1) != 1 else '' }}
+                            </span>
+                            {% endif %}
+                            
+                                                         <!-- Assignment/Takeover Badge -->
+                             {% if ticket.assigned_to %}
+                             <span class="px-1.5 py-0.5 text-xs rounded-full font-medium {% if ticket.is_forwarded %}bg-blue-100 text-blue-800{% else %}bg-green-100 text-green-800{% endif %} border {% if ticket.is_forwarded %}border-blue-200{% else %}border-green-200{% endif %}">
+                                 {% if ticket.is_forwarded %}
+                                 <i class="fas fa-share mr-1"></i> Forwarded from {{ ticket.forwarded_from_name if ticket.forwarded_from_name else 'Support Team' }} to {{ ticket.assigned_to }}
+                                 {% else %}
+                                 <i class="fas fa-check-circle mr-1"></i> Taken by {{ ticket.assigned_to }}
+                                 {% endif %}
+                             </span>
+                             {% endif %}
+                            
+                            <!-- Creation Method Tag -->
+                            {% set creation_method = ticket.creation_method or 'auto-detect' %}
+                            {% if creation_method == 'auto-detect' %}
+                                {% if ticket.ticket_id and ticket.ticket_id.startswith('M') %}
+                                    {% set creation_method = 'manual' %}
+                                {% elif ticket.thread_id or (ticket.email and '@' in ticket.email) or ticket.ticket_id.startswith(('E', 'W', 'T', 'S', 'G', 'O')) or (ticket.ticket_id and ticket.ticket_id|length > 4 and ticket.ticket_id[0:1] in ['E', 'W', 'T', 'S', 'G', 'O']) %}
+                                    {% set creation_method = 'email' %}
+                                {% else %}
+                                    {% set creation_method = 'email' %}
+                                {% endif %}
+                            {% endif %}
+                                                         <span class="px-1.5 py-0.5 text-xs rounded-full font-medium 
+                                 {% if creation_method == 'manual' %}bg-blue-100 text-blue-700{% else %}bg-green-100 text-green-700{% endif %}" 
+                                 title="{% if creation_method == 'manual' %}Created manually via system{% else %}Created from mail or web form{% endif %}">
+                                 {% if creation_method == 'manual' %}
+                                     <i class="fas fa-user-edit mr-1"></i>Manual
+                                 {% else %}
+                                     <i class="fas fa-envelope mr-1"></i>Email
+                                 {% endif %}
+                             </span>
+                        </div>
+                        <span class="text-xs text-gray-500">{{ ticket.created_at|format_datetime }}</span>
+                    </div>
+                    
+                    <a href="/ticket/{{ ticket.ticket_id }}" class="block mt-1">
+                                                 <h3 class="font-medium text-gray-800 break-words">
+                             <span class="font-bold text-blue-800 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200 text-xs">
+                                 <i class="fas fa-hashtag mr-1"></i>{{ ticket.ticket_id }}
+                             </span>
+                            <span class="break-words line-clamp-2">- {{ ticket.subject }}</span>
+                        </h3>
+                        <p class="text-sm text-gray-600 mt-1 line-clamp-2 break-words">{{ ticket.body }}</p>
+                    </a>
+                    
+                    <div class="mt-3 flex justify-between items-start gap-2">
+                                                 <div class="text-xs text-gray-500 flex-1 min-w-0">
+                             {% if ticket.vehicle_registration %}
+                             <span class="inline-block bg-gray-100 rounded px-1.5 py-0.5 truncate max-w-full text-xs">{{ ticket.vehicle_registration }}</span>
+                             {% endif %}
+                         </div>
+                         <div class="flex-shrink-0">
+                             {% if ticket.assigned_to %}
+                             <span class="text-xs bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded truncate max-w-[50px]">{{ ticket.assigned_to }}</span>
+                             {% endif %}
+                         </div>
+                    </div>
+                    
+                    <!-- Enhanced Warranty Information -->
+                    {% if ticket.has_warranty %}
+                    <div class="warranty-details">
+                        <div class="warranty-details-title">
+                            <i class="fas fa-file-contract"></i>
+                            Warranty Form Detected
+                        </div>
+                        <div class="warranty-keywords">
+                            {% if ticket.warranty_forms_count %}
+                                {{ ticket.warranty_forms_count }} warranty form{{ 's' if ticket.warranty_forms_count != 1 else '' }} found
+                            {% endif %}
+                            {% if ticket.has_attachments %}
+                                • {{ ticket.attachments|length if ticket.attachments else 'Multiple' }} attachment{{ 's' if (ticket.attachments|length if ticket.attachments else 2) != 1 else '' }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% elif ticket.has_attachments %}
+                    <div class="attachment-info">
+                        <div class="attachment-header">
+                            <i class="fas fa-paperclip"></i>
+                            {{ ticket.attachments|length if ticket.attachments else 'Multiple' }} attachment{{ 's' if (ticket.attachments|length if ticket.attachments else 2) != 1 else '' }} • No warranty forms detected
+                        </div>
+                        
+                        <!-- ✅ NEW: Attachment List with Download Links -->
+                        {% if ticket.attachments %}
+                        <div class="attachment-list mt-2">
+                            {% for attachment in ticket.attachments[:3] %}
+                           
+                            {% endfor %}
+                            {% if ticket.attachments|length > 3 %}
+                            <div class="more-attachments">
+                                <a href="/ticket/{{ ticket.ticket_id }}" class="text-blue-600 text-xs">
+                                    +{{ ticket.attachments|length - 3 }} more attachment{{ 's' if (ticket.attachments|length - 3) != 1 else '' }}
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination Controls -->
+            {% if pagination %}
+            <div class="pagination-container mt-8 flex justify-center items-center space-x-4">
+                <!-- Previous Button -->
+                {% if pagination.has_prev %}
+                <a href="?page={{ pagination.prev_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                   class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                    <i class="fas fa-chevron-left mr-1"></i> Previous
+                </a>
+                {% else %}
+                <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+                    <i class="fas fa-chevron-left mr-1"></i> Previous
+                </span>
+                {% endif %}
+                
+                <!-- Page Numbers -->
+                <div class="flex space-x-2">
+                    {% for page_num in range(1, pagination.total_pages + 1) %}
+                        {% if page_num == pagination.current_page %}
+                        <span class="px-3 py-2 bg-blue-600 text-white rounded-lg font-semibold">
+                            {{ page_num }}
+                        </span>
+                        {% elif page_num <= 3 or page_num > pagination.total_pages - 3 or (page_num >= pagination.current_page - 1 and page_num <= pagination.current_page + 1) %}
+                        <a href="?page={{ page_num }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                           class="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+                            {{ page_num }}
+                        </a>
+                        {% elif page_num == 4 and pagination.current_page > 5 %}
+                        <span class="px-3 py-2 text-gray-500">...</span>
+                        {% elif page_num == pagination.total_pages - 3 and pagination.current_page < pagination.total_pages - 4 %}
+                        <span class="px-3 py-2 text-gray-500">...</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                
+                <!-- Next Button -->
+                {% if pagination.has_next %}
+                <a href="?page={{ pagination.next_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                   class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                    Next <i class="fas fa-chevron-right ml-1"></i>
+                </a>
+                {% else %}
+                <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+                    Next <i class="fas fa-chevron-right ml-1"></i>
+                </span>
+                {% endif %}
+                
+                <!-- Page Info -->
+                <div class="text-sm text-gray-600 ml-4">
+                    Showing {{ ((pagination.current_page - 1) * pagination.per_page + 1) }} to 
+                    {{ pagination.current_page * pagination.per_page if pagination.current_page * pagination.per_page < pagination.total_tickets else pagination.total_tickets }} 
+                    of {{ pagination.total_tickets }} tickets
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    
+
+    <!-- Template data -->
+    <script type="application/json" id="status-counts-data">{{ status_counts|tojson }}</script>
+    <script type="application/json" id="resolution-time-data">{{ avg_resolution_time|tojson }}</script>
+    <script type="application/json" id="outcomes-data">{"approved": {{ approved_claims or 0 }}, "declined": {{ declined_claims or 0 }}, "referred": {{ referred_claims or 0 }}}</script>
+    
+    <script>
+        // ✅ NEW: Dashboard Attachment Download Function
+        function downloadDashboardAttachment(ticketId, attachmentIndex, filename) {
+            const apiUrl = `/api/tickets/${ticketId}/attachments/${attachmentIndex}/download`;
+            
+            // removed verbose console log
+            
+            const link = document.createElement('a');
+            link.href = apiUrl;
+            link.download = filename;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Note: Chart initialization moved to main DOMContentLoaded event
+        
+        
+        
+        // Charts setup
+        function setupStatusChart() {
+            const ctx = document.getElementById('statusChart').getContext('2d');
+            
+            // Extract data from template
+            const statusLabels = [];
+            const statusCounts = [];
+            const statusColors = [];
+            
+            // Custom color palette - bright, distinct colors
+            const colorPalette = [
+                '#FF6384', // bright pink
+                '#36A2EB', // bright blue
+                '#FFCE56', // bright yellow
+                '#4BC0C0', // teal
+                '#9966FF', // purple
+                '#FF9F40', // orange
+                '#7CFC00', // lawn green
+                '#FF5733', // red-orange
+                '#00FFFF', // cyan
+                '#9400D3', // violet
+                '#FFD700', // gold
+                '#32CD32', // lime green
+                '#8A2BE2'  // blue violet
+            ];
+            
+            // Load status data from JSON
+            try {
+                const statusDataElement = document.getElementById('status-counts-data');
+                const statusDataObj = statusDataElement ? JSON.parse(statusDataElement.textContent) : {};
+                
+                let colorIndex = 0;
+                Object.entries(statusDataObj).forEach(([status, count]) => {
+                    statusLabels.push(status);
+                    statusCounts.push(count);
+                    statusColors.push(colorPalette[colorIndex % colorPalette.length]);
+                    colorIndex++;
+                });
+            } catch (e) {
+                console.error('Error loading status data:', e);
+            }
+            
+            // Make chart globally accessible for updates
+            window.statusChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: statusLabels,
+                    datasets: [{
+                        data: statusCounts,
+                        backgroundColor: statusColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        }
+                    }
+                }
+            });
+        }
+        
+        function setupResolutionTimeChart() {
+            const ctx = document.getElementById('resolutionTimeChart').getContext('2d');
+            
+            // For now, use dummy data - in a real app, you'd get historical data from the backend
+            const resolutionTimeChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Last Week', 'This Week'],
+                    datasets: [{
+                        label: 'Resolution Time (hours)',
+                        data: [
+                            (function() {
+                                try {
+                                    const dataElement = document.getElementById('resolution-time-data');
+                                    const resolutionTime = dataElement ? JSON.parse(dataElement.textContent) : 0;
+                                    return Math.round(resolutionTime * 1.2 * 100) / 100; // dummy previous value
+                                } catch (e) {
+                                    return 0;
+                                }
+                            })(),
+                            (function() {
+                                try {
+                                    const dataElement = document.getElementById('resolution-time-data');
+                                    const resolutionTime = dataElement ? JSON.parse(dataElement.textContent) : 0;
+                                    return Math.round(resolutionTime * 100) / 100;
+                                } catch (e) {
+                                    return 0;
+                                }
+                            })()
+                        ],
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Hours'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+        
+        function setupOutcomesChart() {
+            const ctx = document.getElementById('outcomesChart').getContext('2d');
+            
+            // Vibrant colors for the outcomes chart
+            const outcomeColors = [
+                '#FF6384', // bright pink
+                '#36A2EB', // bright blue
+                '#FFCE56'  // bright yellow
+            ];
+            
+            const outcomesChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Approved', 'Declined', 'Referred'],
+                    datasets: [{
+                        data: (function() {
+                            try {
+                                const dataElement = document.getElementById('outcomes-data');
+                                const outcomes = dataElement ? JSON.parse(dataElement.textContent) : {approved: 0, declined: 0, referred: 0};
+                                return [outcomes.approved, outcomes.declined, outcomes.referred];
+                            } catch (e) {
+                                console.error('Error loading outcomes data:', e);
+                                return [0, 0, 0];
+                            }
+                        })(),
+                        backgroundColor: outcomeColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Enhanced filtering functionality with warranty and attachment support
+        function setupFilters() {
+            const filterBadges = document.querySelectorAll('.filter-badge');
+            const ticketCards = document.querySelectorAll('.ticket-card');
+            
+            // removed verbose console log
+            
+            filterBadges.forEach(badge => {
+                badge.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    // removed verbose console log
+                    
+                    // Toggle active state
+                    filterBadges.forEach(b => b.classList.remove('filter-active'));
+                    this.classList.add('filter-active');
+                    
+                    // Enhanced filtering logic
+                    let visibleCount = 0;
+                    ticketCards.forEach(card => {
+                        let shouldShow = false;
+                        
+                        if (filter === 'all') {
+                            shouldShow = true;
+                        } else if (filter === 'warranty') {
+                            // Filter by warranty detection
+                            shouldShow = card.getAttribute('data-warranty') === 'true';
+                        } else if (filter === 'attachments') {
+                            // Filter by attachments using data attribute
+                            shouldShow = card.getAttribute('data-has-attachments') === 'true';
+                        } else {
+                            // Filter by status - exact match
+                            const cardStatus = card.getAttribute('data-status');
+                            shouldShow = cardStatus === filter;
+                        }
+                        
+                        if (shouldShow) {
+                            card.style.display = 'block';
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                            card.style.animation = 'fadeIn 0.3s ease-in';
+                            visibleCount++;
+                        } else {
+                            card.style.display = 'none';
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.95)';
+                        }
+                    });
+                    
+                    // Update filter count and show feedback
+                    // removed verbose console log
+                    showFilterMessage(`${visibleCount} ticket${visibleCount !== 1 ? 's' : ''} found for "${filter}" filter`, 'success');
+                    
+                    // Scroll to top to show filtered results
+                    document.querySelector('.ticket-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        }
+        
+        // Add fadeIn animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        
+        
+        // Filter message display function
+        function showFilterMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `fixed top-4 right-4 z-50 px-4 py-3 rounded-lg shadow-lg transition-all duration-300 ${
+                type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+            }`;
+            messageDiv.textContent = message;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.classList.add('opacity-0');
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.parentNode.removeChild(messageDiv);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
+        
+        
+        // Dashboard refresh
+        function refreshDashboard() {
+            const refreshBtn = document.getElementById('refreshBtn');
+            refreshBtn.innerHTML = '<i class="fas fa-sync-alt fa-spin mr-2"></i> Refreshing...';
+            
+            // In a real app, you'd make an AJAX request to get updated data
+            fetch('/api/dashboard/data')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Update charts and counters with new data
+                        // For now, just simulate a refresh
+                        setTimeout(() => {
+                            refreshBtn.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> Refresh Data';
+                            
+                            // Show success message
+                            const message = document.createElement('div');
+                            message.className = 'fixed top-4 right-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow';
+                            message.innerHTML = '<div class="flex"><div class="py-1"><i class="fas fa-check-circle"></i></div><div class="ml-3"><p class="text-sm">Dashboard refreshed successfully!</p></div></div>';
+                            document.body.appendChild(message);
+                            
+                            // Remove the message after 3 seconds
+                            setTimeout(() => {
+                                message.remove();
+                            }, 3000);
+                        }, 1000);
+                    } else {
+                        refreshBtn.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> Refresh Failed';
+                        setTimeout(() => {
+                            refreshBtn.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> Refresh Data';
+                        }, 2000);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error refreshing dashboard:', error);
+                    refreshBtn.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> Refresh Failed';
+                    setTimeout(() => {
+                        refreshBtn.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> Refresh Data';
+                    }, 2000);
+                });
+        }
+        
+        // Date Range Filtering Functionality
+        function initDateRangeFilter() {
+            const dateRangeSelector = document.getElementById('dateRangeSelector');
+            const customDateRange = document.getElementById('customDateRange');
+            const startDate = document.getElementById('startDate');
+            const endDate = document.getElementById('endDate');
+            const refreshDashboard = document.getElementById('refreshDashboard');
+            const currentDateRange = document.getElementById('currentDateRange');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            // Handle date range selector changes
+            dateRangeSelector.addEventListener('change', function() {
+                if (this.value === 'custom') {
+                    customDateRange.classList.remove('hidden');
+                    setCustomDateDefaults();
+                } else {
+                    customDateRange.classList.add('hidden');
+                    updateDateRangeDisplay(this.value);
+                }
+            });
+
+            // Set default dates for custom range
+            function setCustomDateDefaults() {
+                const today = new Date();
+                const yesterday = new Date(today.getTime() - 1 * 24 * 60 * 60 * 1000);
+                
+                endDate.value = today.toISOString().split('T')[0];
+                startDate.value = yesterday.toISOString().split('T')[0];
+            }
+
+            // Update display text
+            function updateDateRangeDisplay(range) {
+                const ranges = {
+                    'last_hour': 'Last Hour',
+                    'one_day': 'One Day', 
+                    'week': 'Week',
+                    'custom': 'Custom'
+                };
+                currentDateRange.textContent = `📊 Showing data for: ${ranges[range] || range}`;
+            }
+
+            // Handle refresh button click
+            refreshDashboard.addEventListener('click', function() {
+                applyDateFilter();
+            });
+            
+            // Add fallback for when API is not available
+            if (!refreshDashboard) {
+                // removed verbose console warn
+            }
+
+            // Apply date filter
+            function applyDateFilter() {
+                const selectedRange = dateRangeSelector.value;
+                let startDateValue, endDateValue;
+
+                // Show loading
+                loadingIndicator.classList.remove('hidden');
+                refreshDashboard.disabled = true;
+                refreshDashboard.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Loading...';
+
+                // Calculate date range
+                const today = new Date();
+                const todayStr = today.toISOString().split('T')[0];
+
+                switch (selectedRange) {
+                    case 'last_hour':
+                        startDateValue = new Date(today.getTime() - 1 * 60 * 60 * 1000).toISOString().split('T')[0];
+                        endDateValue = todayStr;
+                        break;
+                    case 'one_day':
+                        startDateValue = new Date(today.getTime() - 1 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                        endDateValue = todayStr;
+                        break;
+                    case 'week':
+                        startDateValue = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                        endDateValue = todayStr;
+                        break;
+                    case 'custom':
+                        startDateValue = startDate.value;
+                        endDateValue = endDate.value;
+                        if (!startDateValue || !endDateValue) {
+                            alert('Please select both start and end dates for custom range.');
+                            resetRefreshButton();
+                            return;
+                        }
+                        break;
+                }
+
+                // Make API call to get filtered data
+                fetch(`/api/dashboard/data?start_date=${startDateValue}&end_date=${endDateValue}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // Update dashboard with filtered data
+                            updateDashboardData(data);
+                            
+                            if (selectedRange === 'custom') {
+                                currentDateRange.textContent = `📊 Showing data for: ${startDateValue} to ${endDateValue}`;
+                            }
+                            
+                            // Show success message
+                            showToast('Dashboard updated successfully!', 'success');
+                        } else {
+                            showToast('Error updating dashboard: ' + (data.message || 'Unknown error'), 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching dashboard data:', error);
+                        showToast('Error loading dashboard data: ' + error.message, 'error');
+                        
+                        // Disable date range filter on persistent errors
+                        if (error.message.includes('500')) {
+                            disableDateRangeFilter();
+                        }
+                    })
+                    .finally(() => {
+                        resetRefreshButton();
+                    });
+            }
+
+            function resetRefreshButton() {
+                loadingIndicator.classList.add('hidden');
+                refreshDashboard.disabled = false;
+                refreshDashboard.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> Apply Filter';
+            }
+
+        }
+        
+        // Global showToast function for use throughout the dashboard
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg transition-all duration-300 ${
+                type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+            }`;
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
+        // Global function to update dashboard data
+        function updateDashboardData(data) {
+            // This would update all the charts and statistics
+            // For now, just simulate an update
+            // removed verbose console log
+            
+            // Update status counts if available
+            if (data.data && data.data.status_counts) {
+                // Update status chart if it exists
+                const statusChart = window.statusChart;
+                if (statusChart && statusChart.data) {
+                    const newLabels = [];
+                    const newData = [];
+                    Object.entries(data.data.status_counts).forEach(([status, count]) => {
+                        newLabels.push(status);
+                        newData.push(count);
+                    });
+                    
+                    statusChart.data.labels = newLabels;
+                    statusChart.data.datasets[0].data = newData;
+                    statusChart.update();
+                }
+            }
+            
+            // Update other metrics if available
+            if (data.data) {
+                // Update outstanding claims
+                if (data.data.outstanding_claims) {
+                    const overdueElement = document.querySelector('.urgent-card .text-2xl.text-red-600');
+                    if (overdueElement && data.data.outstanding_claims.overdue !== undefined) {
+                        overdueElement.textContent = data.data.outstanding_claims.overdue;
+                    }
+                }
+                
+                // Update total tickets
+                if (data.data.total_tickets !== undefined) {
+                    const totalElement = document.querySelector('.text-5xl.font-bold.text-indigo-600');
+                    if (totalElement) {
+                        totalElement.textContent = data.data.total_tickets;
+                    }
+                }
+            }
+        }
+
+        // Note: Date range filter initialized in main DOMContentLoaded
+        
+         
+         
+
+         
+
+         
+
+         
+
+         
+
+         
+
+         
+
+         
+
+         
+
+         
+
+        
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) {
+                mobileMenu.classList.toggle('hidden');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.querySelector('.mobile-menu-btn');
+            
+            if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Function to set progress bar widths
+        function initializeProgressBars() {
+            document.querySelectorAll('.progress-bar').forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                if (width !== null) {
+                    bar.style.width = width + '%';
+                }
+            });
+        }
+
+        // Function to handle attachment downloads
+        function downloadDashboardAttachment(ticketId, attachmentIndex, filename) {
+            const url = `/api/tickets/${ticketId}/attachments/${attachmentIndex}/download`;
+            
+            // Create a temporary link to trigger download
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Initialize attachment download handlers
+        function initializeAttachmentHandlers() {
+            document.querySelectorAll('.attachment-download').forEach(button => {
+                button.addEventListener('click', function() {
+                    const ticketId = this.getAttribute('data-ticket-id');
+                    const attachmentIndex = this.getAttribute('data-attachment-index');
+                    const filename = this.getAttribute('data-filename');
+                    downloadDashboardAttachment(ticketId, attachmentIndex, filename);
+                });
+            });
+        }
+
+                 // Clear all filters function
+         function clearAllFilters() {
+             // Reset badge filters
+             const filterBadges = document.querySelectorAll('.filter-badge');
+             filterBadges.forEach(b => b.classList.remove('filter-active'));
+             document.querySelector('.filter-badge[data-filter="all"]')?.classList.add('filter-active');
+             
+             // Show all tickets
+             const ticketCards = document.querySelectorAll('.ticket-card');
+             ticketCards.forEach(card => {
+                 card.style.display = 'block';
+                 card.style.opacity = '1';
+                 card.style.transform = 'scale(1)';
+             });
+             
+             showFilterMessage('All filters cleared', 'success');
+             // removed verbose console log
+         }
+
+        
+
+                 
+         
+         // Initialize everything when DOM is loaded
+         document.addEventListener('DOMContentLoaded', function() {
+             // removed verbose console log
+             
+                                                     // Initialize all components
+               initializeProgressBars();
+               initializeAttachmentHandlers();
+               setupFilters();
+               initDateRangeFilter();
+             
+             // Setup refresh button
+             const refreshBtn = document.getElementById('refreshBtn');
+             if (refreshBtn) {
+                 refreshBtn.addEventListener('click', refreshDashboard);
+             }
+            
+            // Setup charts
+            setupStatusChart();
+            setupResolutionTimeChart();
+            setupOutcomesChart();
+            
+            // Initialize dashboard with current data
+            // removed verbose console log
+            
+            // Test API connectivity
+            testAPIConnectivity();
+            
+            // Set "All" filter as active by default
+            const allFilter = document.querySelector('.filter-badge[data-filter="all"]');
+            if (allFilter) {
+                allFilter.classList.add('filter-active');
+            }
+            
+            // removed verbose console log
+        });
+        
+        // Test API connectivity and show status
+        function testAPIConnectivity() {
+            // removed verbose console log
+            fetch('/api/dashboard/data')
+                .then(response => {
+                    if (response.ok) {
+                        // removed verbose console log
+                        return response.json();
+                    } else {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        // removed verbose console log
+                        updateDashboardData(data);
+                    } else {
+                        // removed verbose console warn
+                    }
+                })
+                .catch(error => {
+                    // keep errors minimal in production
+                    // Show user-friendly error message
+                    showToast('Dashboard data temporarily unavailable. Some features may be limited.', 'error');
+                    
+                    // Disable date range filtering since API is not working
+                    disableDateRangeFilter();
+                });
+        }
+        
+        // Disable date range filter when API is not available
+        function disableDateRangeFilter() {
+            const dateRangeSelector = document.getElementById('dateRangeSelector');
+            const refreshDashboard = document.getElementById('refreshDashboard');
+            
+            if (dateRangeSelector) {
+                dateRangeSelector.disabled = true;
+                dateRangeSelector.innerHTML = '<option value="disabled">API Unavailable</option>';
+            }
+            
+            if (refreshDashboard) {
+                refreshDashboard.disabled = true;
+                refreshDashboard.innerHTML = '<i class="fas fa-exclamation-triangle mr-2"></i> API Unavailable';
+                refreshDashboard.classList.add('bg-gray-400', 'cursor-not-allowed');
+            }
+            
+            // removed verbose console warn
+        }
+
+        // ===== SESSION KEEP-ALIVE MECHANISM =====
+        // Prevent session timeouts during active use
+        let sessionKeepAlive;
+
+        function startSessionKeepAlive() {
+            // Send a heartbeat every 4 minutes to keep session alive
+            sessionKeepAlive = setInterval(() => {
+                fetch('/api/session/heartbeat', { method: 'POST' })
+                    .then(response => {
+                        if (response.status === 401) {
+                            // Session expired, redirect to login
+                            // removed verbose console log
+                            window.location.href = '/login';
+                        } else if (response.ok) {
+                            // removed verbose console log
+                        }
+                    })
+                    .catch(error => {
+                        // removed verbose console log
+                    });
+            }, 4 * 60 * 1000); // 4 minutes
+        }
+
+        function stopSessionKeepAlive() {
+            if (sessionKeepAlive) {
+                clearInterval(sessionKeepAlive);
+            }
+        }
+
+        // Start keep-alive when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            startSessionKeepAlive();
+            // removed verbose console log
+        });
+
+        // Stop when page unloads
+        window.addEventListener('beforeunload', stopSessionKeepAlive);
+
+        // Reset timer on user activity
+        document.addEventListener('click', () => {
+            if (sessionKeepAlive) {
+                clearInterval(sessionKeepAlive);
+                startSessionKeepAlive();
+                // removed verbose console log
+            }
+        });
+
+        // Also reset on keyboard activity
+        document.addEventListener('keydown', () => {
+            if (sessionKeepAlive) {
+                clearInterval(sessionKeepAlive);
+                startSessionKeepAlive();
+                // removed verbose console log
+            }
+        });
+    </script>
+</body>
+</html> 

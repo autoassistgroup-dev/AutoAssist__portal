@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Management - AutoAssistGroup Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
+        
+        /* Normal base font size - READABLE */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Normal Cards */
+        .dashboard-card, .ticket-card, .stats-card, .member-card {
+            padding: 1rem !important;
+            margin-bottom: 1rem !important;
+            border-radius: 0.5rem !important;
+        }
+
+        /* Normal Badges */
+        .badge, .priority-badge, .member-badge {
+            padding: 0.5rem 1rem !important;
+            font-size: 0.875rem !important;
+            font-weight: 500 !important;
+        }
+
+        /* Normal Buttons */
+        button, .btn, .btn-primary {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 0.875rem !important;
+            border-radius: 0.375rem !important;
+        }
+
+        /* Normal Headers */
+        h1 { font-size: 1.875rem !important; }
+        h2 { font-size: 1.5rem !important; }
+        h3 { font-size: 1.25rem !important; }
+        h4 { font-size: 1.125rem !important; }
+
+        /* Normal Spacing */
+        .p-6 { padding: 1.5rem !important; }
+        .p-4 { padding: 1rem !important; }
+        .m-6 { margin: 1.5rem !important; }
+        .m-4 { margin: 1rem !important; }
+        .mb-6 { margin-bottom: 1rem !important; }
+        .mb-4 { margin-bottom: 1rem !important; }
+
+        /* Normal Grid Gaps */
+        .gap-6 { gap: 1.5rem !important; }
+        .gap-4 { gap: 1rem !important; }
+        .gap-2 { gap: 0.5rem !important; }
+
+        /* Normal Icons */
+        .fas, .fab, .far {
+            font-size: 1.25rem !important;
+        }
+
+        .member-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .member-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .member-card.male {
+            border-left-color: #3b82f6;
+        }
+        .member-card.female {
+            border-left-color: #ec4899;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ff758f 0%, #ff7eb3 100%);
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="flex items-center">
+                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
+                    </a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/" class="px-3 py-2 rounded hover:bg-gray-100 transition">Tickets</a>
+                        <a href="/dashboard" class="px-3 py-2 rounded hover:bg-gray-100 transition">Dashboard</a>
+                        <a href="/status" class="px-3 py-2 rounded hover:bg-gray-100 transition">Status</a>
+                        <a href="/create-ticket" class="px-3 py-2 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                        {% if current_user_role == 'Administrator' %}
+                        <a href="/technicians" class="px-3 py-2 rounded hover:bg-gray-100 transition">Technicians</a>
+                        <a href="/members" class="px-3 py-2 rounded bg-pink-50 text-pink-600 font-medium">Members</a>
+                        <a href="/admin" class="px-3 py-2 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    {% if current_user %}
+                    <span class="hidden sm:inline text-gray-600 text-sm md:text-base">{{ current_user }}</span>
+                    <a href="/logout" class="px-2 py-1 md:px-3 md:py-2 rounded bg-gray-100 hover:bg-gray-200 transition text-xs md:text-sm">Logout</a>
+                    {% else %}
+                    <a href="/login" class="px-2 py-1 md:px-3 md:py-2 rounded bg-pink-500 hover:bg-pink-600 transition text-white text-xs md:text-sm">Login</a>
+                    {% endif %}
+                    
+                    <!-- Mobile menu button -->
+                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu (hidden by default) -->
+            <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
+                <div class="flex flex-col space-y-2 pt-4">
+                    <a href="/" class="px-3 py-2 rounded hover:bg-gray-100 transition">Tickets</a>
+                    <a href="/dashboard" class="px-3 py-2 rounded hover:bg-gray-100 transition">Dashboard</a>
+                    <a href="/status" class="px-3 py-2 rounded hover:bg-gray-100 transition">Status</a>
+                    <a href="/create-ticket" class="px-3 py-2 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                    {% if current_user_role == 'Administrator' %}
+                    <a href="/technicians" class="px-3 py-2 rounded hover:bg-gray-100 transition">Technicians</a>
+                    <a href="/members" class="px-3 py-2 rounded bg-pink-50 text-pink-600 font-medium">Members</a>
+                    <a href="/admin" class="px-3 py-2 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-4 md:py-8">
+        <header class="mb-4 md:mb-6">
+            <div class="text-center md:text-left">
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Member Management</h1>
+                <p class="text-sm md:text-base text-gray-600">Manage your support team members</p>
+            </div>
+        </header>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+            <div class="px-6 py-4 border-b flex justify-between items-center bg-gradient-to-r from-pink-50 to-pink-100">
+                <h2 class="text-xl font-semibold text-pink-700 flex items-center">
+                    <i class="fas fa-users-cog mr-2"></i> Team Members
+                </h2>
+                <button id="addMemberBtn" class="btn-primary text-white py-2 px-4 rounded-lg font-medium transition">
+                    <i class="fas fa-plus mr-2"></i> Add Member
+                </button>
+            </div>
+            <div class="px-6 py-3 bg-blue-50 border-b">
+                <p class="text-sm text-blue-700 flex items-center">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    <strong>Note:</strong> Administrator and Technical Director accounts are protected and cannot be deleted to maintain system security.
+                </p>
+            </div>
+            <div class="divide-y divide-gray-200">
+                {% for member in members %}
+                <div class="p-6 member-card {% if member.gender == 'male' %}male{% else %}female{% endif %}">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">
+                                {{ member.name }}
+                                {% if member.gender == 'female' %}👩{% else %}👨{% endif %}
+                            </h3>
+                            <div class="flex items-center space-x-4 mt-2">
+                                <span class="text-sm text-gray-600"><i class="fas fa-id-badge mr-1"></i> {{ member.user_id }}</span>
+                                <span class="text-sm text-gray-600">
+                                    <i class="fas fa-user-tag mr-1"></i>
+                                    {% if member.role == 'Technician' %}
+                                        <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full font-medium">
+                                            <i class="fas fa-user-cog mr-1"></i>{{ member.role }}
+                                        </span>
+                                    {% elif member.role == 'Administrator' %}
+                                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full font-medium">
+                                            <i class="fas fa-user-shield mr-1"></i>{{ member.role }}
+                                        </span>
+                                    {% else %}
+                                        {{ member.role }}
+                                    {% endif %}
+                                </span>
+                                <span class="text-sm text-gray-600"><i class="fas fa-calendar-alt mr-1"></i> {{ member.created_at | format_datetime }}</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="edit-member-btn px-3 py-1 rounded bg-blue-100 text-blue-800 hover:bg-blue-200 transition" data-id="{{ member._id }}" data-name="{{ member.name }}" data-role="{{ member.role }}" data-gender="{{ member.gender }}" data-user-id="{{ member.user_id }}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            {% if member.user_id not in ['admin001', 'marc001'] %}
+                            <button class="delete-member-btn px-3 py-1 rounded bg-red-100 text-red-800 hover:bg-red-200 transition" data-id="{{ member._id }}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            {% else %}
+                            <span class="px-3 py-1 rounded bg-gray-100 text-gray-600 text-xs flex items-center">
+                                <i class="fas fa-shield-alt mr-1"></i> Protected
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if not members %}
+                <div class="p-6 text-center text-gray-500">
+                    No members found. Add your first team member.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Member Modal -->
+    <div id="memberModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold" id="modalTitle">Add New Member</h3>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="memberForm">
+                <input type="hidden" id="memberId">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-1">Name</label>
+                    <input type="text" id="memberName" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-1">Role</label>
+                    <select id="memberRole" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" required>
+                        <option value="">Select Role</option>
+                        <option value="Administrator">Administrator</option>
+                        <option value="Technical Director">Technical Director</option>
+                        <option value="User">User</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-1">Gender</label>
+                    <select id="memberGender" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-1">User ID</label>
+                    <input type="text" id="memberUserId" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-1">Password</label>
+                    <div class="relative">
+                        <input type="password" id="memberPassword" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 pr-10">
+                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none toggle-password">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-1">Confirm Password</label>
+                    <div class="relative">
+                        <input type="password" id="confirmPassword" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 pr-10">
+                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none toggle-password">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancelMemberForm" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn-primary text-white py-2 px-4 rounded-lg font-medium transition">
+                        Save Member
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('memberModal');
+            const addMemberBtn = document.getElementById('addMemberBtn');
+            const closeModal = document.getElementById('closeModal');
+            const cancelMemberForm = document.getElementById('cancelMemberForm');
+            const memberForm = document.getElementById('memberForm');
+            const modalTitle = document.getElementById('modalTitle');
+            const memberId = document.getElementById('memberId');
+            
+            // Toggle password visibility
+            document.querySelectorAll('.toggle-password').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const input = this.parentElement.querySelector('input');
+                    const icon = this.querySelector('i');
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.replace('fa-eye', 'fa-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.replace('fa-eye-slash', 'fa-eye');
+                    }
+                });
+            });
+            
+            // Add new member
+            addMemberBtn.addEventListener('click', function() {
+                modalTitle.textContent = 'Add New Member';
+                memberForm.reset();
+                memberId.value = '';
+                modal.classList.remove('hidden');
+            });
+            
+            // Edit member
+            document.querySelectorAll('.edit-member-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    modalTitle.textContent = 'Edit Member';
+                    memberId.value = this.dataset.id;
+                    document.getElementById('memberName').value = this.dataset.name;
+                    document.getElementById('memberRole').value = this.dataset.role;
+                    document.getElementById('memberGender').value = this.dataset.gender;
+                    document.getElementById('memberUserId').value = this.dataset.userId;
+                    document.getElementById('memberPassword').required = false;
+                    document.getElementById('confirmPassword').required = false;
+                    modal.classList.remove('hidden');
+                });
+            });
+            
+            // Delete member
+            document.querySelectorAll('.delete-member-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (confirm('Are you sure you want to delete this member?')) {
+                        const memberId = this.dataset.id;
+                        console.log('🚀 DELETE REQUEST - Member ID:', memberId);
+                        console.log('🔍 Button dataset:', this.dataset);
+                        
+                        fetch(`/api/members/${memberId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            console.log('📡 Response status:', response.status);
+                            console.log('📡 Response headers:', response.headers);
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('📦 Response data:', data);
+                            if (data.status === 'success') {
+                                console.log('✅ Delete successful, reloading page');
+                                window.location.reload();
+                            } else {
+                                console.error('❌ Delete failed:', data.message);
+                                alert(data.message || 'Error deleting member');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('💥 Fetch error:', error);
+                            alert('Error deleting member');
+                        });
+                    }
+                });
+            });
+            
+            // Close modal
+            function closeMemberModal() {
+                modal.classList.add('hidden');
+            }
+            
+            closeModal.addEventListener('click', closeMemberModal);
+            cancelMemberForm.addEventListener('click', closeMemberModal);
+            
+            // Handle form submission
+            memberForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    name: document.getElementById('memberName').value,
+                    role: document.getElementById('memberRole').value,
+                    gender: document.getElementById('memberGender').value,
+                    user_id: document.getElementById('memberUserId').value,
+                    password: document.getElementById('memberPassword').value,
+                    confirm_password: document.getElementById('confirmPassword').value
+                };
+                
+                const id = memberId.value;
+                const url = id ? `/api/members/${id}` : '/api/members';
+                const method = id ? 'PUT' : 'POST';
+                
+                fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        window.location.reload();
+                    } else {
+                        alert(data.message || 'Error saving member');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error saving member');
+                });
+            });
+            
+            // Mobile menu toggle function
+            function toggleMobileMenu() {
+                const mobileMenu = document.getElementById('mobileMenu');
+                if (mobileMenu) {
+                    mobileMenu.classList.toggle('hidden');
+                }
+            }
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const menuButton = document.querySelector('.mobile-menu-btn');
+                
+                if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Development files
+.env
+.env.local
+.vscode/
+.idea/
+
+# Database files (use external MongoDB)
+*.db
+*.sqlite
+*.sqlite3
+support_tickets.db
+
+# Uploads (use external storage in production)
+uploads/
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+
+# Documentation
+README.md
+DEPLOYMENT.md
+
+# Development tools
+debug_*.py
+test_*.py
+*_test.py 
