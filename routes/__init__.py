@@ -15,6 +15,7 @@ from routes.admin_routes import admin_bp
 from routes.n8n_routes import n8n_bp
 from routes.webhook_routes import webhook_bp
 from routes.attachment_routes import attachment_bp
+from routes.ai_routes import ai_bp
 from routes.main_routes import main_bp
 
 

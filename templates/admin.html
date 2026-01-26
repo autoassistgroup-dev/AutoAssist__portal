@@ -7,7 +7,9 @@
     <title>AutoAssistGroup Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="/static/css/animations.css" rel="stylesheet">
     <style>
         :root {
             --primary: #ff758f;
@@ -16,39 +18,112 @@
             --fast: #ffa502;
             --medium: #ff6b81;
             --low: #2ed573;
+            --waiting: #ffcc00;
         }
 
-        /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
-        
-        /* Normal base font size - READABLE */
+        /* ===== GLOBAL STYLES ===== */
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
-            font-size: 1rem !important;
-            line-height: 1.5 !important;
+            font-family: 'Poppins', sans-serif !important;
+            background: linear-gradient(135deg, #ffe0e9 0%, #fff0f6 50%, #e8f4f8 100%) !important;
+            min-height: 100vh;
+            position: relative;
         }
 
-        /* Normal Cards */
-        .dashboard-card, .ticket-card, .stats-card {
-            padding: 1rem !important;
-            margin-bottom: 1rem !important;
+        /* ===== UNIVERSAL NAVBAR STYLES ===== */
+        nav {
+            background: rgba(255, 255, 255, 0.45) !important;
+            backdrop-filter: blur(25px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+            min-height: auto;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03) !important;
+        }
+
+        nav .responsive-container {
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+        }
+
+        /* Nav link base styles */
+        .nav-link {
+            padding: 0.5rem 1rem !important;
             border-radius: 0.5rem !important;
+            color: #4b5563 !important;
+            /* gray-600 */
+            font-weight: 500 !important;
+            font-size: 0.875rem !important;
+            transition: all 0.2s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+        }
+
+        .nav-link:hover {
+            background: rgba(0, 0, 0, 0.04) !important;
+            transform: translateY(-1px);
+        }
+
+        /* Active link style - REDESIGNED PER SCREENSHOTS */
+        .nav-link-active {
+            background: rgba(255, 45, 85, 0.1) !important;
+            color: #FF2D55 !important;
+            /* Apple Pink */
+        }
+
+        /* ===== GLASS COMPONENTS ===== */
+        .bg-white,
+        .card,
+        .dashboard-card,
+        .ticket-card,
+        .management-section,
+        .search-section,
+        .modal-content {
+            background: rgba(255, 255, 255, 0.6) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+            border-radius: 0.75rem !important;
+        }
+
+        /* Stats Card - Exact Match to index.html */
+        .stats-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 0.75rem !important;
+            background: rgba(255, 255, 255, 0.6) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        .management-section:hover,
+        .stats-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 117, 143, 0.1) !important;
+            border-color: var(--medium) !important;
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.2) !important;
         }
 
         /* Normal Badges */
-        .badge, .priority-badge, .member-badge {
+        .badge,
+        .priority-badge,
+        .member-badge {
             padding: 0.5rem 1rem !important;
             font-size: 0.875rem !important;
             font-weight: 500 !important;
         }
 
         /* Normal Buttons */
-        button, .btn {
+        button,
+        .btn {
             padding: 0.75rem 1.5rem !important;
             font-size: 0.875rem !important;
             border-radius: 0.375rem !important;
         }
-        
+
         /* Enhanced admin panel buttons - keep gradients but make normal size */
         .admin-btn-primary {
             background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
@@ -58,116 +133,90 @@
             padding: 0.75rem 1.5rem !important;
             font-size: 0.875rem !important;
         }
-        
+
         .admin-btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 8px -2px rgba(59, 130, 246, 0.4);
         }
 
         /* Normal Headers */
-        h1 { font-size: 1.875rem !important; }
-        h2 { font-size: 1.5rem !important; }
-        h3 { font-size: 1.25rem !important; }
-        h4 { font-size: 1.125rem !important; }
+        h1 {
+            font-size: 1.875rem !important;
+        }
+
+        h2 {
+            font-size: 1.5rem !important;
+        }
+
+        h3 {
+            font-size: 1.25rem !important;
+        }
+
+        h4 {
+            font-size: 1.125rem !important;
+        }
 
         /* Normal Spacing */
-        .p-6 { padding: 1.5rem !important; }
-        .p-4 { padding: 1rem !important; }
-        .m-6 { margin: 1.5rem !important; }
-        .m-4 { margin: 1rem !important; }
-        .mb-6 { margin-bottom: 1rem !important; }
-        .mb-4 { margin-bottom: 1rem !important; }
+        .p-6 {
+            padding: 1.5rem !important;
+        }
+
+        .p-4 {
+            padding: 1rem !important;
+        }
+
+        .m-6 {
+            margin: 1.5rem !important;
+        }
+
+        .m-4 {
+            margin: 1rem !important;
+        }
+
+        .mb-6 {
+            margin-bottom: 1rem !important;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem !important;
+        }
 
         /* Normal Grid Gaps */
-        .gap-6 { gap: 1.5rem !important; }
-        .gap-4 { gap: 1rem !important; }
-        .gap-2 { gap: 0.5rem !important; }
+        .gap-6 {
+            gap: 1.5rem !important;
+        }
+
+        .gap-4 {
+            gap: 1rem !important;
+        }
+
+        .gap-2 {
+            gap: 0.5rem !important;
+        }
 
         /* Normal Icons */
-        .fas, .fab, .far {
+        .fas,
+        .fab,
+        .far {
             font-size: 1.25rem !important;
         }
 
         /* ===== NAVBAR ENHANCEMENTS ===== */
-        
-        /* Ensure navbar is always visible */
-        nav {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            transition: all 0.3s ease-in-out;
-        }
-        
-        /* Enhanced navbar shadows */
-        nav.shadow-lg {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        
-        /* Ensure navbar container is always visible */
-        nav .container {
-            display: block !important;
-            visibility: visible !important;
-        }
-        
+
         /* Ensure navigation links are visible on medium screens and larger */
-        nav .hidden.md\\:flex {
-            display: flex !important;
-            visibility: visible !important;
+        @media (min-width: 768px) {
+            nav .hidden.md\:flex {
+                display: flex !important;
+                visibility: visible !important;
+            }
         }
-        
-        /* Force navbar to always be visible regardless of screen size */
-        nav {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            position: sticky !important;
-            top: 0 !important;
-            z-index: 9999 !important;
-            background: white !important;
-            border-bottom: 2px solid #e5e7eb !important;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
-        }
-        
-        /* Ensure navbar test element is visible */
-        #mainNavbar .bg-red-500 {
-            display: block !important;
-            visibility: visible !important;
-            position: relative !important;
-            z-index: 10000 !important;
-        }
-        
-        /* Force all navbar content to be visible */
-        nav * {
-            visibility: visible !important;
-        }
-        
-        /* Override any Tailwind hidden classes in navbar */
-        nav .hidden {
-            display: block !important;
-            visibility: visible !important;
-        }
-        
-        /* Ensure navbar container is visible */
-        nav .container {
-            display: block !important;
-            visibility: visible !important;
-        }
-        
-        /* Override any conflicting hidden classes for navbar */
-        nav.hidden,
-        nav[style*="display: none"],
-        nav[style*="visibility: hidden"] {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-        
+
         /* Navbar link hover effects */
         nav a {
             position: relative;
             overflow: hidden;
         }
-        
+
         nav a::after {
             content: '';
             position: absolute;
@@ -179,20 +228,20 @@
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
-        
+
         nav a:hover::after {
             width: 100%;
         }
-        
+
         /* Active link styling */
         nav a.active {
             background: linear-gradient(135deg, #fce7f3, #f3e8ff);
             color: #7c3aed;
             font-weight: 600;
         }
-        
+
         /* ===== 1920px OPTIMIZATION STYLES ===== */
-        
+
         /* Optimize for 1920px displays */
         @media (min-width: 1920px) {
             .container {
@@ -200,37 +249,44 @@
                 padding-left: 2rem !important;
                 padding-right: 2rem !important;
             }
-            
-            .dashboard-card, .ticket-card, .stats-card {
+
+            .dashboard-card,
+            .ticket-card,
+            .stats-card {
                 padding: 1.5rem !important;
                 margin-bottom: 1.5rem !important;
             }
-            
+
             .ticket-card h3 {
                 font-size: 1.25rem !important;
                 margin-bottom: 1rem !important;
             }
-            
-            .badge, .priority-badge, .member-badge {
+
+            .badge,
+            .priority-badge,
+            .member-badge {
                 padding: 0.75rem 1.5rem !important;
                 font-size: 1rem !important;
             }
-            
-            button, .btn {
+
+            button,
+            .btn {
                 padding: 1rem 2rem !important;
                 font-size: 1rem !important;
             }
-            
-            .fas, .fab, .far {
+
+            .fas,
+            .fab,
+            .far {
                 font-size: 1.5rem !important;
             }
-            
+
             .modal-content {
                 padding: 3rem !important;
                 max-width: 600px !important;
             }
         }
-        
+
         /* Ultra-wide display optimization */
         @media (min-width: 2560px) {
             .container {
@@ -238,12 +294,14 @@
                 padding-left: 3rem !important;
                 padding-right: 3rem !important;
             }
-            
-            .dashboard-card, .ticket-card, .stats-card {
+
+            .dashboard-card,
+            .ticket-card,
+            .stats-card {
                 padding: 2rem !important;
                 margin-bottom: 2rem !important;
             }
-            
+
             .modal-content {
                 padding: 4rem !important;
                 max-width: 800px !important;
@@ -261,7 +319,7 @@
             border-radius: 0.75rem;
             border: 1px solid #f1f5f9;
         }
-        
+
         /* Prevent interactions with deleted tickets */
         .ticket-card.deleting {
             opacity: 0.7 !important;
@@ -269,7 +327,7 @@
             cursor: not-allowed !important;
             position: relative;
         }
-        
+
         .ticket-card.deleting::after {
             content: "DELETING...";
             position: absolute;
@@ -283,30 +341,37 @@
             font-weight: bold;
             z-index: 10;
         }
-        
+
         .ticket-card.deleting .ticket-link {
             pointer-events: none !important;
             cursor: not-allowed !important;
             text-decoration: none !important;
             color: #999 !important;
         }
-        
+
         .ticket-card.deleting .ticket-link:hover {
             text-decoration: none !important;
             color: #999 !important;
         }
-        
+
         /* Ticket fade in animation */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
+
         /* Better card hover effects */
         .management-section {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .management-section:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -322,12 +387,25 @@
             border-left: 4px solid var(--primary);
         }
 
-        .priority-urgent { border-left: 4px solid var(--urgent); }
-        .priority-fast { border-left: 4px solid var(--fast); }
-        .priority-medium { border-left: 4px solid var(--medium); }
-        .priority-low { border-left: 4px solid var(--low); }
+        .priority-urgent {
+            border-left: 4px solid var(--urgent);
+        }
 
-        .portal-title { color: #2b2d42; }
+        .priority-fast {
+            border-left: 4px solid var(--fast);
+        }
+
+        .priority-medium {
+            border-left: 4px solid var(--medium);
+        }
+
+        .priority-low {
+            border-left: 4px solid var(--low);
+        }
+
+        .portal-title {
+            color: #2b2d42;
+        }
 
         .stats-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -359,14 +437,45 @@
             padding: 0.25rem 0.5rem;
         }
 
-        .badge-urgent { background-color: #fee2e2; color: #b91c1c; }
-        .badge-fast { background-color: #fef3c7; color: #92400e; }
-        .badge-medium { background-color: #fce7f3; color: #9d174d; }
-        .badge-low { background-color: #dcfce7; color: #166534; }
-        .badge-technical { background-color: #dbeafe; color: #1e40af; }
-        .badge-payment { background-color: #e0e7ff; color: #4338ca; }
-        .badge-account { background-color: #ede9fe; color: #5b21b6; }
-        .badge-general { background-color: #f3e8ff; color: #7e22ce; }
+        .badge-urgent {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .badge-fast {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-medium {
+            background-color: #fce7f3;
+            color: #9d174d;
+        }
+
+        .badge-low {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-technical {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-payment {
+            background-color: #e0e7ff;
+            color: #4338ca;
+        }
+
+        .badge-account {
+            background-color: #ede9fe;
+            color: #5b21b6;
+        }
+
+        .badge-general {
+            background-color: #f3e8ff;
+            color: #7e22ce;
+        }
 
         .dropdown-content {
             display: none;
@@ -380,7 +489,9 @@
             padding: 1rem;
         }
 
-        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
 
         .member-badge {
             font-size: 0.8rem;
@@ -423,22 +534,26 @@
             margin: 5vh auto;
         }
 
-        /* Custom scrollbar for modals */
-        .modal-content::-webkit-scrollbar {
-            width: 8px;
+        /* Custom scrollbar for modals and other containers */
+        .modal-content::-webkit-scrollbar,
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
         }
 
-        .modal-content::-webkit-scrollbar-track {
+        .modal-content::-webkit-scrollbar-track,
+        .custom-scrollbar::-webkit-scrollbar-track {
             background: #f1f1f1;
             border-radius: 4px;
         }
 
-        .modal-content::-webkit-scrollbar-thumb {
+        .modal-content::-webkit-scrollbar-thumb,
+        .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #c1c1c1;
             border-radius: 4px;
         }
 
-        .modal-content::-webkit-scrollbar-thumb:hover {
+        .modal-content::-webkit-scrollbar-thumb:hover,
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #a8a8a8;
         }
 
@@ -450,7 +565,7 @@
                 padding: 1.5rem;
                 max-height: 85vh;
             }
-            
+
             #roleModal .modal-content {
                 max-width: none;
                 width: 95%;
@@ -459,7 +574,7 @@
                 margin: 3vh auto;
             }
         }
-        
+
         /* Additional optimization for smaller screens */
         @media (max-width: 480px) {
             #roleModal .modal-content {
@@ -470,8 +585,15 @@
         }
 
         @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .member-item {
@@ -482,9 +604,14 @@
             border-bottom: 1px solid #f1f3f5;
         }
 
-        .member-item:last-child { border-bottom: none; }
+        .member-item:last-child {
+            border-bottom: none;
+        }
 
-        .member-actions { display: flex; gap: 0.5rem; }
+        .member-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
 
         .action-btn {
             padding: 0.25rem 0.5rem;
@@ -493,10 +620,23 @@
             transition: all 0.2s;
         }
 
-        .edit-btn { background-color: #e0f2fe; color: #0369a1; }
-        .edit-btn:hover { background-color: #bae6fd; }
-        .delete-btn { background-color: #fee2e2; color: #b91c1c; }
-        .delete-btn:hover { background-color: #fecaca; }
+        .edit-btn {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .edit-btn:hover {
+            background-color: #bae6fd;
+        }
+
+        .delete-btn {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .delete-btn:hover {
+            background-color: #fecaca;
+        }
 
         .add-member-btn {
             background-color: #ecfdf5;
@@ -509,7 +649,9 @@
             gap: 0.5rem;
         }
 
-        .add-member-btn:hover { background-color: #d1fae5; }
+        .add-member-btn:hover {
+            background-color: #d1fae5;
+        }
 
         .form-input {
             width: 100%;
@@ -525,25 +667,46 @@
             box-shadow: 0 0 0 2px rgba(255, 117, 143, 0.2);
         }
 
-        .loading { opacity: 0.7; pointer-events: none; }
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
 
         /* Enhanced Responsive Design */
         /* Container improvements */
-        .admin-container {
-            max-width: 1200px;
+        /* Custom max-width for 1920px constraint */
+        .max-w-1920 {
+            max-width: 1920px;
+        }
+
+        /* Responsive container with max-width */
+        .responsive-container {
+            max-width: 1920px;
             margin: 0 auto;
             padding: 0 1rem;
         }
-        
+
+        @media (min-width: 640px) {
+            .responsive-container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .responsive-container {
+                padding: 0 2rem;
+            }
+        }
+
         /* Better spacing for admin sections */
         .admin-section {
             margin-bottom: 2rem;
         }
-        
+
         .admin-section:last-child {
             margin-bottom: 1rem;
         }
-        
+
         /* Improved stats cards layout */
         .stats-grid {
             display: grid;
@@ -551,7 +714,7 @@
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
-        
+
         /* Better management sections */
         .management-grid {
             display: grid;
@@ -559,13 +722,13 @@
             gap: 2rem;
             margin-bottom: 2rem;
         }
-        
+
         @media (min-width: 1024px) {
             .management-grid {
                 grid-template-columns: 1fr 1fr;
             }
         }
-        
+
         /* Enhanced search section */
         .search-section {
             background: white;
@@ -574,13 +737,13 @@
             padding: 1.5rem;
             margin-bottom: 2rem;
         }
-        
+
         .search-controls {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
-        
+
         @media (min-width: 768px) {
             .search-controls {
                 flex-direction: row;
@@ -588,102 +751,104 @@
                 justify-content: space-between;
             }
         }
-        
+
         .filter-group {
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
         }
-        
+
         @media (min-width: 640px) {
             .filter-group {
                 flex-direction: row;
                 gap: 0.5rem;
             }
         }
-        
+
         /* Mobile responsive improvements */
         @media (max-width: 768px) {
             .admin-container {
                 padding: 0 0.75rem;
             }
-            
+
             .stats-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
-            
+
             .management-section {
                 margin-bottom: 1.5rem;
             }
         }
-        
+
         /* Remove unnecessary spacing */
         .admin-section {
             margin-bottom: 2rem;
         }
-        
+
         .admin-section:last-child {
             margin-bottom: 0;
         }
-        
+
         /* Better section spacing */
-        .stats-grid + .admin-section {
+        .stats-grid+.admin-section {
             margin-top: 0;
         }
-        
+
         /* Small mobile devices (320px - 480px) */
         @media (max-width: 480px) {
             .admin-container {
                 padding-left: 0.5rem;
                 padding-right: 0.5rem;
             }
-            
+
             /* Smaller text on very small screens */
             h1 {
                 font-size: 1.5rem !important;
             }
-            
+
             h2 {
                 font-size: 1.125rem !important;
             }
-            
+
             /* Better mobile stats cards */
             .stats-card {
                 padding: 1rem !important;
             }
-            
+
             /* Mobile management sections */
             .management-section .px-6 {
                 padding-left: 1rem !important;
                 padding-right: 1rem !important;
             }
-            
+
             /* Header responsive */
-            h1, h2 {
+            h1,
+            h2 {
                 font-size: 1.5rem !important;
             }
-            
+
             h3 {
                 font-size: 1.25rem !important;
             }
-            
+
             .stats-card {
                 padding: 0.75rem;
                 text-align: center;
             }
-            
+
             .ticket-card {
                 padding: 0.875rem;
                 margin-bottom: 0.75rem;
             }
-            
+
             /* Buttons and badges */
-            .px-3.py-2, .px-4.py-2 {
+            .px-3.py-2,
+            .px-4.py-2 {
                 padding: 0.5rem 0.75rem;
                 font-size: 0.75rem;
             }
-            
+
             .px-2.py-1 {
                 padding: 0.375rem 0.5rem;
                 font-size: 0.6875rem;
@@ -721,33 +886,33 @@
                 display: block !important;
             }
         }
-        
+
         /* Mobile devices (481px - 768px) */
         @media (min-width: 481px) and (max-width: 768px) {
             .container {
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
-            
+
             .stats-card {
                 padding: 1rem;
             }
-            
+
             .ticket-card {
                 padding: 1rem;
             }
-            
+
             /* Navigation */
             .hidden.md\\:flex {
                 display: none !important;
             }
-            
+
             /* Navbar mobile optimizations */
             nav .container {
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
-            
+
             nav .flex {
                 gap: 0.5rem;
             }
@@ -761,33 +926,33 @@
                 font-size: 0.875rem;
             }
         }
-        
+
         /* Tablet devices (769px - 1024px) */
         @media (min-width: 769px) and (max-width: 1024px) {
             .container {
                 padding-left: 1.5rem;
                 padding-right: 1.5rem;
             }
-            
+
             /* Show navigation items */
             .hidden.md\\:flex {
                 display: flex !important;
             }
-            
+
             /* Navbar tablet optimizations */
             nav .container {
                 padding-left: 1.5rem;
                 padding-right: 1.5rem;
             }
-            
+
             nav .flex {
                 gap: 1rem;
             }
-            
+
             .stats-card {
                 padding: 1.25rem;
             }
-            
+
             .ticket-card {
                 padding: 1.25rem;
             }
@@ -800,15 +965,21 @@
 
         /* Touch-friendly buttons */
         @media (max-width: 768px) {
-            button, .btn, a.btn {
+
+            button,
+            .btn,
+            a.btn {
                 min-height: 44px;
                 padding: 0.75rem 1rem;
             }
 
             /* Input fields */
-            input, select, textarea {
+            input,
+            select,
+            textarea {
                 min-height: 44px;
-                font-size: 16px; /* Prevents zoom on iOS */
+                font-size: 16px;
+                /* Prevents zoom on iOS */
             }
 
 
@@ -817,369 +988,449 @@
         }
 
         /* ===== SCROLLABLE SECTIONS FIX ===== */
-        
+
         /* Hidden class for ticket visibility toggle */
         .hidden {
             display: none !important;
         }
-        
+
         /* Fade in animation for tickets */
         @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .fadeIn {
             animation: fadeIn 0.3s ease-in-out;
         }
-        
+
         /* Management sections with proper scrolling */
         .scrollable-section {
             max-height: 400px;
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: #cbd5e0 #f7fafc;
-            padding-right: 8px; /* Space for scrollbar */
+            padding-right: 8px;
+            /* Space for scrollbar */
         }
-        
+
         /* Custom scrollbar for webkit browsers */
         .scrollable-section::-webkit-scrollbar {
             width: 8px;
         }
-        
+
         .scrollable-section::-webkit-scrollbar-track {
             background: #f7fafc;
             border-radius: 4px;
         }
-        
+
         .scrollable-section::-webkit-scrollbar-thumb {
             background: #cbd5e0;
             border-radius: 4px;
         }
-        
+
         .scrollable-section::-webkit-scrollbar-thumb:hover {
             background: #a0aec0;
         }
-        
+
         /* Status list specific styling */
         #statusList {
             max-height: 350px;
             overflow-y: auto;
         }
-        
-        /* Technician list specific styling */  
+
+        /* Technician list specific styling */
         #technicianSummary {
             max-height: 350px;
             overflow-y: auto;
         }
-        
+
         /* Roles list specific styling */
         #rolesList {
             max-height: 350px;
             overflow-y: auto;
         }
-        
+
         /* Member management modals */
         .member-list-container {
             max-height: 300px;
             overflow-y: auto;
         }
-        
+
         /* Better spacing in scrollable areas */
-        .scrollable-section .space-y-4 > * + * {
+        .scrollable-section .space-y-4>*+* {
             margin-top: 1rem;
         }
-        
+
         /* Ensure proper spacing for last items in scrollable sections */
-        .scrollable-section > *:last-child {
+        .scrollable-section>*:last-child {
             margin-bottom: 1rem;
         }
-        
+
         /* Mobile scrollable adjustments */
         @media (max-width: 768px) {
             .scrollable-section {
                 max-height: 300px;
                 padding-right: 4px;
             }
-            
-            #statusList, #technicianSummary, #rolesList {
+
+            #statusList,
+            #technicianSummary,
+            #rolesList {
                 max-height: 250px;
             }
         }
-
     </style>
 </head>
 
-<body>
-    <div class="min-h-screen">
-                <!-- Navigation -->
-        <nav class="bg-white shadow-lg border-b border-gray-100 sticky top-0 z-50" id="mainNavbar">
-            <div class="container mx-auto px-4 py-4">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center space-x-6">
-                        <a href="/" class="flex items-center space-x-2 hover:opacity-80 transition">
-                            <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
-                        </a>
-                        <div class="hidden md:flex space-x-1">
-                            <a href="/" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Tickets</a>
-                            <a href="/dashboard" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Dashboard</a>
-                            <a href="/status" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Status</a>
-                            <a href="/create-ticket" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Create Ticket</a>
-                            <a href="/technicians" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Technicians</a>
-                            <a href="/members" class="px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 text-gray-600">Members</a>
-                            <a href="/admin" class="px-4 py-2 rounded-lg bg-pink-100 text-pink-700 font-medium border border-pink-200 shadow-sm">Admin Panel</a>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-3 md:space-x-4">
-                        {% if current_user %}
-                        <div class="hidden sm:flex items-center space-x-3">
-                            <span class="text-gray-700 text-sm font-medium">{{ current_user }}</span>
-                        </div>
-                        <a href="/logout" class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 hover:text-gray-800 transition-colors duration-200 text-gray-600 text-sm font-medium">Logout</a>
-                        {% else %}
-                        <a href="/login" class="px-4 py-2 rounded-lg bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 transition-all duration-200 text-white text-sm font-medium shadow-sm">Login</a>
+<body class="min-h-screen">
+    <!-- Animated Gradient Background -->
+    <div class="background-layer">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="gradient-orb orb-4"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="responsive-container py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-6">
+                    <a href="/" class="flex items-center">
+                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
+                    </a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="/" class="px-4 py-3 rounded hover:bg-gray-100 transition">Tickets</a>
+                        <a href="/dashboard" class="px-4 py-3 rounded hover:bg-gray-100 transition">Dashboard</a>
+                        <a href="/status" class="px-4 py-3 rounded hover:bg-gray-100 transition">Status</a>
+                        <a href="/create-ticket" class="px-4 py-3 rounded hover:bg-gray-100 transition">Create
+                            Ticket</a>
+                        {% if current_user_role == 'Administrator' %}
+                        <a href="/technicians" class="px-4 py-3 rounded hover:bg-gray-100 transition">Technicians</a>
+                        <a href="/members" class="px-4 py-3 rounded hover:bg-gray-100 transition">Members</a>
+                        <a href="/admin" class="px-4 py-3 rounded bg-pink-50 text-pink-600 font-medium">Admin Panel</a>
                         {% endif %}
-                        
-                        <!-- Mobile menu button -->
-                        <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 mobile-menu-btn transition-colors duration-200" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
-                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
-                        </button>
                     </div>
+                </div>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    {% if current_user %}
+                    <span class="hidden sm:inline text-gray-600 text-sm md:text-base">{{ current_user }}</span>
+                    <a href="/logout"
+                        class="px-2 py-1 md:px-3 md:py-2 rounded bg-gray-100 hover:bg-gray-200 transition text-xs md:text-sm">Logout</a>
+                    {% else %}
+                    <a href="/login"
+                        class="px-2 py-1 md:px-3 md:py-2 rounded bg-pink-500 hover:bg-pink-600 transition text-white text-xs md:text-sm">Login</a>
+                    {% endif %}
+
+                    <!-- Mobile menu button -->
+                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn"
+                        onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
-        </nav>
 
-        <!-- Main Content -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Page Header -->
-            
-
-        
-
-            <!-- Member Management Modal -->
-    <div id="memberModal" class="modal">
-        <div class="modal-content">
-            <h3 class="text-xl font-semibold mb-4 flex items-center">
-                <i class="fas fa-users-cog mr-2 text-pink-600"></i> Team Members Management
-            </h3>
-            <div id="memberList" class="mb-4"></div>
-            <button id="addMemberBtn" class="add-member-btn">
-                <i class="fas fa-plus"></i> Add New Member
-            </button>
-            <div id="memberForm" class="hidden mt-4">
-                <input type="hidden" id="editMemberId">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                    <input type="text" id="memberName" class="form-input" placeholder="Member name" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
-                    <select id="memberRole" class="form-input" required>
-                        <option value="">Select a role...</option>
-                        <!-- Options will be loaded dynamically from roles -->
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-                    <select id="memberGender" class="form-input">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">User ID</label>
-                    <input type="text" id="memberUserId" class="form-input" placeholder="Unique User ID" required>
-                </div>
-                <div class="mb-4 relative">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <div class="relative">
-                        <input type="password" id="memberPassword" class="form-input pr-10" placeholder="Password" required>
-                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none password-toggle" data-target="memberPassword">
-                            <i class="far fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="mb-4 relative">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-                    <div class="relative">
-                        <input type="password" id="confirmPassword" class="form-input pr-10" placeholder="Confirm Password" required>
-                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none password-toggle" data-target="confirmPassword">
-                            <i class="far fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-end space-x-3">
-                    <button type="button" id="cancelMemberForm" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
-                        Cancel
-                    </button>
-                    <button type="button" id="saveMember" class="px-4 py-2 text-white rounded hover:opacity-90 transition bg-gradient-to-r from-pink-500 to-pink-600">
-                        Save Member
-                    </button>
+            <!-- Mobile menu (hidden by default) -->
+            <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
+                <div class="flex flex-col space-y-3 pt-4">
+                    <a href="/" class="px-4 py-3 rounded hover:bg-gray-100 transition">Tickets</a>
+                    <a href="/dashboard" class="px-4 py-3 rounded hover:bg-gray-100 transition">Dashboard</a>
+                    <a href="/status" class="px-4 py-3 rounded hover:bg-gray-100 transition">Status</a>
+                    <a href="/create-ticket" class="px-4 py-3 rounded hover:bg-gray-100 transition">Create Ticket</a>
+                    {% if current_user_role == 'Administrator' %}
+                    <a href="/technicians" class="px-4 py-3 rounded hover:bg-gray-100 transition">Technicians</a>
+                    <a href="/members" class="px-4 py-3 rounded hover:bg-gray-100 transition">Members</a>
+                    <a href="/admin" class="px-4 py-3 rounded bg-pink-50 text-pink-600 font-medium">Admin Panel</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <!-- Role Management Modal -->
-    <div id="roleModal" class="modal">
-        <div class="modal-content">
-            <h3 class="text-lg font-semibold mb-2 flex items-center">
-                <i class="fas fa-user-tag mr-2 text-purple-600"></i> Role Management
-            </h3>
-            <div id="roleForm">
-                <input type="hidden" id="editRoleId">
-                <div class="mb-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Role Name</label>
-                    <input type="text" id="roleName" class="form-input" placeholder="Role name" required>
-                </div>
-                <div class="mb-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                    <textarea id="roleDescription" class="form-input" placeholder="Role description" rows="2" required></textarea>
-                </div>
-                <div class="mb-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Level (1-3)</label>
-                    <select id="roleLevel" class="form-input">
-                        <option value="1">1 - Administrator</option>
-                        <option value="2">2 - Technical Director</option>
-                        <option value="3" selected>3 - User</option>
-                    </select>
-                </div>
-                <div class="mb-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Color</label>
-                    <div class="flex items-center space-x-2">
-                        <input type="color" id="roleColor" class="w-10 h-8 rounded border">
-                        <span class="text-xs text-gray-500">Choose a color for this role</span>
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header -->
+
+
+
+
+        <!-- Member Management Modal -->
+        <div id="memberModal" class="modal">
+            <div class="modal-content">
+                <h3 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-users-cog mr-2 text-pink-600"></i> Team Members Management
+                </h3>
+                <div id="memberList" class="mb-4"></div>
+                <button id="addMemberBtn" class="add-member-btn">
+                    <i class="fas fa-plus"></i> Add New Member
+                </button>
+                <div id="memberForm" class="hidden mt-4">
+                    <input type="hidden" id="editMemberId">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                        <input type="text" id="memberName" class="form-input" placeholder="Member name" required>
                     </div>
-                </div>
-                <div class="mb-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Permissions</label>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 max-h-24 overflow-y-auto p-1.5 border rounded-lg bg-gray-50 text-xs" id="permissionsContainer">
-                        <label class="flex items-center py-0.5">
-                            <input type="checkbox" value="ticket_management" class="mr-1.5 scale-90"> Ticket Management
-                        </label>
-                        <label class="flex items-center py-0.5">
-                            <input type="checkbox" value="user_management" class="mr-1.5 scale-90"> User Management
-                        </label>
-                        <label class="flex items-center py-0.5">
-                            <input type="checkbox" value="system_config" class="mr-1.5 scale-90"> System Config
-                        </label>
-                        <label class="flex items-center py-0.5">
-                            <input type="checkbox" value="reports" class="mr-1.5 scale-90"> Reports
-                        </label>
-                        <label class="flex items-center py-0.5">
-                            <input type="checkbox" value="technical_tools" class="mr-1.5 scale-90"> Technical Tools
-                        </label>
-                        <label class="flex items-center py-0.5">
-                            <input type="checkbox" value="customer_response" class="mr-1.5 scale-90"> Customer Response
-                        </label>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                        <select id="memberRole" class="form-input" required>
+                            <option value="">Select a role...</option>
+                            <!-- Options will be loaded dynamically from roles -->
+                        </select>
                     </div>
-                </div>
-                <div class="flex justify-end space-x-2 mt-3">
-                    <button type="button" id="cancelRoleForm" class="px-3 py-1.5 text-sm bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
-                        Cancel
-                    </button>
-                    <button type="button" id="saveRole" class="px-3 py-1.5 text-sm text-white rounded hover:opacity-90 transition bg-gradient-to-r from-purple-500 to-purple-600">
-                        Save Role
-                    </button>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                        <select id="memberGender" class="form-input">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">User ID</label>
+                        <input type="text" id="memberUserId" class="form-input" placeholder="Unique User ID" required>
+                    </div>
+                    <div class="mb-4 relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <div class="relative">
+                            <input type="password" id="memberPassword" class="form-input pr-10" placeholder="Password"
+                                required>
+                            <button type="button"
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none password-toggle"
+                                data-target="memberPassword">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-4 relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                        <div class="relative">
+                            <input type="password" id="confirmPassword" class="form-input pr-10"
+                                placeholder="Confirm Password" required>
+                            <button type="button"
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none password-toggle"
+                                data-target="confirmPassword">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancelMemberForm"
+                            class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
+                            Cancel
+                        </button>
+                        <button type="button" id="saveMember"
+                            class="px-4 py-2 text-white rounded hover:opacity-90 transition bg-gradient-to-r from-pink-500 to-pink-600">
+                            Save Member
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Role Management Modal -->
+        <div id="roleModal" class="modal">
+            <div class="modal-content">
+                <h3 class="text-lg font-semibold mb-2 flex items-center">
+                    <i class="fas fa-user-tag mr-2 text-purple-600"></i> Role Management
+                </h3>
+                <div id="roleForm">
+                    <input type="hidden" id="editRoleId">
+                    <div class="mb-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Role Name</label>
+                        <input type="text" id="roleName" class="form-input" placeholder="Role name" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                        <textarea id="roleDescription" class="form-input" placeholder="Role description" rows="2"
+                            required></textarea>
+                    </div>
+                    <div class="mb-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Level (1-3)</label>
+                        <select id="roleLevel" class="form-input">
+                            <option value="1">1 - Administrator</option>
+                            <option value="2">2 - Technical Director</option>
+                            <option value="3" selected>3 - User</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Color</label>
+                        <div class="flex items-center space-x-2">
+                            <input type="color" id="roleColor" class="w-10 h-8 rounded border">
+                            <span class="text-xs text-gray-500">Choose a color for this role</span>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Permissions</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 max-h-24 overflow-y-auto p-1.5 border rounded-lg bg-gray-50 text-xs"
+                            id="permissionsContainer">
+                            <label class="flex items-center py-0.5">
+                                <input type="checkbox" value="ticket_management" class="mr-1.5 scale-90"> Ticket
+                                Management
+                            </label>
+                            <label class="flex items-center py-0.5">
+                                <input type="checkbox" value="user_management" class="mr-1.5 scale-90"> User
+                                Management
+                            </label>
+                            <label class="flex items-center py-0.5">
+                                <input type="checkbox" value="system_config" class="mr-1.5 scale-90"> System Config
+                            </label>
+                            <label class="flex items-center py-0.5">
+                                <input type="checkbox" value="reports" class="mr-1.5 scale-90"> Reports
+                            </label>
+                            <label class="flex items-center py-0.5">
+                                <input type="checkbox" value="technical_tools" class="mr-1.5 scale-90"> Technical
+                                Tools
+                            </label>
+                            <label class="flex items-center py-0.5">
+                                <input type="checkbox" value="customer_response" class="mr-1.5 scale-90"> Customer
+                                Response
+                            </label>
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-2 mt-3">
+                        <button type="button" id="cancelRoleForm"
+                            class="px-3 py-1.5 text-sm bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
+                            Cancel
+                        </button>
+                        <button type="button" id="saveRole"
+                            class="px-3 py-1.5 text-sm text-white rounded hover:opacity-90 transition bg-gradient-to-r from-purple-500 to-purple-600">
+                            Save Role
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Enhanced Stats Cards -->
-        <div class="stats-grid mb-8">
-            <div class="bg-white stats-card shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-all">
-                <div class="flex items-center">
-                    <div class="p-4 rounded-full bg-gradient-to-br from-pink-100 to-pink-50 mr-4">
-                        <i class="fas fa-ticket-alt text-pink-600 text-xl"></i>
+        <!-- Enhanced Stats Cards -->
+        <!-- Enhanced Stats Cards -->
+        <!-- Enhanced Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
+            <!-- Total Tickets -->
+            <div class="bg-white stats-card shadow p-4 flex flex-col h-full hover:shadow-md transition-shadow">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 text-center">Total Tickets
+                </h3>
+                <div class="flex flex-col items-center justify-center flex-1">
+                    <div class="p-3 rounded-full bg-pink-50 mb-2">
+                        <i class="fas fa-ticket-alt text-pink-500 text-xl"></i>
                     </div>
-                    <div>
-                        <h3 class="font-medium text-gray-500 text-sm">Total Tickets</h3>
-                        <p class="text-3xl font-bold" style="color: var(--primary);">{{ total_tickets }}</p>
-                    </div>
+                    <p class="text-3xl font-bold text-gray-800" data-stat="total">{{ total_tickets }}</p>
                 </div>
             </div>
-            <div class="bg-white stats-card shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-all">
-                <div class="flex items-center">
-                    <div class="p-4 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 mr-4">
-                        <i class="fas fa-folder-open text-blue-600 text-xl"></i>
+
+            <!-- Open Tickets -->
+            <div class="bg-white stats-card shadow p-4 flex flex-col h-full hover:shadow-md transition-shadow">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 text-center">Open Tickets
+                </h3>
+                <div class="flex flex-col items-center justify-center flex-1">
+                    <div class="p-3 rounded-full bg-blue-50 mb-2">
+                        <i class="fas fa-folder-open text-blue-500 text-xl"></i>
                     </div>
-                    <div>
-                        <h3 class="font-medium text-gray-500 text-sm">Open Tickets</h3>
-                        <p class="text-3xl font-bold" style="color: var(--medium);">{{ open_tickets }}</p>
-                    </div>
+                    <p class="text-3xl font-bold text-gray-800" data-stat="open">{{ open_tickets }}</p>
                 </div>
             </div>
-            <div class="bg-white stats-card shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-all">
-                <div class="flex flex-col">
-                    <h3 class="font-medium text-gray-500 text-sm mb-3">Priority Breakdown</h3>
-                    <div class="flex flex-wrap gap-2">
-                        {% for priority, count in priorities.items() %}
-                        <span class="priority-badge rounded-full 
-                            {% if priority == 'Urgent' %}badge-urgent
-                            {% elif priority == 'Fast' %}badge-fast
-                            {% elif priority == 'Medium' %}badge-medium
-                            {% else %}badge-low{% endif %}">
+
+            <!-- Waiting for Response -->
+            <div class="bg-white stats-card shadow p-4 flex flex-col h-full hover:shadow-md transition-shadow">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 text-center">Waiting</h3>
+                <div class="flex flex-col items-center justify-center flex-1">
+                    <div class="p-3 rounded-full bg-yellow-50 mb-2">
+                        <i class="fas fa-clock text-yellow-500 text-xl"></i>
+                    </div>
+                    <p class="text-3xl font-bold text-gray-800" data-stat="waiting">{{ waiting_tickets }}</p>
+                </div>
+            </div>
+
+            <!-- Priority Breakdown -->
+            <div class="bg-white stats-card shadow p-4 flex flex-col h-full hover:shadow-md transition-shadow">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 text-center">Priorities
+                </h3>
+                <div class="flex flex-col gap-1.5 flex-1 justify-center w-full">
+                    {% for priority, count in priorities.items() %}
+                    <div class="flex items-center justify-between text-xs w-full">
+                        <span class="w-full text-center py-1 rounded-md font-medium text-[10px]
+                            {% if priority == 'Urgent' %}bg-red-50 text-red-600 border border-red-100
+                            {% elif priority == 'Fast' %}bg-orange-50 text-orange-600 border border-orange-100
+                            {% elif priority == 'High' %}bg-pink-50 text-pink-600 border border-pink-100
+                            {% elif priority == 'Medium' %}bg-purple-50 text-purple-600 border border-purple-100
+                            {% else %}bg-green-50 text-green-600 border border-green-100{% endif %}"
+                            data-priority="{{ priority }}">
                             {{ priority }}: {{ count }}
                         </span>
-                        {% endfor %}
                     </div>
-                    <h3 class="font-medium text-gray-500 mt-4 mb-2">Type Breakdown</h3>
-                    <div class="flex flex-wrap gap-2">
-                        {% for cls, count in classifications.items() %}
-                        <span class="priority-badge rounded-full 
-                            {% if cls == 'Technical' %}badge-technical
-                            {% elif cls == 'Payment' %}badge-payment
-                            {% elif cls == 'Account' %}badge-account
-                            {% else %}badge-general{% endif %}">
-                            {{ cls }}: {{ count }}
-                        </span>
-                        {% endfor %}
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="bg-white stats-card shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-all">
-                <div class="flex items-center">
-                    <div class="p-4 rounded-full bg-gradient-to-br from-green-100 to-green-50 mr-4">
-                        <i class="fas fa-check-circle text-green-600 text-xl"></i>
+
+            <!-- Type Breakdown -->
+            <div class="bg-white stats-card shadow p-4 flex flex-col h-full hover:shadow-md transition-shadow">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 text-center">Types</h3>
+                <div
+                    class="flex flex-col gap-1.5 flex-1 justify-start overflow-y-auto max-h-[140px] px-1 custom-scrollbar w-full">
+                    {% for cls, count in classifications.items() %}
+                    <div class="flex items-center justify-between text-xs w-full">
+                        <span class="w-full text-center py-1 rounded-md font-medium text-[10px]
+                            {% if cls == 'Technical Issue' %}bg-blue-50 text-blue-600 border border-blue-100
+                            {% elif cls == 'Payment' %}bg-indigo-50 text-indigo-600 border border-indigo-100
+                            {% elif cls == 'Support' %}bg-violet-50 text-violet-600 border border-violet-100
+                            {% elif cls == 'Warranty Claim' %}bg-teal-50 text-teal-600 border border-teal-100
+                            {% elif cls == 'Spam' %}bg-gray-50 text-gray-500 border border-gray-100
+                            {% elif cls == 'Account' %}bg-cyan-50 text-cyan-600 border border-cyan-100
+                            {% else %}bg-gray-50 text-gray-600 border border-gray-100{% endif %}"
+                            data-classification="{{ cls }}">
+                            {{ cls }}: {{ count }}
+                        </span>
                     </div>
-                    <div>
-                        <h3 class="font-medium text-gray-500 text-sm">Resolved</h3>
-                        <p class="text-3xl font-bold" style="color: var(--low);">{{ resolved_tickets }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Resolved Tickets -->
+            <div class="bg-white stats-card shadow p-4 flex flex-col h-full hover:shadow-md transition-shadow">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 text-center">Resolved</h3>
+                <div class="flex flex-col items-center justify-center flex-1">
+                    <div class="p-3 rounded-full bg-green-50 mb-2">
+                        <i class="fas fa-check-circle text-green-500 text-xl"></i>
                     </div>
+                    <p class="text-3xl font-bold text-gray-800" data-stat="resolved">{{ resolved_tickets }}</p>
                 </div>
             </div>
         </div>
-        
+
         <!-- Enhanced Ticket List -->
         <div class="admin-section bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 mb-8">
             <div class="px-6 py-5 border-b bg-gradient-to-r from-pink-50 to-pink-100">
                 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-                <h2 class="text-xl font-semibold text-pink-700 flex items-center">
-                    <i class="fas fa-list-ul mr-2"></i> Recent Tickets
-                </h2>
+                    <h2 class="text-xl font-semibold text-pink-700 flex items-center">
+                        <i class="fas fa-list-ul mr-2"></i> Recent Tickets
+                    </h2>
                     <span class="px-4 py-2 rounded-full text-sm font-medium bg-pink-600 text-white">
-                    Total: {{ total_tickets }}
-                </span>
+                        Total: {{ total_tickets }}
+                    </span>
                 </div>
             </div>
-                            <div class="divide-y divide-pink-100" id="ticketsContainer">
-                    {% for ticket in tickets %}
-                    <div class="flex items-start ticket-card p-6 hover:bg-pink-50 {% if ticket.is_important %}ticket-important{% endif %} {% if loop.index > 5 %}hidden{% endif %}" data-ticket-index="{{ loop.index }}" data-ticket-id="{{ ticket.ticket_id }}">
-                        <div class="flex-1">
-                            <a href="/ticket/{{ ticket.ticket_id }}" class="flex-1 ticket-link" data-ticket-id="{{ ticket.ticket_id }}">
+            <div class="divide-y divide-pink-100" id="ticketsContainer">
+                {% for ticket in tickets %}
+                <div class="flex items-start ticket-card p-6 hover:bg-pink-50 {% if ticket.is_important %}ticket-important{% endif %} {% if loop.index > 5 %}hidden{% endif %}"
+                    data-ticket-index="{{ loop.index }}" data-ticket-id="{{ ticket.ticket_id }}">
+                    <div class="flex-1">
+                        <a href="/ticket/{{ ticket.ticket_id }}" class="flex-1 ticket-link"
+                            data-ticket-id="{{ ticket.ticket_id }}">
                             <div class="flex justify-between items-start">
                                 <div class="flex-1">
                                     <div class="flex items-center flex-wrap gap-2 mb-2">
-                                        <span class="font-bold text-blue-800 bg-blue-50 px-2 py-1 rounded border border-blue-200 text-sm">
+                                        <span
+                                            class="font-bold text-blue-800 bg-blue-50 px-2 py-1 rounded border border-blue-200 text-sm">
                                             <i class="fas fa-hashtag mr-1"></i>{{ ticket.ticket_id }}
                                         </span>
                                         <span class="px-2 py-1 text-xs rounded-full font-medium
@@ -1192,10 +1443,12 @@
                                         <span class="px-2 py-1 text-xs rounded-full font-medium
                                             {% if ticket.status == 'Open' %}bg-blue-100 text-blue-800
                                             {% else %}bg-green-100 text-green-800{% endif %}">
-                                            <i class="fas fa-{% if ticket.status == 'Open' %}lock-open{% else %}lock{% endif %} mr-1"></i>
+                                            <i
+                                                class="fas fa-{% if ticket.status == 'Open' %}lock-open{% else %}lock{% endif %} mr-1"></i>
                                             {{ ticket.status }}
                                         </span>
-                                        {% if ticket.classification and ticket.classification in ['Technical Issue', 'Payment', 'Support', 'Warranty Claim', 'Spam', 'Account'] %}
+                                        {% if ticket.classification and ticket.classification in ['Technical Issue',
+                                        'Payment', 'Support', 'Warranty Claim', 'Spam', 'Account'] %}
                                         <span class="px-2 py-1 text-xs rounded-full font-medium 
                                             {% if ticket.classification == 'Technical Issue' %}bg-blue-100 text-blue-800
                                             {% elif ticket.classification == 'Payment' %}bg-indigo-100 text-indigo-800
@@ -1213,7 +1466,8 @@
                                         </span>
                                         {% endif %}
                                         {% if ticket.is_important %}
-                                        <span class="px-2 py-1 text-xs rounded-full font-medium bg-pink-100 text-pink-800">
+                                        <span
+                                            class="px-2 py-1 text-xs rounded-full font-medium bg-pink-100 text-pink-800">
                                             <i class="fas fa-star mr-1"></i> Important
                                         </span>
                                         {% endif %}
@@ -1228,10 +1482,13 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
-                                    <button class="text-gray-400 hover:text-pink-600 important-btn" data-ticket-id="{{ ticket.ticket_id }}" title="Mark as Important">
+                                    <button class="text-gray-400 hover:text-pink-600 important-btn"
+                                        data-ticket-id="{{ ticket.ticket_id }}" title="Mark as Important">
                                         <i class="fas fa-star{% if not ticket.is_important %}-o{% endif %}"></i>
                                     </button>
-                                    <button class="text-gray-400 hover:text-red-600 delete-ticket-btn" data-ticket-id="{{ ticket.ticket_id }}" title="Delete Ticket Permanently" onclick="event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); deleteTicket('{{ ticket.ticket_id }}'); return false;">
+                                    <button class="text-gray-400 hover:text-red-600 delete-ticket-btn"
+                                        data-ticket-id="{{ ticket.ticket_id }}" title="Delete Ticket Permanently"
+                                        onclick="event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); deleteTicket('{{ ticket.ticket_id }}'); return false;">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -1239,19 +1496,20 @@
                         </a>
                     </div>
 
-                            </div>
-                            {% endfor %}
-                        </div>
-            
+                </div>
+                {% endfor %}
+            </div>
+
             <!-- Show More Button -->
             {% if tickets|length > 5 %}
             <div class="px-6 py-4 bg-gray-50 border-t">
-                <button id="showMoreTickets" class="w-full px-4 py-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition-all duration-200 shadow-md hover:shadow-lg font-medium">
+                <button id="showMoreTickets"
+                    class="w-full px-4 py-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition-all duration-200 shadow-md hover:shadow-lg font-medium">
                     <i class="fas fa-chevron-down mr-2"></i>
                     <span id="showMoreText">Show More Tickets ({{ tickets|length - 5 }} hidden)</span>
                 </button>
             </div>
-                        {% endif %}
+            {% endif %}
         </div>
 
         <!-- Technician Management Section -->
@@ -1260,32 +1518,40 @@
                 <h2 class="text-xl font-semibold text-blue-700 flex items-center">
                     <i class="fas fa-tools mr-2"></i> Technician Management
                 </h2>
-                <button id="addTechnicianBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center">
+                <button id="addTechnicianBtn"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center">
                     <i class="fas fa-plus mr-2"></i> Add Technician
                 </button>
             </div>
             <div class="p-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="techniciansContainer">
                     {% for technician in technicians %}
-                    <div class="technician-card bg-gray-50 rounded-lg p-4 border-l-4 border-blue-500" data-technician-id="{{ technician._id }}">
+                    <div class="technician-card bg-gray-50 rounded-lg p-4 border-l-4 border-blue-500"
+                        data-technician-id="{{ technician._id }}">
                         <div class="flex justify-between items-start">
                             <div>
                                 <h3 class="font-semibold text-gray-800">{{ technician.name }}</h3>
                                 <p class="text-sm text-gray-600">
                                     <i class="fas fa-calendar-plus mr-1"></i>
-                                    Added: {{ technician.created_at.strftime('%Y-%m-%d') if technician.created_at else 'N/A' }}
+                                    Added: {{ technician.created_at.strftime('%Y-%m-%d') if technician.created_at
+                                    else 'N/A' }}
                                 </p>
-                                <span class="inline-block px-2 py-1 mt-2 text-xs rounded-full
+                                <span
+                                    class="inline-block px-2 py-1 mt-2 text-xs rounded-full
                                     {% if technician.is_active %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
                                     {% if technician.is_active %}Active{% else %}Inactive{% endif %}
                                 </span>
                             </div>
                             <div class="flex gap-2">
-                                <button class="edit-technician-btn text-blue-600 hover:text-blue-800 p-1" data-technician-id="{{ technician._id }}" data-technician-name="{{ technician.name }}">
+                                <button class="edit-technician-btn text-blue-600 hover:text-blue-800 p-1"
+                                    data-technician-id="{{ technician._id }}"
+                                    data-technician-name="{{ technician.name }}">
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 {% if technician.is_active %}
-                                <button class="deactivate-technician-btn text-red-600 hover:text-red-800 p-1" data-technician-id="{{ technician._id }}" data-technician-name="{{ technician.name }}">
+                                <button class="deactivate-technician-btn text-red-600 hover:text-red-800 p-1"
+                                    data-technician-id="{{ technician._id }}"
+                                    data-technician-name="{{ technician.name }}">
                                     <i class="fas fa-user-times"></i>
                                 </button>
                                 {% endif %}
@@ -1298,16 +1564,19 @@
         </div>
 
         <!-- Deleted Tickets Management -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8" id="deletedTicketsSection" style="display: none;">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8" id="deletedTicketsSection"
+            style="display: none;">
             <div class="px-6 py-4 border-b flex justify-between items-center bg-gradient-to-r from-red-50 to-red-100">
                 <h2 class="text-xl font-semibold text-red-700 flex items-center">
                     <i class="fas fa-trash-restore mr-2"></i> Deleted Tickets
                 </h2>
                 <div class="flex space-x-2">
-                    <button id="refreshDeletedTickets" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                    <button id="refreshDeletedTickets"
+                        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
                         <i class="fas fa-sync mr-2"></i> Refresh
                     </button>
-                    <button id="hideDeletedTickets" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition">
+                    <button id="hideDeletedTickets"
+                        class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition">
                         <i class="fas fa-eye-slash mr-2"></i> Hide
                     </button>
                 </div>
@@ -1330,7 +1599,8 @@
                     <h2 class="text-xl font-semibold text-pink-700 flex items-center">
                         <i class="fas fa-users-cog mr-2"></i> Member Management
                     </h2>
-                    <button id="addMemberBtnMain" class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition">
+                    <button id="addMemberBtnMain"
+                        class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition">
                         <i class="fas fa-plus mr-2"></i> Add Member
                     </button>
                 </div>
@@ -1338,7 +1608,8 @@
             <div class="p-6">
                 <div class="space-y-3" id="membersMainList">
                     {% for member in members %}
-                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg" data-member-id="{{ member._id }}">
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                        data-member-id="{{ member._id }}">
                         <div class="flex items-center space-x-3">
                             <div class="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center">
                                 <span class="text-pink-600">{{ '👩' if member.gender == 'female' else '👨' }}</span>
@@ -1355,11 +1626,13 @@
                                 {% else %}bg-green-100 text-green-800{% endif %}">
                                 {{ member.role }}
                             </span>
-                            <button class="edit-member-btn-main p-2 text-pink-600 hover:bg-pink-100 rounded" data-member-id="{{ member._id }}">
+                            <button class="edit-member-btn-main p-2 text-pink-600 hover:bg-pink-100 rounded"
+                                data-member-id="{{ member._id }}">
                                 <i class="fas fa-edit"></i>
                             </button>
                             {% if member.user_id not in ['admin001', 'marc001'] %}
-                            <button class="delete-member-btn-main p-2 text-red-600 hover:bg-red-100 rounded" data-member-id="{{ member._id }}">
+                            <button class="delete-member-btn-main p-2 text-red-600 hover:bg-red-100 rounded"
+                                data-member-id="{{ member._id }}">
                                 <i class="fas fa-trash"></i>
                             </button>
                             {% endif %}
@@ -1392,19 +1665,23 @@
     <div id="technicianModal" class="modal">
         <div class="modal-content">
             <h3 class="text-xl font-semibold mb-4 flex items-center">
-                <i class="fas fa-tools mr-2 text-blue-600"></i> <span id="technicianModalTitle">Add Technician</span>
+                <i class="fas fa-tools mr-2 text-blue-600"></i> <span id="technicianModalTitle">Add
+                    Technician</span>
             </h3>
             <form id="technicianForm">
                 <input type="hidden" id="editTechnicianId">
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-1">Technician Name</label>
-                    <input type="text" id="technicianName" class="form-input" placeholder="Enter technician name" required>
+                    <input type="text" id="technicianName" class="form-input" placeholder="Enter technician name"
+                        required>
                 </div>
                 <div class="flex justify-end space-x-3">
-                    <button type="button" id="cancelTechnicianForm" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
+                    <button type="button" id="cancelTechnicianForm"
+                        class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
                         Cancel
                     </button>
-                    <button type="submit" id="saveTechnician" class="px-4 py-2 text-white rounded hover:opacity-90 transition bg-gradient-to-r from-blue-500 to-blue-600">
+                    <button type="submit" id="saveTechnician"
+                        class="px-4 py-2 text-white rounded hover:opacity-90 transition bg-gradient-to-r from-blue-500 to-blue-600">
                         Save Technician
                     </button>
                 </div>
@@ -1418,11 +1695,11 @@
 
     <!-- Template data -->
     <script type="application/json" id="technicians-data">{{ technicians | tojson | safe }}</script>
-    
+
     <script>
         // Global members array
         let members = [];
-        
+
         // Initialize technicians data safely
         let techniciansData = [];
         try {
@@ -1444,11 +1721,11 @@
         function showErrorToast(message) {
             showToast(message, 'error');
         }
-        
+
         // Enhanced loading state management
         function setLoadingState(element, isLoading, originalText = 'Loading...') {
             if (!element) return;
-            
+
             if (isLoading) {
                 element.disabled = true;
                 element.dataset.originalText = element.textContent;
@@ -1460,7 +1737,7 @@
                 element.classList.remove('opacity-75', 'cursor-not-allowed');
             }
         }
-        
+
         // Add confirmation dialog for critical actions
         function confirmAction(message, action) {
             if (confirm(message)) {
@@ -1471,23 +1748,22 @@
         function showToast(message, type = 'success') {
             // Create toast element
             const toast = document.createElement('div');
-            toast.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full ${
-                type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
-            }`;
+            toast.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full ${type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                }`;
             toast.innerHTML = `
                 <div class="flex items-center space-x-2">
                     <span>${message}</span>
                 </div>
             `;
-            
+
             // Add to page
             document.body.appendChild(toast);
-            
+
             // Animate in
             setTimeout(() => {
                 toast.classList.remove('translate-x-full');
             }, 100);
-            
+
             // Auto remove after 3 seconds
             setTimeout(() => {
                 toast.classList.add('translate-x-full');
@@ -1519,37 +1795,37 @@
 
         // Initialize password toggles
         function initPasswordToggles() {
-           
+
             const toggles = document.querySelectorAll('.password-toggle');
-            
-            
+
+
             toggles.forEach((toggle, index) => {
                 try {
-                toggle.addEventListener('click', () => {
-                    const targetId = toggle.dataset.target;
-                    const input = document.getElementById(targetId);
-                    const icon = toggle.querySelector('i');
-                        
+                    toggle.addEventListener('click', () => {
+                        const targetId = toggle.dataset.target;
+                        const input = document.getElementById(targetId);
+                        const icon = toggle.querySelector('i');
+
                         if (!input) {
                             console.warn(`⚠️ Password input with ID '${targetId}' not found`);
                             return;
                         }
-                        
+
                         if (!icon) {
                             console.warn(`⚠️ Icon element not found in password toggle`);
                             return;
                         }
-                        
-                    input.type = input.type === 'password' ? 'text' : 'password';
-                    icon.classList.toggle('fa-eye');
-                    icon.classList.toggle('fa-eye-slash');
-                });
+
+                        input.type = input.type === 'password' ? 'text' : 'password';
+                        icon.classList.toggle('fa-eye');
+                        icon.classList.toggle('fa-eye-slash');
+                    });
                     console.log(`✅ Password toggle ${index + 1} initialized`);
                 } catch (e) {
                     console.warn(`⚠️ Failed to initialize password toggle ${index + 1}:`, e);
                 }
             });
-            
+
             console.log('✅ Password Toggles initialized successfully');
         }
 
@@ -1567,12 +1843,12 @@
                 console.warn('Team members list element not found');
                 return;
             }
-            
+
             if (!Array.isArray(members)) {
                 console.warn('Members data is not available');
                 return;
             }
-            
+
             teamMembersList.innerHTML = members.map(member => `
                 <div class="flex items-center">
                     <span class="mr-2">${member.gender === 'female' ? '👩' : '👨'}</span>
@@ -1587,12 +1863,12 @@
                 console.warn('Member list element not found');
                 return;
             }
-            
+
             if (!Array.isArray(members)) {
                 console.warn('Members data is not available');
                 return;
             }
-            
+
             memberList.innerHTML = members.map(member => `
                 <div class="member-item">
                     <div>
@@ -1743,7 +2019,7 @@
         // Initialize member management
         function initMemberManagement() {
             console.log('🚀 Initializing Member Management...');
-            
+
             // Check if manageMembersBtn exists before adding event listener
             if (manageMembersBtn) {
                 manageMembersBtn.addEventListener('click', () => memberModal.style.display = 'block');
@@ -1751,7 +2027,7 @@
             } else {
                 console.log('⚠️ Manage members button not found');
             }
-            
+
             if (addMemberBtn) {
                 addMemberBtn.addEventListener('click', () => {
                     editMemberId.value = '';
@@ -1775,7 +2051,7 @@
             } else {
                 console.log('⚠️ Add member button not found');
             }
-            
+
             if (cancelMemberForm) {
                 cancelMemberForm.addEventListener('click', () => {
                     memberForm.classList.add('hidden');
@@ -1787,14 +2063,14 @@
             } else {
                 console.log('⚠️ Cancel member form button not found');
             }
-            
+
             if (saveMember) {
                 saveMember.addEventListener('click', saveMemberHandler);
                 console.log('✅ Save member button initialized');
             } else {
                 console.log('⚠️ Save member button not found');
             }
-            
+
             console.log('✅ Member Management initialized successfully');
         }
 
@@ -1854,11 +2130,11 @@
 
 
         // Legacy initialization removed - replaced by main initialization below
-        
+
         // Modern Event Listeners (moved from legacy initialization)
         document.addEventListener('DOMContentLoaded', () => {
-            
-            
+
+
             // Technician Management
             const technicianModal = document.getElementById('technicianModal');
             const technicianForm = document.getElementById('technicianForm');
@@ -1895,20 +2171,20 @@
             // Technician form submission
             technicianForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                
+
                 const isEdit = editTechnicianId.value !== '';
                 const name = technicianName.value.trim();
-                
+
                 if (!name) {
                     alert('Please enter a technician name');
                     return;
                 }
 
                 try {
-                    const url = isEdit 
+                    const url = isEdit
                         ? `/api/admin/technicians/${editTechnicianId.value}`
                         : '/api/admin/technicians';
-                    
+
                     const response = await fetch(url, {
                         method: isEdit ? 'PUT' : 'POST',
                         headers: {
@@ -1918,7 +2194,7 @@
                     });
 
                     const result = await response.json();
-                    
+
                     if (response.ok) {
                         showSuccessToast(result.message);
                         technicianModal.style.display = 'none';
@@ -1940,7 +2216,7 @@
                 btn.addEventListener('click', () => {
                     const technicianId = btn.dataset.technicianId;
                     const technicianNameValue = btn.dataset.technicianName;
-                    
+
                     technicianModalTitle.textContent = 'Edit Technician';
                     editTechnicianId.value = technicianId;
                     technicianName.value = technicianNameValue;
@@ -1953,7 +2229,7 @@
                 btn.addEventListener('click', async () => {
                     const technicianId = btn.dataset.technicianId;
                     const technicianNameValue = btn.dataset.technicianName;
-                    
+
                     if (!confirm(`Are you sure you want to deactivate ${technicianNameValue}? They will no longer appear in new tickets but will remain in historical records.`)) {
                         return;
                     }
@@ -1967,7 +2243,7 @@
                         });
 
                         const result = await response.json();
-                        
+
                         if (response.ok) {
                             showSuccessToast(result.message);
                             // Reload page to show updated status
@@ -1986,11 +2262,11 @@
 
 
 
-            
-            
-            
+
+
+
             // Show deleted tickets section
-            document.getElementById('showDeletedTicketsBtn')?.addEventListener('click', function() {
+            document.getElementById('showDeletedTicketsBtn')?.addEventListener('click', function () {
                 const section = document.getElementById('deletedTicketsSection');
                 if (section.style.display === 'none') {
                     section.style.display = 'block';
@@ -1998,39 +2274,39 @@
                     section.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-            document.getElementById('hideDeletedTickets')?.addEventListener('click', function() {
+            document.getElementById('hideDeletedTickets')?.addEventListener('click', function () {
                 document.getElementById('deletedTicketsSection').style.display = 'none';
             });
             document.getElementById('refreshDeletedTickets')?.addEventListener('click', loadDeletedTickets);
             document.getElementById('cleanupDataBtn')?.addEventListener('click', cleanupOldData);
             document.getElementById('exportDataBtn')?.addEventListener('click', exportData);
-            
+
             // Add event listeners for ticket deletion buttons
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (e && e.target) {
-                if (e.target.closest('.delete-ticket-btn')) {
-                    const ticketId = e.target.closest('.delete-ticket-btn').dataset.ticketId;
-                    deleteTicket(ticketId); // Permanent deletion only
-                } else if (e.target.closest('.permanent-delete-btn')) {
-                    const ticketId = e.target.closest('.permanent-delete-btn').dataset.ticketId;
-                    deleteTicket(ticketId, true); // Permanent deletion from deleted tickets list
+                    if (e.target.closest('.delete-ticket-btn')) {
+                        const ticketId = e.target.closest('.delete-ticket-btn').dataset.ticketId;
+                        deleteTicket(ticketId); // Permanent deletion only
+                    } else if (e.target.closest('.permanent-delete-btn')) {
+                        const ticketId = e.target.closest('.permanent-delete-btn').dataset.ticketId;
+                        deleteTicket(ticketId, true); // Permanent deletion from deleted tickets list
                     }
                 }
             });
         });
-        
 
-        
+
+
 
 
         async function updateTicketTags() {
             if (!confirm('This will update creation method tags for all tickets. Continue?')) return;
-            
+
             try {
                 const response = await fetch('/api/admin/update-creation-methods', {
                     method: 'POST'
                 });
-                
+
                 const data = await response.json();
                 if (response.ok && data.success) {
                     showSuccessToast(`Updated ${data.updated_count} tickets successfully`);
@@ -2044,14 +2320,14 @@
 
         async function cleanupOldData() {
             if (!confirm('This will permanently delete old tickets and replies older than 365 days. This action cannot be undone. Continue?')) return;
-            
+
             try {
                 const response = await fetch('/api/admin/cleanup', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ days: 365 })
                 });
-                
+
                 const data = await response.json();
                 if (response.ok && data.status === 'success') {
                     showSuccessToast(`Cleaned up ${data.deleted_count || 0} old records successfully`);
@@ -2066,15 +2342,15 @@
 
         async function exportSystemData() {
             if (!confirm('This will export all system data to CSV files. Continue?')) return;
-            
+
             try {
                 showSuccessToast('Starting data export...');
-                
+
                 const response = await fetch('/api/admin/export', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }
                 });
-                
+
                 if (response.ok) {
                     // Trigger file download
                     const blob = await response.blob();
@@ -2099,14 +2375,14 @@
         }
 
         // Duplicate functions removed - already defined above
-        
+
         // Ticket Deletion Functions
         async function deleteTicket(ticketId) {
             try {
                 // IMMEDIATELY disable the ticket card to prevent any clicks
                 const ticketCards = document.querySelectorAll('.ticket-card');
                 let ticketCard = null;
-                
+
                 // Find the ticket card that contains the delete button with this ticket ID
                 for (let card of ticketCards) {
                     const deleteBtn = card.querySelector(`.delete-ticket-btn[data-ticket-id="${ticketId}"]`);
@@ -2115,24 +2391,24 @@
                         break;
                     }
                 }
-                
+
                 if (ticketCard) {
                     // IMMEDIATELY mark ticket as deleting and disable all interactions
                     ticketCard.classList.add('deleting');
                     ticketCard.setAttribute('data-deleting', 'true');
                     ticketCard.style.pointerEvents = 'none';
                     ticketCard.style.opacity = '0.7';
-                    
+
                     // IMMEDIATELY disable ticket navigation before API call
                     disableTicketNavigation(ticketCard);
-                    
+
                     // CRITICAL: Prevent any navigation by removing href and adding click prevention
                     const ticketLink = ticketCard.querySelector('.ticket-link');
                     if (ticketLink) {
                         // Remove href completely
                         ticketLink.removeAttribute('href');
                         // Add onclick that prevents navigation
-                        ticketLink.onclick = function(e) {
+                        ticketLink.onclick = function (e) {
                             e.preventDefault();
                             e.stopPropagation();
                             showErrorToast('This ticket is being deleted. Please wait...');
@@ -2144,164 +2420,164 @@
                         ticketLink.style.textDecoration = 'none';
                         ticketLink.style.color = '#999';
                     }
-                    
+
                     // Add immediate click prevention to the entire ticket card
-                    ticketCard.addEventListener('click', function(e) {
+                    ticketCard.addEventListener('click', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         showErrorToast('This ticket is being deleted. Please wait...');
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Also prevent mousedown events
-                    ticketCard.addEventListener('mousedown', function(e) {
+                    ticketCard.addEventListener('mousedown', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // And prevent any pointer events
-                    ticketCard.addEventListener('pointerdown', function(e) {
+                    ticketCard.addEventListener('pointerdown', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent touch events on mobile
-                    ticketCard.addEventListener('touchstart', function(e) {
+                    ticketCard.addEventListener('touchstart', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent keyboard navigation
-                    ticketCard.addEventListener('keydown', function(e) {
+                    ticketCard.addEventListener('keydown', function (e) {
                         if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
                             e.preventDefault();
                             e.stopPropagation();
                             return false;
                         }
                     }, { once: true, capture: true });
-                    
+
                     // Prevent focus events
-                    ticketCard.addEventListener('focus', function(e) {
+                    ticketCard.addEventListener('focus', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent form submissions
-                    ticketCard.addEventListener('submit', function(e) {
+                    ticketCard.addEventListener('submit', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent input changes
-                    ticketCard.addEventListener('change', function(e) {
+                    ticketCard.addEventListener('change', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent input events
-                    ticketCard.addEventListener('input', function(e) {
+                    ticketCard.addEventListener('input', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent paste events
-                    ticketCard.addEventListener('paste', function(e) {
+                    ticketCard.addEventListener('paste', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent copy events
-                    ticketCard.addEventListener('copy', function(e) {
+                    ticketCard.addEventListener('copy', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent cut events
-                    ticketCard.addEventListener('cut', function(e) {
+                    ticketCard.addEventListener('cut', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent selection events
-                    ticketCard.addEventListener('select', function(e) {
+                    ticketCard.addEventListener('select', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent selection start events
-                    ticketCard.addEventListener('selectstart', function(e) {
+                    ticketCard.addEventListener('selectstart', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent drag events
-                    ticketCard.addEventListener('dragstart', function(e) {
+                    ticketCard.addEventListener('dragstart', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent drop events
-                    ticketCard.addEventListener('drop', function(e) {
+                    ticketCard.addEventListener('drop', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent dragover events
-                    ticketCard.addEventListener('dragover', function(e) {
+                    ticketCard.addEventListener('dragover', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent dragenter events
-                    ticketCard.addEventListener('dragenter', function(e) {
+                    ticketCard.addEventListener('dragenter', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Prevent dragleave events
-                    ticketCard.addEventListener('dragleave', function(e) {
+                    ticketCard.addEventListener('dragleave', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     }, { once: true, capture: true });
-                    
+
                     // Show loading state
                     showSuccessToast('Deleting ticket...');
                 }
-                
+
                 const response = await fetch(`/api/tickets/${ticketId}`, { method: 'DELETE' });
                 const data = await response.json();
-                
+
                 if (response.ok && data.status === 'success') {
                     showSuccessToast('Ticket deleted successfully');
-                    
+
                     if (ticketCard) {
                         // Animate removal
                         ticketCard.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                         ticketCard.style.opacity = '0';
                         ticketCard.style.transform = 'translateX(-100%)';
-                        
+
                         setTimeout(() => {
                             ticketCard.remove();
                             updateTicketCount();
                             updateShowMoreButton();
-                            
+
                             // Check if we need to show more tickets after deletion
                             const remainingTickets = document.querySelectorAll('.ticket-card');
                             if (remainingTickets.length <= 5) {
@@ -2312,7 +2588,7 @@
                                     showMoreBtn.parentElement.style.display = 'none';
                                 }
                             }
-                            
+
                             // Update ticket list without page reload
                             setTimeout(() => {
                                 refreshTicketList();
@@ -2321,7 +2597,7 @@
                     }
                 } else {
                     showErrorToast(data.message || 'Failed to delete ticket');
-                    
+
                     // Re-enable the ticket card if deletion failed
                     if (ticketCard) {
                         ticketCard.classList.remove('deleting');
@@ -2341,7 +2617,7 @@
             } catch (error) {
                 showErrorToast('Error deleting ticket');
                 console.error('Error:', error);
-                
+
                 // Re-enable the ticket card if deletion failed
                 if (ticketCard) {
                     ticketCard.classList.remove('deleting');
@@ -2363,15 +2639,15 @@
         function updateTicketCount() {
             const ticketsContainer = document.getElementById('ticketsContainer');
             if (!ticketsContainer) return;
-            
+
             const remainingTickets = ticketsContainer.querySelectorAll('.ticket-card').length;
-            
+
             // Update the total count display
             const countElement = document.querySelector('.bg-pink-600.text-white');
             if (countElement) {
                 countElement.textContent = `Total: ${remainingTickets}`;
             }
-            
+
             // Update the show more button text if it exists
             const showMoreText = document.getElementById('showMoreText');
             if (showMoreText) {
@@ -2382,7 +2658,7 @@
                     showMoreText.textContent = 'Show Less';
                 }
             }
-            
+
             console.log(`✅ Ticket count updated: ${remainingTickets} tickets remaining`);
         }
 
@@ -2399,7 +2675,7 @@
                 console.log('❌ Show more button not found in DOM');
             }
         }
-        
+
         // Refresh ticket list from server
         async function refreshTicketList() {
             try {
@@ -2411,71 +2687,71 @@
                 console.error('Error refreshing ticket list:', error);
             }
         }
-        
+
         // Prevent clicking on deleted tickets
         function preventDeletedTicketClicks() {
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (e && e.target) {
-                if (e.target.closest('.ticket-link')) {
-                    const ticketId = e.target.closest('.ticket-link').dataset.ticketId;
-                    const ticketCard = e.target.closest('.ticket-card');
-                    
-                    // Check if ticket is marked as deleted (has opacity 0, is being removed, or has no href)
-                    if (ticketCard && (
-                        ticketCard.style.opacity === '0' || 
-                        ticketCard.classList.contains('deleting') ||
-                        ticketCard.hasAttribute('data-deleting') ||
-                        !e.target.closest('.ticket-link').hasAttribute('href') ||
-                        ticketCard.style.pointerEvents === 'none'
-                    )) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        showErrorToast('This ticket is being deleted or has been deleted. Please wait...');
-                        return false;
+                    if (e.target.closest('.ticket-link')) {
+                        const ticketId = e.target.closest('.ticket-link').dataset.ticketId;
+                        const ticketCard = e.target.closest('.ticket-card');
+
+                        // Check if ticket is marked as deleted (has opacity 0, is being removed, or has no href)
+                        if (ticketCard && (
+                            ticketCard.style.opacity === '0' ||
+                            ticketCard.classList.contains('deleting') ||
+                            ticketCard.hasAttribute('data-deleting') ||
+                            !e.target.closest('.ticket-link').hasAttribute('href') ||
+                            ticketCard.style.pointerEvents === 'none'
+                        )) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            showErrorToast('This ticket is being deleted or has been deleted. Please wait...');
+                            return false;
                         }
                     }
                 }
             });
-            
+
             // Also prevent any clicks on ticket cards that are being deleted
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (e && e.target) {
-                if (e.target.closest('.ticket-card')) {
-                    const ticketCard = e.target.closest('.ticket-card');
-                    
-                    if (ticketCard.classList.contains('deleting') || 
-                        ticketCard.hasAttribute('data-deleting') ||
-                        ticketCard.style.pointerEvents === 'none') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        showErrorToast('This ticket is being deleted. Please wait...');
-                        return false;
-                        }
-                    }
-                }
-            });
-            
-            // CRITICAL: Global prevention for any navigation to deleted tickets
-            document.addEventListener('click', function(e) {
-                if (e && e.target) {
-                const link = e.target.closest('a[href*="/ticket/"]');
-                if (link) {
-                    const ticketId = link.href.split('/ticket/')[1];
-                    if (ticketId) {
-                        // Check if this ticket is being deleted
-                        const ticketCard = document.querySelector(`.ticket-card[data-ticket-id="${ticketId}"]`);
-                        if (ticketCard && (ticketCard.classList.contains('deleting') || ticketCard.hasAttribute('data-deleting'))) {
+                    if (e.target.closest('.ticket-card')) {
+                        const ticketCard = e.target.closest('.ticket-card');
+
+                        if (ticketCard.classList.contains('deleting') ||
+                            ticketCard.hasAttribute('data-deleting') ||
+                            ticketCard.style.pointerEvents === 'none') {
                             e.preventDefault();
                             e.stopPropagation();
                             showErrorToast('This ticket is being deleted. Please wait...');
                             return false;
+                        }
+                    }
+                }
+            });
+
+            // CRITICAL: Global prevention for any navigation to deleted tickets
+            document.addEventListener('click', function (e) {
+                if (e && e.target) {
+                    const link = e.target.closest('a[href*="/ticket/"]');
+                    if (link) {
+                        const ticketId = link.href.split('/ticket/')[1];
+                        if (ticketId) {
+                            // Check if this ticket is being deleted
+                            const ticketCard = document.querySelector(`.ticket-card[data-ticket-id="${ticketId}"]`);
+                            if (ticketCard && (ticketCard.classList.contains('deleting') || ticketCard.hasAttribute('data-deleting'))) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                showErrorToast('This ticket is being deleted. Please wait...');
+                                return false;
                             }
                         }
                     }
                 }
             });
         }
-        
+
         // Completely disable ticket navigation for deleted tickets
         function disableTicketNavigation(ticketCard) {
             const ticketLink = ticketCard.querySelector('.ticket-link');
@@ -2485,7 +2761,7 @@
                 ticketLink.style.cursor = 'default';
                 ticketLink.style.textDecoration = 'none';
                 ticketLink.style.color = 'inherit';
-                
+
                 // Add a visual indicator that the ticket is being deleted
                 ticketLink.innerHTML += ' <span style="color: #ef4444; font-size: 0.75rem;">(Deleting...)</span>';
             }
@@ -2556,13 +2832,13 @@
                 console.log('❌ Show more button not found!');
             }
         }
-        
+
         // Deleted Tickets Management
         async function loadDeletedTickets() {
             try {
                 const response = await fetch('/api/admin/tickets/deleted');
                 const data = await response.json();
-                
+
                 if (response.ok && data.status === 'success') {
                     renderDeletedTickets(data.tickets);
                 } else {
@@ -2578,13 +2854,13 @@
         function renderDeletedTickets(tickets) {
             const container = document.getElementById('deletedTicketsList');
             const noMessage = document.getElementById('noDeletedTicketsMessage');
-            
+
             if (!tickets || tickets.length === 0) {
                 container.innerHTML = '';
                 noMessage.style.display = 'block';
                 return;
             }
-            
+
             noMessage.style.display = 'none';
             container.innerHTML = tickets.map(ticket => `
                 <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200" data-ticket-id="${ticket.ticket_id}">
@@ -2620,11 +2896,11 @@
                 const response = await fetch(`/api/tickets/${ticketId}/restore`, {
                     method: 'POST'
                 });
-                
+
                 const data = await response.json();
                 if (response.ok && data.status === 'success') {
                     showSuccessToast('Ticket restored successfully');
-                    
+
                     // Remove from deleted tickets list
                     const ticketRow = document.querySelector(`#deletedTicketsList [data-ticket-id="${ticketId}"]`);
                     if (ticketRow) {
@@ -2647,7 +2923,7 @@
                 console.error('Error:', error);
             }
         }
-        
+
 
 
         // Mobile menu toggle function
@@ -2659,93 +2935,93 @@
         }
 
         // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const mobileMenu = document.getElementById('mobileMenu');
             const menuButton = document.querySelector('.mobile-menu-btn');
-            
+
             if (mobileMenu && !mobileMenu.contains(event.target) && menuButton && !menuButton.contains(event.target)) {
                 mobileMenu.classList.add('hidden');
             }
         });
 
         // Initialize all features when DOM is loaded
-        document.addEventListener('DOMContentLoaded', async function() {
+        document.addEventListener('DOMContentLoaded', async function () {
             console.log('🚀 Admin Panel Initializing...');
-            
+
             try {
                 // Initialize UI components with error handling
                 console.log('🔧 Initializing UI components...');
-                
+
                 try {
-                initPasswordToggles();
+                    initPasswordToggles();
                     console.log('✅ Password toggles initialized');
                 } catch (e) {
                     console.warn('⚠️ Password toggles initialization failed:', e);
                 }
-                
+
                 try {
-                initMemberManagement();
+                    initMemberManagement();
                     console.log('✅ Member management initialized');
                 } catch (e) {
                     console.warn('⚠️ Member management initialization failed:', e);
                 }
-                
+
                 try {
-                initMainMemberManagement();
+                    initMainMemberManagement();
                     console.log('✅ Main member management initialized');
                 } catch (e) {
                     console.warn('⚠️ Main member management initialization failed:', e);
                 }
-                
+
                 try {
-                initRoleManagement();
+                    initRoleManagement();
                     console.log('✅ Role management initialized');
                 } catch (e) {
                     console.warn('⚠️ Role management initialization failed:', e);
                 }
-                
+
                 try {
-                initShowMoreButton();
+                    initShowMoreButton();
                     console.log('✅ Show more button initialized');
                 } catch (e) {
                     console.warn('⚠️ Show more button initialization failed:', e);
                 }
-                
+
                 try {
-                preventDeletedTicketClicks();
+                    preventDeletedTicketClicks();
                     console.log('✅ Deleted ticket click prevention initialized');
                 } catch (e) {
                     console.warn('⚠️ Deleted ticket click prevention initialization failed:', e);
                 }
-                
+
                 console.log('🔧 Loading data...');
-                
+
                 // Load data in parallel for better performance
                 await Promise.all([
                     loadMembers().catch(e => console.error('Failed to load members:', e)),
                     loadRoles().catch(e => console.error('Failed to load roles:', e))
                 ]);
-                
+
                 console.log('🔧 Rendering UI components...');
-                
+
                 // Render UI components after data is loaded
                 try {
-                renderTeamMembersList();
+                    renderTeamMembersList();
                     console.log('✅ Team members list rendered');
                 } catch (e) {
                     console.warn('⚠️ Team members list rendering failed:', e);
                 }
-                
+
                 try {
-                renderMemberList();
+                    renderMemberList();
                     console.log('✅ Member list rendered');
                 } catch (e) {
                     console.warn('⚠️ Member list rendering failed:', e);
                 }
-                
+
                 console.log('✅ Admin Panel Initialized Successfully');
                 showSuccessToast('Admin panel loaded successfully');
-                
+
             } catch (error) {
                 console.error('❌ Error initializing admin panel:', error);
                 showErrorToast('Error loading admin panel');
@@ -2753,11 +3029,11 @@
         });
 
         // ============ MAIN MEMBER MANAGEMENT ============
-        
+
         function initMainMemberManagement() {
             const addMemberBtnMain = document.getElementById('addMemberBtnMain');
             const memberModal = document.getElementById('memberModal');
-            
+
             // Connect main add button to existing modal
             if (addMemberBtnMain) {
                 addMemberBtnMain.addEventListener('click', () => {
@@ -2771,67 +3047,67 @@
                     document.getElementById('confirmPassword').value = '';
                     document.getElementById('memberPassword').required = true;
                     document.getElementById('confirmPassword').required = true;
-                    
+
                     // Show form and hide add button in modal
                     document.getElementById('memberForm').classList.remove('hidden');
                     document.getElementById('addMemberBtn').classList.add('hidden');
-                    
+
                     // Open modal
                     memberModal.style.display = 'block';
                 });
             }
-            
+
             // Connect edit buttons from main section
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (e && e.target) {
-                if (e.target.closest('.edit-member-btn-main')) {
-                    const memberId = e.target.closest('.edit-member-btn-main').dataset.memberId;
-                    const member = members.find(m => m.id === memberId || m._id === memberId);
-                    
-                    if (member) {
-                        // Fill form with member data
-                        document.getElementById('editMemberId').value = member.id || member._id;
-                        document.getElementById('memberName').value = member.name;
-                        document.getElementById('memberRole').value = member.role;
-                        document.getElementById('memberGender').value = member.gender;
-                        document.getElementById('memberUserId').value = member.user_id;
-                        document.getElementById('memberPassword').value = '';
-                        document.getElementById('confirmPassword').value = '';
-                        document.getElementById('memberPassword').required = false;
-                        document.getElementById('confirmPassword').required = false;
-                        
-                        // Show form and hide add button in modal
-                        document.getElementById('memberForm').classList.remove('hidden');
-                        document.getElementById('addMemberBtn').classList.add('hidden');
-                        
-                        // Open modal
-                        memberModal.style.display = 'block';
+                    if (e.target.closest('.edit-member-btn-main')) {
+                        const memberId = e.target.closest('.edit-member-btn-main').dataset.memberId;
+                        const member = members.find(m => m.id === memberId || m._id === memberId);
+
+                        if (member) {
+                            // Fill form with member data
+                            document.getElementById('editMemberId').value = member.id || member._id;
+                            document.getElementById('memberName').value = member.name;
+                            document.getElementById('memberRole').value = member.role;
+                            document.getElementById('memberGender').value = member.gender;
+                            document.getElementById('memberUserId').value = member.user_id;
+                            document.getElementById('memberPassword').value = '';
+                            document.getElementById('confirmPassword').value = '';
+                            document.getElementById('memberPassword').required = false;
+                            document.getElementById('confirmPassword').required = false;
+
+                            // Show form and hide add button in modal
+                            document.getElementById('memberForm').classList.remove('hidden');
+                            document.getElementById('addMemberBtn').classList.add('hidden');
+
+                            // Open modal
+                            memberModal.style.display = 'block';
                         }
                     }
                 }
             });
-            
+
             // Connect delete buttons from main section
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (e && e.target) {
-                if (e.target.closest('.delete-member-btn-main')) {
-                    const memberId = e.target.closest('.delete-member-btn-main').dataset.memberId;
-                    const member = members.find(m => m.id === memberId || m._id === memberId);
-                    
-                    if (member && confirm(`Are you sure you want to delete ${member.name}?`)) {
-                        deleteMemberById(memberId);
+                    if (e.target.closest('.delete-member-btn-main')) {
+                        const memberId = e.target.closest('.delete-member-btn-main').dataset.memberId;
+                        const member = members.find(m => m.id === memberId || m._id === memberId);
+
+                        if (member && confirm(`Are you sure you want to delete ${member.name}?`)) {
+                            deleteMemberById(memberId);
                         }
                     }
                 }
             });
         }
-        
+
         // Delete member function
         async function deleteMemberById(memberId) {
             try {
                 const response = await fetch(`/api/members/${memberId}`, { method: 'DELETE' });
                 const data = await response.json();
-                
+
                 if (response.ok && data.status === 'success') {
                     await loadMembers();
                     updateMainMembersList();
@@ -2846,12 +3122,12 @@
                 alert('An error occurred while deleting the member');
             }
         }
-        
+
         // Update main members list
         function updateMainMembersList() {
             const membersMainList = document.getElementById('membersMainList');
             if (!membersMainList) return;
-            
+
             membersMainList.innerHTML = members.map(member => `
                 <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg" data-member-id="${member.id}">
                     <div class="flex items-center space-x-3">
@@ -2864,11 +3140,10 @@
                         </div>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <span class="text-xs px-2 py-1 rounded-full ${
-                            member.role === 'Administrator' ? 'bg-blue-100 text-blue-800' :
-                            member.role === 'Technical Director' ? 'bg-orange-100 text-orange-800' :
-                            'bg-green-100 text-green-800'
-                        }">
+                        <span class="text-xs px-2 py-1 rounded-full ${member.role === 'Administrator' ? 'bg-blue-100 text-blue-800' :
+                    member.role === 'Technical Director' ? 'bg-orange-100 text-orange-800' :
+                        'bg-green-100 text-green-800'
+                }">
                             ${member.role}
                         </span>
                         <button class="edit-member-btn-main p-2 text-pink-600 hover:bg-pink-100 rounded" data-member-id="${member.id}">
@@ -2883,18 +3158,18 @@
                 </div>
             `).join('');
         }
-        
+
         // Override the existing saveMemberHandler to also update main list
         const originalSaveMemberHandler = saveMemberHandler;
-        saveMemberHandler = async function() {
+        saveMemberHandler = async function () {
             await originalSaveMemberHandler();
             updateMainMembersList(); // Update the main list when a member is saved
         };
 
         // ============ ROLES MANAGEMENT ============
-        
+
         let roles = [];
-        
+
         async function loadRoles() {
             try {
                 const response = await fetch('/api/roles');
@@ -2907,11 +3182,11 @@
                 console.error('Error loading roles:', error);
             }
         }
-        
+
         function updateRoleDropdowns() {
             const memberRoleSelect = document.getElementById('memberRole');
             memberRoleSelect.innerHTML = '<option value="">Select a role...</option>';
-            
+
             roles.forEach(role => {
                 const option = document.createElement('option');
                 option.value = role.name;
@@ -2919,129 +3194,129 @@
                 memberRoleSelect.appendChild(option);
             });
         }
-        
+
         function initRoleManagement() {
-            
-            
+
+
             const roleModal = document.getElementById('roleModal');
             const cancelRoleForm = document.getElementById('cancelRoleForm');
             const saveRole = document.getElementById('saveRole');
-            
+
             // Check if required elements exist before adding event listeners
             if (!roleModal) {
-                
+
                 return;
             }
-            
+
             if (!cancelRoleForm) {
-               
+
             } else {
-            // Cancel role form
-            cancelRoleForm.addEventListener('click', () => {
-                roleModal.style.display = 'none';
-            });
-                
+                // Cancel role form
+                cancelRoleForm.addEventListener('click', () => {
+                    roleModal.style.display = 'none';
+                });
+
             }
-            
+
             if (!saveRole) {
-               
+
             } else {
-            // Save role
-            saveRole.addEventListener('click', saveRoleHandler);
-                
+                // Save role
+                saveRole.addEventListener('click', saveRoleHandler);
+
             }
-            
+
             // Edit role buttons
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (e && e.target) {
-                if (e.target.closest('.edit-role-btn')) {
-                    const roleId = e.target.closest('.edit-role-btn').dataset.roleId;
-                    editRole(roleId);
+                    if (e.target.closest('.edit-role-btn')) {
+                        const roleId = e.target.closest('.edit-role-btn').dataset.roleId;
+                        editRole(roleId);
                     }
                 }
             });
-            
+
             // Delete role buttons
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (e && e.target) {
-                if (e.target.closest('.delete-role-btn')) {
-                    const roleId = e.target.closest('.delete-role-btn').dataset.roleId;
-                    deleteRole(roleId);
+                    if (e.target.closest('.delete-role-btn')) {
+                        const roleId = e.target.closest('.delete-role-btn').dataset.roleId;
+                        deleteRole(roleId);
                     }
                 }
             });
-            
+
             // Close modals when clicking outside
             window.addEventListener('click', (event) => {
                 if (event.target === roleModal) {
                     roleModal.style.display = 'none';
                 }
             });
-            
-           
+
+
         }
-        
+
         function resetRoleForm() {
             document.getElementById('editRoleId').value = '';
             document.getElementById('roleName').value = '';
             document.getElementById('roleDescription').value = '';
             document.getElementById('roleLevel').value = '3';
             document.getElementById('roleColor').value = '#6b7280';
-            
+
             // Reset checkboxes
             document.querySelectorAll('#permissionsContainer input[type="checkbox"]').forEach(checkbox => {
                 checkbox.checked = false;
             });
         }
-        
+
         function editRole(roleId) {
             const role = roles.find(r => r.id === roleId);
             if (!role) return;
-            
+
             document.getElementById('editRoleId').value = roleId;
             document.getElementById('roleName').value = role.name;
             document.getElementById('roleDescription').value = role.description;
             document.getElementById('roleLevel').value = role.level;
             document.getElementById('roleColor').value = role.color;
-            
+
             // Set permissions checkboxes
             document.querySelectorAll('#permissionsContainer input[type="checkbox"]').forEach(checkbox => {
                 checkbox.checked = role.permissions && role.permissions.includes(checkbox.value);
             });
-            
+
             document.getElementById('roleModal').style.display = 'block';
         }
-        
+
         async function saveRoleHandler() {
             const roleId = document.getElementById('editRoleId').value;
             const name = document.getElementById('roleName').value.trim();
             const description = document.getElementById('roleDescription').value.trim();
             const level = parseInt(document.getElementById('roleLevel').value);
             const color = document.getElementById('roleColor').value;
-            
+
             if (!name || !description) {
                 alert('Please fill in all required fields');
                 return;
             }
-            
+
             // Get selected permissions
             const permissions = Array.from(document.querySelectorAll('#permissionsContainer input[type="checkbox"]:checked'))
                 .map(checkbox => checkbox.value);
-            
+
             const roleData = { name, description, level, color, permissions };
-            
+
             try {
                 setLoading(document.getElementById('saveRole'), true);
-                
+
                 const method = roleId ? 'PUT' : 'POST';
                 const url = roleId ? `/api/roles/${roleId}` : '/api/roles';
-                
+
                 const response = await fetch(url, {
                     method: method,
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(roleData)
                 });
-                
+
                 const data = await response.json();
                 if (response.ok && data.status === 'success') {
                     await loadRoles();
@@ -3062,12 +3337,12 @@
         async function deleteRole(roleId) {
             const role = roles.find(r => r.id === roleId);
             if (!role) return;
-            
+
             if (confirm(`Are you sure you want to delete the "${role.name}" role? This action cannot be undone.`)) {
                 try {
                     const response = await fetch(`/api/roles/${roleId}`, { method: 'DELETE' });
                     const data = await response.json();
-                    
+
                     if (response.ok && data.status === 'success') {
                         await loadRoles();
                         updateRolesList();
@@ -3081,11 +3356,11 @@
                 }
             }
         }
-        
+
         function updateRolesList() {
             const rolesList = document.getElementById('rolesList');
             const coreRoles = ['Administrator', 'Technical Director', 'User'];
-            
+
             rolesList.innerHTML = roles.map(role => `
                 <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg" data-role-id="${role.id}">
                     <div class="flex items-center space-x-3">
@@ -3107,7 +3382,7 @@
                     </div>
                 </div>
             `).join('');
-            
+
             // Apply colors to newly created indicators
             applyColorIndicators();
         }
@@ -3121,7 +3396,7 @@
                     element.style.backgroundColor = color;
                 }
             });
-            
+
             // Apply colors to role indicators  
             document.querySelectorAll('.role-color-indicator').forEach(element => {
                 const color = element.getAttribute('data-color');
@@ -3132,28 +3407,28 @@
         }
 
         // Initialize colors on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             applyColorIndicators();
-            
+
             // Set up global unauthorized response handler
             setupGlobalUnauthorizedHandler();
         });
-        
+
         // Global handler for unauthorized responses (401/403)
         function setupGlobalUnauthorizedHandler() {
             // Intercept all fetch requests to handle unauthorized responses
             const originalFetch = window.fetch;
-            window.fetch = function(...args) {
+            window.fetch = function (...args) {
                 return originalFetch.apply(this, args).then(response => {
                     if (response.status === 401 || response.status === 403) {
-                          
+
                         return response;
                     }
                     return response;
                 });
             };
-            
-           
+
+
         }
 
         // Session heartbeat functionality removed
@@ -3161,15 +3436,15 @@
 
 
 
-        
 
-        
+
+
         // Function to show user notifications
         function showNotification(message, type = 'info') {
             // Create notification element
             const notification = document.createElement('div');
             notification.className = `fixed top-4 right-4 z-50 px-4 py-3 rounded-lg shadow-lg text-white text-sm max-w-sm transform transition-all duration-300 translate-x-full`;
-            
+
             // Set colors based on type
             switch (type) {
                 case 'success':
@@ -3184,7 +3459,7 @@
                 default:
                     notification.classList.add('bg-blue-500');
             }
-            
+
             notification.innerHTML = `
                 <div class="flex items-center justify-between">
                     <span>${message}</span>
@@ -3193,15 +3468,15 @@
                     </button>
                 </div>
             `;
-            
+
             // Add to page
             document.body.appendChild(notification);
-            
+
             // Animate in
             setTimeout(() => {
                 notification.classList.remove('translate-x-full');
             }, 100);
-            
+
             // Auto-remove after 5 seconds
             setTimeout(() => {
                 notification.classList.add('translate-x-full');
@@ -3212,16 +3487,16 @@
                 }, 300);
             }, 5000);
         }
-        
+
         // Session heartbeat functionality completely removed
-        
+
         // ===== NAVBAR ENHANCEMENTS =====
-        
+
         // Highlight current page in navbar
         function highlightCurrentPage() {
             const currentPath = window.location.pathname;
             const navLinks = document.querySelectorAll('nav a[href]');
-            
+
             navLinks.forEach(link => {
                 if (link.getAttribute('href') === currentPath) {
                     link.classList.add('active');
@@ -3230,18 +3505,18 @@
                 }
             });
         }
-        
+
         // Add smooth scroll behavior for navbar
         function initNavbarEnhancements() {
             // Highlight current page
             highlightCurrentPage();
-            
+
             // Add scroll effect to navbar
             let lastScrollTop = 0;
             window.addEventListener('scroll', () => {
                 const navbar = document.querySelector('nav');
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
+
                 if (scrollTop > lastScrollTop && scrollTop > 100) {
                     // Scrolling down - add shadow
                     navbar.classList.add('shadow-xl');
@@ -3249,26 +3524,26 @@
                     // Scrolling up - remove shadow
                     navbar.classList.remove('shadow-xl');
                 }
-                
+
                 lastScrollTop = scrollTop;
             });
-            
-          
+
+
         }
-        
+
         // Initialize navbar enhancements when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-           
-            
+        document.addEventListener('DOMContentLoaded', function () {
+
+
             // Debug: Check navbar element
             const navbar = document.querySelector('nav');
             if (navbar) {
-               
-                
+
+
                 // Check if navbar is being covered by other elements
                 const navbarRect = navbar.getBoundingClientRect();
-                
-                
+
+
                 // Ensure navbar is visible
                 navbar.style.display = 'block';
                 navbar.style.visibility = 'visible';
@@ -3276,26 +3551,26 @@
                 navbar.style.position = 'sticky';
                 navbar.style.top = '0';
                 navbar.style.zIndex = '9999';
-                
-                
+
+
                 // Force navbar to top
                 navbar.scrollIntoView({ behavior: 'auto', block: 'start' });
             } else {
                 console.error('❌ Navbar element not found!');
             }
-            
+
             // Debug: Check all navigation elements
             const navLinks = document.querySelectorAll('nav a');
-            
+
             navLinks.forEach((link, index) => {
-               
+
             });
-            
+
             initNavbarEnhancements();
         });
     </script>
 
-        </div> <!-- End Main Content -->
+    </div> <!-- End Main Content -->
     </div> <!-- End min-h-screen -->
 </body>
 

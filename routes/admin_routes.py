@@ -158,7 +158,9 @@ def technicians_management():
     
     return render_template('technicians.html',
                           technicians=technicians,
-                          current_member=current_member)
+                          current_member=current_member,
+                          current_user=current_member.get('name'),
+                          current_user_role=current_member.get('role'))
 
 
 @admin_bp.route('/api/technicians', methods=['GET', 'POST'])

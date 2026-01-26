@@ -142,6 +142,16 @@ class MongoDB:
             self.ticket_assignments.create_index([("ticket_id", 1), ("member_id", 1)], background=False)
             self.ticket_metadata.create_index([("ticket_id", 1), ("key", 1)], background=False)
             
+            # CRITICAL PERFORMANCE INDEX: Support dashboard default sort
+            # This matches: {"$sort": {"has_unread_reply": -1, "is_important": -1, "created_at": -1}}
+            self.tickets.create_index(
+                [("has_unread_reply", -1), ("is_important", -1), ("created_at", -1)],
+                background=False
+            )
+            
+            # Additional unread index for quick lookups
+            self.tickets.create_index([("has_unread_reply", 1)], background=False)
+            
             # Enhanced indexes for warranty detection and attachment support
             self.tickets.create_index([("has_warranty", 1)], background=False)
             self.tickets.create_index([("has_attachments", 1)], background=False)
@@ -283,7 +293,20 @@ class MongoDB:
             if match_stage:
                 pipeline.append({"$match": match_stage})
             
-            # Add the existing lookup stages
+            # OPTIMIZATION: Move sort, skip, and limit BEFORE lookups
+            # This significantly reduces the number of documents we need to perform lookups on
+            
+            # 1. Sort first (using index)
+            pipeline.append({"$sort": {"has_unread_reply": -1, "is_important": -1, "created_at": -1}})
+            
+            # 2. Skip and Limit (Pagination)
+            skip = (page - 1) * per_page
+            pipeline.extend([
+                {"$skip": skip},
+                {"$limit": per_page}
+            ])
+            
+            # 3. NOW perform the expensive lookups only on the paginated results
             pipeline.extend([
                 # First lookup: Get assignment data
                 {
@@ -347,20 +370,7 @@ class MongoDB:
                         "assignment_forwarded_from": 0,
                         "technician_metadata": 0
                     }
-                },
-                # Sort results - has_unread_reply first for proper alert priority
-                {
-                    "$sort": {"has_unread_reply": -1, "is_important": -1, "created_at": -1}
                 }
-            ])
-            
-            # Calculate pagination
-            skip = (page - 1) * per_page
-            
-            # Add pagination stages
-            pipeline.extend([
-                {"$skip": skip},
-                {"$limit": per_page}
             ])
             
             logging.info(f"[DATABASE] Running PAGINATED tickets aggregation: page={page}, per_page={per_page}")
@@ -456,6 +466,140 @@ class MongoDB:
         except Exception as e:
             logging.error(f"[DATABASE] Error getting tickets count: {e}")
             return 0
+
+    def get_ticket_stats(self):
+        """
+        Get efficient aggregated statistics for tickets.
+        Performance Optimized: Uses server-side aggregation instead of loading all docs.
+        """
+        try:
+            pipeline = [
+                {
+                    "$facet": {
+                        "status_counts": [
+                            {"$group": {"_id": "$status", "count": {"$sum": 1}}}
+                        ],
+                        "priority_counts": [
+                             {"$group": {"_id": "$priority", "count": {"$sum": 1}}}
+                        ],
+                        "classification_counts": [
+                             {"$group": {"_id": "$classification", "count": {"$sum": 1}}}
+                        ],
+                        "total_count": [
+                            {"$count": "count"}
+                        ]
+                    }
+                }
+            ]
+            
+            result = list(self.tickets.aggregate(pipeline))
+            
+            if not result:
+                return {}
+                
+            stats = result[0]
+            
+            # Format output for easier consumption
+            formatted_stats = {
+                "status_counts": {item["_id"]: item["count"] for item in stats.get("status_counts", [])},
+                "priorities": {item["_id"]: item["count"] for item in stats.get("priority_counts", [])},
+                "classifications": {item["_id"]: item["count"] for item in stats.get("classification_counts", [])},
+                "total_tickets": stats.get("total_count", [{"count": 0}])[0]["count"] if stats.get("total_count") else 0
+            }
+            
+            # Fill in defaults if missing
+            default_priorities = {'Urgent': 0, 'Fast': 0, 'High': 0, 'Medium': 0, 'Low': 0}
+            for p, count in formatted_stats["priorities"].items():
+                if p in default_priorities:
+                    default_priorities[p] = count
+            formatted_stats["priorities"] = default_priorities
+            
+            # Fill in default classifications if missing (required for UI)
+            default_classifications = {'Technical Issue': 0, 'Payment': 0, 'Support': 0, 'Warranty Claim': 0, 'Spam': 0, 'Account': 0}
+            for c, count in formatted_stats["classifications"].items():
+                if c in default_classifications:
+                    default_classifications[c] = count
+            formatted_stats["classifications"] = default_classifications
+            
+            return formatted_stats
+            
+        except Exception as e:
+            logging.error(f"[DATABASE] Error getting ticket stats: {e}")
+            return {
+                "status_counts": {}, 
+                "priorities": {'Urgent': 0, 'Fast': 0, 'High': 0, 'Medium': 0, 'Low': 0},
+                "classifications": {},
+                "total_tickets": 0
+            }
+
+    def get_dashboard_stats(self):
+        """
+        Get specialized stats for the dashboard.
+        """
+        try:
+            now = datetime.now()
+            today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+            three_days_ago = now - timedelta(days=3)
+            
+            pipeline = [
+                {
+                    "$facet": {
+                        "overdue": [
+                            {"$match": {
+                                "created_at": {"$lt": three_days_ago},
+                                "status": {"$nin": ["Resolved", "Closed"]}
+                            }},
+                             # Limit to save memory if list is needed, or just count
+                            {"$limit": 50} 
+                        ],
+                        "unread": [
+                            {"$match": {"has_unread_reply": True}}
+                        ],
+                        "claims_stats": [
+                             {"$group": {
+                                "_id": None,
+                                "total": {"$sum": 1},
+                                "approved": {
+                                    "$sum": {
+                                        "$cond": [{"$regexMatch": {"input": "$status", "regex": "Approved|Revisit"}}, 1, 0]
+                                    }
+                                },
+                                "declined": {
+                                    "$sum": {
+                                        "$cond": [{"$regexMatch": {"input": "$status", "regex": "Declined|Not Covered"}}, 1, 0]
+                                    }
+                                },
+                                "referred": {
+                                    "$sum": {
+                                        "$cond": [{"$regexMatch": {"input": "$status", "regex": "Referred"}}, 1, 0]
+                                    }
+                                }
+                            }}
+                        ]
+                    }
+                }
+            ]
+            
+            result = list(self.tickets.aggregate(pipeline))
+            if not result:
+                return {}
+                
+            data = result[0]
+            
+            claims = data.get("claims_stats", [{}])[0]
+            
+            return {
+                "overdue_tickets": data.get("overdue", []),
+                "unread_tickets": data.get("unread", []),
+                "total_claims": claims.get("total", 0),
+                "approved_claims": claims.get("approved", 0),
+                "declined_claims": claims.get("declined", 0),
+                "referred_claims": claims.get("referred", 0)
+            }
+            
+        except Exception as e:
+            logging.error(f"[DATABASE] Error getting dashboard stats: {e}")
+            return {}
     
     def ticket_id_exists(self, ticket_id):
         """Fast check if ticket ID already exists (for duplicate checking)"""

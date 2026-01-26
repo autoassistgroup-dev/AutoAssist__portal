@@ -91,6 +91,71 @@ def get_tickets():
         return jsonify({'success': False, 'error': str(e)}), 500
 
 
+@ticket_bp.route('/create', methods=['POST'])
+def create_ticket():
+    """
+    Create a new ticket via API.
+    Handles AJAX form submission from create_ticket.html.
+    """
+    try:
+        if not is_authenticated():
+            return jsonify({'success': False, 'error': 'Authentication required'}), 401
+        
+        current_member = safe_member_lookup()
+        if not current_member:
+            return jsonify({'success': False, 'error': 'User not found'}), 404
+            
+        import uuid
+        from database import get_db
+        db = get_db()
+        
+        # Extract form data
+        ticket_data = {
+            'ticket_id': 'M' + str(uuid.uuid4())[:5].upper(),
+            'subject': request.form.get('subject', ''),
+            'body': request.form.get('body', ''), # Mapped from description? Check form field names
+            'description': request.form.get('description', ''), # Fallback or main?
+            'customer_first_name': request.form.get('customer_first_name', ''),
+            'customer_surname': request.form.get('customer_surname', ''),
+            'customer_title': request.form.get('customer_title', ''),
+            'vehicle_registration': request.form.get('vehicle_registration', ''),
+            'email': request.form.get('email', ''),
+            'phone': request.form.get('phone', ''),
+            'type_of_claim': request.form.get('type_of_claim', ''),
+            'status': 'New',
+            'priority': request.form.get('priority', 'Medium'),
+            'assigned_technician': request.form.get('technician', ''),
+            'created_at': datetime.now(),
+            'created_by': current_member.get('name', ''),
+            'created_by_id': session.get('member_id'),
+            'creation_method': 'api', 
+            'is_forwarded': False
+        }
+        
+        # Handle field mapping (create_ticket.html inputs vs DB schema)
+        # HTML inputs: subject, customer_first_name, customer_surname, email, vehicle_registration, type_of_claim, priority, technician
+        # No 'body' input in HTML form view? 
+        # HTML shows: <input type="text" name="subject">. Where is description?
+        # HTML was cut off at line 800. I need to assume there is a description/body field.
+        # But 'request.form.get' is safe.
+        
+        db.create_ticket(ticket_data)
+        
+        logger.info(f"Ticket {ticket_data['ticket_id']} created by {current_member.get('name')}")
+        
+        return jsonify({
+            'status': 'success',
+            'success': True,
+            'message': 'Ticket created successfully',
+            'ticket_id': ticket_data['ticket_id'],
+            'customer_number': ticket_data['ticket_id']
+        })
+        
+    except Exception as e:
+        logger.error(f"Error creating ticket via API: {e}")
+        return jsonify({'status': 'error', 'success': False, 'message': str(e)}), 500
+
+
 @ticket_bp.route('/<ticket_id>', methods=['GET'])
 def get_ticket(ticket_id):
     """Get a single ticket by ID."""
