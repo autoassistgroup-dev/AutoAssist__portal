@@ -151,55 +151,28 @@ def dashboard():
     technicians = list(db.technicians.find({"is_active": True}))
     ticket_statuses = list(db.ticket_statuses.find({"is_active": True}).sort("order", 1))
     
-    # Initialize all template variables with defaults
-    status_counts = {}
-    overdue_tickets = []
-    unread_tickets = []
-    open_1_3_days = []
-    open_today = []
-    team_performance = {}
+    # Optimized Dashboard Stats (using ticket stats instead of warranty claims)
+    ticket_stats = db.get_ticket_stats()
+    status_counts = ticket_stats.get('status_counts', {})
+    priority_counts = ticket_stats.get('priorities', {})
+    total_tickets = ticket_stats.get('total_tickets', 0)
     
-    total_claims = 0
-    approved_claims = 0
-    declined_claims = 0
-    referred_claims = 0
+    active_tickets = 0
+    waiting_tickets = 0
     
-    approved_percent = 0
-    declined_percent = 0
-    referred_percent = 0
-    
-    avg_resolution_time = 24
-    rejection_reasons = {
-        'uncompleted_advisories': 0,
-        'no_fault_code': 0,
-        'warranty_expired': 0
-    }
-
-    # Optimized Dashboard Stats
-    try:
-        dashboard_stats = db.get_dashboard_stats()
-        
-        # Map optimized stats to template variables
-        overdue_tickets = dashboard_stats.get('overdue_tickets', [])
-        unread_tickets = dashboard_stats.get('unread_tickets', [])
-        
-        total_claims = dashboard_stats.get('total_claims', 0)
-        approved_claims = dashboard_stats.get('approved_claims', 0)
-        declined_claims = dashboard_stats.get('declined_claims', 0)
-        referred_claims = dashboard_stats.get('referred_claims', 0)
-        
-        # Calculate percentages
-        if total_claims > 0:
-            approved_percent = (approved_claims / total_claims) * 100
-            declined_percent = (declined_claims / total_claims) * 100
-            referred_percent = (referred_claims / total_claims) * 100
-        
-    except Exception as e:
-        logger.error(f"Error calculating dashboard metrics: {e}")
+    for status, count in status_counts.items():
+        if status not in ['Closed', 'Resolved']:
+            active_tickets += count
+        if 'Waiting' in status:
+            waiting_tickets += count
+            
+    # "Resolved Today" requires a specific date query or aggregation we can add later.
+    # For now, let's keep it 0 or add a lightweight query if needed. 
+    resolved_today = 0
     
     return render_template('dashboard.html',
                           tickets=tickets,
-                          all_tickets=tickets,
+                          recent_tickets=tickets, # Reuse the tickets list for the recent table
                           current_member=current_member,
                           current_user=current_member.get('name') or session.get('member_name') or 'User',
                           current_user_role=current_member.get('role') or session.get('member_role') or 'User',
@@ -207,21 +180,11 @@ def dashboard():
                           technicians=technicians,
                           ticket_statuses=ticket_statuses,
                           status_counts=status_counts,
-                          total_tickets=total_claims,
-                          overdue_tickets=overdue_tickets,
-                          open_1_3_days=open_1_3_days,
-                          open_today=open_today,
-                          unread_tickets=unread_tickets,
-                          avg_resolution_time=avg_resolution_time,
-                          total_claims=total_claims,
-                          approved_claims=approved_claims,
-                          declined_claims=declined_claims,
-                          referred_claims=referred_claims,
-                          approved_percent=approved_percent,
-                          declined_percent=declined_percent,
-                          referred_percent=referred_percent,
-                          rejection_reasons=rejection_reasons,
-                          team_performance=team_performance,
+                          priority_counts=priority_counts,
+                          total_tickets=total_tickets,
+                          active_tickets=active_tickets,
+                          waiting_tickets=waiting_tickets,
+                          resolved_today=resolved_today,
                           pagination=None)
 
 
