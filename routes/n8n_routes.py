@@ -43,7 +43,7 @@ def n8n_email_tickets():
             }), 400
         
         # Process the email data
-        processed = _process_n8n_email_data(raw_data)
+        processed = process_n8n_email_data(raw_data)
         
         if not processed:
             return jsonify({
@@ -179,7 +179,7 @@ def n8n_simple_test():
         }), 500
 
 
-def _process_n8n_email_data(raw_data):
+def process_n8n_email_data(raw_data):
     """
     Process n8n email data into ticket format.
     

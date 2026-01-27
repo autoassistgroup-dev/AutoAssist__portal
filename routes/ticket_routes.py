@@ -91,6 +91,49 @@ def get_tickets():
         return jsonify({'success': False, 'error': str(e)}), 500
 
 
+
+@ticket_bp.route('', methods=['POST'])
+@ticket_bp.route('/', methods=['POST'])
+def create_ticket_webhook():
+    """
+    Handle ticket creation from N8N webhook (or other API clients).
+    Accepts JSON payload matching N8N structure.
+    """
+    try:
+        # Check for JSON data
+        if not request.is_json:
+            return jsonify({'success': False, 'error': 'Content-Type must be application/json'}), 400
+            
+        data = request.get_json()
+        
+        # Reuse N8N processing logic
+        from routes.n8n_routes import process_n8n_email_data
+        
+        processed = process_n8n_email_data(data)
+        
+        if not processed:
+            return jsonify({'success': False, 'error': 'Invalid ticket data'}), 400
+            
+        from database import get_db
+        db = get_db()
+        
+        # Create ticket
+        ticket_id = db.create_ticket(processed)
+        
+        logger.info(f"Ticket created via webhook: {processed.get('ticket_id')}")
+        
+        return jsonify({
+            'success': True, 
+            'message': 'Ticket created successfully',
+            'ticket_id': processed.get('ticket_id'),
+            'db_id': str(ticket_id)
+        })
+        
+    except Exception as e:
+        logger.error(f"Error creating ticket via webhook: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
 @ticket_bp.route('/create', methods=['POST'])
 def create_ticket():
     """
