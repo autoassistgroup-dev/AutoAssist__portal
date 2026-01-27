@@ -9,8 +9,10 @@ bind = "0.0.0.0:" + os.environ.get("PORT", "8000")
 backlog = 2048
 
 # Worker processes
+# Worker processes
 workers = multiprocessing.cpu_count() * 2 + 1
-worker_class = "gevent"
+worker_class = "gthread"
+threads = 2
 worker_connections = 1000
 timeout = 30
 keepalive = 2
