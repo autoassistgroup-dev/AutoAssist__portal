@@ -303,56 +303,7 @@ def create_ticket():
                           technicians=technicians)
 
 
-@main_bp.route('/status')
-def status_page():
-    """Status overview page."""
-    if not is_authenticated():
-        return redirect(url_for('auth.login'))
-    
-    current_member = safe_member_lookup()
-    if not current_member:
-        return redirect(url_for('auth.login'))
-    
-    from database import get_db
-    db = get_db()
-    
-    ticket_statuses = list(db.ticket_statuses.find({"is_active": True}).sort("order", 1))
-    
-    # Optimized Status Page
-    ticket_stats = db.get_ticket_stats()
-    status_counts = ticket_stats.get('status_counts', {})
-    priority_counts = ticket_stats.get('priorities', {})
-    total_tickets = ticket_stats.get('total_tickets', 0)
-    
-    active_tickets = 0
-    waiting_tickets = 0
-    
-    for status, count in status_counts.items():
-        if status not in ['Closed', 'Resolved']:
-            active_tickets += count
-        if 'Waiting' in status:
-            waiting_tickets += count
-            
-    # "Resolved Today" requires a specific date query or aggregation we can add later.
-    # For now, let's keep it 0 or add a lightweight query if needed. 
-    resolved_today = 0
-    
-    # Get recent tickets for the table (limited to 20 for simplicity on this view)
-    recent_tickets = db.get_tickets_with_assignments(page=1, per_page=20)
-    
-    return render_template('status.html',
-                          current_member=current_member,
-                          current_user=current_member.get('name') or session.get('member_name') or 'User',
-                          current_user_role=current_member.get('role') or session.get('member_role') or 'User',
-                          ticket_statuses=ticket_statuses,
-                          status_counts=status_counts,
-                          priority_counts=priority_counts,
-                          total_tickets=total_tickets,
-                          active_tickets=active_tickets,
-                          waiting_tickets=waiting_tickets,
-                          resolved_today=resolved_today,
-                          recent_tickets=recent_tickets,
-                          pagination=None) # Start without pagination to avoid complexity, template handles null pagination
+
 
 
 @main_bp.route('/members')
