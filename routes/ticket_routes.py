@@ -129,6 +129,29 @@ def create_ticket_webhook():
             'db_id': str(ticket_id)
         })
         
+    except ValueError as e:
+        if "Thread ID already exists" in str(e):
+            logger.warning(f"Duplicate thread ID detected via webhook: {e}")
+            
+            # Find the existing ticket
+            from database import get_db
+            db = get_db()
+            
+            thread_id = processed.get('thread_id')
+            existing_ticket = db.tickets.find_one({"thread_id": thread_id})
+            
+            if existing_ticket:
+                logger.info(f"Returning existing ticket {existing_ticket.get('ticket_id')} for thread {thread_id}")
+                return jsonify({
+                    'success': True, 
+                    'message': 'Ticket already exists',
+                    'ticket_id': existing_ticket.get('ticket_id'),
+                    'db_id': str(existing_ticket.get('_id'))
+                })
+        
+        logger.error(f"Error creating ticket via webhook: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 409
+        
     except Exception as e:
         logger.error(f"Error creating ticket via webhook: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
