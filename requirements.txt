@@ -22,6 +22,6 @@ python-dotenv==1.0.0
 
 # Additional security and performance (optional but recommended)
 # Uncomment if using in production:
-# gunicorn==21.2.0
+gunicorn==21.2.0
 # redis==5.0.0  # For advanced caching
 # celery==5.3.4  # For background tasks 
