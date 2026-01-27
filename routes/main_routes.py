@@ -315,8 +315,8 @@ def technicians_page():
     
     # DEBUG: Log values being passed to template
     print(f"🔍 TECHNICIANS DEBUG: current_member={current_member}")
-    # Use fixed template with hardcoded navigation for reliability
-    return render_template('technicians_fixed.html',
+    # Use standard template
+    return render_template('technicians.html',
                           current_member=current_member,
                           technicians=technicians)
 
