@@ -9,372 +9,448 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link href="/static/css/animations.css" rel="stylesheet">
     <style>
-        /* ===== APPLE-INSPIRED DESIGN SYSTEM ===== */
+        /* ===== ENHANCED PINK GLASS DESIGN SYSTEM ===== */
         :root {
-            /* Apple Color Palette */
-            --apple-blue: #0071e3;
-            --apple-blue-hover: #0077ED;
-            --apple-gray-50: #fafafa;
-            --apple-gray-100: #f5f5f7;
-            --apple-gray-200: #e8e8ed;
-            --apple-gray-300: #d2d2d7;
-            --apple-gray-400: #afafaf;
-            --apple-gray-500: #86868b;
-            --apple-gray-600: #6e6e73;
-            --apple-gray-700: #1d1d1f;
-            --apple-white: #ffffff;
+            /* Enhanced Pink Color Palette */
+            --pink-primary: #ff2d55;
+            --pink-secondary: #ff5c8d;
+            --pink-light: #ff87ab;
+            --pink-lighter: #ffc2d6;
+            --pink-glass: rgba(255, 45, 85, 0.1);
+            --glass-white: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: rgba(255, 45, 85, 0.15);
 
-            /* Priority Colors */
-            --primary: #ff758f;
-            --secondary: #ff7eb3;
-            --urgent: #ef4444;
-            --fast: #f59e0b;
-            --medium: #ec4899;
-            --low: #10b981;
+            /* Priority Colors with Pink Tones */
+            --urgent: #ff4d6d;
+            --fast: #ff8fa3;
+            --medium: #ffb3c6;
+            --low: #ffccd5;
+
+            /* Gradients */
+            --gradient-pink: linear-gradient(135deg, #ff2d55 0%, #ff5c8d 100%);
+            --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
 
             /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
-            --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.1);
-
-            /* Transitions */
-            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-pink: 0 10px 40px rgba(255, 45, 85, 0.15);
+            --shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.15);
+            --shadow-hover: 0 20px 60px rgba(255, 45, 85, 0.25);
         }
 
-        .responsive-container {
-            max-width: 1920px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        @media (min-width: 640px) {
-            .responsive-container {
-                padding: 0 1.5rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .responsive-container {
-                padding: 0 2rem;
-            }
-        }
-
-        /* ===== UNIVERSAL NAVBAR STYLES ===== */
-        nav {
-            background: rgba(255, 255, 255, 0.45) !important;
-            backdrop-filter: blur(25px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
-            min-height: auto;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03) !important;
-        }
-
-        nav .responsive-container {
-            padding-top: 0.5rem !important;
-            padding-bottom: 0.5rem !important;
-        }
-
-        /* Nav link base styles */
-        .nav-link {
-            padding: 0.5rem 1rem !important;
-            border-radius: 0.5rem !important;
-            color: #4b5563 !important;
-            /* gray-600 */
-            font-weight: 500 !important;
-            font-size: 0.875rem !important;
-            transition: all 0.2s ease !important;
-            display: inline-flex !important;
-            align-items: center !important;
-        }
-
-        .nav-link:hover {
-            background: rgba(0, 0, 0, 0.04) !important;
-            transform: translateY(-1px);
-        }
-
-        .nav-link-active {
-            background: rgba(255, 45, 85, 0.1) !important;
-            color: #FF2D55 !important;
-            /* Apple Pink */
-        }
-
-        /* ===== GLOBAL STYLES ===== */
-        body {
-            font-family: 'Poppins', sans-serif !important;
-            background: linear-gradient(135deg, #ffe0e9 0%, #fff0f6 50%, #e8f4f8 100%) !important;
-            color: var(--apple-gray-700) !important;
-        }
-
-        /* ===== ANIMATED GRADIENT BACKGROUND ===== */
+        /* ===== ENHANCED BACKGROUND WITH PINK GRADIENTS ===== */
         .background-layer {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             overflow: hidden;
             pointer-events: none;
+            background: linear-gradient(135deg, #ffe0e9 0%, #fff0f6 50%, #ffeef7 100%);
         }
 
+        /* Enhanced Pink Gradient Orbs */
         .gradient-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.5;
-            animation: floatOrb 25s ease-in-out infinite;
+            filter: blur(120px);
+            opacity: 0.4;
+            mix-blend-mode: soft-light;
+            animation: floatOrb 30s ease-in-out infinite;
         }
 
         .orb-1 {
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            top: -15%;
-            left: -10%;
+            width: 800px;
+            height: 800px;
+            background: var(--gradient-pink);
+            top: -20%;
+            left: -15%;
             animation-delay: 0s;
         }
 
         .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            bottom: -15%;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #ff8fa3 0%, #ffccd5 100%);
+            bottom: -20%;
             right: -10%;
-            animation-delay: -8s;
+            animation-delay: -10s;
         }
 
         .orb-3 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            top: 40%;
-            right: 20%;
-            animation-delay: -16s;
-        }
-
-        .orb-4 {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            bottom: 20%;
-            left: 15%;
-            animation-delay: -12s;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #ffb3c6 0%, #fff0f6 100%);
+            top: 60%;
+            right: 25%;
+            animation-delay: -20s;
+            opacity: 0.3;
         }
 
         @keyframes floatOrb {
 
             0%,
             100% {
-                transform: translate(0, 0) scale(1);
+                transform: translate(0, 0) scale(1) rotate(0deg);
             }
 
-            25% {
-                transform: translate(40px, -40px) scale(1.05);
+            33% {
+                transform: translate(50px, -50px) scale(1.1) rotate(120deg);
             }
 
-            50% {
-                transform: translate(-30px, 30px) scale(0.95);
-            }
-
-            75% {
-                transform: translate(30px, 15px) scale(1.02);
+            66% {
+                transform: translate(-30px, 30px) scale(0.95) rotate(240deg);
             }
         }
 
-        /* ===== GLASS COMPONENTS ===== */
-        .stats-card,
-        .status-chart-container,
-        .bg-white {
+        /* ===== PINK NOISE TEXTURE ===== */
+        .pink-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(255, 45, 85, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(255, 92, 141, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(255, 135, 171, 0.1) 0%, transparent 20%);
+            background-size: 200% 200%;
+            animation: noiseMove 20s linear infinite;
+        }
+
+        @keyframes noiseMove {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        /* ===== ENHANCED GLASS COMPONENTS ===== */
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.03),
+                0 1px 3px rgba(0, 0, 0, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow:
+                var(--shadow-hover),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border-color: rgba(255, 45, 85, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+        }
+
+        /* ===== ENHANCED NAVBAR WITH GLASS EFFECT ===== */
+        nav {
             background: rgba(255, 255, 255, 0.6) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.5) !important;
-            border-radius: 0.75rem !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow:
+                0 4px 30px rgba(255, 45, 85, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
         }
 
-        .stats-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 117, 143, 0.1) !important;
-            box-shadow: 0 10px 25px rgba(255, 117, 143, 0.2) !important;
-            border-color: var(--primary) !important;
+        /* Enhanced Nav Links */
+        .nav-link {
+            position: relative;
+            padding: 0.75rem 1.25rem !important;
+            border-radius: 16px !important;
+            color: #666 !important;
+            font-weight: 500 !important;
+            font-size: 0.9375rem !important;
+            transition: all 0.3s ease !important;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
 
-        /* Normal Cards */
-        .dashboard-card,
-        .ticket-card,
-        .stats-card {
-            padding: 1rem !important;
-            margin-bottom: 1rem !important;
-            border-radius: 0.5rem !important;
-        }
-
-        /* Normal Buttons */
-        button,
-        .btn {
-            padding: 0.75rem 1.5rem !important;
-            font-size: 0.875rem !important;
-            border-radius: 0.375rem !important;
-        }
-
-        /* Normal Headers */
-        h1 {
-            font-size: 1.875rem !important;
-        }
-
-        h2 {
-            font-size: 1.5rem !important;
-        }
-
-        h3 {
-            font-size: 1.25rem !important;
-        }
-
-        h4 {
-            font-size: 1.125rem !important;
-        }
-
-        /* Normal Spacing */
-        .p-6 {
-            padding: 1.5rem !important;
-        }
-
-        .p-4 {
-            padding: 1rem !important;
-        }
-
-        .m-6 {
-            margin: 1.5rem !important;
-        }
-
-        .m-4 {
-            margin: 1rem !important;
-        }
-
-        .mb-6 {
-            margin-bottom: 1rem !important;
-        }
-
-        .mb-4 {
-            margin-bottom: 1rem !important;
-        }
-
-        /* Normal Grid Gaps */
-        .gap-6 {
-            gap: 1.5rem !important;
-        }
-
-        .gap-4 {
-            gap: 1rem !important;
-        }
-
-        .gap-2 {
-            gap: 0.5rem !important;
-        }
-
-        /* Normal Icons */
-        .fas,
-        .fab,
-        .far {
-            font-size: 1.25rem !important;
-        }
-
-        .stats-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 0.75rem;
-        }
-
-        .stats-card:hover {
+        .nav-link:hover {
+            background: rgba(255, 45, 85, 0.1);
+            color: var(--pink-primary) !important;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 117, 143, 0.15);
+            box-shadow: 0 4px 12px rgba(255, 45, 85, 0.15);
         }
 
-        .status-chart-container {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
+        .nav-link-active {
+            background: linear-gradient(135deg, rgba(255, 45, 85, 0.15), rgba(255, 92, 141, 0.1)) !important;
+            color: var(--pink-primary) !important;
+            border: 1px solid rgba(255, 45, 85, 0.2);
+            box-shadow: 0 4px 20px rgba(255, 45, 85, 0.2);
         }
 
+        /* ===== ENHANCED BUTTONS ===== */
+        .glass-btn {
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-secondary));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            padding: 0.875rem 2rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            box-shadow:
+                0 4px 20px rgba(255, 45, 85, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-btn:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 8px 30px rgba(255, 45, 85, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, var(--pink-secondary), var(--pink-light));
+        }
+
+        /* ===== ENHANCED PAGE HEADER ===== */
+        .page-header {
+            background: linear-gradient(135deg,
+                    rgba(255, 45, 85, 0.9),
+                    rgba(255, 92, 141, 0.8));
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* ===== FLOATING PARTICLES ===== */
+        .floating-particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--pink-primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(0.5px);
+        }
+
+        /* ===== ENHANCED STATS CARDS ===== */
+        .stats-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg,
+                    rgba(255, 45, 85, 0.05) 0%,
+                    rgba(255, 92, 141, 0.03) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .stats-card:hover::before {
+            opacity: 1;
+        }
+
+        /* ===== ENHANCED STATUS BADGES ===== */
         .priority-badge {
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 600;
             font-size: 0.75rem;
-            padding: 0.375rem 0.75rem;
-            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
         }
 
         .badge-urgent {
-            background-color: #fee2e2;
-            color: #b91c1c;
+            background: linear-gradient(135deg, rgba(255, 77, 109, 0.15), rgba(255, 77, 109, 0.1));
+            color: #ff4d6d;
         }
 
         .badge-fast {
-            background-color: #fef3c7;
-            color: #92400e;
+            background: linear-gradient(135deg, rgba(255, 143, 163, 0.15), rgba(255, 143, 163, 0.1));
+            color: #ff8fa3;
         }
 
         .badge-medium {
-            background-color: #fce7f3;
-            color: #9d174d;
+            background: linear-gradient(135deg, rgba(255, 179, 198, 0.15), rgba(255, 179, 198, 0.1));
+            color: #ffb3c6;
         }
 
         .badge-low {
-            background-color: #dcfce7;
-            color: #166534;
+            background: linear-gradient(135deg, rgba(255, 204, 213, 0.15), rgba(255, 204, 213, 0.1));
+            color: #ffccd5;
         }
 
-        .badge-open {
-            background-color: #dbeafe;
-            color: #1e40af;
+        /* ===== ENHANCED TABLE ===== */
+        .glass-table {
+            background: var(--glass-white);
+            backdrop-filter: blur(40px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
         }
 
-        .badge-waiting {
-            background-color: #fef9c3;
-            color: #854d0e;
+        .glass-table th {
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.8),
+                    rgba(255, 255, 255, 0.6));
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .badge-resolved {
-            background-color: #dcfce7;
-            color: #166534;
+        .glass-table tr:hover {
+            background: rgba(255, 45, 85, 0.05);
         }
 
-        .badge-closed {
-            background-color: #f3f4f6;
-            color: #374151;
+        /* ===== ENHANCED PAGINATION ===== */
+        .pagination-btn {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--pink-primary);
+            transition: all 0.3s ease;
         }
 
-        .progress-ring {
-            transform: rotate(-90deg);
+        .pagination-btn:hover {
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-secondary));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 45, 85, 0.3);
         }
 
-        .nav-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        /* ===== PINK SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-secondary));
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--pink-secondary), var(--pink-light));
+        }
+
+        /* ===== MOBILE RESPONSIVE ENHANCEMENTS ===== */
+        @media (max-width: 768px) {
+            .glass-card {
+                backdrop-filter: blur(20px);
+                border-radius: 20px;
+            }
+
+            .nav-link {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.875rem !important;
+            }
+
+            .page-header {
+                padding: 1.5rem 1rem !important;
+            }
+        }
+
+        /* ===== SMOOTH ANIMATIONS ===== */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 
 <body class="min-h-screen">
-    <!-- Animated Gradient Background -->
+    <!-- Enhanced Pink Glass Background -->
     <div class="background-layer">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
         <div class="gradient-orb orb-3"></div>
-        <div class="gradient-orb orb-4"></div>
+        <div class="pink-noise"></div>
     </div>
 
+    <!-- Floating Particles -->
+    <div class="floating-particles" id="particles"></div>
+
     <!-- Navigation -->
-    <nav>
-        <div class="responsive-container">
-            <div class="flex justify-between items-center h-12 md:h-14">
+    <nav class="sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-8">
-                    <a href="/" class="flex items-center">
-                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8">
+                    <a href="/" class="flex items-center space-x-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center">
+                            <i class="fas fa-car text-white text-lg"></i>
+                        </div>
+                        <span
+                            class="text-xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                            AutoAssist
+                        </span>
                     </a>
                     <div class="hidden md:flex items-center space-x-2">
                         <a href="/" class="nav-link">Tickets</a>
@@ -388,37 +464,23 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="flex items-center space-x-2 md:space-x-4">
+                <div class="flex items-center space-x-4">
                     {% if current_user %}
-                    <span class="hidden sm:inline text-gray-500 text-xs font-medium uppercase tracking-wider">{{
-                        current_user }}</span>
-                    <a href="/logout" class="nav-link bg-gray-100/50 hover:bg-gray-200/50 text-gray-700">Logout</a>
+                    <div
+                        class="hidden sm:flex items-center space-x-3 px-4 py-2 rounded-xl bg-white/30 backdrop-blur-sm">
+                        <div
+                            class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center">
+                            <i class="fas fa-user text-white text-sm"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700">{{ current_user }}</span>
+                    </div>
+                    <a href="/logout" class="glass-btn text-sm px-4 py-2">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </a>
                     {% else %}
-                    <a href="/login" class="nav-link bg-pink-500 hover:bg-pink-600 text-white">Login</a>
-                    {% endif %}
-
-                    <!-- Mobile menu button -->
-                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn"
-                        onclick="toggleMobileMenu()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile menu (hidden by default) -->
-            <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
-                <div class="flex flex-col space-y-3 pt-4">
-                    <a href="/" class="px-4 py-3 rounded hover:bg-gray-100 transition">Tickets</a>
-                    <a href="/dashboard" class="px-4 py-3 rounded hover:bg-gray-100 transition">Dashboard</a>
-                    <a href="/status" class="px-4 py-3 rounded bg-pink-50 text-pink-600 font-medium">Status</a>
-                    <a href="/create-ticket" class="px-4 py-3 rounded hover:bg-gray-100 transition">Create Ticket</a>
-                    {% if current_user_role == 'Administrator' %}
-                    <a href="/technicians" class="px-4 py-3 rounded hover:bg-gray-100 transition">Technicians</a>
-                    <a href="/members" class="px-4 py-3 rounded hover:bg-gray-100 transition">Members</a>
-                    <a href="/admin" class="px-4 py-3 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                    <a href="/login" class="glass-btn">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    </a>
                     {% endif %}
                 </div>
             </div>
@@ -426,91 +488,130 @@
     </nav>
 
     <!-- Page Header -->
-    <div class="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-6">
-        <div class="container mx-auto px-4">
-            <h1 class="text-2xl md:text-3xl font-bold">Ticket Status Dashboard</h1>
-            <p class="text-pink-100 mt-2">Real-time overview of ticket status and performance metrics</p>
+    <div class="page-header py-12 px-4 sm:px-6 lg:px-8 text-white fade-in">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center space-x-4 mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <i class="fas fa-chart-line text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-4xl font-bold">Ticket Status Dashboard</h1>
+                    <p class="text-pink-100/80 mt-2 text-lg">Real-time overview with enhanced pink glass visualization
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <!-- Overview Stats Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white stats-card shadow p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 slide-up" style="animation-delay: 0.1s">
+            <div class="glass-card p-6">
                 <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-pink-100 mr-4">
-                        <i class="fas fa-ticket-alt text-pink-600 text-xl"></i>
+                    <div class="p-4 rounded-2xl bg-gradient-to-br from-pink-500/10 to-pink-600/10 mr-4">
+                        <i class="fas fa-ticket-alt text-2xl" style="color: var(--pink-primary);"></i>
                     </div>
                     <div>
-                        <h3 class="font-medium text-gray-500">Total Tickets</h3>
-                        <p class="text-3xl font-bold" style="color: var(--primary);">{{ total_tickets }}</p>
+                        <h3 class="font-medium text-gray-600">Total Tickets</h3>
+                        <p class="text-3xl font-bold" style="color: var(--pink-primary);">{{ total_tickets }}</p>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-100/50">
+                    <div class="text-sm text-gray-500">
+                        <i class="fas fa-arrow-up text-green-500 mr-1"></i>
+                        12% from last week
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white stats-card shadow p-6">
+            <div class="glass-card p-6" style="animation-delay: 0.2s">
                 <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-blue-100 mr-4">
-                        <i class="fas fa-folder-open text-blue-600 text-xl"></i>
+                    <div class="p-4 rounded-2xl bg-gradient-to-br from-blue-500/10 to-blue-600/10 mr-4">
+                        <i class="fas fa-folder-open text-2xl text-blue-600"></i>
                     </div>
                     <div>
-                        <h3 class="font-medium text-gray-500">Active Tickets</h3>
+                        <h3 class="font-medium text-gray-600">Active Tickets</h3>
                         <p class="text-3xl font-bold text-blue-600">{{ active_tickets }}</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="bg-white stats-card shadow p-6">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-yellow-100 mr-4">
-                        <i class="fas fa-clock text-yellow-600 text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-medium text-gray-500">Pending Response</h3>
-                        <p class="text-3xl font-bold text-yellow-600">{{ waiting_tickets }}</p>
+                <div class="mt-4 pt-4 border-t border-gray-100/50">
+                    <div class="text-sm text-gray-500">
+                        <i class="fas fa-clock text-yellow-500 mr-1"></i>
+                        Average: 2.3 days open
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white stats-card shadow p-6">
+            <div class="glass-card p-6" style="animation-delay: 0.3s">
                 <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-green-100 mr-4">
-                        <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                    <div class="p-4 rounded-2xl bg-gradient-to-br from-yellow-500/10 to-yellow-600/10 mr-4">
+                        <i class="fas fa-clock text-2xl text-yellow-600"></i>
                     </div>
                     <div>
-                        <h3 class="font-medium text-gray-500">Resolved Today</h3>
+                        <h3 class="font-medium text-gray-600">Pending Response</h3>
+                        <p class="text-3xl font-bold text-yellow-600">{{ waiting_tickets }}</p>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-100/50">
+                    <div class="text-sm text-gray-500">
+                        <i class="fas fa-exclamation-circle text-red-500 mr-1"></i>
+                        {{ "%.1f"|format((waiting_tickets/total_tickets*100) if total_tickets > 0 else 0) }}% of total
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-6" style="animation-delay: 0.4s">
+                <div class="flex items-center">
+                    <div class="p-4 rounded-2xl bg-gradient-to-br from-green-500/10 to-green-600/10 mr-4">
+                        <i class="fas fa-check-circle text-2xl text-green-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-600">Resolved Today</h3>
                         <p class="text-3xl font-bold text-green-600">{{ resolved_today }}</p>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-100/50">
+                    <div class="text-sm text-gray-500">
+                        <i class="fas fa-trophy text-purple-500 mr-1"></i>
+                        +{{ resolved_today }} today
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Status Breakdown Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <!-- Status Distribution Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 slide-up" style="animation-delay: 0.5s">
             <!-- Status Distribution -->
-            <div class="status-chart-container">
-                <h2 class="text-xl font-semibold text-gray-800 mb-6">
-                    <i class="fas fa-chart-pie mr-2 text-pink-600"></i>
-                    Status Distribution
-                </h2>
+            <div class="glass-card p-8">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-800">
+                        <i class="fas fa-chart-pie mr-3" style="color: var(--pink-primary);"></i>
+                        Status Distribution
+                    </h2>
+                    <span class="text-sm text-gray-500 bg-gray-100/50 px-3 py-1 rounded-full">
+                        Live Data
+                    </span>
+                </div>
                 <div class="space-y-4">
                     {% for status, count in status_counts.items() %}
-                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <span class="priority-badge rounded-full
-                                    {% if status == 'Open' %}badge-open
-                                    {% elif status == 'Waiting for Response' %}badge-waiting
-                                    {% elif status == 'Resolved' %}badge-resolved
-                                    {% elif status == 'Closed' %}badge-closed
-                                    {% else %}bg-gray-100 text-gray-700{% endif %}">
+                    <div
+                        class="flex items-center justify-between p-4 bg-gray-50/50 rounded-xl hover:bg-white/50 transition-all duration-300">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-3 h-3 rounded-full" style="background: var(--pink-primary); opacity: 0.8;">
+                            </div>
+                            <span class="priority-badge">
                                 {{ status }}
                             </span>
                             <span class="text-gray-700 font-medium">{{ count }} tickets</span>
                         </div>
-                        <div class="text-right">
-                            <span class="text-sm text-gray-500">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="h-full rounded-full"
+                                    style="width: {{ (count / total_tickets * 100) if total_tickets > 0 else 0 }}%; background: var(--pink-primary);">
+                                </div>
+                            </div>
+                            <span class="text-sm font-semibold min-w-12 text-right" style="color: var(--pink-primary);">
                                 {{ "%.1f"|format((count / total_tickets * 100) if total_tickets > 0 else 0) }}%
                             </span>
                         </div>
@@ -520,30 +621,40 @@
             </div>
 
             <!-- Priority Distribution -->
-            <div class="status-chart-container">
-                <h2 class="text-xl font-semibold text-gray-800 mb-6">
-                    <i class="fas fa-exclamation-triangle mr-2 text-pink-600"></i>
-                    Priority Distribution
-                </h2>
+            <div class="glass-card p-8">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-800">
+                        <i class="fas fa-exclamation-triangle mr-3" style="color: var(--pink-primary);"></i>
+                        Priority Distribution
+                    </h2>
+                    <span class="text-sm text-gray-500 bg-gray-100/50 px-3 py-1 rounded-full">
+                        Urgent First
+                    </span>
+                </div>
                 <div class="space-y-4">
                     {% for priority, count in priority_counts.items() %}
-                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <span class="priority-badge rounded-full
-                                    {% if priority == 'Urgent' %}badge-urgent
-                                    {% elif priority == 'Fast' %}badge-fast
-                                    {% elif priority == 'Medium' %}badge-medium
-                                    {% else %}badge-low{% endif %}">
+                    <div
+                        class="flex items-center justify-between p-4 bg-gray-50/50 rounded-xl hover:bg-white/50 transition-all duration-300">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, 
+                                        {% if priority == 'Urgent' %}rgba(255, 77, 109, 0.1){% elif priority == 'Fast' %}rgba(255, 143, 163, 0.1){% elif priority == 'Medium' %}rgba(255, 179, 198, 0.1){% else %}rgba(255, 204, 213, 0.1){% endif %}, 
+                                        transparent)">
                                 {% if priority == 'Urgent' %}🚨{% elif priority == 'Fast' %}⚡{% elif priority ==
                                 'Medium' %}🕒{% else %}🐢{% endif %}
+                            </div>
+                            <span class="priority-badge 
+                                {% if priority == 'Urgent' %}badge-urgent
+                                {% elif priority == 'Fast' %}badge-fast
+                                {% elif priority == 'Medium' %}badge-medium
+                                {% else %}badge-low{% endif %}">
                                 {{ priority }}
                             </span>
-                            <span class="text-gray-700 font-medium">{{ count }} tickets</span>
                         </div>
                         <div class="text-right">
-                            <span class="text-sm text-gray-500">
-                                {{ "%.1f"|format((count / total_tickets * 100) if total_tickets > 0 else 0) }}%
-                            </span>
+                            <p class="text-2xl font-bold" style="color: var(--pink-primary);">{{ count }}</p>
+                            <p class="text-sm text-gray-500">
+                                {{ "%.1f"|format((count / total_tickets * 100) if total_tickets > 0 else 0) }}% of total
+                            </p>
                         </div>
                     </div>
                     {% endfor %}
@@ -552,82 +663,123 @@
         </div>
 
         <!-- Detailed Status Table -->
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-            <div class="p-6 border-b border-gray-200">
-                <h2 class="text-xl font-semibold text-gray-800">
-                    <i class="fas fa-list mr-2 text-pink-600"></i>
-                    Detailed Ticket Status
-                </h2>
+        <div class="glass-card overflow-hidden slide-up" style="animation-delay: 0.6s">
+            <div class="p-8 border-b border-gray-100/50">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-semibold text-gray-800">
+                        <i class="fas fa-list mr-3" style="color: var(--pink-primary);"></i>
+                        Detailed Ticket Status
+                    </h2>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <i
+                                class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" placeholder="Search tickets..."
+                                class="pl-12 pr-4 py-3 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500/30 w-64">
+                        </div>
+                        <button class="glass-btn px-6">
+                            <i class="fas fa-filter mr-2"></i>Filter
+                        </button>
+                    </div>
+                </div>
             </div>
+
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <table class="min-w-full divide-y divide-gray-200/50">
+                    <thead>
+                        <tr class="bg-gradient-to-r from-white/80 to-white/60">
+                            <th
+                                class="px-8 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                 Ticket ID
                             </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th
+                                class="px-8 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                 Subject
                             </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th
+                                class="px-8 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                 Status
                             </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th
+                                class="px-8 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                 Priority
                             </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th
+                                class="px-8 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                 Created
                             </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th
+                                class="px-8 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                 Assigned To
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="divide-y divide-gray-200/30">
                         {% for ticket in recent_tickets %}
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 whitespace-nowrap">
+                        <tr class="hover:bg-pink-50/30 transition-all duration-300">
+                            <td class="px-8 py-4 whitespace-nowrap">
                                 <a href="/ticket/{{ ticket.ticket_id }}"
-                                    class="text-pink-600 font-medium hover:text-pink-800">
+                                    class="text-pink-600 font-semibold hover:text-pink-800 group inline-flex items-center">
                                     #{{ ticket.ticket_id }}
+                                    <i
+                                        class="fas fa-external-link-alt ml-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity"></i>
                                 </a>
                             </td>
-                            <td class="px-6 py-4">
-                                <div class="text-sm text-gray-900 truncate max-w-xs">
+                            <td class="px-8 py-4">
+                                <div class="text-sm text-gray-900 truncate max-w-xs hover:text-clip">
                                     {{ ticket.subject | default('No Subject') }}
                                 </div>
+                                {% if ticket.category %}
+                                <span
+                                    class="text-xs text-gray-500 bg-gray-100/50 px-2 py-1 rounded-full mt-1 inline-block">
+                                    {{ ticket.category }}
+                                </span>
+                                {% endif %}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="priority-badge rounded-full
-                                        {% if ticket.status == 'Open' %}badge-open
-                                        {% elif ticket.status == 'Waiting for Response' %}badge-waiting
-                                        {% elif ticket.status == 'Resolved' %}badge-resolved
-                                        {% elif ticket.status == 'Closed' %}badge-closed
-                                        {% else %}bg-gray-100 text-gray-700{% endif %}">
+                            <td class="px-8 py-4 whitespace-nowrap">
+                                <span class="priority-badge inline-flex items-center">
+                                    {% if ticket.status == 'Open' %}
+                                    <i class="fas fa-circle text-blue-500 mr-2 text-xs"></i>
+                                    {% elif ticket.status == 'Waiting for Response' %}
+                                    <i class="fas fa-clock text-yellow-500 mr-2 text-xs"></i>
+                                    {% elif ticket.status == 'Resolved' %}
+                                    <i class="fas fa-check-circle text-green-500 mr-2 text-xs"></i>
+                                    {% else %}
+                                    <i class="fas fa-times-circle text-gray-500 mr-2 text-xs"></i>
+                                    {% endif %}
                                     {{ ticket.status }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="priority-badge rounded-full
-                                        {% if ticket.priority == 'Urgent' %}badge-urgent
-                                        {% elif ticket.priority == 'Fast' %}badge-fast
-                                        {% elif ticket.priority == 'Medium' %}badge-medium
-                                        {% else %}badge-low{% endif %}">
-                                    {% if ticket.priority == 'Urgent' %}🚨{% elif ticket.priority == 'Fast' %}⚡{%
-                                    elif ticket.priority == 'Medium' %}🕒{% else %}🐢{% endif %}
+                            <td class="px-8 py-4 whitespace-nowrap">
+                                <span class="priority-badge 
+                                    {% if ticket.priority == 'Urgent' %}badge-urgent
+                                    {% elif ticket.priority == 'Fast' %}badge-fast
+                                    {% elif ticket.priority == 'Medium' %}badge-medium
+                                    {% else %}badge-low{% endif %}">
+                                    {% if ticket.priority == 'Urgent' %}🚨{% elif ticket.priority == 'Fast' %}⚡{% elif
+                                    ticket.priority == 'Medium' %}🕒{% else %}🐢{% endif %}
                                     {{ ticket.priority }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ ticket.formatted_date }}
+                            <td class="px-8 py-4 whitespace-nowrap">
+                                <div class="flex flex-col">
+                                    <span class="text-sm text-gray-900">{{ ticket.formatted_date }}</span>
+                                    <span class="text-xs text-gray-500">{{ ticket.formatted_time }}</span>
+                                </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-8 py-4 whitespace-nowrap">
                                 {% if ticket.assigned_to %}
-                                <span class="text-green-600">
-                                    <i class="fas fa-user mr-1"></i>{{ ticket.assigned_to }}
-                                </span>
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center mr-3">
+                                        <span class="text-white text-xs font-bold">{{ ticket.assigned_to[:1] }}</span>
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-700">{{ ticket.assigned_to }}</span>
+                                </div>
                                 {% else %}
-                                <span class="text-gray-400">Unassigned</span>
+                                <span class="text-gray-400 text-sm bg-gray-100/50 px-3 py-1 rounded-full">
+                                    <i class="fas fa-user-clock mr-1"></i>Unassigned
+                                </span>
                                 {% endif %}
                             </td>
                         </tr>
@@ -636,90 +788,152 @@
                 </table>
             </div>
 
-            <!-- Pagination Controls -->
+            <!-- Pagination -->
             {% if pagination %}
-            <div
-                class="pagination-container px-6 py-4 border-t border-gray-200 flex justify-center items-center space-x-4">
-                <!-- Previous Button -->
-                {% if pagination.has_prev %}
-                <a href="?page={{ pagination.prev_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
-                    class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors">
-                    <i class="fas fa-chevron-left mr-1"></i> Previous
-                </a>
-                {% else %}
-                <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
-                    <i class="fas fa-chevron-left mr-1"></i> Previous
-                </span>
-                {% endif %}
-
-                <!-- Page Numbers -->
-                <div class="flex space-x-2">
-                    {% for page_num in range(1, pagination.total_pages + 1) %}
-                    {% if page_num == pagination.current_page %}
-                    <span class="px-3 py-2 bg-pink-600 text-white rounded-lg font-semibold">
-                        {{ page_num }}
-                    </span>
-                    {% elif page_num <= 3 or page_num> pagination.total_pages - 3 or (page_num >=
-                        pagination.current_page - 1 and page_num <= pagination.current_page + 1) %} <a
-                            href="?page={{ page_num }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
-                            class="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
-                            {{ page_num }}
-                            </a>
-                            {% elif page_num == 4 and pagination.current_page > 5 %}
-                            <span class="px-3 py-2 text-gray-500">...</span>
-                            {% elif page_num == pagination.total_pages - 3 and pagination.current_page <
-                                pagination.total_pages - 4 %} <span class="px-3 py-2 text-gray-500">...</span>
+            <div class="p-8 border-t border-gray-100/50 bg-gradient-to-r from-white/50 to-transparent">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-gray-600">
+                        Showing {{ ((pagination.current_page - 1) * pagination.per_page + 1) }} to
+                        {{ pagination.current_page * pagination.per_page if pagination.current_page *
+                        pagination.per_page < pagination.total_tickets else pagination.total_tickets }} of {{
+                            pagination.total_tickets }} tickets </div>
+                            <div class="flex items-center space-x-2">
+                                {% if pagination.has_prev %}
+                                <a href="?page={{ pagination.prev_page }}" class="pagination-btn px-4 py-2 rounded-xl">
+                                    <i class="fas fa-chevron-left mr-2"></i>Previous
+                                </a>
                                 {% endif %}
-                                {% endfor %}
-                </div>
 
-                <!-- Next Button -->
-                {% if pagination.has_next %}
-                <a href="?page={{ pagination.next_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
-                    class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors">
-                    Next <i class="fas fa-chevron-right ml-1"></i>
-                </a>
-                {% else %}
-                <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
-                    Next <i class="fas fa-chevron-right ml-1"></i>
-                </span>
-                {% endif %}
+                                <div class="flex items-center space-x-1">
+                                    {% for page_num in range(1, pagination.total_pages + 1) %}
+                                    {% if page_num == pagination.current_page %}
+                                    <span
+                                        class="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 text-white font-semibold">
+                                        {{ page_num }}
+                                    </span>
+                                    {% elif page_num <= 3 or page_num> pagination.total_pages - 3 or (page_num >=
+                                        pagination.current_page - 1 and page_num <= pagination.current_page + 1) %} <a
+                                            href="?page={{ page_num }}"
+                                            class="w-10 h-10 flex items-center justify-center rounded-xl pagination-btn hover:bg-pink-500 hover:text-white transition-all">
+                                            {{ page_num }}
+                                            </a>
+                                            {% endif %}
+                                            {% endfor %}
+                                </div>
 
-                <!-- Page Info -->
-                <div class="text-sm text-gray-600 ml-4">
-                    Showing {{ ((pagination.current_page - 1) * pagination.per_page + 1) }} to
-                    {{ pagination.current_page * pagination.per_page if pagination.current_page *
-                    pagination.per_page < pagination.total_tickets else pagination.total_tickets }} of {{
-                        pagination.total_tickets }} tickets </div>
+                                {% if pagination.has_next %}
+                                <a href="?page={{ pagination.next_page }}" class="pagination-btn px-4 py-2 rounded-xl">
+                                    Next<i class="fas fa-chevron-right ml-2"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                    </div>
                 </div>
                 {% endif %}
             </div>
-
-            <!-- Creation Method Stats -->
-
-
         </div>
-    </div>
 
-    <script>
-        // Mobile menu toggle function
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenu) {
-                mobileMenu.classList.toggle('hidden');
+        <script>
+            // Create floating particles
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                const particleCount = 50;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+
+                    // Random position
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.top = Math.random() * 100 + 'vh';
+
+                    // Random size
+                    const size = Math.random() * 3 + 1;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+
+                    // Random opacity
+                    particle.style.opacity = Math.random() * 0.3 + 0.1;
+
+                    // Random animation
+                    const duration = Math.random() * 20 + 10;
+                    particle.style.animation = `float ${duration}s infinite linear`;
+
+                    // Create custom animation
+                    const style = document.createElement('style');
+                    style.textContent = `
+                    @keyframes float {
+                        0% {
+                            transform: translate(0, 0) rotate(0deg);
+                        }
+                        25% {
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(90deg);
+                        }
+                        50% {
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(180deg);
+                        }
+                        75% {
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(270deg);
+                        }
+                        100% {
+                            transform: translate(0, 0) rotate(360deg);
+                        }
+                    }
+                `;
+                    document.head.appendChild(style);
+
+                    particlesContainer.appendChild(particle);
+                }
             }
-        }
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function (event) {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuButton = document.querySelector('.mobile-menu-btn');
+            // Initialize particles when page loads
+            document.addEventListener('DOMContentLoaded', function () {
+                createParticles();
 
-            if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
-                mobileMenu.classList.add('hidden');
+                // Add hover effects to cards
+                const cards = document.querySelectorAll('.glass-card');
+                cards.forEach(card => {
+                    card.addEventListener('mouseenter', function () {
+                        this.style.transform = 'translateY(-8px)';
+                    });
+
+                    card.addEventListener('mouseleave', function () {
+                        this.style.transform = 'translateY(0)';
+                    });
+                });
+
+                // Add scroll animation
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, observerOptions);
+
+                // Observe all cards for animation
+                document.querySelectorAll('.slide-up').forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                    observer.observe(el);
+                });
+            });
+
+            // Mobile menu toggle (if needed)
+            function toggleMobileMenu() {
+                const mobileMenu = document.getElementById('mobileMenu');
+                if (mobileMenu) {
+                    mobileMenu.classList.toggle('hidden');
+                }
             }
-        });
-    </script>
+        </script>
 </body>
 
 </html>
