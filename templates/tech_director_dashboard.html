@@ -7,155 +7,401 @@
     <title>Technical Director Dashboard - AutoAssistGroup</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
+        /* ===== ENHANCED PINK GLASS DESIGN SYSTEM ===== */
+        :root {
+            /* Enhanced Pink Color Palette */
+            --pink-primary: #ff2d55;
+            --pink-secondary: #ff5c8d;
+            --pink-light: #ff87ab;
+            --pink-lighter: #ffc2d6;
+            --pink-glass: rgba(255, 45, 85, 0.1);
+            --glass-white: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: rgba(255, 45, 85, 0.15);
 
-        /* Normal base font size - READABLE */
+            /* Priority Colors with Pink Tones */
+            --urgent: #ff4d6d;
+            --high: #ff8fa3;
+            --medium: #ffb3c6;
+            --low: #ffccd5;
+
+            /* Gradients */
+            --gradient-pink: linear-gradient(135deg, #ff2d55 0%, #ff5c8d 100%);
+            --gradient-director: linear-gradient(135deg, #ff2d55 0%, #9c27b0 100%);
+
+            /* Shadows */
+            --shadow-pink: 0 10px 40px rgba(255, 45, 85, 0.15);
+            --shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.15);
+            --shadow-hover: 0 20px 60px rgba(255, 45, 85, 0.25);
+        }
+
+        /* ===== ENHANCED BACKGROUND WITH PINK GRADIENTS ===== */
         body {
-            font-size: 1rem !important;
-            line-height: 1.5 !important;
+            font-family: 'Poppins', sans-serif !important;
+            background: linear-gradient(135deg, #ffe0e9 0%, #fff0f6 50%, #ffeef7 100%);
+            min-height: 100vh;
         }
 
-        /* Normal Cards */
-        .dashboard-card,
-        .ticket-card,
-        .stats-card {
-            padding: 1rem !important;
-            margin-bottom: 1rem !important;
-            border-radius: 0.5rem !important;
-            transition: all 0.3s ease;
-            border-left: 4px solid #e5e7eb;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            min-width: 0;
-            box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.08);
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
         }
 
-        /* Normal Buttons */
-        button,
-        .btn {
-            padding: 0.75rem 1.5rem !important;
-            font-size: 0.875rem !important;
-            border-radius: 0.375rem !important;
+        /* Director Gradient Orbs */
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.4;
+            mix-blend-mode: soft-light;
+            animation: floatOrb 30s ease-in-out infinite;
         }
 
-        /* Normal Headers */
-        h1 {
-            font-size: 1.875rem !important;
+        .orb-1 {
+            width: 800px;
+            height: 800px;
+            background: var(--gradient-director);
+            top: -20%;
+            left: -15%;
+            animation-delay: 0s;
         }
 
-        h2 {
-            font-size: 1.5rem !important;
+        .orb-2 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #9c27b0 0%, #e91e63 100%);
+            bottom: -20%;
+            right: -10%;
+            animation-delay: -10s;
         }
 
-        h3 {
-            font-size: 1.25rem !important;
+        .orb-3 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #ff87ab 0%, #fff0f6 100%);
+            top: 60%;
+            right: 25%;
+            animation-delay: -20s;
+            opacity: 0.3;
         }
 
-        h4 {
-            font-size: 1.125rem !important;
+        @keyframes floatOrb {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(50px, -50px) scale(1.1) rotate(120deg);
+            }
+
+            66% {
+                transform: translate(-30px, 30px) scale(0.95) rotate(240deg);
+            }
         }
 
-        /* Normal Icons */
-        .fas,
-        .fab,
-        .far {
-            font-size: 1.25rem !important;
+        /* ===== PINK NOISE TEXTURE ===== */
+        .pink-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(255, 45, 85, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(156, 39, 176, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(255, 135, 171, 0.1) 0%, transparent 20%);
+            background-size: 200% 200%;
+            animation: noiseMove 20s linear infinite;
         }
 
-        .ticket-card:hover {
+        @keyframes noiseMove {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        /* ===== ENHANCED GLASS COMPONENTS ===== */
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.03),
+                0 1px 3px rgba(0, 0, 0, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow:
+                var(--shadow-hover),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border-color: rgba(255, 45, 85, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+        }
+
+        /* ===== ENHANCED NAVBAR WITH GLASS EFFECT ===== */
+        nav {
+            background: rgba(255, 255, 255, 0.6) !important;
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow:
+                0 4px 30px rgba(255, 45, 85, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        /* Enhanced Nav Links */
+        .nav-link {
+            position: relative;
+            padding: 0.75rem 1.25rem !important;
+            border-radius: 16px !important;
+            color: #666 !important;
+            font-weight: 500 !important;
+            font-size: 0.9375rem !important;
+            transition: all 0.3s ease !important;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 45, 85, 0.1);
+            color: var(--pink-primary) !important;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border-left-color: #f59e0b;
+            box-shadow: 0 4px 12px rgba(255, 45, 85, 0.15);
+        }
+
+        .nav-link-active {
+            background: linear-gradient(135deg, rgba(255, 45, 85, 0.15), rgba(255, 92, 141, 0.1)) !important;
+            color: var(--pink-primary) !important;
+            border: 1px solid rgba(255, 45, 85, 0.2);
+            box-shadow: 0 4px 20px rgba(255, 45, 85, 0.2);
+        }
+
+        /* ===== DIRECTOR-SPECIFIC STYLES ===== */
+        .director-header {
+            background: linear-gradient(135deg,
+                    rgba(255, 45, 85, 0.9),
+                    rgba(156, 39, 176, 0.8));
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .director-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .director-badge {
+            background: linear-gradient(135deg, rgba(255, 45, 85, 0.15), rgba(156, 39, 176, 0.1));
+            border: 1px solid rgba(255, 45, 85, 0.2);
+            color: var(--pink-primary);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(20px);
+        }
+
+        /* ===== ENHANCED BUTTONS ===== */
+        .glass-btn {
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-secondary));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 600;
+            padding: 0.875rem 2rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            box-shadow:
+                0 4px 20px rgba(255, 45, 85, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-btn:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 8px 30px rgba(255, 45, 85, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, var(--pink-secondary), var(--pink-light));
+        }
+
+        /* ===== PRIORITY BADGES ===== */
+        .priority-badge {
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
         }
 
         .priority-urgent {
-            border-left-color: #ef4444;
+            background: linear-gradient(135deg, rgba(255, 77, 109, 0.15), rgba(255, 77, 109, 0.1));
+            color: #ff4d6d;
         }
 
         .priority-high {
-            border-left-color: #f97316;
+            background: linear-gradient(135deg, rgba(255, 143, 163, 0.15), rgba(255, 143, 163, 0.1));
+            color: #ff8fa3;
         }
 
         .priority-medium {
-            border-left-color: #eab308;
+            background: linear-gradient(135deg, rgba(255, 179, 198, 0.15), rgba(255, 179, 198, 0.1));
+            color: #ffb3c6;
         }
 
         .priority-low {
-            border-left-color: #22c55e;
+            background: linear-gradient(135deg, rgba(255, 204, 213, 0.15), rgba(255, 204, 213, 0.1));
+            color: #ffccd5;
         }
 
-        /* Comprehensive Responsive Design */
-        /* Small mobile devices (320px - 480px) */
-        @media (max-width: 480px) {
+        /* ===== TICKET CARDS ===== */
+        .ticket-card {
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .ticket-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg,
+                    rgba(255, 45, 85, 0.05) 0%,
+                    rgba(255, 92, 141, 0.03) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .ticket-card:hover::before {
+            opacity: 1;
+        }
+
+        .ticket-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(255, 45, 85, 0.15);
+        }
+
+        /* ===== FLOATING PARTICLES ===== */
+        .floating-particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--pink-primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(0.5px);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .glass-card {
+                backdrop-filter: blur(20px);
+                border-radius: 20px;
+                padding: 1.5rem !important;
+            }
+
+            .nav-link {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.875rem !important;
+            }
+
+            .director-header {
+                padding: 1.5rem 1rem !important;
+            }
+
             .ticket-card {
-                padding: 1rem;
-                margin-bottom: 1rem;
+                padding: 1.5rem !important;
             }
 
-            .ticket-card h3 {
-                font-size: 1rem;
-                line-height: 1.4;
-            }
-
-            .ticket-card .grid {
-                grid-template-columns: 1fr;
-                gap: 0.75rem;
-            }
-
-            .ticket-card .flex-col {
-                gap: 0.5rem;
-            }
-
-            .ticket-card .flex-col a,
-            .ticket-card .flex-col button {
-                text-align: center;
-                padding: 0.75rem 1rem;
-                font-size: 0.875rem;
-            }
-
-            /* Stats cards responsive */
-            .stats-overview {
-                grid-template-columns: 1fr;
-                gap: 1rem;
+            .grid-responsive {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
             }
         }
 
-        /* Mobile devices (481px - 768px) */
-        @media (min-width: 481px) and (max-width: 768px) {
-            .ticket-card {
-                padding: 1.25rem;
-            }
-
-            .ticket-card .grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .stats-overview {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Tablet devices (769px - 1024px) */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .ticket-card .grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stats-overview {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Desktop devices (1025px+) */
-        @media (min-width: 1025px) {
-            .ticket-card .grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Line clamp utilities for text truncation */
+        /* ===== LINE CLAMP UTILITIES ===== */
         .line-clamp-1 {
             display: -webkit-box;
             -webkit-line-clamp: 1;
@@ -179,81 +425,39 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
-        /* ===== UNIVERSAL NAVBAR STYLES ===== */
-        nav {
-            background: rgba(255, 255, 255, 0.7) !important;
-            backdrop-filter: saturate(180%) blur(20px) !important;
-            -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-            min-height: auto;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav .responsive-container {
-            padding-top: 0.5rem !important;
-            padding-bottom: 0.5rem !important;
-        }
-
-        /* Nav link base styles */
-        .nav-link {
-            padding: 0.5rem 1rem !important;
-            border-radius: 0.5rem !important;
-            color: #4b5563 !important;
-            /* gray-600 */
-            font-weight: 500 !important;
-            font-size: 0.875rem !important;
-            transition: all 0.2s ease !important;
-            display: inline-flex !important;
-            align-items: center !important;
-        }
-
-        .nav-link:hover {
-            background: rgba(0, 0, 0, 0.04) !important;
-            transform: translateY(-1px);
-        }
-
-        .nav-link-active {
-            background: rgba(255, 45, 85, 0.1) !important;
-            color: #FF2D55 !important;
-            /* Apple Pink */
-        }
-
-        /* Responsive container with max-width for 1920px optimization */
-        .responsive-container {
-            max-width: 1920px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        @media (min-width: 640px) {
-            .responsive-container {
-                padding: 0 1.5rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .responsive-container {
-                padding: 0 2rem;
-            }
-        }
     </style>
 </head>
 
-<body class="bg-gray-50">
+<body class="min-h-screen">
+    <!-- Enhanced Pink Glass Background -->
+    <div class="background-layer">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="pink-noise"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="floating-particles" id="particles"></div>
+
     <!-- Navigation -->
-    <nav>
-        <div class="responsive-container">
-            <div class="flex justify-between items-center h-12 md:h-14">
+    <nav class="sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-8">
-                    <a href="/" class="flex items-center">
-                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8">
+                    <a href="/" class="flex items-center space-x-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center">
+                            <i class="fas fa-car text-white text-lg"></i>
+                        </div>
+                        <span
+                            class="text-xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                            AutoAssist
+                        </span>
                     </a>
                     <div class="hidden md:flex items-center space-x-2">
                         <a href="/" class="nav-link">Tickets</a>
-                        <a href="/dashboard" class="nav-link nav-link-active">Dashboard</a>
+                        <a href="/dashboard" class="nav-link">Dashboard</a>
                         <a href="/status" class="nav-link">Status</a>
                         <a href="/create-ticket" class="nav-link">Create Ticket</a>
                         {% if current_user_role == 'Administrator' %}
@@ -263,23 +467,24 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="flex items-center space-x-2 md:space-x-4">
+                <div class="flex items-center space-x-4">
                     {% if current_user %}
-                    <span class="hidden sm:inline text-gray-500 text-xs font-medium uppercase tracking-wider">{{
-                        current_user }}</span>
-                    <a href="/logout" class="nav-link bg-gray-100/50 hover:bg-gray-200/50 text-gray-700">Logout</a>
+                    <div
+                        class="hidden sm:flex items-center space-x-3 px-4 py-2 rounded-xl bg-white/30 backdrop-blur-sm">
+                        <div
+                            class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center">
+                            <i class="fas fa-user text-white text-sm"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700">{{ current_user }}</span>
+                    </div>
+                    <a href="/logout" class="glass-btn text-sm px-4 py-2">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </a>
                     {% else %}
-                    <a href="/login" class="nav-link bg-pink-500 hover:bg-pink-600 text-white">Login</a>
+                    <a href="/login" class="glass-btn">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    </a>
                     {% endif %}
-
-                    <!-- Mobile menu button -->
-                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn"
-                        onclick="toggleMobileMenu()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
                 </div>
             </div>
 
@@ -299,73 +504,103 @@
             </div>
         </div>
     </nav>
-    <!-- Header -->
-    <div class="bg-white shadow-sm border-b">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center space-x-3 sm:space-x-4">
+
+    <!-- Director Header -->
+    <div class="director-header py-12 px-4 sm:px-6 lg:px-8 text-white fade-in">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <i class="fas fa-user-tie text-2xl"></i>
+                    </div>
                     <div>
-                        <h1 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900">Technical Director Dashboard
-                        </h1>
-                        <p class="text-xs sm:text-sm text-gray-600">Review tickets and provide technical feedback</p>
+                        <h1 class="text-3xl md:text-4xl font-bold">Technical Director Dashboard</h1>
+                        <p class="text-pink-100/80 mt-2 text-lg">Review tickets and provide technical feedback</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-2 sm:space-x-4">
+                <div class="hidden lg:flex items-center space-x-3">
+                    <span class="director-badge">
+                        <i class="fas fa-star mr-2"></i>Director Access
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <!-- Stats Overview -->
-        <div class="stats-overview grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10">
-            <div class="bg-white rounded-xl shadow-md p-8 border border-gray-100">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 slide-up" style="animation-delay: 0.1s">
+            <!-- Referred Tickets Card -->
+            <div class="glass-card p-8">
                 <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-amber-100 mr-4">
-                        <i class="fas fa-exclamation-triangle text-amber-600 text-xl"></i>
+                    <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-500/10 to-amber-600/10 mr-4">
+                        <i class="fas fa-exclamation-triangle text-2xl text-amber-600"></i>
                     </div>
                     <div>
-                        <h3 class="text-xs sm:text-sm font-medium text-gray-500">Referred Tickets</h3>
-                        <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ total_referred }}</p>
+                        <h3 class="font-medium text-gray-600 text-sm uppercase tracking-wider">Referred Tickets</h3>
+                        <p class="text-3xl font-bold text-gray-800 mt-2">{{ total_referred }}</p>
+                        <div class="mt-4 pt-4 border-t border-gray-100/50">
+                            <div class="text-sm text-gray-500 flex items-center">
+                                <i class="fas fa-history mr-2"></i>
+                                Awaiting technical review
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-md p-8 border border-gray-100">
+            <!-- Pending Review Card -->
+            <div class="glass-card p-8" style="animation-delay: 0.2s">
                 <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-blue-100 mr-4">
-                        <i class="fas fa-clock text-blue-600 text-xl"></i>
+                    <div class="p-4 rounded-2xl bg-gradient-to-br from-blue-500/10 to-blue-600/10 mr-4">
+                        <i class="fas fa-clock text-2xl text-blue-600"></i>
                     </div>
                     <div>
-                        <h3 class="text-xs sm:text-sm font-medium text-gray-500">Pending Review</h3>
-                        <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ total_referred }}</p>
-                        <p class="text-xs text-gray-500">Awaiting your review</p>
+                        <h3 class="font-medium text-gray-600 text-sm uppercase tracking-wider">Pending Review</h3>
+                        <p class="text-3xl font-bold text-gray-800 mt-2">{{ total_referred }}</p>
+                        <div class="mt-4 pt-4 border-t border-gray-100/50">
+                            <div class="text-sm text-gray-500 flex items-center">
+                                <i class="fas fa-user-clock mr-2"></i>
+                                Awaiting your expert review
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-md p-8 border border-gray-100">
+            <!-- Forwarded Out Card -->
+            <div class="glass-card p-8" style="animation-delay: 0.3s">
                 <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-green-100 mr-4">
-                        <i class="fas fa-share text-green-600 text-xl"></i>
+                    <div class="p-4 rounded-2xl bg-gradient-to-br from-green-500/10 to-green-600/10 mr-4">
+                        <i class="fas fa-share text-2xl text-green-600"></i>
                     </div>
                     <div>
-                        <h3 class="text-xs sm:text-sm font-medium text-gray-500">Forwarded Out</h3>
-                        <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ forwarded_to_others|default(0) }}</p>
-                        <p class="text-xs text-gray-500">Already forwarded to team</p>
+                        <h3 class="font-medium text-gray-600 text-sm uppercase tracking-wider">Forwarded Out</h3>
+                        <p class="text-3xl font-bold text-gray-800 mt-2">{{ forwarded_to_others|default(0) }}</p>
+                        <div class="mt-4 pt-4 border-t border-gray-100/50">
+                            <div class="text-sm text-gray-500 flex items-center">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                Already forwarded to team
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Info Banner (only show if there are forwarded tickets) -->
+        <!-- Info Banner -->
         {% if forwarded_to_others and forwarded_to_others > 0 %}
-        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-            <div class="flex items-center">
+        <div class="glass-card p-6 bg-gradient-to-r from-blue-50/50 to-indigo-50/50 border-blue-200/50 slide-up"
+            style="animation-delay: 0.4s">
+            <div class="flex items-start space-x-4">
                 <div class="flex-shrink-0">
-                    <i class="fas fa-info-circle text-blue-600"></i>
+                    <div
+                        class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                        <i class="fas fa-info-circle text-white"></i>
+                    </div>
                 </div>
-                <div class="ml-3">
+                <div class="flex-1">
                     <p class="text-sm text-blue-800">
                         <strong>{{ forwarded_to_others }} ticket{% if forwarded_to_others != 1 %}s{% endif %}</strong>
                         that {% if forwarded_to_others == 1 %}was{% else %}were{% endif %} originally referred to you {%
@@ -378,123 +613,283 @@
         {% endif %}
 
         <!-- Referred Tickets List -->
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-200">
-                <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-                    <i class="fas fa-list-alt mr-2 text-gray-600"></i>
-                    Active Tickets Requiring Technical Review
-                </h2>
-                <p class="text-sm text-gray-500 mt-1">Only showing tickets that haven't been forwarded to other team
-                    members</p>
+        <div class="glass-card overflow-hidden slide-up" style="animation-delay: 0.5s">
+            <div class="p-8 border-b border-gray-100/50 bg-gradient-to-r from-white/60 to-transparent">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-gray-800">
+                            <i class="fas fa-list-alt mr-3" style="color: var(--pink-primary);"></i>
+                            Active Tickets Requiring Technical Review
+                        </h2>
+                        <p class="text-sm text-gray-500 mt-2">Only showing tickets that haven't been forwarded to other
+                            team members</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <i
+                                class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" placeholder="Search tickets..."
+                                class="pl-12 pr-4 py-3 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500/30 w-64">
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {% if tickets %}
-            <div class="divide-y divide-gray-200">
+            <div class="divide-y divide-gray-200/30">
                 {% for ticket in tickets %}
-                <div class="ticket-card p-6 priority-{{ ticket.priority|lower if ticket.priority else 'medium' }}">
-                    <div class="flex items-start justify-between">
-                        <div class="flex-1">
-                            <div class="flex items-start space-x-3 mb-2">
-                                <h3 class="text-lg font-semibold text-gray-900 break-words line-clamp-2 min-w-0 flex-1">
-                                    <span
-                                        class="font-bold text-blue-800 bg-blue-50 px-2 py-1 rounded border border-blue-200 text-sm mr-2 inline-block">
+                <div class="ticket-card glass-card m-6 border-l-4 
+                    {% if ticket.priority == 'Urgent' %}border-red-500
+                    {% elif ticket.priority == 'High' %}border-orange-500
+                    {% elif ticket.priority == 'Medium' %}border-yellow-500
+                    {% elif ticket.priority == 'Low' %}border-green-500
+                    {% else %}border-gray-400{% endif %}">
+                    <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+                        <!-- Ticket Info -->
+                        <div class="flex-1 min-w-0">
+                            <!-- Header -->
+                            <div class="flex flex-wrap items-start gap-3 mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-sm font-bold text-gray-700 bg-gray-100/50 px-3 py-1.5 rounded-xl">
                                         <i class="fas fa-hashtag mr-1"></i>{{ ticket.ticket_id }}
                                     </span>
-                                    <span class="break-words">- {{ ticket.subject|default('No Subject') }}</span>
-                                </h3>
+                                    <span class="priority-badge 
+                                        {% if ticket.priority == 'Urgent' %}priority-urgent
+                                        {% elif ticket.priority == 'High' %}priority-high
+                                        {% elif ticket.priority == 'Medium' %}priority-medium
+                                        {% else %}priority-low{% endif %}">
+                                        <i class="fas fa-flag mr-2"></i>{{ ticket.priority|default('Medium') }}
+                                    </span>
+                                </div>
 
-                                <!-- Priority Badge -->
-                                {% if ticket.priority %}
-                                <span class="px-2 py-1 text-xs rounded-full font-medium
-                                    {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
-                                    {% elif ticket.priority == 'High' %}bg-orange-100 text-orange-800
-                                    {% elif ticket.priority == 'Medium' %}bg-yellow-100 text-yellow-800
-                                    {% elif ticket.priority == 'Low' %}bg-green-100 text-green-800
-                                    {% else %}bg-gray-100 text-gray-800{% endif %}">
-                                    <i class="fas fa-flag mr-1"></i>{{ ticket.priority }}
-                                </span>
-                                {% endif %}
-
-                                <!-- Status Badge -->
-                                <span class="px-2 py-1 text-xs rounded-full font-medium bg-amber-100 text-amber-800">
-                                    <i class="fas fa-user-tie mr-1"></i>Referred from {{
+                                <span class="director-badge text-sm">
+                                    <i class="fas fa-user-tie mr-2"></i>Referred from {{
                                     ticket.forwarded_from_name|default('Unknown') }}
                                 </span>
                             </div>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4">
-                                <div class="min-w-0">
-                                    <p class="text-sm text-gray-500">Customer</p>
-                                    <p class="font-medium truncate">{{ ticket.name|default('Unknown') }}</p>
+                            <!-- Subject -->
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4 line-clamp-2">
+                                {{ ticket.subject|default('No Subject') }}
+                            </h3>
+
+                            <!-- Grid Info -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                                <!-- Customer Info -->
+                                <div class="space-y-2">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-user text-gray-400"></i>
+                                        <span class="text-sm text-gray-500">Customer</span>
+                                    </div>
+                                    <p class="font-medium text-gray-800 truncate">{{ ticket.name|default('Unknown') }}
+                                    </p>
                                     <p class="text-sm text-gray-600 truncate">{{ ticket.email|default('No email') }}</p>
                                 </div>
-                                <div class="min-w-0">
-                                    <p class="text-sm text-gray-500">Vehicle Registration</p>
-                                    <p class="font-medium truncate">{{ ticket.vehicle_registration|default('Not
-                                        specified') }}</p>
+
+                                <!-- Vehicle Info -->
+                                <div class="space-y-2">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-car text-gray-400"></i>
+                                        <span class="text-sm text-gray-500">Vehicle Registration</span>
+                                    </div>
+                                    <p class="font-medium text-gray-800 truncate">
+                                        {{ ticket.vehicle_registration|default('Not specified') }}
+                                    </p>
                                 </div>
-                                <div class="min-w-0">
-                                    <p class="text-sm text-gray-500">Referred Date</p>
-                                    <p class="font-medium truncate">{{ ticket.formatted_date|default('Unknown') }}</p>
+
+                                <!-- Date Info -->
+                                <div class="space-y-2">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-calendar text-gray-400"></i>
+                                        <span class="text-sm text-gray-500">Referred Date</span>
+                                    </div>
+                                    <p class="font-medium text-gray-800 truncate">
+                                        {{ ticket.formatted_date|default('Unknown') }}
+                                    </p>
                                 </div>
                             </div>
 
-                            <div class="mb-4">
-                                <p class="text-sm text-gray-500 mb-1">Issue Summary</p>
-                                <p class="text-gray-700 break-words line-clamp-3">{{ ticket.body|default('No description
-                                    available')|truncate(200) }}</p>
+                            <!-- Issue Summary -->
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-file-alt text-gray-400"></i>
+                                    <span class="text-sm text-gray-500">Issue Summary</span>
+                                </div>
+                                <div class="bg-gray-50/50 rounded-xl p-4">
+                                    <p class="text-gray-700 break-words line-clamp-3">
+                                        {{ ticket.body|default('No description available')|truncate(300) }}
+                                    </p>
+                                    <div class="mt-2 flex items-center text-sm text-gray-500">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        {{ ticket.body|length if ticket.body else 0 }} characters
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="flex flex-col space-y-2 mt-4 sm:mt-0 sm:ml-6">
-                            <a href="/ticket/{{ ticket.ticket_id }}"
-                                class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition flex items-center justify-center">
-                                <i class="fas fa-cogs mr-1 sm:mr-2"></i> <span class="hidden sm:inline">Review &
-                                </span>Manage
+                        <!-- Action Buttons -->
+                        <div class="lg:w-64 flex flex-col space-y-3">
+                            <a href="/ticket/{{ ticket.ticket_id }}" class="glass-btn text-center">
+                                <i class="fas fa-cogs mr-2"></i>Review & Manage
                             </a>
+
+                            <div class="flex flex-col space-y-2">
+                                <button
+                                    class="w-full bg-white/80 hover:bg-white border border-gray-300 text-gray-700 px-4 py-3 rounded-xl font-medium transition-all hover:shadow-lg">
+                                    <i class="fas fa-forward mr-2"></i>Forward to Team
+                                </button>
+
+                                <button
+                                    class="w-full bg-white/80 hover:bg-white border border-gray-300 text-gray-700 px-4 py-3 rounded-xl font-medium transition-all hover:shadow-lg">
+                                    <i class="fas fa-comment-medical mr-2"></i>Add Technical Note
+                                </button>
+                            </div>
+
+                            <div class="pt-4 border-t border-gray-200/50">
+                                <div class="text-xs text-gray-500">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-history mr-2"></i>
+                                        Last updated: {{ ticket.formatted_date }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
             {% else %}
-            <div class="text-center py-12">
-                <div class="mb-4">
-                    <i class="fas fa-clipboard-check text-gray-400 text-6xl"></i>
+            <!-- Empty State -->
+            <div class="text-center py-16">
+                <div class="mb-6">
+                    <div
+                        class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
+                        <i class="fas fa-clipboard-check text-emerald-600 text-3xl"></i>
+                    </div>
                 </div>
-                <h3 class="text-lg font-medium text-gray-900 mb-2">No Tickets Awaiting Review</h3>
-                <p class="text-gray-500">All technical reviews are up to date!</p>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3">No Tickets Awaiting Review</h3>
+                <p class="text-gray-500 max-w-md mx-auto mb-6">
+                    All technical reviews are up to date! You're all caught up with your technical responsibilities.
+                </p>
+                <div class="space-y-3 max-w-sm mx-auto">
+                    <div class="text-sm text-gray-500 bg-gray-50/50 p-4 rounded-xl">
+                        <i class="fas fa-lightbulb text-amber-500 mr-2"></i>
+                        Check back later for new technical referrals
+                    </div>
+                </div>
             </div>
             {% endif %}
         </div>
     </div>
 
     <script>
-        // Tech Director Dashboard - Simplified for standard review workflow
-        console.log('Tech Director Dashboard loaded - Using standard review process');
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
 
-        // PERFORMANCE FIX: Reduced auto-refresh to 15 minutes instead of 5 minutes
-        setInterval(() => {
-            window.location.reload();
-        }, 900000); // 15 minutes instead of 5 minutes
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
 
-        // Mobile menu toggle function
+                // Random position
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+
+                // Random size
+                const size = Math.random() * 3 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+
+                // Random opacity
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+
+                // Random animation
+                const duration = Math.random() * 20 + 10;
+                particle.style.animation = `float ${duration}s infinite linear`;
+
+                // Create custom animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes float {
+                        0% {
+                            transform: translate(0, 0) rotate(0deg);
+                        }
+                        25% {
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(90deg);
+                        }
+                        50% {
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(180deg);
+                        }
+                        75% {
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(270deg);
+                        }
+                        100% {
+                            transform: translate(0, 0) rotate(360deg);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            createParticles();
+
+            // Add hover effects
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-8px)';
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated elements
+            document.querySelectorAll('.slide-up').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                observer.observe(el);
+            });
+
+            // Performance optimization: Auto-refresh every 15 minutes
+            setInterval(() => {
+                if (document.visibilityState === 'visible') {
+                    console.log('Auto-refreshing director dashboard...');
+                    window.location.reload();
+                }
+            }, 900000); // 15 minutes
+        });
+
+        // Mobile menu toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             if (menu) {
                 menu.classList.toggle('hidden');
             }
         }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function (event) {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuButton = document.querySelector('.mobile-menu-btn');
-
-            if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
-                mobileMenu.classList.add('hidden');
-            }
-        });
     </script>
 </body>
 

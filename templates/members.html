@@ -9,117 +9,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link href="/static/css/animations.css" rel="stylesheet">
     <style>
-        /* ===== APPLE-INSPIRED DESIGN SYSTEM ===== */
+        /* ===== ENHANCED PINK GLASS DESIGN SYSTEM ===== */
         :root {
-            /* Apple Color Palette */
-            --apple-blue: #0071e3;
-            --apple-blue-hover: #0077ED;
-            --apple-gray-50: #fafafa;
-            --apple-gray-100: #f5f5f7;
-            --apple-gray-200: #e8e8ed;
-            --apple-gray-300: #d2d2d7;
-            --apple-gray-400: #afafaf;
-            --apple-gray-500: #86868b;
-            --apple-gray-600: #6e6e73;
-            --apple-gray-700: #1d1d1f;
-            --apple-white: #ffffff;
+            /* Enhanced Pink Color Palette */
+            --pink-primary: #ff2d55;
+            --pink-secondary: #ff5c8d;
+            --pink-light: #ff87ab;
+            --pink-lighter: #ffc2d6;
+            --pink-glass: rgba(255, 45, 85, 0.1);
+            --glass-white: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: rgba(255, 45, 85, 0.15);
 
-            /* Priority Colors */
-            --primary: #ff758f;
-            --secondary: #ff7eb3;
-            --urgent: #ef4444;
-            --fast: #f59e0b;
-            --medium: #ec4899;
-            --low: #10b981;
+            /* Gradients */
+            --gradient-pink: linear-gradient(135deg, #ff2d55 0%, #ff5c8d 100%);
+            --gradient-header: linear-gradient(135deg, #ff2d55 0%, #ff5c8d 50%, #ff87ab 100%);
 
             /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
-            --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.1);
-
-            /* Transitions */
-            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-pink: 0 10px 40px rgba(255, 45, 85, 0.15);
+            --shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.15);
+            --shadow-hover: 0 20px 60px rgba(255, 45, 85, 0.25);
         }
 
-        .responsive-container {
-            max-width: 1920px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        @media (min-width: 640px) {
-            .responsive-container {
-                padding: 0 1.5rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .responsive-container {
-                padding: 0 2rem;
-            }
-        }
-
-        /* ===== NAVBAR CONSISTENCY ===== */
-        nav .responsive-container {
-            padding-top: 0.5rem !important;
-            padding-bottom: 0.5rem !important;
-        }
-
-        nav a {
-            transition: var(--transition-smooth);
-            font-weight: 500;
-            color: var(--apple-gray-700);
-            border-radius: 0.5rem;
-            padding: 0.5rem 1rem;
-        }
-
-        nav a:hover {
-            color: var(--apple-blue);
-            background: rgba(0, 0, 0, 0.04);
-        }
-
-        .nav-link-active {
-            background: rgba(255, 45, 85, 0.1) !important;
-            color: #FF2D55 !important;
-            /* Apple Pink */
-        }
-
-        /* ===== GLOBAL STYLES ===== */
+        /* ===== ENHANCED BACKGROUND WITH PINK GRADIENTS ===== */
         body {
             font-family: 'Poppins', sans-serif !important;
-            background: linear-gradient(135deg, #ffe0e9 0%, #fff0f6 50%, #e8f4f8 100%) !important;
-            color: var(--apple-gray-700) !important;
+            background: linear-gradient(135deg, #ffe0e9 0%, #fff0f6 50%, #ffeef7 100%);
+            min-height: 100vh;
         }
 
-        /* ===== ANIMATED GRADIENT BACKGROUND ===== */
         .background-layer {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             overflow: hidden;
             pointer-events: none;
         }
 
+        /* Gradient Orbs */
         .gradient-orb {
             position: absolute;
             border-radius: 50%;
             filter: blur(100px);
             opacity: 0.5;
+            mix-blend-mode: soft-light;
             animation: floatOrb 25s ease-in-out infinite;
         }
 
         .orb-1 {
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            top: -15%;
+            width: 700px;
+            height: 700px;
+            background: var(--gradient-header);
+            top: -20%;
             left: -10%;
             animation-delay: 0s;
         }
@@ -127,583 +72,700 @@
         .orb-2 {
             width: 500px;
             height: 500px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            bottom: -15%;
-            right: -10%;
+            background: linear-gradient(135deg, #ff87ab 0%, #fff0f6 100%);
+            bottom: -10%;
+            right: -5%;
             animation-delay: -8s;
-        }
-
-        .orb-3 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            top: 40%;
-            right: 20%;
-            animation-delay: -16s;
-        }
-
-        .orb-4 {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            bottom: 20%;
-            left: 15%;
-            animation-delay: -12s;
         }
 
         @keyframes floatOrb {
 
             0%,
             100% {
-                transform: translate(0, 0) scale(1);
+                transform: translate(0, 0) scale(1) rotate(0deg);
             }
 
-            25% {
-                transform: translate(40px, -40px) scale(1.05);
+            33% {
+                transform: translate(30px, -50px) scale(1.1) rotate(120deg);
             }
 
-            50% {
-                transform: translate(-30px, 30px) scale(0.95);
-            }
-
-            75% {
-                transform: translate(30px, 15px) scale(1.02);
+            66% {
+                transform: translate(-20px, 40px) scale(0.9) rotate(240deg);
             }
         }
 
-        /* ===== GLASS COMPONENTS ===== */
-        .member-card,
-        .dashboard-card,
-        .ticket-card,
-        .stats-card,
-        .bg-white,
-        .modal-content,
-        .card {
-            background: rgba(255, 255, 255, 0.6) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.5) !important;
-            border-radius: 0.75rem !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+        /* ===== PINK NOISE TEXTURE ===== */
+        .pink-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(255, 45, 85, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(255, 92, 141, 0.1) 0%, transparent 20%);
+            background-size: 200% 200%;
+            animation: noiseMove 20s linear infinite;
         }
 
+        @keyframes noiseMove {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        /* ===== ENHANCED GLASS COMPONENTS ===== */
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.03),
+                0 1px 3px rgba(0, 0, 0, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                var(--shadow-hover),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border-color: rgba(255, 45, 85, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+        }
+
+        /* ===== ENHANCED NAVBAR ===== */
         nav {
-            background: rgba(255, 255, 255, 0.45) !important;
-            backdrop-filter: blur(25px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+            background: rgba(255, 255, 255, 0.7) !important;
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
             position: sticky;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03) !important;
-            border-radius: 0 !important;
+            z-index: 50;
         }
 
-        .member-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 117, 143, 0.1) !important;
-            box-shadow: 0 10px 25px rgba(255, 117, 143, 0.2) !important;
-            border-color: var(--primary) !important;
-        }
-
-        /* Normal Cards */
-        .dashboard-card,
-        .ticket-card,
-        .stats-card,
-        .member-card {
-            padding: 1rem !important;
-            margin-bottom: 1rem !important;
-            border-radius: 0.5rem !important;
-        }
-
-        /* Normal Badges */
-        .badge,
-        .priority-badge,
-        .member-badge {
+        .nav-link {
             padding: 0.5rem 1rem !important;
-            font-size: 0.875rem !important;
+            border-radius: 12px !important;
+            color: #555 !important;
             font-weight: 500 !important;
+            transition: all 0.3s ease !important;
         }
 
-        /* Normal Buttons */
-        button,
-        .btn,
-        .btn-primary {
-            padding: 0.75rem 1.5rem !important;
-            font-size: 0.875rem !important;
-            border-radius: 0.375rem !important;
+        .nav-link:hover {
+            color: var(--pink-primary) !important;
+            background: rgba(255, 45, 85, 0.05) !important;
         }
 
-        /* Normal Headers */
-        h1 {
-            font-size: 1.875rem !important;
+        .nav-link-active {
+            color: var(--pink-primary) !important;
+            background: rgba(255, 45, 85, 0.1) !important;
+            font-weight: 600 !important;
         }
 
-        h2 {
-            font-size: 1.5rem !important;
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            background: var(--gradient-header);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
         }
 
-        h3 {
-            font-size: 1.25rem !important;
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
 
-        h4 {
-            font-size: 1.125rem !important;
-        }
-
-        /* Normal Spacing */
-        .p-6 {
-            padding: 1.5rem !important;
-        }
-
-        .p-4 {
-            padding: 1rem !important;
-        }
-
-        .m-6 {
-            margin: 1.5rem !important;
-        }
-
-        .m-4 {
-            margin: 1rem !important;
-        }
-
-        .mb-6 {
-            margin-bottom: 1rem !important;
-        }
-
-        .mb-4 {
-            margin-bottom: 1rem !important;
-        }
-
-        /* Normal Grid Gaps */
-        .gap-6 {
-            gap: 1.5rem !important;
-        }
-
-        .gap-4 {
-            gap: 1rem !important;
-        }
-
-        .gap-2 {
-            gap: 0.5rem !important;
-        }
-
-        /* Normal Icons */
-        .fas,
-        .fab,
-        .far {
-            font-size: 1.25rem !important;
-        }
-
-        .member-card {
+        /* ===== BUTTONS ===== */
+        .glass-btn {
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-secondary));
+            color: white;
+            border-radius: 14px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
             transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+            box-shadow: 0 4px 15px rgba(255, 45, 85, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
 
-        .member-card:hover {
+        .glass-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(255, 45, 85, 0.4);
+            filter: brightness(1.1);
         }
 
-        .member-card.male {
-            border-left-color: #3b82f6;
+        .glass-btn-secondary {
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--pink-primary);
+            border: 1px solid rgba(255, 45, 85, 0.2);
         }
 
-        .member-card.female {
-            border-left-color: #ec4899;
+        .glass-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: var(--pink-primary);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #ff758f 0%, #ff7eb3 100%);
+        /* ===== MODAL STYLES ===== */
+        .modal-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(40px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
 
-        .btn-primary:hover {
-            opacity: 0.9;
+        .form-input-glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(209, 213, 219, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input-glass:focus {
+            background: white;
+            border-color: var(--pink-primary);
+            box-shadow: 0 0 0 3px rgba(255, 45, 85, 0.1);
+            outline: none;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating Particles */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--pink-primary);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.3;
+            }
+
+            90% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 
-<body class="min-h-screen">
-    <!-- Animated Gradient Background -->
+<body class="bg-gray-50 min-h-screen relative">
+    <!-- Background Layers -->
     <div class="background-layer">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
-        <div class="gradient-orb orb-4"></div>
+        <div class="pink-noise"></div>
     </div>
 
+    <div class="particles-container" id="particles"></div>
+
     <!-- Navigation -->
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md">
-        <div class="responsive-container py-6">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-6">
-                    <a href="/" class="flex items-center">
-                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
+    <nav class="sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="flex items-center space-x-3">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-lg shadow-pink-500/20">
+                            <i class="fas fa-users-cog text-white text-lg"></i>
+                        </div>
+                        <span
+                            class="text-xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                            AutoAssist <span class="font-normal text-gray-500 text-sm ml-1">Admin</span>
+                        </span>
                     </a>
-                    <div class="hidden md:flex space-x-6">
-                        <a href="/" class="px-4 py-3 rounded hover:bg-gray-100 transition">Tickets</a>
-                        <a href="/dashboard" class="px-4 py-3 rounded hover:bg-gray-100 transition">Dashboard</a>
-                        <a href="/status" class="px-4 py-3 rounded hover:bg-gray-100 transition">Status</a>
-                        <a href="/create-ticket" class="px-4 py-3 rounded hover:bg-gray-100 transition">Create
-                            Ticket</a>
+
+                    <!-- Desktop Nav -->
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="/" class="nav-link">Tickets</a>
+                        <a href="/dashboard" class="nav-link">Dashboard</a>
+                        <a href="/status" class="nav-link">Status</a>
+                        <a href="/create-ticket" class="nav-link">Create Ticket</a>
                         {% if current_user_role == 'Administrator' %}
-                        <a href="/technicians" class="px-4 py-3 rounded hover:bg-gray-100 transition">Technicians</a>
-                        <a href="/members" class="px-4 py-3 rounded bg-pink-50 text-pink-600 font-medium">Members</a>
-                        <a href="/admin" class="px-4 py-3 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                        <a href="/technicians" class="nav-link">Technicians</a>
+                        <a href="/members" class="nav-link nav-link-active">Members</a>
+                        <a href="/admin" class="nav-link">Admin Panel</a>
                         {% endif %}
                     </div>
                 </div>
-                <div class="flex items-center space-x-2 md:space-x-4">
+
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
                     {% if current_user %}
-                    <span class="hidden sm:inline text-gray-600 text-sm md:text-base">{{ current_user }}</span>
+                    <div
+                        class="hidden sm:flex items-center space-x-3 px-4 py-2 rounded-xl bg-white/40 backdrop-blur-sm border border-white/50">
+                        <div
+                            class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center text-white text-xs font-bold">
+                            {{ current_user[:1] }}
+                        </div>
+                        <span class="text-sm font-medium text-gray-700">{{ current_user }}</span>
+                    </div>
                     <a href="/logout"
-                        class="px-2 py-1 md:px-3 md:py-2 rounded bg-gray-100 hover:bg-gray-200 transition text-xs md:text-sm">Logout</a>
+                        class="p-2 rounded-xl text-gray-500 hover:text-pink-500 hover:bg-pink-50 transition-colors">
+                        <i class="fas fa-sign-out-alt text-lg"></i>
+                    </a>
                     {% else %}
-                    <a href="/login"
-                        class="px-2 py-1 md:px-3 md:py-2 rounded bg-pink-500 hover:bg-pink-600 transition text-white text-xs md:text-sm">Login</a>
+                    <a href="/login" class="glass-btn text-sm px-6 py-2">Login</a>
                     {% endif %}
 
                     <!-- Mobile menu button -->
-                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn"
+                    <button class="md:hidden p-2 rounded-xl hover:bg-gray-100 mobile-menu-btn"
                         onclick="toggleMobileMenu()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
+                        <i class="fas fa-bars text-gray-600 text-xl"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Mobile menu (hidden by default) -->
-            <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
-                <div class="flex flex-col space-y-3 pt-4">
-                    <a href="/" class="px-4 py-3 rounded hover:bg-gray-100 transition">Tickets</a>
-                    <a href="/dashboard" class="px-4 py-3 rounded hover:bg-gray-100 transition">Dashboard</a>
-                    <a href="/status" class="px-4 py-3 rounded hover:bg-gray-100 transition">Status</a>
-                    <a href="/create-ticket" class="px-4 py-3 rounded hover:bg-gray-100 transition">Create Ticket</a>
-                    {% if current_user_role == 'Administrator' %}
-                    <a href="/technicians" class="px-4 py-3 rounded hover:bg-gray-100 transition">Technicians</a>
-                    <a href="/members" class="px-4 py-3 rounded bg-pink-50 text-pink-600 font-medium">Members</a>
-                    <a href="/admin" class="px-4 py-3 rounded hover:bg-gray-100 transition">Admin Panel</a>
-                    {% endif %}
+            <!-- Mobile Menu -->
+            <div id="mobileMenu"
+                class="md:hidden hidden pb-4 border-t border-gray-200/50 bg-white/80 backdrop-blur-xl absolute w-full left-0 px-4 shadow-xl rounded-b-2xl">
+                <div class="flex flex-col space-y-2 pt-4">
+                    <a href="/" class="px-4 py-3 rounded-xl hover:bg-pink-50 text-gray-700">Tickets</a>
+                    <a href="/dashboard" class="px-4 py-3 rounded-xl hover:bg-pink-50 text-gray-700">Dashboard</a>
+                    <a href="/members" class="px-4 py-3 rounded-xl bg-pink-50 text-pink-600 font-medium">Members</a>
+                    <a href="/admin" class="px-4 py-3 rounded-xl hover:bg-pink-50 text-gray-700">Admin Panel</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="container mx-auto px-4 py-4 md:py-8">
-        <header class="mb-4 md:mb-6">
-            <div class="text-center md:text-left">
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Member Management</h1>
-                <p class="text-sm md:text-base text-gray-600">Manage your support team members</p>
-            </div>
-        </header>
-
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-            <div class="px-6 py-4 border-b flex justify-between items-center bg-gradient-to-r from-pink-50 to-pink-100">
-                <h2 class="text-xl font-semibold text-pink-700 flex items-center">
-                    <i class="fas fa-users-cog mr-2"></i> Team Members
-                </h2>
-                <button id="addMemberBtn" class="btn-primary text-white py-2 px-4 rounded-lg font-medium transition">
-                    <i class="fas fa-plus mr-2"></i> Add Member
-                </button>
-            </div>
-            <div class="px-6 py-3 bg-blue-50 border-b">
-                <p class="text-sm text-blue-700 flex items-center">
-                    <i class="fas fa-info-circle mr-2"></i>
-                    <strong>Note:</strong> Administrator and Technical Director accounts are protected and cannot be
-                    deleted to maintain system security.
-                </p>
-            </div>
-            <div class="divide-y divide-gray-200">
-                {% for member in members %}
-                <div class="p-6 member-card {% if member.gender == 'male' %}male{% else %}female{% endif %}">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-800">
-                                {{ member.name }}
-                                {% if member.gender == 'female' %}👩{% else %}👨{% endif %}
-                            </h3>
-                            <div class="flex items-center space-x-4 mt-2">
-                                <span class="text-sm text-gray-600"><i class="fas fa-id-badge mr-1"></i> {{
-                                    member.user_id }}</span>
-                                <span class="text-sm text-gray-600">
-                                    <i class="fas fa-user-tag mr-1"></i>
-                                    {% if member.role == 'Technician' %}
-                                    <span
-                                        class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full font-medium">
-                                        <i class="fas fa-user-cog mr-1"></i>{{ member.role }}
-                                    </span>
-                                    {% elif member.role == 'Administrator' %}
-                                    <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full font-medium">
-                                        <i class="fas fa-user-shield mr-1"></i>{{ member.role }}
-                                    </span>
-                                    {% else %}
-                                    {{ member.role }}
-                                    {% endif %}
-                                </span>
-                                <span class="text-sm text-gray-600"><i class="fas fa-calendar-alt mr-1"></i> {{
-                                    member.created_at | format_datetime }}</span>
-                            </div>
-                        </div>
-                        <div class="flex space-x-2">
-                            <button
-                                class="edit-member-btn px-3 py-1 rounded bg-blue-100 text-blue-800 hover:bg-blue-200 transition"
-                                data-id="{{ member._id }}" data-name="{{ member.name }}" data-role="{{ member.role }}"
-                                data-gender="{{ member.gender }}" data-user-id="{{ member.user_id }}">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            {% if member.user_id not in ['admin001', 'marc001'] %}
-                            <button
-                                class="delete-member-btn px-3 py-1 rounded bg-red-100 text-red-800 hover:bg-red-200 transition"
-                                data-id="{{ member._id }}">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                            {% else %}
-                            <span class="px-3 py-1 rounded bg-gray-100 text-gray-600 text-xs flex items-center">
-                                <i class="fas fa-shield-alt mr-1"></i> Protected
-                            </span>
-                            {% endif %}
-                        </div>
+    <!-- Page Header -->
+    <div class="page-header py-12 px-4 sm:px-6 lg:px-8 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div
+                class="flex flex-col md:flex-row justify-between items-center bg-white/10 p-8 rounded-3xl backdrop-blur-md border border-white/20 shadow-2xl">
+                <div class="flex items-center space-x-6 mb-6 md:mb-0">
+                    <div class="w-20 h-20 rounded-2xl bg-white/20 flex items-center justify-center shadow-inner">
+                        <i class="fas fa-users text-4xl text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl md:text-4xl font-bold">Member Management</h1>
+                        <p class="text-pink-100 mt-2 text-lg opacity-90">Manage team members, roles, and access
+                            permissions</p>
                     </div>
                 </div>
-                {% endfor %}
-                {% if not members %}
-                <div class="p-6 text-center text-gray-500">
-                    No members found. Add your first team member.
-                </div>
-                {% endif %}
+                <button onclick="openAddMemberModal()"
+                    class="bg-white text-pink-600 hover:bg-gray-50 px-8 py-4 rounded-xl font-bold shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl flex items-center">
+                    <i class="fas fa-user-plus mr-3"></i>Add New Member
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Member Modal -->
-    <div id="memberModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-semibold" id="modalTitle">Add New Member</h3>
-                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 -mt-20 relative z-10">
+        <!-- Search and Filter -->
+        <div class="glass-card p-6 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="relative w-full md:w-96">
+                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                <input type="text" id="memberSearch" placeholder="Search members..."
+                    class="w-full pl-12 pr-4 py-3 bg-white/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition">
             </div>
-            <form id="memberForm">
-                <input type="hidden" id="memberId">
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-medium mb-1">Name</label>
-                    <input type="text" id="memberName"
-                        class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
-                        required>
+
+            <div class="flex gap-2">
+                <span class="px-4 py-2 rounded-lg bg-pink-100/50 text-pink-700 text-sm font-medium">
+                    {{ members|length }} Active Members
+                </span>
+            </div>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="mb-8 space-y-4">
+            {% for category, message in messages %}
+            <div class="rounded-xl p-4 flex items-center shadow-sm border-l-4 
+                {% if category == 'success' %}bg-green-50 border-green-500 text-green-700
+                {% elif category == 'error' %}bg-red-50 border-red-500 text-red-700
+                {% else %}bg-blue-50 border-blue-500 text-blue-700{% endif %}">
+                <i
+                    class="fas {% if category == 'success' %}fa-check-circle{% elif category == 'error' %}fa-exclamation-circle{% else %}fa-info-circle{% endif %} mr-3 text-xl"></i>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Members Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for member in members %}
+            <div class="glass-card p-6 relative group hover:z-20 slide-up"
+                style="animation-delay: {{ loop.index * 0.1 }}s">
+                <!-- Card Header -->
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold shadow-lg
+                            {% if member.role == 'Administrator' %}bg-gradient-to-br from-pink-500 to-purple-600 text-white
+                            {% elif member.role == 'Technician' %}bg-gradient-to-br from-blue-400 to-blue-600 text-white
+                            {% else %}bg-gradient-to-br from-gray-200 to-gray-400 text-gray-600{% endif %}">
+                            {{ member.name[:1] if member.name else '?' }}
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">{{ member.name }}</h3>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mt-1
+                                {% if member.role == 'Administrator' %}bg-pink-100 text-pink-800
+                                {% elif member.role == 'Technician' %}bg-blue-100 text-blue-800
+                                {% else %}bg-gray-100 text-gray-800{% endif %}">
+                                {{ member.role }}
+                            </span>
+                        </div>
+                    </div>
+
+                    {% if member.gender %}
+                    <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400"
+                        title="{{ member.gender }}">
+                        {% if member.gender == 'Male' %}
+                        <i class="fas fa-mars text-blue-400"></i>
+                        {% elif member.gender == 'Female' %}
+                        <i class="fas fa-venus text-pink-400"></i>
+                        {% else %}
+                        <i class="fas fa-genderless"></i>
+                        {% endif %}
+                    </div>
+                    {% endif %}
                 </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-medium mb-1">Role</label>
-                    <select id="memberRole"
-                        class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
-                        required>
-                        <option value="">Select Role</option>
-                        <option value="Administrator">Administrator</option>
-                        <option value="Technical Director">Technical Director</option>
-                        <option value="User">User</option>
-                    </select>
+
+                <!-- Card Body -->
+                <div class="space-y-4 mb-6">
+                    <div class="flex items-center text-gray-600 p-3 bg-white/50 rounded-xl">
+                        <i class="fas fa-envelope w-6 text-pink-400"></i>
+                        <span class="text-sm truncate">{{ member.email }}</span>
+                    </div>
                 </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-medium mb-1">Gender</label>
-                    <select id="memberGender"
-                        class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
+
+                <!-- Protected Account warning for default admin -->
+                {% if member.email == 'admin@autoassist.com' %}
+                <div class="absolute top-4 right-4">
+                    <i class="fas fa-shield-alt text-gray-300" title="Protected Account"></i>
                 </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-medium mb-1">User ID</label>
-                    <input type="text" id="memberUserId"
-                        class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
-                        required>
+                {% endif %}
+
+                <!-- Actions -->
+                <div class="flex justify-end gap-3 pt-4 border-t border-gray-100">
+                    <button
+                        onclick="openEditMemberModal('{{ member.id }}', '{{ member.name }}', '{{ member.email }}', '{{ member.role }}', '{{ member.gender|default('') }}')"
+                        class="text-gray-500 hover:text-blue-600 p-2 rounded-lg hover:bg-blue-50 transition">
+                        <i class="fas fa-edit"></i>
+                    </button>
+
+                    {% if member.email != 'admin@autoassist.com' and member.email != current_user_email %}
+                    <form action="{{ url_for('members.delete_member', member_id=member.id) }}" method="POST"
+                        onsubmit="return confirm('Are you sure you want to delete this member?');" class="inline">
+                        <button type="submit"
+                            class="text-gray-500 hover:text-red-600 p-2 rounded-lg hover:bg-red-50 transition">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                    {% endif %}
                 </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-medium mb-1">Password</label>
-                    <div class="relative">
-                        <input type="password" id="memberPassword"
-                            class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 pr-10">
-                        <button type="button"
-                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none toggle-password">
-                            <i class="far fa-eye"></i>
+            </div>
+            {% endfor %}
+
+            <!-- Add New Card (Empty State) -->
+            <div onclick="openAddMemberModal()"
+                class="border-2 border-dashed border-gray-300 rounded-3xl p-8 flex flex-col items-center justify-center text-gray-400 hover:border-pink-400 hover:text-pink-500 hover:bg-pink-50/30 transition cursor-pointer h-full min-h-[250px]">
+                <div
+                    class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                    <i class="fas fa-plus text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-medium">Add New Member</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Member Modal -->
+    <div id="memberModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Backdrop -->
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm" aria-hidden="true"
+                onclick="closeMemberModal()"></div>
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <!-- Modal Panel -->
+            <div
+                class="inline-block align-bottom bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full modal-glass border border-white/40">
+                <div class="bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-6">
+                    <div class="flex justify-between items-center text-white">
+                        <h3 class="text-xl font-bold flex items-center" id="modal-title">
+                            <i class="fas fa-user-circle mr-3"></i>
+                            <span id="modalTitleText">Add New Member</span>
+                        </h3>
+                        <button type="button" onclick="closeMemberModal()"
+                            class="text-white/80 hover:text-white transition">
+                            <i class="fas fa-times text-xl"></i>
                         </button>
                     </div>
                 </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-medium mb-1">Confirm Password</label>
-                    <div class="relative">
-                        <input type="password" id="confirmPassword"
-                            class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 pr-10">
-                        <button type="button"
-                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none toggle-password">
-                            <i class="far fa-eye"></i>
+
+                <form id="memberForm" action="{{ url_for('members.add_member') }}" method="POST" class="p-8">
+                    <input type="hidden" name="member_id" id="member_id">
+
+                    <div class="space-y-6">
+                        <!-- Name & Email -->
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <div class="relative">
+                                <i
+                                    class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" name="name" id="name" required
+                                    class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email
+                                Address</label>
+                            <div class="relative">
+                                <i
+                                    class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="email" name="email" id="email" required
+                                    class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition">
+                            </div>
+                        </div>
+
+                        <!-- Role & Gender Grid -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                                <div class="relative">
+                                    <i
+                                        class="fas fa-id-badge absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <select name="role" id="role"
+                                        class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition appearance-none">
+                                        <option value="Administrator">Administrator</option>
+                                        <option value="Technician" selected>Technician</option>
+                                    </select>
+                                    <i
+                                        class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="gender" class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                                <div class="relative">
+                                    <i
+                                        class="fas fa-venus-mars absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <select name="gender" id="gender"
+                                        class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition appearance-none">
+                                        <option value="">Select...</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                    <i
+                                        class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div id="password-group">
+                            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+                                Password <span id="password-optional" class="text-gray-400 font-normal hidden">(Leave
+                                    blank to keep current)</span>
+                            </label>
+                            <div class="relative">
+                                <i
+                                    class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="password" name="password" id="password"
+                                    class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-end gap-3">
+                        <button type="button" onclick="closeMemberModal()"
+                            class="px-6 py-3 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition">Cancel</button>
+                        <button type="submit"
+                            class="px-8 py-3 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition transform flex items-center">
+                            <i class="fas fa-check mr-2"></i>
+                            <span id="submitButtonText">Add Member</span>
                         </button>
                     </div>
-                </div>
-                <div class="flex justify-end space-x-3">
-                    <button type="button" id="cancelMemberForm"
-                        class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">
-                        Cancel
-                    </button>
-                    <button type="submit" class="btn-primary text-white py-2 px-4 rounded-lg font-medium transition">
-                        Save Member
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const modal = document.getElementById('memberModal');
-            const addMemberBtn = document.getElementById('addMemberBtn');
-            const closeModal = document.getElementById('closeModal');
-            const cancelMemberForm = document.getElementById('cancelMemberForm');
-            const memberForm = document.getElementById('memberForm');
-            const modalTitle = document.getElementById('modalTitle');
-            const memberId = document.getElementById('memberId');
+        // Modal Logic
+        function openAddMemberModal() {
+            document.getElementById('modalTitleText').textContent = 'Add New Member';
+            document.getElementById('submitButtonText').textContent = 'Add Member';
+            document.getElementById('memberForm').action = "{{ url_for('members.add_member') }}";
+            document.getElementById('member_id').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('role').value = 'Technician';
+            document.getElementById('gender').value = '';
+            document.getElementById('password').required = true;
+            document.getElementById('password-optional').classList.add('hidden');
 
-            // Toggle password visibility
-            document.querySelectorAll('.toggle-password').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const input = this.parentElement.querySelector('input');
-                    const icon = this.querySelector('i');
-                    if (input.type === 'password') {
-                        input.type = 'text';
-                        icon.classList.replace('fa-eye', 'fa-eye-slash');
-                    } else {
-                        input.type = 'password';
-                        icon.classList.replace('fa-eye-slash', 'fa-eye');
-                    }
-                });
-            });
+            document.getElementById('memberModal').classList.remove('hidden');
+            setTimeout(() => {
+                document.querySelector('.modal-glass').classList.remove('scale-95', 'opacity-0');
+                document.querySelector('.modal-glass').classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
 
-            // Add new member
-            addMemberBtn.addEventListener('click', function () {
-                modalTitle.textContent = 'Add New Member';
-                memberForm.reset();
-                memberId.value = '';
-                modal.classList.remove('hidden');
-            });
+        function openEditMemberModal(id, name, email, role, gender) {
+            document.getElementById('modalTitleText').textContent = 'Edit Member';
+            document.getElementById('submitButtonText').textContent = 'Save Changes';
+            document.getElementById('memberForm').action = "{{ url_for('members.edit_member') }}";
+            document.getElementById('member_id').value = id;
+            document.getElementById('name').value = name;
+            document.getElementById('email').value = email;
+            document.getElementById('role').value = role;
+            document.getElementById('gender').value = gender;
+            document.getElementById('password').required = false;
+            document.getElementById('password-optional').classList.remove('hidden');
 
-            // Edit member
-            document.querySelectorAll('.edit-member-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    modalTitle.textContent = 'Edit Member';
-                    memberId.value = this.dataset.id;
-                    document.getElementById('memberName').value = this.dataset.name;
-                    document.getElementById('memberRole').value = this.dataset.role;
-                    document.getElementById('memberGender').value = this.dataset.gender;
-                    document.getElementById('memberUserId').value = this.dataset.userId;
-                    document.getElementById('memberPassword').required = false;
-                    document.getElementById('confirmPassword').required = false;
-                    modal.classList.remove('hidden');
-                });
-            });
+            document.getElementById('memberModal').classList.remove('hidden');
+            setTimeout(() => {
+                document.querySelector('.modal-glass').classList.remove('scale-95', 'opacity-0');
+                document.querySelector('.modal-glass').classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
 
-            // Delete member
-            document.querySelectorAll('.delete-member-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    if (confirm('Are you sure you want to delete this member?')) {
-                        const memberId = this.dataset.id;
-                        console.log('🚀 DELETE REQUEST - Member ID:', memberId);
-                        console.log('🔍 Button dataset:', this.dataset);
+        function closeMemberModal() {
+            const modalPanel = document.querySelector('.modal-glass');
+            modalPanel.classList.remove('scale-100', 'opacity-100');
+            modalPanel.classList.add('scale-95', 'opacity-0');
 
-                        fetch(`/api/members/${memberId}`, {
-                            method: 'DELETE',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        })
-                            .then(response => {
-                                console.log('📡 Response status:', response.status);
-                                console.log('📡 Response headers:', response.headers);
-                                return response.json();
-                            })
-                            .then(data => {
-                                console.log('📦 Response data:', data);
-                                if (data.status === 'success') {
-                                    console.log('✅ Delete successful, reloading page');
-                                    window.location.reload();
-                                } else {
-                                    console.error('❌ Delete failed:', data.message);
-                                    alert(data.message || 'Error deleting member');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('💥 Fetch error:', error);
-                                alert('Error deleting member');
-                            });
-                    }
-                });
-            });
+            setTimeout(() => {
+                document.getElementById('memberModal').classList.add('hidden');
+            }, 300);
+        }
 
-            // Close modal
-            function closeMemberModal() {
-                modal.classList.add('hidden');
-            }
+        // Search Logic
+        document.getElementById('memberSearch').addEventListener('keyup', function () {
+            const searchText = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.glass-card');
 
-            closeModal.addEventListener('click', closeMemberModal);
-            cancelMemberForm.addEventListener('click', closeMemberModal);
+            cards.forEach(card => {
+                if (card.querySelector('.group-hover\\:scale-110')) return; // Skip "Add New" card
 
-            // Handle form submission
-            memberForm.addEventListener('submit', function (e) {
-                e.preventDefault();
+                const name = card.querySelector('h3').textContent.toLowerCase();
+                const email = card.querySelector('.fa-envelope').nextElementSibling.textContent.toLowerCase();
+                const role = card.querySelector('.inline-flex').textContent.toLowerCase();
 
-                const formData = {
-                    name: document.getElementById('memberName').value,
-                    role: document.getElementById('memberRole').value,
-                    gender: document.getElementById('memberGender').value,
-                    user_id: document.getElementById('memberUserId').value,
-                    password: document.getElementById('memberPassword').value,
-                    confirm_password: document.getElementById('confirmPassword').value
-                };
-
-                const id = memberId.value;
-                const url = id ? `/api/members/${id}` : '/api/members';
-                const method = id ? 'PUT' : 'POST';
-
-                fetch(url, {
-                    method: method,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === 'success') {
-                            window.location.reload();
-                        } else {
-                            alert(data.message || 'Error saving member');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Error saving member');
-                    });
-            });
-
-            // Mobile menu toggle function
-            function toggleMobileMenu() {
-                const mobileMenu = document.getElementById('mobileMenu');
-                if (mobileMenu) {
-                    mobileMenu.classList.toggle('hidden');
-                }
-            }
-
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function (event) {
-                const mobileMenu = document.getElementById('mobileMenu');
-                const menuButton = document.querySelector('.mobile-menu-btn');
-
-                if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
-                    mobileMenu.classList.add('hidden');
+                if (name.includes(searchText) || email.includes(searchText) || role.includes(searchText)) {
+                    card.style.display = '';
+                    card.style.animation = 'fadeIn 0.5s ease-out';
+                } else {
+                    card.style.display = 'none';
                 }
             });
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+            if (!menu.classList.contains('hidden')) {
+                menu.classList.add('animate-pulse');
+                setTimeout(() => menu.classList.remove('animate-pulse'), 500);
+            }
+        }
+
+        // Particle System
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                const size = Math.random() * 5 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+
+                particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                particle.style.animationDelay = `-${Math.random() * 20}s`;
+
+                container.appendChild(particle);
+            }
         });
     </script>
 </body>
