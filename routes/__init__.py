@@ -47,6 +47,9 @@ def register_blueprints(app):
     # Attachment routes
     app.register_blueprint(attachment_bp)
     
+    # AI routes
+    app.register_blueprint(ai_bp)
+    
     # Main page routes (index, dashboard, ticket detail, etc.)
     app.register_blueprint(main_bp)
     
