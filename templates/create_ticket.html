@@ -7,52 +7,78 @@
     <title>Create New Ticket - AutoAssistGroup Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link href="/static/css/animations.css" rel="stylesheet">
     <style>
-        /* ===== APPLE-INSPIRED DESIGN SYSTEM ===== */
+        /* ===== ENHANCED GLASS BLUR PINK BACKGROUND ===== */
         :root {
-            /* Apple Color Palette */
-            --apple-blue: #0071e3;
-            --apple-blue-hover: #0077ED;
-            --apple-gray-50: #fafafa;
-            --apple-gray-100: #f5f5f7;
-            --apple-gray-200: #e8e8ed;
-            --apple-gray-300: #d2d2d7;
-            --apple-gray-400: #afafaf;
-            --apple-gray-500: #86868b;
-            --apple-gray-600: #6e6e73;
-            --apple-gray-700: #1d1d1f;
-            --apple-white: #ffffff;
+            --apple-system-gray: #f2f2f7;
+            --apple-blue: #007aff;
+            --apple-pink: #ff2d55;
+            --apple-text: #1d1d1f;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --glass-blur: 30px;
+            --pink-primary: #ff2d55;
+            --pink-secondary: #ff6b9d;
+            --pink-light: #ffd6e7;
+            --pink-lighter: #fff0f6;
+            --pink-glow: rgba(255, 45, 85, 0.2);
 
-            /* Priority Colors */
-            --primary: #ff758f;
-            --secondary: #ff7eb3;
-            --urgent: #ef4444;
-            --fast: #f59e0b;
-            --medium: #ec4899;
-            --low: #10b981;
-
-            /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
-            --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.1);
-
-            /* Transitions */
-            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Status Colors */
+            --status-new-bg: #fff1f2;
+            --status-new-text: #be123c;
+            --status-form-bg: #eff6ff;
+            --status-form-text: #1d4ed8;
+            --status-waiting-bg: #faf5ff;
+            --status-waiting-text: #7e22ce;
+            --status-review-bg: #fffbeb;
+            --status-review-text: #b45309;
+            --status-closed-bg: #f3f4f6;
+            --status-closed-text: #4b5563;
         }
 
-        /* ===== GLOBAL STYLES ===== */
+        /* ===== ENHANCED GLASS BACKGROUND ===== */
         body {
-            font-family: 'Poppins', sans-serif !important;
-            background: linear-gradient(135deg, #ffe0e9 0%, #fff0f6 50%, #e8f4f8 100%) !important;
-            color: var(--apple-gray-700) !important;
+            font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            background:
+                /* Base gradient */
+                linear-gradient(135deg, #fff0f6 0%, #ffeef8 30%, #ffebf5 60%, #ffe9f3 100%),
+                /* Pink noise texture */
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"),
+                /* Subtle radial gradient */
+                radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 182, 193, 0.1) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: var(--apple-text) !important;
+            font-size: 15px;
+            line-height: 1.5;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* ===== ANIMATED GRADIENT BACKGROUND ===== */
+        /* Enhanced Glass Blur Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(135deg,
+                    rgba(255, 240, 245, 0.95) 0%,
+                    rgba(255, 245, 250, 0.97) 100%);
+            backdrop-filter: blur(100px) saturate(200%);
+            -webkit-backdrop-filter: blur(100px) saturate(200%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Enhanced Animated Gradient Orbs with Pink Theme */
         .background-layer {
             position: fixed;
             top: 0;
@@ -62,21 +88,23 @@
             z-index: -1;
             overflow: hidden;
             pointer-events: none;
+            opacity: 0.7;
         }
 
         .gradient-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(120px);
             opacity: 0.5;
             animation: floatOrb 25s ease-in-out infinite;
+            mix-blend-mode: soft-light;
         }
 
         .orb-1 {
             width: 600px;
             height: 600px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            top: -15%;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffd1ff 100%);
+            top: -30%;
             left: -10%;
             animation-delay: 0s;
         }
@@ -84,369 +112,417 @@
         .orb-2 {
             width: 500px;
             height: 500px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #ffd6e7 0%, #ffc2d1 50%, #ff9ec2 100%);
             bottom: -15%;
             right: -10%;
             animation-delay: -8s;
+            animation-duration: 30s;
         }
 
         .orb-3 {
             width: 400px;
             height: 400px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #ffcce0 0%, #ffb3c6 50%, #ff8fab 100%);
             top: 40%;
             right: 20%;
-            animation-delay: -16s;
+            animation-delay: -15s;
+            animation-duration: 35s;
+            opacity: 0.4;
         }
 
         .orb-4 {
             width: 350px;
             height: 350px;
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            bottom: 20%;
+            background: linear-gradient(135deg, #ffafcc 0%, #ffc8dd 50%, #cdb4db 100%);
+            bottom: 30%;
             left: 15%;
-            animation-delay: -12s;
+            animation-delay: -20s;
+            animation-duration: 40s;
+            opacity: 0.4;
+        }
+
+        /* Add subtle floating particles */
+        .background-layer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 45, 85, 0.3), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 107, 157, 0.3), transparent),
+                radial-gradient(3px 3px at 80px 40px, rgba(255, 182, 193, 0.3), transparent),
+                radial-gradient(2px 2px at 90px 90px, rgba(255, 45, 85, 0.4), transparent),
+                radial-gradient(3px 3px at 150px 150px, rgba(255, 107, 157, 0.3), transparent),
+                radial-gradient(2px 2px at 180px 100px, rgba(255, 182, 193, 0.3), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: floatParticles 60s linear infinite;
         }
 
         @keyframes floatOrb {
 
             0%,
             100% {
-                transform: translate(0, 0) scale(1);
+                transform: translate(0, 0) rotate(0deg);
             }
 
-            25% {
-                transform: translate(40px, -40px) scale(1.05);
+            33% {
+                transform: translate(30px, -50px) rotate(120deg);
             }
 
-            50% {
-                transform: translate(-30px, 30px) scale(0.95);
-            }
-
-            75% {
-                transform: translate(30px, 15px) scale(1.02);
+            66% {
+                transform: translate(-20px, 30px) rotate(240deg);
             }
         }
 
-        /* ===== GLASS COMPONENTS ===== */
-        .form-card {
-            background: rgba(255, 255, 255, 0.6) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.5) !important;
-            border-radius: 0.75rem !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
-        }
+        @keyframes floatParticles {
+            from {
+                transform: translateY(0px);
+            }
 
-        .form-card:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 117, 143, 0.1) !important;
-            box-shadow: 0 10px 25px rgba(255, 117, 143, 0.2) !important;
-            border-color: var(--primary) !important;
+            to {
+                transform: translateY(-200px);
+            }
         }
 
         /* ===== UNIVERSAL NAVBAR STYLES ===== */
         nav {
-            background: rgba(255, 255, 255, 0.7) !important;
-            backdrop-filter: saturate(180%) blur(20px) !important;
-            -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+            background: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(40px) saturate(200%) !important;
+            -webkit-backdrop-filter: blur(40px) saturate(200%) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6) !important;
             min-height: auto;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow:
+                0 4px 30px rgba(255, 45, 85, 0.05),
+                0 1px 0 rgba(255, 255, 255, 0.5) !important;
         }
 
         nav .responsive-container {
             padding-top: 0.5rem !important;
             padding-bottom: 0.5rem !important;
-            padding-left: 3rem !important;
-            padding-right: 3rem !important;
+            padding-left: 2rem !important;
+            padding-right: 2rem !important;
         }
 
         /* Nav link base styles */
         .nav-link {
-            padding: 0.5rem 1rem !important;
-            border-radius: 0.5rem !important;
+            padding: 0.5rem 1.2rem !important;
+            border-radius: 12px !important;
             color: #4b5563 !important;
-            /* gray-600 */
             font-weight: 500 !important;
             font-size: 0.875rem !important;
-            transition: all 0.2s ease !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
             display: inline-flex !important;
             align-items: center !important;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .nav-link:hover {
-            background: rgba(0, 0, 0, 0.04) !important;
-            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.6) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 45, 85, 0.1);
         }
 
         .nav-link-active {
-            background: rgba(255, 45, 85, 0.1) !important;
+            background: linear-gradient(135deg, rgba(255, 45, 85, 0.15), rgba(255, 107, 157, 0.1)) !important;
             color: #FF2D55 !important;
-            /* Apple Pink */
+            border: 1px solid rgba(255, 45, 85, 0.2);
+            box-shadow: 0 4px 12px rgba(255, 45, 85, 0.1);
         }
 
-        /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
+        /* Responsive container with max-width */
+        .responsive-container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
 
-        /* Normal base font size - READABLE */
-        /* Removed body styles to avoid conflict with global styles */
+        @media (min-width: 640px) {
+            .responsive-container {
+                padding: 0 1.5rem;
+            }
+        }
 
-        /* Normal Cards */
-        .dashboard-card,
-        .ticket-card,
-        .stats-card,
+        @media (min-width: 1024px) {
+            .responsive-container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* ===== ENHANCED GLASSMORPHISM CONTAINERS ===== */
         .form-card {
-            padding: 1rem !important;
-            margin-bottom: 1rem !important;
-            border-radius: 0.5rem !important;
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(40px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.8) !important;
+            border-radius: 24px !important;
+            box-shadow:
+                0 20px 40px rgba(255, 45, 85, 0.08),
+                0 8px 16px rgba(255, 45, 85, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Normal Form Field Sizing */
-        .form-input {
-            padding: 0.75rem !important;
-            font-size: 1rem !important;
-            border-radius: 0.5rem !important;
-        }
-
-        /* Normal Buttons */
-        button,
-        .btn {
-            padding: 0.75rem 1.5rem !important;
-            font-size: 0.875rem !important;
-            border-radius: 0.375rem !important;
-        }
-
-        /* Normal Headers */
-        h1 {
-            font-size: 1.875rem !important;
-        }
-
-        h2 {
-            font-size: 1.5rem !important;
-        }
-
-        h3 {
-            font-size: 1.25rem !important;
-        }
-
-        h4 {
-            font-size: 1.125rem !important;
-        }
-
-        /* Normal Spacing */
-        .p-6 {
-            padding: 1.5rem !important;
-        }
-
-        .p-4 {
-            padding: 1rem !important;
-        }
-
-        .m-6 {
-            margin: 1.5rem !important;
-        }
-
-        .m-4 {
-            margin: 1rem !important;
-        }
-
-        .mb-6 {
-            margin-bottom: 1rem !important;
-        }
-
-        .mb-4 {
-            margin-bottom: 1rem !important;
-        }
-
-        /* Normal Grid Gaps */
-        .gap-6 {
-            gap: 1.5rem !important;
-        }
-
-        .gap-4 {
-            gap: 1rem !important;
-        }
-
-        .gap-2 {
-            gap: 0.5rem !important;
-        }
-
-        /* Normal Icons */
-        .fas,
-        .fab,
-        .far {
-            font-size: 1.25rem !important;
-        }
-
-        .form-card {
-            background: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.8),
+                    transparent);
+            z-index: 1;
         }
 
         .form-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 117, 143, 0.15);
+            transform: translateY(-6px) scale(1.005);
+            box-shadow:
+                0 30px 60px rgba(255, 45, 85, 0.15),
+                0 15px 30px rgba(255, 45, 85, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95),
+                0 0 0 1px rgba(255, 255, 255, 0.7) !important;
+            border-color: rgba(255, 45, 85, 0.2) !important;
         }
 
-        .form-input {
+        /* Enhanced Form Inputs */
+        .form-input,
+        .form-select,
+        .form-textarea {
             width: 100%;
-            padding: 0.25rem 0.375rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.125rem;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.625rem !important;
+            padding: 14px 18px !important;
+            background: rgba(255, 255, 255, 0.7) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8) !important;
+            border-radius: 14px !important;
+            font-size: 15px !important;
+            transition: all 0.3s !important;
+            box-shadow:
+                0 2px 8px rgba(255, 45, 85, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+            font-family: 'SF Pro Display', 'Inter', sans-serif;
         }
 
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(255, 117, 143, 0.1);
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-color: var(--pink-primary) !important;
+            box-shadow:
+                0 0 0 4px rgba(255, 45, 85, 0.15),
+                0 4px 12px rgba(255, 45, 85, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+            outline: none !important;
         }
 
-        .form-select {
-            width: 100%;
-            padding: 0.25rem 0.375rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.5rem;
-            background-color: white;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
+        .form-textarea {
+            min-height: 140px;
+            resize: vertical;
         }
 
-        .form-select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(255, 117, 143, 0.1);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid #f1f5f9;
-        }
-
-        .section-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            font-size: 1.1rem;
-        }
-
+        /* Enhanced iOS Buttons */
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff2d55 0%, #ff6b9d 100%) !important;
+            color: white !important;
+            border-radius: 16px !important;
+            padding: 14px 28px !important;
+            font-weight: 600 !important;
+            font-size: 16px;
+            box-shadow:
+                0 8px 24px rgba(255, 45, 85, 0.3),
+                0 4px 8px rgba(255, 45, 85, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            border: none !important;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            font-family: 'SF Pro Display', 'Inter', sans-serif;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent);
+            transition: left 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
 
         .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(255, 117, 143, 0.3);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow:
+                0 16px 32px rgba(255, 45, 85, 0.4),
+                0 8px 16px rgba(255, 45, 85, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px) scale(0.98);
         }
 
         .btn-primary:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-            transform: none;
+            transform: none !important;
         }
 
+        /* Secondary Buttons with Glass Effect */
         .btn-secondary {
-            background: #f8fafc;
-            color: #64748b;
-            border: 1px solid #e2e8f0;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
+            background: rgba(255, 255, 255, 0.4) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #1d1d1f !important;
+            border-radius: 16px !important;
+            padding: 14px 28px !important;
+            font-weight: 600 !important;
+            font-size: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.6) !important;
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            cursor: pointer;
+            font-family: 'SF Pro Display', 'Inter', sans-serif;
         }
 
         .btn-secondary:hover {
-            background: #f1f5f9;
-            border-color: #cbd5e1;
+            background: rgba(255, 255, 255, 0.6) !important;
+            transform: translateY(-2px);
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
         }
 
+        /* Section headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .section-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 22px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow:
+                0 4px 12px rgba(255, 45, 85, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        /* Duration display */
         .duration-display {
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-weight: 600;
             text-align: center;
             transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow:
+                0 2px 8px rgba(255, 45, 85, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
         }
 
         .duration-valid {
-            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            background: linear-gradient(135deg, rgba(220, 252, 231, 0.9) 0%, rgba(187, 247, 208, 0.9) 100%);
             color: #166534;
-            border: 1px solid #bbf7d0;
+            border: 1px solid rgba(187, 247, 208, 0.9);
         }
 
         .duration-invalid {
-            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            background: linear-gradient(135deg, rgba(254, 242, 242, 0.9) 0%, rgba(254, 202, 202, 0.9) 100%);
             color: #dc2626;
-            border: 1px solid #fecaca;
+            border: 1px solid rgba(254, 202, 202, 0.9);
         }
 
         .duration-default {
-            background: #f8fafc;
             color: #64748b;
-            border: 1px solid #e2e8f0;
         }
 
+        /* Attachment boxes */
         .attachment-box {
-            border: 2px dashed #e2e8f0;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
+            border: 2px dashed rgba(226, 232, 240, 0.7);
+            border-radius: 20px;
+            padding: 28px;
             text-align: center;
             transition: all 0.3s ease;
-            background: #fafbfc;
+            background: rgba(250, 251, 252, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         .attachment-box:hover {
-            border-color: var(--primary);
-            background: rgba(255, 117, 143, 0.02);
+            border-color: var(--pink-primary);
+            background: rgba(255, 117, 143, 0.08);
+            transform: translateY(-4px);
+            box-shadow:
+                0 12px 32px rgba(255, 45, 85, 0.1),
+                0 4px 12px rgba(255, 45, 85, 0.05);
         }
 
+        /* Message box */
         .message-box {
             position: fixed;
-            top: 1rem;
-            right: 1rem;
+            top: 20px;
+            right: 20px;
             z-index: 1000;
-            max-width: 24rem;
-            padding: 1rem 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            padding: 18px 24px;
+            border-radius: 16px;
+            box-shadow:
+                0 20px 60px rgba(255, 45, 85, 0.2),
+                0 8px 24px rgba(255, 45, 85, 0.1);
             display: none;
-            font-family: 'Poppins', sans-serif;
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
         .message-success {
-            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            background: linear-gradient(135deg, rgba(220, 252, 231, 0.9) 0%, rgba(187, 247, 208, 0.9) 100%);
             color: #166534;
-            border: 1px solid #bbf7d0;
+            border: 1px solid rgba(187, 247, 208, 0.9);
         }
 
         .message-error {
-            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            background: linear-gradient(135deg, rgba(254, 242, 242, 0.9) 0%, rgba(254, 202, 202, 0.9) 100%);
             color: #dc2626;
-            border: 1px solid #fecaca;
+            border: 1px solid rgba(254, 202, 202, 0.9);
         }
 
         @keyframes slideInRight {
@@ -466,126 +542,215 @@
             animation: slideInRight 0.3s ease;
         }
 
-        /* Responsive Design */
-        /* Small mobile devices (320px - 480px) */
-        @media (max-width: 480px) {
-            .container {
-                padding: 0.75rem;
-            }
-
-            .form-card {
-                margin: 0.5rem;
-                border-radius: 0.5rem;
-            }
-
-            .form-header {
-                padding: 1.5rem 1rem;
-            }
-
-            .form-header h1 {
-                font-size: 1.5rem;
-            }
-
-            .form-body {
-                padding: 1.5rem 1rem;
-            }
-
-            .form-group {
-                margin-bottom: 1rem;
-            }
-
-            .form-input,
-            .form-textarea {
-                padding: 0.75rem;
-                font-size: 16px;
-                /* Prevents zoom on iOS */
-                min-height: 44px;
-            }
-
-            .form-textarea {
-                min-height: 100px;
-            }
-
-            .submit-btn {
-                padding: 0.875rem 1.5rem;
-                font-size: 1rem;
-                min-height: 48px;
-            }
-
-            .file-upload {
-                padding: 1.5rem 1rem;
-            }
-
-            /* Notification positioning */
-            .success-message,
-            .error-message {
-                left: 1rem;
-                right: 1rem;
-                top: 1rem;
-            }
+        /* Customer number section */
+        .customer-number-section {
+            background: linear-gradient(135deg, rgba(220, 252, 231, 0.9) 0%, rgba(187, 247, 208, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(187, 247, 208, 0.9);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 32px;
         }
 
-        /* Mobile devices (481px - 768px) */
-        @media (min-width: 481px) and (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .form-card {
-                margin: 1rem;
-            }
-
-            .form-header {
-                padding: 1.75rem;
-            }
-
-            .form-body {
-                padding: 1.75rem;
-            }
-
-            .form-input,
-            .form-textarea {
-                font-size: 16px;
-            }
+        /* Label styling */
+        label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 10px;
         }
 
-        /* Tablet devices (769px - 1024px) */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .container {
-                padding: 1.5rem;
-            }
-
-            .form-card {
-                max-width: 600px;
-                margin: 2rem auto;
-            }
+        .required {
+            color: #ef4444;
         }
 
-        /* Touch-friendly interactions */
+        /* Header styling */
+        .page-header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding: 28px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow:
+                0 20px 40px rgba(255, 45, 85, 0.08),
+                0 8px 16px rgba(255, 45, 85, 0.04);
+        }
+
+        /* Grid gaps */
+        .grid-gap-6 {
+            gap: 32px;
+        }
+
+        .grid-gap-4 {
+            gap: 20px;
+        }
+
+        /* Mobile menu */
+        #mobileMenu {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            margin-top: 8px;
+            box-shadow:
+                0 20px 60px rgba(255, 45, 85, 0.1),
+                0 8px 24px rgba(255, 45, 85, 0.05);
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-
-            button,
-            .btn,
-            a.btn {
-                min-height: 44px;
-                touch-action: manipulation;
+            .responsive-container {
+                padding: 0 1rem;
             }
 
-            .file-upload {
-                touch-action: manipulation;
+            .form-card {
+                padding: 24px !important;
             }
 
-            /* Ensure text is readable */
-            body {
-                -webkit-text-size-adjust: 100%;
-                text-size-adjust: 100%;
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 24px;
+            }
+
+            .section-icon {
+                margin-right: 0;
+                margin-bottom: 16px;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                margin-bottom: 12px;
+            }
+
+            .attachment-box {
+                padding: 20px;
+            }
+
+            .gradient-orb {
+                filter: blur(80px);
+            }
+
+            .orb-1,
+            .orb-2,
+            .orb-3,
+            .orb-4 {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            .responsive-container {
+                max-width: 1800px;
+            }
+        }
+
+        /* File input styling */
+        input[type="file"] {
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.8) !important;
+            width: 100%;
+            cursor: pointer;
+            box-shadow:
+                0 2px 8px rgba(255, 45, 85, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+
+        input[type="file"]:focus {
+            outline: none;
+            border-color: var(--pink-primary) !important;
+            box-shadow:
+                0 0 0 4px rgba(255, 45, 85, 0.15),
+                0 4px 12px rgba(255, 45, 85, 0.1) !important;
+        }
+
+        /* Placeholder styling */
+        ::placeholder {
+            color: #9ca3af;
+            opacity: 1;
+        }
+
+        /* Selection styling */
+        ::selection {
+            background-color: rgba(255, 117, 143, 0.3);
+            color: #1d1d1f;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 240, 245, 0.5);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ff2d55, #ff6b9d);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 240, 245, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #ff6b9d, #ff2d55);
+        }
+
+        /* Pink Glow Effects */
+        .glow-pink {
+            box-shadow:
+                0 0 20px rgba(255, 45, 85, 0.15),
+                0 0 40px rgba(255, 107, 157, 0.1),
+                0 0 60px rgba(255, 182, 193, 0.05) !important;
+        }
+
+        /* Page Header Specific */
+        .page-header h1 {
+            background: linear-gradient(135deg, #ff2d55, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Pink Glow Animation for Interactive Elements */
+        .attachment-box:hover,
+        .btn-primary:hover,
+        .btn-secondary:hover {
+            animation: pinkPulse 2s infinite;
+        }
+
+        @keyframes pinkPulse {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 12px 32px rgba(255, 45, 85, 0.1),
+                    0 4px 12px rgba(255, 45, 85, 0.05);
+            }
+
+            50% {
+                box-shadow:
+                    0 12px 32px rgba(255, 45, 85, 0.15),
+                    0 4px 12px rgba(255, 45, 85, 0.08);
             }
         }
     </style>
 </head>
 
 <body class="min-h-screen">
-    <!-- Animated Gradient Background -->
+    <!-- Enhanced Animated Pink Glass Background -->
     <div class="background-layer">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
@@ -615,7 +780,7 @@
                 </div>
                 <div class="flex items-center space-x-2 md:space-x-4">
                     {% if current_user %}
-                    <span class="hidden sm:inline text-gray-500 text-xs font-medium uppercase tracking-wider">{{
+                    <span class="hidden sm:inline text-gray-600 text-sm md:text-base font-medium">{{
                         current_user }}</span>
                     <a href="/logout" class="nav-link bg-gray-100/50 hover:bg-gray-200/50 text-gray-700">Logout</a>
                     {% else %}
@@ -651,27 +816,47 @@
         </div>
     </nav>
 
-    <div class="container mx-auto px-4 py-8">
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Create New Ticket</h1>
-            <p class="text-gray-600">Create a comprehensive support ticket with structured information</p>
-        </div>
+    <!-- Main Content -->
+    <main class="responsive-container py-8">
+        <!-- Page Header -->
+        <header class="page-header mb-6 md:mb-10">
+            <div class="flex flex-col items-center mb-3 md:mb-4">
+                <div class="w-16 h-8 md:w-20 md:h-10 mb-1 md:mb-2 flex items-center justify-center">
+                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="w-full h-full object-contain">
+                </div>
+                <h1 class="text-lg md:text-xl font-semibold text-gray-800 mb-1">AutoAssistGroup Portal</h1>
+                <p class="text-xs md:text-sm text-pink-600 font-medium">Create New Support Ticket</p>
+            </div>
+
+            <div
+                class="flex flex-col sm:flex-row items-center justify-center sm:justify-end space-y-2 sm:space-y-0 sm:space-x-4">
+                <span class="text-sm md:text-base text-gray-600 font-medium">Welcome, {{ current_user }}</span>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    <a href="/"
+                        class="px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:opacity-90 transition flex items-center text-sm md:text-base font-medium shadow-lg">
+                        <i class="fas fa-list mr-2"></i>
+                        <span class="hidden sm:inline">View </span>Tickets
+                    </a>
+                </div>
+            </div>
+        </header>
 
         <!-- Main Form -->
         <form id="createTicketForm" class="max-w-4xl mx-auto space-y-8" enctype="multipart/form-data">
             <!-- Customer Information Section -->
-            <div class="form-card p-6">
+            <div class="form-card p-8">
                 <div class="section-header">
                     <div class="section-icon bg-blue-100 text-blue-600">
                         <i class="fas fa-user"></i>
                     </div>
-                    <h2 class="text-xl font-semibold text-gray-800">Customer Information</h2>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800">Customer Information</h2>
+                        <p class="text-sm text-gray-600 mt-1">Enter customer details for the new ticket</p>
+                    </div>
                 </div>
 
                 <!-- Customer Number Field (Auto-generated) -->
-                <div id="customerNumberSection" class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg"
-                    style="display: none;">
+                <div id="customerNumberSection" class="customer-number-section" style="display: none;">
                     <div class="flex items-center">
                         <i class="fas fa-ticket-alt text-green-600 text-xl mr-3"></i>
                         <div>
@@ -679,7 +864,7 @@
                                 Customer Number (Auto-generated)
                             </label>
                             <div id="customerNumberDisplay"
-                                class="text-lg font-bold text-green-800 bg-white px-3 py-2 rounded border">
+                                class="text-lg font-bold text-green-800 bg-white px-4 py-3 rounded-xl border border-green-200">
                                 <!-- Will be populated after ticket creation -->
                             </div>
                             <p class="text-xs text-green-600 mt-1">Reference this number for all inquiries</p>
@@ -688,10 +873,10 @@
                 </div>
 
                 <!-- Customer Name Fields -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            Title <span class="text-red-500">*</span>
+                        <label class="block mb-2">
+                            Title <span class="required">*</span>
                         </label>
                         <select name="customer_title" id="customer_title" required class="form-select">
                             <option value="">Select Title</option>
@@ -704,15 +889,15 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            First Name <span class="text-red-500">*</span>
+                        <label class="block mb-2">
+                            First Name <span class="required">*</span>
                         </label>
                         <input type="text" name="customer_first_name" id="customer_first_name" required
                             class="form-input" placeholder="Enter first name">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            Surname <span class="text-red-500">*</span>
+                        <label class="block mb-2">
+                            Surname <span class="required">*</span>
                         </label>
                         <input type="text" name="customer_surname" id="customer_surname" required class="form-input"
                             placeholder="Enter surname">
@@ -720,17 +905,17 @@
                 </div>
 
                 <!-- Email and Vehicle Registration -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            Email Address <span class="text-red-500">*</span>
+                        <label class="block mb-2">
+                            Email Address <span class="required">*</span>
                         </label>
                         <input type="email" name="email" id="email" required class="form-input"
                             placeholder="customer@example.com">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            Vehicle Registration <span class="text-red-500">*</span>
+                        <label class="block mb-2">
+                            Vehicle Registration <span class="required">*</span>
                         </label>
                         <input type="text" name="vehicle_registration" id="vehicle_registration" required
                             class="form-input" placeholder="AB12 CDE" style="text-transform: uppercase;">
@@ -739,19 +924,22 @@
             </div>
 
             <!-- Ticket Details Section -->
-            <div class="form-card p-6">
+            <div class="form-card p-8">
                 <div class="section-header">
                     <div class="section-icon bg-green-100 text-green-600">
                         <i class="fas fa-ticket-alt"></i>
                     </div>
-                    <h2 class="text-xl font-semibold text-gray-800">Ticket Details</h2>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800">Ticket Details</h2>
+                        <p class="text-sm text-gray-600 mt-1">Configure ticket priority and assignment</p>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Type of Claim -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            Type of Claim <span class="text-red-500">*</span>
+                        <label class="block mb-2">
+                            Type of Claim <span class="required">*</span>
                         </label>
                         <select name="type_of_claim" id="type_of_claim" required class="form-select">
                             <option value="">Select Type</option>
@@ -765,8 +953,8 @@
 
                     <!-- Priority -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            Priority Status <span class="text-red-500">*</span>
+                        <label class="block mb-2">
+                            Priority Status <span class="required">*</span>
                         </label>
                         <select name="priority" id="priority" required class="form-select">
                             <option value="">Select Priority</option>
@@ -779,8 +967,8 @@
 
                     <!-- Technician -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            Technician <span class="text-red-500">*</span>
+                        <label class="block mb-2">
+                            Technician <span class="required">*</span>
                         </label>
                         <select name="technician" id="technician" required class="form-select">
                             <option value="">Select Technician</option>
@@ -796,48 +984,51 @@
 
                 <!-- Subject and Description -->
                 <div class="mt-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Subject <span class="text-red-500">*</span>
+                    <label class="block mb-2">
+                        Subject <span class="required">*</span>
                     </label>
                     <input type="text" name="subject" id="subject" required class="form-input"
                         placeholder="Brief description of the issue">
                 </div>
 
                 <div class="mt-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Description <span class="text-red-500">*</span>
+                    <label class="block mb-2">
+                        Description <span class="required">*</span>
                     </label>
-                    <textarea name="description" id="description" rows="4" required class="form-input"
+                    <textarea name="description" id="description" rows="4" required class="form-textarea"
                         placeholder="Detailed description of the issue..."></textarea>
                 </div>
             </div>
 
             <!-- Date Fields Section -->
-            <div class="form-card p-6">
+            <div class="form-card p-8">
                 <div class="section-header">
                     <div class="section-icon bg-purple-100 text-purple-600">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
-                    <h2 class="text-xl font-semibold text-gray-800">Date Information</h2>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800">Date Information</h2>
+                        <p class="text-sm text-gray-600 mt-1">Important dates for the ticket</p>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            Service Date <span class="text-red-500">*</span>
+                        <label class="block mb-2">
+                            Service Date <span class="required">*</span>
                         </label>
                         <input type="date" name="service_date" id="service_date" required class="form-input"
                             onchange="calculateDuration()">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            Claim Date <span class="text-red-500">*</span>
+                        <label class="block mb-2">
+                            Claim Date <span class="required">*</span>
                         </label>
                         <input type="date" name="claim_date" id="claim_date" required class="form-input"
                             onchange="calculateDuration()">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <label class="block mb-2">
                             Days Between Service and Claim
                         </label>
                         <div id="duration_display" class="duration-display duration-default">
@@ -848,15 +1039,16 @@
             </div>
 
             <!-- Attachments Section -->
-            <div class="form-card p-6">
+            <div class="form-card p-8">
                 <div class="section-header">
                     <div class="section-icon bg-orange-100 text-orange-600">
                         <i class="fas fa-paperclip"></i>
                     </div>
-                    <h2 class="text-xl font-semibold text-gray-800">Attachments</h2>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800">Attachments</h2>
+                        <p class="text-sm text-gray-600 mt-1">Upload relevant documents (optional)</p>
+                    </div>
                 </div>
-                <p class="text-sm text-gray-600 mb-6">Upload relevant documents. You can select all, some, or none of
-                    these attachments.</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- DPF Report -->
@@ -905,15 +1097,16 @@
             </div>
 
             <!-- Submit Button -->
-            <div class="flex justify-center space-x-4">
-                <a href="/" class="btn-secondary">Cancel</a>
+            <div class="flex justify-center space-x-4 pt-8">
+                <a href="/" class="btn-secondary">
+                    <i class="fas fa-times mr-2"></i>Cancel
+                </a>
                 <button type="submit" class="btn-primary">
-                    <i class="fas fa-plus mr-2"></i>
-                    Create Ticket
+                    <i class="fas fa-plus mr-2"></i>Create Ticket
                 </button>
             </div>
         </form>
-    </div>
+    </main>
 
     <!-- Message Container -->
     <div id="messageContainer" class="message-box">
@@ -939,7 +1132,6 @@
             }
         });
 
-        // Global variable for current time - used across validation functions
         // Duration calculation
         function calculateDuration() {
             const serviceDate = document.getElementById('service_date').value;
@@ -971,7 +1163,6 @@
 
             const formData = new FormData(this);
             const submitButton = e.target.querySelector('button[type="submit"]');
-
 
             // Disable submit button
             submitButton.disabled = true;
@@ -1053,6 +1244,24 @@
         // Auto-uppercase vehicle registration
         document.getElementById('vehicle_registration').addEventListener('input', function (e) {
             e.target.value = e.target.value.toUpperCase();
+        });
+
+        // Set today's date as default for claim date
+        document.addEventListener('DOMContentLoaded', function () {
+            const today = new Date().toISOString().split('T')[0];
+            const claimDateInput = document.getElementById('claim_date');
+            claimDateInput.value = today;
+            claimDateInput.min = today;
+
+            // Set service date to yesterday by default
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const serviceDateInput = document.getElementById('service_date');
+            serviceDateInput.value = yesterday.toISOString().split('T')[0];
+            serviceDateInput.max = today;
+
+            // Calculate initial duration
+            calculateDuration();
         });
     </script>
 </body>
