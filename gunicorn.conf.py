@@ -5,7 +5,7 @@ import multiprocessing
 import os
 
 # Server socket
-bind = "127.0.0.1:8000"
+bind = "0.0.0.0:" + os.environ.get("PORT", "8000")
 backlog = 2048
 
 # Worker processes
@@ -20,8 +20,8 @@ max_requests = 1000
 max_requests_jitter = 50
 
 # Logging
-accesslog = "/var/log/gunicorn/autoassist_access.log"
-errorlog = "/var/log/gunicorn/autoassist_error.log"
+accesslog = "-"
+errorlog = "-"
 loglevel = "info"
 access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s'
 
@@ -30,9 +30,9 @@ proc_name = "autoassist_support"
 
 # Server mechanics
 daemon = False
-pidfile = "/var/run/gunicorn/autoassist.pid"
-user = "www-data"
-group = "www-data"
+# pidfile = "/var/run/gunicorn/autoassist.pid"
+# user = "www-data"
+# group = "www-data"
 tmp_upload_dir = None
 
 # SSL (if needed)
