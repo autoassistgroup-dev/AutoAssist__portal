@@ -9,111 +9,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link href="/static/css/animations.css" rel="stylesheet">
     <style>
-        /* ===== APPLE-INSPIRED DESIGN SYSTEM ===== */
+        /* ===== MODERN PINK GLASSMORPHISM THEME ===== */
         :root {
-            /* Apple Color Palette */
-            --apple-blue: #0071e3;
-            --apple-blue-hover: #0077ED;
-            --apple-gray-50: #fafafa;
-            --apple-gray-100: #f5f5f7;
-            --apple-gray-200: #e8e8ed;
-            --apple-gray-300: #d2d2d7;
-            --apple-gray-400: #afafaf;
-            --apple-gray-500: #86868b;
-            --apple-gray-600: #6e6e73;
-            --apple-gray-700: #1d1d1f;
-            --apple-white: #ffffff;
-
-            /* Priority Colors */
+            /* Pink Color Palette */
             --primary: #ff758f;
             --secondary: #ff7eb3;
-            --urgent: #ef4444;
-            --fast: #f59e0b;
-            --medium: #ec4899;
-            --low: #10b981;
+            --primary-dark: #ff6b81;
+            --primary-light: #ffe0e9;
 
-            /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
-            --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.1);
+            /* Glass Effects */
+            --glass-white: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-shadow: rgba(255, 117, 143, 0.1);
+            --glass-blur: 15px;
 
-            /* Transitions */
-            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Background Colors */
+            --bg-gradient-start: #ffe0e9;
+            --bg-gradient-middle: #fff0f6;
+            --bg-gradient-end: #e8f4f8;
         }
 
-        /* ===== GLOBAL STYLES ===== */
         body {
             font-family: 'Poppins', sans-serif !important;
-            background: linear-gradient(135deg, #ffe0e9 0%, #fff0f6 50%, #e8f4f8 100%) !important;
-            color: var(--apple-gray-700) !important;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-middle) 50%,
+                    var(--bg-gradient-end) 100%);
+            color: #4b5563;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        .responsive-container {
-            max-width: 1920px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        @media (min-width: 640px) {
-            .responsive-container {
-                padding: 0 1.5rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .responsive-container {
-                padding: 0 2rem;
-            }
-        }
-
-        /* ===== UNIVERSAL NAVBAR STYLES ===== */
-        nav {
-            background: rgba(255, 255, 255, 0.45) !important;
-            backdrop-filter: blur(25px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
-            min-height: auto;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03) !important;
-            border-radius: 0 !important;
-        }
-
-        nav .responsive-container {
-            padding-top: 0.5rem !important;
-            padding-bottom: 0.5rem !important;
-        }
-
-        /* Nav link base styles */
-        .nav-link {
-            padding: 0.5rem 1rem !important;
-            border-radius: 0.5rem !important;
-            color: #4b5563 !important;
-            /* gray-600 */
-            font-weight: 500 !important;
-            font-size: 0.875rem !important;
-            transition: all 0.2s ease !important;
-            display: inline-flex !important;
-            align-items: center !important;
-        }
-
-        .nav-link:hover {
-            background: rgba(0, 0, 0, 0.04) !important;
-            transform: translateY(-1px);
-        }
-
-        .nav-link-active {
-            background: rgba(255, 45, 85, 0.1) !important;
-            color: #FF2D55 !important;
-            /* Apple Pink */
-        }
-
-        /* ===== ANIMATED GRADIENT BACKGROUND ===== */
+        /* Animated Gradient Background */
         .background-layer {
             position: fixed;
             top: 0;
@@ -128,286 +55,279 @@
         .gradient-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(60px);
             opacity: 0.5;
-            animation: floatOrb 25s ease-in-out infinite;
+            animation: float 20s infinite ease-in-out;
+            mix-blend-mode: soft-light;
         }
 
         .orb-1 {
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            top: -15%;
-            left: -10%;
-            animation-delay: 0s;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 117, 143, 0.4), rgba(255, 126, 179, 0.2));
+            top: -100px;
+            left: -100px;
         }
 
         .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            bottom: -15%;
-            right: -10%;
-            animation-delay: -8s;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 107, 129, 0.3), rgba(255, 71, 87, 0.2));
+            top: 50%;
+            right: -50px;
+            animation-delay: -5s;
         }
 
-        .orb-3 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            top: 40%;
-            right: 20%;
-            animation-delay: -16s;
-        }
-
-        .orb-4 {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            bottom: 20%;
-            left: 15%;
-            animation-delay: -12s;
-        }
-
-        @keyframes floatOrb {
+        @keyframes float {
 
             0%,
             100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            25% {
-                transform: translate(40px, -40px) scale(1.05);
+                transform: translateY(0);
             }
 
             50% {
-                transform: translate(-30px, 30px) scale(0.95);
+                transform: translateY(-20px);
             }
+        }
 
-            75% {
-                transform: translate(30px, 15px) scale(1.02);
-            }
+        /* ===== NAVBAR GLASS EFFECT ===== */
+        nav {
+            background: rgba(255, 255, 255, 0.15) !important;
+            backdrop-filter: blur(25px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
+            min-height: auto;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(255, 117, 143, 0.1) !important;
+        }
+
+        nav .responsive-container {
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem !important;
+            border-radius: 0.75rem !important;
+            color: #4b5563 !important;
+            font-weight: 500 !important;
+            font-size: 0.875rem !important;
+            transition: all 0.3s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            background: rgba(255, 255, 255, 0.3) !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 117, 143, 0.2) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.2);
+            border-color: var(--primary) !important;
+        }
+
+        .nav-link-active {
+            background: rgba(255, 117, 143, 0.25) !important;
+            color: var(--primary-dark) !important;
+            border-color: rgba(255, 117, 143, 0.4) !important;
+            box-shadow: 0 2px 10px rgba(255, 117, 143, 0.2);
         }
 
         /* ===== GLASS COMPONENTS ===== */
-        .card,
-        .modal .bg-white,
-        .modal-content,
-        .dashboard-card,
-        .ticket-card,
-        .stats-card {
-            background: rgba(255, 255, 255, 0.6) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.5) !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
-            border-radius: 0.75rem !important;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 117, 143, 0.1) !important;
-            border-color: var(--medium) !important;
-            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.2) !important;
-        }
-
-        /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
-
-        /* Normal base font size - READABLE */
-        /* Removed body styles to avoid conflict */
-
-        /* Normal Cards */
-        .dashboard-card,
-        .ticket-card,
-        .stats-card {
-            padding: 1rem !important;
-            margin-bottom: 1rem !important;
-            border-radius: 0.5rem !important;
-        }
-
-        /* Normal Buttons */
-        button,
-        .btn {
-            padding: 0.75rem 1.5rem !important;
-            font-size: 0.875rem !important;
-            border-radius: 0.375rem !important;
-        }
-
-        /* Normal Headers */
-        h1 {
-            font-size: 1.875rem !important;
-        }
-
-        h2 {
-            font-size: 1.5rem !important;
-        }
-
-        h3 {
-            font-size: 1.25rem !important;
-        }
-
-        h4 {
-            font-size: 1.125rem !important;
-        }
-
-        /* Normal Icons */
-        .fas,
-        .fab,
-        .far {
-            font-size: 1.25rem !important;
-        }
-
-        .card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        .glass-panel,
+        .glass-card,
+        .technician-card {
+            background: rgba(255, 255, 255, 0.25) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            border-radius: 1rem !important;
+            box-shadow: 0 8px 32px rgba(255, 117, 143, 0.1) !important;
             transition: all 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        .glass-card:hover,
+        .technician-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.35) !important;
+            box-shadow: 0 12px 40px rgba(255, 117, 143, 0.15) !important;
+            border-color: var(--primary) !important;
         }
 
+        /* ===== GRADIENT TEXT ===== */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-gradient,
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+            color: white !important;
+            border: none !important;
+            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.4) !important;
+            transition: all 0.3s ease !important;
         }
 
+        .btn-gradient:hover,
         .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(255, 117, 143, 0.3);
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary)) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 117, 143, 0.5) !important;
         }
 
+        /* ===== MODAL ===== */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
         }
 
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .modal .bg-white {
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
         }
 
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1001;
-            padding: 15px 25px;
-            border-radius: 8px;
-            color: white;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
+        /* Form Controls */
+        input[type="text"],
+        input[type="email"],
+        select {
+            background: rgba(255, 255, 255, 0.5) !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            backdrop-filter: blur(5px);
         }
 
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.success {
-            background-color: #10b981;
-        }
-
-        .notification.error {
-            background-color: #ef4444;
+        input:focus,
+        select:focus {
+            background: white !important;
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 3px rgba(255, 117, 143, 0.1) !important;
         }
     </style>
 </head>
 
-<body class="min-h-screen">
-    <!-- Animated Gradient Background -->
+<body class="bg-gray-50 min-h-screen relative">
+    <!-- Background Layers -->
     <div class="background-layer">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
-        <div class="gradient-orb orb-4"></div>
     </div>
 
     <!-- Navigation -->
     <nav>
-        <div class="responsive-container">
-            <div class="flex justify-between items-center h-12 md:h-14">
-                <div class="flex items-center space-x-8">
+        <div class="responsive-container py-4 px-4 md:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-6">
                     <a href="/" class="flex items-center">
-                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8">
+                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
                     </a>
-                    <div class="hidden md:flex items-center space-x-2">
-                        <a href="/" class="nav-link">Tickets</a>
-                        <a href="/dashboard" class="nav-link">Dashboard</a>
-
-                        <a href="/create-ticket" class="nav-link">Create Ticket</a>
+                    <div class="hidden md:flex space-x-3">
+                        <a href="/" class="nav-link">
+                            <i class="fas fa-ticket-alt mr-2"></i>Tickets
+                        </a>
+                        <a href="/dashboard" class="nav-link">
+                            <i class="fas fa-chart-line mr-2"></i>Dashboard
+                        </a>
+                        <a href="/create-ticket" class="nav-link">
+                            <i class="fas fa-plus-circle mr-2"></i>Create Ticket
+                        </a>
                         {% if current_user_role == 'Administrator' %}
-                        <a href="/technicians" class="nav-link nav-link-active">Technicians</a>
-                        <a href="/members" class="nav-link">Members</a>
-                        <a href="/admin" class="nav-link">Admin Panel</a>
+                        <a href="/technicians" class="nav-link nav-link-active">
+                            <i class="fas fa-tools mr-2"></i>Technicians
+                        </a>
+                        <a href="/members" class="nav-link">
+                            <i class="fas fa-users mr-2"></i>Members
+                        </a>
+                        <a href="/admin" class="nav-link">
+                            <i class="fas fa-cog mr-2"></i>Admin Panel
+                        </a>
                         {% endif %}
                     </div>
                 </div>
-                <div class="flex items-center space-x-2 md:space-x-4">
+                <div class="flex items-center space-x-3">
                     {% if current_user %}
-                    <span class="hidden sm:inline text-gray-500 text-xs font-medium uppercase tracking-wider">{{
-                        current_user }}</span>
-                    <a href="/logout" class="nav-link bg-gray-100/50 hover:bg-gray-200/50 text-gray-700">Logout</a>
+                    <div class="hidden sm:flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
+                            <span class="text-pink-600 text-sm">{{ current_user[0]|upper }}</span>
+                        </div>
+                        <span class="text-gray-600 text-sm">{{ current_user }}</span>
+                    </div>
+                    <a href="/logout" class="nav-link">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </a>
                     {% else %}
-                    <a href="/login" class="nav-link bg-pink-500 hover:bg-pink-600 text-white">Login</a>
+                    <a href="/login" class="nav-link bg-gradient-to-r from-pink-500 to-pink-600 text-white">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    </a>
                     {% endif %}
+
                     <!-- Mobile menu button -->
-                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn"
+                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn nav-link"
                         onclick="toggleMobileMenu()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
+                        <i class="fas fa-bars text-lg"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Mobile menu (hidden by default) -->
-            <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
-                <div class="flex flex-col space-y-3 pt-4">
-                    <a href="/" class="px-4 py-3 rounded hover:bg-gray-100 transition">Tickets</a>
-                    <a href="/dashboard" class="px-4 py-3 rounded hover:bg-gray-100 transition">Dashboard</a>
-
-                    <a href="/create-ticket" class="px-4 py-3 rounded hover:bg-gray-100 transition">Create Ticket</a>
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="md:hidden mt-3 pb-3 border-t border-pink-100 hidden">
+                <div class="flex flex-col space-y-2 pt-3">
+                    <a href="/" class="nav-link">
+                        <i class="fas fa-ticket-alt mr-2"></i>Tickets
+                    </a>
+                    <a href="/dashboard" class="nav-link">
+                        <i class="fas fa-chart-line mr-2"></i>Dashboard
+                    </a>
+                    <a href="/create-ticket" class="nav-link">
+                        <i class="fas fa-plus-circle mr-2"></i>Create Ticket
+                    </a>
                     {% if current_user_role == 'Administrator' %}
-                    <a href="/technicians"
-                        class="px-4 py-3 rounded bg-pink-50 text-pink-600 font-medium">Technicians</a>
-                    <a href="/members" class="px-4 py-3 rounded hover:bg-gray-100 transition">Members</a>
-                    <a href="/admin" class="px-4 py-3 rounded hover:bg-gray-100 transition">Admin Panel</a>
+                    <a href="/technicians" class="nav-link nav-link-active">
+                        <i class="fas fa-tools mr-2"></i>Technicians
+                    </a>
+                    <a href="/members" class="nav-link">
+                        <i class="fas fa-users mr-2"></i>Members
+                    </a>
+                    <a href="/admin" class="nav-link">
+                        <i class="fas fa-cog mr-2"></i>Admin Panel
+                    </a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </nav>
-    <div class="container mx-auto px-4 py-8">
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
-                <i class="fas fa-tools text-pink-600 mr-3"></i>Technicians Management
-            </h1>
-            <p class="text-gray-600">Manage field technicians and their information</p>
-        </div>
-
-        <!-- Add New Technician Button -->
-        <div class="mb-6 flex justify-between items-center">
-            <h2 class="text-xl font-semibold text-gray-700">All Technicians ({{ technicians|length }})</h2>
+    <!-- Page Header -->
+    <div class="text-center py-8">
+        <h1 class="text-3xl md:text-4xl font-bold gradient-text mb-2">Technicians Management</h1>
+        <p class="text-gray-500">Manage field technicians and their information</p>
+        <div class="mt-6">
             <button id="addTechnicianBtn"
-                class="btn-primary text-white px-6 py-3 rounded-lg font-medium transition hover:shadow-lg">
+                class="btn-gradient px-6 py-3 rounded-xl font-bold shadow-lg flex items-center mx-auto text-lg hover-lift">
                 <i class="fas fa-plus mr-2"></i>Add New Technician
             </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 -mt-20 relative z-10">
+        <div class="glass-panel px-6 py-4 mb-6 flex justify-between items-center">
+            <h2 class="text-xl font-semibold text-gray-700">All Technicians</h2>
+            <span class="px-3 py-1 rounded-full bg-pink-100 text-pink-700 text-sm font-medium">{{ technicians|length }}
+                Active</span>
         </div>
 
         <!-- Technicians Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="techniciansContainer">
             {% for technician in technicians %}
-            <div class="card p-6 technician-card" data-technician-id="{{ technician._id }}">
+            <div class="glass-card p-6 technician-card" data-technician-id="{{ technician._id }}">
                 <div class="text-center">
                     <div class="bg-pink-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-hard-hat text-pink-600 text-2xl"></i>
@@ -464,7 +384,7 @@
             <h3 class="text-xl font-semibold text-gray-600 mb-2">No Technicians Found</h3>
             <p class="text-gray-500 mb-6">Start by adding your first technician to the system.</p>
             <button id="addFirstTechnicianBtn"
-                class="btn-primary text-white px-6 py-3 rounded-lg font-medium transition hover:shadow-lg">
+                class="btn-gradient text-white px-6 py-3 rounded-lg font-medium transition hover:shadow-lg">
                 <i class="fas fa-plus mr-2"></i>Add First Technician
             </button>
         </div>
@@ -521,7 +441,7 @@
                         Cancel
                     </button>
                     <button type="submit" id="submitBtn"
-                        class="flex-1 btn-primary text-white px-4 py-2 rounded-lg transition hover:shadow-lg">
+                        class="flex-1 btn-gradient text-white px-4 py-2 rounded-lg transition hover:shadow-lg">
                         <i class="fas fa-save mr-2"></i>Save
                     </button>
                 </div>
