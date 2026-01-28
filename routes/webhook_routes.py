@@ -158,6 +158,7 @@ def webhook_reply():
         customer_email = data.get('customer_email', data.get('from', ''))
         sender_type = 'customer' if customer_email else 'webhook'
         sender_name = data.get('sender_name', customer_email or 'External System')
+        is_customer = True if sender_type == 'customer' else False
         
         # Create reply
         reply_data = {
@@ -166,6 +167,7 @@ def webhook_reply():
             'sender_name': sender_name,
             'sender_email': customer_email,
             'sender_type': sender_type,
+            'is_customer': is_customer,
             'attachments': data.get('attachments', []),
             'created_at': datetime.now()
         }
