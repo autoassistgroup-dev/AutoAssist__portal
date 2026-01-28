@@ -42,12 +42,29 @@ def display_response():
             from database import get_db
             db = get_db()
             
-            # Check if there's also a customer message to save as a reply
-            customer_message = data.get('customer_message', data.get('body', ''))
+            # First, try to find the ticket by ticket_id
+            ticket = db.get_ticket_by_id(ticket_id)
+            
+            # If ticket not found, try to find by customer email (for reply scenarios)
             customer_email = data.get('from', data.get('customer_email', ''))
+            if not ticket and customer_email:
+                # Find the most recent ticket from this customer
+                tickets = list(db.tickets.find(
+                    {"email": customer_email}
+                ).sort("created_at", -1).limit(1))
+                if tickets:
+                    ticket = tickets[0]
+                    ticket_id = ticket.get('ticket_id')
+                    logger.info(f"Found ticket {ticket_id} by customer email {customer_email}")
+            
+            if not ticket:
+                logger.warning(f"Ticket {ticket_id} not found, creating update anyway")
+            
+            # Check if there's also a customer message to save as a reply
+            customer_message = data.get('customer_message', data.get('body', data.get('message', '')))
             
             # If customer message provided, save it as a reply first
-            if customer_message and customer_email:
+            if customer_message and customer_email and ticket:
                 reply_data = {
                     'ticket_id': ticket_id,
                     'message': customer_message,
