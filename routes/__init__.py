@@ -16,6 +16,7 @@ from routes.n8n_routes import n8n_bp
 from routes.webhook_routes import webhook_bp
 from routes.attachment_routes import attachment_bp
 from routes.ai_routes import ai_bp
+from routes.document_routes import document_bp
 from routes.main_routes import main_bp
 
 
@@ -49,6 +50,9 @@ def register_blueprints(app):
     
     # AI routes
     app.register_blueprint(ai_bp)
+    
+    # Document routes (Templates/Files)
+    app.register_blueprint(document_bp)
     
     # Main page routes (index, dashboard, ticket detail, etc.)
     app.register_blueprint(main_bp)
