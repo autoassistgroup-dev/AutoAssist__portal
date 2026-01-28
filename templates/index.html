@@ -12,7 +12,6 @@
     <style>
         /* ===== MODERN PINK GLASSMORPHISM THEME ===== */
         :root {
-            /* Pink Color Palette */
             --primary: #ff758f;
             --secondary: #ff7eb3;
             --primary-dark: #ff6b81;
@@ -22,20 +21,15 @@
             --low: #2ed573;
             --waiting: #ffcc00;
             --medium: #ff6b81;
-
-            /* Glass Effects */
             --glass-white: rgba(255, 255, 255, 0.25);
             --glass-border: rgba(255, 255, 255, 0.4);
             --glass-shadow: rgba(255, 117, 143, 0.1);
             --glass-blur: 15px;
-
-            /* Background Colors */
             --bg-gradient-start: #ffe0e9;
             --bg-gradient-middle: #fff0f6;
             --bg-gradient-end: #e8f4f8;
         }
 
-        /* ===== GLOBAL STYLES ===== */
         * {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -51,7 +45,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated Gradient Background */
         .background-layer {
             position: fixed;
             top: 0;
@@ -101,7 +94,7 @@
             }
         }
 
-        /* ===== NAVBAR GLASS EFFECT ===== */
+        /* ===== NAVBAR ===== */
         nav {
             background: rgba(255, 255, 255, 0.15) !important;
             backdrop-filter: blur(25px) saturate(180%) !important;
@@ -112,11 +105,6 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 30px rgba(255, 117, 143, 0.1) !important;
-        }
-
-        nav .responsive-container {
-            padding-top: 0.5rem !important;
-            padding-bottom: 0.5rem !important;
         }
 
         .nav-link {
@@ -152,7 +140,8 @@
         .stats-card,
         .ticket-card,
         .main-container-glass,
-        .enhanced-search-container {
+        .enhanced-search-container,
+        .forwarded-glass {
             background: rgba(255, 255, 255, 0.25) !important;
             backdrop-filter: blur(20px) !important;
             -webkit-backdrop-filter: blur(20px) !important;
@@ -170,7 +159,6 @@
             border-color: var(--primary) !important;
         }
 
-        /* ===== GRADIENT TEXT ===== */
         .gradient-text {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -178,7 +166,6 @@
             background-clip: text;
         }
 
-        /* ===== BUTTONS ===== */
         .btn-gradient {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -193,28 +180,118 @@
             box-shadow: 0 8px 25px rgba(255, 117, 143, 0.5);
         }
 
-        /* ===== DROPDOWNS ===== */
-        .custom-dropdown,
-        .search-input {
-            background: rgba(255, 255, 255, 0.9) !important;
-            border-color: rgba(255, 255, 255, 0.5) !important;
+        /* ===== NEW LAYOUT STYLES ===== */
+        .compact-header {
+            padding: 1.5rem !important;
+            margin-bottom: 1.5rem !important;
         }
 
-        .custom-dropdown:hover,
-        .search-input:focus {
-            border-color: var(--primary) !important;
-            box-shadow: 0 0 0 3px rgba(255, 117, 143, 0.1) !important;
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .dropdown-menu {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+        @media (min-width: 768px) {
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .user-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 640px) {
+            .user-actions {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        /* Stats grid adjustment */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Filter section adjustment */
+        .filter-section {
+            background: rgba(255, 255, 255, 0.25);
             border-radius: 1rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        /* ===== BADGES ===== */
+        .filter-row {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .filter-row {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        /* Ticket card improvements */
+        .ticket-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .ticket-main-content {
+            flex: 1;
+            min-width: 0;
+            /* Prevents flex item from overflowing */
+        }
+
+        .ticket-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .ticket-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.75rem;
+        }
+
+        .ticket-sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+            min-width: 120px;
+        }
+
+        /* Priority badges */
         .priority-badge {
             font-size: 0.7rem;
             padding: 0.25rem 0.5rem;
@@ -241,13 +318,35 @@
             background: rgba(46, 213, 115, 0.1);
             color: #2ed573;
         }
+
+        /* Dropdown improvements */
+        .custom-dropdown {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border: 1px solid rgba(209, 213, 219, 0.3) !important;
+            border-radius: 0.75rem !important;
+            padding: 0.5rem 1rem !important;
+            min-width: 150px;
+        }
+
+        /* Mobile improvements */
+        @media (max-width: 768px) {
+            .ticket-card {
+                flex-direction: column;
+            }
+
+            .ticket-sidebar {
+                align-items: flex-start;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
 <body class="min-h-screen">
-    <!-- Navbar -->
-    <!-- Navigation -->
-    <!-- Navigation -->
+    <!-- Background Gradient -->
     <div class="background-layer">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
@@ -255,16 +354,16 @@
 
     <!-- Navigation -->
     <nav>
-        <div class="responsive-container py-4">
+        <div class="responsive-container px-6 md:px-12 py-4">
             <div class="flex items-center justify-between">
-                <!-- Logo Section (Left) -->
+                <!-- Logo -->
                 <div class="flex-1 flex justify-start">
                     <a href="/" class="flex items-center">
                         <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
                     </a>
                 </div>
 
-                <!-- Navigation Links (Center) -->
+                <!-- Navigation Links -->
                 <div class="hidden md:flex flex-grow justify-center space-x-2">
                     <a href="/" class="nav-link nav-link-active">
                         <i class="fas fa-ticket-alt mr-2"></i>Tickets
@@ -287,6 +386,8 @@
                     </a>
                     {% endif %}
                 </div>
+
+                <!-- User Section -->
                 <div class="flex items-center space-x-3">
                     {% if current_user %}
                     <div class="hidden sm:flex items-center space-x-2">
@@ -343,85 +444,82 @@
         </div>
     </nav>
 
-
-
-    <div id="mainContainer" class="responsive-container py-8 mt-4">
-        <header class="mb-6 md:mb-10 glass-panel p-8 relative overflow-hidden">
-            <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="text-left">
-                    <h1 class="text-3xl font-bold gradient-text mb-2">AutoAssist Support Portal</h1>
-                    <p class="text-gray-500">Manage and track support tickets efficiently</p>
+    <!-- Main Content -->
+    <div id="mainContainer" class="responsive-container py-6 mt-4">
+        <!-- Compact Header -->
+        <header class="compact-header glass-panel">
+            <div class="header-content">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold gradient-text mb-2">AutoAssist Support Portal</h1>
+                    <p class="text-gray-500 text-sm md:text-base">Manage and track support tickets efficiently</p>
                 </div>
-
-                <div class="flex flex-col sm:flex-row items-center gap-3 mt-4 md:mt-0">
-                    <span class="text-gray-600 font-medium mr-2">Welcome, {{ current_user }}</span>
-
-                    <a href="/create-ticket"
-                        class="btn-gradient px-4 py-2 rounded-lg text-sm font-semibold flex items-center">
-                        <i class="fas fa-plus mr-2"></i>Create Ticket
-                    </a>
-
-                    <button id="manualRefreshBtn"
-                        class="bg-white text-gray-700 hover:text-pink-600 px-4 py-2 rounded-lg border border-gray-200 font-medium transition flex items-center shadow-sm">
-                        <i class="fas fa-sync-alt mr-2"></i>Check Updates
-                    </button>
+                <div class="user-actions">
+                    <span class="text-gray-600 font-medium">Welcome, {{ current_user }}</span>
+                    <div class="flex items-center gap-2">
+                        <a href="/create-ticket"
+                            class="btn-gradient px-4 py-2 rounded-lg text-sm font-semibold flex items-center whitespace-nowrap">
+                            <i class="fas fa-plus mr-2"></i>Create Ticket
+                        </a>
+                        <button id="manualRefreshBtn"
+                            class="bg-white text-gray-700 hover:text-pink-600 px-3 py-2 rounded-lg border border-gray-200 font-medium transition flex items-center shadow-sm whitespace-nowrap">
+                            <i class="fas fa-sync-alt mr-2"></i>Refresh
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div class="stats-card shadow p-6">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stats-card p-5">
                 <div class="flex items-center">
                     <div class="p-3 rounded-full bg-pink-100 mr-4">
                         <i class="fas fa-ticket-alt text-pink-600"></i>
                     </div>
                     <div>
-                        <h3 class="font-medium text-gray-500">Total Tickets</h3>
-                        <p class="text-3xl font-bold" style="color: var(--primary);" data-stat="total">{{
-                            total_tickets
-                            }}</p>
+                        <h3 class="font-medium text-gray-500 text-sm">Total Tickets</h3>
+                        <p class="text-2xl font-bold" style="color: var(--primary);">{{ total_tickets }}</p>
                     </div>
                 </div>
             </div>
-            <div class="stats-card shadow p-6">
+            <div class="stats-card p-5">
                 <div class="flex items-center">
                     <div class="p-3 rounded-full bg-blue-100 mr-4">
                         <i class="fas fa-folder-open text-blue-600"></i>
                     </div>
                     <div>
-                        <h3 class="font-medium text-gray-500">Open Tickets</h3>
-                        <p class="text-3xl font-bold" style="color: var(--medium);" data-stat="open">{{ open_tickets
-                            }}
-                        </p>
+                        <h3 class="font-medium text-gray-500 text-sm">Open Tickets</h3>
+                        <p class="text-2xl font-bold" style="color: var(--medium);">{{ open_tickets }}</p>
                     </div>
                 </div>
             </div>
-            <!-- New: Waiting for Response Stats Card -->
-            <div class="stats-card shadow p-6">
+            <div class="stats-card p-5">
                 <div class="flex items-center">
                     <div class="p-3 rounded-full bg-yellow-100 mr-4">
                         <i class="fas fa-clock text-yellow-600"></i>
                     </div>
                     <div>
-                        <h3 class="font-medium text-gray-500">Waiting for Response</h3>
-                        <p class="text-3xl font-bold" style="color: var(--waiting);" data-stat="waiting">{{
-                            waiting_tickets }}</p>
+                        <h3 class="font-medium text-gray-500 text-sm">Waiting Response</h3>
+                        <p class="text-2xl font-bold" style="color: var(--waiting);">{{ waiting_tickets }}</p>
                     </div>
                 </div>
             </div>
-            <div class="stats-card shadow p-6">
+            <div class="stats-card p-5">
                 <div class="flex items-center">
                     <div class="p-3 rounded-full bg-green-100 mr-4">
                         <i class="fas fa-check-circle text-green-600"></i>
                     </div>
                     <div>
-                        <h3 class="font-medium text-gray-500">Resolved</h3>
-                        <p class="text-3xl font-bold" style="color: var(--low);" data-stat="resolved">{{
-                            resolved_tickets }}</p>
+                        <h3 class="font-medium text-gray-500 text-sm">Resolved</h3>
+                        <p class="text-2xl font-bold" style="color: var(--low);">{{ resolved_tickets }}</p>
                     </div>
                 </div>
             </div>
-            <div class="stats-card shadow p-6 lg:col-span-2">
+        </div>
+
+        <!-- Breakdown Cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="stats-card p-6">
                 <div class="flex flex-col">
                     <h3 class="font-medium text-gray-500 mb-3">Priority Breakdown</h3>
                     <div class="flex flex-wrap gap-2">
@@ -437,7 +535,7 @@
                     </div>
                 </div>
             </div>
-            <div class="stats-card shadow p-6 lg:col-span-2">
+            <div class="stats-card p-6">
                 <div class="flex flex-col">
                     <h3 class="font-medium text-gray-500 mb-3">Type Breakdown</h3>
                     <div class="flex flex-wrap gap-2">
@@ -445,10 +543,11 @@
                         {% if classification in ['Support', 'Technical Issue', 'Warranty Claim', 'Payment', 'Spam',
                         'Account'] %}
                         <span class="priority-badge rounded-full 
-                                {% if classification == 'Support' %}badge-support
-                                {% elif classification == 'Technical Issue' %}badge-technical
-                                {% elif classification == 'Warranty Claim' %}badge-warranty
-                                {% else %}badge-others{% endif %}" data-classification="{{ classification }}">
+                                {% if classification == 'Support' %}bg-purple-100 text-purple-700
+                                {% elif classification == 'Technical Issue' %}bg-blue-100 text-blue-700
+                                {% elif classification == 'Warranty Claim' %}bg-green-100 text-green-700
+                                {% else %}bg-gray-100 text-gray-700{% endif %}"
+                            data-classification="{{ classification }}">
                             {% if classification == 'Warranty Claim' %}🛡️{% endif %}
                             {{ classification }}: {{ count }}
                         </span>
@@ -457,140 +556,47 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
-
-        <div class="enhanced-search-container mb-6">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div class="search-input-container w-full md:w-80 lg:w-96">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-row">
+                <div class="search-container relative">
                     <input type="text" id="searchInput" placeholder="Search tickets by ID, subject, email..."
-                        class="search-input">
-                    <i class="fas fa-search search-icon"></i>
+                        class="w-full px-4 py-3 pl-10 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                 </div>
-                <div class="flex gap-3 flex-wrap">
-                    <!-- Type Filter -->
-                    <div class="relative inline-block text-left dropdown-wrapper min-w-[200px]">
-                        <input type="hidden" id="typeFilter" value="All">
-                        <button type="button"
-                            class="custom-dropdown w-full flex items-center justify-between px-4 py-3 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 group"
-                            onclick="toggleDropdown('type-dropdown')">
-                            <div class="flex items-center gap-3">
-                                <i class="fas fa-layer-group text-pink-500 text-lg"></i>
-                                <span class="text-sm font-medium text-gray-700 whitespace-nowrap"
-                                    id="typeFilterLabel">All Types</span>
-                            </div>
-                            <i class="fas fa-chevron-down text-gray-400 text-xs transition-transform duration-200 group-hover:text-pink-500 ml-2"
-                                id="type-dropdown-arrow"></i>
-                        </button>
-
-                        <div id="type-dropdown"
-                            class="dropdown-menu hidden absolute z-50 mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden transform origin-top transition-all duration-200">
-                            <div class="p-1">
-                                <div class="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                                    Filter by Type</div>
-                                <button onclick="selectOption('typeFilter', 'All', 'All Types')"
-                                    class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-colors flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-gray-300"></span> All Types
-                                </button>
-                                <button onclick="selectOption('typeFilter', 'Technical Issue', 'Technical Issue')"
-                                    class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-colors flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-blue-400"></span> Technical Issue
-                                </button>
-                                <button onclick="selectOption('typeFilter', 'Payment', 'Payment')"
-                                    class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-colors flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-indigo-400"></span> Payment
-                                </button>
-                                <button onclick="selectOption('typeFilter', 'Support', 'Support')"
-                                    class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-colors flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-purple-400"></span> Support
-                                </button>
-                                <button onclick="selectOption('typeFilter', 'Warranty Claim', 'Warranty Claim')"
-                                    class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-colors flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-green-400"></span> Warranty Claim
-                                </button>
-                                <button onclick="selectOption('typeFilter', 'Account', 'Account')"
-                                    class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-colors flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-cyan-400"></span> Account
-                                </button>
-                                <button onclick="selectOption('typeFilter', 'Spam', 'Spam')"
-                                    class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-colors flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-gray-400"></span> Spam
-                                </button>
-                            </div>
-                        </div>
+                <div class="filters-container">
+                    <div class="relative">
+                        <select id="typeFilter" class="custom-dropdown">
+                            <option value="All">All Types</option>
+                            <option value="Technical Issue">Technical Issue</option>
+                            <option value="Payment">Payment</option>
+                            <option value="Support">Support</option>
+                            <option value="Warranty Claim">Warranty Claim</option>
+                            <option value="Account">Account</option>
+                            <option value="Spam">Spam</option>
+                        </select>
                     </div>
-
-                    <!-- Priority Filter -->
-                    <div class="relative inline-block text-left dropdown-wrapper min-w-[170px]">
-                        <input type="hidden" id="priorityFilter" value="All">
-                        <button type="button"
-                            class="custom-dropdown w-full flex items-center justify-between px-4 py-3 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 group"
-                            onclick="toggleDropdown('priority-dropdown')">
-                            <div class="flex items-center gap-3">
-                                <i class="fas fa-exclamation-triangle text-orange-500 text-lg"></i>
-                                <span class="text-sm font-medium text-gray-700 whitespace-nowrap"
-                                    id="priorityFilterLabel">All Priority</span>
-                            </div>
-                            <i class="fas fa-chevron-down text-gray-400 text-xs transition-transform duration-200 group-hover:text-orange-500 ml-2"
-                                id="priority-dropdown-arrow"></i>
-                        </button>
-
-                        <div id="priority-dropdown"
-                            class="dropdown-menu hidden absolute z-50 mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden transform origin-top transition-all duration-200">
-                            <div class="p-1">
-                                <div class="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                                    Filter by Priority</div>
-                                <button onclick="selectOption('priorityFilter', 'All', 'All Priority')"
-                                    class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors flex items-center gap-2">All
-                                    Priority</button>
-                                <button onclick="selectOption('priorityFilter', 'Urgent', 'Urgent')"
-                                    class="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors flex items-center gap-2">Urgent</button>
-                                <button onclick="selectOption('priorityFilter', 'Fast', 'Fast')"
-                                    class="w-full text-left px-3 py-2 text-sm text-orange-600 hover:bg-orange-50 rounded-lg transition-colors flex items-center gap-2">Fast</button>
-                                <button onclick="selectOption('priorityFilter', 'Medium', 'Medium')"
-                                    class="w-full text-left px-3 py-2 text-sm text-pink-600 hover:bg-pink-50 rounded-lg transition-colors flex items-center gap-2">Medium</button>
-                                <button onclick="selectOption('priorityFilter', 'Low', 'Low')"
-                                    class="w-full text-left px-3 py-2 text-sm text-green-600 hover:bg-green-50 rounded-lg transition-colors flex items-center gap-2">Low</button>
-                            </div>
-                        </div>
+                    <div class="relative">
+                        <select id="priorityFilter" class="custom-dropdown">
+                            <option value="All">All Priority</option>
+                            <option value="Urgent">Urgent</option>
+                            <option value="Fast">Fast</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
                     </div>
-
-                    <!-- Status Filter -->
-                    <div class="relative inline-block text-left dropdown-wrapper min-w-[180px]">
-                        <input type="hidden" id="statusFilter" value="All">
-                        <button type="button"
-                            class="custom-dropdown w-full flex items-center justify-between px-4 py-3 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 group"
-                            onclick="toggleDropdown('status-dropdown')">
-                            <div class="flex items-center gap-3">
-                                <i class="fas fa-tasks text-blue-500 text-lg"></i>
-                                <span class="text-sm font-medium text-gray-700 whitespace-nowrap"
-                                    id="statusFilterLabel">All Status</span>
-                            </div>
-                            <i class="fas fa-chevron-down text-gray-400 text-xs transition-transform duration-200 group-hover:text-blue-500 ml-2"
-                                id="status-dropdown-arrow"></i>
-                        </button>
-
-                        <div id="status-dropdown"
-                            class="dropdown-menu hidden absolute z-50 mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden transform origin-top transition-all duration-200">
-                            <div class="p-1">
-                                <div class="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                                    Filter by Status</div>
-                                <button onclick="selectOption('statusFilter', 'All', 'All Status')"
-                                    class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors flex items-center gap-2">All
-                                    Status</button>
-                                <button onclick="selectOption('statusFilter', 'Open', 'Open')"
-                                    class="w-full text-left px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-lg transition-colors flex items-center gap-2">Open</button>
-                                <button onclick="selectOption('statusFilter', 'Waiting for Response', 'Waiting')"
-                                    class="w-full text-left px-3 py-2 text-sm text-yellow-600 hover:bg-yellow-50 rounded-lg transition-colors flex items-center gap-2">Waiting
-                                    for Response</button>
-                                <button onclick="selectOption('statusFilter', 'Resolved', 'Resolved')"
-                                    class="w-full text-left px-3 py-2 text-sm text-green-600 hover:bg-green-50 rounded-lg transition-colors flex items-center gap-2">Resolved</button>
-                            </div>
-                        </div>
+                    <div class="relative">
+                        <select id="statusFilter" class="custom-dropdown">
+                            <option value="All">All Status</option>
+                            <option value="Open">Open</option>
+                            <option value="Waiting for Response">Waiting</option>
+                            <option value="Resolved">Resolved</option>
+                        </select>
                     </div>
-                    <button id="clearFilters" class="clear-button flex items-center">
-                        <i class="fas fa-times mr-2"></i> Clear
+                    <button id="clearFilters" class="px-4 py-2 text-sm text-gray-600 hover:text-pink-600 transition">
+                        Clear Filters
                     </button>
                 </div>
             </div>
@@ -598,423 +604,134 @@
 
         <!-- Forwarded Tickets Section -->
         {% if forwarded_tickets %}
-        <div class="forwarded-glass rounded-lg shadow-lg overflow-hidden mb-6 border-l-4">
-            <div class="px-6 py-4 border-b flex justify-between items-center forwarded-header-glass">
-                <h2 class="text-xl font-semibold text-blue-800 flex items-center">
-                    <i class="fas fa-share mr-2"></i> Tickets Forwarded to You
+        <div class="forwarded-glass mb-6">
+            <div class="px-6 py-4 border-b flex justify-between items-center">
+                <h2 class="text-lg font-semibold text-blue-800 flex items-center">
+                    <i class="fas fa-share mr-2"></i> Forwarded to You
                 </h2>
-                <span
-                    class="px-3 py-1 rounded-full text-sm font-medium bg-blue-600 text-white forwarded-notification-badge"
-                    id="forwardedBadge">
-                    {{ forwarded_tickets|length }} forwarded
+                <span class="px-3 py-1 rounded-full text-sm font-medium bg-blue-600 text-white">
+                    {{ forwarded_tickets|length }}
                 </span>
             </div>
-            <div class="space-y-3">
-                <!-- Show first 2 forwarded tickets (newest first) -->
+            <div class="p-4">
                 {% for ticket in forwarded_tickets[:2] %}
-                <div
-                    class="flex items-start ticket-card p-4 hover:bg-blue-50 border-l-4 border-blue-400 bg-blue-25 rounded-r-lg">
-                    <div class="flex-1">
-                        <a href="/ticket/{{ ticket.ticket_id }}" class="flex-1">
-                            <div class="flex justify-between items-start">
-                                <div class="flex-1">
-                                    <div class="flex items-center flex-wrap gap-2 mb-2">
-                                        <span class="font-bold text-gray-800">#{{ ticket.ticket_id }}</span>
-
-                                        <!-- Smart Warranty Detection Badge -->
-                                        {% if ticket.has_warranty %}
-                                        <span
-                                            class="px-2 py-1 text-xs rounded-full font-medium bg-green-100 text-green-800">
-                                            <i class="fas fa-shield-alt mr-1"></i> WARRANTY DETECTED
-                                        </span>
-                                        {% endif %}
-                                        <span class="px-2 py-1 text-xs rounded-full font-medium
-                                                {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
-                                                {% elif ticket.priority == 'Fast' %}bg-yellow-100 text-yellow-800
-                                                {% elif ticket.priority == 'Medium' %}bg-pink-100 text-pink-800
-                                                {% else %}bg-green-100 text-green-800{% endif %}">
-                                            {{ ticket.priority }}
-                                        </span>
-                                        {% if ticket.classification and ticket.classification in ['Technical Issue',
-                                        'Payment', 'Support', 'Warranty Claim', 'Spam', 'Account'] %}
-                                        <span
-                                            class="px-2 py-1 text-xs rounded-full font-medium bg-gray-100 text-gray-800">
-                                            {{ ticket.classification }}
-                                        </span>
-                                        {% endif %}
-                                        {% if ticket.assigned_to %}
-                                        <span
-                                            class="px-2 py-1 text-xs rounded-full font-medium {% if ticket.is_forwarded %}bg-blue-100 text-blue-800{% else %}bg-green-100 text-green-800{% endif %} border border-green-200">
-                                            {% if ticket.is_forwarded %}
-                                            <i class="fas fa-share mr-1"></i>
-                                            {% if ticket.assignment and ticket.assignment|length > 0 and
-                                            ticket.assignment[0].is_seen %}
-                                            Forwarded from {{ ticket.forwarded_from_name if
-                                            ticket.forwarded_from_name
-                                            else 'Support Team' }} to {{ ticket.assigned_to }} (viewed)
-                                            {% else %}
-                                            Forwarded from {{ ticket.forwarded_from_name if
-                                            ticket.forwarded_from_name
-                                            else 'Support Team' }} to {{ ticket.assigned_to }}
-                                            {% endif %}
-                                            {% else %}
-                                            <i class="fas a-check-circle mr-1"></i> Taken by {{ ticket.assigned_to
-                                            }}
-                                            {% endif %}
-                                        </span>
-                                        {% if ticket.is_forwarded and ticket.forwarded_from_name %}
-                                        <span
-                                            class="px-2 py-1 text-xs rounded-full font-medium bg-gray-100 text-gray-700 border border-gray-200">
-                                            <i class="fas fa-user mr-1"></i>From {{ ticket.forwarded_from_name }} to
-                                            {{
-                                            ticket.assigned_to }}
-                                        </span>
-                                        {% endif %}
-                                        {% endif %}
-                                    </div>
-                                    <h3 class="text-lg font-semibold text-gray-800 mb-1 break-words line-clamp-2">{{
-                                        ticket.subject | default('No Subject') }}</h3>
-                                    <p class="text-gray-600 text-sm mb-3 line-clamp-2 break-words">{{ ticket.body |
-                                        default('No Body') }}</p>
-                                    <div class="flex flex-wrap items-center text-sm text-gray-500 gap-3">
-                                        <span class="truncate max-w-[150px] sm:max-w-[200px]"><i
-                                                class="fas fa-user mr-1"></i>{{ ticket.name | default('Anonymous')
-                                            }}</span>
-                                        <span class="truncate max-w-[150px] sm:max-w-[200px]"><i
-                                                class="fas fa-envelope mr-1"></i>{{ ticket.email | default('No
-                                            Email')
-                                            }}</span>
-                                        <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date }}</span>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col items-end space-y-2">
-                                    {% set creation_method = ticket.creation_method or 'auto-detect' %}
-                                    {% if creation_method == 'auto-detect' %}
-                                    {% if ticket.ticket_id and ticket.ticket_id.startswith('M') %}
-                                    {% set creation_method = 'manual' %}
-                                    {% elif ticket.thread_id or (ticket.email and '@' in ticket.email) or
-                                    ticket.ticket_id.startswith(('E', 'W', 'T', 'S', 'G', 'O')) or (ticket.ticket_id
-                                    and
-                                    ticket.ticket_id|length > 4 and ticket.ticket_id[0:1] in ['E', 'W', 'T', 'S',
-                                    'G',
-                                    'O']) %}
-                                    {% set creation_method = 'email' %}
-                                    {% else %}
-                                    {% set creation_method = 'email' %}
-                                    {% endif %}
-                                    {% endif %}
-
-                                    <span
-                                        class="px-3 py-1 text-xs rounded-full font-medium 
-                                            {% if creation_method == 'manual' %}bg-blue-100 text-blue-700{% else %}bg-green-100 text-green-700{% endif %}"
-                                        title="{% if creation_method == 'manual' %}Created manually via system{% else %}Created from mail or web form{% endif %}">
-                                        {% if creation_method == 'manual' %}
-                                        <i class="fas fa-user-edit text-xs"></i> Manual
-                                        {% else %}
-                                        <i class="fas fa-envelope"></i> Mail
-                                        {% endif %}
-                                    </span>
-                                </div>
+                <div class="ticket-card p-4 mb-3 border-l-4 border-blue-400">
+                    <a href="/ticket/{{ ticket.ticket_id }}" class="flex">
+                        <div class="ticket-main-content">
+                            <div class="ticket-badges">
+                                <span class="font-bold text-gray-800">#{{ ticket.ticket_id }}</span>
+                                {% if ticket.has_warranty %}
+                                <span class="px-2 py-1 text-xs rounded-full font-medium bg-green-100 text-green-800">
+                                    <i class="fas fa-shield-alt mr-1"></i> WARRANTY
+                                </span>
+                                {% endif %}
+                                <span class="px-2 py-1 text-xs rounded-full font-medium
+                                        {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
+                                        {% elif ticket.priority == 'Fast' %}bg-yellow-100 text-yellow-800
+                                        {% elif ticket.priority == 'Medium' %}bg-pink-100 text-pink-800
+                                        {% else %}bg-green-100 text-green-800{% endif %}">
+                                    {{ ticket.priority }}
+                                </span>
                             </div>
-                        </a>
-                    </div>
+                            <h3 class="font-semibold text-gray-800 mb-1">{{ ticket.subject | default('No Subject') }}
+                            </h3>
+                            <div class="ticket-meta">
+                                <span><i class="fas fa-user mr-1"></i>{{ ticket.name | default('Anonymous') }}</span>
+                                <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date }}</span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
                 {% endfor %}
-
-                <!-- Show More Button (only if more than 2 tickets) -->
-                {% if forwarded_tickets|length > 2 %}
-                <div id="showMoreForwardedContainer" class="p-4 text-center border-t border-blue-100">
-                    <button id="showMoreForwardedBtn"
-                        class="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-all duration-200 text-sm font-medium"
-                        onclick="toggleMoreForwardedTickets()">
-                        <i class="fas fa-chevron-down mr-2"></i>
-                        Show {{ forwarded_tickets|length - 2 }} More Forwarded Ticket{% if forwarded_tickets|length
-                        - 2
-                        != 1 %}s{% endif %}
-                    </button>
-                </div>
-
-                <!-- Hidden Additional Tickets -->
-                <div id="moreForwardedTickets" class="hidden space-y-3 mt-3">
-                    {% for ticket in forwarded_tickets[2:] %}
-                    <div
-                        class="flex items-start ticket-card p-4 hover:bg-blue-50 border-l-4 border-blue-400 bg-blue-25 rounded-r-lg">
-                        <div class="flex-1">
-                            <a href="/ticket/{{ ticket.ticket_id }}" class="flex-1">
-                                <div class="flex justify-between items-start">
-                                    <div class="flex-1">
-                                        <div class="flex items-center flex-wrap gap-2 mb-2">
-                                            <span class="font-bold text-gray-800">#{{ ticket.ticket_id }}</span>
-
-                                            <span class="px-2 py-1 text-xs rounded-full font-medium
-                                                    {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
-                                                    {% elif ticket.priority == 'Fast' %}bg-yellow-100 text-yellow-800
-                                                    {% elif ticket.priority == 'Medium' %}bg-pink-100 text-pink-800
-                                                    {% else %}bg-green-100 text-green-800{% endif %}">
-                                                {{ ticket.priority }}
-                                            </span>
-                                            {% if ticket.classification and ticket.classification in ['Technical
-                                            Issue',
-                                            'Payment', 'Support', 'Warranty Claim', 'Spam', 'Account'] %}
-                                            <span
-                                                class="px-2 py-1 text-xs rounded-full font-medium bg-gray-100 text-gray-800">
-                                                {{ ticket.classification }}
-                                            </span>
-                                            {% endif %}
-                                            {% if ticket.assigned_to %}
-                                            <span
-                                                class="px-2 py-1 text-xs rounded-full font-medium {% if ticket.is_forwarded %}bg-blue-100 text-blue-800{% else %}bg-green-100 text-green-800{% endif %} border border-green-200">
-                                                {% if ticket.is_forwarded %}
-                                                <i class="fas fa-share mr-1"></i> Forwarded from {{
-                                                ticket.forwarded_from_name if ticket.forwarded_from_name else
-                                                'Support
-                                                Team' }} to {{ ticket.assigned_to }}
-                                                {% else %}
-                                                <i class="fas a-check-circle mr-1"></i> Taken by {{
-                                                ticket.assigned_to
-                                                }}
-                                                {% endif %}
-                                            </span>
-                                            {% endif %}
-                                        </div>
-                                        <h3 class="text-lg font-semibold text-gray-800 mb-1 break-words line-clamp-2">
-                                            {{
-                                            ticket.subject | default('No Subject') }}</h3>
-                                        <p class="text-gray-600 text-sm mb-3 line-clamp-2 break-words">{{
-                                            ticket.body |
-                                            default('No Body') }}</p>
-                                        <div class="flex flex-wrap items-center text-sm text-gray-500 gap-3">
-                                            <span class="truncate max-w-[150px] sm:max-w-[200px]"><i
-                                                    class="fas fa-user mr-1"></i>{{ ticket.name |
-                                                default('Anonymous')
-                                                }}</span>
-                                            <span class="truncate max-w-[150px] sm:max-w-[200px]"><i
-                                                    class="fas fa-envelope mr-1"></i>{{ ticket.email | default('No
-                                                Email') }}</span>
-                                            <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col items-end space-y-2">
-                                        <span
-                                            class="px-3 py-1 text-xs rounded-full font-medium {% if creation_method == 'manual' %}bg-blue-100 text-blue-700{% else %}bg-green-100 text-green-700{% endif %}"
-                                            title="{% if ticket.creation_method == 'manual' %}Created manually{% elif ticket.creation_method == 'email' %}Created from mail{% else %}Created from mail or web form{% endif %}">
-                                            {% if ticket.creation_method == 'manual' %}
-                                            <i class="fas fa-user-edit text-xs"></i> Manual
-                                            {% elif ticket.creation_method == 'email' %}
-                                            <i class="fas fa-envelope"></i> Email
-                                            {% else %}
-                                            <i class="fas fa-envelope"></i> Mail
-                                            {% endif %}
-                                        </span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    {% endfor %}
-
-                    <!-- Show Less Button at bottom of expanded content -->
-                    <div class="p-4 text-center border-t border-blue-100">
-                        <button id="showLessForwardedBtn"
-                            class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-all duration-200 text-sm font-medium"
-                            onclick="toggleMoreForwardedTickets()">
-                            <i class="fas fa-chevron-up mr-2"></i>
-                            Show Less
-                        </button>
-                    </div>
-                </div>
-                {% endif %}
             </div>
         </div>
         {% endif %}
 
-        <div class="main-container-glass rounded-lg shadow-lg overflow-hidden">
-            <div class="px-6 py-4 border-b flex justify-between items-center"
-                style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px);">
+        <!-- Main Tickets Section -->
+        <div class="main-container-glass">
+            <div class="px-6 py-4 border-b flex justify-between items-center">
                 <h2 class="text-xl font-bold gradient-text flex items-center">
                     <i class="fas fa-list-ul mr-2 text-pink-500"></i> Recent Tickets
                 </h2>
                 <div class="flex items-center space-x-3">
-                    <button id="fullscreenBtn"
-                        class="px-3 py-1 text-sm btn-gradient text-white rounded-lg hover:opacity-90 transition shadow-md">
-                        <i class="fas fa-expand mr-1"></i> Fullscreen
-                    </button>
-                    <span
-                        class="px-3 py-1 rounded-full text-sm font-medium bg-pink-100 text-pink-700 border border-pink-200">
+                    <span class="px-3 py-1 rounded-full text-sm font-medium bg-pink-100 text-pink-700">
                         Total: {{ total_tickets }}
                     </span>
                 </div>
             </div>
-            <div class="space-y-4 tickets-container" id="ticketsContainer">
+            <div class="ticket-grid p-6">
                 {% for ticket in tickets %}
-                <div class="flex items-start ticket-card p-6 hover:bg-pink-50 rounded-lg border border-gray-200 shadow-sm
-                            {% if ticket.is_important %}ticket-important{% endif %}"
-                    data-ticket-id="{{ ticket.ticket_id }}" data-priority="{{ ticket.priority or 'Low' }}"
-                    data-classification="{{ ticket.classification or 'General' }}"
-                    data-status="{{ ticket.status or 'Open' }}" data-email="{{ ticket.email or '' }}"
-                    data-name="{{ ticket.name or '' }}" data-subject="{{ ticket.subject or '' }}"
-                    data-body="{{ ticket.body or '' }}">
+                <div class="ticket-card p-4">
+                    <div class="flex">
+                        <!-- Unread indicator -->
+                        {% if ticket.has_unread_reply %}
+                        <div class="mr-3 mt-1">
+                            <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                        </div>
+                        {% endif %}
 
-                    <!-- Red Dot Notification for New Conversations -->
-                    {% if ticket.has_unread_reply %}
-                    <span class="ml-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"
-                        title="New Reply - Ticket #{{ ticket.ticket_id }} has unread reply"></span>
-                    {% endif %}
+                        <div class="ticket-main-content">
+                            <div class="ticket-badges">
+                                <span class="font-bold text-blue-800">#{{ ticket.ticket_id }}</span>
+                                <span class="priority-badge rounded-full 
+                                        {% if ticket.priority == 'Urgent' %}badge-urgent
+                                        {% elif ticket.priority == 'Fast' %}badge-fast
+                                        {% elif ticket.priority == 'Medium' %}badge-medium
+                                        {% else %}badge-low{% endif %}">
+                                    {{ ticket.priority }}
+                                </span>
 
-                    <div class="flex-1">
-                        <a href="/ticket/{{ ticket.ticket_id }}" class="flex-1">
-                            <div class="flex justify-between items-start">
-                                <div class="flex-1">
-                                    <div class="flex items-center flex-wrap gap-2 mb-2">
-                                        <span
-                                            class="font-bold text-blue-800 bg-blue-50 px-2 py-1 rounded-lg border border-blue-200 text-sm">
-                                            <i class="fas fa-hashtag mr-1"></i>{{ ticket.ticket_id }}
-                                        </span>
-                                        <span class="px-2 py-1 text-xs rounded-full font-medium
-                                            {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
-                                            {% elif ticket.priority == 'Fast' %}bg-yellow-100 text-yellow-800
-                                            {% elif ticket.priority == 'Medium' %}bg-pink-100 text-pink-800
-                                            {% else %}bg-green-100 text-green-800{% endif %}">
-                                            {% if ticket.priority == 'Urgent' %}🚨{% elif ticket.priority ==
-                                            'Fast'
-                                            %}⚡{% elif ticket.priority == 'Medium' %}🕒{% else %}🐢{% endif %}
-                                            {{ ticket.priority }}
-                                        </span>
+                                {% if ticket.classification in ['Technical Issue', 'Payment', 'Support', 'Warranty
+                                Claim', 'Spam'] %}
+                                <span
+                                    class="px-2 py-1 text-xs rounded-full font-medium
+                                        {% if ticket.classification == 'Technical Issue' %}bg-blue-100 text-blue-800
+                                        {% elif ticket.classification == 'Payment' %}bg-indigo-100 text-indigo-800
+                                        {% elif ticket.classification == 'Support' %}bg-purple-100 text-purple-800
+                                        {% elif ticket.classification == 'Warranty Claim' %}bg-green-100 text-green-800
+                                        {% elif ticket.classification == 'Spam' %}bg-pink-100 text-pink-800{% endif %}">
+                                    {{ ticket.classification }}
+                                </span>
+                                {% endif %}
 
-                                        <!-- Technician Badge -->
-                                        {% if ticket.technician_name %}
-                                        <span
-                                            class="technician-badge px-2 py-1 text-xs rounded-full font-medium bg-blue-100 text-blue-800">
-                                            👷 {{ ticket.technician_name }}
-                                        </span>
-                                        {% endif %}
-
-                                        {% if ticket.classification in ['Technical Issue', 'Payment', 'Support',
-                                        'Warranty Claim', 'Spam'] %}
-                                        <span
-                                            class="px-2 py-1 text-xs rounded-full font-medium
-                                            {% if ticket.classification == 'Technical Issue' %}bg-blue-100 text-blue-800
-                                            {% elif ticket.classification == 'Payment' %}bg-indigo-100 text-indigo-800
-                                            {% elif ticket.classification == 'Support' %}bg-purple-100 text-purple-800
-                                            {% elif ticket.classification == 'Warranty Claim' %}bg-green-100 text-green-800
-                                            {% elif ticket.classification == 'Spam' %}bg-pink-100 text-pink-800{% endif %}">
-                                            {% if ticket.classification == 'Technical Issue' %}🔧
-                                            {% elif ticket.classification == 'Payment' %}💳
-                                            {% elif ticket.classification == 'Support' %}🛎️
-                                            {% elif ticket.classification == 'Warranty Claim' %}🛡️
-                                            {% elif ticket.classification == 'Spam' %}🚫{% endif %}
-                                            {{ ticket.classification }}
-                                        </span>
-                                        {% endif %}
-                                        {% if ticket.assigned_to %}
-                                        <span
-                                            class="px-2 py-1 text-xs rounded-full font-medium {% if ticket.is_forwarded %}bg-blue-100 text-blue-800{% else %}bg-green-100 text-green-800{% endif %} border border-green-200">
-                                            {% if ticket.is_forwarded %}
-                                            <i class="fas fa-share mr-1"></i> Forwarded from {{
-                                            ticket.forwarded_from_name if ticket.forwarded_from_name else
-                                            'Support
-                                            Team'
-                                            }} to {{ ticket.assigned_to }}
-                                            {% else %}
-                                            <i class="fas a-check-circle mr-1"></i> Taken by {{
-                                            ticket.assigned_to
-                                            }}
-                                            {% endif %}
-                                        </span>
-                                        {% endif %}
-                                        <span class="px-2 py-1 text-xs rounded-full font-medium
-                                            {% if ticket.status == 'Open' %}bg-blue-100 text-blue-800
-                                            {% elif ticket.status == 'Waiting for Response' %}bg-yellow-100 text-yellow-800
-                                            {% elif ticket.status == 'Closed' %}bg-gray-100 text-gray-700
-                                            {% elif ticket.status == 'Resolved' %}bg-green-100 text-green-800
-                                            {% else %}bg-green-100 text-green-800{% endif %}">
-                                            {% if ticket.status in ['Closed', 'Resolved'] %}
-                                            <i class="fas fa-lock mr-1"></i>
-                                            {% endif %}
-                                            {{ ticket.status }}
-                                        </span>
-
-                                        <!-- Extra CLOSED badge -->
-                                        {% if ticket.status == 'Closed' %}
-                                        <span
-                                            class="px-2 py-1 text-xs rounded-full font-bold bg-gray-200 text-gray-700">
-                                            🔒 CLOSED
-                                        </span>
-                                        {% elif ticket.status == 'Resolved' %}
-                                        <span
-                                            class="px-2 py-1 text-xs rounded-full font-bold bg-green-100 text-green-700">
-                                            ✅ RESOLVED
-                                        </span>
-                                        {% endif %}
-                                        {% if ticket.is_important %}
-                                        <span
-                                            class="px-2 py-1 text-xs rounded-full font-medium bg-pink-100 text-pink-800">
-                                            <i class="fas fa-star mr-1"></i> Important
-                                        </span>
-                                        {% endif %}
-                                    </div>
-                                    <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ ticket.subject |
-                                        default('No
-                                        Subject') }}</h3>
-                                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ ticket.body |
-                                        default('No
-                                        Body') }}</p>
-                                    <div class="flex flex-wrap items-center text-sm text-gray-500 gap-3">
-                                        <span><i class="fas fa-user mr-1"></i>{{ ticket.name |
-                                            default('Anonymous')
-                                            }}</span>
-                                        <span><i class="fas fa-envelope mr-1"></i>{{ ticket.email | default('No
-                                            Email')
-                                            }}</span>
-                                        <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date
-                                            }}</span>
-                                    </div>
-
-                                    <!-- Warranty Details at bottom of ticket card -->
-                                    {% if ticket.classification == 'Warranty Claim' %}
-                                    <div class="warranty-details">
-                                        <div class="warranty-details-title">
-                                            <i class="fas fa-file-contract"></i>
-                                            Warranty Form Detected
-                                        </div>
-                                        <div class="warranty-keywords">
-                                            {% if ticket.attachments and ticket.attachments|length > 0 %}
-                                            • {{ ticket.attachments|length }} attachment{% if
-                                            ticket.attachments|length
-                                            != 1 %}s{% endif %}
-                                            {% else %}
-                                            • Warranty claim ticket
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                <div class="flex flex-col items-end space-y-2">
-                                    <span
-                                        class="px-3 py-1 text-xs rounded-full font-medium {% if creation_method == 'manual' %}bg-blue-100 text-blue-700{% else %}bg-green-100 text-green-700{% endif %}"
-                                        title="{% if ticket.creation_method == 'manual' %}Created manually{% elif ticket.creation_method == 'email' %}Created from mail{% else %}Created from mail or web form{% endif %}">
-                                        {% if ticket.creation_method == 'manual' %}
-                                        <i class="fas fa-user-edit text-xs"></i> Manual
-                                        {% elif ticket.creation_method == 'email' %}
-                                        <i class="fas fa-envelope"></i> Email
-                                        {% else %}
-                                        <i class="fas fa-envelope"></i> Mail
-                                        {% endif %}
-                                    </span>
-
-                                    <div class="flex items-center space-x-2">
-                                        <button class="text-gray-400 hover:text-pink-600 important-btn"
-                                            data-ticket-id="{{ ticket.ticket_id }}" title="Mark as Important">
-                                            <i class="fas fa-star{% if not ticket.is_important %}-o{% endif %}"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                <span class="px-2 py-1 text-xs rounded-full font-medium
+                                        {% if ticket.status == 'Open' %}bg-blue-100 text-blue-800
+                                        {% elif ticket.status == 'Waiting for Response' %}bg-yellow-100 text-yellow-800
+                                        {% elif ticket.status == 'Closed' %}bg-gray-100 text-gray-700
+                                        {% elif ticket.status == 'Resolved' %}bg-green-100 text-green-800
+                                        {% else %}bg-green-100 text-green-800{% endif %}">
+                                    {{ ticket.status }}
+                                </span>
                             </div>
-                        </a>
+
+                            <h3 class="font-semibold text-gray-800 mb-1">{{ ticket.subject | default('No Subject') }}
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-2 line-clamp-2">{{ ticket.body | default('No Body') }}
+                            </p>
+
+                            <div class="ticket-meta">
+                                <span><i class="fas fa-user mr-1"></i>{{ ticket.name | default('Anonymous') }}</span>
+                                <span><i class="fas fa-envelope mr-1"></i>{{ ticket.email | default('No Email')
+                                    }}</span>
+                                <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date }}</span>
+                            </div>
+                        </div>
+
+                        <div class="ticket-sidebar">
+                            <span class="px-2 py-1 text-xs rounded-full font-medium 
+                                    {% if ticket.creation_method == 'manual' %}bg-blue-100 text-blue-700
+                                    {% else %}bg-green-100 text-green-700{% endif %}">
+                                {% if ticket.creation_method == 'manual' %}
+                                <i class="fas fa-user-edit text-xs"></i> Manual
+                                {% else %}
+                                <i class="fas fa-envelope text-xs"></i> Email
+                                {% endif %}
+                            </span>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
+
                 {% if not tickets %}
                 <div class="p-6 text-center text-gray-500">
                     No tickets found.
@@ -1022,248 +739,109 @@
                 {% endif %}
             </div>
 
-            <!-- Pagination Controls -->
+            <!-- Pagination -->
             {% if pagination %}
-            <div class="pagination-container px-6 py-4 border-t border-gray-200 flex justify-center items-center space-x-4"
-                style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(12px);">
-                <!-- Previous Button -->
+            <div class="px-6 py-4 border-t border-gray-200 flex justify-center items-center space-x-4">
                 {% if pagination.has_prev %}
                 <a href="?page={{ pagination.prev_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
-                    class="px-4 py-2 btn-gradient text-white rounded-lg hover:opacity-90 transition-all shadow-md">
+                    class="px-4 py-2 btn-gradient text-white rounded-lg hover:opacity-90 transition-all">
                     <i class="fas fa-chevron-left mr-1"></i> Previous
                 </a>
-                {% else %}
-                <span class="px-4 py-2 bg-gray-200 text-gray-400 rounded-lg cursor-not-allowed">
-                    <i class="fas fa-chevron-left mr-1"></i> Previous
-                </span>
                 {% endif %}
 
-                <!-- Page Numbers -->
                 <div class="flex space-x-2">
                     {% for page_num in range(1, pagination.total_pages + 1) %}
                     {% if page_num == pagination.current_page %}
-                    <span class="px-3 py-2 btn-gradient text-white rounded-lg font-semibold shadow-md">
+                    <span class="px-3 py-2 btn-gradient text-white rounded-lg font-semibold">
                         {{ page_num }}
                     </span>
-                    {% elif page_num <= 3 or page_num> pagination.total_pages - 3 or (page_num >=
-                        pagination.current_page - 1 and page_num <= pagination.current_page + 1) %} <a
-                            href="?page={{ page_num }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
-                            class="px-3 py-2 bg-white text-gray-700 rounded-lg hover:bg-pink-50 border border-gray-200 transition-colors">
+                    {% elif page_num <= 3 or page_num> pagination.total_pages - 3 %}
+                        <a href="?page={{ page_num }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                            class="px-3 py-2 bg-white text-gray-700 rounded-lg hover:bg-pink-50 border">
                             {{ page_num }}
-                            </a>
-                            {% elif page_num == 4 and pagination.current_page > 5 %}
-                            <span class="px-3 py-2 text-gray-500">...</span>
-                            {% elif page_num == pagination.total_pages - 3 and pagination.current_page <
-                                pagination.total_pages - 4 %} <span class="px-3 py-2 text-gray-500">...</span>
-                                {% endif %}
-                                {% endfor %}
+                        </a>
+                        {% endif %}
+                        {% endfor %}
                 </div>
 
-                <!-- Next Button -->
                 {% if pagination.has_next %}
                 <a href="?page={{ pagination.next_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
-                    class="px-4 py-2 btn-gradient text-white rounded-lg hover:opacity-90 transition-all shadow-md">
+                    class="px-4 py-2 btn-gradient text-white rounded-lg hover:opacity-90 transition-all">
                     Next <i class="fas fa-chevron-right ml-1"></i>
                 </a>
-                {% else %}
-                <span class="px-4 py-2 bg-gray-200 text-gray-400 rounded-lg cursor-not-allowed">
-                    Next <i class="fas fa-chevron-right ml-1"></i>
-                </span>
-                {% endif %}
-
-                <!-- Page Info -->
-                <div class="text-sm text-gray-500 ml-4 font-medium">
-                    Showing {{ ((pagination.current_page - 1) * pagination.per_page + 1) }} to
-                    {{ pagination.current_page * pagination.per_page if pagination.current_page *
-                    pagination.per_page < pagination.total_tickets else pagination.total_tickets }} of {{
-                        pagination.total_tickets }} tickets </div>
-                </div>
                 {% endif %}
             </div>
-
-            <div id="fullscreenContainer" class="fullscreen hidden">
-                <div class="fullscreen-header">
-                    <h2 class="text-xl font-semibold text-pink-700 flex items-center">
-                        <i class="fas fa-list-ul mr-2"></i> Recent Tickets
-                    </h2>
-                    <div class="flex items-center space-x-3">
-                        <button id="exitFullscreenBtn"
-                            class="px-3 py-1 text-sm btn-gradient text-white rounded-lg hover:opacity-90 transition shadow-md">
-                            <i class="fas fa-compress mr-1"></i> Exit Fullscreen
-                        </button>
-                        <button id="fullscreenReloadBtn"
-                            class="px-3 py-1 text-sm bg-white border border-pink-300 text-pink-500 rounded hover:bg-pink-50 transition reload-btn shadow-sm">
-                            <i class="fas fa-sync-alt"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="fullscreen-search">
-                    <div class="search-container">
-                        <div class="relative flex-grow">
-                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                            <input type="text" id="fullscreenSearchInput"
-                                placeholder="Search tickets by ID, subject, email..."
-                                class="pl-10 pr-4 py-2 w-full border rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500">
-                        </div>
-                        <button id="fullscreenSearchBtn" class="search-button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div id="fullscreenTicketsContainer" class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <!-- Tickets will be loaded here -->
-                </div>
-            </div>
+            {% endif %}
         </div>
+    </div>
 
-        <script>
-            // ===== AUTO-REFRESH AND SESSION HEARTBEAT DISABLED =====
-            // All automatic page refreshing and session keep-alive functionality has been removed
-            // to prevent console spam and unnecessary network requests
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) mobileMenu.classList.toggle('hidden');
+        }
 
-            // DOM Elements
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('searchInput');
             const typeFilter = document.getElementById('typeFilter');
             const priorityFilter = document.getElementById('priorityFilter');
             const statusFilter = document.getElementById('statusFilter');
             const clearFilters = document.getElementById('clearFilters');
-            const ticketsContainer = document.getElementById('ticketsContainer');
-
-            let allTickets = [];
-
-            function initializeTicketsData() {
-                const ticketCards = document.querySelectorAll('.ticket-card');
-                allTickets = [];
-                ticketCards.forEach((card) => {
-                    let ticketId = card.getAttribute('data-ticket-id');
-                    // ... (simplified initialization logic)
-                    if (ticketId) {
-                        allTickets.push({
-                            element: card,
-                            ticketId: ticketId,
-                            priority: card.getAttribute('data-priority') || 'Low',
-                            classification: card.getAttribute('data-classification') || 'General',
-                            status: card.getAttribute('data-status') || 'Open',
-                            subject: (card.querySelector('h3')?.textContent || '').toLowerCase(),
-                            searchText: (card.textContent || '').toLowerCase()
-                        });
-                    }
-                });
-            }
+            const ticketCards = document.querySelectorAll('.ticket-card');
 
             function filterTickets() {
-                const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
-                const typeValue = typeFilter ? typeFilter.value : 'All';
-                const priorityValue = priorityFilter ? priorityFilter.value : 'All';
-                const statusValue = statusFilter ? statusFilter.value : 'All';
+                const searchTerm = searchInput.value.toLowerCase();
+                const typeValue = typeFilter.value;
+                const priorityValue = priorityFilter.value;
+                const statusValue = statusFilter.value;
 
-                let visibleCount = 0;
-                allTickets.forEach(ticket => {
-                    let visible = true;
-                    if (query && !ticket.searchText.includes(query)) visible = false;
-                    if (typeValue !== 'All' && ticket.classification !== typeValue) visible = false;
-                    if (priorityValue !== 'All' && ticket.priority !== priorityValue) visible = false;
-                    if (statusValue !== 'All' && ticket.status !== statusValue) visible = false;
+                ticketCards.forEach(card => {
+                    const ticketId = card.querySelector('.font-bold.text-blue-800')?.textContent.toLowerCase() || '';
+                    const subject = card.querySelector('.font-semibold.text-gray-800')?.textContent.toLowerCase() || '';
+                    const body = card.querySelector('.text-gray-600')?.textContent.toLowerCase() || '';
+                    const priority = card.querySelector('.priority-badge')?.textContent || '';
+                    const classification = card.querySelectorAll('.ticket-badges span')[2]?.textContent || '';
+                    const status = card.querySelectorAll('.ticket-badges span')[3]?.textContent || '';
 
-                    ticket.element.style.display = visible ? 'flex' : 'none';
-                    if (visible) visibleCount++;
-                });
-            }
+                    const matchesSearch = !searchTerm ||
+                        ticketId.includes(searchTerm) ||
+                        subject.includes(searchTerm) ||
+                        body.includes(searchTerm);
 
-            // Custom Dropdown Logic
-            function toggleDropdown(id) {
-                // Close all other dropdowns first
-                const allDropdowns = document.querySelectorAll('.dropdown-menu');
-                allDropdowns.forEach(d => {
-                    if (d.id !== id) d.classList.add('hidden');
-                });
+                    const matchesType = typeValue === 'All' || classification.includes(typeValue);
+                    const matchesPriority = priorityValue === 'All' || priority.includes(priorityValue);
+                    const matchesStatus = statusValue === 'All' || status.includes(statusValue);
 
-                // Toggle the target dropdown
-                const dropdown = document.getElementById(id);
-                if (dropdown) {
-                    dropdown.classList.toggle('hidden');
-
-                    // Rotate arrow animation
-                    const arrowId = id + '-arrow';
-                    const arrow = document.getElementById(arrowId);
-                    if (arrow) arrow.classList.toggle('rotate-180');
-                }
-            }
-
-            function selectOption(filterId, value, label) {
-                // Update hidden input value
-                const input = document.getElementById(filterId);
-                if (input) input.value = value;
-
-                // Update button label
-                const labelSpan = document.getElementById(filterId + 'Label');
-                if (labelSpan) labelSpan.textContent = label;
-
-                // Close dropdown
-                const dropdownMenus = document.querySelectorAll('.dropdown-menu');
-                dropdownMenus.forEach(d => d.classList.add('hidden'));
-
-                // Trigger filtering
-                filterTickets();
-            }
-
-            // Close dropdowns when clicking outside
-            document.addEventListener('click', function (e) {
-                if (!e.target.closest('.dropdown-wrapper')) {
-                    const dropdowns = document.querySelectorAll('.dropdown-menu');
-                    dropdowns.forEach(d => d.classList.add('hidden'));
-                }
-            });
-
-            document.addEventListener('DOMContentLoaded', function () {
-                initializeTicketsData();
-                if (searchInput) searchInput.addEventListener('input', filterTickets);
-
-                // Note: The select 'change' listeners are replaced by the selectOption function calls
-
-                if (clearFilters) clearFilters.addEventListener('click', () => {
-                    searchInput.value = '';
-
-                    // Reset custom dropdowns
-                    selectOption('typeFilter', 'All', 'All Types');
-                    selectOption('priorityFilter', 'All', 'All Priority');
-                    selectOption('statusFilter', 'All', 'All Status');
-
-                    filterTickets();
-                });
-            });
-
-            function toggleMobileMenu() {
-                const mobileMenu = document.getElementById('mobileMenu');
-                if (mobileMenu) mobileMenu.classList.toggle('hidden');
-            }
-
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function (event) {
-                const mobileMenu = document.getElementById('mobileMenu');
-                const menuButton = document.querySelector('.mobile-menu-btn');
-
-                if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-
-            function toggleMoreForwardedTickets() {
-                const moreTicketsDiv = document.getElementById('moreForwardedTickets');
-                const showMoreContainer = document.getElementById('showMoreForwardedContainer');
-                if (moreTicketsDiv && showMoreContainer) {
-                    if (moreTicketsDiv.classList.contains('hidden')) {
-                        moreTicketsDiv.classList.remove('hidden');
-                        showMoreContainer.style.display = 'none';
+                    if (matchesSearch && matchesType && matchesPriority && matchesStatus) {
+                        card.style.display = 'block';
                     } else {
-                        moreTicketsDiv.classList.add('hidden');
-                        showMoreContainer.style.display = 'block';
+                        card.style.display = 'none';
                     }
-                }
+                });
             }
-        </script>
+
+            // Event listeners
+            searchInput.addEventListener('input', filterTickets);
+            typeFilter.addEventListener('change', filterTickets);
+            priorityFilter.addEventListener('change', filterTickets);
+            statusFilter.addEventListener('change', filterTickets);
+
+            clearFilters.addEventListener('click', function () {
+                searchInput.value = '';
+                typeFilter.value = 'All';
+                priorityFilter.value = 'All';
+                statusFilter.value = 'All';
+                filterTickets();
+            });
+
+            // Manual refresh button
+            document.getElementById('manualRefreshBtn')?.addEventListener('click', function () {
+                location.reload();
+            });
+        });
+    </script>
 </body>
 
 </html>

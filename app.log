@@ -5851,3 +5851,136 @@ NameError: name 'tickets' is not defined
 2026-01-26 14:25:58,069 - werkzeug - WARNING -  * Debugger is active!
 2026-01-26 14:26:10,541 - app - INFO - Application initialized successfully (refactored version)
 2026-01-26 14:26:10,548 - werkzeug - WARNING -  * Debugger is active!
+2026-01-27 19:09:03,024 - app - INFO - Application initialized successfully (refactored version)
+2026-01-27 19:09:04,750 - app - INFO - Application initialized successfully (refactored version)
+2026-01-27 19:09:04,757 - werkzeug - WARNING -  * Debugger is active!
+2026-01-27 19:09:31,830 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #48
+2026-01-27 19:09:42,902 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-27 19:09:43,029 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-27 19:09:43,029 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-27 19:09:43,030 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-27 19:09:43,031 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-27 19:09:43,252 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-27 19:09:43,252 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-27 19:09:43,361 - root - INFO - [DATABASE] Total tickets count: 2
+2026-01-27 19:18:02,367 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #49
+2026-01-27 19:18:02,476 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-27 19:18:02,604 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-27 19:18:02,604 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-27 19:18:02,604 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-27 19:18:02,605 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-27 19:18:02,819 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-27 19:18:02,819 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-27 19:18:02,929 - root - INFO - [DATABASE] Total tickets count: 2
+2026-01-27 19:24:44,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #50
+2026-01-27 19:24:44,498 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-27 19:24:44,620 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-27 19:24:44,620 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-27 19:24:44,620 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-27 19:24:44,620 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-27 19:24:44,840 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-27 19:24:44,840 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-27 19:24:44,954 - root - INFO - [DATABASE] Total tickets count: 2
+2026-01-27 19:24:49,989 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #51
+2026-01-27 19:24:50,105 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-27 19:24:50,241 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-27 19:24:50,243 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-27 19:24:50,243 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-27 19:24:50,243 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-27 19:24:50,458 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-27 19:24:50,458 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-27 19:27:02,706 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #52
+2026-01-27 19:27:02,816 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-27 19:27:02,952 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-27 19:27:02,952 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-27 19:27:02,952 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-27 19:27:02,952 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-27 19:27:03,170 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-27 19:27:03,174 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-27 19:29:32,052 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #53
+2026-01-27 19:29:32,154 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-27 19:29:32,283 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-27 19:29:32,283 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-27 19:29:32,283 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-27 19:29:32,284 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-27 19:29:32,497 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-27 19:29:32,497 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-27 19:31:58,508 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #54
+2026-01-27 19:31:58,613 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-27 19:31:58,732 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-27 19:31:58,736 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-27 19:31:58,741 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-27 19:31:58,747 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-27 19:31:58,970 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-27 19:31:58,971 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-27 19:32:35,639 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #55
+2026-01-27 19:32:35,752 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-27 19:32:35,887 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-27 19:32:35,896 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-27 19:32:35,907 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-27 19:32:35,907 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-27 19:32:36,122 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-27 19:32:36,123 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-27 19:32:48,781 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #56
+2026-01-27 19:33:38,045 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #57
+2026-01-27 19:33:38,160 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-27 19:33:38,277 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-27 19:33:38,281 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-27 19:33:38,281 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-27 19:33:38,282 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-27 19:33:38,504 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-27 19:33:38,520 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-27 19:33:38,624 - root - INFO - [DATABASE] Total tickets count: 2
+2026-01-27 19:33:56,366 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #58
+2026-01-27 19:33:56,970 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-27 19:33:57,087 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-27 19:33:57,088 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-27 19:33:57,089 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-27 19:33:57,090 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-27 19:33:57,303 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-27 19:33:57,313 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-27 19:34:01,302 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #59
+2026-01-27 19:34:11,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #60
+2026-01-27 19:35:56,576 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #61
+2026-01-27 19:36:07,023 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #62
+2026-01-27 19:37:53,658 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #63
+2026-01-27 19:38:02,157 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #64
+2026-01-27 19:38:02,269 - root - INFO - [DATABASE] Getting all active technicians from collection: technicians
+2026-01-27 19:38:02,500 - root - INFO - [DATABASE] Total technicians: 9, Active technicians: 8
+2026-01-27 19:38:02,613 - root - INFO - [DATABASE] Retrieved 8 active technicians
+2026-01-27 19:38:02,613 - root - INFO - [DATABASE] Technician 1: Craig (ID: 6971c6ef969247226ebdb228, Active: True)
+2026-01-27 19:38:02,613 - root - INFO - [DATABASE] Technician 2: Declan (ID: 6971c6ee969247226ebdb224, Active: True)
+2026-01-27 19:38:02,614 - root - INFO - [DATABASE] Technician 3: Karl (ID: 6971c6ef969247226ebdb229, Active: True)
+2026-01-27 19:47:01,507 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #65
+2026-01-27 19:47:01,616 - root - INFO - [DATABASE] Getting all active technicians from collection: technicians
+2026-01-27 19:47:01,835 - root - INFO - [DATABASE] Total technicians: 9, Active technicians: 8
+2026-01-27 19:47:01,940 - root - INFO - [DATABASE] Retrieved 8 active technicians
+2026-01-27 19:47:01,941 - root - INFO - [DATABASE] Technician 1: Craig (ID: 6971c6ef969247226ebdb228, Active: True)
+2026-01-27 19:47:01,941 - root - INFO - [DATABASE] Technician 2: Declan (ID: 6971c6ee969247226ebdb224, Active: True)
+2026-01-27 19:47:01,941 - root - INFO - [DATABASE] Technician 3: Karl (ID: 6971c6ef969247226ebdb229, Active: True)
+2026-01-27 19:47:09,903 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #66
+2026-01-27 19:47:10,152 - middleware.error_handlers - ERROR - Unhandled exception: Could not build url for endpoint 'members.delete_member' with values ['member_id']. Did you mean 'main.members_page' instead?
+Traceback (most recent call last):
+  File "C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "E:\auto-assit-group-master\auto-assit-group-master\routes\main_routes.py", line 288, in members_page
+    return render_template('members.html',
+  File "C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+  File "C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+  File "C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "E:\auto-assit-group-master\auto-assit-group-master\templates\members.html", line 425, in top-level template code
+    <form action="{{ url_for('members.delete_member', member_id=member.id) }}" method="POST"
+  File "C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 1697, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\flask\app.py", line 1686, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\werkzeug\routing\map.py", line 950, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'members.delete_member' with values ['member_id']. Did you mean 'main.members_page' instead?

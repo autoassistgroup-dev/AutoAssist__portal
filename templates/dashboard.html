@@ -330,7 +330,7 @@
 
     <!-- Navigation -->
     <nav>
-        <div class="responsive-container py-4">
+        <div class="responsive-container px-6 md:px-12 py-4">
             <div class="flex items-center justify-between">
                 <!-- Logo Section (Left) -->
                 <div class="flex-1 flex justify-start">
@@ -467,33 +467,23 @@
         </div>
 
         <!-- Status Breakdown Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 fade-in" style="animation-delay: 0.2s;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 fade-in" style="animation-delay: 0.2s;">
             <!-- Status Distribution -->
-            <div class="glass-panel p-6">
-                <h2 class="text-lg font-semibold text-gray-700 mb-6 flex items-center">
-                    <div class="w-8 h-8 rounded-lg bg-pink-100 flex items-center justify-center mr-3 text-pink-500">
-                        <i class="fas fa-chart-pie"></i>
+            <div class="glass-panel p-4 flex flex-col min-h-[160px]">
+                <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center">
+                    <div class="w-5 h-5 rounded bg-pink-100 flex items-center justify-center mr-2 text-pink-500">
+                        <i class="fas fa-chart-pie text-[10px]"></i>
                     </div>
-                    Status Distribution
+                    Status
                 </h2>
-                <div class="space-y-3 custom-scrollbar max-h-64 overflow-y-auto pr-2">
+                <div class="flex flex-wrap gap-2">
                     {% for status, count in status_counts.items() %}
-                    <div class="flex items-center justify-between p-3 rounded-lg hover:bg-white/50 transition">
-                        <div class="flex items-center space-x-3">
-                            <span class="priority-badge rounded-full
-                                    {% if status == 'Open' %}badge-open
-                                    {% elif status == 'Waiting for Response' %}badge-waiting
-                                    {% elif status == 'Resolved' %}badge-resolved
-                                    {% elif status == 'Closed' %}badge-closed
-                                    {% else %}badge-closed{% endif %}">
-                                {{ status }}
-                            </span>
-                            <span class="text-gray-600 font-medium">{{ count }}</span>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-xs font-medium text-gray-400">
-                                {{ "%.1f"|format((count / total_tickets * 100) if total_tickets > 0 else 0) }}%
-                            </span>
+                    <div class="flex flex-col p-2 rounded-lg bg-white/40 border border-gray-100/50 min-w-[65px] flex-1">
+                        <span class="text-[9px] font-bold text-gray-400 uppercase truncate">{{ status }}</span>
+                        <div class="flex items-baseline space-x-1">
+                            <span class="text-sm font-bold text-gray-700">{{ count }}</span>
+                            <span class="text-[9px] text-gray-400 font-medium">{{ "%.0f"|format((count / total_tickets *
+                                100) if total_tickets > 0 else 0) }}%</span>
                         </div>
                     </div>
                     {% endfor %}
@@ -501,32 +491,21 @@
             </div>
 
             <!-- Priority Distribution -->
-            <div class="glass-panel p-6">
-                <h2 class="text-lg font-semibold text-gray-700 mb-6 flex items-center">
-                    <div class="w-8 h-8 rounded-lg bg-pink-100 flex items-center justify-center mr-3 text-pink-500">
-                        <i class="fas fa-exclamation-triangle"></i>
+            <div class="glass-panel p-4 flex flex-col min-h-[160px]">
+                <h2 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center">
+                    <div class="w-5 h-5 rounded bg-pink-100 flex items-center justify-center mr-2 text-pink-500">
+                        <i class="fas fa-exclamation-triangle text-[10px]"></i>
                     </div>
-                    Priority Distribution
+                    Priority
                 </h2>
-                <div class="space-y-3 custom-scrollbar max-h-64 overflow-y-auto pr-2">
+                <div class="flex flex-wrap gap-2">
                     {% for priority, count in priority_counts.items() %}
-                    <div class="flex items-center justify-between p-3 rounded-lg hover:bg-white/50 transition">
-                        <div class="flex items-center space-x-3">
-                            <span class="priority-badge rounded-full
-                                    {% if priority == 'Urgent' %}badge-urgent
-                                    {% elif priority == 'Fast' %}badge-fast
-                                    {% elif priority == 'Medium' %}badge-medium
-                                    {% else %}badge-low{% endif %}">
-                                {% if priority == 'Urgent' %}🚨{% elif priority == 'Fast' %}⚡{% elif priority ==
-                                'Medium' %}🕒{% else %}🐢{% endif %}
-                                {{ priority }}
-                            </span>
-                            <span class="text-gray-600 font-medium">{{ count }}</span>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-xs font-medium text-gray-400">
-                                {{ "%.1f"|format((count / total_tickets * 100) if total_tickets > 0 else 0) }}%
-                            </span>
+                    <div class="flex flex-col p-2 rounded-lg bg-white/40 border border-gray-100/50 min-w-[65px] flex-1">
+                        <span class="text-[9px] font-bold text-gray-400 uppercase truncate">{{ priority }}</span>
+                        <div class="flex items-baseline space-x-1">
+                            <span class="text-sm font-bold text-gray-700">{{ count }}</span>
+                            <span class="text-[9px] text-gray-400 font-medium">{{ "%.0f"|format((count / total_tickets *
+                                100) if total_tickets > 0 else 0) }}%</span>
                         </div>
                     </div>
                     {% endfor %}

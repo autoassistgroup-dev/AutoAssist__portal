@@ -36,3 +36,10 @@ ENV/
 # Flask
 instance/
 .webassets-cache
+
+# Logs
+*.log
+
+# Temporary data
+*_check.json
+*_check_full.json

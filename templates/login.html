@@ -8,45 +8,58 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link href="/static/css/animations.css" rel="stylesheet">
     <style>
-        /* ===== MODERN PINK GLASSMORPHISM THEME ===== */
+        /* ===== COMPLETE PINK GLASSMORPHISM THEME ===== */
         :root {
-            /* Pink Color Palette */
-            --primary: #ff758f;
-            --secondary: #ff7eb3;
-            --primary-dark: #ff6b81;
-            --primary-light: #ffe0e9;
+            /* Pink Gradient Palette */
+            --pink-1: #ff758f;
+            --pink-2: #ff7eb3;
+            --pink-3: #ff6b81;
+            --pink-4: #ff4d94;
+            --pink-light: #ffe0e9;
+            --pink-dark: #ff4d6d;
+
+            /* Priority Colors */
+            --urgent: #ff4757;
+            --fast: #ffa502;
+            --medium: #ff6b81;
+            --low: #2ed573;
 
             /* Glass Effects */
-            --glass-white: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
             --glass-shadow: rgba(255, 117, 143, 0.1);
-            --glass-blur: 15px;
+            --glass-highlight: rgba(255, 255, 255, 0.15);
+            --backdrop-blur: blur(20px);
 
-            /* Background Colors */
-            --bg-gradient-start: #ffe0e9;
-            --bg-gradient-middle: #fff0f6;
-            --bg-gradient-end: #e8f4f8;
+            /* Animation Speeds */
+            --float-slow: 25s;
+            --float-medium: 20s;
+            --float-fast: 15s;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Poppins', sans-serif !important;
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-middle) 50%, var(--bg-gradient-end) 100%);
-            color: #4b5563;
+            font-family: 'Poppins', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #ffe0e9 0%, #fff0f6 50%, #f8e8ff 100%);
+            color: #4a5568;
             min-height: 100vh;
-            margin: 0;
-            padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
 
-        /* Animated Background */
+        /* ===== ANIMATED PINK GRADIENT BACKGROUND ===== */
         .background-layer {
             position: fixed;
             top: 0;
@@ -55,35 +68,100 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
+            overflow: hidden;
         }
 
         .gradient-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-            animation: float 20s infinite ease-in-out;
+            filter: blur(80px);
+            opacity: 0.6;
             mix-blend-mode: soft-light;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
         }
 
         .orb-1 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255, 117, 143, 0.4), rgba(255, 126, 179, 0.2));
-            top: -20%;
-            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at 30% 30%, var(--pink-1), var(--pink-2));
+            top: -150px;
+            left: -150px;
+            animation: float-orb-1 var(--float-slow) infinite;
         }
 
         .orb-2 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 71, 87, 0.3), rgba(255, 165, 2, 0.2));
-            bottom: -10%;
-            right: -10%;
-            animation-delay: -5s;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle at 70% 70%, var(--pink-2), var(--pink-3));
+            bottom: -100px;
+            right: -100px;
+            animation: float-orb-2 var(--float-medium) infinite;
         }
 
-        @keyframes float {
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle at 50% 50%, var(--pink-3), var(--pink-4));
+            top: 50%;
+            right: 20%;
+            animation: float-orb-3 var(--float-fast) infinite;
+        }
+
+        .orb-4 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at 40% 60%, var(--pink-4), var(--pink-1));
+            bottom: 30%;
+            left: 10%;
+            animation: float-orb-4 var(--float-medium) infinite reverse;
+        }
+
+        @keyframes float-orb-1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(50px, -30px) rotate(120deg);
+            }
+
+            66% {
+                transform: translate(-20px, 40px) rotate(240deg);
+            }
+        }
+
+        @keyframes float-orb-2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(-40px, 30px) scale(1.1);
+            }
+        }
+
+        @keyframes float-orb-3 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(30px, -20px) rotate(90deg);
+            }
+
+            75% {
+                transform: translate(-20px, 30px) rotate(270deg);
+            }
+        }
+
+        @keyframes float-orb-4 {
 
             0%,
             100% {
@@ -91,205 +169,611 @@
             }
 
             50% {
-                transform: translate(30px, -30px);
+                transform: translate(25px, -25px);
             }
         }
 
-        /* Glassmorphism Card */
+        /* ===== GLASS EFFECT LOGIN CARD ===== */
         .login-card {
             width: 100%;
-            max-width: 420px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            max-width: 440px;
+            background: var(--glass-bg);
+            backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur);
+            border: 1px solid var(--glass-border);
             border-radius: 24px;
-            padding: 40px 32px;
-            box-shadow: 0 15px 35px rgba(255, 117, 143, 0.15);
-            transform: translateY(0);
-            transition: all 0.3s ease;
+            padding: 40px 35px;
+            box-shadow:
+                0 20px 40px rgba(255, 117, 143, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.4),
+                    transparent);
+        }
+
+        .login-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+                    rgba(255, 117, 143, 0.05) 0%,
+                    transparent 50%);
+            pointer-events: none;
         }
 
         .login-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(255, 117, 143, 0.25);
-            border-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow:
+                0 30px 60px rgba(255, 117, 143, 0.25),
+                0 0 0 1px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 117, 143, 0.3);
         }
 
-        /* Inputs */
+        /* ===== GRADIENT TEXT & ELEMENTS ===== */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--pink-1), var(--pink-2), var(--pink-3));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradientShift 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .gradient-border {
+            position: relative;
+        }
+
+        .gradient-border::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    var(--pink-1),
+                    var(--pink-2),
+                    var(--pink-1),
+                    transparent);
+            border-radius: 2px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .login-card:hover .gradient-border::after {
+            opacity: 1;
+        }
+
+        /* ===== GLASS EFFECT INPUTS ===== */
         .ios-input-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            position: relative;
         }
 
         .ios-label {
             display: block;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             color: #6b7280;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .ios-input-wrapper {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .ios-input-wrapper:hover {
+            transform: translateY(-2px);
         }
 
         .ios-input {
             width: 100%;
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 12px;
-            padding: 16px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 18px 20px;
             font-size: 16px;
             color: #374151;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                inset 0 2px 10px rgba(0, 0, 0, 0.05),
+                0 4px 20px rgba(255, 117, 143, 0.1);
+        }
+
+        .ios-input::placeholder {
+            color: #9ca3af;
+            font-weight: 400;
         }
 
         .ios-input:focus {
             outline: none;
-            background: rgba(255, 255, 255, 0.8);
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(255, 117, 143, 0.15);
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 117, 143, 0.6);
+            box-shadow:
+                inset 0 2px 10px rgba(0, 0, 0, 0.05),
+                0 0 0 4px rgba(255, 117, 143, 0.15),
+                0 8px 32px rgba(255, 117, 143, 0.2);
+            transform: translateY(-2px);
         }
 
-        .ios-btn {
+        /* ===== GRADIENT BUTTON ===== */
+        .gradient-btn {
             width: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--pink-1), var(--pink-2), var(--pink-3));
             color: white;
             border: none;
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 16px;
+            padding: 18px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.3);
-            margin-top: 10px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 8px 30px rgba(255, 117, 143, 0.4),
+                0 2px 10px rgba(255, 255, 255, 0.2) inset;
         }
 
-        .ios-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 117, 143, 0.4);
-            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+        .gradient-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.2),
+                    transparent);
+            transition: left 0.7s ease;
         }
 
-        /* Member List */
+        .gradient-btn:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 15px 40px rgba(255, 117, 143, 0.5),
+                0 2px 10px rgba(255, 255, 255, 0.3) inset;
+            background: linear-gradient(135deg, var(--pink-3), var(--pink-1), var(--pink-2));
+        }
+
+        .gradient-btn:hover::before {
+            left: 100%;
+        }
+
+        .gradient-btn:active {
+            transform: translateY(0);
+            transition: transform 0.1s ease;
+        }
+
+        /* ===== MEMBER LIST GLASS EFFECT ===== */
+        .member-list {
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 8px;
+        }
+
+        /* Custom Scrollbar */
+        .member-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .member-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .member-list::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--pink-1), var(--pink-3));
+            border-radius: 10px;
+        }
+
         .member-option {
-            background: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    rgba(255, 117, 143, 0) 0%,
+                    rgba(255, 117, 143, 0.05) 50%,
+                    rgba(255, 117, 143, 0) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
         }
 
         .member-option:hover {
-            background: rgba(255, 255, 255, 0.6);
-            border-color: var(--primary-light);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 117, 143, 0.3);
+            transform: translateX(8px) translateY(-2px);
+            box-shadow:
+                0 10px 25px rgba(255, 117, 143, 0.15),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .member-option:hover::before {
+            transform: translateX(100%);
         }
 
         .member-option.selected {
-            background: rgba(255, 255, 255, 0.8);
-            border-color: var(--primary);
-            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.15);
+            background: rgba(255, 255, 255, 0.3);
+            border-color: var(--pink-1);
+            box-shadow:
+                0 10px 30px rgba(255, 117, 143, 0.2),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
+        /* Avatar with Gradient */
         .avatar-circle {
-            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 18px;
+            color: white;
+            background: linear-gradient(135deg, #9ca3af, #6b7280);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-option:hover .avatar-circle {
+            transform: scale(1.1);
         }
 
         .member-option.selected .avatar-circle {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--pink-1), var(--pink-3));
+            box-shadow: 0 6px 20px rgba(255, 117, 143, 0.4);
         }
 
-        .back-link {
-            color: #6b7280;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .back-link:hover {
-            color: var(--primary);
-        }
-
-        h1 {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Selection Indicator Update */
+        /* Selection Indicator */
         .selection-indicator {
-            border-color: #d1d5db;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .selection-indicator::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: transparent;
+            transition: all 0.3s ease;
         }
 
         .member-option.selected .selection-indicator {
-            background-color: var(--primary) !important;
-            border-color: var(--primary) !important;
+            border-color: var(--pink-1);
+            background: var(--pink-1);
+            box-shadow: 0 0 20px rgba(255, 117, 143, 0.5);
         }
 
-        /* Password Toggle */
+        .member-option.selected .selection-indicator::before {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 117, 143, 0.3),
+                    transparent);
+        }
+
+        .divider span {
+            padding: 0 16px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 6px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== FLASH MESSAGES GLASS EFFECT ===== */
+        .flash-message {
+            background: rgba(255, 71, 87, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 71, 87, 0.2);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            color: #dc2626;
+            font-weight: 500;
+            animation: fadeIn 0.6s ease-out;
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.1);
+        }
+
+        .flash-message i {
+            font-size: 20px;
+            margin-right: 12px;
+        }
+
+        /* ===== BACK LINK ===== */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #6b7280;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-link:hover {
+            color: var(--pink-1);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 117, 143, 0.2);
+            transform: translateX(-4px);
+        }
+
+        /* ===== PASSWORD TOGGLE ===== */
         .password-toggle {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
             color: #9ca3af;
-            transition: color 0.3s;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .password-toggle:hover {
-            color: var(--primary);
+            color: var(--pink-1);
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* ===== LOGO ===== */
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow:
+                0 10px 30px rgba(255, 117, 143, 0.15),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05) rotate(5deg);
+            border-color: rgba(255, 117, 143, 0.4);
+        }
+
+        .logo-container img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .login-card {
+                max-width: 90%;
+                padding: 30px 25px;
+                margin: 20px;
+            }
+
+            .orb-1,
+            .orb-2,
+            .orb-3,
+            .orb-4 {
+                transform: scale(0.7);
+            }
+
+            .member-option {
+                padding: 14px;
+            }
+
+            .avatar-circle {
+                width: 42px;
+                height: 42px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 25px 20px;
+            }
+
+            .ios-input,
+            .gradient-btn {
+                padding: 16px;
+            }
+
+            .gradient-text {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Animated Background -->
+    <!-- Animated Pink Gradient Background -->
     <div class="background-layer">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="gradient-orb orb-4"></div>
     </div>
 
-    <div class="login-card">
-        <div class="text-center">
+    <div class="login-card gradient-border">
+        <div class="text-center fade-in">
             <a href="/portal" class="back-link">
-                <i class="fas fa-chevron-left mr-2" style="font-size: 12px;"></i> Portals
+                <i class="fas fa-chevron-left mr-2" style="font-size: 12px;"></i> Back to Portals
             </a>
 
-            <div class="mb-6">
-                <img src="/static/logo.png" alt="Logo" class="w-16 h-16 mx-auto object-contain drop-shadow-md">
+            <div class="logo-container">
+                <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="w-16 h-16">
             </div>
 
-            <h1>
-                {% if selected_role == 'admin' %}Admin Access{% elif selected_role == 'tech-director' %}Director Login{%
-                elif selected_role == 'user' %}Member Login{% else %}Welcome Back{% endif %}
+            <h1 class="gradient-text text-3xl font-bold mb-2">
+                {% if selected_role == 'admin' %}Admin Portal{% elif selected_role == 'tech-director' %}Director
+                Access{% elif selected_role == 'user' %}Member Login{% else %}Welcome Back{% endif %}
             </h1>
-            <p class="subtitle">Please sign in to continue</p>
+            <p class="text-gray-600 mb-8">Sign in to access your dashboard</p>
         </div>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         {% for category, message in messages %}
-        <div
-            class="mb-6 p-4 rounded-2xl bg-red-50 border border-red-100 text-red-600 text-sm font-medium flex items-center shadow-sm">
-            <i class="fas fa-exclamation-circle mr-3 text-lg"></i>
-            {{ message }}
+        <div class="flash-message">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>{{ message }}</span>
         </div>
         {% endfor %}
         {% endif %}
         {% endwith %}
 
-        <form action="/login{% if selected_role %}?role={{ selected_role }}{% endif %}" method="POST" id="loginForm">
+        <form action="/login{% if selected_role %}?role={{ selected_role }}{% endif %}" method="POST" id="loginForm"
+            class="fade-in">
             <!-- Member Selection -->
             {% if members and members|length > 0 %}
             <div class="member-list custom-scrollbar">
                 {% for member in members %}
-                <div class="member-option" onclick="selectMember(this, '{{ member._id }}', '{{ member.user_id }}')">
+                <div class="member-option" onclick="selectMember(this, '{{ member._id }}', '{{ member.user_id }}')"
+                    data-member-id="{{ member._id }}">
                     <div class="avatar-circle">
                         {{ member.name[0].upper() }}
                     </div>
                     <div class="flex-1 text-left">
                         <div class="font-semibold text-gray-900">{{ member.name }}</div>
-                        <div class="text-xs text-gray-500">{{ member.role }}</div>
+                        <div class="text-sm text-gray-600">{{ member.role }}</div>
                     </div>
-                    <div
-                        class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center selection-indicator">
-                        <div class="w-2.5 h-2.5 rounded-full bg-transparent transition-colors"></div>
-                    </div>
+                    <div class="selection-indicator"></div>
                 </div>
                 {% endfor %}
             </div>
@@ -305,30 +789,32 @@
             <div class="ios-input-group">
                 <label class="ios-label">User ID</label>
                 <div class="ios-input-wrapper">
-                    <input type="text" id="user_id" name="user_id" class="ios-input" placeholder="e.g. user001"
-                        required>
+                    <input type="text" id="user_id" name="user_id" class="ios-input" placeholder="Enter your user ID"
+                        required autocomplete="username">
                 </div>
             </div>
 
             <div class="ios-input-group">
                 <label class="ios-label">Password</label>
                 <div class="ios-input-wrapper">
-                    <input type="password" id="password" name="password" class="ios-input" placeholder="••••••••"
-                        required>
-                    <i class="fas fa-eye password-toggle" onclick="togglePassword()"></i>
+                    <input type="password" id="password" name="password" class="ios-input"
+                        placeholder="Enter your password" required autocomplete="current-password">
+                    <i class="fas fa-eye password-toggle" onclick="togglePassword()" id="passwordToggle"></i>
                 </div>
             </div>
 
-            <button type="submit" class="ios-btn">
-                Sign In
+            <button type="submit" class="gradient-btn">
+                <i class="fas fa-sign-in-alt mr-2"></i> Sign In
             </button>
         </form>
     </div>
 
     <script>
+        // Password Toggle
         function togglePassword() {
             const input = document.getElementById('password');
-            const icon = document.querySelector('.password-toggle');
+            const icon = document.getElementById('passwordToggle');
+
             if (input.type === 'password') {
                 input.type = 'text';
                 icon.classList.remove('fa-eye');
@@ -340,29 +826,36 @@
             }
         }
 
+        // Member Selection
         function selectMember(element, memberId, userId) {
             // Reset all options
             document.querySelectorAll('.member-option').forEach(el => {
                 el.classList.remove('selected');
-                el.querySelector('.selection-indicator div').classList.remove('bg-white'); // Fix inner dot color
-                el.querySelector('.selection-indicator').classList.remove('bg-pink-500', 'border-pink-500'); // Fix border
+                // Remove any existing selection indicators
+                el.querySelector('.selection-indicator').classList.remove('selected-indicator');
             });
 
-            // Activate clicked option
+            // Activate clicked option with animation
             element.classList.add('selected');
-            const indicator = element.querySelector('.selection-indicator');
-            const dot = indicator.querySelector('div');
 
-            indicator.classList.remove('border-gray-300');
-            indicator.classList.add('bg-pink-500', 'border-pink-500');
-            dot.classList.add('bg-white');
+            // Add selection indicator animation
+            const indicator = element.querySelector('.selection-indicator');
+            indicator.style.animation = 'none';
+            setTimeout(() => {
+                indicator.style.animation = 'pulse 0.3s ease';
+            }, 10);
 
             // Set values
             document.getElementById('member_id').value = memberId;
             document.getElementById('user_id').value = userId;
 
-            // Auto-focus password
-            document.getElementById('password').focus();
+            // Auto-focus password with animation
+            const passwordInput = document.getElementById('password');
+            passwordInput.focus();
+            passwordInput.style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                passwordInput.style.transform = '';
+            }, 300);
         }
 
         // Manual input clears selection
@@ -370,12 +863,44 @@
             document.getElementById('member_id').value = '';
             document.querySelectorAll('.member-option').forEach(el => {
                 el.classList.remove('selected');
-                const indicator = el.querySelector('.selection-indicator');
-                const dot = indicator.querySelector('div');
-                indicator.classList.add('border-gray-300');
-                indicator.classList.remove('bg-pink-500', 'border-pink-500');
-                dot.classList.remove('bg-white');
             });
+        });
+
+        // Form submission animation
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            const btn = this.querySelector('.gradient-btn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Signing In...';
+            btn.disabled = true;
+
+            // Add pulse animation
+            btn.style.animation = 'pulse 1s infinite';
+        });
+
+        // Add CSS for pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: translateY(-3px) scale(1); }
+                50% { transform: translateY(-3px) scale(1.05); }
+                100% { transform: translateY(-3px) scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add floating animation to card on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const card = document.querySelector('.login-card');
+            card.style.animation = 'float 6s ease-in-out infinite';
+
+            // Add float animation
+            const floatStyle = document.createElement('style');
+            floatStyle.textContent = `
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                }
+            `;
+            document.head.appendChild(floatStyle);
         });
     </script>
 </body>

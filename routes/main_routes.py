@@ -25,6 +25,11 @@ logger = logging.getLogger(__name__)
 # Create blueprint
 main_bp = Blueprint('main', __name__)
 
+import uuid
+from werkzeug.security import generate_password_hash
+from bson.objectid import ObjectId
+
+
 
 @main_bp.route('/')
 def index():
@@ -290,6 +295,140 @@ def members_page():
                           current_user=current_member.get('name') or session.get('member_name') or 'User',
                           current_user_role=current_member.get('role') or session.get('member_role') or 'User',
                           members=members)
+
+
+@main_bp.route('/members/add', methods=['POST'])
+def add_member():
+    """Add a new team member."""
+    if not is_authenticated():
+        return redirect(url_for('auth.login'))
+        
+    current_member = safe_member_lookup()
+    if not current_member or current_member.get('role') != 'Administrator':
+        flash('Access denied', 'error')
+        return redirect(url_for('main.index'))
+        
+    from database import get_db
+    db = get_db()
+    
+    name = request.form.get('name')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    role = request.form.get('role')
+    gender = request.form.get('gender')
+    
+    if not name or not email or not password or not role:
+        flash('All required fields must be filled', 'error')
+        return redirect(url_for('main.members_page'))
+        
+    try:
+        # Generate user_id from email prefix or name if email is malformed
+        user_id = email.split('@')[0].lower() if '@' in email else name.lower().replace(' ', '')
+        
+        member_data = {
+            'name': name,
+            'email': email,
+            'user_id': user_id,
+            'password_hash': generate_password_hash(password),
+            'role': role,
+            'gender': gender,
+            'is_active': True,
+            'created_at': datetime.now()
+        }
+        
+        db.create_member(member_data)
+        flash(f'Member {name} added successfully!', 'success')
+    except ValueError as e:
+        flash(str(e), 'error')
+    except Exception as e:
+        flash(f'Error adding member: {e}', 'error')
+        
+    return redirect(url_for('main.members_page'))
+
+
+@main_bp.route('/members/edit', methods=['POST'])
+def edit_member():
+    """Edit an existing team member."""
+    if not is_authenticated():
+        return redirect(url_for('auth.login'))
+        
+    current_member = safe_member_lookup()
+    if not current_member or current_member.get('role') != 'Administrator':
+        flash('Access denied', 'error')
+        return redirect(url_for('main.index'))
+        
+    from database import get_db
+    db = get_db()
+    
+    member_id = request.form.get('member_id')
+    name = request.form.get('name')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    role = request.form.get('role')
+    gender = request.form.get('gender')
+    
+    if not member_id:
+        flash('Member ID is missing', 'error')
+        return redirect(url_for('main.members_page'))
+        
+    try:
+        update_data = {
+            'name': name,
+            'email': email,
+            'role': role,
+            'gender': gender,
+            'updated_at': datetime.now()
+        }
+        
+        # Only update password if provided
+        if password:
+            update_data['password_hash'] = generate_password_hash(password)
+            
+        db.members.update_one(
+            {'_id': ObjectId(member_id)},
+            {'$set': update_data}
+        )
+        flash(f'Member {name} updated successfully!', 'success')
+    except Exception as e:
+        flash(f'Error updating member: {e}', 'error')
+        
+    return redirect(url_for('main.members_page'))
+
+
+@main_bp.route('/members/delete/<member_id>', methods=['POST'])
+def delete_member(member_id):
+    """Delete (deactivate) a team member."""
+    if not is_authenticated():
+        return redirect(url_for('auth.login'))
+        
+    current_member = safe_member_lookup()
+    if not current_member or current_member.get('role') != 'Administrator':
+        flash('Access denied', 'error')
+        return redirect(url_for('main.index'))
+        
+    from database import get_db
+    db = get_db()
+    
+    try:
+        # Check if trying to delete self or default admin
+        member = db.get_member_by_id(member_id)
+        if member:
+            if member.get('email') == 'admin@autoassist.com':
+                flash('Cannot delete protected admin account', 'error')
+            elif str(member.get('_id')) == str(current_member.get('_id')):
+                flash('Cannot delete your own account', 'error')
+            else:
+                db.members.update_one(
+                    {'_id': ObjectId(member_id)},
+                    {'$set': {'is_active': False, 'deleted_at': datetime.now()}}
+                )
+                flash('Member deactivated successfully', 'success')
+        else:
+            flash('Member not found', 'error')
+    except Exception as e:
+        flash(f'Error deleting member: {e}', 'error')
+        
+    return redirect(url_for('main.members_page'))
 
 
 @main_bp.route('/technicians')
