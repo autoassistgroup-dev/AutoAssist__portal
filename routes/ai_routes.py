@@ -10,10 +10,39 @@ Author: AutoAssistGroup Development Team
 from flask import Blueprint, request, jsonify
 from datetime import datetime
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
 ai_bp = Blueprint('ai', __name__, url_prefix='/api/ai')
+
+
+def extract_ticket_id_from_body(body):
+    """
+    Extract existing ticket ID from email body.
+    Looks for patterns like 'ticket #EE3295', 'Ticket ID: EE3295', etc.
+    
+    Returns the first matched ticket ID or None.
+    """
+    if not body:
+        return None
+    
+    # Patterns to match ticket IDs in email body
+    patterns = [
+        r'ticket\s*#?\s*([A-Z]{1,3}\d{3,6})',  # ticket #EE3295, ticket EE3295
+        r'ticket\s+id[:\s]+([A-Z]{1,3}\d{3,6})',  # Ticket ID: EE3295
+        r'regarding\s+ticket\s*#?\s*([A-Z]{1,3}\d{3,6})',  # regarding ticket #EE3295
+        r'#([A-Z]{1,3}\d{3,6})',  # Just #EE3295
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, body, re.IGNORECASE)
+        if match:
+            ticket_id = match.group(1).upper()
+            logger.info(f"Extracted ticket ID from body: {ticket_id}")
+            return ticket_id
+    
+    return None
 
 
 @ai_bp.route('/display-response', methods=['POST', 'GET'])
@@ -34,8 +63,20 @@ def display_response():
     try:
         data = request.get_json() or {}
         
-        ticket_id = data.get('ticket_id', '')
+        original_ticket_id = data.get('ticket_id', '')
         ai_response = data.get('ai_response', data.get('draft', ''))
+        email_body = data.get('body', data.get('message', ''))
+        customer_email = data.get('from', data.get('customer_email', ''))
+        
+        # SMART TICKET ID EXTRACTION
+        # First, try to extract real ticket ID from email body (for replies)
+        extracted_ticket_id = extract_ticket_id_from_body(email_body)
+        
+        # Use extracted ID if found, otherwise use the one from N8N
+        ticket_id = extracted_ticket_id or original_ticket_id
+        
+        if extracted_ticket_id and extracted_ticket_id != original_ticket_id:
+            logger.info(f"Using extracted ticket ID {extracted_ticket_id} instead of AI-generated {original_ticket_id}")
         
         if ticket_id and ai_response:
             # Save the AI draft to the ticket in database
@@ -45,8 +86,14 @@ def display_response():
             # First, try to find the ticket by ticket_id
             ticket = db.get_ticket_by_id(ticket_id)
             
-            # If ticket not found, try to find by customer email (for reply scenarios)
-            customer_email = data.get('from', data.get('customer_email', ''))
+            # If ticket not found and we have original_ticket_id, try that too
+            if not ticket and extracted_ticket_id and original_ticket_id:
+                ticket = db.get_ticket_by_id(original_ticket_id)
+                if ticket:
+                    ticket_id = original_ticket_id
+                    logger.info(f"Found ticket using original ID: {original_ticket_id}")
+            
+            # If still not found, try to find by customer email (for reply scenarios)
             if not ticket and customer_email:
                 # Find the most recent ticket from this customer
                 tickets = list(db.tickets.find(
