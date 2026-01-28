@@ -410,8 +410,13 @@ def send_ticket_reply(ticket_id):
             logger.info(f"Reply form fields received: {list(request.form.keys())}")
             logger.info(f"Reply form data: {dict(request.form)}")
             
-            # Frontend sends 'response_text', also accept 'message'
-            message = request.form.get('response_text', request.form.get('message', ''))
+            # Frontend has multiple handlers that send different field names:
+            # - 'response_text' from enhanced attachment handler
+            # - 'response' from native form handler
+            # - 'message' for API compatibility
+            message = request.form.get('response_text', 
+                      request.form.get('response', 
+                      request.form.get('message', '')))
             send_email = request.form.get('sendEmail', 'false').lower() == 'true'
             
             logger.info(f"Extracted message (len={len(message)}): {message[:100] if message else 'EMPTY'}")
@@ -432,7 +437,7 @@ def send_ticket_reply(ticket_id):
                             })
         else:
             data = request.get_json() or {}
-            message = data.get('message', data.get('response_text', ''))
+            message = data.get('message', data.get('response_text', data.get('response', '')))
             send_email = data.get('sendEmail', False)
             attachments = data.get('attachments', [])
         
