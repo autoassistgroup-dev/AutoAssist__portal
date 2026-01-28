@@ -17,6 +17,7 @@ from routes.webhook_routes import webhook_bp
 from routes.attachment_routes import attachment_bp
 from routes.ai_routes import ai_bp
 from routes.document_routes import document_bp
+from routes.email_template_routes import email_template_bp
 from routes.main_routes import main_bp
 
 
@@ -53,6 +54,9 @@ def register_blueprints(app):
     
     # Document routes (Templates/Files)
     app.register_blueprint(document_bp)
+    
+    # Email Template routes
+    app.register_blueprint(email_template_bp)
     
     # Main page routes (index, dashboard, ticket detail, etc.)
     app.register_blueprint(main_bp)
