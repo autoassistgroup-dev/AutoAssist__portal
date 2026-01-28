@@ -195,8 +195,8 @@ def process_n8n_email_data(raw_data):
         
         # Extract email fields
         email = extract_email(data.get('from', data.get('email', '')))
-        subject = data.get('subject', 'No Subject')
-        body = data.get('body', data.get('text', data.get('content', '')))
+        subject = data.get('subject', data.get('Subject', 'No Subject'))
+        body = data.get('body', data.get('text', data.get('content', data.get('message', ''))))
         name = data.get('name', data.get('sender_name', ''))
         
         # Extract name from email if not provided
@@ -204,7 +204,7 @@ def process_n8n_email_data(raw_data):
             name = email.split('@')[0].replace('.', ' ').replace('_', ' ').title()
         
         # Check for existing ticket ID or generate new one
-        ticket_id = data.get('ticket_id', data.get('ticketId'))
+        ticket_id = data.get('ticket_id', data.get('ticketId', data.get('final_ticket_id', '')))
         
         if not ticket_id:
             # Generate new ticket ID
@@ -224,28 +224,55 @@ def process_n8n_email_data(raw_data):
                 has_warranty = True
                 break
         
+        # Extract priority (handle both cases from N8N)
+        priority = data.get('Priority', data.get('priority', 'Medium'))
+        
+        # Extract classification (handle both cases from N8N)
+        classification = data.get('Classification', data.get('classification', 'General Inquiry'))
+        
+        # Extract draft response from N8N AI Agent
+        draft = data.get('draft', data.get('n8n_draft', ''))
+        n8n_draft = data.get('n8n_draft', data.get('draft', ''))
+        
+        # Extract thread and message IDs for email tracking
+        thread_id = data.get('threadId', data.get('thread_id', ''))
+        message_id = data.get('messageid', data.get('message_id', data.get('messageId', '')))
+        
+        # Extract date
+        date_str = data.get('date', '')
+        
         # Build ticket data
         ticket_data = {
             'ticket_id': ticket_id,
             'email': email,
             'name': name,
             'subject': subject,
-            'message': body,
+            'body': body,  # For template display
+            'message': body,  # Legacy field
             'status': 'Open',
-            'priority': data.get('priority', 'Medium'),
-            'classification': data.get('classification', 'General Inquiry'),
+            'priority': priority,
+            'classification': classification,
             'source': 'n8n_email',
             'creation_method': 'n8n_email',
             'has_warranty': has_warranty,
             'has_attachments': len(attachments) > 0,
             'attachments': attachments,
+            # N8N specific fields
+            'draft': draft,
+            'n8n_draft': n8n_draft,
+            'thread_id': thread_id,
+            'message_id': message_id,
+            'email_date': date_str,
             'raw_data': data,
             'created_at': datetime.now(),
             'updated_at': datetime.now()
         }
+        
+        logger.info(f"Processed N8N ticket: {ticket_id}, Priority: {priority}, Classification: {classification}, Draft: {'Yes' if draft else 'No'}")
         
         return ticket_data
         
     except Exception as e:
         logger.error(f"Error processing N8N email data: {e}")
         return None
+

@@ -22,7 +22,7 @@ def display_response():
     Display or verify AI response generation.
     
     GET: Test endpoint availability
-    POST: Process and display AI response data
+    POST: Process and save AI response data to ticket
     """
     if request.method == 'GET':
         return jsonify({
@@ -34,9 +34,34 @@ def display_response():
     try:
         data = request.get_json() or {}
         
+        ticket_id = data.get('ticket_id', '')
+        ai_response = data.get('ai_response', data.get('draft', ''))
+        
+        if ticket_id and ai_response:
+            # Save the AI draft to the ticket in database
+            from database import get_db
+            db = get_db()
+            
+            # Update the ticket with the AI draft
+            result = db.update_ticket(ticket_id, {
+                'draft': ai_response,
+                'n8n_draft': ai_response,
+                'updated_at': datetime.now()
+            })
+            
+            logger.info(f"AI draft saved for ticket {ticket_id}: {len(ai_response)} chars")
+            
+            return jsonify({
+                'success': True,
+                'message': 'AI response saved to ticket',
+                'ticket_id': ticket_id,
+                'draft_length': len(ai_response),
+                'timestamp': datetime.now().isoformat()
+            })
+        
         return jsonify({
             'success': True,
-            'message': 'AI response received',
+            'message': 'AI response received (no ticket_id provided)',
             'data': data,
             'timestamp': datetime.now().isoformat()
         })

@@ -157,6 +157,12 @@
             background: rgba(255, 255, 255, 0.35) !important;
             box-shadow: 0 12px 40px rgba(255, 117, 143, 0.15) !important;
             border-color: var(--primary) !important;
+            cursor: pointer;
+        }
+
+        .ticket-card a {
+            text-decoration: none !important;
+            color: inherit !important;
         }
 
         .gradient-text {
@@ -662,7 +668,7 @@
             <div class="ticket-grid p-6">
                 {% for ticket in tickets %}
                 <div class="ticket-card p-4">
-                    <div class="flex">
+                    <a href="/ticket/{{ ticket.ticket_id }}" class="flex">
                         <!-- Unread indicator -->
                         {% if ticket.has_unread_reply %}
                         <div class="mr-3 mt-1">
@@ -684,7 +690,7 @@
                                 {% if ticket.classification in ['Technical Issue', 'Payment', 'Support', 'Warranty
                                 Claim', 'Spam'] %}
                                 <span
-                                    class="px-2 py-1 text-xs rounded-full font-medium
+                                    class="badge-classification px-2 py-1 text-xs rounded-full font-medium
                                         {% if ticket.classification == 'Technical Issue' %}bg-blue-100 text-blue-800
                                         {% elif ticket.classification == 'Payment' %}bg-indigo-100 text-indigo-800
                                         {% elif ticket.classification == 'Support' %}bg-purple-100 text-purple-800
@@ -694,7 +700,7 @@
                                 </span>
                                 {% endif %}
 
-                                <span class="px-2 py-1 text-xs rounded-full font-medium
+                                <span class="badge-status px-2 py-1 text-xs rounded-full font-medium
                                         {% if ticket.status == 'Open' %}bg-blue-100 text-blue-800
                                         {% elif ticket.status == 'Waiting for Response' %}bg-yellow-100 text-yellow-800
                                         {% elif ticket.status == 'Closed' %}bg-gray-100 text-gray-700
@@ -728,7 +734,7 @@
                                 {% endif %}
                             </span>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 {% endfor %}
 
@@ -802,8 +808,8 @@
                     const subject = card.querySelector('.font-semibold.text-gray-800')?.textContent.toLowerCase() || '';
                     const body = card.querySelector('.text-gray-600')?.textContent.toLowerCase() || '';
                     const priority = card.querySelector('.priority-badge')?.textContent || '';
-                    const classification = card.querySelectorAll('.ticket-badges span')[2]?.textContent || '';
-                    const status = card.querySelectorAll('.ticket-badges span')[3]?.textContent || '';
+                    const classification = card.querySelector('.badge-classification')?.textContent || '';
+                    const status = card.querySelector('.badge-status')?.textContent || '';
 
                     const matchesSearch = !searchTerm ||
                         ticketId.includes(searchTerm) ||

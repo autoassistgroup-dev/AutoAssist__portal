@@ -1130,6 +1130,42 @@
             }, 3000);
         }
 
+        // Delete ticket function
+        async function deleteTicket(ticketId) {
+            if (!confirm(`Are you sure you want to permanently delete ticket ${ticketId}? This action cannot be undone.`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/tickets/${ticketId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showSuccessToast(`Ticket ${ticketId} deleted successfully`);
+                    // Remove the ticket from the DOM
+                    const ticketCard = document.querySelector(`[data-ticket-id="${ticketId}"]`);
+                    if (ticketCard) {
+                        ticketCard.closest('.ticket-item')?.remove();
+                    }
+                    // Reload page after short delay to refresh the list
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    showErrorToast(data.error || 'Failed to delete ticket');
+                }
+            } catch (error) {
+                console.error('Error deleting ticket:', error);
+                showErrorToast('An error occurred while deleting the ticket');
+            }
+        }
+
         // Mobile menu toggle
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');

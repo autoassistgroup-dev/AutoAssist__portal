@@ -342,6 +342,198 @@ def close_ticket(ticket_id):
         return jsonify({'success': False, 'error': str(e)}), 500
 
 
+@ticket_bp.route('/<ticket_id>', methods=['DELETE'])
+def delete_ticket(ticket_id):
+    """
+    Delete a ticket permanently.
+    Requires admin or authorized role.
+    """
+    try:
+        if not is_authenticated():
+            return jsonify({'success': False, 'error': 'Authentication required'}), 401
+        
+        # Check if user is admin
+        from middleware.session_manager import is_admin
+        if not is_admin():
+            return jsonify({'success': False, 'error': 'Admin access required'}), 403
+        
+        if not validate_ticket_id(ticket_id):
+            return jsonify({'success': False, 'error': 'Invalid ticket ID'}), 400
+        
+        from database import get_db
+        db = get_db()
+        
+        # Check if ticket exists
+        ticket = db.get_ticket_by_id(ticket_id)
+        if not ticket:
+            return jsonify({'success': False, 'error': 'Ticket not found'}), 404
+        
+        # Delete the ticket
+        result = db.tickets.delete_one({'ticket_id': ticket_id})
+        
+        if result.deleted_count > 0:
+            logger.info(f"Ticket {ticket_id} deleted by {session.get('member_name')}")
+            return jsonify({
+                'success': True,
+                'message': 'Ticket deleted successfully',
+                'ticket_id': ticket_id
+            })
+        else:
+            return jsonify({'success': False, 'error': 'Failed to delete ticket'}), 500
+        
+    except Exception as e:
+        logger.error(f"Error deleting ticket {ticket_id}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@ticket_bp.route('/<ticket_id>/reply', methods=['POST'])
+def send_ticket_reply(ticket_id):
+    """
+    Send a reply to a ticket.
+    Creates a reply record and optionally sends email to customer.
+    """
+    try:
+        if not is_authenticated():
+            return jsonify({'success': False, 'message': 'Authentication required'}), 401
+        
+        from database import get_db
+        db = get_db()
+        
+        # Get ticket
+        ticket = db.get_ticket_by_id(ticket_id)
+        if not ticket:
+            return jsonify({'success': False, 'message': 'Ticket not found'}), 404
+        
+        # Handle multipart form data (with attachments) or JSON
+        if request.content_type and 'multipart/form-data' in request.content_type:
+            # Debug: log all form fields received
+            logger.info(f"Reply form fields received: {list(request.form.keys())}")
+            logger.info(f"Reply form data: {dict(request.form)}")
+            
+            # Frontend has multiple handlers that send different field names:
+            # - 'response_text' from enhanced attachment handler
+            # - 'response' from native form handler
+            # - 'message' for API compatibility
+            message = request.form.get('response_text', 
+                      request.form.get('response', 
+                      request.form.get('message', '')))
+            send_email = request.form.get('sendEmail', 'false').lower() == 'true'
+            
+            logger.info(f"Extracted message (len={len(message)}): {message[:100] if message else 'EMPTY'}")
+            
+            # Handle file attachments - frontend sends as attachment_0, attachment_1, etc.
+            attachments = []
+            for key in request.files:
+                if key.startswith('attachment_') or key == 'attachments':
+                    files = request.files.getlist(key) if key == 'attachments' else [request.files[key]]
+                    for f in files:
+                        if f.filename:
+                            import base64
+                            file_data = base64.b64encode(f.read()).decode('utf-8')
+                            attachments.append({
+                                'filename': f.filename,
+                                'content_type': f.content_type,
+                                'data': file_data
+                            })
+        else:
+            data = request.get_json() or {}
+            message = data.get('message', data.get('response_text', data.get('response', '')))
+            send_email = data.get('sendEmail', False)
+            attachments = data.get('attachments', [])
+        
+        if not message:
+            return jsonify({'success': False, 'message': 'Message is required'}), 400
+        
+        # Get current member info
+        current_member = safe_member_lookup()
+        sender_name = current_member.get('name', 'Support Team') if current_member else 'Support Team'
+        
+        # Create reply record
+        reply_data = {
+            'ticket_id': ticket_id,
+            'message': message,
+            'sender_name': sender_name,
+            'sender_id': session.get('member_id'),
+            'sender_type': 'agent',
+            'attachments': attachments,
+            'created_at': datetime.now()
+        }
+        
+        reply_id = db.create_reply(reply_data)
+        
+        # Update ticket with last reply info
+        db.update_ticket(ticket_id, {
+            'last_reply_at': datetime.now(),
+            'last_reply_by': sender_name,
+            'updated_at': datetime.now()
+        })
+        
+        logger.info(f"Reply sent for ticket {ticket_id} by {sender_name}")
+        
+        # Always send reply via N8N webhook to Outlook when there's a customer email
+        email_sent = False
+        if ticket.get('email'):
+            try:
+                import requests
+                from config.settings import WEBHOOK_URL
+                logger.info(f"Preparing to send reply via N8N webhook to {ticket.get('email')}")
+                
+                # Prepare webhook payload matching N8N workflow expectations
+                webhook_payload = {
+                    'ticket_id': ticket_id,
+                    'response_text': message,
+                    'replyMessage': message,  # Also include as replyMessage for compatibility
+                    'customer_email': ticket.get('email'),
+                    'email': ticket.get('email'),
+                    'ticket_subject': ticket.get('subject', 'Your Support Request'),
+                    'subject': ticket.get('subject', 'Your Support Request'),
+                    'customer_name': ticket.get('customer_name', ticket.get('name', '')),
+                    'priority': ticket.get('priority', 'Medium'),
+                    'ticket_status': ticket.get('status', 'Waiting for Response'),
+                    'ticketSource': ticket.get('source', 'manual'),  # Determines reply vs new email flow
+                    'is_email_ticket': ticket.get('is_email_ticket', False),
+                    'threadId': ticket.get('threadId', ''),
+                    'message_id': ticket.get('message_id', ''),
+                    'timestamp': datetime.now().isoformat(),
+                    'user_id': session.get('member_id'),
+                    'has_attachments': len(attachments) > 0,
+                    'attachments': attachments,
+                    'attachment_count': len(attachments),
+                    'body': ticket.get('body', ''),  # Original ticket body for context
+                    'draft': message,
+                    'message': message,
+                    'content': message
+                }
+                
+                logger.info(f"Sending reply to N8N webhook for ticket {ticket_id}")
+                
+                webhook_response = requests.post(
+                    WEBHOOK_URL,
+                    json=webhook_payload,
+                    timeout=30
+                )
+                
+                email_sent = webhook_response.status_code == 200
+                logger.info(f"N8N webhook response for ticket {ticket_id}: {webhook_response.status_code}")
+                
+            except requests.exceptions.Timeout:
+                logger.error(f"N8N webhook timeout for ticket {ticket_id}")
+            except Exception as email_error:
+                logger.error(f"Failed to send via N8N webhook for ticket {ticket_id}: {email_error}")
+        
+        return jsonify({
+            'success': True,
+            'message': 'Reply sent successfully',
+            'reply_id': str(reply_id),
+            'ticket_id': ticket_id,
+            'email_sent': email_sent
+        })
+        
+    except Exception as e:
+        logger.error(f"Error sending reply for ticket {ticket_id}: {e}")
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
 @ticket_bp.route('/search', methods=['GET'])
 def search_tickets():
     """
