@@ -129,12 +129,16 @@ def display_response():
                 db.update_ticket(ticket_id, {
                     'has_unread_reply': True,
                     'last_reply_at': datetime.now(),
-                    'status': 'Customer Replied'
+                    'status': 'Customer Replied',
+                    'draft': ai_response,
+                    'draft_body': ai_response,  # Added for compatibility
+                    'n8n_draft': ai_response
                 })
             
             # Update the ticket with the AI draft
             result = db.update_ticket(ticket_id, {
                 'draft': ai_response,
+                'draft_body': ai_response,  # Added for compatibility
                 'n8n_draft': ai_response,
                 'updated_at': datetime.now()
             })
