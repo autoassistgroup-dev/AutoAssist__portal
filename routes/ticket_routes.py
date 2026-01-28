@@ -470,22 +470,55 @@ def send_ticket_reply(ticket_id):
         
         logger.info(f"Reply sent for ticket {ticket_id} by {sender_name}")
         
-        # Optionally send email to customer
+        # Send reply via N8N webhook to Outlook
         email_sent = False
         if send_email and ticket.get('email'):
             try:
-                from services.email_service import send_email as send_email_func
-                email_result = send_email_func(
-                    to_email=ticket.get('email'),
-                    subject=f"Re: {ticket.get('subject', 'Your Support Request')} [Ticket: {ticket_id}]",
-                    body=message,
-                    html_body=f"<p>{message.replace(chr(10), '<br>')}</p>",
-                    attachments=attachments if attachments else None
+                import requests
+                from config.settings import WEBHOOK_URL
+                
+                # Prepare webhook payload matching N8N workflow expectations
+                webhook_payload = {
+                    'ticket_id': ticket_id,
+                    'response_text': message,
+                    'replyMessage': message,  # Also include as replyMessage for compatibility
+                    'customer_email': ticket.get('email'),
+                    'email': ticket.get('email'),
+                    'ticket_subject': ticket.get('subject', 'Your Support Request'),
+                    'subject': ticket.get('subject', 'Your Support Request'),
+                    'customer_name': ticket.get('customer_name', ticket.get('name', '')),
+                    'priority': ticket.get('priority', 'Medium'),
+                    'ticket_status': ticket.get('status', 'Waiting for Response'),
+                    'ticketSource': ticket.get('source', 'manual'),  # Determines reply vs new email flow
+                    'is_email_ticket': ticket.get('is_email_ticket', False),
+                    'threadId': ticket.get('threadId', ''),
+                    'message_id': ticket.get('message_id', ''),
+                    'timestamp': datetime.now().isoformat(),
+                    'user_id': session.get('member_id'),
+                    'has_attachments': len(attachments) > 0,
+                    'attachments': attachments,
+                    'attachment_count': len(attachments),
+                    'body': ticket.get('body', ''),  # Original ticket body for context
+                    'draft': message,
+                    'message': message,
+                    'content': message
+                }
+                
+                logger.info(f"Sending reply to N8N webhook for ticket {ticket_id}")
+                
+                webhook_response = requests.post(
+                    WEBHOOK_URL,
+                    json=webhook_payload,
+                    timeout=30
                 )
-                email_sent = email_result.get('success', False) if isinstance(email_result, dict) else email_result
-                logger.info(f"Email sent to {ticket.get('email')} for ticket {ticket_id}: {email_sent}")
+                
+                email_sent = webhook_response.status_code == 200
+                logger.info(f"N8N webhook response for ticket {ticket_id}: {webhook_response.status_code}")
+                
+            except requests.exceptions.Timeout:
+                logger.error(f"N8N webhook timeout for ticket {ticket_id}")
             except Exception as email_error:
-                logger.error(f"Failed to send email for ticket {ticket_id}: {email_error}")
+                logger.error(f"Failed to send via N8N webhook for ticket {ticket_id}: {email_error}")
         
         return jsonify({
             'success': True,
