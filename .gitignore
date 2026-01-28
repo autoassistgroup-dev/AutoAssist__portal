@@ -39,6 +39,7 @@ instance/
 
 # Logs
 *.log
+app.log
 
 # Temporary data
 *_check.json
