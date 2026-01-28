@@ -681,21 +681,24 @@
     <!-- Navigation -->
     <nav class="shadow-md">
         <div class="responsive-container py-6">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-6">
+            <div class="flex items-center justify-between">
+                <!-- Logo Section (Left) -->
+                <div class="flex-1 flex justify-start">
                     <a href="/" class="flex items-center">
                         <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
                     </a>
-                    <div class="hidden md:flex space-x-6">
-                        <a href="/" class="nav-link">Tickets</a>
-                        <a href="/dashboard" class="nav-link">Dashboard</a>
-                        <a href="/create-ticket" class="nav-link">Create Ticket</a>
-                        {% if current_user_role == 'Administrator' %}
-                        <a href="/technicians" class="nav-link">Technicians</a>
-                        <a href="/members" class="nav-link">Members</a>
-                        <a href="/admin" class="nav-link nav-link-active">Admin Panel</a>
-                        {% endif %}
-                    </div>
+                </div>
+
+                <!-- Navigation Links (Center) -->
+                <div class="hidden md:flex flex-grow justify-center space-x-2">
+                    <a href="/" class="nav-link">Tickets</a>
+                    <a href="/dashboard" class="nav-link">Dashboard</a>
+                    <a href="/create-ticket" class="nav-link">Create Ticket</a>
+                    {% if current_user_role == 'Administrator' %}
+                    <a href="/technicians" class="nav-link">Technicians</a>
+                    <a href="/members" class="nav-link">Members</a>
+                    <a href="/admin" class="nav-link nav-link-active">Admin Panel</a>
+                    {% endif %}
                 </div>
                 <div class="flex items-center space-x-2 md:space-x-4">
                     {% if current_user %}

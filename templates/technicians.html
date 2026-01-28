@@ -224,33 +224,36 @@
     <!-- Navigation -->
     <nav>
         <div class="responsive-container py-4 px-4 md:px-8">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-6">
+            <div class="flex items-center justify-between">
+                <!-- Logo Section (Left) -->
+                <div class="flex-1 flex justify-start">
                     <a href="/" class="flex items-center">
                         <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
                     </a>
-                    <div class="hidden md:flex space-x-3">
-                        <a href="/" class="nav-link">
-                            <i class="fas fa-ticket-alt mr-2"></i>Tickets
-                        </a>
-                        <a href="/dashboard" class="nav-link">
-                            <i class="fas fa-chart-line mr-2"></i>Dashboard
-                        </a>
-                        <a href="/create-ticket" class="nav-link">
-                            <i class="fas fa-plus-circle mr-2"></i>Create Ticket
-                        </a>
-                        {% if current_user_role == 'Administrator' %}
-                        <a href="/technicians" class="nav-link nav-link-active">
-                            <i class="fas fa-tools mr-2"></i>Technicians
-                        </a>
-                        <a href="/members" class="nav-link">
-                            <i class="fas fa-users mr-2"></i>Members
-                        </a>
-                        <a href="/admin" class="nav-link">
-                            <i class="fas fa-cog mr-2"></i>Admin Panel
-                        </a>
-                        {% endif %}
-                    </div>
+                </div>
+
+                <!-- Navigation Links (Center) -->
+                <div class="hidden md:flex flex-grow justify-center space-x-2">
+                    <a href="/" class="nav-link">
+                        <i class="fas fa-ticket-alt mr-2"></i>Tickets
+                    </a>
+                    <a href="/dashboard" class="nav-link">
+                        <i class="fas fa-chart-line mr-2"></i>Dashboard
+                    </a>
+                    <a href="/create-ticket" class="nav-link">
+                        <i class="fas fa-plus-circle mr-2"></i>Create Ticket
+                    </a>
+                    {% if current_user_role == 'Administrator' %}
+                    <a href="/technicians" class="nav-link nav-link-active">
+                        <i class="fas fa-tools mr-2"></i>Technicians
+                    </a>
+                    <a href="/members" class="nav-link">
+                        <i class="fas fa-users mr-2"></i>Members
+                    </a>
+                    <a href="/admin" class="nav-link">
+                        <i class="fas fa-cog mr-2"></i>Admin Panel
+                    </a>
+                    {% endif %}
                 </div>
                 <div class="flex items-center space-x-3">
                     {% if current_user %}

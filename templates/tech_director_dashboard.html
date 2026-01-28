@@ -443,8 +443,9 @@
     <!-- Navigation -->
     <nav class="sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo Section (Left) -->
+                <div class="flex-1 flex justify-start">
                     <a href="/" class="flex items-center space-x-3">
                         <div
                             class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center">
@@ -455,19 +456,22 @@
                             AutoAssist
                         </span>
                     </a>
-                    <div class="hidden md:flex items-center space-x-2">
-                        <a href="/" class="nav-link">Tickets</a>
-                        <a href="/dashboard" class="nav-link">Dashboard</a>
-
-                        <a href="/create-ticket" class="nav-link">Create Ticket</a>
-                        {% if current_user_role == 'Administrator' %}
-                        <a href="/technicians" class="nav-link">Technicians</a>
-                        <a href="/members" class="nav-link">Members</a>
-                        <a href="/admin" class="nav-link">Admin Panel</a>
-                        {% endif %}
-                    </div>
                 </div>
-                <div class="flex items-center space-x-4">
+
+                <!-- Navigation Links (Center) -->
+                <div class="hidden md:flex flex-grow justify-center space-x-2">
+                    <a href="/" class="nav-link">Tickets</a>
+                    <a href="/dashboard" class="nav-link">Dashboard</a>
+                    <a href="/create-ticket" class="nav-link">Create Ticket</a>
+                    {% if current_user_role == 'Administrator' %}
+                    <a href="/technicians" class="nav-link">Technicians</a>
+                    <a href="/members" class="nav-link">Members</a>
+                    <a href="/admin" class="nav-link">Admin Panel</a>
+                    {% endif %}
+                </div>
+
+                <!-- User/Actions Section (Right) -->
+                <div class="flex-1 flex justify-end items-center space-x-4">
                     {% if current_user %}
                     <div
                         class="hidden sm:flex items-center space-x-3 px-4 py-2 rounded-xl bg-white/30 backdrop-blur-sm">

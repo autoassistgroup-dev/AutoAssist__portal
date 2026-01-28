@@ -404,12 +404,75 @@
     <!-- Navigation -->
     <nav>
         <div class="responsive-container py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-6">
+            <div class="flex items-center justify-between">
+                <!-- Logo Section (Left) -->
+                <div class="flex-1 flex justify-start">
                     <a href="{{ url_for('main.index') }}" class="flex items-center">
                         <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
                     </a>
-                    <div class="hidden md:flex space-x-3">
+                </div>
+
+                <!-- Navigation Links (Center) -->
+                <div class="hidden md:flex flex-1 justify-center space-x-2">
+                    <a href="{{ url_for('main.index') }}"
+                        class="nav-link {% if request.endpoint == 'main.index' %}nav-link-active{% endif %}">
+                        <i class="fas fa-ticket-alt mr-2"></i>Tickets
+                    </a>
+                    <a href="{{ url_for('main.dashboard') }}"
+                        class="nav-link {% if request.endpoint == 'main.dashboard' %}nav-link-active{% endif %}">
+                        <i class="fas fa-chart-line mr-2"></i>Dashboard
+                    </a>
+                    <a href="{{ url_for('main.create_ticket') }}"
+                        class="nav-link {% if request.endpoint == 'main.create_ticket' %}nav-link-active{% endif %}">
+                        <i class="fas fa-plus-circle mr-2"></i>Create Ticket
+                    </a>
+
+                    {% if current_member and current_member.role == 'Administrator' %}
+                    <a href="{{ url_for('main.technicians') }}"
+                        class="nav-link {% if request.endpoint == 'main.technicians' %}nav-link-active{% endif %}">
+                        <i class="fas fa-tools mr-2"></i>Technicians
+                    </a>
+                    <a href="{{ url_for('main.members') }}"
+                        class="nav-link {% if request.endpoint == 'main.members' %}nav-link-active{% endif %}">
+                        <i class="fas fa-users mr-2"></i>Members
+                    </a>
+                    <a href="{{ url_for('main.admin_panel') }}"
+                        class="nav-link {% if request.endpoint == 'main.admin_panel' %}nav-link-active gradient-btn{% endif %}">
+                        <i class="fas fa-cog mr-2"></i>Admin Panel
+                    </a>
+                    {% endif %}
+                    <!-- User/Actions Section (Right) -->
+                    <div class="flex-1 flex justify-end items-center space-x-3">
+                        {% if current_member %}
+                        <div class="hidden sm:flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
+                                <span class="text-pink-600 text-sm">{{ current_member.name[0]|upper }}</span>
+                            </div>
+                            <span class="text-gray-600 text-sm">{{ current_member.name }}</span>
+                        </div>
+                        <a href="{{ url_for('auth.logout') }}" class="nav-link text-sm">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                        </a>
+                        {% else %}
+                        <a href="{{ url_for('auth.login') }}" class="gradient-btn px-4 py-2 text-sm">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Login
+                        </a>
+                        {% endif %}
+
+                        <!-- Mobile menu button -->
+                        <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn nav-link"
+                            onclick="toggleMobileMenu()">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu -->
+                <div id="mobileMenu" class="md:hidden mt-3 pb-3 border-t border-pink-100 hidden">
+                    <div class="flex flex-col space-y-2 pt-3">
                         <a href="{{ url_for('main.index') }}"
                             class="nav-link {% if request.endpoint == 'main.index' %}nav-link-active{% endif %}">
                             <i class="fas fa-ticket-alt mr-2"></i>Tickets
@@ -439,67 +502,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="flex items-center space-x-3">
-                    {% if current_member %}
-                    <div class="hidden sm:flex items-center space-x-2">
-                        <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
-                            <span class="text-pink-600 text-sm">{{ current_member.name[0]|upper }}</span>
-                        </div>
-                        <span class="text-gray-600 text-sm">{{ current_member.name }}</span>
-                    </div>
-                    <a href="{{ url_for('auth.logout') }}" class="nav-link text-sm">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                    </a>
-                    {% else %}
-                    <a href="{{ url_for('auth.login') }}" class="gradient-btn px-4 py-2 text-sm">
-                        <i class="fas fa-sign-in-alt mr-2"></i>Login
-                    </a>
-                    {% endif %}
-
-                    <!-- Mobile menu button -->
-                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn nav-link"
-                        onclick="toggleMobileMenu()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
             </div>
-
-            <!-- Mobile menu -->
-            <div id="mobileMenu" class="md:hidden mt-3 pb-3 border-t border-pink-100 hidden">
-                <div class="flex flex-col space-y-2 pt-3">
-                    <a href="{{ url_for('main.index') }}"
-                        class="nav-link {% if request.endpoint == 'main.index' %}nav-link-active{% endif %}">
-                        <i class="fas fa-ticket-alt mr-2"></i>Tickets
-                    </a>
-                    <a href="{{ url_for('main.dashboard') }}"
-                        class="nav-link {% if request.endpoint == 'main.dashboard' %}nav-link-active{% endif %}">
-                        <i class="fas fa-chart-line mr-2"></i>Dashboard
-                    </a>
-                    <a href="{{ url_for('main.create_ticket') }}"
-                        class="nav-link {% if request.endpoint == 'main.create_ticket' %}nav-link-active{% endif %}">
-                        <i class="fas fa-plus-circle mr-2"></i>Create Ticket
-                    </a>
-
-                    {% if current_member and current_member.role == 'Administrator' %}
-                    <a href="{{ url_for('main.technicians') }}"
-                        class="nav-link {% if request.endpoint == 'main.technicians' %}nav-link-active{% endif %}">
-                        <i class="fas fa-tools mr-2"></i>Technicians
-                    </a>
-                    <a href="{{ url_for('main.members') }}"
-                        class="nav-link {% if request.endpoint == 'main.members' %}nav-link-active{% endif %}">
-                        <i class="fas fa-users mr-2"></i>Members
-                    </a>
-                    <a href="{{ url_for('main.admin_panel') }}"
-                        class="nav-link {% if request.endpoint == 'main.admin_panel' %}nav-link-active gradient-btn{% endif %}">
-                        <i class="fas fa-cog mr-2"></i>Admin Panel
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
     </nav>
 
     <!-- Main Content -->
