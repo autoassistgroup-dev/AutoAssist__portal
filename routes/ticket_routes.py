@@ -470,12 +470,13 @@ def send_ticket_reply(ticket_id):
         
         logger.info(f"Reply sent for ticket {ticket_id} by {sender_name}")
         
-        # Send reply via N8N webhook to Outlook
+        # Always send reply via N8N webhook to Outlook when there's a customer email
         email_sent = False
-        if send_email and ticket.get('email'):
+        if ticket.get('email'):
             try:
                 import requests
                 from config.settings import WEBHOOK_URL
+                logger.info(f"Preparing to send reply via N8N webhook to {ticket.get('email')}")
                 
                 # Prepare webhook payload matching N8N workflow expectations
                 webhook_payload = {
