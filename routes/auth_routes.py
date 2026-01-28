@@ -31,44 +31,53 @@ def login():
         # If already logged in, redirect to dashboard
         if is_authenticated():
             return redirect(url_for('main.dashboard'))
+        
+        # Get role filter from query parameter
+        selected_role = request.args.get('role', '').lower()
             
         # Fetch members for the "Select Account" UI
         members = []
         try:
             from database import get_db
             db = get_db()
-            # Get members sorted by role priority (Admin first)
+            # Get members sorted by role priority
             all_members = db.get_all_members()
             
-            # Sort manually locally if needed, or rely on db sort
-            # Rank: Admin (1), Tech Director (2), User (3)
-            def get_rank(m):
-                role = m.get('role', '')
-                if 'Admin' in role: return 0
-                if 'Director' in role: return 1
-                return 2
+            # Filter members based on selected role
+            if selected_role == 'admin':
+                # Show only administrators
+                members = [m for m in all_members if 'Admin' in m.get('role', '')]
+            elif selected_role == 'tech-director':
+                # Show only technical directors
+                members = [m for m in all_members if 'Director' in m.get('role', '')]
+            elif selected_role == 'user':
+                # Show only regular users (not admin or director)
+                members = [m for m in all_members if 'Admin' not in m.get('role', '') and 'Director' not in m.get('role', '')]
+            else:
+                # No filter - show all members sorted by role priority
+                def get_rank(m):
+                    role = m.get('role', '')
+                    if 'Admin' in role: return 0
+                    if 'Director' in role: return 1
+                    return 2
+                members = sorted(all_members, key=get_rank)
                 
-            members = sorted(all_members, key=get_rank)
         except Exception as e:
             logger.warning(f"Could not fetch members for login screen: {e}")
             # FALLBACK FOR OFFLINE/CONNECTION ISSUES
-            # Show default users so the UI looks correct even if DB is unreachable
-            members = [
-                {
-                    "_id": "admin_dummy",
-                    "name": "Admin",
-                    "role": "Administrator",
-                    "user_id": "admin001"
-                },
-                {
-                    "_id": "marc_dummy",
-                    "name": "Marc (Technical Director)",
-                    "role": "Technical Director",
-                    "user_id": "marc001"
-                }
-            ]
+            if selected_role == 'admin':
+                members = [{"_id": "admin_dummy", "name": "Admin", "role": "Administrator", "user_id": "admin001"}]
+            elif selected_role == 'tech-director':
+                members = [{"_id": "marc_dummy", "name": "Marc (Technical Director)", "role": "Technical Director", "user_id": "marc001"}]
+            elif selected_role == 'user':
+                members = [{"_id": "user_dummy", "name": "User", "role": "User", "user_id": "user001"}]
+            else:
+                members = [
+                    {"_id": "admin_dummy", "name": "Admin", "role": "Administrator", "user_id": "admin001"},
+                    {"_id": "marc_dummy", "name": "Marc (Technical Director)", "role": "Technical Director", "user_id": "marc001"}
+                ]
             
-        return render_template('login.html', members=members)
+        return render_template('login.html', members=members, selected_role=selected_role)
     
     # POST - process login
     try:
@@ -126,14 +135,14 @@ def logout():
         clear_session()
         
         logger.info(f"User logged out: {user_name} ({user_id})")
-        flash('You have been logged out successfully.', 'success')
         
     except Exception as e:
         logger.error(f"Logout error: {e}")
         # Still clear session even if logging fails
         clear_session()
     
-    return redirect(url_for('auth.login'))
+    # Redirect to portal page instead of login
+    return redirect(url_for('main.portal'))
 
 
 @auth_bp.route('/api/session/heartbeat', methods=['POST'])

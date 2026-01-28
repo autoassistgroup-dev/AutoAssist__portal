@@ -5984,3 +5984,680 @@ Traceback (most recent call last):
   File "C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\werkzeug\routing\map.py", line 950, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'members.delete_member' with values ['member_id']. Did you mean 'main.members_page' instead?
+2026-01-28 19:32:07,236 - app - INFO - Application initialized successfully (refactored version)
+2026-01-28 19:32:08,007 - app - INFO - Application initialized successfully (refactored version)
+2026-01-28 19:32:08,057 - werkzeug - WARNING -  * Debugger is active!
+2026-01-28 19:32:11,350 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:32:11,368 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:32:11,431 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/__pycache__", inode=27404065, flags=28100, id=7315519): is_created, is_directory, is_xattr_mod
+2026-01-28 19:32:11,431 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc.4565412656", inode=27404066, flags=19900, id=7315531): is_coalesced, is_created, is_file, is_modified, is_renamed, is_xattr_mod
+2026-01-28 19:32:11,432 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc", inode=27404066, flags=10800, id=7315532): is_file, is_renamed
+2026-01-28 19:32:11,433 - fsevents - DEBUG - queue_event DirCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__', dest_path='', event_type='created', is_directory=True, is_synthetic=False)
+2026-01-28 19:32:11,433 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 19:32:11,434 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 19:32:11,435 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc.4565412656', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 19:32:11,435 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 19:32:11,435 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc.4565412656', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 19:32:11,436 - fsevents - DEBUG - Destination event for rename is NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc", inode=27404066, flags=10800, id=7315532)
+2026-01-28 19:32:11,436 - fsevents - DEBUG - queue_event FileMovedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc.4565412656', dest_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc', event_type='moved', is_directory=False, is_synthetic=False)
+2026-01-28 19:32:11,436 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 19:32:11,438 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 19:32:12,223 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 19:32:12,223 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 19:33:33,195 - app - INFO - Application initialized successfully (refactored version)
+2026-01-28 19:33:33,556 - app - INFO - Application initialized successfully (refactored version)
+2026-01-28 19:33:33,560 - werkzeug - WARNING -  * Debugger is active!
+2026-01-28 19:33:48,431 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:33:48,457 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:33:49,845 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 19:33:49,846 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 19:34:00,489 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:34:08,017 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:34:08,040 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:34:08,040 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 19:34:08,040 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 19:34:17,943 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:34:17,964 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:34:17,964 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 19:34:17,964 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 19:34:24,110 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:35:39,759 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:35:39,776 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:35:39,776 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 19:35:39,776 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 19:35:45,217 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/routes/main_routes.py", inode=27402664, flags=10400, id=7360218): is_file, is_inode_meta_mod
+2026-01-28 19:35:45,226 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/routes/main_routes.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 19:35:45,240 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/routes/main_routes.py", inode=27402664, flags=11400, id=7360227): is_file, is_inode_meta_mod, is_modified
+2026-01-28 19:35:45,241 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/routes/main_routes.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 19:35:47,686 - app - INFO - Application initialized successfully (refactored version)
+2026-01-28 19:35:47,712 - werkzeug - WARNING -  * Debugger is active!
+2026-01-28 19:35:47,831 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:07,704 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:08,625 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:10,494 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:10,506 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:13,677 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:13,686 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:16,083 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:16,822 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 19:36:16,822 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 19:36:27,095 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:33,909 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:33,910 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 19:36:33,910 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 19:36:40,626 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:43,094 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:36:43,095 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 19:36:43,095 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 19:36:47,954 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:37:41,528 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:37:41,541 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:37:41,542 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 19:37:41,542 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 19:37:49,684 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:42:30,331 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=10400, id=7375495): is_file, is_inode_meta_mod
+2026-01-28 19:42:30,336 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 19:42:30,347 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=11400, id=7375504): is_file, is_inode_meta_mod, is_modified
+2026-01-28 19:42:30,348 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 19:42:45,533 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=10400, id=7375842): is_file, is_inode_meta_mod
+2026-01-28 19:42:45,538 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 19:42:45,549 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=11400, id=7375845): is_file, is_inode_meta_mod, is_modified
+2026-01-28 19:42:45,550 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 19:43:05,350 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:49:06,369 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 19:54:04,190 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27411458, flags=18100, id=7459264): is_created, is_file, is_xattr_mod
+2026-01-28 19:54:04,191 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 19:54:04,193 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 19:54:04,196 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 19:54:04,201 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27411458, flags=19100, id=7459267): is_created, is_file, is_modified, is_xattr_mod
+2026-01-28 19:54:04,201 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 19:57:00,959 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image copy.png", inode=27411744, flags=18100, id=7467600): is_created, is_file, is_xattr_mod
+2026-01-28 19:57:00,965 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image copy.png', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 19:57:00,965 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 19:57:00,966 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image copy.png', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 19:57:00,975 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image copy.png", inode=27411744, flags=19100, id=7467603): is_created, is_file, is_modified, is_xattr_mod
+2026-01-28 19:57:00,976 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image copy.png', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 19:57:16,205 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image copy.png", inode=27411744, flags=10800, id=7468441): is_file, is_renamed
+2026-01-28 19:57:16,206 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/portal_bg.png", inode=27411744, flags=10800, id=7468442): is_file, is_renamed
+2026-01-28 19:57:16,206 - fsevents - DEBUG - Destination event for rename is NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/portal_bg.png", inode=27411744, flags=10800, id=7468442)
+2026-01-28 19:57:16,208 - fsevents - DEBUG - queue_event FileMovedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image copy.png', dest_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/portal_bg.png', event_type='moved', is_directory=False, is_synthetic=False)
+2026-01-28 19:57:16,208 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 19:57:16,209 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 20:00:21,133 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=10400, id=7474906): is_file, is_inode_meta_mod
+2026-01-28 20:00:21,143 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:00:21,153 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=11400, id=7474909): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:00:21,153 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:01:58,687 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:02:40,116 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/portal_bg.png", inode=27411744, flags=10800, id=7500350): is_file, is_renamed
+2026-01-28 20:02:40,116 - fsevents - DEBUG - queue_event FileDeletedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/portal_bg.png', dest_path='', event_type='deleted', is_directory=False, is_synthetic=False)
+2026-01-28 20:02:40,116 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 20:02:44,970 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27411458, flags=10800, id=7500418): is_file, is_renamed
+2026-01-28 20:02:44,970 - fsevents - DEBUG - queue_event FileDeletedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='deleted', is_directory=False, is_synthetic=False)
+2026-01-28 20:02:44,970 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 20:02:55,672 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27413423, flags=18100, id=7500772): is_created, is_file, is_xattr_mod
+2026-01-28 20:02:55,685 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 20:02:55,685 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 20:02:55,686 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:02:55,697 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27413423, flags=19100, id=7500775): is_created, is_file, is_modified, is_xattr_mod
+2026-01-28 20:02:55,698 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:02:58,720 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:03:01,838 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:03:18,379 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27413423, flags=10800, id=7501713): is_file, is_renamed
+2026-01-28 20:03:18,379 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/portal_bg.png", inode=27413423, flags=10800, id=7501714): is_file, is_renamed
+2026-01-28 20:03:18,379 - fsevents - DEBUG - Destination event for rename is NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/portal_bg.png", inode=27413423, flags=10800, id=7501714)
+2026-01-28 20:03:18,379 - fsevents - DEBUG - queue_event FileMovedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/portal_bg.png', event_type='moved', is_directory=False, is_synthetic=False)
+2026-01-28 20:03:18,380 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 20:03:18,380 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 20:03:20,693 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:06:54,941 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=10400, id=7505943): is_file, is_inode_meta_mod
+2026-01-28 20:06:54,942 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:06:54,951 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=11400, id=7505946): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:06:54,952 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:07:10,887 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=10400, id=7506356): is_file, is_inode_meta_mod
+2026-01-28 20:07:10,899 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:07:10,911 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=11400, id=7506359): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:07:10,911 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:07:54,005 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:08:40,990 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:08:43,114 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:08:43,645 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:09:19,184 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:09:19,743 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:09:19,928 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:09:20,095 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:10:07,553 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:10:08,173 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:10:08,617 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:10:09,024 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:10:09,696 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:10:09,884 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:10:16,661 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=10400, id=7511283): is_file, is_inode_meta_mod
+2026-01-28 20:10:16,664 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:10:16,675 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=11400, id=7511286): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:10:16,675 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:10:18,179 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:10:49,252 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:10:51,456 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=10400, id=7512300): is_file, is_inode_meta_mod
+2026-01-28 20:10:51,458 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:10:51,469 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=11400, id=7512303): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:10:51,469 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:10:54,463 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:11:10,914 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=10400, id=7512979): is_file, is_inode_meta_mod
+2026-01-28 20:11:10,916 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:11:10,927 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=11400, id=7512982): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:11:10,927 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:11:12,500 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:11:22,732 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:11:22,735 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:11:22,736 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:11:26,708 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:11:30,581 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:11:32,099 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:11:32,393 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:11:32,675 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:11:32,820 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:11:32,952 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:12:25,455 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:12:25,456 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:12:25,456 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:12:41,727 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:12:41,727 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:12:41,728 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:12:44,889 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:12:44,890 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:12:44,890 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:13:08,705 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:13:08,706 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:13:08,706 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:14:22,171 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:14:22,172 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:14:22,172 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:14:38,270 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:14:38,271 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:14:38,271 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:14:47,408 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:14:47,409 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:14:47,409 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:14:54,063 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:14:54,063 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:14:54,063 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:14:57,066 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:14:57,068 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:14:57,068 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:14:59,057 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:14:59,089 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:15:01,164 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:15:01,164 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:15:01,165 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:22:12,059 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27418616, flags=18100, id=7584725): is_created, is_file, is_xattr_mod
+2026-01-28 20:22:12,083 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 20:22:12,103 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 20:22:12,112 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:22:12,114 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27418616, flags=19100, id=7584740): is_created, is_file, is_modified, is_xattr_mod
+2026-01-28 20:22:12,115 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:22:26,402 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27418616, flags=19900, id=7585259): is_coalesced, is_created, is_file, is_modified, is_renamed, is_xattr_mod
+2026-01-28 20:22:26,403 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/login_bg.png", inode=27418616, flags=10800, id=7585260): is_file, is_renamed
+2026-01-28 20:22:26,404 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:22:26,404 - fsevents - DEBUG - Destination event for rename is NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/login_bg.png", inode=27418616, flags=10800, id=7585260)
+2026-01-28 20:22:26,405 - fsevents - DEBUG - queue_event FileMovedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/login_bg.png', event_type='moved', is_directory=False, is_synthetic=False)
+2026-01-28 20:22:26,406 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 20:22:26,408 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 20:25:20,704 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/routes/auth_routes.py", inode=27402662, flags=10400, id=7601255): is_file, is_inode_meta_mod
+2026-01-28 20:25:20,711 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/routes/auth_routes.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:25:20,742 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/routes/auth_routes.py", inode=27402662, flags=11400, id=7601258): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:25:20,759 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/routes/auth_routes.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:25:22,021 - app - INFO - Application initialized successfully (refactored version)
+2026-01-28 20:25:22,032 - werkzeug - WARNING -  * Debugger is active!
+2026-01-28 20:26:23,708 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html", inode=27402683, flags=10400, id=7603097): is_file, is_inode_meta_mod
+2026-01-28 20:26:23,722 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:26:23,729 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html", inode=27402683, flags=11400, id=7603100): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:26:23,733 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:27:08,053 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html", inode=27402683, flags=10400, id=7612069): is_file, is_inode_meta_mod
+2026-01-28 20:27:08,055 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:27:08,066 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html", inode=27402683, flags=11400, id=7612072): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:27:08,066 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:27:46,454 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html", inode=27402683, flags=10400, id=7616363): is_file, is_inode_meta_mod
+2026-01-28 20:27:46,460 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:27:46,471 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html", inode=27402683, flags=11400, id=7616366): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:27:46,471 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:28:28,104 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html", inode=27402683, flags=10400, id=7625569): is_file, is_inode_meta_mod
+2026-01-28 20:28:28,105 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:28:28,116 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html", inode=27402683, flags=11400, id=7625572): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:28:28,117 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:34:07,991 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:34:09,607 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:34:09,608 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:34:18,695 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:34:18,696 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:34:18,696 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:34:29,873 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:34:29,876 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:34:29,877 - routes.auth_routes - ERROR - Login error: MONGODB_URI environment variable is required
+2026-01-28 20:34:32,500 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:34:33,493 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:34:33,493 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:34:33,493 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:34:42,792 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:34:42,795 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:34:42,799 - routes.auth_routes - ERROR - Login error: MONGODB_URI environment variable is required
+2026-01-28 20:34:59,827 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:35:01,408 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:35:01,409 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:35:01,409 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:35:07,800 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:35:07,800 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:35:07,801 - routes.auth_routes - ERROR - Login error: MONGODB_URI environment variable is required
+2026-01-28 20:35:10,813 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:36:02,167 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:36:02,168 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:36:02,168 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:37:24,776 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:37:24,777 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:37:24,778 - routes.auth_routes - ERROR - Login error: MONGODB_URI environment variable is required
+2026-01-28 20:37:27,688 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:37:28,970 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:37:28,970 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:37:28,970 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:37:36,871 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:37:36,871 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:37:36,871 - routes.auth_routes - ERROR - Login error: MONGODB_URI environment variable is required
+2026-01-28 20:39:13,433 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.env", inode=27421728, flags=18100, id=7649439): is_created, is_file, is_xattr_mod
+2026-01-28 20:39:13,434 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.env', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 20:39:13,435 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 20:39:13,435 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.env', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:39:17,161 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.env", inode=27421728, flags=18500, id=7649649): is_created, is_file, is_inode_meta_mod, is_xattr_mod
+2026-01-28 20:39:17,172 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.env', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:39:17,183 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.env", inode=27421728, flags=19500, id=7649652): is_created, is_file, is_inode_meta_mod, is_modified, is_xattr_mod
+2026-01-28 20:39:17,183 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.env', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:39:23,111 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:39:23,112 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:39:23,112 - routes.auth_routes - ERROR - Login error: MONGODB_URI environment variable is required
+2026-01-28 20:39:24,974 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:39:26,373 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:39:26,373 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:39:26,374 - routes.auth_routes - WARNING - Could not fetch members for login screen: MONGODB_URI environment variable is required
+2026-01-28 20:39:31,392 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:39:31,393 - root - ERROR - Failed to get database connection: MONGODB_URI environment variable is required
+2026-01-28 20:39:31,393 - routes.auth_routes - ERROR - Login error: MONGODB_URI environment variable is required
+2026-01-28 20:39:52,747 - app - INFO - Application initialized successfully (refactored version)
+2026-01-28 20:39:53,476 - app - INFO - Application initialized successfully (refactored version)
+2026-01-28 20:39:53,486 - werkzeug - WARNING -  * Debugger is active!
+2026-01-28 20:39:55,228 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:39:55,268 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:39:57,591 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:40:08,054 - root - ERROR - Database connection failed: ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000), Timeout: 5.0s, Topology Description: <TopologyDescription id: 697a2dd27f0341b9531e56d8, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>]>
+2026-01-28 20:40:08,054 - root - ERROR - Failed to get database connection: ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000), Timeout: 5.0s, Topology Description: <TopologyDescription id: 697a2dd27f0341b9531e56d8, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>]>
+2026-01-28 20:40:08,054 - routes.auth_routes - WARNING - Could not fetch members for login screen: ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000), Timeout: 5.0s, Topology Description: <TopologyDescription id: 697a2dd27f0341b9531e56d8, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>]>
+2026-01-28 20:40:15,813 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:40:21,090 - root - ERROR - Database connection failed: ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000), Timeout: 5.0s, Topology Description: <TopologyDescription id: 697a2ddf7f0341b9531e56d9, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>]>
+2026-01-28 20:40:21,091 - root - ERROR - Failed to get database connection: ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000), Timeout: 5.0s, Topology Description: <TopologyDescription id: 697a2ddf7f0341b9531e56d9, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>]>
+2026-01-28 20:40:21,091 - routes.auth_routes - ERROR - Login error: ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000), Timeout: 5.0s, Topology Description: <TopologyDescription id: 697a2ddf7f0341b9531e56d9, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>]>
+2026-01-28 20:41:46,768 - werkzeug - ERROR - 127.0.0.1 - - [28/Jan/2026 20:41:46] code 400, message Bad request version ('\\\x99>\x9e\x89\x0f\x00*ZZ\x13\x01\x13\x02\x13\x03,+0/')
+2026-01-28 20:41:46,828 - werkzeug - ERROR - 127.0.0.1 - - [28/Jan/2026 20:41:46] code 400, message Bad request version ('\x8aK!,q\x8a\x07\x04\x97\x08f\x00,JJ\x13\x01\x13\x02\x13\x03,+0/')
+2026-01-28 20:41:46,885 - werkzeug - ERROR - 127.0.0.1 - - [28/Jan/2026 20:41:46] code 400, message Bad request version ('mk\x8a\x97\x06\x9b|7Dj8\x00\x00\x14')
+2026-01-28 20:46:13,894 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:46:15,391 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 20:46:21,988 - root - ERROR - Database connection failed: ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000), Timeout: 5.0s, Topology Description: <TopologyDescription id: 697a2f487f0341b9531e56da, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>]>
+2026-01-28 20:46:21,988 - root - ERROR - Failed to get database connection: ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000), Timeout: 5.0s, Topology Description: <TopologyDescription id: 697a2f487f0341b9531e56da, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>]>
+2026-01-28 20:46:21,988 - routes.auth_routes - WARNING - Could not fetch members for login screen: ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000),ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000), Timeout: 5.0s, Topology Description: <TopologyDescription id: 697a2f487f0341b9531e56da, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-00.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-01.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>, <ServerDescription ('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-xngyvrs-shard-00-02.bbmwvcn.mongodb.net:27017: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')>]>
+2026-01-28 20:54:53,118 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/database.py", inode=27402641, flags=10400, id=7689526): is_file, is_inode_meta_mod
+2026-01-28 20:54:53,119 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/database.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:54:53,130 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/database.py", inode=27402641, flags=11400, id=7689529): is_file, is_inode_meta_mod, is_modified
+2026-01-28 20:54:53,130 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/database.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 20:54:54,268 - app - INFO - Application initialized successfully (refactored version)
+2026-01-28 20:54:54,277 - werkzeug - WARNING -  * Debugger is active!
+2026-01-28 21:00:26,509 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:00:26,614 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc.4435995440", inode=27425396, flags=19900, id=7720044): is_coalesced, is_created, is_file, is_modified, is_renamed, is_xattr_mod
+2026-01-28 21:00:26,615 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc", inode=27425396, flags=10800, id=7720045): is_file, is_renamed
+2026-01-28 21:00:26,615 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc", inode=27404066, flags=10800, id=7720046): is_file, is_renamed
+2026-01-28 21:00:26,615 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc.4435995440', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 21:00:26,617 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 21:00:26,620 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc.4435995440', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:00:26,620 - fsevents - DEBUG - Destination event for rename is NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc", inode=27425396, flags=10800, id=7720045)
+2026-01-28 21:00:26,621 - fsevents - DEBUG - queue_event FileMovedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc.4435995440', dest_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc', event_type='moved', is_directory=False, is_synthetic=False)
+2026-01-28 21:00:26,622 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 21:00:26,623 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 21:00:26,623 - fsevents - DEBUG - queue_event FileDeletedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__/database.cpython-312.pyc', dest_path='', event_type='deleted', is_directory=False, is_synthetic=False)
+2026-01-28 21:00:26,626 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/__pycache__', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 21:00:27,834 - root - INFO - Using certifi CA bundle: /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/certifi/cacert.pem
+2026-01-28 21:00:35,080 - routes.auth_routes - INFO - User logged in: Admin (admin001)
+2026-01-28 21:00:35,106 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #1
+2026-01-28 21:00:35,232 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-28 21:00:35,404 - root - INFO - [DATABASE] Paginated aggregation returned 3 tickets
+2026-01-28 21:00:35,404 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 21:00:35,404 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 21:00:35,404 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 21:00:35,858 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-28 21:00:35,858 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 3 total tickets
+2026-01-28 21:00:35,970 - root - INFO - [DATABASE] Total tickets count: 3
+2026-01-28 21:05:28,958 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27425999, flags=18100, id=7732568): is_created, is_file, is_xattr_mod
+2026-01-28 21:05:28,966 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 21:05:28,983 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 21:05:28,985 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:05:28,989 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27425999, flags=19100, id=7732571): is_created, is_file, is_modified, is_xattr_mod
+2026-01-28 21:05:28,991 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:05:44,763 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/login_bg.png", inode=27418616, flags=10800, id=7733056): is_file, is_renamed
+2026-01-28 21:05:44,763 - fsevents - DEBUG - queue_event FileDeletedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/login_bg.png', dest_path='', event_type='deleted', is_directory=False, is_synthetic=False)
+2026-01-28 21:05:44,764 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 21:05:52,669 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png", inode=27425999, flags=10800, id=7733275): is_file, is_renamed
+2026-01-28 21:05:52,669 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/login_bg.png", inode=27425999, flags=10800, id=7733276): is_file, is_renamed
+2026-01-28 21:05:52,670 - fsevents - DEBUG - Destination event for rename is NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/static/css/login_bg.png", inode=27425999, flags=10800, id=7733276)
+2026-01-28 21:05:52,670 - fsevents - DEBUG - queue_event FileMovedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/image.png', dest_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css/login_bg.png', event_type='moved', is_directory=False, is_synthetic=False)
+2026-01-28 21:05:52,670 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 21:05:52,671 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/static/css', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 21:05:56,190 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #2
+2026-01-28 21:05:56,192 - routes.auth_routes - INFO - User logged out: Admin (admin001)
+2026-01-28 21:05:56,208 - middleware.session_manager - INFO - Attempting session restoration. Session keys: ['_flashes']
+2026-01-28 21:06:02,415 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:06:04,196 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:09:25,021 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html", inode=27402683, flags=11400, id=7739596): is_file, is_inode_meta_mod, is_modified
+2026-01-28 21:09:25,109 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:09:55,916 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:10:10,334 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:10:11,066 - routes.auth_routes - INFO - User logged in: Admin (admin001)
+2026-01-28 21:10:11,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #1
+2026-01-28 21:10:11,220 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-28 21:10:11,346 - root - INFO - [DATABASE] Paginated aggregation returned 4 tickets
+2026-01-28 21:10:11,346 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 21:10:11,346 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 21:10:11,346 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 21:10:11,823 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-28 21:10:11,823 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 4 total tickets
+2026-01-28 21:10:11,942 - root - INFO - [DATABASE] Total tickets count: 4
+2026-01-28 21:10:15,902 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #2
+2026-01-28 21:10:15,902 - routes.auth_routes - INFO - User logged out: Admin (admin001)
+2026-01-28 21:10:15,922 - middleware.session_manager - INFO - Attempting session restoration. Session keys: ['_flashes']
+2026-01-28 21:10:40,094 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:10:40,811 - routes.auth_routes - INFO - User logged in: Admin (admin001)
+2026-01-28 21:10:40,828 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #1
+2026-01-28 21:10:40,978 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-28 21:10:41,108 - root - INFO - [DATABASE] Paginated aggregation returned 4 tickets
+2026-01-28 21:10:41,109 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 21:10:41,109 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 21:10:41,109 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 21:10:41,574 - root - INFO - [DATABASE] Added technician information: 1 tickets now have technicians
+2026-01-28 21:10:41,574 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 4 total tickets
+2026-01-28 21:10:41,691 - root - INFO - [DATABASE] Total tickets count: 4
+2026-01-28 21:15:32,837 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/routes/auth_routes.py", inode=27402662, flags=10400, id=7748799): is_file, is_inode_meta_mod
+2026-01-28 21:15:32,840 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/routes/auth_routes.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:15:32,857 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/routes/auth_routes.py", inode=27402662, flags=11400, id=7748802): is_file, is_inode_meta_mod, is_modified
+2026-01-28 21:15:32,858 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/routes/auth_routes.py', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:15:35,173 - app - INFO - Application initialized successfully (refactored version)
+2026-01-28 21:15:35,192 - werkzeug - WARNING -  * Debugger is active!
+2026-01-28 21:17:11,033 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #2
+2026-01-28 21:17:11,034 - routes.auth_routes - INFO - User logged out: Admin (admin001)
+2026-01-28 21:17:11,053 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:17:16,748 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:17:17,598 - root - INFO - Using certifi CA bundle: /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/certifi/cacert.pem
+2026-01-28 21:17:32,372 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:17:34,170 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:17:37,028 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:19:15,479 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=10400, id=7756649): is_file, is_inode_meta_mod
+2026-01-28 21:19:15,485 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:19:15,496 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=11400, id=7756652): is_file, is_inode_meta_mod, is_modified
+2026-01-28 21:19:15,496 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:19:51,714 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:20:03,626 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:20:06,028 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:20:07,120 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:20:09,394 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:20:10,268 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:20:14,263 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:22:38,994 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=10400, id=7763541): is_file, is_inode_meta_mod
+2026-01-28 21:22:38,996 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:22:39,006 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=11400, id=7763550): is_file, is_inode_meta_mod, is_modified
+2026-01-28 21:22:39,007 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:23:07,610 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:23:21,048 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:23:23,611 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:24:44,198 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27402685, flags=10200, id=7767606): is_file, is_removed
+2026-01-28 21:24:44,198 - fsevents - DEBUG - queue_event FileDeletedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='deleted', is_directory=False, is_synthetic=False)
+2026-01-28 21:24:44,198 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 21:24:50,951 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:24:50,953 - middleware.error_handlers - ERROR - Unhandled exception: portal.html
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/appleenterprises/Desktop/autoassist_portal/routes/main_routes.py", line 588, in portal
+    return render_template('portal.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/templating.py", line 150, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/jinja2/environment.py", line 1084, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/jinja2/environment.py", line 1013, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/jinja2/environment.py", line 972, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/templating.py", line 64, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/templating.py", line 98, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: portal.html
+2026-01-28 21:25:46,868 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27427911, flags=18100, id=7769093): is_created, is_file, is_xattr_mod
+2026-01-28 21:25:46,871 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 21:25:46,871 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 21:25:46,872 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:25:49,612 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27427911, flags=18500, id=7769227): is_created, is_file, is_inode_meta_mod, is_xattr_mod
+2026-01-28 21:25:49,623 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:25:49,634 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html", inode=27427911, flags=19500, id=7769230): is_created, is_file, is_inode_meta_mod, is_modified, is_xattr_mod
+2026-01-28 21:25:49,634 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/portal.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:25:51,180 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:28:15,484 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:28:19,932 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:28:45,801 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:28:47,132 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:29:05,821 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:30:24,777 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:30:29,394 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:30:39,847 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:30:42,764 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:30:45,638 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:30:50,035 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:30:55,621 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:31:05,860 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:31:14,246 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:31:17,067 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:31:18,495 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:31:20,452 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:40:41,057 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html", inode=27402683, flags=10400, id=7797797): is_file, is_inode_meta_mod
+2026-01-28 21:40:41,058 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:40:41,066 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html", inode=27402683, flags=11400, id=7797800): is_file, is_inode_meta_mod, is_modified
+2026-01-28 21:40:41,066 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/templates/login.html', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 21:41:48,057 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 21:41:49,747 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:30:27,908 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:30:28,658 - routes.auth_routes - INFO - User logged in: Admin (admin001)
+2026-01-28 22:30:28,689 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #1
+2026-01-28 22:30:28,890 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-28 22:30:29,022 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-28 22:30:29,022 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 22:30:29,022 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 22:30:29,023 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 22:30:29,268 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-28 22:30:29,268 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-28 22:30:29,392 - root - INFO - [DATABASE] Total tickets count: 2
+2026-01-28 22:40:28,549 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #2
+2026-01-28 22:40:28,551 - routes.auth_routes - INFO - User logged out: Admin (admin001)
+2026-01-28 22:40:28,567 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:44:05,453 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:44:13,740 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:44:14,558 - routes.auth_routes - INFO - User logged in: Admin (admin001)
+2026-01-28 22:44:14,585 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #1
+2026-01-28 22:44:14,709 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-28 22:44:14,836 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-28 22:44:14,836 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 22:44:14,836 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 22:44:14,836 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 22:44:15,103 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-28 22:44:15,103 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-28 22:44:15,237 - root - INFO - [DATABASE] Total tickets count: 2
+2026-01-28 22:44:25,956 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #2
+2026-01-28 22:44:25,957 - routes.auth_routes - INFO - User logged out: Admin (admin001)
+2026-01-28 22:44:25,969 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:44:32,615 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:45:09,518 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:45:14,202 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:45:25,021 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:45:43,550 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:45:43,567 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:45:48,472 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:45:53,405 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-28 22:45:54,218 - routes.auth_routes - INFO - User logged in: Admin (admin001)
+2026-01-28 22:45:54,230 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #1
+2026-01-28 22:45:54,361 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-28 22:45:54,495 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-28 22:45:54,495 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 22:45:54,495 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 22:45:54,495 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 22:45:54,914 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-28 22:45:54,914 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-28 22:45:55,045 - root - INFO - [DATABASE] Total tickets count: 2
+2026-01-28 22:46:08,099 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #2
+2026-01-28 22:46:08,224 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-28 22:46:08,369 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-28 22:46:08,370 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 22:46:08,370 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 22:46:08,370 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 22:46:08,858 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-28 22:46:08,859 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-28 22:46:16,615 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #3
+2026-01-28 22:46:16,638 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #4
+2026-01-28 22:46:18,340 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #5
+2026-01-28 22:46:18,359 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #6
+2026-01-28 22:46:18,870 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-28 22:46:19,030 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-28 22:46:19,031 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 22:46:19,031 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 22:46:19,031 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 22:46:19,329 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-28 22:46:19,329 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-28 22:46:22,952 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #7
+2026-01-28 22:46:23,780 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-28 22:46:23,968 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-28 22:46:23,968 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 22:46:23,968 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 22:46:23,968 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 22:46:24,223 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-28 22:46:24,223 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-28 22:46:40,678 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #8
+2026-01-28 22:46:40,693 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #9
+2026-01-28 22:46:42,782 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #10
+2026-01-28 22:46:42,800 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #11
+2026-01-28 22:46:42,985 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-28 22:46:43,251 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-28 22:46:43,251 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 22:46:43,252 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 22:46:43,252 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 22:46:43,670 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-28 22:46:43,670 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-28 22:46:47,027 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #12
+2026-01-28 22:46:47,049 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #13
+2026-01-28 22:46:48,816 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #14
+2026-01-28 22:46:48,839 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #15
+2026-01-28 22:46:48,960 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-28 22:46:49,091 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-28 22:46:49,092 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 22:46:49,092 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 22:46:49,092 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 22:46:49,360 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-28 22:46:49,360 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-28 22:46:51,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #16
+2026-01-28 22:46:51,783 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #17
+2026-01-28 22:46:54,933 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #18
+2026-01-28 22:46:54,947 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #19
+2026-01-28 22:46:55,635 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-28 22:46:55,820 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-28 22:46:55,821 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 22:46:55,821 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 22:46:55,821 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 22:46:56,195 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-28 22:46:56,196 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-28 22:47:02,259 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #20
+2026-01-28 22:47:02,284 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #21
+2026-01-28 22:49:00,314 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #22
+2026-01-28 22:49:00,329 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #23
+2026-01-28 22:49:00,459 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-28 22:49:00,586 - root - INFO - [DATABASE] Paginated aggregation returned 2 tickets
+2026-01-28 22:49:00,586 - root - INFO - [DATABASE] Field validation complete: 0 tickets have unread replies
+2026-01-28 22:49:00,586 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-28 22:49:00,586 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-28 22:49:00,829 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-28 22:49:00,829 - root - INFO - [DATABASE] FINAL VALIDATION: 0 tickets have unread replies out of 2 total tickets
+2026-01-28 22:49:04,826 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #24
+2026-01-28 22:49:04,847 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #25
+2026-01-28 22:53:58,540 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/logs/refs/heads/usman_workspace_v1", inode=27435667, flags=19100, id=7924802): is_created, is_file, is_modified, is_xattr_mod
+2026-01-28 22:53:58,543 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/refs/heads/usman_workspace_v1.lock", inode=27435666, flags=19900, id=7924805): is_coalesced, is_created, is_file, is_modified, is_renamed, is_xattr_mod
+2026-01-28 22:53:58,543 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/refs/heads/usman_workspace_v1", inode=27435666, flags=10800, id=7924806): is_file, is_renamed
+2026-01-28 22:53:58,543 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/logs/HEAD", inode=27402616, flags=11000, id=7924818): is_file, is_modified
+2026-01-28 22:53:58,543 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/HEAD.lock", inode=27435668, flags=19900, id=7924821): is_coalesced, is_created, is_file, is_modified, is_renamed, is_xattr_mod
+2026-01-28 22:53:58,543 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/HEAD", inode=27435668, flags=10800, id=7924822): is_file, is_renamed
+2026-01-28 22:53:58,543 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/HEAD", inode=27402613, flags=10800, id=7924823): is_file, is_renamed
+2026-01-28 22:53:58,544 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/AUTO_MERGE.lock", inode=27435669, flags=18300, id=7924838): is_coalesced, is_created, is_file, is_removed, is_xattr_mod
+2026-01-28 22:53:58,544 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/packed-refs.lock", inode=27435670, flags=18300, id=7924841): is_coalesced, is_created, is_file, is_removed, is_xattr_mod
+2026-01-28 22:53:58,544 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/AUTO_MERGE.lock", inode=27435671, flags=18300, id=7924856): is_coalesced, is_created, is_file, is_removed, is_xattr_mod
+2026-01-28 22:53:58,544 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/packed-refs.lock", inode=27435672, flags=18300, id=7924859): is_coalesced, is_created, is_file, is_removed, is_xattr_mod
+2026-01-28 22:53:58,546 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/logs/refs/heads/usman_workspace_v1', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,551 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/logs/refs/heads', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,555 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/logs/refs/heads/usman_workspace_v1', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,556 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/refs/heads/usman_workspace_v1.lock', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,556 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/refs/heads', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,556 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/refs/heads/usman_workspace_v1.lock', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,558 - fsevents - DEBUG - Destination event for rename is NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/refs/heads/usman_workspace_v1", inode=27435666, flags=10800, id=7924806)
+2026-01-28 22:53:58,573 - fsevents - DEBUG - queue_event FileMovedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/refs/heads/usman_workspace_v1.lock', dest_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/refs/heads/usman_workspace_v1', event_type='moved', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,574 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/refs/heads', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,574 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/refs/heads', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,578 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/logs/HEAD', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,579 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/HEAD.lock', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,579 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,579 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/HEAD.lock', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,580 - fsevents - DEBUG - Destination event for rename is NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/HEAD", inode=27435668, flags=10800, id=7924822)
+2026-01-28 22:53:58,580 - fsevents - DEBUG - queue_event FileMovedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/HEAD.lock', dest_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/HEAD', event_type='moved', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,580 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,580 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,581 - fsevents - DEBUG - queue_event FileDeletedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/HEAD', dest_path='', event_type='deleted', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,581 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,582 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/AUTO_MERGE.lock', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,582 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,582 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/AUTO_MERGE.lock', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,583 - fsevents - DEBUG - queue_event FileDeletedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/AUTO_MERGE.lock', dest_path='', event_type='deleted', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,583 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,584 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/packed-refs.lock', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,584 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,585 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/packed-refs.lock', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,585 - fsevents - DEBUG - queue_event FileDeletedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/packed-refs.lock', dest_path='', event_type='deleted', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,585 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,585 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/AUTO_MERGE.lock', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,586 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,586 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/AUTO_MERGE.lock', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,586 - fsevents - DEBUG - queue_event FileDeletedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/AUTO_MERGE.lock', dest_path='', event_type='deleted', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,587 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,587 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/packed-refs.lock', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,587 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,587 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/packed-refs.lock', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,588 - fsevents - DEBUG - queue_event FileDeletedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/packed-refs.lock', dest_path='', event_type='deleted', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,588 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,860 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/config.lock", inode=27435677, flags=1d900, id=7924933): is_coalesced, is_created, is_file, is_modified, is_owner_change, is_renamed, is_xattr_mod
+2026-01-28 22:53:58,860 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/config", inode=27435677, flags=10800, id=7924934): is_file, is_renamed
+2026-01-28 22:53:58,860 - fsevents - DEBUG - NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/config", inode=27402709, flags=10800, id=7924935): is_file, is_renamed
+2026-01-28 22:53:58,860 - fsevents - DEBUG - queue_event FileCreatedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/config.lock', dest_path='', event_type='created', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,860 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,861 - fsevents - DEBUG - queue_event FileModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/config.lock', dest_path='', event_type='modified', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,861 - fsevents - DEBUG - Destination event for rename is NativeEvent(path="/Users/appleenterprises/Desktop/autoassist_portal/.git/config", inode=27435677, flags=10800, id=7924934)
+2026-01-28 22:53:58,862 - fsevents - DEBUG - queue_event FileMovedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/config.lock', dest_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/config', event_type='moved', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,862 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,862 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)
+2026-01-28 22:53:58,863 - fsevents - DEBUG - queue_event FileDeletedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git/config', dest_path='', event_type='deleted', is_directory=False, is_synthetic=False)
+2026-01-28 22:53:58,863 - fsevents - DEBUG - queue_event DirModifiedEvent(src_path='/Users/appleenterprises/Desktop/autoassist_portal/.git', dest_path='', event_type='modified', is_directory=True, is_synthetic=False)

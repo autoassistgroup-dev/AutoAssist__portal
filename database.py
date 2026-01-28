@@ -58,22 +58,45 @@ class MongoDB:
         
         # Serverless-optimized connection settings
         try:
+            # Try to use certifi for SSL certificates (recommended)
+            import ssl
+            try:
+                import certifi
+                tls_ca_file = certifi.where()
+                logging.info(f"Using certifi CA bundle: {tls_ca_file}")
+            except ImportError:
+                tls_ca_file = None
+                logging.warning("certifi not installed, SSL certificate verification may fail")
+            
+            connection_options = {
+                # Serverless optimizations
+                'maxPoolSize': 10,  # Smaller pool for serverless
+                'minPoolSize': 1,   # Minimal idle connections
+                'maxIdleTimeMS': 30000,  # 30 seconds idle time
+                'serverSelectionTimeoutMS': 5000,  # Faster timeout
+                'connectTimeoutMS': 10000,  # Faster connection timeout
+                'socketTimeoutMS': 20000,   # Shorter socket timeout
+                'heartbeatFrequencyMS': 60000,  # Less frequent heartbeats
+                'retryWrites': True,
+                'retryReads': True,
+                'w': 'majority',
+                'readPreference': 'primaryPreferred',
+                # Critical for serverless: don't maintain connections
+                'maxConnecting': 2
+            }
+            
+            # Add SSL certificate handling
+            if tls_ca_file:
+                connection_options['tlsCAFile'] = tls_ca_file
+            else:
+                # For development on macOS without certifi - disable cert verification
+                # WARNING: Not recommended for production!
+                connection_options['tlsAllowInvalidCertificates'] = True
+                logging.warning("SSL certificate verification disabled - install certifi for production use")
+            
             self.client = MongoClient(
                 self.connection_string,
-                # Serverless optimizations
-                maxPoolSize=10,  # Smaller pool for serverless
-                minPoolSize=1,   # Minimal idle connections
-                maxIdleTimeMS=30000,  # 30 seconds idle time
-                serverSelectionTimeoutMS=5000,  # Faster timeout
-                connectTimeoutMS=10000,  # Faster connection timeout
-                socketTimeoutMS=20000,   # Shorter socket timeout
-                heartbeatFrequencyMS=60000,  # Less frequent heartbeats
-                retryWrites=True,
-                retryReads=True,
-                w='majority',
-                readPreference='primaryPreferred',
-                # Critical for serverless: don't maintain connections
-                maxConnecting=2
+                **connection_options
             )
             
             # Test the connection immediately
