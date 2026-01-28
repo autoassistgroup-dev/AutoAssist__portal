@@ -92,6 +92,18 @@ def display_response():
                 'updated_at': datetime.now()
             })
             
+            # Check if any document was actually modified
+            updated_count = result.matched_count if hasattr(result, 'matched_count') else 0
+            
+            if updated_count == 0:
+                logger.warning(f"No ticket found to update with ID {ticket_id}")
+                return jsonify({
+                    'success': False,
+                    'message': f"Ticket {ticket_id} not found. Ensure 'from' (email) is sent for fallback lookup.",
+                    'ticket_id': ticket_id,
+                    'customer_reply_saved': False
+                }), 404
+            
             logger.info(f"AI draft saved for ticket {ticket_id}: {len(ai_response)} chars")
             
             return jsonify({
@@ -99,7 +111,7 @@ def display_response():
                 'message': 'AI response saved to ticket',
                 'ticket_id': ticket_id,
                 'draft_length': len(ai_response),
-                'customer_reply_saved': bool(customer_message and customer_email),
+                'customer_reply_saved': bool(customer_message and customer_email and ticket),
                 'timestamp': datetime.now().isoformat()
             })
         
