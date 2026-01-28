@@ -247,7 +247,8 @@ def process_n8n_email_data(raw_data):
             'email': email,
             'name': name,
             'subject': subject,
-            'message': body,
+            'body': body,  # For template display
+            'message': body,  # Legacy field
             'status': 'Open',
             'priority': priority,
             'classification': classification,
