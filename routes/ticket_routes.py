@@ -406,24 +406,27 @@ def send_ticket_reply(ticket_id):
         
         # Handle multipart form data (with attachments) or JSON
         if request.content_type and 'multipart/form-data' in request.content_type:
-            message = request.form.get('message', '')
+            # Frontend sends 'response_text', also accept 'message'
+            message = request.form.get('response_text', request.form.get('message', ''))
             send_email = request.form.get('sendEmail', 'false').lower() == 'true'
-            # Handle file attachments
+            
+            # Handle file attachments - frontend sends as attachment_0, attachment_1, etc.
             attachments = []
-            if 'attachments' in request.files:
-                files = request.files.getlist('attachments')
-                for f in files:
-                    if f.filename:
-                        import base64
-                        file_data = base64.b64encode(f.read()).decode('utf-8')
-                        attachments.append({
-                            'filename': f.filename,
-                            'content_type': f.content_type,
-                            'data': file_data
-                        })
+            for key in request.files:
+                if key.startswith('attachment_') or key == 'attachments':
+                    files = request.files.getlist(key) if key == 'attachments' else [request.files[key]]
+                    for f in files:
+                        if f.filename:
+                            import base64
+                            file_data = base64.b64encode(f.read()).decode('utf-8')
+                            attachments.append({
+                                'filename': f.filename,
+                                'content_type': f.content_type,
+                                'data': file_data
+                            })
         else:
             data = request.get_json() or {}
-            message = data.get('message', '')
+            message = data.get('message', data.get('response_text', ''))
             send_email = data.get('sendEmail', False)
             attachments = data.get('attachments', [])
         
