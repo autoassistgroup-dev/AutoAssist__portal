@@ -5089,7 +5089,7 @@
                                             <textarea id="response" name="response" rows="3"
                                                 class="w-full px-4 py-3 outline-none border-0 resize-none auto-expand-textarea"
                                                 placeholder="Type your response here... (Drag & drop files or documents here!)"
-                                                style="min-height: 60px; max-height: 300px; overflow-y: auto;">{{ ticket.draft_body }}</textarea>
+                                                style="min-height: 60px; max-height: 300px; overflow-y: auto;">{{ ticket.draft or ticket.n8n_draft or '' }}</textarea>
 
                                             <!-- Hidden file input -->
                                             <input id="response_attachments" name="response_attachments" type="file"
