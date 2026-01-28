@@ -342,6 +342,50 @@ def close_ticket(ticket_id):
         return jsonify({'success': False, 'error': str(e)}), 500
 
 
+@ticket_bp.route('/<ticket_id>', methods=['DELETE'])
+def delete_ticket(ticket_id):
+    """
+    Delete a ticket permanently.
+    Requires admin or authorized role.
+    """
+    try:
+        if not is_authenticated():
+            return jsonify({'success': False, 'error': 'Authentication required'}), 401
+        
+        # Check if user is admin
+        from middleware.session_manager import is_admin
+        if not is_admin():
+            return jsonify({'success': False, 'error': 'Admin access required'}), 403
+        
+        if not validate_ticket_id(ticket_id):
+            return jsonify({'success': False, 'error': 'Invalid ticket ID'}), 400
+        
+        from database import get_db
+        db = get_db()
+        
+        # Check if ticket exists
+        ticket = db.get_ticket_by_id(ticket_id)
+        if not ticket:
+            return jsonify({'success': False, 'error': 'Ticket not found'}), 404
+        
+        # Delete the ticket
+        result = db.tickets.delete_one({'ticket_id': ticket_id})
+        
+        if result.deleted_count > 0:
+            logger.info(f"Ticket {ticket_id} deleted by {session.get('member_name')}")
+            return jsonify({
+                'success': True,
+                'message': 'Ticket deleted successfully',
+                'ticket_id': ticket_id
+            })
+        else:
+            return jsonify({'success': False, 'error': 'Failed to delete ticket'}), 500
+        
+    except Exception as e:
+        logger.error(f"Error deleting ticket {ticket_id}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
 @ticket_bp.route('/search', methods=['GET'])
 def search_tickets():
     """
