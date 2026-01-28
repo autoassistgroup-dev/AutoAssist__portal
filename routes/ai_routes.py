@@ -110,6 +110,7 @@ def display_response():
                 'success': True,
                 'message': 'AI response saved to ticket',
                 'ticket_id': ticket_id,
+                'draft': ai_response,
                 'draft_length': len(ai_response),
                 'customer_reply_saved': bool(customer_message and customer_email and ticket),
                 'timestamp': datetime.now().isoformat()
