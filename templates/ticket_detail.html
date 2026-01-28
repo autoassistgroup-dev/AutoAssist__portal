@@ -24,44 +24,51 @@
         media="all">
     <link href="/static/css/animations.css" rel="stylesheet">
     <style>
-        /* ===== APPLE-INSPIRED DESIGN SYSTEM ===== */
+        /* ===== MODERN PINK GLASSMORPHISM THEME ===== */
         :root {
-            /* Apple Color Palette */
-            --apple-blue: #0071e3;
-            --apple-blue-hover: #0077ED;
-            --apple-gray-50: #fafafa;
-            --apple-gray-100: #f5f5f7;
-            --apple-gray-200: #e8e8ed;
-            --apple-gray-300: #d2d2d7;
-            --apple-gray-400: #afafaf;
-            --apple-gray-500: #86868b;
-            --apple-gray-600: #6e6e73;
-            --apple-gray-700: #1d1d1f;
-            --apple-white: #ffffff;
-
-            /* Priority Colors */
+            /* Pink Color Palette */
             --primary: #ff758f;
-            --urgent: #ef4444;
-            --fast: #f59e0b;
-            --medium: #ec4899;
-            --low: #10b981;
+            --secondary: #ff7eb3;
+            --primary-dark: #ff6b81;
+            --primary-light: #ffe0e9;
+            --urgent: #ff4757;
+            --fast: #ffa502;
+            --low: #2ed573;
+            --waiting: #ffcc00;
+            --medium: #ff6b81;
+            --glass-white: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-shadow: rgba(255, 117, 143, 0.1);
+            --glass-blur: 15px;
+            --bg-gradient-start: #ffe0e9;
+            --bg-gradient-middle: #fff0f6;
+            --bg-gradient-end: #e8f4f8;
 
             /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
-            --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.1);
+            --shadow-sm: 0 1px 2px rgba(255, 117, 143, 0.04);
+            --shadow-md: 0 4px 12px rgba(255, 117, 143, 0.08);
+            --shadow-lg: 0 12px 40px rgba(255, 117, 143, 0.12);
+            --shadow-card: 0 2px 8px rgba(255, 117, 143, 0.06), 0 0 1px rgba(255, 117, 143, 0.1);
 
             /* Transitions */
             --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         /* ===== GLOBAL STYLES ===== */
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-            background: linear-gradient(135deg, #ffe0e9 0%, #fff0f6 50%, #e8f4f8 100%) !important;
-            color: var(--apple-gray-700) !important;
+            font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-middle) 50%, var(--bg-gradient-end) 100%) !important;
+            color: #4b5563 !important;
+            line-height: 1.5;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
         /* ===== ANIMATED GRADIENT BACKGROUND ===== */
@@ -79,92 +86,176 @@
         .gradient-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(60px);
             opacity: 0.5;
-            animation: floatOrb 25s ease-in-out infinite;
+            animation: float 20s infinite ease-in-out;
+            mix-blend-mode: soft-light;
         }
 
         .orb-1 {
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            top: -15%;
-            left: -10%;
-            animation-delay: 0s;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 117, 143, 0.4), rgba(255, 126, 179, 0.2));
+            top: -100px;
+            left: -100px;
         }
 
         .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            bottom: -15%;
-            right: -10%;
-            animation-delay: -8s;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 107, 129, 0.3), rgba(255, 71, 87, 0.2));
+            top: 50%;
+            right: -50px;
+            animation-delay: -5s;
         }
 
         .orb-3 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            top: 40%;
-            right: 20%;
-            animation-delay: -16s;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(255, 126, 179, 0.3), rgba(255, 117, 143, 0.2));
+            top: 30%;
+            right: 25%;
+            animation-delay: -10s;
         }
 
         .orb-4 {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            bottom: 20%;
-            left: 15%;
-            animation-delay: -12s;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(255, 71, 87, 0.2), rgba(255, 107, 129, 0.2));
+            bottom: 15%;
+            left: 10%;
+            animation-delay: -15s;
         }
 
-        @keyframes floatOrb {
+        @keyframes float {
 
             0%,
             100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            25% {
-                transform: translate(40px, -40px) scale(1.05);
+                transform: translateY(0);
             }
 
             50% {
-                transform: translate(-30px, 30px) scale(0.95);
-            }
-
-            75% {
-                transform: translate(30px, 15px) scale(1.02);
+                transform: translateY(-20px);
             }
         }
 
         /* ===== GLASS COMPONENTS ===== */
-        /* Force glassmorphism on main containers */
+        .glass-panel,
+        .stats-card,
+        .ticket-card,
+        .main-container-glass,
+        .enhanced-search-container,
         .bg-white,
         .card,
         .dashboard-card,
-        .ticket-card,
         .sidebar-section,
         .detail-card,
-        .reply-card,
-        nav {
-            background: rgba(255, 255, 255, 0.65) !important;
-            backdrop-filter: saturate(180%) blur(20px) !important;
-            -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.5) !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+        .reply-card {
+            background: rgba(255, 255, 255, 0.25) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            border-radius: 1rem !important;
+            box-shadow: 0 8px 32px rgba(255, 117, 143, 0.1) !important;
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel:hover,
+        .stats-card:hover,
+        .ticket-card:hover,
+        .detail-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.35) !important;
+            box-shadow: 0 12px 40px rgba(255, 117, 143, 0.15) !important;
+            border-color: var(--primary) !important;
         }
 
         .right-sidebar {
-            background: rgba(255, 255, 255, 0.65) !important;
-            backdrop-filter: saturate(180%) blur(20px) !important;
+            background: rgba(255, 255, 255, 0.25) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
         }
 
+        /* ===== NAVBAR ===== */
         nav {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+            background: rgba(255, 255, 255, 0.15) !important;
+            backdrop-filter: blur(25px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
             z-index: 1000 !important;
+            box-shadow: 0 4px 30px rgba(255, 117, 143, 0.1) !important;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem !important;
+            border-radius: 0.75rem !important;
+            color: #4b5563 !important;
+            font-weight: 500 !important;
+            font-size: 0.875rem !important;
+            transition: all 0.3s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            background: rgba(255, 255, 255, 0.3) !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 117, 143, 0.2) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.2);
+            border-color: var(--primary) !important;
+        }
+
+        /* ===== GRADIENT TEXT & BUTTONS ===== */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 117, 143, 0.5);
+        }
+
+        /* ===== PRIORITY BADGES WITH GLASS EFFECT ===== */
+        .badge-urgent,
+        .priority-urgent {
+            background: rgba(255, 71, 87, 0.15) !important;
+            color: #ff4757 !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-fast,
+        .priority-fast {
+            background: rgba(255, 165, 2, 0.15) !important;
+            color: #ffa502 !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-medium,
+        .priority-medium {
+            background: rgba(255, 107, 129, 0.15) !important;
+            color: #ff6b81 !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-low,
+        .priority-low {
+            background: rgba(46, 213, 115, 0.15) !important;
+            color: #2ed573 !important;
+            backdrop-filter: blur(10px);
         }
 
         .responsive-container {
