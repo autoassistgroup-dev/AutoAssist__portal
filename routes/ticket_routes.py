@@ -386,6 +386,106 @@ def delete_ticket(ticket_id):
         return jsonify({'success': False, 'error': str(e)}), 500
 
 
+@ticket_bp.route('/<ticket_id>/reply', methods=['POST'])
+def send_ticket_reply(ticket_id):
+    """
+    Send a reply to a ticket.
+    Creates a reply record and optionally sends email to customer.
+    """
+    try:
+        if not is_authenticated():
+            return jsonify({'success': False, 'message': 'Authentication required'}), 401
+        
+        from database import get_db
+        db = get_db()
+        
+        # Get ticket
+        ticket = db.get_ticket_by_id(ticket_id)
+        if not ticket:
+            return jsonify({'success': False, 'message': 'Ticket not found'}), 404
+        
+        # Handle multipart form data (with attachments) or JSON
+        if request.content_type and 'multipart/form-data' in request.content_type:
+            message = request.form.get('message', '')
+            send_email = request.form.get('sendEmail', 'false').lower() == 'true'
+            # Handle file attachments
+            attachments = []
+            if 'attachments' in request.files:
+                files = request.files.getlist('attachments')
+                for f in files:
+                    if f.filename:
+                        import base64
+                        file_data = base64.b64encode(f.read()).decode('utf-8')
+                        attachments.append({
+                            'filename': f.filename,
+                            'content_type': f.content_type,
+                            'data': file_data
+                        })
+        else:
+            data = request.get_json() or {}
+            message = data.get('message', '')
+            send_email = data.get('sendEmail', False)
+            attachments = data.get('attachments', [])
+        
+        if not message:
+            return jsonify({'success': False, 'message': 'Message is required'}), 400
+        
+        # Get current member info
+        current_member = safe_member_lookup()
+        sender_name = current_member.get('name', 'Support Team') if current_member else 'Support Team'
+        
+        # Create reply record
+        reply_data = {
+            'ticket_id': ticket_id,
+            'message': message,
+            'sender_name': sender_name,
+            'sender_id': session.get('member_id'),
+            'sender_type': 'agent',
+            'attachments': attachments,
+            'created_at': datetime.now()
+        }
+        
+        reply_id = db.create_reply(reply_data)
+        
+        # Update ticket with last reply info
+        db.update_ticket(ticket_id, {
+            'last_reply_at': datetime.now(),
+            'last_reply_by': sender_name,
+            'updated_at': datetime.now()
+        })
+        
+        logger.info(f"Reply sent for ticket {ticket_id} by {sender_name}")
+        
+        # Optionally send email to customer
+        email_sent = False
+        if send_email and ticket.get('email'):
+            try:
+                from services.email_service import send_email as send_email_func
+                email_result = send_email_func(
+                    to_email=ticket.get('email'),
+                    subject=f"Re: {ticket.get('subject', 'Your Support Request')} [Ticket: {ticket_id}]",
+                    body=message,
+                    html_body=f"<p>{message.replace(chr(10), '<br>')}</p>",
+                    attachments=attachments if attachments else None
+                )
+                email_sent = email_result.get('success', False) if isinstance(email_result, dict) else email_result
+                logger.info(f"Email sent to {ticket.get('email')} for ticket {ticket_id}: {email_sent}")
+            except Exception as email_error:
+                logger.error(f"Failed to send email for ticket {ticket_id}: {email_error}")
+        
+        return jsonify({
+            'success': True,
+            'message': 'Reply sent successfully',
+            'reply_id': str(reply_id),
+            'ticket_id': ticket_id,
+            'email_sent': email_sent
+        })
+        
+    except Exception as e:
+        logger.error(f"Error sending reply for ticket {ticket_id}: {e}")
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
 @ticket_bp.route('/search', methods=['GET'])
 def search_tickets():
     """
