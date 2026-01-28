@@ -53,11 +53,5 @@ def register_blueprints(app):
     # Main page routes (index, dashboard, ticket detail, etc.)
     app.register_blueprint(main_bp)
     
-    # Debug routes (only in development)
-    if app.debug:
-        try:
-            from routes.debug_routes import debug_bp
-            app.register_blueprint(debug_bp, url_prefix='/debug')
-        except ImportError:
-            pass  # Debug routes not yet created
+
 
