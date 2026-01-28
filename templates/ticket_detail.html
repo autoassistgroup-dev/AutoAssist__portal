@@ -24,54 +24,267 @@
         media="all">
     <link href="/static/css/animations.css" rel="stylesheet">
     <style>
-        /* ===== MODERN PINK GLASSMORPHISM THEME ===== */
+        /* ===== PROFESSIONAL DARK THEME ===== */
         :root {
-            /* Pink Color Palette */
-            --primary: #ff758f;
-            --secondary: #ff7eb3;
-            --primary-dark: #ff6b81;
-            --primary-light: #ffe0e9;
-            --urgent: #ff4757;
-            --fast: #ffa502;
-            --low: #2ed573;
-            --waiting: #ffcc00;
-            --medium: #ff6b81;
-            --glass-white: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --glass-shadow: rgba(255, 117, 143, 0.1);
-            --glass-blur: 15px;
-            --bg-gradient-start: #ffe0e9;
-            --bg-gradient-middle: #fff0f6;
-            --bg-gradient-end: #e8f4f8;
+            /* Dark Color Palette */
+            --primary: #ec4899;
+            --secondary: #f472b6;
+            --primary-dark: #db2777;
+            --primary-light: rgba(236, 72, 153, 0.15);
+            --urgent: #ef4444;
+            --fast: #f59e0b;
+            --low: #6366f1;
+            --waiting: #f59e0b;
+            --medium: #ec4899;
+
+            /* Dark Theme Colors */
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.9);
+            --bg-card-hover: rgba(30, 30, 45, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: rgba(0, 0, 0, 0.4);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
 
             /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(255, 117, 143, 0.04);
-            --shadow-md: 0 4px 12px rgba(255, 117, 143, 0.08);
-            --shadow-lg: 0 12px 40px rgba(255, 117, 143, 0.12);
-            --shadow-card: 0 2px 8px rgba(255, 117, 143, 0.06), 0 0 1px rgba(255, 117, 143, 0.1);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.4);
+            --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.2);
 
             /* Transitions */
-            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: 0.1s ease;
+            --transition-smooth: 0.2s ease;
         }
 
         * {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: auto !important;
         }
 
         /* ===== GLOBAL STYLES ===== */
         body {
-            font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-middle) 50%, var(--bg-gradient-end) 100%) !important;
-            color: #4b5563 !important;
-            line-height: 1.5;
+            font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+            background: var(--bg-dark) !important;
+            color: var(--text-primary) !important;
+            line-height: 1.4;
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
+            font-size: 14px !important;
         }
 
-        /* ===== ANIMATED GRADIENT BACKGROUND ===== */
+        /* ===== COMPACT STYLING FIXES ===== */
+
+        /* Make all buttons compact */
+        button,
+        .btn,
+        [class*="btn-"],
+        a.px-4,
+        a.px-3,
+        a.px-2 {
+            padding: 6px 12px !important;
+            font-size: 12px !important;
+            border-radius: 6px !important;
+        }
+
+        /* Fix action buttons to be compact */
+        .close-ticket-btn,
+        .take-over-btn,
+        [class*="Close"],
+        [class*="Take Over"] {
+            padding: 6px 12px !important;
+            font-size: 12px !important;
+        }
+
+        /* Remove green color - use purple instead */
+        .bg-green-100,
+        .bg-green-500,
+        .bg-green-600 {
+            background: rgba(99, 102, 241, 0.15) !important;
+        }
+
+        .text-green-800,
+        .text-green-600,
+        .text-green-500 {
+            color: #818cf8 !important;
+        }
+
+        /* Fix white containers to dark */
+        .bg-white,
+        [class*="bg-white"] {
+            background: var(--bg-card) !important;
+            border: 1px solid var(--glass-border) !important;
+        }
+
+        /* Fix all card/container backgrounds */
+        .rounded-xl,
+        .rounded-lg,
+        .rounded-md,
+        .shadow-lg,
+        .shadow-md {
+            background: var(--bg-card) !important;
+            border: 1px solid var(--glass-border) !important;
+        }
+
+        /* Fix text colors for dark theme */
+        .text-gray-800,
+        .text-gray-900 {
+            color: var(--text-primary) !important;
+        }
+
+        .text-gray-600,
+        .text-gray-700 {
+            color: var(--text-secondary) !important;
+        }
+
+        .text-gray-400,
+        .text-gray-500 {
+            color: var(--text-muted) !important;
+        }
+
+        /* Fix navbar logout button */
+        nav a[href="/logout"],
+        .logout-btn {
+            background: rgba(239, 68, 68, 0.15) !important;
+            color: #f87171 !important;
+            padding: 6px 12px !important;
+            font-size: 12px !important;
+            border-radius: 6px !important;
+            border: 1px solid rgba(239, 68, 68, 0.3) !important;
+        }
+
+        nav a[href="/logout"]:hover {
+            background: rgba(239, 68, 68, 0.25) !important;
+        }
+
+        /* Compact badge styling */
+        .px-3.py-1,
+        [class*="badge"],
+        .rounded-full {
+            padding: 3px 8px !important;
+            font-size: 11px !important;
+        }
+
+        /* Hide the pink floating toggle button */
+        #sidebarToggleMobile,
+        .sidebar-toggle {
+            display: none !important;
+        }
+
+        /* Compact ticket header */
+        .ticket-header,
+        [class*="ticket-header"] {
+            padding: 16px !important;
+        }
+
+        /* Compact card padding */
+        .p-5,
+        .p-6,
+        .p-8 {
+            padding: 16px !important;
+        }
+
+        /* Fix Low badge to use purple not green */
+        .bg-green-100.text-green-800,
+        [class*="bg-green"][class*="text-green"] {
+            background: rgba(99, 102, 241, 0.15) !important;
+            color: #a5b4fc !important;
+        }
+
+        /* Smaller font sizes overall */
+        h1 {
+            font-size: 1.25rem !important;
+        }
+
+        h2 {
+            font-size: 1.1rem !important;
+        }
+
+        h3 {
+            font-size: 1rem !important;
+        }
+
+        h4,
+        h5,
+        h6 {
+            font-size: 0.9rem !important;
+        }
+
+        p,
+        span,
+        div,
+        label {
+            font-size: 13px;
+        }
+
+        /* ===== FIX REMAINING LIGHT CONTAINERS ===== */
+
+        /* Fix original message container */
+        .original-message,
+        [class*="original-message"],
+        .message-content,
+        [class*="message-content"],
+        .prose,
+        .prose-sm {
+            background: rgba(25, 25, 35, 0.9) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            color: var(--text-primary) !important;
+        }
+
+        /* Fix conversation message bubbles */
+        .customer-message,
+        .support-message,
+        [class*="customer-message"],
+        [class*="support-message"],
+        .message-bubble,
+        [class*="message"] {
+            background: rgba(30, 30, 45, 0.95) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            color: var(--text-primary) !important;
+        }
+
+        /* Fix reply box */
+        .reply-form,
+        [class*="reply-form"],
+        textarea,
+        input[type="text"],
+        input[type="email"],
+        .form-control {
+            background: rgba(20, 20, 30, 0.95) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: var(--text-primary) !important;
+        }
+
+        textarea::placeholder,
+        input::placeholder {
+            color: var(--text-muted) !important;
+        }
+
+        /* Fix all remaining white/gray backgrounds */
+        [class*="bg-gray-"],
+        [class*="bg-slate-"],
+        .bg-gray-50,
+        .bg-gray-100,
+        .bg-gray-200 {
+            background: rgba(25, 25, 35, 0.9) !important;
+        }
+
+        /* Fix glowing borders */
+        .ring-pink-500,
+        [class*="ring-"] {
+            box-shadow: none !important;
+        }
+
+        /* Fix any remaining border colors */
+        [class*="border-gray"],
+        [class*="border-slate"] {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        /* ===== BACKGROUND ===== */
         .background-layer {
             position: fixed;
             top: 0;
@@ -81,65 +294,18 @@
             z-index: -1;
             overflow: hidden;
             pointer-events: none;
+            background-image: url('/static/css/portal_bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
         }
 
+        /* Hide gradient orbs - using background image instead */
         .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-            animation: float 20s infinite ease-in-out;
-            mix-blend-mode: soft-light;
+            display: none;
         }
 
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 117, 143, 0.4), rgba(255, 126, 179, 0.2));
-            top: -100px;
-            left: -100px;
-        }
-
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 107, 129, 0.3), rgba(255, 71, 87, 0.2));
-            top: 50%;
-            right: -50px;
-            animation-delay: -5s;
-        }
-
-        .orb-3 {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(255, 126, 179, 0.3), rgba(255, 117, 143, 0.2));
-            top: 30%;
-            right: 25%;
-            animation-delay: -10s;
-        }
-
-        .orb-4 {
-            width: 280px;
-            height: 280px;
-            background: radial-gradient(circle, rgba(255, 71, 87, 0.2), rgba(255, 107, 129, 0.2));
-            bottom: 15%;
-            left: 10%;
-            animation-delay: -15s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        /* ===== GLASS COMPONENTS ===== */
+        /* ===== GLASS COMPONENTS - DARK THEME ===== */
         .glass-panel,
         .stats-card,
         .ticket-card,
@@ -151,57 +317,58 @@
         .sidebar-section,
         .detail-card,
         .reply-card {
-            background: rgba(255, 255, 255, 0.25) !important;
+            background: var(--bg-card) !important;
             backdrop-filter: blur(20px) !important;
             -webkit-backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            border: 1px solid var(--glass-border) !important;
             border-radius: 1rem !important;
-            box-shadow: 0 8px 32px rgba(255, 117, 143, 0.1) !important;
+            box-shadow: var(--shadow-card) !important;
             transition: all 0.3s ease;
+            color: var(--text-primary) !important;
         }
 
         .glass-panel:hover,
         .stats-card:hover,
         .ticket-card:hover,
         .detail-card:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.35) !important;
-            box-shadow: 0 12px 40px rgba(255, 117, 143, 0.15) !important;
+            transform: translateY(-2px);
+            background: var(--bg-card-hover) !important;
+            box-shadow: var(--shadow-md) !important;
             border-color: var(--primary) !important;
         }
 
         .right-sidebar {
-            background: rgba(255, 255, 255, 0.25) !important;
+            background: rgba(15, 15, 20, 0.95) !important;
             backdrop-filter: blur(20px) !important;
             -webkit-backdrop-filter: blur(20px) !important;
+            border-left: 1px solid var(--glass-border) !important;
         }
 
-        /* ===== NAVBAR ===== */
+        /* ===== NAVBAR - DARK THEME ===== */
         nav {
-            background: rgba(255, 255, 255, 0.15) !important;
+            background: rgba(10, 10, 15, 0.9) !important;
             backdrop-filter: blur(25px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
+            border-bottom: 1px solid var(--glass-border) !important;
             z-index: 1000 !important;
-            box-shadow: 0 4px 30px rgba(255, 117, 143, 0.1) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
         }
 
         .nav-link {
             padding: 0.5rem 1rem !important;
-            border-radius: 0.75rem !important;
-            color: #4b5563 !important;
+            border-radius: 0.5rem !important;
+            color: var(--text-secondary) !important;
             font-weight: 500 !important;
             font-size: 0.875rem !important;
             transition: all 0.3s ease !important;
             display: inline-flex !important;
             align-items: center !important;
-            background: rgba(255, 255, 255, 0.3) !important;
-            backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            background: transparent !important;
+            border: 1px solid transparent !important;
         }
 
         .nav-link:hover {
-            background: rgba(255, 117, 143, 0.2) !important;
+            background: rgba(255, 255, 255, 0.05) !important;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(255, 117, 143, 0.2);
             border-color: var(--primary) !important;
@@ -264,40 +431,53 @@
             padding: 0 1.5rem;
         }
 
-        /* CRITICAL: Hide sidebar immediately when page loads */
-        .right-sidebar {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            transform: translateX(200%) !important;
-            pointer-events: none !important;
+        /* ===== DARK THEME TEXT OVERRIDES ===== */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: var(--text-primary) !important;
         }
 
-        /* Only show when explicitly opened */
-        .right-sidebar.sidebar-open,
-        .right-sidebar.ultra-wide-open {
-            display: block !important;
+        p,
+        span,
+        div,
+        label {
+            color: var(--text-primary);
+        }
+
+        .text-gray-600,
+        .text-gray-700,
+        .text-gray-800,
+        .text-gray-900 {
+            color: var(--text-secondary) !important;
+        }
+
+        .text-gray-400,
+        .text-gray-500 {
+            color: var(--text-muted) !important;
+        }
+
+        /* ALWAYS VISIBLE SIDEBAR - Override any hiding */
+        .right-sidebar {
+            display: flex !important;
             visibility: visible !important;
             opacity: 1 !important;
             transform: translateX(0) !important;
             pointer-events: auto !important;
         }
 
-        /* CRITICAL: Ensure sidebar is hidden by default on page load */
+        /* All sidebar states - always visible */
+        .right-sidebar.sidebar-open,
+        .right-sidebar.ultra-wide-open,
         .right-sidebar:not(.sidebar-open):not(.ultra-wide-open) {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            transform: translateX(200%) !important;
-            pointer-events: none !important;
-        }
-
-        :root {
-            --primary: #4f46e5;
-            --urgent: #ef4444;
-            --fast: #f59e0b;
-            --medium: #ec4899;
-            --low: #10b981;
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+            pointer-events: auto !important;
         }
 
         /* ===== NORMAL UI STYLES - READABLE SIZES ===== */
@@ -307,98 +487,54 @@
             box-sizing: border-box;
         }
 
-        /* IMMEDIATE SIDEBAR HIDING - runs before any other CSS */
-        .right-sidebar {
-            transform: translateX(200%) !important;
-            pointer-events: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            display: none !important;
-        }
-
-        /* Force hide sidebar on page load - highest specificity */
-        body .right-sidebar {
-            transform: translateX(120%) !important;
-            pointer-events: none !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            display: block !important;
-        }
-
-        /* Only show when explicitly opened */
-        body .right-sidebar.sidebar-open,
-        body .right-sidebar.ultra-wide-open {
-            transform: translateX(0) !important;
-            pointer-events: auto !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            display: block !important;
-        }
-
-        /* Additional force hiding for any edge cases */
-        html body .right-sidebar {
-            transform: translateX(200%) !important;
-            pointer-events: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            display: none !important;
-        }
-
-        html body .right-sidebar.sidebar-open,
-        html body .right-sidebar.ultra-wide-open {
-            transform: translateX(0) !important;
-            pointer-events: auto !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            display: block !important;
-        }
-
-        /* CRITICAL: Force hide sidebar on page load with maximum specificity */
+        /* ===== ALWAYS VISIBLE STICKY SIDEBAR ===== */
+        /* Sidebar is ALWAYS visible on desktop - like Google Gemini */
+        .right-sidebar,
+        body .right-sidebar,
+        html body .right-sidebar,
         html body div#rightSidebar.right-sidebar {
-            transform: translateX(200%) !important;
-            pointer-events: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            display: none !important;
-        }
-
-        /* CRITICAL: Only show when explicitly opened with maximum specificity */
-        html body div#rightSidebar.right-sidebar.sidebar-open,
-        html body div#rightSidebar.right-sidebar.ultra-wide-open {
             transform: translateX(0) !important;
             pointer-events: auto !important;
             visibility: visible !important;
             opacity: 1 !important;
-            display: block !important;
+            display: flex !important;
+            position: fixed !important;
+            right: 0 !important;
+            top: 10vh !important;
+            height: 90vh !important;
+            width: 320px !important;
+            z-index: 42 !important;
         }
 
-        /* NUCLEAR OPTION: Completely remove sidebar from layout when hidden */
+        /* All sidebar states - always visible */
+        body .right-sidebar.sidebar-open,
+        body .right-sidebar.ultra-wide-open,
+        html body .right-sidebar.sidebar-open,
+        html body .right-sidebar.ultra-wide-open,
+        html body div#rightSidebar.right-sidebar.sidebar-open,
+        html body div#rightSidebar.right-sidebar.ultra-wide-open,
         .right-sidebar:not(.sidebar-open):not(.ultra-wide-open) {
-            position: absolute !important;
-            left: -9999px !important;
-            top: -9999px !important;
-            width: 0 !important;
-            height: 0 !important;
-            overflow: hidden !important;
-            clip: rect(0, 0, 0, 0) !important;
-            margin: -1px !important;
-            padding: 0 !important;
-            border: 0 !important;
+            transform: translateX(0) !important;
+            pointer-events: auto !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            display: flex !important;
+            position: fixed !important;
         }
 
-        /* CRITICAL: Force hide sidebar by default - this MUST work */
+        /* ALWAYS VISIBLE SIDEBAR - override any hiding */
         .right-sidebar {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            transform: translateX(200%) !important;
-            pointer-events: none !important;
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+            pointer-events: auto !important;
         }
 
-        /* Only show when explicitly opened */
+        /* All sidebar states - always visible */
         .right-sidebar.sidebar-open,
         .right-sidebar.ultra-wide-open {
-            display: block !important;
+            display: flex !important;
             visibility: visible !important;
             opacity: 1 !important;
             transform: translateX(0) !important;
@@ -1427,9 +1563,10 @@
 
         /* Card styling */
         .detail-card {
-            background-color: #f9fafb;
-            border-radius: 0.75rem;
-            padding: 0.875rem;
+            background: rgba(25, 25, 35, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 14px;
         }
 
         /* FIXED LAYOUT STYLES */
@@ -1439,50 +1576,62 @@
             max-width: 1440px;
         }
 
-        /* Main layout container - ensure proper positioning for sidebar */
+        /* ===== STICKY SIDEBAR LAYOUT (Google Gemini Style) ===== */
+
+        /* Main layout container - fills viewport height minus navbar */
         .main-layout {
             position: relative;
             width: 100%;
-            min-height: 100vh;
+            min-height: calc(100vh - 10vh);
+            display: flex;
+            flex-direction: row;
         }
 
-        /* Parallel container - ensure proper layout for app and sidebar */
+        /* Parallel container - flex layout for app and sidebar */
         .parallel-container {
             display: flex;
             width: 100%;
             position: relative;
-            align-items: flex-start;
+            align-items: stretch;
+            flex: 1;
         }
 
-        /* App container - ensure it takes up available space */
+        /* App container - left side, scrollable content */
         .app-container {
             flex: 1;
-            width: 100%;
+            width: calc(100% - 280px);
             position: relative;
-            transition: all 0.3s ease-in-out;
-        }
-
-        /* Right sidebar styles - Ultra compact design */
-        .right-sidebar {
-            width: 340px;
-            position: fixed;
-            right: 0;
-            height: 100%;
-            top: 4rem;
-            bottom: 0;
-            background: #f8fafc;
-            border-left: 1px solid #e2e8f0;
             overflow-y: auto;
-            z-index: 42;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            transform: translateX(0);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+            padding-right: 12px;
+            transition: all 0.15s ease;
         }
 
-        /* Minimized sidebar state */
+        /* Right sidebar styles - ALWAYS VISIBLE AND STICKY */
+        /* Right sidebar styles - ALWAYS VISIBLE AND STICKY */
+        .right-sidebar {
+            width: 280px !important;
+            position: fixed !important;
+            right: 0 !important;
+            top: 10vh !important;
+            height: calc(100vh - 10vh) !important;
+            background: #0f0f13 !important;
+            /* Solid dark background */
+            border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+            /* Visual separator */
+            overflow-y: auto !important;
+            z-index: 42 !important;
+            padding: 16px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 16px !important;
+            transform: translateX(0) !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            box-shadow: none !important;
+        }
+
+        /* Minimized sidebar state - not used with always-visible sidebar */
         .right-sidebar.minimized {
             width: 60px;
             padding: 0.5rem;
@@ -1500,9 +1649,9 @@
             display: none;
         }
 
-        /* Minimize button styles */
+        /* Minimize button styles - dark theme */
         .minimize-btn {
-            background: #e2e8f0;
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             border-radius: 0.25rem;
             width: 24px;
@@ -1515,33 +1664,17 @@
         }
 
         .minimize-btn:hover {
-            background: #cbd5e1;
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .minimize-btn i {
             font-size: 0.75rem;
-            color: #64748b;
+            color: var(--text-secondary);
         }
 
-        /* Toggle button visibility control */
+        /* Toggle button - hidden since sidebar is always visible */
         .sidebar-toggle {
-            display: flex !important;
-            position: fixed !important;
-            top: 50% !important;
-            right: 1rem !important;
-            transform: translateY(-50%) !important;
-            z-index: 9999 !important;
-            background: #4f46e5 !important;
-            color: white !important;
-            border: 3px solid #ffffff !important;
-            width: 56px !important;
-            height: 56px !important;
-            border-radius: 50% !important;
-            align-items: center !important;
-            justify-content: center !important;
-            cursor: pointer !important;
-            box-shadow: 0 4px 16px rgba(79, 70, 229, 0.4) !important;
-            transition: all 0.3s ease !important;
+            display: none !important;
         }
 
         .sidebar-toggle.hidden {
@@ -1549,9 +1682,7 @@
         }
 
         .sidebar-toggle:hover {
-            background: #4338ca !important;
-            transform: translateY(-50%) scale(1.05) !important;
-            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5) !important;
+            display: none !important;
         }
 
         .sidebar-toggle i {
@@ -1897,44 +2028,41 @@
             }
         }
 
-        /* Enhanced main content expansion when sidebar is hidden */
+        /* Enhanced main content - with space for fixed sidebar */
         .main-content.expanded {
-            margin-right: 0 !important;
-            max-width: 100% !important;
-            width: 100% !important;
-            padding-right: 0 !important;
-            transition: all 0.3s ease-in-out;
+            margin-right: 295px !important;
+            max-width: calc(100% - 295px) !important;
+            width: calc(100% - 295px) !important;
+            padding-right: 12px !important;
+            transition: all 0.15s ease;
         }
 
-        /* Make main content expanded by default */
+        /* Make main content have space for sidebar by default */
         .main-content {
-            margin-right: 0 !important;
-            max-width: 100% !important;
-            width: 100% !important;
-            padding-right: 0 !important;
+            margin-right: 295px !important;
+            max-width: calc(100% - 295px) !important;
+            width: calc(100% - 295px) !important;
+            padding-right: 12px !important;
         }
 
-        /* Enhanced responsive behavior for all screen sizes */
+        /* Sidebar always visible on desktop */
         .right-sidebar {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            /* Default state - hidden on all screens */
-            transform: translateX(120%) !important;
-            pointer-events: none !important;
+            transition: all 0.15s ease;
+            /* Default state - ALWAYS VISIBLE */
+            transform: translateX(0) !important;
+            pointer-events: auto !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            display: flex !important;
         }
 
-        /* Ensure sidebar is hidden by default on all screen sizes */
+        /* Keep sidebar visible */
         .right-sidebar:not(.sidebar-open):not(.ultra-wide-open) {
-            transform: translateX(120%) !important;
-            pointer-events: none !important;
+            transform: translateX(0) !important;
+            pointer-events: auto !important;
         }
 
-        /* Force sidebar to be hidden on page load - highest priority */
-        .right-sidebar {
-            transform: translateX(120%) !important;
-            pointer-events: none !important;
-        }
-
-        /* Only show sidebar when explicitly opened */
+        /* Sidebar always visible */
         .right-sidebar.sidebar-open,
         .right-sidebar.ultra-wide-open {
             transform: translateX(0) !important;
@@ -2948,15 +3076,18 @@
         /* Laptop screens (1025px - 1400px) */
         @media (min-width: 1025px) and (max-width: 1400px) {
             .container {
-                max-width: 100%;
+                max-width: none;
+                margin: 0;
                 padding-left: 2rem;
                 padding-right: 2rem;
-                margin-right: 0 !important;
             }
 
             .main-content {
-                margin-right: 0 !important;
-                padding: 2rem;
+                /* FORCE SEPARATION on laptop screens */
+                margin-right: 295px !important;
+                padding: 1.5rem;
+                max-width: calc(100% - 295px) !important;
+                width: calc(100% - 295px) !important;
             }
 
             .ticket-header {
@@ -2980,27 +3111,27 @@
                 margin-left: 12.5%;
             }
 
-            /* Full grid layout */
             .grid.grid-cols-1.md\:grid-cols-3 {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 2rem;
             }
         }
 
-        /* Large desktop screens (1401px+) - With sidebar */
+        /* Large desktop screens (1401px+) - Maintain separation */
         @media (min-width: 1401px) {
             .container {
                 max-width: none;
                 margin: 0;
-                /* Ensure left alignment */
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
             }
 
             .main-content {
-                margin-right: 0 !important;
-                /* No margin needed with flexbox layout */
+                /* FORCE SEPARATION on large screens */
+                margin-right: 350px !important;
                 padding: 1.5rem;
+                max-width: calc(100% - 350px) !important;
+                width: calc(100% - 350px) !important;
             }
 
             .ticket-header {
@@ -3008,7 +3139,7 @@
             }
 
             .detail-card {
-                padding: 1.25rem;
+                padding: 1.5rem;
             }
 
             .message {
@@ -3024,126 +3155,87 @@
                 margin-left: 15%;
             }
 
-            /* Full grid layout for desktop */
             .grid.grid-cols-1.md\:grid-cols-3 {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 2rem;
             }
         }
 
-        /* Extra large screens (1441px+) */
-        @media (min-width: 1441px) {
-            .container {
-                max-width: 1600px;
-                margin: 0 auto;
-            }
-
-            .main-content {
-                margin-right: 0 !important;
-                padding: 2.5rem;
-            }
-
-            .ticket-header {
-                padding: 2.5rem;
-            }
-
-            .detail-card {
-                padding: 2rem;
-            }
-        }
-
-        /* Extra large screens (1441px+) */
-        @media (min-width: 1441px) {
-            .container {
-                max-width: 1600px;
-                margin: 0;
-                /* Ensure left alignment */
-            }
-
-            .main-content {
-                margin-right: 0 !important;
-                /* No margin needed with flexbox layout */
-                padding: 2.5rem;
-            }
-
-            .ticket-header {
-                padding: 2.5rem;
-            }
-
-            .detail-card {
-                padding: 2rem;
-            }
+        .detail-card {
+            padding: 2rem;
         }
 
         /* Desktop sidebar behavior - REMOVED CONFLICTING STYLES */
         /* These styles were conflicting with the main layout system */
 
         .sidebar-section {
-            margin-bottom: 0.5rem;
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.375rem;
-            padding: 0.5rem;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            transition: all 0.2s ease-in-out;
+            margin-bottom: 0;
+            background: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0;
+            padding: 20px 0;
+            box-shadow: none;
+            transition: none;
         }
 
         .sidebar-section:hover {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
         }
 
         .sidebar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
-            padding-bottom: 0.25rem;
-            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .sidebar-title {
-            font-size: 0.875rem;
+            font-size: 13px;
             font-weight: 600;
-            color: #374151;
+            color: var(--text-primary);
+            letter-spacing: 0.3px;
         }
 
         .add-btn {
             width: 24px;
             height: 24px;
             border-radius: 4px;
-            background: #3b82f6;
+            background: var(--primary);
             color: white;
             border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            font-size: 0.75rem;
+            transition: all 0.15s ease;
+            font-size: 11px;
         }
 
         .add-btn:hover {
-            background: #2563eb;
+            background: var(--primary-dark);
         }
 
-        /* Note card styles */
+        /* Note card styles - dark theme */
         .note-card {
-            background-color: white;
-            border-radius: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
             padding: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            border-left: 3px solid #4f46e5;
+            margin-bottom: 0.75rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 3px solid var(--primary);
         }
 
         .note-title {
             font-weight: 600;
             margin-bottom: 0.5rem;
-            color: #1e293b;
+            color: var(--text-primary);
         }
 
         .note-content {
-            color: #475569;
+            color: var(--text-secondary);
             font-size: 0.875rem;
             white-space: pre-line;
         }
@@ -3152,7 +3244,7 @@
             display: flex;
             justify-content: space-between;
             font-size: 0.75rem;
-            color: #64748b;
+            color: var(--text-muted);
             margin-top: 0.5rem;
         }
 
@@ -3162,37 +3254,39 @@
         }
 
         .note-action-btn {
-            color: #64748b;
+            color: var(--text-muted);
             cursor: pointer;
             transition: color 0.2s ease;
         }
 
         .note-action-btn:hover {
-            color: #4f46e5;
+            color: var(--primary);
         }
 
-        /* Template styles */
+        /* Template styles - dark theme */
         .template-item {
-            border: 1px solid #e2e8f0;
-            border-radius: 0.5rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 0.75rem;
             padding: 0.75rem;
             margin-bottom: 0.5rem;
             cursor: pointer;
             transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .template-item:hover {
-            background-color: #f1f5f9;
-            border-color: #cbd5e1;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary);
         }
 
         .template-title {
             font-weight: 600;
             margin-bottom: 0.25rem;
+            color: var(--text-primary);
         }
 
         .template-content {
-            color: #64748b;
+            color: var(--text-muted);
             font-size: 0.875rem;
             white-space: nowrap;
             overflow: hidden;
@@ -3253,30 +3347,30 @@
         .empty-state {
             text-align: center;
             padding: 2rem 1rem;
-            color: #64748b;
-            background: rgba(248, 250, 252, 0.5);
-            border: 2px dashed rgba(203, 213, 225, 0.6);
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px dashed rgba(255, 255, 255, 0.1);
             border-radius: 1rem;
             margin: 0.5rem 0;
             transition: all 0.2s ease-in-out;
         }
 
         .empty-state:hover {
-            border-color: rgba(59, 130, 246, 0.3);
-            background: rgba(239, 246, 255, 0.5);
+            border-color: rgba(236, 72, 153, 0.3);
+            background: rgba(236, 72, 153, 0.05);
         }
 
         .empty-icon {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 0.75rem;
-            color: #cbd5e1;
-            opacity: 0.8;
+            color: var(--text-muted);
+            opacity: 0.6;
         }
 
         .empty-state p {
             font-size: 0.875rem;
             font-weight: 500;
-            color: #64748b;
+            color: var(--text-muted);
         }
 
 
@@ -4222,12 +4316,12 @@
 
                                     <!-- Priority Selection Dropdown -->
                                     <div class="relative inline-block">
-                                        <select id="prioritySelect" class="px-3 py-1 text-xs rounded-lg font-medium border-none bg-transparent appearance-none cursor-pointer
-                                        {% if ticket.priority == 'Urgent' %}text-red-800 bg-red-100
-                                        {% elif ticket.priority == 'High' %}text-orange-800 bg-orange-100
-                                        {% elif ticket.priority == 'Medium' %}text-yellow-800 bg-yellow-100
-                                        {% elif ticket.priority == 'Low' %}text-green-800 bg-green-100
-                                        {% else %}text-gray-800 bg-gray-100{% endif %} hover:opacity-80 transition"
+                                        <select id="prioritySelect" class="pl-3 pr-8 py-1 text-xs rounded-lg font-medium border-none bg-transparent appearance-none cursor-pointer
+                                        {% if ticket.priority == 'Urgent' %}text-red-400 bg-red-900/30
+                                        {% elif ticket.priority == 'High' %}text-orange-400 bg-orange-900/30
+                                        {% elif ticket.priority == 'Medium' %}text-yellow-400 bg-yellow-900/30
+                                        {% elif ticket.priority == 'Low' %}text-emerald-400 bg-emerald-900/30
+                                        {% else %}text-gray-300 bg-gray-800{% endif %} hover:opacity-80 transition"
                                             data-ticket-id="{{ ticket.ticket_id }}">
                                             <option value="Urgent" {% if ticket.priority=='Urgent' %}selected{% endif
                                                 %}>🔴 Urgent</option>
@@ -4246,8 +4340,8 @@
                                     <!-- Technician Assignment Dropdown -->
                                     <div class="relative inline-block">
                                         <select id="technicianSelect"
-                                            class="px-3 py-1 text-xs rounded-lg font-medium border-none bg-transparent appearance-none cursor-pointer
-                                        {% if technician_name %}text-indigo-800 bg-indigo-100{% else %}text-gray-800 bg-gray-100{% endif %} hover:opacity-80 transition"
+                                            class="pl-3 pr-8 py-1 text-xs rounded-lg font-medium border-none bg-transparent appearance-none cursor-pointer
+                                        {% if technician_name %}text-indigo-400 bg-indigo-900/30{% else %}text-gray-400 bg-gray-800{% endif %} hover:opacity-80 transition"
                                             data-ticket-id="{{ ticket.ticket_id }}">
                                             <option value="">👤 Select Technician</option>
                                             {% for tech in technicians %}
@@ -10566,70 +10660,32 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
                         console.log('✅ Forced sidebar transform to translateX(150%)');
 
                         console.log('✅ Initialized for very large screen (2560px+)');
-                    } else if (window.innerWidth >= 1921) {
-                        // Ultra-wide screen: auto-hide sidebar
-                        rightSidebar.classList.add('ultra-wide-open');
+                    } else if (window.innerWidth >= 1025) {
+                        // Desktop (>= 1025px): Sidebar ALWAYS VISIBLE
+                        rightSidebar.classList.remove('ultra-wide-open');
+                        rightSidebar.classList.add('sidebar-open');
+                        rightSidebar.style.transform = 'translateX(0)';
+                        rightSidebar.style.visibility = 'visible';
+                        rightSidebar.style.opacity = '1';
+                        rightSidebar.style.display = 'block';
 
-                        // Contract app container when sidebar is hidden
+                        // Expand app container
                         const appContainer = document.querySelector('.app-container');
                         if (appContainer) {
-                            appContainer.classList.remove('sidebar-open');
-                            appContainer.classList.add('sidebar-closed');
+                            appContainer.classList.remove('sidebar-closed');
+                            appContainer.classList.add('sidebar-open');
                         }
 
-                        sidebarToggle.classList.remove('hidden');
-                        sidebarToggle.title = 'Open Sidebar';
-                        console.log('✅ Initialized for ultra-wide screen (1921px+)');
-                    } else if (window.innerWidth >= 1711 && window.innerWidth <= 1920) {
-                        // Wide desktop (1711px - 1920px): hide sidebar by default
-                        rightSidebar.classList.remove('ultra-wide-open', 'sidebar-open');
-                        rightSidebar.style.transform = 'translateX(120%)';
+                        // Hide toggle button as it's always open
+                        sidebarToggle.classList.add('hidden');
+                        console.log('✅ Initialized for desktop (>= 1025px): Sidebar forced visible');
 
-                        // Contract app container when sidebar is hidden
-                        const appContainer = document.querySelector('.app-container');
-                        if (appContainer) {
-                            appContainer.classList.remove('sidebar-open');
-                            appContainer.classList.add('sidebar-closed');
-                        }
-
-                        sidebarToggle.classList.remove('hidden');
-                        sidebarToggle.title = 'Open Sidebar';
-                        console.log('✅ Initialized for wide desktop (1711px-1920px): sidebar hidden by default - toggle button shown');
-                    } else if (window.innerWidth >= 1281 && window.innerWidth <= 1710) {
-                        // Standard desktop (1281px - 1710px): hide sidebar by default
-                        rightSidebar.classList.remove('ultra-wide-open', 'sidebar-open');
-                        rightSidebar.style.transform = 'translateX(120%)';
-
-                        // Contract app container when sidebar is hidden
-                        const appContainer = document.querySelector('.app-container');
-                        if (appContainer) {
-                            appContainer.classList.remove('sidebar-open');
-                            appContainer.classList.add('sidebar-closed');
-                        }
-
-                        sidebarToggle.classList.remove('hidden');
-                        sidebarToggle.title = 'Open Sidebar';
-                        console.log('✅ Initialized for standard desktop (1281px-1710px): sidebar hidden by default - toggle button shown');
-                    } else if (window.innerWidth >= 1025 && window.innerWidth <= 1280) {
-                        // Medium desktop: hide sidebar by default but allow toggling
-                        rightSidebar.classList.remove('ultra-wide-open', 'sidebar-open');
-                        rightSidebar.style.transform = 'translateX(120%)';
-
-                        // Contract app container when sidebar is hidden
-                        const appContainer = document.querySelector('.app-container');
-                        if (appContainer) {
-                            appContainer.classList.remove('sidebar-open');
-                            appContainer.classList.add('sidebar-closed');
-                        }
-
-                        sidebarToggle.classList.remove('hidden');
-                        sidebarToggle.title = 'Open Sidebar';
-                        console.log('✅ Initialized for medium desktop (1025px-1280px): sidebar hidden by default - toggle button shown');
                     } else if (window.innerWidth >= 769 && window.innerWidth <= 1024) {
-                        // Tablet landscape: hide sidebar by default
+                        // Tablet landscape: hidden by default
                         rightSidebar.classList.remove('ultra-wide-open', 'sidebar-open');
+                        rightSidebar.style.transform = 'translateX(120%)';
 
-                        // Contract app container when sidebar is hidden
+                        // Contract app container
                         const appContainer = document.querySelector('.app-container');
                         if (appContainer) {
                             appContainer.classList.remove('sidebar-open');
@@ -10638,7 +10694,7 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
 
                         sidebarToggle.classList.remove('hidden');
                         sidebarToggle.title = 'Open Sidebar';
-                        console.log('✅ Initialized for tablet landscape (769px-1024px): sidebar hidden - toggle button shown');
+                        console.log('✅ Initialized for tablet: Sidebar hidden');
                     } else if (window.innerWidth <= 768) {
                         // Mobile/tablet: hide sidebar by default
                         rightSidebar.classList.remove('ultra-wide-open', 'sidebar-open');
@@ -10730,35 +10786,26 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
                     }
                 }
 
-                // IMMEDIATE SIDEBAR HIDING - runs as soon as script loads
+                // SIDEBAR ALWAYS VISIBLE - Make sidebar visible on page load
                 (function () {
-                    console.log('🚨 IMMEDIATE SIDEBAR HIDING - forcing sidebar to be completely hidden on page load');
+                    console.log('🎯 Making sidebar always visible (Google Gemini style)');
 
-                    // Force sidebar to be completely hidden immediately
+                    // Force sidebar to be visible
                     const rightSidebar = document.querySelector('.right-sidebar');
                     if (rightSidebar) {
-                        rightSidebar.style.transform = 'translateX(200%)';
-                        rightSidebar.style.pointerEvents = 'none';
-                        rightSidebar.style.visibility = 'hidden';
-                        rightSidebar.style.opacity = '0';
-                        rightSidebar.style.display = 'none';
-                        console.log('✅ Sidebar completely hidden on page load');
+                        rightSidebar.style.transform = 'translateX(0)';
+                        rightSidebar.style.pointerEvents = 'auto';
+                        rightSidebar.style.visibility = 'visible';
+                        rightSidebar.style.opacity = '1';
+                        rightSidebar.style.display = 'flex';
+                        rightSidebar.classList.add('sidebar-open');
+                        console.log('✅ Sidebar visible on page load');
                     }
 
-                    // Force app container to be expanded
-                    const appContainer = document.querySelector('.app-container');
-                    if (appContainer) {
-                        appContainer.classList.remove('sidebar-open');
-                        appContainer.classList.add('sidebar-closed');
-                        console.log('✅ App container immediately expanded on page load');
-                    }
-
-                    // Show toggle button immediately
+                    // Hide the toggle button since sidebar is always visible
                     const sidebarToggle = document.getElementById('sidebarToggleMobile');
                     if (sidebarToggle) {
-                        sidebarToggle.classList.remove('hidden');
-                        sidebarToggle.title = 'Open Sidebar';
-                        console.log('✅ Toggle button immediately shown on page load');
+                        sidebarToggle.style.display = 'none';
                     }
                 })();
 
