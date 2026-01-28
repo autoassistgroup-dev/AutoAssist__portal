@@ -42,6 +42,32 @@ def display_response():
             from database import get_db
             db = get_db()
             
+            # Check if there's also a customer message to save as a reply
+            customer_message = data.get('customer_message', data.get('body', ''))
+            customer_email = data.get('from', data.get('customer_email', ''))
+            
+            # If customer message provided, save it as a reply first
+            if customer_message and customer_email:
+                reply_data = {
+                    'ticket_id': ticket_id,
+                    'message': customer_message,
+                    'sender_name': data.get('name', customer_email),
+                    'sender_email': customer_email,
+                    'sender_type': 'customer',
+                    'is_customer': True,
+                    'attachments': [],
+                    'created_at': datetime.now()
+                }
+                db.create_reply(reply_data)
+                logger.info(f"Customer reply saved for ticket {ticket_id}")
+                
+                # Update ticket status
+                db.update_ticket(ticket_id, {
+                    'has_unread_reply': True,
+                    'last_reply_at': datetime.now(),
+                    'status': 'Customer Replied'
+                })
+            
             # Update the ticket with the AI draft
             result = db.update_ticket(ticket_id, {
                 'draft': ai_response,
@@ -56,6 +82,7 @@ def display_response():
                 'message': 'AI response saved to ticket',
                 'ticket_id': ticket_id,
                 'draft_length': len(ai_response),
+                'customer_reply_saved': bool(customer_message and customer_email),
                 'timestamp': datetime.now().isoformat()
             })
         

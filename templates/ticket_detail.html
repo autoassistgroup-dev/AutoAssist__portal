@@ -4937,14 +4937,17 @@
 
                         <div class="conversation-container">
                             {% for reply in replies %}
+                            {% set is_from_customer = reply.is_customer or reply.sender_type == 'customer' %}
                             <div
-                                class="message {% if reply.is_customer %}customer-message{% else %}support-message{% endif %}">
+                                class="message {% if is_from_customer %}customer-message{% else %}support-message{% endif %}">
                                 <div class="message-header">
                                     <span class="font-medium flex items-center">
-                                        {% if reply.is_customer %}
-                                        <i class="fas fa-user-circle customer-icon"></i> {{ ticket.name }}
+                                        {% if is_from_customer %}
+                                        <i class="fas fa-user-circle customer-icon"></i> {{ reply.sender_name or
+                                        ticket.name }}
                                         {% else %}
-                                        <i class="fas fa-headset support-icon"></i> Support Team
+                                        <i class="fas fa-headset support-icon"></i> {{ reply.sender_name or 'Support
+                                        Team' }}
                                         {% endif %}
                                     </span>
                                     <span class="message-time">
