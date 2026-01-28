@@ -741,7 +741,8 @@
         </div>
 
         <!-- Enhanced Stats Cards -->
-        <div class="stats-grid mb-8">
+        <!-- Key Metrics Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <!-- Total Tickets -->
             <div class="stats-card p-6 text-center hover-lift">
                 <div class="icon-container">
@@ -769,6 +770,18 @@
                 <p class="text-4xl font-bold gradient-text" data-stat="waiting">{{ waiting_tickets }}</p>
             </div>
 
+            <!-- Resolved Tickets -->
+            <div class="stats-card p-6 text-center hover-lift">
+                <div class="icon-container">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Resolved</h3>
+                <p class="text-4xl font-bold gradient-text" data-stat="resolved">{{ resolved_tickets }}</p>
+            </div>
+        </div>
+
+        <!-- Breakdown Stats Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <!-- Priority Breakdown -->
             <div class="stats-card p-6 hover-lift">
                 <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4 text-center">Priorities
@@ -792,7 +805,7 @@
             <!-- Type Breakdown -->
             <div class="stats-card p-6 hover-lift">
                 <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4 text-center">Types</h3>
-                <div class="space-y-2 max-h-48 overflow-y-auto pr-2">
+                <div class="space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
                     {% for cls, count in classifications.items() %}
                     <div class="flex items-center justify-between">
                         <span class="priority-badge {% if cls == 'Technical Issue' %}badge-technical
@@ -808,15 +821,6 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-
-            <!-- Resolved Tickets -->
-            <div class="stats-card p-6 text-center hover-lift">
-                <div class="icon-container">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Resolved</h3>
-                <p class="text-4xl font-bold gradient-text" data-stat="resolved">{{ resolved_tickets }}</p>
             </div>
         </div>
 

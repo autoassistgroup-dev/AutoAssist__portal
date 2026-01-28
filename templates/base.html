@@ -13,39 +13,30 @@
     <link href="/static/css/animations.css" rel="stylesheet">
 
     <style>
-        /* ===== APPLE-INSPIRED DESIGN SYSTEM ===== */
+        /* ===== MODERN PINK GLASSMORPHISM THEME ===== */
         :root {
-            /* Apple Color Palette */
-            --apple-blue: #0071e3;
-            --apple-blue-hover: #0077ED;
-            --apple-gray-50: #fafafa;
-            --apple-gray-100: #f5f5f7;
-            --apple-gray-200: #e8e8ed;
-            --apple-gray-300: #d2d2d7;
-            --apple-gray-400: #afafaf;
-            --apple-gray-500: #86868b;
-            --apple-gray-600: #6e6e73;
-            --apple-gray-700: #1d1d1f;
-            --apple-white: #ffffff;
-
-            /* Priority Colors */
+            /* Pink Color Palette */
             --primary: #ff758f;
             --secondary: #ff7eb3;
-            --urgent: #ef4444;
-            --fast: #f59e0b;
-            --medium: #ec4899;
-            --low: #22c55e;
-            --waiting: #eab308;
+            --primary-light: #ffe0e9;
+            --primary-dark: #ff6b81;
 
-            /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
-            --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.1);
+            /* Priority Colors */
+            --urgent: #ff4757;
+            --fast: #ffa502;
+            --medium: #ff6b81;
+            --low: #2ed573;
+            --waiting: #ffcc00;
 
-            /* Transitions */
-            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Background Colors */
+            --bg-gradient-start: #ffe0e9;
+            --bg-gradient-middle: #fff0f6;
+            --bg-gradient-end: #e8f4f8;
+
+            /* Glass Effects */
+            --glass-white: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-shadow: rgba(255, 117, 143, 0.1);
         }
 
         /* ===== GLOBAL STYLES ===== */
@@ -56,66 +47,179 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #ffe0e9 0%, #fff0f6 50%, #e8f4f8 100%);
-            color: var(--apple-gray-700);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-middle) 50%, var(--bg-gradient-end) 100%);
+            color: #4b5563;
             line-height: 1.5;
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Glassmorphism Utility */
+        /* Animated Gradient Background */
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 117, 143, 0.4), rgba(255, 126, 179, 0.2));
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 107, 129, 0.3), rgba(255, 71, 87, 0.2));
+            top: 60%;
+            right: -150px;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255, 126, 179, 0.3), rgba(255, 117, 143, 0.2));
+            bottom: -100px;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        .orb-4 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(255, 71, 87, 0.2), rgba(255, 165, 2, 0.1));
+            top: 20%;
+            right: 30%;
+            animation-delay: 15s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+
+            50% {
+                transform: translateY(0) translateX(20px);
+            }
+
+            75% {
+                transform: translateY(20px) translateX(10px);
+            }
+        }
+
+        /* Glassmorphism Utility Classes */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.6);
+            background: var(--glass-white);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px var(--glass-shadow);
+            border-radius: 1rem;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             border-radius: 0.75rem;
         }
 
-        /* Navbar Styles */
+        /* ===== NAVBAR GLASS EFFECT ===== */
         nav {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: saturate(200%) blur(30px);
-            -webkit-backdrop-filter: saturate(200%) blur(30px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: saturate(200%) blur(25px);
+            -webkit-backdrop-filter: saturate(200%) blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 30px rgba(255, 117, 143, 0.1);
         }
 
-        nav a {
-            transition: var(--transition-smooth);
+        .nav-link {
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            color: #4b5563;
             font-weight: 500;
-            color: var(--apple-gray-700);
-            border-radius: 8px;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        nav a:hover,
-        nav a.nav-link-active {
-            color: #d63384;
-            /* Pink darker shade */
-            background: rgba(255, 117, 143, 0.1);
+        .nav-link:hover {
+            background: rgba(255, 117, 143, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.2);
+            border-color: var(--primary);
         }
 
-        /* Mobile Menu */
-        #mobile-menu {
+        .nav-link-active {
+            background: rgba(255, 117, 143, 0.25);
+            color: var(--primary-dark);
+            border-color: rgba(255, 117, 143, 0.4);
+            box-shadow: 0 2px 10px rgba(255, 117, 143, 0.2);
+        }
+
+        .gradient-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.4);
+        }
+
+        .gradient-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 117, 143, 0.5);
+        }
+
+        /* ===== MOBILE MENU ===== */
+        #mobileMenu {
             transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
             max-height: 0;
             opacity: 0;
             overflow: hidden;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
+            border-radius: 0.75rem;
+            margin-top: 0.5rem;
         }
 
-        #mobile-menu.open {
-            max-height: 100vh;
+        #mobileMenu.open {
+            max-height: 500px;
             opacity: 1;
         }
 
-        /* Common Utility Classes */
+        /* ===== RESPONSIVE CONTAINER ===== */
         .responsive-container {
             max-width: 1600px;
             margin: 0 auto;
@@ -134,6 +238,149 @@
             }
         }
 
+        @media (min-width: 1920px) {
+            .responsive-container {
+                max-width: 1920px;
+                padding: 0 4rem;
+            }
+        }
+
+        /* ===== GRADIENT TEXT ===== */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== HOVER EFFECTS ===== */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(255, 117, 143, 0.25);
+        }
+
+        /* ===== PRIORITY BADGES ===== */
+        .priority-badge {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0.75rem;
+        }
+
+        .badge-urgent {
+            background: linear-gradient(135deg, rgba(255, 71, 87, 0.2), rgba(255, 71, 87, 0.1));
+            color: #ff4757;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+        }
+
+        .badge-fast {
+            background: linear-gradient(135deg, rgba(255, 165, 2, 0.2), rgba(255, 165, 2, 0.1));
+            color: #ffa502;
+            border: 1px solid rgba(255, 165, 2, 0.3);
+        }
+
+        .badge-medium {
+            background: linear-gradient(135deg, rgba(255, 107, 129, 0.2), rgba(255, 107, 129, 0.1));
+            color: #ff6b81;
+            border: 1px solid rgba(255, 107, 129, 0.3);
+        }
+
+        .badge-low {
+            background: linear-gradient(135deg, rgba(46, 213, 115, 0.2), rgba(46, 213, 115, 0.1));
+            color: #2ed573;
+            border: 1px solid rgba(46, 213, 115, 0.3);
+        }
+
+        /* ===== FORM INPUTS ===== */
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 117, 143, 0.2);
+        }
+
+        /* ===== SCROLLBAR STYLING ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* ===== TOAST NOTIFICATIONS ===== */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(255, 117, 143, 0.3);
+            z-index: 1000;
+            animation: toastSlideIn 0.3s ease;
+            max-width: 350px;
+        }
+
+        @keyframes toastSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         /* Additional styles block */
             {
             % block styles %
@@ -145,48 +392,72 @@
     </style>
 </head>
 
-<body class="bg-gray-50 text-gray-900">
+<body class="min-h-screen">
+    <!-- Animated Gradient Background -->
+    <div class="background-layer">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="gradient-orb orb-4"></div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="bg-white shadow-md">
-        <div class="responsive-container py-6">
+    <nav>
+        <div class="responsive-container py-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-6">
                     <a href="{{ url_for('main.index') }}" class="flex items-center">
                         <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
                     </a>
-                    <div class="hidden md:flex space-x-6">
+                    <div class="hidden md:flex space-x-3">
                         <a href="{{ url_for('main.index') }}"
-                            class="px-4 py-3 rounded {% if request.endpoint == 'main.index' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Tickets</a>
+                            class="nav-link {% if request.endpoint == 'main.index' %}nav-link-active{% endif %}">
+                            <i class="fas fa-ticket-alt mr-2"></i>Tickets
+                        </a>
                         <a href="{{ url_for('main.dashboard') }}"
-                            class="px-4 py-3 rounded {% if request.endpoint == 'main.dashboard' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Dashboard</a>
-
+                            class="nav-link {% if request.endpoint == 'main.dashboard' %}nav-link-active{% endif %}">
+                            <i class="fas fa-chart-line mr-2"></i>Dashboard
+                        </a>
                         <a href="{{ url_for('main.create_ticket') }}"
-                            class="px-4 py-3 rounded {% if request.endpoint == 'main.create_ticket' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Create
-                            Ticket</a>
+                            class="nav-link {% if request.endpoint == 'main.create_ticket' %}nav-link-active{% endif %}">
+                            <i class="fas fa-plus-circle mr-2"></i>Create Ticket
+                        </a>
 
                         {% if current_member and current_member.role == 'Administrator' %}
                         <a href="{{ url_for('main.technicians') }}"
-                            class="px-4 py-3 rounded {% if request.endpoint == 'main.technicians' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Technicians</a>
+                            class="nav-link {% if request.endpoint == 'main.technicians' %}nav-link-active{% endif %}">
+                            <i class="fas fa-tools mr-2"></i>Technicians
+                        </a>
                         <a href="{{ url_for('main.members') }}"
-                            class="px-4 py-3 rounded {% if request.endpoint == 'main.members' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Members</a>
+                            class="nav-link {% if request.endpoint == 'main.members' %}nav-link-active{% endif %}">
+                            <i class="fas fa-users mr-2"></i>Members
+                        </a>
                         <a href="{{ url_for('main.admin_panel') }}"
-                            class="px-4 py-3 rounded {% if request.endpoint == 'main.admin_panel' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Admin
-                            Panel</a>
+                            class="nav-link {% if request.endpoint == 'main.admin_panel' %}nav-link-active gradient-btn{% endif %}">
+                            <i class="fas fa-cog mr-2"></i>Admin Panel
+                        </a>
                         {% endif %}
                     </div>
                 </div>
-                <div class="flex items-center space-x-2 md:space-x-4">
+                <div class="flex items-center space-x-3">
                     {% if current_member %}
-                    <span class="hidden sm:inline text-gray-600 text-sm md:text-base">{{ current_user }}</span>
-                    <a href="{{ url_for('auth.logout') }}"
-                        class="px-2 py-1 md:px-3 md:py-2 rounded bg-gray-100 hover:bg-gray-200 transition text-xs md:text-sm">Logout</a>
+                    <div class="hidden sm:flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
+                            <span class="text-pink-600 text-sm">{{ current_member.name[0]|upper }}</span>
+                        </div>
+                        <span class="text-gray-600 text-sm">{{ current_member.name }}</span>
+                    </div>
+                    <a href="{{ url_for('auth.logout') }}" class="nav-link text-sm">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </a>
                     {% else %}
-                    <a href="{{ url_for('auth.login') }}"
-                        class="px-2 py-1 md:px-3 md:py-2 rounded bg-pink-500 hover:bg-pink-600 transition text-white text-xs md:text-sm">Login</a>
+                    <a href="{{ url_for('auth.login') }}" class="gradient-btn px-4 py-2 text-sm">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    </a>
                     {% endif %}
 
                     <!-- Mobile menu button -->
-                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn"
+                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn nav-link"
                         onclick="toggleMobileMenu()">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -196,25 +467,35 @@
                 </div>
             </div>
 
-            <!-- Mobile menu (hidden by default) -->
-            <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
-                <div class="flex flex-col space-y-3 pt-4">
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="md:hidden mt-3 pb-3 border-t border-pink-100 hidden">
+                <div class="flex flex-col space-y-2 pt-3">
                     <a href="{{ url_for('main.index') }}"
-                        class="px-4 py-3 rounded {% if request.endpoint == 'main.index' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Tickets</a>
+                        class="nav-link {% if request.endpoint == 'main.index' %}nav-link-active{% endif %}">
+                        <i class="fas fa-ticket-alt mr-2"></i>Tickets
+                    </a>
                     <a href="{{ url_for('main.dashboard') }}"
-                        class="px-4 py-3 rounded {% if request.endpoint == 'main.dashboard' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Dashboard</a>
-
+                        class="nav-link {% if request.endpoint == 'main.dashboard' %}nav-link-active{% endif %}">
+                        <i class="fas fa-chart-line mr-2"></i>Dashboard
+                    </a>
                     <a href="{{ url_for('main.create_ticket') }}"
-                        class="px-4 py-3 rounded {% if request.endpoint == 'main.create_ticket' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Create
-                        Ticket</a>
+                        class="nav-link {% if request.endpoint == 'main.create_ticket' %}nav-link-active{% endif %}">
+                        <i class="fas fa-plus-circle mr-2"></i>Create Ticket
+                    </a>
+
                     {% if current_member and current_member.role == 'Administrator' %}
                     <a href="{{ url_for('main.technicians') }}"
-                        class="px-4 py-3 rounded {% if request.endpoint == 'main.technicians' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Technicians</a>
+                        class="nav-link {% if request.endpoint == 'main.technicians' %}nav-link-active{% endif %}">
+                        <i class="fas fa-tools mr-2"></i>Technicians
+                    </a>
                     <a href="{{ url_for('main.members') }}"
-                        class="px-4 py-3 rounded {% if request.endpoint == 'main.members' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Members</a>
+                        class="nav-link {% if request.endpoint == 'main.members' %}nav-link-active{% endif %}">
+                        <i class="fas fa-users mr-2"></i>Members
+                    </a>
                     <a href="{{ url_for('main.admin_panel') }}"
-                        class="px-4 py-3 rounded {% if request.endpoint == 'main.admin_panel' %}bg-pink-50 text-pink-600 font-medium{% else %}hover:bg-gray-100 transition{% endif %}">Admin
-                        Panel</a>
+                        class="nav-link {% if request.endpoint == 'main.admin_panel' %}nav-link-active gradient-btn{% endif %}">
+                        <i class="fas fa-cog mr-2"></i>Admin Panel
+                    </a>
                     {% endif %}
                 </div>
             </div>
@@ -222,15 +503,22 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="responsive-container py-6">
+    <main class="responsive-container py-6 fade-in">
         {% block content %}{% endblock %}
     </main>
 
+    <!-- Toast Container -->
+    <div id="toastContainer"></div>
+
     <!-- Javascript -->
     <script>
+        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenu) mobileMenu.classList.toggle('hidden');
+            if (mobileMenu) {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('open');
+            }
         }
 
         // Close mobile menu when clicking outside
@@ -238,9 +526,61 @@
             const mobileMenu = document.getElementById('mobileMenu');
             const menuButton = document.querySelector('.mobile-menu-btn');
 
-            if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+            if (mobileMenu && menuButton && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
                 mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('open');
             }
+        });
+
+        // Toast notification functions
+        function showSuccessToast(message) {
+            showToast(message, 'success');
+        }
+
+        function showErrorToast(message) {
+            showToast(message, 'error');
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-${type === 'success' ? 'check-circle text-green-500' : 'exclamation-triangle text-red-500'}"></i>
+                    <span class="text-sm font-medium">${message}</span>
+                </div>
+            `;
+
+            const container = document.getElementById('toastContainer') || document.body;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'toastSlideIn 0.3s ease reverse';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize theme
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('🎀 Modern Pink Glassmorphism Theme Loaded');
+
+            // Add hover effects to all glass cards
+            const glassCards = document.querySelectorAll('.glass-card');
+            glassCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-4px)';
+                    card.style.boxShadow = '0 12px 30px rgba(255, 117, 143, 0.25)';
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.05)';
+                });
+            });
         });
     </script>
     {% block scripts %}{% endblock %}
