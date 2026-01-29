@@ -577,6 +577,123 @@ def search_tickets():
         return jsonify({'success': False, 'error': str(e)}), 500
 
 
+@ticket_bp.route('/<ticket_id>/send-email', methods=['POST'])
+def send_ticket_email(ticket_id):
+    """
+    Send an email from a template (or custom).
+    Similar to reply, but allows custom subject and body.
+    """
+    try:
+        if not is_authenticated():
+            return jsonify({'success': False, 'error': 'Authentication required'}), 401
+        
+        from database import get_db
+        db = get_db()
+        
+        # Get ticket
+        ticket = db.get_ticket_by_id(ticket_id)
+        if not ticket:
+            return jsonify({'success': False, 'error': 'Ticket not found'}), 404
+            
+        data = request.get_json()
+        subject = data.get('custom_subject') or data.get('subject') or ticket.get('subject')
+        body = data.get('custom_body') or data.get('body') or data.get('message')
+        attachments = data.get('attachments', [])
+        
+        if not body:
+            return jsonify({'success': False, 'error': 'Email body is required'}), 400
+
+        # Get current member info
+        current_member = safe_member_lookup()
+        sender_name = current_member.get('name', 'Support Team') if current_member else 'Support Team'
+        
+        # Create reply record (so it shows in history)
+        reply_data = {
+            'ticket_id': ticket_id,
+            'message': body, # Store the body as the message
+            'subject': subject, # Store subject if schema supports it, or just in body
+            'sender_name': sender_name,
+            'sender_id': session.get('member_id'),
+            'sender_type': 'agent',
+            'attachments': attachments,
+            'created_at': datetime.now(),
+            'is_email_template': True # detailed flag
+        }
+        
+        reply_id = db.create_reply(reply_data)
+        
+        # Update ticket
+        db.update_ticket(ticket_id, {
+            'last_reply_at': datetime.now(),
+            'last_reply_by': sender_name,
+            'updated_at': datetime.now()
+        })
+        
+        logger.info(f"Email template sent for ticket {ticket_id} by {sender_name}")
+        
+        # Send via N8N webhook
+        email_sent = False
+        if ticket.get('email'):
+            try:
+                import requests
+                from config.settings import WEBHOOK_URL
+                
+                # Payload with OVERRIDDEN subject and body
+                webhook_payload = {
+                    'ticket_id': ticket_id,
+                    'response_text': body,
+                    'replyMessage': body,
+                    'customer_email': ticket.get('email'),
+                    'email': ticket.get('email'),
+                    'ticket_subject': subject, # USE CUSTOM SUBJECT
+                    'subject': subject,        # USE CUSTOM SUBJECT
+                    'customer_name': ticket.get('customer_name', ticket.get('name', '')),
+                    'priority': ticket.get('priority', 'Medium'),
+                    'ticket_status': ticket.get('status', 'Waiting for Response'),
+                    'ticketSource': ticket.get('source', 'manual'),
+                    'user_id': session.get('member_id'),
+                    'has_attachments': len(attachments) > 0,
+                    'attachments': attachments,
+                    'attachment_count': len(attachments),
+                    'body': ticket.get('body', ''), 
+                    'message': body,
+                    'content': body
+                }
+                
+                logger.info(f"Sending email template to N8N webhook for ticket {ticket_id}")
+                
+                webhook_response = requests.post(
+                    WEBHOOK_URL,
+                    json=webhook_payload,
+                    timeout=30
+                )
+                
+                email_sent = webhook_response.status_code == 200
+                logger.info(f"N8N webhook response: {webhook_response.status_code}")
+                
+            except Exception as email_error:
+                logger.error(f"Failed to send email template via N8N: {email_error}")
+        
+        if not email_sent:
+             return jsonify({
+                'success': True, # Still success because we saved the reply? Or Warning?
+                'warning': 'Response saved but email delivery failed (Webhook Error)',
+                'email_sent': False,
+                'reply_id': str(reply_id)
+            })
+
+        return jsonify({
+            'success': True,
+            'message': 'Email sent successfully',
+            'reply_id': str(reply_id),
+            'email_sent': True
+        })
+        
+    except Exception as e:
+        logger.error(f"Error sending email template {ticket_id}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
 def _serialize_ticket(ticket):
     """
     Serialize a ticket document for JSON response.

@@ -9411,8 +9411,8 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
 
                             console.log('📧 EMAIL DATA:', emailData);
 
-                            // Send to API endpoint (if implemented)
-                            const response = await fetch('/api/email/send-template', {
+                            // Send to API endpoint
+                            const response = await fetch(`/api/tickets/${emailData.ticket_id}/send-email`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -9420,10 +9420,16 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
                                 body: JSON.stringify(emailData)
                             });
 
-                            if (response.ok) {
-                                const result = await response.json();
+                            const result = await response.json();
+
+                            if (response.ok && result.success) {
                                 console.log('✅ EMAIL TEMPLATE SUCCESS:', result);
-                                showNotification('Email sent successfully! 📧', 'success');
+
+                                if (result.warning) {
+                                    showNotification('Reply saved, but email sending failed: ' + result.warning, 'warning');
+                                } else {
+                                    showNotification('Email sent successfully! 📧', 'success');
+                                }
 
                                 // Close modal first
                                 closeModal('emailTemplateModal');
@@ -9434,17 +9440,16 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
                                 }, 1000);
 
                             } else {
-                                // Fallback to placeholder behavior if API not implemented
-                                console.log('📧 EMAIL TEMPLATE PLACEHOLDER - API not yet implemented');
-                                showNotification('Email template prepared! (Integration with email service required for actual sending)', 'success');
-                                closeModal('emailTemplateModal');
+                                // Real Error Handling
+                                console.error('❌ EMAIL TEMPLATE ERROR:', result);
+                                showNotification('Failed to send email: ' + (result.error || result.message || 'Unknown error'), 'error');
+                                // Do NOT close modal on error so user can retry
                             }
 
                         } catch (error) {
-                            console.error('❌ EMAIL TEMPLATE ERROR:', error);
-                            // Fallback to placeholder behavior
-                            showNotification('Email template prepared! (Integration with email service required for actual sending)', 'success');
-                            closeModal('emailTemplateModal');
+                            console.error('❌ EMAIL TEMPLATE NETWORK ERROR:', error);
+                            showNotification('Network error sending email: ' + error.message, 'error');
+                            // Do NOT close modal on error
                         } finally {
                             // Reset button after delay to prevent spam
                             setTimeout(() => {
