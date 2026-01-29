@@ -157,7 +157,15 @@ def webhook_reply():
         # Determine sender type - 'customer' for mail replies, 'webhook' for system
         customer_email = data.get('customer_email', data.get('from', ''))
         sender_type = 'customer' if customer_email else 'webhook'
-        sender_name = data.get('sender_name', customer_email or 'External System')
+        
+        # Try multiple possible sender name fields from n8n
+        sender_name = (
+            data.get('sender_name') or 
+            data.get('name') or 
+            data.get('from_name') or 
+            customer_email or 
+            'External System'
+        )
         is_customer = True if sender_type == 'customer' else False
         
         # Create reply

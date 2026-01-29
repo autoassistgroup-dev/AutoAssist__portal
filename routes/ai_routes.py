@@ -107,38 +107,13 @@ def display_response():
             if not ticket:
                 logger.warning(f"Ticket {ticket_id} not found, creating update anyway")
             
-            # Check if there's also a customer message to save as a reply
-            customer_message = data.get('customer_message', data.get('body', data.get('message', '')))
+            # NOTE: Customer replies are handled by /api/webhook/reply endpoint
+            # This endpoint ONLY saves the AI draft to prevent duplicate messages
             
-            # If customer message provided, save it as a reply first
-            if customer_message and customer_email and ticket:
-                reply_data = {
-                    'ticket_id': ticket_id,
-                    'message': customer_message,
-                    'sender_name': data.get('name', customer_email),
-                    'sender_email': customer_email,
-                    'sender_type': 'customer',
-                    'is_customer': True,
-                    'attachments': [],
-                    'created_at': datetime.now()
-                }
-                db.create_reply(reply_data)
-                logger.info(f"Customer reply saved for ticket {ticket_id}")
-                
-                # Update ticket status
-                db.update_ticket(ticket_id, {
-                    'has_unread_reply': True,
-                    'last_reply_at': datetime.now(),
-                    'status': 'Customer Replied',
-                    'draft': ai_response,
-                    'draft_body': ai_response,  # Added for compatibility
-                    'n8n_draft': ai_response
-                })
-            
-            # Update the ticket with the AI draft
+            # Update the ticket with the AI draft ONLY
             result = db.update_ticket(ticket_id, {
                 'draft': ai_response,
-                'draft_body': ai_response,  # Added for compatibility
+                'draft_body': ai_response,
                 'n8n_draft': ai_response,
                 'updated_at': datetime.now()
             })
