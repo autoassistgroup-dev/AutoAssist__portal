@@ -1848,6 +1848,215 @@
             transform: translateY(0);
         }
 
+        /* Vehicle & Claim Modal Specific Styles */
+        #vehicleClaimModal .modal-content {
+            width: 800px;
+            max-width: 95%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 0;
+        }
+
+        #vehicleClaimModal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        #vehicleClaimModal .modal-body {
+            padding: 1.5rem;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        #vehicleClaimModal .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        #vehicleClaimModal .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        #vehicleClaimModal .section-title i {
+            font-size: 1rem;
+        }
+
+        #vehicleClaimModal .form-group {
+            margin-bottom: 1rem;
+        }
+
+        #vehicleClaimModal .form-label {
+            display: block;
+            color: #9ca3af;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        #vehicleClaimModal .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            padding-left: 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        #vehicleClaimModal .form-input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        #vehicleClaimModal .form-input::placeholder {
+            color: #6b7280;
+        }
+
+        #vehicleClaimModal .input-wrapper {
+            position: relative;
+        }
+
+        #vehicleClaimModal .input-icon {
+            position: absolute;
+            left: 0.875rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        #vehicleClaimModal .section-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #vehicleClaimModal .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 0.75rem;
+        }
+
+        #vehicleClaimModal .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #vehicleClaimModal .checkbox-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        #vehicleClaimModal .checkbox-item input {
+            width: 18px;
+            height: 18px;
+            accent-color: #6366f1;
+        }
+
+        #vehicleClaimModal .checkbox-item span {
+            color: #d1d5db;
+            font-size: 0.85rem;
+        }
+
+        #vehicleClaimModal .upload-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.08));
+            border: 2px dashed rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #vehicleClaimModal .upload-zone:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.12));
+        }
+
+        #vehicleClaimModal .upload-zone i {
+            font-size: 2rem;
+            color: #818cf8;
+            margin-bottom: 0.5rem;
+        }
+
+        #vehicleClaimModal .btn-cancel {
+            padding: 0.625rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #d1d5db;
+            border: none;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #vehicleClaimModal .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        #vehicleClaimModal .btn-save {
+            padding: 0.625rem 1.5rem;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        #vehicleClaimModal .btn-save:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+        }
+
+        #vehicleClaimModal .btn-upload {
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #vehicleClaimModal .btn-upload:hover {
+            transform: translateY(-1px);
+        }
+
         /* Mobile responsive improvements */
         @media (max-width: 768px) {
             .message {
@@ -4370,122 +4579,166 @@
 
     <!-- Vehicle & Claim Edit Modal -->
     <div id="vehicleClaimModal" class="modal-overlay">
-        <div class="modal-content p-6 bg-[#1a1a2e] border border-white/10"
-            style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-semibold text-white">Edit Vehicle & Claim Information</h3>
-                <button id="closeVehicleClaimModal" class="text-gray-400 hover:text-white transition-colors">
-                    <i class="fas fa-times"></i>
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div
+                        style="width: 44px; height: 44px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-car-side" style="color: white; font-size: 18px;"></i>
+                    </div>
+                    <div>
+                        <h3 style="color: white; font-size: 1.125rem; font-weight: 600; margin: 0;">Vehicle & Claim
+                            Information</h3>
+                        <p style="color: #9ca3af; font-size: 0.8rem; margin: 0;">Edit vehicle details and upload claim
+                            documents</p>
+                    </div>
+                </div>
+                <button id="closeVehicleClaimModal"
+                    style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-times" style="color: #9ca3af; font-size: 16px;"></i>
                 </button>
             </div>
 
-            <!-- Vehicle Info Fields -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                    <label class="block text-gray-300 text-sm font-medium mb-1">Vehicle Registration</label>
-                    <input type="text" id="editVehicleRegistration"
-                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500"
-                        placeholder="e.g., ABC 123">
-                </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-medium mb-1">Service Date</label>
-                    <input type="date" id="editServiceDate"
-                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500">
-                </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-medium mb-1">Claim Date</label>
-                    <input type="date" id="editClaimDate"
-                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500">
-                </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-medium mb-1">Type of Claim</label>
-                    <input type="text" id="editTypeOfClaim"
-                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500"
-                        placeholder="e.g., Warranty, Repair">
-                </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-medium mb-1">VHC Link</label>
-                    <input type="url" id="editVhcLink"
-                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500"
-                        placeholder="https://...">
-                </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-medium mb-1">Days Between Service & Claim</label>
-                    <input type="number" id="editDaysBetween"
-                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500"
-                        placeholder="0">
-                </div>
-            </div>
-
-            <!-- Checklist Options -->
-            <div class="mb-4">
-                <label class="block text-gray-300 text-sm font-medium mb-2">Claim Checklist</label>
-                <div class="grid grid-cols-2 gap-2">
-                    <label class="flex items-center text-gray-300 text-sm cursor-pointer">
-                        <input type="checkbox" id="editAdvisoriesFollowed"
-                            class="mr-2 rounded bg-white/5 border-white/10">
-                        Advisories Followed
-                    </label>
-                    <label class="flex items-center text-gray-300 text-sm cursor-pointer">
-                        <input type="checkbox" id="editWithinWarranty" class="mr-2 rounded bg-white/5 border-white/10">
-                        Within Warranty
-                    </label>
-                    <label class="flex items-center text-gray-300 text-sm cursor-pointer">
-                        <input type="checkbox" id="editNewFaultCodes" class="mr-2 rounded bg-white/5 border-white/10">
-                        New Fault Codes
-                    </label>
-                    <label class="flex items-center text-gray-300 text-sm cursor-pointer">
-                        <input type="checkbox" id="editDpfLightOn" class="mr-2 rounded bg-white/5 border-white/10">
-                        DPF Light On
-                    </label>
-                    <label class="flex items-center text-gray-300 text-sm cursor-pointer">
-                        <input type="checkbox" id="editEmlLightOn" class="mr-2 rounded bg-white/5 border-white/10">
-                        EML Light On
-                    </label>
-                </div>
-            </div>
-
-            <!-- Claim Documents Section -->
-            <div class="mb-4 border-t border-white/10 pt-4">
-                <div class="flex justify-between items-center mb-2">
-                    <label class="block text-gray-300 text-sm font-medium">Claim Documents (Receipts, Photos)</label>
-                </div>
-
-                <!-- Upload Area -->
-                <div class="mb-3">
-                    <div class="flex items-center gap-2">
-                        <div class="file-input-wrapper flex-1">
-                            <div
-                                class="file-input-button w-full flex items-center justify-center py-2 bg-white/5 hover:bg-white/10 border border-dashed border-white/20 transition rounded-lg text-gray-400 cursor-pointer">
-                                <i class="fas fa-cloud-upload-alt mr-2"></i> Drop files here or click to upload
+            <!-- Body -->
+            <div class="modal-body">
+                <!-- Vehicle Details Section -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-car" style="color: #818cf8;"></i>
+                        <span>Vehicle Details</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                        <div class="form-group">
+                            <label class="form-label">Registration</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-id-card input-icon"></i>
+                                <input type="text" id="editVehicleRegistration" class="form-input"
+                                    placeholder="e.g., ABC 123">
                             </div>
-                            <input type="file" id="claimDocumentFile"
-                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xlsx,.xls" multiple>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Service Date</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-calendar-check input-icon"></i>
+                                <input type="date" id="editServiceDate" class="form-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Claim Date</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-calendar-alt input-icon"></i>
+                                <input type="date" id="editClaimDate" class="form-input">
+                            </div>
                         </div>
                     </div>
-                    <input type="text" id="claimDocumentDescription"
-                        class="w-full mt-2 px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500 text-sm"
-                        placeholder="Description (optional)">
-                    <button type="button" id="uploadClaimDocBtn"
-                        class="mt-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm">
-                        <i class="fas fa-upload mr-1"></i> Upload
-                    </button>
                 </div>
 
-                <!-- Existing Documents List -->
-                <div id="claimDocumentsList" class="space-y-2 max-h-40 overflow-y-auto">
-                    <p class="text-gray-500 text-sm">No claim documents uploaded yet.</p>
+                <!-- Claim Details Section -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-clipboard-list" style="color: #a78bfa;"></i>
+                        <span>Claim Details</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                        <div class="form-group">
+                            <label class="form-label">Type of Claim</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-tag input-icon"></i>
+                                <input type="text" id="editTypeOfClaim" class="form-input"
+                                    placeholder="e.g., Warranty, Repair">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">VHC Link</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-link input-icon"></i>
+                                <input type="url" id="editVhcLink" class="form-input" placeholder="https://...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Days Between</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-clock input-icon"></i>
+                                <input type="number" id="editDaysBetween" class="form-input" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checklist Section -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-tasks" style="color: #34d399;"></i>
+                        <span>Claim Checklist</span>
+                    </div>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="editAdvisoriesFollowed">
+                            <span>Advisories Followed</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="editWithinWarranty">
+                            <span>Within Warranty</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="editNewFaultCodes">
+                            <span>New Fault Codes</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="editDpfLightOn">
+                            <span>DPF Light On</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="editEmlLightOn">
+                            <span>EML Light On</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Documents Section -->
+                <div class="section-card" style="margin-bottom: 0;">
+                    <div class="section-title">
+                        <i class="fas fa-file-alt" style="color: #60a5fa;"></i>
+                        <span>Claim Documents</span>
+                        <span style="margin-left: auto; font-size: 0.7rem; color: #6b7280; font-weight: 400;">Receipts,
+                            Photos, Reports</span>
+                    </div>
+
+                    <!-- Upload Zone -->
+                    <div class="file-input-wrapper" style="margin-bottom: 12px;">
+                        <div class="upload-zone file-input-button">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span style="color: #d1d5db; font-size: 0.9rem;">Drop files here or click to upload</span>
+                            <span style="color: #6b7280; font-size: 0.75rem;">PDF, DOC, JPG, PNG, XLS</span>
+                        </div>
+                        <input type="file" id="claimDocumentFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xlsx,.xls"
+                            multiple>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                        <input type="text" id="claimDocumentDescription" class="form-input"
+                            style="padding-left: 1rem; flex: 1;" placeholder="Description (optional)">
+                        <button type="button" id="uploadClaimDocBtn" class="btn-upload">
+                            <i class="fas fa-upload" style="margin-right: 6px;"></i>Upload
+                        </button>
+                    </div>
+
+                    <!-- Existing Documents List -->
+                    <div id="claimDocumentsList" style="max-height: 100px; overflow-y: auto;">
+                        <p style="color: #6b7280; font-size: 0.85rem; text-align: center; padding: 8px 0;">No claim
+                            documents uploaded yet.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex justify-end space-x-3 border-t border-white/10 pt-4">
-                <button id="cancelVehicleClaim"
-                    class="px-4 py-2 bg-white/10 text-gray-300 rounded-lg hover:bg-white/20 transition">
-                    Cancel
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button id="cancelVehicleClaim" class="btn-cancel">
+                    <i class="fas fa-times" style="margin-right: 6px;"></i>Cancel
                 </button>
-                <button id="saveVehicleClaim"
-                    class="px-4 py-2 text-white rounded-lg hover:opacity-90 transition bg-indigo-600">
-                    Save Changes
+                <button id="saveVehicleClaim" class="btn-save">
+                    <i class="fas fa-save" style="margin-right: 6px;"></i>Save Changes
                 </button>
             </div>
         </div>
@@ -4949,8 +5202,7 @@
                             </div>
                         </div>
 
-                        <!-- Vehicle Information -->
-                        {% if vehicle_registration %}
+                        <!-- Vehicle Information - Always visible -->
                         <div class="mb-3">
                             <div class="flex items-center justify-between mb-2">
                                 <h3 class="text-sm font-medium text-gray-500">Vehicle & Claim Information</h3>
@@ -4961,6 +5213,8 @@
                                     <span>Edit</span>
                                 </button>
                             </div>
+
+                            {% if vehicle_registration or service_date or claim_date or type_of_claim %}
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 vehicle-info-grid">
                                 {% if vehicle_registration %}
                                 <div class="detail-card flex items-center">
@@ -4989,8 +5243,8 @@
 
                                 {% if claim_date %}
                                 <div class="detail-card flex items-center">
-                                    <div class="p-3 rounded-full bg-yellow-100 mr-4">
-                                        <i class="fas fa-calendar-alt text-yellow-600"></i>
+                                    <div class="p-3 rounded-full bg-green-100 mr-4">
+                                        <i class="fas fa-file-invoice text-green-600"></i>
                                     </div>
                                     <div>
                                         <h4 class="text-xs font-medium text-gray-500">Claim Date</h4>
@@ -5068,8 +5322,17 @@
                                 </div>
                                 {% endif %}
                             </div>
+                            {% else %}
+                            <!-- Empty state when no vehicle data exists -->
+                            <div class="detail-card p-4 text-center">
+                                <div class="text-gray-400 mb-2">
+                                    <i class="fas fa-car text-3xl"></i>
+                                </div>
+                                <p class="text-gray-500 text-sm">No vehicle or claim information added yet.</p>
+                                <p class="text-gray-400 text-xs mt-1">Click "Edit" to add details.</p>
+                            </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
 
                         <!-- Checklist Information -->
                         {% if advisories_followed or within_warranty or new_fault_codes or dpf_light_on or
