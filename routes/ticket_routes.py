@@ -603,3 +603,237 @@ def _serialize_ticket(ticket):
             serialized[key] = value
     
     return serialized
+
+@ticket_bp.route('/<ticket_id>/priority', methods=['POST'])
+def update_ticket_priority(ticket_id):
+    """Update ticket priority."""
+    try:
+        if not is_authenticated():
+            return jsonify({'success': False, 'error': 'Authentication required'}), 401
+        
+        from utils.validators import validate_ticket_id
+        if not validate_ticket_id(ticket_id):
+            return jsonify({'success': False, 'error': 'Invalid ticket ID'}), 400
+        
+        data = request.get_json()
+        priority = data.get('priority')
+        
+        if not priority:
+            return jsonify({'success': False, 'error': 'Priority is required'}), 400
+            
+        from database import get_db
+        db = get_db()
+        
+        # Update priority
+        update_data = {
+            'priority': priority,
+            'updated_at': datetime.now()
+        }
+        
+        db.update_ticket(ticket_id, update_data)
+        
+        logger.info(f"Ticket {ticket_id} priority updated to {priority} by {session.get('member_name')}")
+        
+        return jsonify({
+            'status': 'success',
+            'success': True,
+            'message': f'Priority updated to {priority}'
+        })
+        
+    except Exception as e:
+        logger.error(f"Error updating ticket priority {ticket_id}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@ticket_bp.route('/<ticket_id>/technician', methods=['POST'])
+def update_ticket_technician(ticket_id):
+    """Update assigned technician."""
+    try:
+        if not is_authenticated():
+            return jsonify({'success': False, 'error': 'Authentication required'}), 401
+            
+        from utils.validators import validate_ticket_id
+        if not validate_ticket_id(ticket_id):
+            return jsonify({'success': False, 'error': 'Invalid ticket ID'}), 400
+            
+        data = request.get_json()
+        technician_id = data.get('technician_id')
+        
+        from database import get_db
+        db = get_db()
+        
+        update_data = {
+            'assigned_technician_id': technician_id,
+            'technician_id': technician_id, # Keep both for compatibility
+            'updated_at': datetime.now()
+        }
+        
+        # If unassigning
+        if not technician_id:
+             update_data['status'] = 'New' # Revert to New or Open?
+             update_data['assigned_technician'] = None
+             msg = 'Technician unassigned'
+        else:
+            # Get technician name for history/display
+            tech = db.get_technician_by_id(technician_id)
+            if tech:
+                update_data['assigned_technician'] = tech.get('name')
+            update_data['status'] = 'Assigned'
+            msg = f"Technician assigned"
+            
+        db.update_ticket(ticket_id, update_data)
+        
+        logger.info(f"Ticket {ticket_id} technician updated to {technician_id} by {session.get('member_name')}")
+        
+        return jsonify({
+            'status': 'success',
+            'success': True,
+            'message': msg
+        })
+        
+    except Exception as e:
+        logger.error(f"Error updating ticket technician {ticket_id}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@ticket_bp.route('/<ticket_id>/assign', methods=['POST'])
+def assign_ticket(ticket_id):
+    """
+    Assign ticket (Take Over or Forward).
+    """
+    try:
+        if not is_authenticated():
+            return jsonify({'success': False, 'error': 'Authentication required'}), 401
+            
+        from utils.validators import validate_ticket_id
+        if not validate_ticket_id(ticket_id):
+            return jsonify({'success': False, 'error': 'Invalid ticket ID'}), 400
+            
+        data = request.get_json() or {}
+        is_forwarded = data.get('is_forwarded', False)
+        target_member_id = data.get('assigned_to')
+        note = data.get('note', '')
+        
+        from database import get_db
+        db = get_db()
+        
+        current_member_id = session.get('member_id')
+        current_member_name = session.get('member_name')
+        
+        update_data = {
+            'updated_at': datetime.now()
+        }
+        
+        if is_forwarded:
+            # Forwarding to another member
+            if not target_member_id:
+                return jsonify({'success': False, 'error': 'Target member required for forwarding'}), 400
+                
+            update_data['is_forwarded'] = True
+            update_data['forwarded_by'] = current_member_id
+            update_data['forwarded_to'] = target_member_id
+            update_data['forwarded_at'] = datetime.now()
+            update_data['forwarding_note'] = note
+            update_data['status'] = 'Open' # Or Forwarded?
+            
+            msg = 'Ticket forwarded successfully'
+            
+        else:
+            # Take Over (Assign to self)
+            update_data['assigned_to'] = current_member_id
+            update_data['assigned_by'] = current_member_id
+            update_data['assigned_at'] = datetime.now()
+            update_data['status'] = 'In Progress'
+            
+            msg = 'Ticket taken over successfully'
+            
+        db.update_ticket(ticket_id, update_data)
+        
+        logger.info(f"Ticket {ticket_id} assignment updated by {current_member_name}")
+        
+        return jsonify({
+            'status': 'success',
+            'success': True,
+            'message': msg
+        })
+        
+    except Exception as e:
+        logger.error(f"Error assigning ticket {ticket_id}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@ticket_bp.route('/<ticket_id>/tech-director', methods=['POST'])
+def refer_to_tech_director(ticket_id):
+    """Refer ticket to Technical Director."""
+    try:
+        if not is_authenticated():
+            return jsonify({'success': False, 'error': 'Authentication required'}), 401
+            
+        from utils.validators import validate_ticket_id
+        if not validate_ticket_id(ticket_id):
+            return jsonify({'success': False, 'error': 'Invalid ticket ID'}), 400
+            
+        from database import get_db
+        db = get_db()
+        
+        update_data = {
+            'referred_to_director': True,
+            'referred_at': datetime.now(),
+            'referred_by': session.get('member_id'),
+            'status': 'Under Review' # Or keep current?
+        }
+        
+        db.update_ticket(ticket_id, update_data)
+        
+        logger.info(f"Ticket {ticket_id} referred to tech director by {session.get('member_name')}")
+        
+        return jsonify({
+            'status': 'success',
+            'success': True,
+            'message': 'Referred to Technical Director'
+        })
+        
+    except Exception as e:
+        logger.error(f"Error referring ticket {ticket_id}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@ticket_bp.route('/<ticket_id>/important', methods=['POST'])
+def toggle_ticket_importance(ticket_id):
+    """Toggle ticket importance (Starred)."""
+    try:
+        if not is_authenticated():
+            return jsonify({'success': False, 'error': 'Authentication required'}), 401
+            
+        from utils.validators import validate_ticket_id
+        if not validate_ticket_id(ticket_id):
+            return jsonify({'success': False, 'error': 'Invalid ticket ID'}), 400
+            
+        from database import get_db
+        db = get_db()
+        
+        # Get current state
+        ticket = db.get_ticket_by_id(ticket_id)
+        if not ticket:
+             return jsonify({'success': False, 'error': 'Ticket not found'}), 404
+             
+        current_importance = ticket.get('is_important', False)
+        new_importance = not current_importance
+        
+        update_data = {
+            'is_important': new_importance,
+            'updated_at': datetime.now()
+        }
+        
+        db.update_ticket(ticket_id, update_data)
+        
+        return jsonify({
+            'status': 'success',
+            'success': True,
+            'message': 'Importance updated',
+            'is_important': new_importance
+        })
+        
+    except Exception as e:
+        logger.error(f"Error toggling importance for {ticket_id}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500

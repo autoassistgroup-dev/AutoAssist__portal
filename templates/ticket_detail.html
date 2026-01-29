@@ -11055,6 +11055,178 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
 
                 // Call test function after a short delay
                 setTimeout(testSidebarToggle, 1000);
+
+                // ==========================================
+                // NEW: Action Modules Implementation
+                // ==========================================
+                document.addEventListener('DOMContentLoaded', function () {
+                    initializeActionModules();
+                });
+
+                function initializeActionModules() {
+                    console.log('🚀 Initializing Action Modules');
+                    // Use template variable or fallback to dataset
+                    const ticketId = '{{ ticket.ticket_id }}';
+
+                    // 1. Status Dropdown Logic
+                    const statusBtn = document.getElementById('statusDropdownBtn');
+                    const statusContent = document.getElementById('statusDropdownContent');
+                    if (statusBtn && statusContent) {
+                        statusBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            // Toggle both class conventions to be safe
+                            statusContent.classList.toggle('show');
+                            if (statusContent.classList.contains('hidden')) {
+                                statusContent.classList.remove('hidden');
+                            }
+                        });
+
+                        // Close on click outside
+                        document.addEventListener('click', (e) => {
+                            if (!statusBtn.contains(e.target) && !statusContent.contains(e.target)) {
+                                statusContent.classList.remove('show');
+                            }
+                        });
+
+                        // Options
+                        document.querySelectorAll('.status-option').forEach(opt => {
+                            opt.addEventListener('click', () => {
+                                const newStatus = opt.getAttribute('data-status');
+                                updateTicketStatus(ticketId, newStatus);
+                                statusContent.classList.remove('show');
+                            });
+                        });
+                    }
+
+                    // 2. Close Ticket Logic
+                    const closeBtn = document.getElementById('closeResolvedBtn');
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', () => {
+                            if (confirm('Are you sure you want to close this ticket?')) {
+                                closeTicket(ticketId);
+                            }
+                        });
+                    }
+
+                    // 3. Take Over Logic
+                    const takeOverBtn = document.getElementById('takeOverBtn');
+                    if (takeOverBtn) {
+                        takeOverBtn.addEventListener('click', () => {
+                            takeOverTicket(ticketId);
+                        });
+                    }
+
+                    // 4. Refer to Tech Director Logic
+                    const referBtn = document.getElementById('referToTechDirectorBtn');
+                    if (referBtn) {
+                        referBtn.addEventListener('click', () => {
+                            if (confirm('Are you sure you want to refer this ticket to the Technical Director?')) {
+                                referToTechDirector(ticketId);
+                            }
+                        });
+                    }
+
+                    // 5. Important Toggle Logic
+                    const importantBtn = document.getElementById('importantBtn');
+                    if (importantBtn) {
+                        importantBtn.addEventListener('click', () => {
+                            toggleImportance(ticketId);
+                        });
+                    }
+                }
+
+                // API Helpers
+                function updateTicketStatus(ticketId, status) {
+                    fetch(`/api/tickets/${ticketId}/status`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ status: status })
+                    }).then(r => r.json()).then(data => {
+                        if (data.success) {
+                            // Show notification manually since showNotification might not be global
+                            const notif = document.createElement('div');
+                            notif.className = 'notification success show';
+                            notif.textContent = 'Status updated successfully';
+                            document.body.appendChild(notif);
+                            setTimeout(() => location.reload(), 1000);
+                        } else {
+                            alert('Error updating status: ' + data.error);
+                        }
+                    }).catch(err => alert('Network error: ' + err));
+                }
+
+                function closeTicket(ticketId) {
+                    fetch(`/api/tickets/${ticketId}/close`, {
+                        method: 'POST'
+                    }).then(r => r.json()).then(data => {
+                        if (data.success) {
+                            const notif = document.createElement('div');
+                            notif.className = 'notification success show';
+                            notif.textContent = 'Ticket closed successfully';
+                            document.body.appendChild(notif);
+                            setTimeout(() => location.reload(), 1000);
+                        } else {
+                            alert('Error closing ticket: ' + data.error);
+                        }
+                    }).catch(err => alert('Network error: ' + err));
+                }
+
+                function takeOverTicket(ticketId) {
+                    fetch(`/api/tickets/${ticketId}/assign`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ is_forwarded: false })
+                    }).then(r => r.json()).then(data => {
+                        if (data.success) {
+                            const notif = document.createElement('div');
+                            notif.className = 'notification success show';
+                            notif.textContent = 'Ticket taken over successfully';
+                            document.body.appendChild(notif);
+                            setTimeout(() => location.reload(), 1000);
+                        } else {
+                            alert('Error taking over ticket: ' + (data.error || data.message));
+                        }
+                    }).catch(err => alert('Network error: ' + err));
+                }
+
+                function referToTechDirector(ticketId) {
+                    fetch(`/api/tickets/${ticketId}/tech-director`, {
+                        method: 'POST'
+                    }).then(r => r.json()).then(data => {
+                        if (data.success) {
+                            const notif = document.createElement('div');
+                            notif.className = 'notification success show';
+                            notif.textContent = 'Referred to Technical Director';
+                            document.body.appendChild(notif);
+                            setTimeout(() => location.reload(), 1000);
+                        } else {
+                            alert('Error referring ticket: ' + (data.error || data.message));
+                        }
+                    }).catch(err => alert('Network error: ' + err));
+                }
+
+                function toggleImportance(ticketId) {
+                    fetch(`/api/tickets/${ticketId}/important`, {
+                        method: 'POST'
+                    }).then(r => r.json()).then(data => {
+                        if (data.success) {
+                            // Update UI immediately
+                            const btn = document.getElementById('importantBtn');
+                            const icon = btn.querySelector('i');
+                            if (btn && icon) {
+                                if (data.is_important) {
+                                    btn.classList.add('important');
+                                    icon.className = 'fas fa-star';
+                                } else {
+                                    btn.classList.remove('important');
+                                    icon.className = 'far fa-star';
+                                }
+                            }
+                        } else {
+                            alert('Error updating importance: ' + (data.error || data.message));
+                        }
+                    }).catch(err => alert('Network error: ' + err));
+                }
             </script>
         </div> <!-- Close main-content container -->
     </div> <!-- Close app-container -->

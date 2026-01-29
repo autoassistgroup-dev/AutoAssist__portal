@@ -225,12 +225,33 @@ def ticket_detail(ticket_id):
     technicians = list(db.technicians.find({"is_active": True}))
     ticket_statuses = list(db.ticket_statuses.find({"is_active": True}).sort("order", 1))
     
+    is_tech_director = current_member.get('role') == 'Technical Director'
+    
     return render_template('ticket_detail.html',
                           ticket=ticket,
                           replies=replies,
                           current_member=current_member,
                           current_user=current_member.get('name') or 'User',
                           current_user_role=current_member.get('role') or 'User',
+                          is_tech_director=is_tech_director,
+                          
+                          # Unpack common ticket fields for template convenience
+                          customer_title=ticket.get('customer_title'),
+                          customer_first_name=ticket.get('customer_first_name'),
+                          customer_surname=ticket.get('customer_surname'),
+                          vehicle_registration=ticket.get('vehicle_registration'),
+                          service_date=ticket.get('service_date'),
+                          claim_date=ticket.get('claim_date'),
+                          
+                          # Technician details
+                          technician_name=ticket.get('assigned_technician'),
+                          technician_id=ticket.get('technician_id') or ticket.get('assigned_technician_id'),
+                          
+                          # Outcome details
+                          outcome_category=ticket.get('outcome_category'),
+                          outcome_notes=ticket.get('outcome_notes'),
+                          revisit_carried_out=ticket.get('revisit_carried_out'),
+                          
                           members=members,
                           technicians=technicians,
                           ticket_statuses=ticket_statuses)
