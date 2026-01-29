@@ -925,14 +925,17 @@
 <body>
     <!-- Background -->
     <div class="bg-gradient"></div>
+    {% if system_settings.show_background %}
     <div class="bg-image"></div>
+    {% endif %}
 
     <!-- Navigation -->
     <nav class="navbar">
         <div class="flex items-center justify-between">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="/" class="flex items-center">
+                <a href="{% if current_user_role == 'Technical Director' %}/tech-director-dashboard{% else %}/{% endif %}"
+                    class="flex items-center">
                     <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
                 </a>
             </div>
@@ -1049,207 +1052,255 @@
             </div>
         </div>
 
-        <!-- Breakdown Cards -->
-        <div class="breakdown-grid">
-            <!-- Priority Breakdown -->
-            <div class="breakdown-card">
-                <div class="breakdown-title">Priorities</div>
-                <div class="breakdown-list">
-                    {% for priority, count in priorities.items() %}
-                    <div class="breakdown-item">
-                        <span
-                            class="breakdown-badge {% if priority == 'Urgent' %}badge-urgent{% elif priority == 'Fast' or priority == 'High' %}badge-high{% elif priority == 'Medium' %}badge-medium{% else %}badge-low{% endif %}">
-                            {{ priority }}
-                        </span>
-                        <span class="breakdown-count">{{ count }}</span>
-                    </div>
-                    {% endfor %}
-                </div>
+        <!-- Settings Section -->
+        <div class="glass-section mt-8">
+            <div class="section-header">
+                <i class="fas fa-sliders-h section-icon"
+                    style="background: rgba(16, 185, 129, 0.15); color: #10b981;"></i>
+                <h2 class="section-title">System Settings</h2>
             </div>
 
-            <!-- Type Breakdown -->
-            <div class="breakdown-card">
-                <div class="breakdown-title">Types</div>
-                <div class="breakdown-list">
-                    {% for cls, count in classifications.items() %}
-                    <div class="breakdown-item">
-                        <span
-                            class="breakdown-badge {% if cls == 'Technical Issue' %}badge-technical{% elif cls == 'Payment' %}badge-payment{% elif cls == 'Account' %}badge-account{% else %}badge-general{% endif %}">
-                            {{ cls }}
-                        </span>
-                        <span class="breakdown-count">{{ count }}</span>
+            <div class="settings-grid" style="display: grid; gap: 20px;">
+                <div class="setting-item glass-card"
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+                    <div class="setting-info">
+                        <h3 class="setting-title"
+                            style="font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 4px;">Enable
+                            Background Wallpaper</h3>
+                        <p class="setting-desc" style="font-size: 13px; color: rgba(255, 255, 255, 0.5);">Show the
+                            cosmic background on all internal pages (Login/Portal always have background)</p>
                     </div>
-                    {% endfor %}
+                    <label class="toggle-switch"
+                        style="position: relative; display: inline-block; width: 50px; height: 26px;">
+                        <input type="checkbox" id="bgToggle" onchange="toggleBackground(this.checked)">
+                        <span class="slider round"
+                            style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255, 255, 255, 0.1); border-radius: 34px; transition: .4s;"></span>
+                        <style>
+                            .slider:before {
+                                position: absolute;
+                                content: "";
+                                height: 18px;
+                                width: 18px;
+                                left: 4px;
+                                bottom: 4px;
+                                background-color: white;
+                                border-radius: 50%;
+                                transition: .4s;
+                            }
+
+                            input:checked+.slider {
+                                background-color: #ff2d55;
+                            }
+
+                            input:checked+.slider:before {
+                                transform: translateX(24px);
+                            }
+                        </style>
+                    </label>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
 
-        <!-- Recent Tickets -->
-        <div class="glass-card">
-            <div class="card-header">
-                <h2 class="card-title">
-                    <i class="fas fa-list-ul"></i>Recent Tickets
-                </h2>
-                <span class="card-badge">Total: {{ total_tickets }}</span>
-            </div>
-            <div class="card-body">
-                <div class="ticket-list" id="ticketsContainer">
-                    {% for ticket in tickets %}
-                    <a href="/ticket/{{ ticket.ticket_id }}"
-                        class="ticket-item {% if ticket.is_important %}important{% endif %} {% if loop.index > 5 %}hidden{% endif %}"
-                        data-ticket-index="{{ loop.index }}">
-                        <div class="ticket-content">
-                            <div class="ticket-meta">
-                                <span class="ticket-id">#{{ ticket.ticket_id }}</span>
-                                <span
-                                    class="ticket-badge {% if ticket.priority == 'Urgent' %}badge-urgent{% elif ticket.priority == 'Fast' %}badge-high{% elif ticket.priority == 'Medium' %}badge-medium{% else %}badge-low{% endif %}">
-                                    {{ ticket.priority }}
-                                </span>
-                                <span
-                                    class="ticket-badge {% if ticket.status == 'Open' %}badge-technical{% else %}badge-low{% endif %}">
-                                    {{ ticket.status }}
-                                </span>
-                                {% if ticket.classification %}
-                                <span class="ticket-badge badge-general">{{ ticket.classification }}</span>
-                                {% endif %}
-                            </div>
-                            <div class="ticket-title">{{ ticket.subject }}</div>
-                            <div class="ticket-body">{{ ticket.body }}</div>
-                            <div class="ticket-info">
-                                <span><i class="fas fa-user"></i>{{ ticket.name }}</span>
-                                <span><i class="fas fa-envelope"></i>{{ ticket.email }}</span>
-                                <span><i class="fas fa-clock"></i>{{ ticket.formatted_date }}</span>
-                            </div>
-                        </div>
-                        <div class="ticket-actions" onclick="event.preventDefault(); event.stopPropagation();">
-                            <button class="ticket-action-btn star" onclick="event.preventDefault();"
-                                title="Mark Important">
-                                <i class="fas fa-star{% if not ticket.is_important %}-o{% endif %}"></i>
-                            </button>
-                            <button class="ticket-action-btn delete"
-                                onclick="event.preventDefault(); deleteTicket('{{ ticket.ticket_id }}');"
-                                title="Delete">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </a>
-                    {% endfor %}
+    <!-- Breakdown Cards -->
+    <div class="breakdown-grid">
+        <!-- Priority Breakdown -->
+        <div class="breakdown-card">
+            <div class="breakdown-title">Priorities</div>
+            <div class="breakdown-list">
+                {% for priority, count in priorities.items() %}
+                <div class="breakdown-item">
+                    <span
+                        class="breakdown-badge {% if priority == 'Urgent' %}badge-urgent{% elif priority == 'Fast' or priority == 'High' %}badge-high{% elif priority == 'Medium' %}badge-medium{% else %}badge-low{% endif %}">
+                        {{ priority }}
+                    </span>
+                    <span class="breakdown-count">{{ count }}</span>
                 </div>
-            </div>
-            {% if tickets|length > 5 %}
-            <div class="show-more-section">
-                <button id="showMoreTickets" class="show-more-btn">
-                    <i class="fas fa-chevron-down"></i>
-                    <span id="showMoreText">Show More Tickets ({{ tickets|length - 5 }} hidden)</span>
-                </button>
-            </div>
-            {% endif %}
-        </div>
-
-        <!-- Technician Management -->
-        <div class="glass-card">
-            <div class="card-header">
-                <h2 class="card-title">
-                    <i class="fas fa-tools"></i>Technician Management
-                </h2>
-                <button class="btn-primary" id="addTechnicianBtn">
-                    <i class="fas fa-plus"></i>Add Technician
-                </button>
-            </div>
-            <div class="card-body">
-                <div class="management-grid" id="techniciansContainer">
-                    {% for technician in technicians %}
-                    <div class="management-card" data-technician-id="{{ technician._id }}">
-                        <div class="management-card-header">
-                            <div class="management-card-info">
-                                <h4>{{ technician.name }}</h4>
-                                <p><i class="fas fa-calendar-plus"></i> Added: {{
-                                    technician.created_at.strftime('%Y-%m-%d') if technician.created_at else 'N/A' }}
-                                </p>
-                            </div>
-                            <div class="management-card-actions">
-                                <button class="management-action-btn edit" data-technician-id="{{ technician._id }}"
-                                    data-technician-name="{{ technician.name }}">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                {% if technician.is_active %}
-                                <button class="management-action-btn deactivate"
-                                    data-technician-id="{{ technician._id }}"
-                                    data-technician-name="{{ technician.name }}">
-                                    <i class="fas fa-user-times"></i>
-                                </button>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <span class="status-badge {% if technician.is_active %}active{% else %}inactive{% endif %}">
-                            <i class="fas fa-{% if technician.is_active %}check{% else %}times{% endif %}-circle"></i>
-                            {{ 'Active' if technician.is_active else 'Inactive' }}
-                        </span>
-                    </div>
-                    {% endfor %}
-                </div>
+                {% endfor %}
             </div>
         </div>
 
-        <!-- Member Management -->
-        <div class="glass-card">
-            <div class="card-header">
-                <h2 class="card-title">
-                    <i class="fas fa-users-cog"></i>Member Management
-                </h2>
-                <button class="btn-primary" id="addMemberBtnMain">
-                    <i class="fas fa-plus"></i>Add Member
-                </button>
+        <!-- Type Breakdown -->
+        <div class="breakdown-card">
+            <div class="breakdown-title">Types</div>
+            <div class="breakdown-list">
+                {% for cls, count in classifications.items() %}
+                <div class="breakdown-item">
+                    <span
+                        class="breakdown-badge {% if cls == 'Technical Issue' %}badge-technical{% elif cls == 'Payment' %}badge-payment{% elif cls == 'Account' %}badge-account{% else %}badge-general{% endif %}">
+                        {{ cls }}
+                    </span>
+                    <span class="breakdown-count">{{ count }}</span>
+                </div>
+                {% endfor %}
             </div>
-            <div class="card-body">
-                <div class="ticket-list" id="membersMainList">
-                    {% for member in members %}
-                    <div class="member-item" data-member-id="{{ member._id }}">
-                        <div class="member-info">
-                            <div class="member-avatar">
-                                {{ '👩' if member.gender == 'female' else '👨' }}
-                            </div>
-                            <div class="member-details">
-                                <h5>{{ member.name }}</h5>
-                                <p>{{ member.role }} · {{ member.user_id }}</p>
-                            </div>
-                        </div>
-                        <div class="member-actions">
+        </div>
+    </div>
+
+    <!-- Recent Tickets -->
+    <div class="glass-card">
+        <div class="card-header">
+            <h2 class="card-title">
+                <i class="fas fa-list-ul"></i>Recent Tickets
+            </h2>
+            <span class="card-badge">Total: {{ total_tickets }}</span>
+        </div>
+        <div class="card-body">
+            <div class="ticket-list" id="ticketsContainer">
+                {% for ticket in tickets %}
+                <a href="/ticket/{{ ticket.ticket_id }}"
+                    class="ticket-item {% if ticket.is_important %}important{% endif %} {% if loop.index > 5 %}hidden{% endif %}"
+                    data-ticket-index="{{ loop.index }}">
+                    <div class="ticket-content">
+                        <div class="ticket-meta">
+                            <span class="ticket-id">#{{ ticket.ticket_id }}</span>
                             <span
-                                class="role-badge {% if member.role == 'Administrator' %}admin{% elif member.role == 'Technical Director' %}director{% else %}member{% endif %}">
-                                {{ member.role }}
+                                class="ticket-badge {% if ticket.priority == 'Urgent' %}badge-urgent{% elif ticket.priority == 'Fast' %}badge-high{% elif ticket.priority == 'Medium' %}badge-medium{% else %}badge-low{% endif %}">
+                                {{ ticket.priority }}
                             </span>
-                            <button class="management-action-btn edit" data-member-id="{{ member._id }}">
+                            <span
+                                class="ticket-badge {% if ticket.status == 'Open' %}badge-technical{% else %}badge-low{% endif %}">
+                                {{ ticket.status }}
+                            </span>
+                            {% if ticket.classification %}
+                            <span class="ticket-badge badge-general">{{ ticket.classification }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="ticket-title">{{ ticket.subject }}</div>
+                        <div class="ticket-body">{{ ticket.body }}</div>
+                        <div class="ticket-info">
+                            <span><i class="fas fa-user"></i>{{ ticket.name }}</span>
+                            <span><i class="fas fa-envelope"></i>{{ ticket.email }}</span>
+                            <span><i class="fas fa-clock"></i>{{ ticket.formatted_date }}</span>
+                        </div>
+                    </div>
+                    <div class="ticket-actions" onclick="event.preventDefault(); event.stopPropagation();">
+                        <button class="ticket-action-btn star" onclick="event.preventDefault();" title="Mark Important">
+                            <i class="fas fa-star{% if not ticket.is_important %}-o{% endif %}"></i>
+                        </button>
+                        <button class="ticket-action-btn delete"
+                            onclick="event.preventDefault(); deleteTicket('{{ ticket.ticket_id }}');" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% if tickets|length > 5 %}
+        <div class="show-more-section">
+            <button id="showMoreTickets" class="show-more-btn">
+                <i class="fas fa-chevron-down"></i>
+                <span id="showMoreText">Show More Tickets ({{ tickets|length - 5 }} hidden)</span>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Technician Management -->
+    <div class="glass-card">
+        <div class="card-header">
+            <h2 class="card-title">
+                <i class="fas fa-tools"></i>Technician Management
+            </h2>
+            <button class="btn-primary" id="addTechnicianBtn">
+                <i class="fas fa-plus"></i>Add Technician
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="management-grid" id="techniciansContainer">
+                {% for technician in technicians %}
+                <div class="management-card" data-technician-id="{{ technician._id }}">
+                    <div class="management-card-header">
+                        <div class="management-card-info">
+                            <h4>{{ technician.name }}</h4>
+                            <p><i class="fas fa-calendar-plus"></i> Added: {{
+                                technician.created_at.strftime('%Y-%m-%d') if technician.created_at else 'N/A' }}
+                            </p>
+                        </div>
+                        <div class="management-card-actions">
+                            <button class="management-action-btn edit" data-technician-id="{{ technician._id }}"
+                                data-technician-name="{{ technician.name }}">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            {% if member.user_id not in ['admin001', 'marc001'] %}
-                            <button class="management-action-btn deactivate" data-member-id="{{ member._id }}">
-                                <i class="fas fa-trash"></i>
+                            {% if technician.is_active %}
+                            <button class="management-action-btn deactivate" data-technician-id="{{ technician._id }}"
+                                data-technician-name="{{ technician.name }}">
+                                <i class="fas fa-user-times"></i>
                             </button>
                             {% endif %}
                         </div>
                     </div>
-                    {% endfor %}
+                    <span class="status-badge {% if technician.is_active %}active{% else %}inactive{% endif %}">
+                        <i class="fas fa-{% if technician.is_active %}check{% else %}times{% endif %}-circle"></i>
+                        {{ 'Active' if technician.is_active else 'Inactive' }}
+                    </span>
                 </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
-                <!-- Portal Access Guide -->
-                <div class="access-guide">
-                    <div class="access-guide-title">Portal Access Guide:</div>
-                    <div class="access-item">
-                        <span class="access-dot blue"></span>
-                        <span><strong>Administrator:</strong> Admin Portal only</span>
+    <!-- Member Management -->
+    <div class="glass-card">
+        <div class="card-header">
+            <h2 class="card-title">
+                <i class="fas fa-users-cog"></i>Member Management
+            </h2>
+            <button class="btn-primary" id="addMemberBtnMain">
+                <i class="fas fa-plus"></i>Add Member
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="ticket-list" id="membersMainList">
+                {% for member in members %}
+                <div class="member-item" data-member-id="{{ member._id }}">
+                    <div class="member-info">
+                        <div class="member-avatar">
+                            {{ '👩' if member.gender == 'female' else '👨' }}
+                        </div>
+                        <div class="member-details">
+                            <h5>{{ member.name }}</h5>
+                            <p>{{ member.role }} · {{ member.user_id }}</p>
+                        </div>
                     </div>
-                    <div class="access-item">
-                        <span class="access-dot orange"></span>
-                        <span><strong>Technical Director:</strong> Tech Portal only</span>
+                    <div class="member-actions">
+                        <span
+                            class="role-badge {% if member.role == 'Administrator' %}admin{% elif member.role == 'Technical Director' %}director{% else %}member{% endif %}">
+                            {{ member.role }}
+                        </span>
+                        <button class="management-action-btn edit" data-member-id="{{ member._id }}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        {% if member.user_id not in ['admin001', 'marc001'] %}
+                        <button class="management-action-btn deactivate" data-member-id="{{ member._id }}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        {% endif %}
                     </div>
-                    <div class="access-item">
-                        <span class="access-dot green"></span>
-                        <span><strong>Other Roles:</strong> User Portal</span>
-                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Portal Access Guide -->
+            <div class="access-guide">
+                <div class="access-guide-title">Portal Access Guide:</div>
+                <div class="access-item">
+                    <span class="access-dot blue"></span>
+                    <span><strong>Administrator:</strong> Admin Portal only</span>
+                </div>
+                <div class="access-item">
+                    <span class="access-dot orange"></span>
+                    <span><strong>Technical Director:</strong> Tech Portal only</span>
+                </div>
+                <div class="access-item">
+                    <span class="access-dot green"></span>
+                    <span><strong>Other Roles:</strong> User Portal</span>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Template data -->
@@ -1278,6 +1329,54 @@
             const mobileMenu = document.getElementById('mobileMenu');
             if (mobileMenu) mobileMenu.classList.toggle('open');
         }
+
+        // Toggle Background Setting
+        async function fetchSettings() {
+            try {
+                const response = await fetch('/api/system-settings');
+                const data = await response.json();
+                if (data.success) {
+                    const bgToggle = document.getElementById('bgToggle');
+                    if (bgToggle) {
+                        bgToggle.checked = data.settings.show_background;
+                    }
+                    applyBackgroundSetting(data.settings.show_background);
+                }
+            } catch (error) {
+                console.error('Error fetching settings:', error);
+            }
+        }
+
+        async function toggleBackground(enabled) {
+            try {
+                const response = await fetch('/api/system-settings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ show_background: enabled })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    applyBackgroundSetting(enabled);
+                    showToast('Background setting updated successfully');
+                }
+            } catch (error) {
+                console.error('Error saving settings:', error);
+            }
+        }
+
+        function applyBackgroundSetting(show) {
+            // Apply immediately to current page
+            const bgImage = document.querySelector('.bg-image');
+            if (bgImage) {
+                bgImage.style.display = show ? 'block' : 'none';
+            }
+        }
+
+        // Initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchSettings();
+        });
 
         // Delete ticket
         async function deleteTicket(ticketId) {

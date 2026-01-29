@@ -1677,7 +1677,75 @@ class MongoDB:
             logging.error(f"❌ Error getting common document {document_id}: {e}")
             return None
     
+    
     def update_common_document(self, document_id, update_data):
+        """Update a common document"""
+        try:
+            from bson.objectid import ObjectId
+            if not ObjectId.is_valid(document_id):
+                return False
+                
+            update_data['updated_at'] = datetime.now()
+            
+            result = self.common_documents.update_one(
+                {'_id': ObjectId(document_id)},
+                {'$set': update_data}
+            )
+            
+            return result.modified_count > 0
+        except Exception as e:
+            logging.error(f"❌ Error updating common document {document_id}: {e}")
+            return False
+
+    # ============ SYSTEM SETTINGS METHODS ============
+
+    def get_system_settings(self):
+        """Get system-wide settings, creating default if not exists"""
+        try:
+            # Use 'settings' collection, create if needed
+            if not hasattr(self, 'settings'):
+                self.settings = self.db.settings
+            
+            settings = self.settings.find_one({'_id': 'global_settings'})
+            
+            if not settings:
+                # Create default settings
+                default_settings = {
+                    '_id': 'global_settings',
+                    'show_background': True,
+                    'updated_at': datetime.now(),
+                    'updated_by': 'system'
+                }
+                self.settings.insert_one(default_settings)
+                return default_settings
+            
+            return settings
+        except Exception as e:
+            logging.error(f"❌ Error getting system settings: {e}")
+            # Return default fallback to avoid breaking app
+            return {'show_background': True}
+
+    def update_system_settings(self, updates):
+        """Update system settings"""
+        try:
+            if not updates:
+                return False
+                
+            if not hasattr(self, 'settings'):
+                self.settings = self.db.settings
+                
+            updates['updated_at'] = datetime.now()
+            
+            result = self.settings.update_one(
+                {'_id': 'global_settings'},
+                {'$set': updates},
+                upsert=True
+            )
+            
+            return True
+        except Exception as e:
+            logging.error(f"❌ Error updating system settings: {e}")
+            return False
         """Update a common document"""
         try:
             from bson.objectid import ObjectId

@@ -4149,12 +4149,14 @@
 
 <body class="min-h-screen max-w-screen-ultra">
     <!-- Animated Gradient Background -->
+    {% if system_settings.show_background %}
     <div class="background-layer">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
         <div class="gradient-orb orb-3"></div>
         <div class="gradient-orb orb-4"></div>
     </div>
+    {% endif %}
 
     <!-- Navigation -->
     <!-- Navigation -->
@@ -4162,7 +4164,8 @@
         <div class="flex items-center justify-between">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="/" class="flex items-center">
+                <a href="{% if current_user_role == 'Technical Director' %}/tech-director-dashboard{% else %}/{% endif %}"
+                    class="flex items-center">
                     <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
                 </a>
             </div>
