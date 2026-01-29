@@ -7,170 +7,589 @@
     <title>Technicians Management - AutoAssistGroup Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== MODERN PINK GLASSMORPHISM THEME ===== */
-        :root {
-            --primary: #ff758f;
-            --secondary: #ff7eb3;
-            --primary-dark: #ff6b81;
-            --primary-light: #ffe0e9;
-            --glass-white: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --glass-shadow: rgba(255, 117, 143, 0.1);
-            --glass-blur: 15px;
-            --bg-gradient-start: #ffe0e9;
-            --bg-gradient-middle: #fff0f6;
-            --bg-gradient-end: #e8f4f8;
+        /* ===== DARK PROFESSIONAL THEME ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Poppins', sans-serif !important;
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-middle) 50%,
-                    var(--bg-gradient-end) 100%);
-            color: #4b5563;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
+            background: #0a0a0f;
+            color: #fff;
         }
 
-        /* Animated Gradient Background */
-        .background-layer {
+        /* Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(180deg, #0a0a0f 0%, #141420 100%);
+        }
+
+        .bg-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-            animation: float 20s infinite ease-in-out;
-            mix-blend-mode: soft-light;
-        }
-
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 117, 143, 0.4), rgba(255, 126, 179, 0.2));
-            top: -100px;
-            left: -100px;
-        }
-
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 107, 129, 0.3), rgba(255, 71, 87, 0.2));
-            top: 50%;
-            right: -50px;
-            animation-delay: -5s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
+            background-image: url('/static/css/portal_bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
         }
 
         /* ===== NAVBAR ===== */
-        nav {
-            background: rgba(255, 255, 255, 0.15) !important;
-            backdrop-filter: blur(25px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
-            min-height: auto;
-            position: sticky;
+        .navbar {
+            position: fixed;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(255, 117, 143, 0.1) !important;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 12px 24px;
+        }
+
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 12px 48px;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .nav-link {
-            padding: 0.5rem 1rem !important;
-            border-radius: 0.75rem !important;
-            color: #4b5563 !important;
-            font-weight: 500 !important;
-            font-size: 0.875rem !important;
-            transition: all 0.3s ease !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            background: rgba(255, 255, 255, 0.3) !important;
-            backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .nav-link:hover {
-            background: rgba(255, 117, 143, 0.2) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.2);
-            border-color: var(--primary) !important;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: #fff;
         }
 
         .nav-link-active {
-            background: rgba(255, 117, 143, 0.25) !important;
-            color: var(--primary-dark) !important;
-            border-color: rgba(255, 117, 143, 0.4) !important;
-            box-shadow: 0 2px 10px rgba(255, 117, 143, 0.2);
+            background: rgba(255, 117, 143, 0.15);
+            border-color: rgba(255, 117, 143, 0.3);
+            color: #ff758f;
         }
 
-        /* ===== GLASS COMPONENTS ===== */
-        .glass-panel,
-        .glass-card,
-        .technician-card,
+        .nav-link i {
+            margin-right: 6px;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
         .main-container {
-            background: rgba(255, 255, 255, 0.25) !important;
-            backdrop-filter: blur(20px) !important;
-            -webkit-backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
-            border-radius: 1rem !important;
-            box-shadow: 0 8px 32px rgba(255, 117, 143, 0.1) !important;
-            transition: all 0.3s ease;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            padding-top: 80px;
+            padding-bottom: 60px;
         }
 
-        .glass-card:hover,
-        .technician-card:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.35) !important;
-            box-shadow: 0 12px 40px rgba(255, 117, 143, 0.15) !important;
-            border-color: var(--primary) !important;
+        @media (min-width: 768px) {
+            .main-container {
+                padding: 32px 48px;
+                padding-top: 80px;
+            }
         }
 
-        /* ===== GRADIENT TEXT ===== */
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        /* ===== HEADER SECTION ===== */
+        .header-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .header-content {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+            background: linear-gradient(135deg, #ff758f 0%, #ff7eb3 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        /* ===== BUTTONS ===== */
-        .btn-gradient,
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
-            color: white !important;
-            border: none !important;
-            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.4) !important;
-            transition: all 0.3s ease !important;
+        .page-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
         }
 
-        .btn-gradient:hover,
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background: rgba(255, 117, 143, 0.2);
+            border: 1px solid rgba(255, 117, 143, 0.4);
+            border-radius: 10px;
+            color: #ff758f;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .btn-primary {
+                width: auto;
+            }
+        }
+
         .btn-primary:hover {
-            background: linear-gradient(135deg, var(--primary-dark), var(--secondary)) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 117, 143, 0.5) !important;
+            background: rgba(255, 117, 143, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary i {
+            margin-right: 8px;
+        }
+
+        /* ===== STATS GRID ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+            font-size: 16px;
+        }
+
+        .stat-icon.blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+        }
+
+        .stat-icon.green {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+        }
+
+        .stat-icon.orange {
+            background: rgba(249, 115, 22, 0.15);
+            color: #f97316;
+        }
+
+        .stat-icon.purple {
+            background: rgba(168, 85, 247, 0.15);
+            color: #a855f7;
+        }
+
+        .stat-info h3 {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 4px;
+        }
+
+        .stat-info p {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stat-info p.pink {
+            color: #ff758f;
+        }
+
+        .stat-info p.green {
+            color: #22c55e;
+        }
+
+        .stat-info p.orange {
+            color: #f97316;
+        }
+
+        .stat-info p.purple {
+            color: #a855f7;
+        }
+
+        /* ===== MAIN CONTENT CARD ===== */
+        .content-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .content-header {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        @media (min-width: 640px) {
+            .content-header {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .content-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .content-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 10px 14px;
+            width: 100%;
+            max-width: 260px;
+        }
+
+        .search-box i {
+            color: rgba(255, 255, 255, 0.4);
+            margin-right: 10px;
+            font-size: 13px;
+        }
+
+        .search-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 13px;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .refresh-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .refresh-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ff758f;
+        }
+
+        .content-body {
+            padding: 24px;
+        }
+
+        /* ===== TECHNICIAN GRID ===== */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .tech-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        /* ===== TECHNICIAN CARD ===== */
+        .tech-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .tech-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 117, 143, 0.2) 0%, rgba(255, 126, 179, 0.2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 24px;
+            color: #ff758f;
+        }
+
+        .tech-content {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .status-badge.active {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+        }
+
+        .status-badge.inactive {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+
+        .status-badge i {
+            margin-right: 5px;
+            font-size: 10px;
+        }
+
+        .tech-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .tech-role {
+            font-size: 13px;
+            font-weight: 500;
+            color: #3b82f6;
+            margin-bottom: 8px;
+        }
+
+        .tech-email {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .tech-email i {
+            margin-right: 6px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 11px;
+        }
+
+        .tech-meta {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 14px;
+            margin-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .tech-meta span {
+            display: flex;
+            align-items: center;
+        }
+
+        .tech-meta i {
+            margin-right: 5px;
+            font-size: 10px;
+        }
+
+        .tech-actions {
+            display: flex;
+            gap: 8px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 14px;
+        }
+
+        .tech-action-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tech-action-btn.edit {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .tech-action-btn.edit:hover {
+            background: #3b82f6;
+            color: #fff;
+        }
+
+        .tech-action-btn.deactivate {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .tech-action-btn.deactivate:hover {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .tech-action-btn.activate {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .tech-action-btn.activate:hover {
+            background: #22c55e;
+            color: #fff;
+        }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px dashed rgba(255, 117, 143, 0.2);
+            border-radius: 12px;
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 117, 143, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: rgba(255, 117, 143, 0.5);
+        }
+
+        .empty-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .empty-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 400px;
+            margin: 0 auto 24px;
+        }
+
+        /* ===== USER AVATAR ===== */
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255, 117, 143, 0.15);
+            border: 1px solid rgba(255, 117, 143, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #ff758f;
         }
 
         /* ===== MODAL ===== */
@@ -181,44 +600,257 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 1100;
+            z-index: 200;
             align-items: center;
             justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 20px;
         }
 
         .modal.show {
             display: flex;
         }
 
-        .modal .modal-content {
-            background: rgba(255, 255, 255, 0.85) !important;
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 1.5rem;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 90%;
+        .modal-content {
+            background: #16161f;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 480px;
             max-height: 90vh;
             overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+        }
+
+        .form-label .required {
+            color: #ef4444;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 117, 143, 0.5);
+        }
+
+        .form-select {
+            cursor: pointer;
+        }
+
+        .form-select option {
+            background: #1a1a24;
+            color: #fff;
+        }
+
+        .form-hint {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 6px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 12px;
+            padding: 20px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .btn-cancel {
+            flex: 1;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .btn-submit {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(255, 117, 143, 0.2);
+            border: 1px solid rgba(255, 117, 143, 0.4);
+            border-radius: 10px;
+            color: #ff758f;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background: rgba(255, 117, 143, 0.3);
+        }
+
+        /* Confirm Modal */
+        .confirm-modal .modal-content {
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .confirm-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(234, 179, 8, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 28px;
+            color: #eab308;
+        }
+
+        .confirm-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .confirm-message {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 24px;
+        }
+
+        .confirm-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .confirm-actions button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-confirm-cancel {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .btn-confirm-cancel:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .btn-confirm-action {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #ef4444;
+        }
+
+        .btn-confirm-action:hover {
+            background: #ef4444;
+            color: #fff;
         }
 
         /* ===== NOTIFICATION ===== */
         .notification {
             position: fixed;
-            top: 100px;
+            top: 80px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 0.75rem;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 8px 32px rgba(255, 117, 143, 0.2);
+            z-index: 300;
+            padding: 16px 20px;
+            border-radius: 12px;
+            min-width: 280px;
             transform: translateX(150%);
             transition: transform 0.3s ease;
-            z-index: 1200;
-            min-width: 300px;
+            backdrop-filter: blur(20px);
         }
 
         .notification.show {
@@ -226,429 +858,373 @@
         }
 
         .notification.success {
-            border-left: 4px solid #10b981;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
         }
 
         .notification.error {
-            border-left: 4px solid #ef4444;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
-        /* ===== LAYOUT ADJUSTMENTS ===== */
-        .compact-header {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-        }
-
-        .stats-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .tech-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .tech-grid {
-                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            }
-        }
-
-        .tech-card {
+        .notification-content {
             display: flex;
-            flex-direction: column;
-            height: 100%;
+            align-items: flex-start;
         }
 
-        .tech-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 2rem;
-            background: linear-gradient(135deg, var(--primary-light), white);
-            box-shadow: 0 4px 20px rgba(255, 117, 143, 0.2);
+        .notification-icon {
+            margin-right: 12px;
+            font-size: 16px;
         }
 
-        .tech-details {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+        .notification.success .notification-icon {
+            color: #22c55e;
         }
 
-        .tech-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: auto;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            width: fit-content;
-            margin: 0 auto 0.5rem;
-        }
-
-        .status-active {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-        }
-
-        .status-inactive {
-            background: rgba(239, 68, 68, 0.1);
+        .notification.error .notification-icon {
             color: #ef4444;
         }
 
-        /* Empty State */
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem 2rem;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 1rem;
-            border: 2px dashed rgba(255, 117, 143, 0.3);
-            margin: 2rem 0;
+        .notification-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
         }
 
-        .empty-state-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
+        .notification-message {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            padding: 16px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 16px;
+        }
+
+        .mobile-menu.open {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            background: rgba(255, 117, 143, 0.1);
-            color: var(--primary);
-            font-size: 2.5rem;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .menu-btn {
+            display: none;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-links.desktop {
+                display: none;
+            }
+        }
+
+        /* Hidden utility */
+        .hidden {
+            display: none !important;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
     </style>
 </head>
 
-<body class="min-h-screen">
-    <!-- Background Layers -->
-    <div class="background-layer">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-    </div>
+<body>
+    <!-- Background -->
+    <div class="bg-gradient"></div>
+    <div class="bg-image"></div>
 
     <!-- Navigation -->
-    <nav>
-        <div class="px-6 md:px-8 lg:px-12 py-4">
-            <div class="flex items-center justify-between">
-                <!-- Logo Section -->
-                <div class="flex-1 flex justify-start">
-                    <a href="/" class="flex items-center">
-                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
-                    </a>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden md:flex flex-grow justify-center space-x-2">
-                    <a href="/" class="nav-link">
-                        <i class="fas fa-ticket-alt mr-2"></i>Tickets
-                    </a>
-                    <a href="/dashboard" class="nav-link">
-                        <i class="fas fa-chart-line mr-2"></i>Dashboard
-                    </a>
-                    <a href="/create-ticket" class="nav-link">
-                        <i class="fas fa-plus-circle mr-2"></i>Create Ticket
-                    </a>
-                    {% if current_user_role == 'Administrator' %}
-                    <a href="/technicians" class="nav-link nav-link-active">
-                        <i class="fas fa-tools mr-2"></i>Technicians
-                    </a>
-                    <a href="/members" class="nav-link">
-                        <i class="fas fa-users mr-2"></i>Members
-                    </a>
-                    <a href="/admin" class="nav-link">
-                        <i class="fas fa-cog mr-2"></i>Admin Panel
-                    </a>
-                    {% endif %}
-                </div>
-
-                <!-- User Section -->
-                <div class="flex items-center space-x-3">
-                    {% if current_user %}
-                    <div class="hidden sm:flex items-center space-x-2">
-                        <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
-                            <span class="text-pink-600 text-sm">{{ current_user[0]|upper }}</span>
-                        </div>
-                        <span class="text-gray-600 text-sm">{{ current_user }}</span>
-                    </div>
-                    <a href="/logout" class="nav-link">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                    </a>
-                    {% else %}
-                    <a href="/login" class="nav-link bg-gradient-to-r from-pink-500 to-pink-600 text-white">
-                        <i class="fas fa-sign-in-alt mr-2"></i>Login
-                    </a>
-                    {% endif %}
-
-                    <!-- Mobile menu button -->
-                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn nav-link"
-                        onclick="toggleMobileMenu()">
-                        <i class="fas fa-bars text-lg"></i>
-                    </button>
-                </div>
+    <nav class="navbar">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="/" class="flex items-center">
+                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
+                </a>
             </div>
 
-            <!-- Mobile menu -->
-            <div id="mobileMenu" class="md:hidden mt-3 pb-3 border-t border-pink-100 hidden">
-                <div class="flex flex-col space-y-2 pt-3">
-                    <a href="/" class="nav-link">
-                        <i class="fas fa-ticket-alt mr-2"></i>Tickets
-                    </a>
-                    <a href="/dashboard" class="nav-link">
-                        <i class="fas fa-chart-line mr-2"></i>Dashboard
-                    </a>
-                    <a href="/create-ticket" class="nav-link">
-                        <i class="fas fa-plus-circle mr-2"></i>Create Ticket
-                    </a>
-                    {% if current_user_role == 'Administrator' %}
-                    <a href="/technicians" class="nav-link nav-link-active">
-                        <i class="fas fa-tools mr-2"></i>Technicians
-                    </a>
-                    <a href="/members" class="nav-link">
-                        <i class="fas fa-users mr-2"></i>Members
-                    </a>
-                    <a href="/admin" class="nav-link">
-                        <i class="fas fa-cog mr-2"></i>Admin Panel
-                    </a>
-                    {% endif %}
-                </div>
+            <!-- Desktop Nav Links -->
+            <div class="nav-links desktop hidden md:flex">
+                <a href="/" class="nav-link">
+                    <i class="fas fa-ticket-alt"></i>Tickets
+                </a>
+                <a href="/dashboard" class="nav-link">
+                    <i class="fas fa-chart-line"></i>Dashboard
+                </a>
+                <a href="/create-ticket" class="nav-link">
+                    <i class="fas fa-plus-circle"></i>Create Ticket
+                </a>
+                {% if current_user_role == 'Administrator' %}
+                <a href="/technicians" class="nav-link nav-link-active">
+                    <i class="fas fa-tools"></i>Technicians
+                </a>
+                <a href="/members" class="nav-link">
+                    <i class="fas fa-users"></i>Members
+                </a>
+                <a href="/admin" class="nav-link">
+                    <i class="fas fa-cog"></i>Admin Panel
+                </a>
+                {% endif %}
             </div>
-        </div>
-    </nav>
 
-    <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
-        <!-- Header Section -->
-        <div class="compact-header glass-panel">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                <div>
-                    <h1 class="text-2xl md:text-3xl font-bold gradient-text mb-2">Technicians Management</h1>
-                    <p class="text-gray-600">Manage field technicians and their information</p>
+            <!-- User Section -->
+            <div class="flex items-center gap-3">
+                {% if current_user %}
+                <div class="hidden sm:flex items-center gap-2">
+                    <div class="user-avatar">{{ current_user[0]|upper }}</div>
+                    <span class="text-sm" style="color: rgba(255,255,255,0.7);">{{ current_user }}</span>
                 </div>
-                <button id="addTechnicianBtn"
-                    class="btn-gradient px-6 py-3 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2 hover:shadow-xl transition-all duration-300 w-full md:w-auto">
-                    <i class="fas fa-plus"></i>
-                    Add New Technician
+                <a href="/logout" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i>Logout
+                </a>
+                {% else %}
+                <a href="/login" class="nav-link">
+                    <i class="fas fa-sign-in-alt"></i>Login
+                </a>
+                {% endif %}
+
+                <!-- Mobile menu button -->
+                <button class="menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Quick Stats -->
-        <div class="stats-summary">
-            <div class="glass-card p-5">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-blue-100 mr-4">
-                        <i class="fas fa-users text-blue-600"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-medium text-gray-500 text-sm">Total Technicians</h3>
-                        <p class="text-2xl font-bold" style="color: var(--primary);">{{ technicians|length }}</p>
-                    </div>
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="mobile-menu">
+            <a href="/" class="nav-link">
+                <i class="fas fa-ticket-alt"></i>Tickets
+            </a>
+            <a href="/dashboard" class="nav-link">
+                <i class="fas fa-chart-line"></i>Dashboard
+            </a>
+            <a href="/create-ticket" class="nav-link">
+                <i class="fas fa-plus-circle"></i>Create Ticket
+            </a>
+            {% if current_user_role == 'Administrator' %}
+            <a href="/technicians" class="nav-link nav-link-active">
+                <i class="fas fa-tools"></i>Technicians
+            </a>
+            <a href="/members" class="nav-link">
+                <i class="fas fa-users"></i>Members
+            </a>
+            <a href="/admin" class="nav-link">
+                <i class="fas fa-cog"></i>Admin Panel
+            </a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-card">
+            <div class="header-content">
+                <div>
+                    <h1 class="page-title">Technicians Management</h1>
+                    <p class="page-subtitle">Manage field technicians and their information</p>
+                </div>
+                <button id="addTechnicianBtn" class="btn-primary">
+                    <i class="fas fa-plus"></i>Add New Technician
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Total Technicians</h3>
+                    <p class="pink">{{ technicians|length }}</p>
                 </div>
             </div>
-            <div class="glass-card p-5">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-green-100 mr-4">
-                        <i class="fas fa-check-circle text-green-600"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-medium text-gray-500 text-sm">Active</h3>
-                        <p class="text-2xl font-bold" style="color: #10b981;">
-                            {{ technicians|selectattr('is_active')|list|length }}
-                        </p>
-                    </div>
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Active</h3>
+                    <p class="green">{{ technicians|selectattr('is_active')|list|length }}</p>
                 </div>
             </div>
-            <div class="glass-card p-5">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-orange-100 mr-4">
-                        <i class="fas fa-clock text-orange-600"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-medium text-gray-500 text-sm">Inactive</h3>
-                        <p class="text-2xl font-bold" style="color: #f97316;">
-                            {{ technicians|rejectattr('is_active')|list|length }}
-                        </p>
-                    </div>
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Inactive</h3>
+                    <p class="orange">{{ technicians|rejectattr('is_active')|list|length }}</p>
                 </div>
             </div>
-            <div class="glass-card p-5">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-purple-100 mr-4">
-                        <i class="fas fa-crown text-purple-600"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-medium text-gray-500 text-sm">Senior Techs</h3>
-                        <p class="text-2xl font-bold" style="color: #8b5cf6;">
-                            {{ technicians|selectattr('role', 'equalto', 'Senior Technician')|list|length }}
-                        </p>
-                    </div>
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Senior Techs</h3>
+                    <p class="purple">{{ technicians|selectattr('role', 'equalto', 'Senior Technician')|list|length }}
+                    </p>
                 </div>
             </div>
         </div>
 
-        <!-- Main Content Area -->
-        <div class="main-container p-6">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4 sm:mb-0">Technicians Directory</h2>
-                <div class="flex items-center gap-3">
-                    <div class="relative">
-                        <input type="text" placeholder="Search technicians..." id="searchInput"
-                            class="pl-10 pr-4 py-2 w-full sm:w-64 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500">
-                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        <!-- Main Content Card -->
+        <div class="content-card">
+            <div class="content-header">
+                <h2 class="content-title">Technicians Directory</h2>
+                <div class="content-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search technicians..." id="searchInput">
                     </div>
-                    <button id="refreshBtn" class="p-2 text-gray-600 hover:text-pink-600 transition">
+                    <button id="refreshBtn" class="refresh-btn">
                         <i class="fas fa-sync-alt"></i>
                     </button>
                 </div>
             </div>
 
-            {% if technicians %}
-            <!-- Technicians Grid -->
-            <div class="tech-grid" id="techniciansContainer">
-                {% for technician in technicians %}
-                <div class="technician-card tech-card p-6" data-technician-id="{{ technician._id }}">
-                    <div class="tech-avatar">
-                        <i class="fas fa-hard-hat text-pink-600"></i>
-                    </div>
+            <div class="content-body">
+                {% if technicians %}
+                <!-- Technicians Grid -->
+                <div class="tech-grid" id="techniciansContainer">
+                    {% for technician in technicians %}
+                    <div class="tech-card" data-technician-id="{{ technician._id }}">
+                        <div class="tech-avatar">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
 
-                    <div class="tech-details">
-                        <div class="text-center mb-4">
-                            <span
-                                class="status-badge {% if technician.is_active %}status-active{% else %}status-inactive{% endif %}">
+                        <div class="tech-content">
+                            <span class="status-badge {% if technician.is_active %}active{% else %}inactive{% endif %}">
                                 <i
-                                    class="fas {% if technician.is_active %}fa-check-circle{% else %}fa-times-circle{% endif %} mr-1"></i>
+                                    class="fas fa-{% if technician.is_active %}check{% else %}times{% endif %}-circle"></i>
                                 {{ 'Active' if technician.is_active else 'Inactive' }}
                             </span>
 
-                            <h3 class="font-bold text-lg text-gray-800 mb-1">{{ technician.name }}</h3>
-                            <p class="text-blue-600 font-medium mb-2">{{ technician.role or 'Technician' }}</p>
-                            <p class="text-gray-600 text-sm mb-3 flex items-center justify-center">
-                                <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <h3 class="tech-name">{{ technician.name }}</h3>
+                            <p class="tech-role">{{ technician.role or 'Technician' }}</p>
+                            <p class="tech-email">
+                                <i class="fas fa-envelope"></i>
                                 {{ technician.email or 'No email' }}
                             </p>
                         </div>
 
-                        <div class="mt-4 pt-4 border-t border-gray-100">
-                            <div class="flex items-center justify-between text-sm text-gray-500">
-                                <span class="flex items-center">
-                                    <i class="fas fa-calendar mr-2"></i>
-                                    Added: {{ technician.created_at.strftime('%Y-%m-%d') if technician.created_at else
-                                    'N/A' }}
-                                </span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-id-badge mr-2"></i>
-                                    ID: {{ technician.employee_id or 'N/A' }}
-                                </span>
-                            </div>
+                        <div class="tech-meta">
+                            <span>
+                                <i class="fas fa-calendar"></i>
+                                {{ technician.created_at.strftime('%Y-%m-%d') if technician.created_at else 'N/A' }}
+                            </span>
+                            <span>
+                                <i class="fas fa-id-badge"></i>
+                                {{ technician.employee_id or 'N/A' }}
+                            </span>
+                        </div>
+
+                        <div class="tech-actions">
+                            <button class="tech-action-btn edit edit-technician"
+                                data-technician-id="{{ technician._id }}" data-technician-name="{{ technician.name }}"
+                                data-technician-role="{{ technician.role or '' }}"
+                                data-technician-email="{{ technician.email or '' }}">
+                                <i class="fas fa-edit"></i>Edit
+                            </button>
+                            {% if technician.is_active %}
+                            <button class="tech-action-btn deactivate deactivate-technician"
+                                data-technician-id="{{ technician._id }}" data-technician-name="{{ technician.name }}">
+                                <i class="fas fa-ban"></i>Deactivate
+                            </button>
+                            {% else %}
+                            <button class="tech-action-btn activate activate-technician"
+                                data-technician-id="{{ technician._id }}" data-technician-name="{{ technician.name }}">
+                                <i class="fas fa-check"></i>Activate
+                            </button>
+                            {% endif %}
                         </div>
                     </div>
-
-                    <div class="tech-actions">
-                        <button
-                            class="edit-technician flex-1 bg-blue-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-blue-600 transition flex items-center justify-center gap-2"
-                            data-technician-id="{{ technician._id }}" data-technician-name="{{ technician.name }}"
-                            data-technician-role="{{ technician.role or '' }}"
-                            data-technician-email="{{ technician.email or '' }}">
-                            <i class="fas fa-edit"></i>
-                            Edit
-                        </button>
-                        {% if technician.is_active %}
-                        <button
-                            class="deactivate-technician flex-1 bg-red-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-red-600 transition flex items-center justify-center gap-2"
-                            data-technician-id="{{ technician._id }}" data-technician-name="{{ technician.name }}">
-                            <i class="fas fa-ban"></i>
-                            Deactivate
-                        </button>
-                        {% else %}
-                        <button
-                            class="activate-technician flex-1 bg-green-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-green-600 transition flex items-center justify-center gap-2"
-                            data-technician-id="{{ technician._id }}" data-technician-name="{{ technician.name }}">
-                            <i class="fas fa-check"></i>
-                            Activate
-                        </button>
-                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- Empty State -->
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-tools"></i>
                     </div>
+                    <h3 class="empty-title">No Technicians Yet</h3>
+                    <p class="empty-desc">Get started by adding your first technician to the system. Technicians can be
+                        assigned to tickets and managed from here.</p>
+                    <button id="addFirstTechnicianBtn" class="btn-primary">
+                        <i class="fas fa-plus"></i>Add Your First Technician
+                    </button>
                 </div>
-                {% endfor %}
+                {% endif %}
             </div>
-            {% else %}
-            <!-- Empty State -->
-            <div class="empty-state">
-                <div class="empty-state-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-gray-700 mb-2">No Technicians Yet</h3>
-                <p class="text-gray-500 mb-6 max-w-md">
-                    Get started by adding your first technician to the system. Technicians can be assigned to tickets
-                    and managed from here.
-                </p>
-                <button id="addFirstTechnicianBtn"
-                    class="btn-gradient text-white px-6 py-3 rounded-lg font-medium transition-all hover:shadow-lg flex items-center gap-2">
-                    <i class="fas fa-plus"></i>
-                    Add Your First Technician
-                </button>
-            </div>
-            {% endif %}
         </div>
     </div>
 
     <!-- Add/Edit Technician Modal -->
     <div id="technicianModal" class="modal">
-        <div class="modal-content p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 id="modalTitle" class="text-xl font-semibold text-gray-800">Add New Technician</h3>
-                <button id="closeModal" class="text-gray-500 hover:text-gray-700 transition">
-                    <i class="fas fa-times text-xl"></i>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle" class="modal-title">Add New Technician</h3>
+                <button id="closeModal" class="modal-close">
+                    <i class="fas fa-times"></i>
                 </button>
             </div>
 
             <form id="technicianForm">
-                <div class="space-y-4 mb-6">
-                    <div>
-                        <label class="block text-gray-700 text-sm font-medium mb-2">
-                            Technician Name <span class="text-red-500">*</span>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Technician Name <span class="required">*</span>
                         </label>
-                        <input type="text" id="technicianName"
-                            class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
-                            placeholder="Enter full name" required>
+                        <input type="text" id="technicianName" class="form-input" placeholder="Enter full name"
+                            required>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-gray-700 text-sm font-medium mb-2">
-                                Role <span class="text-red-500">*</span>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">
+                                Role <span class="required">*</span>
                             </label>
-                            <select id="technicianRole"
-                                class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
-                                required>
+                            <select id="technicianRole" class="form-select" required>
                                 <option value="">Select role</option>
                                 <option value="Technician">Technician</option>
                                 <option value="Senior Technician">Senior Technician</option>
@@ -658,43 +1234,25 @@
                             </select>
                         </div>
 
-                        <div>
-                            <label class="block text-gray-700 text-sm font-medium mb-2">
-                                Employee ID
-                            </label>
-                            <input type="text" id="technicianEmployeeId"
-                                class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
-                                placeholder="Optional">
+                        <div class="form-group">
+                            <label class="form-label">Employee ID</label>
+                            <input type="text" id="technicianEmployeeId" class="form-input" placeholder="Optional">
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-gray-700 text-sm font-medium mb-2">
-                            Email Address <span class="text-red-500">*</span>
+                    <div class="form-group">
+                        <label class="form-label">
+                            Email Address <span class="required">*</span>
                         </label>
-                        <input type="email" id="technicianEmail"
-                            class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
-                            placeholder="Enter email address" required>
-                        <p class="text-xs text-gray-500 mt-1">Used for notifications and account access</p>
-                    </div>
-
-                    <div id="additionalFields" class="hidden">
-                        <label class="block text-gray-700 text-sm font-medium mb-2">
-                            Additional Notes
-                        </label>
-                        <textarea id="technicianNotes"
-                            class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
-                            rows="3" placeholder="Any additional notes about this technician..."></textarea>
+                        <input type="email" id="technicianEmail" class="form-input" placeholder="Enter email address"
+                            required>
+                        <p class="form-hint">Used for notifications and account access</p>
                     </div>
                 </div>
 
-                <div class="flex space-x-3">
-                    <button type="button" id="cancelBtn"
-                        class="flex-1 bg-gray-100 text-gray-700 px-4 py-3 rounded-xl hover:bg-gray-200 transition font-medium">
-                        Cancel
-                    </button>
-                    <button type="submit" id="submitBtn"
-                        class="flex-1 btn-gradient text-white px-4 py-3 rounded-xl transition font-medium flex items-center justify-center gap-2">
+                <div class="modal-footer">
+                    <button type="button" id="cancelBtn" class="btn-cancel">Cancel</button>
+                    <button type="submit" id="submitBtn" class="btn-submit">
                         <i class="fas fa-save"></i>
                         <span id="submitBtnText">Save Technician</span>
                     </button>
@@ -704,23 +1262,17 @@
     </div>
 
     <!-- Confirmation Modal -->
-    <div id="confirmModal" class="modal">
-        <div class="modal-content p-6 max-w-md">
-            <div class="text-center">
-                <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" id="confirmIcon">
-                    <i class="fas fa-exclamation-triangle text-2xl text-yellow-600"></i>
+    <div id="confirmModal" class="modal confirm-modal">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-top: 32px;">
+                <div class="confirm-icon" id="confirmIcon">
+                    <i class="fas fa-exclamation-triangle"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2" id="confirmTitle">Confirm Action</h3>
-                <p id="confirmMessage" class="text-gray-600 mb-6">Are you sure you want to continue?</p>
-                <div class="flex space-x-3">
-                    <button id="cancelConfirm"
-                        class="flex-1 bg-gray-100 text-gray-700 px-4 py-3 rounded-xl hover:bg-gray-200 transition font-medium">
-                        Cancel
-                    </button>
-                    <button id="confirmAction"
-                        class="flex-1 bg-red-500 text-white px-4 py-3 rounded-xl hover:bg-red-600 transition font-medium">
-                        Confirm
-                    </button>
+                <h3 class="confirm-title" id="confirmTitle">Confirm Action</h3>
+                <p class="confirm-message" id="confirmMessage">Are you sure you want to continue?</p>
+                <div class="confirm-actions">
+                    <button id="cancelConfirm" class="btn-confirm-cancel">Cancel</button>
+                    <button id="confirmAction" class="btn-confirm-action">Confirm</button>
                 </div>
             </div>
         </div>
@@ -728,11 +1280,11 @@
 
     <!-- Notification -->
     <div id="notification" class="notification">
-        <div class="flex items-start">
-            <i id="notificationIcon" class="fas fa-check-circle mr-3 mt-0.5"></i>
+        <div class="notification-content">
+            <i id="notificationIcon" class="notification-icon fas fa-check-circle"></i>
             <div>
-                <p id="notificationTitle" class="font-medium text-gray-800"></p>
-                <p id="notificationMessage" class="text-sm text-gray-600 mt-1"></p>
+                <p id="notificationTitle" class="notification-title"></p>
+                <p id="notificationMessage" class="notification-message"></p>
             </div>
         </div>
     </div>
@@ -749,7 +1301,6 @@
         const technicianRole = document.getElementById('technicianRole');
         const technicianEmail = document.getElementById('technicianEmail');
         const modalTitle = document.getElementById('modalTitle');
-        const submitBtn = document.getElementById('submitBtn');
         const submitBtnText = document.getElementById('submitBtnText');
         const searchInput = document.getElementById('searchInput');
         const techniciansContainer = document.getElementById('techniciansContainer');
@@ -765,25 +1316,22 @@
             notificationMessage.textContent = message;
 
             if (type === 'success') {
-                notificationIcon.className = 'fas fa-check-circle text-green-500 mr-3 mt-0.5';
+                notificationIcon.className = 'notification-icon fas fa-check-circle';
                 notification.className = 'notification success show';
             } else {
-                notificationIcon.className = 'fas fa-exclamation-circle text-red-500 mr-3 mt-0.5';
+                notificationIcon.className = 'notification-icon fas fa-exclamation-circle';
                 notification.className = 'notification error show';
             }
 
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            setTimeout(() => notification.classList.remove('show'), 3000);
         }
 
-        // Show modal
+        // Show/hide modals
         function showModal(modal) {
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
         }
 
-        // Hide modal
         function hideModal(modal) {
             modal.classList.remove('show');
             document.body.style.overflow = 'auto';
@@ -793,12 +1341,12 @@
         if (searchInput && techniciansContainer) {
             searchInput.addEventListener('input', function () {
                 const searchTerm = this.value.toLowerCase();
-                const cards = techniciansContainer.querySelectorAll('.technician-card');
+                const cards = techniciansContainer.querySelectorAll('.tech-card');
 
                 cards.forEach(card => {
-                    const name = card.querySelector('h3').textContent.toLowerCase();
-                    const email = card.querySelector('.text-gray-600').textContent.toLowerCase();
-                    const role = card.querySelector('.text-blue-600').textContent.toLowerCase();
+                    const name = card.querySelector('.tech-name').textContent.toLowerCase();
+                    const email = card.querySelector('.tech-email').textContent.toLowerCase();
+                    const role = card.querySelector('.tech-role').textContent.toLowerCase();
 
                     if (name.includes(searchTerm) || email.includes(searchTerm) || role.includes(searchTerm)) {
                         card.style.display = 'block';
@@ -809,211 +1357,131 @@
             });
         }
 
-        // Refresh button
-        document.getElementById('refreshBtn')?.addEventListener('click', () => {
-            window.location.reload();
-        });
-
-        // Add Technician Button
-        document.getElementById('addTechnicianBtn').addEventListener('click', () => {
-            currentTechnicianId = null;
+        // Add technician button
+        document.getElementById('addTechnicianBtn')?.addEventListener('click', function () {
             modalTitle.textContent = 'Add New Technician';
-            technicianName.value = '';
-            technicianRole.value = '';
-            technicianEmail.value = '';
-            document.getElementById('technicianEmployeeId').value = '';
-            document.getElementById('technicianNotes').value = '';
             submitBtnText.textContent = 'Save Technician';
+            technicianForm.reset();
+            currentTechnicianId = null;
             showModal(technicianModal);
         });
 
-        // Add First Technician Button
-        document.getElementById('addFirstTechnicianBtn')?.addEventListener('click', () => {
-            currentTechnicianId = null;
+        document.getElementById('addFirstTechnicianBtn')?.addEventListener('click', function () {
             modalTitle.textContent = 'Add New Technician';
-            technicianName.value = '';
-            technicianRole.value = '';
-            technicianEmail.value = '';
-            document.getElementById('technicianEmployeeId').value = '';
-            document.getElementById('technicianNotes').value = '';
             submitBtnText.textContent = 'Save Technician';
+            technicianForm.reset();
+            currentTechnicianId = null;
             showModal(technicianModal);
         });
 
-        // Edit Technician
+        // Edit technician buttons
         document.querySelectorAll('.edit-technician').forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentTechnicianId = btn.dataset.technicianId;
+            btn.addEventListener('click', function () {
+                currentTechnicianId = this.dataset.technicianId;
                 modalTitle.textContent = 'Edit Technician';
-                technicianName.value = btn.dataset.technicianName;
-                technicianRole.value = btn.dataset.technicianRole;
-                technicianEmail.value = btn.dataset.technicianEmail;
                 submitBtnText.textContent = 'Update Technician';
+                technicianName.value = this.dataset.technicianName;
+                technicianRole.value = this.dataset.technicianRole;
+                technicianEmail.value = this.dataset.technicianEmail;
                 showModal(technicianModal);
             });
         });
 
-        // Close modals
-        document.getElementById('closeModal').addEventListener('click', () => hideModal(technicianModal));
-        document.getElementById('cancelBtn').addEventListener('click', () => hideModal(technicianModal));
-        document.getElementById('cancelConfirm').addEventListener('click', () => hideModal(confirmModal));
+        // Close modal buttons
+        document.getElementById('closeModal')?.addEventListener('click', () => hideModal(technicianModal));
+        document.getElementById('cancelBtn')?.addEventListener('click', () => hideModal(technicianModal));
+        document.getElementById('cancelConfirm')?.addEventListener('click', () => hideModal(confirmModal));
 
         // Form submission
-        technicianForm.addEventListener('submit', async (e) => {
+        technicianForm?.addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            const name = technicianName.value.trim();
-            const role = technicianRole.value.trim();
-            const email = technicianEmail.value.trim();
-            const employeeId = document.getElementById('technicianEmployeeId').value.trim();
-            const notes = document.getElementById('technicianNotes').value.trim();
-
-            // Validate required fields
-            if (!name) {
-                showNotification('Validation Error', 'Please enter a technician name', 'error');
-                return;
-            }
-            if (!role) {
-                showNotification('Validation Error', 'Please select a role', 'error');
-                return;
-            }
-            if (!email) {
-                showNotification('Validation Error', 'Please enter an email address', 'error');
-                return;
-            }
-
-            // Validate email format
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showNotification('Validation Error', 'Please enter a valid email address', 'error');
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Saving...';
+            const data = {
+                name: technicianName.value,
+                role: technicianRole.value,
+                email: technicianEmail.value,
+                employee_id: document.getElementById('technicianEmployeeId')?.value || ''
+            };
 
             try {
                 const url = currentTechnicianId
                     ? `/api/technicians/${currentTechnicianId}`
                     : '/api/technicians';
-
                 const method = currentTechnicianId ? 'PUT' : 'POST';
 
                 const response = await fetch(url, {
                     method: method,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        role: role,
-                        email: email,
-                        employee_id: employeeId || undefined,
-                        notes: notes || undefined
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
                 });
 
-                const data = await response.json();
+                const result = await response.json();
 
-                if (response.ok && data.status === 'success') {
-                    showNotification('Success', data.message, 'success');
+                if (result.success) {
+                    showNotification('Success', result.message || 'Technician saved successfully');
                     hideModal(technicianModal);
-                    setTimeout(() => window.location.reload(), 1500);
+                    setTimeout(() => window.location.reload(), 1000);
                 } else {
-                    showNotification('Error', data.message || 'Error saving technician', 'error');
+                    showNotification('Error', result.error || 'Failed to save technician', 'error');
                 }
             } catch (error) {
-                console.error('Error:', error);
-                showNotification('Error', 'An error occurred while saving', 'error');
+                showNotification('Error', 'An error occurred', 'error');
             }
-
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fas fa-save mr-2"></i>' + submitBtnText.textContent;
         });
 
-        // Deactivate/Activate Technician
+        // Deactivate/Activate buttons
         document.querySelectorAll('.deactivate-technician, .activate-technician').forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentTechnicianId = btn.dataset.technicianId;
-                currentAction = btn.classList.contains('deactivate-technician') ? 'deactivate' : 'activate';
-                const technicianName = btn.dataset.technicianName;
+            btn.addEventListener('click', function () {
+                currentTechnicianId = this.dataset.technicianId;
+                const name = this.dataset.technicianName;
+                const isDeactivate = this.classList.contains('deactivate-technician');
 
-                const title = currentAction === 'deactivate'
-                    ? 'Deactivate Technician'
-                    : 'Activate Technician';
-
-                const message = currentAction === 'deactivate'
-                    ? `Are you sure you want to deactivate ${technicianName}? They will no longer appear in dropdown lists.`
-                    : `Are you sure you want to activate ${technicianName}? They will appear in dropdown lists.`;
-
-                document.getElementById('confirmTitle').textContent = title;
-                document.getElementById('confirmMessage').textContent = message;
-
-                const confirmIcon = document.getElementById('confirmIcon');
-                if (currentAction === 'deactivate') {
-                    confirmIcon.innerHTML = '<i class="fas fa-exclamation-triangle text-2xl text-red-600"></i>';
-                } else {
-                    confirmIcon.innerHTML = '<i class="fas fa-check-circle text-2xl text-green-600"></i>';
-                }
+                currentAction = isDeactivate ? 'deactivate' : 'activate';
+                document.getElementById('confirmTitle').textContent = `${isDeactivate ? 'Deactivate' : 'Activate'} Technician`;
+                document.getElementById('confirmMessage').textContent = `Are you sure you want to ${isDeactivate ? 'deactivate' : 'activate'} ${name}?`;
 
                 showModal(confirmModal);
             });
         });
 
         // Confirm action
-        document.getElementById('confirmAction').addEventListener('click', async () => {
+        document.getElementById('confirmAction')?.addEventListener('click', async function () {
             if (!currentTechnicianId || !currentAction) return;
 
             try {
-                const url = `/api/technicians/${currentTechnicianId}`;
-
-                const response = await fetch(url, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        is_active: currentAction === 'activate'
-                    })
+                const response = await fetch(`/api/technicians/${currentTechnicianId}/${currentAction}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
                 });
 
-                const data = await response.json();
+                const result = await response.json();
 
-                if (response.ok && data.status === 'success') {
-                    showNotification('Success', data.message, 'success');
+                if (result.success) {
+                    showNotification('Success', result.message || `Technician ${currentAction}d successfully`);
                     hideModal(confirmModal);
-                    setTimeout(() => window.location.reload(), 1500);
+                    setTimeout(() => window.location.reload(), 1000);
                 } else {
-                    showNotification('Error', data.message || 'Error updating technician', 'error');
+                    showNotification('Error', result.error || 'Action failed', 'error');
                 }
             } catch (error) {
-                console.error('Error:', error);
                 showNotification('Error', 'An error occurred', 'error');
             }
         });
 
-        // Close modals when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === technicianModal) hideModal(technicianModal);
-            if (e.target === confirmModal) hideModal(confirmModal);
-        });
+        // Refresh button
+        document.getElementById('refreshBtn')?.addEventListener('click', () => window.location.reload());
 
-        // Mobile menu toggle function
+        // Mobile menu
         function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenu) {
-                mobileMenu.classList.toggle('hidden');
-            }
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
         }
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function (event) {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuButton = document.querySelector('.mobile-menu-btn');
-
-            if (mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
-                mobileMenu.classList.add('hidden');
-            }
+        // Close modals on outside click
+        [technicianModal, confirmModal].forEach(modal => {
+            modal?.addEventListener('click', function (e) {
+                if (e.target === this) hideModal(this);
+            });
         });
     </script>
 </body>

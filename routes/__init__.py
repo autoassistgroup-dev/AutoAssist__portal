@@ -49,6 +49,10 @@ def register_blueprints(app):
     # Attachment routes
     app.register_blueprint(attachment_bp)
     
+    # Common Document routes
+    from routes.common_document_routes import common_docs_bp
+    app.register_blueprint(common_docs_bp)
+    
     # AI routes
     app.register_blueprint(ai_bp)
     

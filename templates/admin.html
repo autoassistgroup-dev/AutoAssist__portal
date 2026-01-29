@@ -4,965 +4,1176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoAssistGroup Portal</title>
+    <title>Admin Panel - AutoAssistGroup Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="/static/css/animations.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #ff758f;
-            --secondary: #ff7eb3;
-            --urgent: #ff4757;
-            --fast: #ffa502;
-            --medium: #ff6b81;
-            --low: #2ed573;
-            --waiting: #ffcc00;
+        /* ===== DARK PROFESSIONAL THEME ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* ===== GLOBAL STYLES ===== */
         body {
-            font-family: 'Poppins', sans-serif !important;
-            background: linear-gradient(135deg,
-                    rgba(255, 224, 233, 0.95) 0%,
-                    rgba(255, 240, 246, 0.95) 50%,
-                    rgba(255, 232, 248, 0.95) 100%) !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
+            background: #0a0a0f;
+            color: #fff;
         }
 
-        /* Animated Gradient Background */
-        .background-layer {
+        /* Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(180deg, #0a0a0f 0%, #141420 100%);
+        }
+
+        .bg-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden;
+            background-image: url('/static/css/portal_bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
         }
 
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 117, 143, 0.4), rgba(255, 126, 179, 0.2));
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 107, 129, 0.3), rgba(255, 71, 87, 0.2));
-            top: 60%;
-            right: -150px;
-            animation-delay: 5s;
-        }
-
-        .orb-3 {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(255, 126, 179, 0.3), rgba(255, 117, 143, 0.2));
-            bottom: -100px;
-            left: 30%;
-            animation-delay: 10s;
-        }
-
-        .orb-4 {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(255, 71, 87, 0.2), rgba(255, 165, 2, 0.1));
-            top: 20%;
-            right: 30%;
-            animation-delay: 15s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0) translateX(0);
-            }
-
-            25% {
-                transform: translateY(-20px) translateX(10px);
-            }
-
-            50% {
-                transform: translateY(0) translateX(20px);
-            }
-
-            75% {
-                transform: translateY(20px) translateX(10px);
-            }
-        }
-
-        /* ===== UNIVERSAL NAVBAR STYLES ===== */
-        nav {
-            background: rgba(255, 255, 255, 0.15) !important;
-            backdrop-filter: blur(25px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
-            min-height: auto;
-            position: sticky;
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(255, 117, 143, 0.1) !important;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 12px 24px;
         }
 
-        nav .responsive-container {
-            padding-top: 0.5rem !important;
-            padding-bottom: 0.5rem !important;
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 12px 48px;
+            }
         }
 
-        /* Nav link base styles */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         .nav-link {
-            padding: 0.5rem 1rem !important;
-            border-radius: 0.5rem !important;
-            color: #4b5563 !important;
-            font-weight: 500 !important;
-            font-size: 0.875rem !important;
-            transition: all 0.2s ease !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            background: rgba(255, 255, 255, 0.3) !important;
-            backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .nav-link:hover {
-            background: rgba(255, 117, 143, 0.2) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.2);
-            border-color: var(--primary) !important;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: #fff;
         }
 
-        /* Active link style */
         .nav-link-active {
-            background: rgba(255, 117, 143, 0.25) !important;
-            color: #ff2d55 !important;
-            border-color: rgba(255, 117, 143, 0.4) !important;
-            box-shadow: 0 2px 10px rgba(255, 117, 143, 0.2);
+            background: rgba(255, 117, 143, 0.15);
+            border-color: rgba(255, 117, 143, 0.3);
+            color: #ff758f;
         }
 
-        /* ===== GLASS COMPONENTS ===== */
-        .bg-white,
-        .card,
-        .dashboard-card,
-        .ticket-card,
-        .management-section,
-        .search-section,
-        .modal-content {
-            background: rgba(255, 255, 255, 0.25) !important;
-            backdrop-filter: blur(15px) !important;
-            -webkit-backdrop-filter: blur(15px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
-            box-shadow: 0 8px 32px rgba(255, 117, 143, 0.1) !important;
-            border-radius: 1rem !important;
+        .nav-link i {
+            margin-right: 6px;
+            font-size: 11px;
+            opacity: 0.8;
         }
 
-        /* Stats Card - Glassmorphism Design */
-        .stats-card {
-            transition: all 0.3s ease;
-            border-radius: 1rem !important;
-            background: rgba(255, 255, 255, 0.25) !important;
-            backdrop-filter: blur(15px) !important;
-            -webkit-backdrop-filter: blur(15px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
-            box-shadow: 0 8px 32px rgba(255, 117, 143, 0.1) !important;
-            position: relative;
-            overflow: hidden;
+        /* ===== MAIN CONTAINER ===== */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            padding-top: 80px;
+            padding-bottom: 60px;
         }
 
-        .stats-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .stats-card:hover::before {
-            opacity: 1;
-        }
-
-        .management-section:hover,
-        .stats-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 117, 143, 0.15) !important;
-            border-color: var(--primary) !important;
-            box-shadow: 0 20px 40px rgba(236, 72, 153, 0.3) !important;
-        }
-
-        /* Enhanced Glass Buttons */
-        button,
-        .btn {
-            padding: 0.75rem 1.5rem !important;
-            font-size: 0.875rem !important;
-            border-radius: 0.75rem !important;
-            background: rgba(255, 255, 255, 0.25) !important;
-            backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
-            transition: all 0.3s ease !important;
-        }
-
-        button:hover,
-        .btn:hover {
-            background: rgba(255, 117, 143, 0.25) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 117, 143, 0.3);
-            border-color: var(--primary) !important;
-        }
-
-        /* Gradient Buttons */
-        .gradient-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
-            color: white !important;
-            border: none !important;
-            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.4) !important;
-        }
-
-        .gradient-btn:hover {
-            background: linear-gradient(135deg, #ff6b81, #ff7eb3) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 117, 143, 0.5) !important;
-        }
-
-        /* Priority Badges with Glass Effect */
-        .priority-badge {
-            padding: 0.5rem 1rem !important;
-            font-size: 0.875rem !important;
-            font-weight: 500 !important;
-            background: rgba(255, 255, 255, 0.3) !important;
-            backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-            border-radius: 0.75rem !important;
-        }
-
-        /* ===== TICKET CARDS ENHANCEMENT ===== */
-        .ticket-card {
-            transition: all 0.3s ease;
-            margin-bottom: 1rem;
-            border-radius: 1rem;
-            background: rgba(255, 255, 255, 0.25) !important;
-            backdrop-filter: blur(15px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ticket-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .ticket-card:hover::before {
-            opacity: 1;
-        }
-
-        .ticket-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 117, 143, 0.15) !important;
-            box-shadow: 0 15px 35px rgba(255, 117, 143, 0.25);
-            border-color: var(--primary) !important;
-        }
-
-        .ticket-important {
-            background: rgba(255, 117, 143, 0.15) !important;
-            border-left: 4px solid var(--primary) !important;
-        }
-
-        /* Priority Colors */
-        .priority-urgent {
-            border-left: 4px solid var(--urgent);
-        }
-
-        .priority-fast {
-            border-left: 4px solid var(--fast);
-        }
-
-        .priority-medium {
-            border-left: 4px solid var(--medium);
-        }
-
-        .priority-low {
-            border-left: 4px solid var(--low);
-        }
-
-        /* Status Badges */
-        .badge-urgent {
-            background: linear-gradient(135deg, rgba(255, 71, 87, 0.2), rgba(255, 71, 87, 0.1)) !important;
-            color: #ff4757 !important;
-            border: 1px solid rgba(255, 71, 87, 0.3) !important;
-        }
-
-        .badge-fast {
-            background: linear-gradient(135deg, rgba(255, 165, 2, 0.2), rgba(255, 165, 2, 0.1)) !important;
-            color: #ffa502 !important;
-            border: 1px solid rgba(255, 165, 2, 0.3) !important;
-        }
-
-        .badge-medium {
-            background: linear-gradient(135deg, rgba(255, 107, 129, 0.2), rgba(255, 107, 129, 0.1)) !important;
-            color: #ff6b81 !important;
-            border: 1px solid rgba(255, 107, 129, 0.3) !important;
-        }
-
-        .badge-low {
-            background: linear-gradient(135deg, rgba(46, 213, 115, 0.2), rgba(46, 213, 115, 0.1)) !important;
-            color: #2ed573 !important;
-            border: 1px solid rgba(46, 213, 115, 0.3) !important;
-        }
-
-        /* Type Badges */
-        .badge-technical {
-            background: linear-gradient(135deg, rgba(91, 192, 222, 0.2), rgba(91, 192, 222, 0.1)) !important;
-            color: #5bc0de !important;
-            border: 1px solid rgba(91, 192, 222, 0.3) !important;
-        }
-
-        .badge-payment {
-            background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(155, 89, 182, 0.1)) !important;
-            color: #9b59b6 !important;
-            border: 1px solid rgba(155, 89, 182, 0.3) !important;
-        }
-
-        .badge-account {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(52, 152, 219, 0.1)) !important;
-            color: #3498db !important;
-            border: 1px solid rgba(52, 152, 219, 0.3) !important;
-        }
-
-        .badge-general {
-            background: linear-gradient(135deg, rgba(149, 165, 166, 0.2), rgba(149, 165, 166, 0.1)) !important;
-            color: #95a5a6 !important;
-            border: 1px solid rgba(149, 165, 166, 0.3) !important;
-        }
-
-        /* ===== MODAL STYLES ===== */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: rgba(255, 255, 255, 0.25) !important;
-            backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
-            box-shadow: 0 25px 50px rgba(255, 117, 143, 0.2) !important;
-            border-radius: 1.5rem !important;
-            margin: 2% auto;
-            padding: 2rem;
-            width: 90%;
-            max-width: 500px;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px) scale(0.95);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
+        @media (min-width: 768px) {
+            .main-container {
+                padding: 32px 48px;
+                padding-top: 80px;
             }
         }
 
-        /* ===== FORM INPUTS ===== */
-        .form-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            background: rgba(255, 255, 255, 0.2) !important;
-            backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-            border-radius: 0.75rem !important;
-            transition: all 0.3s ease;
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            margin-bottom: 32px;
         }
 
-        .form-input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.3) !important;
-            border-color: var(--primary) !important;
-            box-shadow: 0 0 0 3px rgba(255, 117, 143, 0.2) !important;
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
         }
 
-        /* ===== STATS CARD SPECIFIC ===== */
+        .page-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ===== STATS GRID ===== */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
-        .stats-card .icon-container {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
-            background: rgba(255, 255, 255, 0.3) !important;
-            backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            margin: 0 auto 12px;
+            font-size: 18px;
         }
 
-        .stats-card .icon-container i {
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .stat-icon.blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
         }
 
-        /* ===== DROPDOWN STYLES ===== */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background: rgba(255, 255, 255, 0.25) !important;
-            backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
-            min-width: 200px;
-            box-shadow: 0 15px 35px rgba(255, 117, 143, 0.2);
-            z-index: 1;
-            border-radius: 1rem !important;
-            padding: 1rem;
-            animation: dropdownFade 0.2s ease;
+        .stat-icon.green {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
         }
 
-        @keyframes dropdownFade {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
+        .stat-icon.yellow {
+            background: rgba(234, 179, 8, 0.15);
+            color: #eab308;
+        }
+
+        .stat-icon.purple {
+            background: rgba(168, 85, 247, 0.15);
+            color: #a855f7;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* ===== BREAKDOWN CARDS ===== */
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .breakdown-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
-        /* ===== SCROLLBAR STYLING ===== */
-        ::-webkit-scrollbar {
+        .breakdown-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .breakdown-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .breakdown-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .breakdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .breakdown-badge {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .breakdown-count {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* Badge colors */
+        .badge-urgent {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+
+        .badge-high {
+            background: rgba(249, 115, 22, 0.15);
+            color: #f97316;
+        }
+
+        .badge-medium {
+            background: rgba(234, 179, 8, 0.15);
+            color: #eab308;
+        }
+
+        .badge-low {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+        }
+
+        .badge-technical {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+        }
+
+        .badge-payment {
+            background: rgba(168, 85, 247, 0.15);
+            color: #a855f7;
+        }
+
+        .badge-general {
+            background: rgba(156, 163, 175, 0.15);
+            color: #9ca3af;
+        }
+
+        .badge-account {
+            background: rgba(14, 165, 233, 0.15);
+            color: #0ea5e9;
+        }
+
+        /* ===== GLASS CARDS ===== */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .card-title i {
+            margin-right: 10px;
+            opacity: 0.7;
+        }
+
+        .card-badge {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 14px;
+            background: rgba(255, 117, 143, 0.15);
+            border: 1px solid rgba(255, 117, 143, 0.3);
+            border-radius: 8px;
+            color: #ff758f;
+        }
+
+        .card-body {
+            padding: 20px 24px;
+        }
+
+        /* ===== TICKET LIST ===== */
+        .ticket-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .ticket-item {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .ticket-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .ticket-item.important {
+            border-left: 3px solid #ff758f;
+        }
+
+        .ticket-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .ticket-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .ticket-id {
+            font-size: 12px;
+            font-weight: 600;
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .ticket-badge {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .ticket-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ticket-body {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .ticket-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .ticket-info i {
+            margin-right: 4px;
+        }
+
+        .ticket-actions {
+            display: flex;
+            gap: 8px;
+            margin-left: 12px;
+        }
+
+        .ticket-action-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .ticket-action-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .ticket-action-btn.star:hover {
+            color: #eab308;
+        }
+
+        .ticket-action-btn.delete:hover {
+            color: #ef4444;
+        }
+
+        /* ===== MANAGEMENT SECTIONS ===== */
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .management-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .management-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .management-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .management-card-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .management-card-info p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .management-card-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .management-action-btn {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .management-action-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .management-action-btn.edit:hover {
+            color: #3b82f6;
+        }
+
+        .management-action-btn.deactivate:hover {
+            color: #ef4444;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+
+        .status-badge.active {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+        }
+
+        .status-badge.inactive {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+
+        .status-badge i {
+            margin-right: 4px;
+            font-size: 10px;
+        }
+
+        /* Member list compact */
+        .member-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .member-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .member-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .member-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(255, 117, 143, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .member-details h5 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .member-details p {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .member-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .role-badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .role-badge.admin {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+        }
+
+        .role-badge.director {
+            background: rgba(249, 115, 22, 0.15);
+            color: #f97316;
+        }
+
+        .role-badge.member {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+        }
+
+        /* Portal access guide */
+        .access-guide {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            margin-top: 16px;
+        }
+
+        .access-guide-title {
+            grid-column: 1 / -1;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4px;
+        }
+
+        .access-item {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .access-dot {
             width: 8px;
             height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #ff6b81, #ff7eb3);
-        }
-
-        /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-
-            .modal-content {
-                width: 95%;
-                margin: 1rem auto;
-                padding: 1.5rem;
-            }
-
-            nav .hidden.md\:flex {
-                display: none !important;
-            }
-
-            .mobile-menu {
-                display: block !important;
-            }
-        }
-
-        @media (min-width: 1920px) {
-            .container {
-                max-width: 1920px !important;
-                padding-left: 2rem !important;
-                padding-right: 2rem !important;
-            }
-        }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        /* ===== LOADING STATES ===== */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-            position: relative;
-        }
-
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            margin: -10px 0 0 -10px;
-            border: 2px solid rgba(255, 117, 143, 0.3);
-            border-top-color: var(--primary);
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
         }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
+        .access-dot.blue {
+            background: #3b82f6;
+        }
+
+        .access-dot.orange {
+            background: #f97316;
+        }
+
+        .access-dot.green {
+            background: #22c55e;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 18px;
+            background: rgba(255, 117, 143, 0.2);
+            border: 1px solid rgba(255, 117, 143, 0.4);
+            border-radius: 8px;
+            color: #ff758f;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 117, 143, 0.3);
+        }
+
+        .btn-primary i {
+            margin-right: 6px;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        /* Show more button */
+        .show-more-section {
+            padding: 16px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .show-more-btn {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 117, 143, 0.1);
+            border: 1px solid rgba(255, 117, 143, 0.2);
+            border-radius: 8px;
+            color: #ff758f;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .show-more-btn:hover {
+            background: rgba(255, 117, 143, 0.15);
+        }
+
+        .show-more-btn i {
+            margin-right: 8px;
+        }
+
+        /* ===== USER AVATAR ===== */
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255, 117, 143, 0.15);
+            border: 1px solid rgba(255, 117, 143, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #ff758f;
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            padding: 16px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 16px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .menu-btn {
+            display: none;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-links.desktop {
+                display: none;
             }
         }
 
         /* ===== TOAST NOTIFICATIONS ===== */
         .toast {
             position: fixed;
-            top: 20px;
+            top: 80px;
             right: 20px;
-            padding: 1rem 1.5rem;
-            background: rgba(255, 255, 255, 0.25) !important;
-            backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
-            border-radius: 1rem !important;
-            box-shadow: 0 10px 30px rgba(255, 117, 143, 0.3);
             z-index: 1000;
-            animation: toastSlideIn 0.3s ease;
+            padding: 14px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(20px);
+            animation: slideIn 0.3s ease;
             max-width: 350px;
         }
 
-        @keyframes toastSlideIn {
-            from {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         .toast-success {
-            border-left: 4px solid #2ed573;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
         }
 
         .toast-error {
-            border-left: 4px solid #ff4757;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
         }
 
-        .toast-info {
-            border-left: 4px solid var(--primary);
-        }
-
-        /* ===== SECTION HEADERS ===== */
-        .section-header {
-            background: linear-gradient(135deg,
-                    rgba(255, 117, 143, 0.1),
-                    rgba(255, 126, 179, 0.05));
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 1rem 1rem 0 0;
-        }
-
-        /* ===== HOVER EFFECTS ===== */
-        .hover-lift {
-            transition: all 0.3s ease;
-        }
-
-        .hover-lift:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(255, 117, 143, 0.25);
-        }
-
-        /* ===== GRADIENT TEXT ===== */
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* ===== SHIMMER EFFECT ===== */
-        .shimmer {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shimmer::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right,
-                    transparent 0%,
-                    rgba(255, 255, 255, 0.1) 50%,
-                    transparent 100%);
-            transform: rotate(30deg);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) rotate(30deg);
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
             }
 
-            100% {
-                transform: translateX(100%) rotate(30deg);
+            to {
+                transform: translateX(0);
+                opacity: 1;
             }
+        }
+
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #16161f;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            width: 90%;
+            max-width: 480px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Hidden utility */
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
 
-<body class="min-h-screen">
-    <!-- Animated Gradient Background -->
-    <div class="background-layer">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
-        <div class="gradient-orb orb-4"></div>
-    </div>
+<body>
+    <!-- Background -->
+    <div class="bg-gradient"></div>
+    <div class="bg-image"></div>
 
     <!-- Navigation -->
-    <nav class="shadow-md">
-        <div class="responsive-container py-6">
-            <div class="flex items-center justify-between">
-                <!-- Logo Section (Left) -->
-                <div class="flex-1 flex justify-start">
-                    <a href="/" class="flex items-center">
-                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
-                    </a>
-                </div>
-
-                <!-- Navigation Links (Center) -->
-                <div class="hidden md:flex flex-grow justify-center space-x-2">
-                    <a href="/" class="nav-link">Tickets</a>
-                    <a href="/dashboard" class="nav-link">Dashboard</a>
-                    <a href="/create-ticket" class="nav-link">Create Ticket</a>
-                    {% if current_user_role == 'Administrator' %}
-                    <a href="/technicians" class="nav-link">Technicians</a>
-                    <a href="/members" class="nav-link">Members</a>
-                    <a href="/admin" class="nav-link nav-link-active">Admin Panel</a>
-                    {% endif %}
-                </div>
-                <div class="flex items-center space-x-2 md:space-x-4">
-                    {% if current_user %}
-                    <span class="hidden sm:inline text-gray-600 text-sm md:text-base">{{ current_user }}</span>
-                    <a href="/logout" class="nav-link">Logout</a>
-                    {% else %}
-                    <a href="/login" class="nav-link gradient-btn">Login</a>
-                    {% endif %}
-
-                    <!-- Mobile menu button -->
-                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn nav-link"
-                        onclick="toggleMobileMenu()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
+    <nav class="navbar">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="/" class="flex items-center">
+                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
+                </a>
             </div>
 
-            <!-- Mobile menu (hidden by default) -->
-            <div id="mobileMenu" class="md:hidden mt-4 pb-4 border-t border-gray-200 hidden">
-                <div class="flex flex-col space-y-3 pt-4">
-                    <a href="/" class="nav-link">Tickets</a>
-                    <a href="/dashboard" class="nav-link">Dashboard</a>
-                    <a href="/create-ticket" class="nav-link">Create Ticket</a>
-                    {% if current_user_role == 'Administrator' %}
-                    <a href="/technicians" class="nav-link">Technicians</a>
-                    <a href="/members" class="nav-link">Members</a>
-                    <a href="/admin" class="nav-link nav-link-active">Admin Panel</a>
-                    {% endif %}
-                </div>
+            <!-- Desktop Nav Links -->
+            <div class="nav-links desktop hidden md:flex">
+                <a href="/" class="nav-link">
+                    <i class="fas fa-ticket-alt"></i>Tickets
+                </a>
+                <a href="/dashboard" class="nav-link">
+                    <i class="fas fa-chart-line"></i>Dashboard
+                </a>
+                <a href="/create-ticket" class="nav-link">
+                    <i class="fas fa-plus-circle"></i>Create Ticket
+                </a>
+                {% if current_user_role == 'Administrator' %}
+                <a href="/technicians" class="nav-link">
+                    <i class="fas fa-tools"></i>Technicians
+                </a>
+                <a href="/members" class="nav-link">
+                    <i class="fas fa-users"></i>Members
+                </a>
+                <a href="/admin" class="nav-link nav-link-active">
+                    <i class="fas fa-cog"></i>Admin Panel
+                </a>
+                {% endif %}
             </div>
+
+            <!-- User Section -->
+            <div class="flex items-center gap-3">
+                {% if current_user %}
+                <div class="hidden sm:flex items-center gap-2">
+                    <div class="user-avatar">{{ current_user[0]|upper }}</div>
+                    <span class="text-sm" style="color: rgba(255,255,255,0.7);">{{ current_user }}</span>
+                </div>
+                <a href="/logout" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i>Logout
+                </a>
+                {% else %}
+                <a href="/login" class="nav-link">
+                    <i class="fas fa-sign-in-alt"></i>Login
+                </a>
+                {% endif %}
+
+                <!-- Mobile menu button -->
+                <button class="menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="mobile-menu">
+            <a href="/" class="nav-link">
+                <i class="fas fa-ticket-alt"></i>Tickets
+            </a>
+            <a href="/dashboard" class="nav-link">
+                <i class="fas fa-chart-line"></i>Dashboard
+            </a>
+            <a href="/create-ticket" class="nav-link">
+                <i class="fas fa-plus-circle"></i>Create Ticket
+            </a>
+            {% if current_user_role == 'Administrator' %}
+            <a href="/technicians" class="nav-link">
+                <i class="fas fa-tools"></i>Technicians
+            </a>
+            <a href="/members" class="nav-link">
+                <i class="fas fa-users"></i>Members
+            </a>
+            <a href="/admin" class="nav-link nav-link-active">
+                <i class="fas fa-cog"></i>Admin Panel
+            </a>
+            {% endif %}
         </div>
     </nav>
 
     <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 fade-in">
+    <div class="main-container">
         <!-- Page Header -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold gradient-text">Admin Panel</h1>
-            <p class="text-gray-600 mt-2">Manage your system settings, users, and tickets</p>
+        <div class="page-header">
+            <h1 class="page-title">Admin Panel</h1>
+            <p class="page-subtitle">Manage your system settings, users, and tickets</p>
         </div>
 
-        <!-- Enhanced Stats Cards -->
-        <!-- Key Metrics Row -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <!-- Total Tickets -->
-            <div class="stats-card p-6 text-center hover-lift">
-                <div class="icon-container">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon blue">
                     <i class="fas fa-ticket-alt"></i>
                 </div>
-                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Total Tickets</h3>
-                <p class="text-4xl font-bold gradient-text" data-stat="total">{{ total_tickets }}</p>
+                <div class="stat-label">Total Tickets</div>
+                <div class="stat-value">{{ total_tickets }}</div>
             </div>
-
-            <!-- Open Tickets -->
-            <div class="stats-card p-6 text-center hover-lift">
-                <div class="icon-container">
+            <div class="stat-card">
+                <div class="stat-icon green">
                     <i class="fas fa-folder-open"></i>
                 </div>
-                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Open Tickets</h3>
-                <p class="text-4xl font-bold gradient-text" data-stat="open">{{ open_tickets }}</p>
+                <div class="stat-label">Open Tickets</div>
+                <div class="stat-value">{{ open_tickets }}</div>
             </div>
-
-            <!-- Waiting for Response -->
-            <div class="stats-card p-6 text-center hover-lift">
-                <div class="icon-container">
+            <div class="stat-card">
+                <div class="stat-icon yellow">
                     <i class="fas fa-clock"></i>
                 </div>
-                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Waiting</h3>
-                <p class="text-4xl font-bold gradient-text" data-stat="waiting">{{ waiting_tickets }}</p>
+                <div class="stat-label">Waiting</div>
+                <div class="stat-value">{{ waiting_tickets }}</div>
             </div>
-
-            <!-- Resolved Tickets -->
-            <div class="stats-card p-6 text-center hover-lift">
-                <div class="icon-container">
+            <div class="stat-card">
+                <div class="stat-icon purple">
                     <i class="fas fa-check-circle"></i>
                 </div>
-                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Resolved</h3>
-                <p class="text-4xl font-bold gradient-text" data-stat="resolved">{{ resolved_tickets }}</p>
+                <div class="stat-label">Resolved</div>
+                <div class="stat-value">{{ resolved_tickets }}</div>
             </div>
         </div>
 
-        <!-- Breakdown Stats Row -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <!-- Breakdown Cards -->
+        <div class="breakdown-grid">
             <!-- Priority Breakdown -->
-            <div class="stats-card p-6 hover-lift">
-                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4 text-center">Priorities
-                </h3>
-                <div class="space-y-2">
+            <div class="breakdown-card">
+                <div class="breakdown-title">Priorities</div>
+                <div class="breakdown-list">
                     {% for priority, count in priorities.items() %}
-                    <div class="flex items-center justify-between">
-                        <span class="priority-badge {% if priority == 'Urgent' %}badge-urgent
-                            {% elif priority == 'Fast' %}badge-fast
-                            {% elif priority == 'High' %}badge-medium
-                            {% elif priority == 'Medium' %}badge-medium
-                            {% else %}badge-low{% endif %}">
+                    <div class="breakdown-item">
+                        <span
+                            class="breakdown-badge {% if priority == 'Urgent' %}badge-urgent{% elif priority == 'Fast' or priority == 'High' %}badge-high{% elif priority == 'Medium' %}badge-medium{% else %}badge-low{% endif %}">
                             {{ priority }}
                         </span>
-                        <span class="font-semibold">{{ count }}</span>
+                        <span class="breakdown-count">{{ count }}</span>
                     </div>
                     {% endfor %}
                 </div>
             </div>
 
             <!-- Type Breakdown -->
-            <div class="stats-card p-6 hover-lift">
-                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4 text-center">Types</h3>
-                <div class="space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+            <div class="breakdown-card">
+                <div class="breakdown-title">Types</div>
+                <div class="breakdown-list">
                     {% for cls, count in classifications.items() %}
-                    <div class="flex items-center justify-between">
-                        <span class="priority-badge {% if cls == 'Technical Issue' %}badge-technical
-                            {% elif cls == 'Payment' %}badge-payment
-                            {% elif cls == 'Support' %}badge-general
-                            {% elif cls == 'Warranty Claim' %}badge-general
-                            {% elif cls == 'Spam' %}badge-general
-                            {% elif cls == 'Account' %}badge-account
-                            {% else %}badge-general{% endif %}">
+                    <div class="breakdown-item">
+                        <span
+                            class="breakdown-badge {% if cls == 'Technical Issue' %}badge-technical{% elif cls == 'Payment' %}badge-payment{% elif cls == 'Account' %}badge-account{% else %}badge-general{% endif %}">
                             {{ cls }}
                         </span>
-                        <span class="font-semibold">{{ count }}</span>
+                        <span class="breakdown-count">{{ count }}</span>
                     </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
 
-        <!-- Enhanced Ticket List -->
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
-            <div class="section-header px-6 py-5">
-                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-                    <h2 class="text-xl font-semibold gradient-text flex items-center">
-                        <i class="fas fa-list-ul mr-2"></i> Recent Tickets
-                    </h2>
-                    <span class="px-4 py-2 rounded-full text-sm font-medium gradient-btn">
-                        Total: {{ total_tickets }}
-                    </span>
-                </div>
+        <!-- Recent Tickets -->
+        <div class="glass-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fas fa-list-ul"></i>Recent Tickets
+                </h2>
+                <span class="card-badge">Total: {{ total_tickets }}</span>
             </div>
-            <div class="divide-y divide-pink-100" id="ticketsContainer">
-                {% for ticket in tickets %}
-                <div class="ticket-card p-6 hover-lift {% if ticket.is_important %}ticket-important{% endif %} {% if loop.index > 5 %}hidden{% endif %}"
-                    data-ticket-index="{{ loop.index }}" data-ticket-id="{{ ticket.ticket_id }}">
-                    <div class="flex-1">
-                        <a href="/ticket/{{ ticket.ticket_id }}" class="flex-1 ticket-link"
-                            data-ticket-id="{{ ticket.ticket_id }}">
-                            <div class="flex justify-between items-start">
-                                <div class="flex-1">
-                                    <div class="flex items-center flex-wrap gap-2 mb-2">
-                                        <span
-                                            class="font-bold text-blue-800 bg-blue-50 px-2 py-1 rounded border border-blue-200 text-sm">
-                                            <i class="fas fa-hashtag mr-1"></i>{{ ticket.ticket_id }}
-                                        </span>
-                                        <span class="priority-badge {% if ticket.priority == 'Urgent' %}badge-urgent
-                                            {% elif ticket.priority == 'Fast' %}badge-fast
-                                            {% elif ticket.priority == 'Medium' %}badge-medium
-                                            {% else %}badge-low{% endif %}">
-                                            {{ ticket.priority }}
-                                        </span>
-                                        <span class="priority-badge {% if ticket.status == 'Open' %}badge-technical
-                                            {% else %}badge-low{% endif %}">
-                                            <i
-                                                class="fas fa-{% if ticket.status == 'Open' %}lock-open{% else %}lock{% endif %} mr-1"></i>
-                                            {{ ticket.status }}
-                                        </span>
-                                        {% if ticket.classification and ticket.classification in ['Technical Issue',
-                                        'Payment', 'Support', 'Warranty Claim', 'Spam', 'Account'] %}
-                                        <span class="priority-badge 
-                                            {% if ticket.classification == 'Technical Issue' %}badge-technical
-                                            {% elif ticket.classification == 'Payment' %}badge-payment
-                                            {% elif ticket.classification == 'Support' %}badge-general
-                                            {% elif ticket.classification == 'Warranty Claim' %}badge-general
-                                            {% elif ticket.classification == 'Spam' %}badge-general
-                                            {% else %}badge-account{% endif %}">
-                                            {% if ticket.classification == 'Technical Issue' %}🔧
-                                            {% elif ticket.classification == 'Payment' %}💳
-                                            {% elif ticket.classification == 'Support' %}🛎️
-                                            {% elif ticket.classification == 'Warranty Claim' %}🛡️
-                                            {% elif ticket.classification == 'Spam' %}🚫
-                                            {% else %}❓{% endif %}
-                                            {{ ticket.classification }}
-                                        </span>
-                                        {% endif %}
-                                        {% if ticket.is_important %}
-                                        <span class="priority-badge badge-medium">
-                                            <i class="fas fa-star mr-1"></i> Important
-                                        </span>
-                                        {% endif %}
-                                    </div>
-                                    <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ ticket.subject }}</h3>
-                                    <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ ticket.body }}</p>
-                                    <div class="flex flex-wrap items-center text-sm text-gray-500 gap-3">
-                                        <span><i class="fas fa-user mr-1"></i>{{ ticket.name }}</span>
-                                        <span><i class="fas fa-envelope mr-1"></i>{{ ticket.email }}</span>
-                                        <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date }}</span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <button class="nav-link important-btn" data-ticket-id="{{ ticket.ticket_id }}"
-                                        title="Mark as Important">
-                                        <i class="fas fa-star{% if not ticket.is_important %}-o{% endif %}"></i>
-                                    </button>
-                                    <button class="nav-link delete-ticket-btn" data-ticket-id="{{ ticket.ticket_id }}"
-                                        title="Delete Ticket Permanently"
-                                        onclick="event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); deleteTicket('{{ ticket.ticket_id }}'); return false;">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
+            <div class="card-body">
+                <div class="ticket-list" id="ticketsContainer">
+                    {% for ticket in tickets %}
+                    <a href="/ticket/{{ ticket.ticket_id }}"
+                        class="ticket-item {% if ticket.is_important %}important{% endif %} {% if loop.index > 5 %}hidden{% endif %}"
+                        data-ticket-index="{{ loop.index }}">
+                        <div class="ticket-content">
+                            <div class="ticket-meta">
+                                <span class="ticket-id">#{{ ticket.ticket_id }}</span>
+                                <span
+                                    class="ticket-badge {% if ticket.priority == 'Urgent' %}badge-urgent{% elif ticket.priority == 'Fast' %}badge-high{% elif ticket.priority == 'Medium' %}badge-medium{% else %}badge-low{% endif %}">
+                                    {{ ticket.priority }}
+                                </span>
+                                <span
+                                    class="ticket-badge {% if ticket.status == 'Open' %}badge-technical{% else %}badge-low{% endif %}">
+                                    {{ ticket.status }}
+                                </span>
+                                {% if ticket.classification %}
+                                <span class="ticket-badge badge-general">{{ ticket.classification }}</span>
+                                {% endif %}
                             </div>
-                        </a>
-                    </div>
+                            <div class="ticket-title">{{ ticket.subject }}</div>
+                            <div class="ticket-body">{{ ticket.body }}</div>
+                            <div class="ticket-info">
+                                <span><i class="fas fa-user"></i>{{ ticket.name }}</span>
+                                <span><i class="fas fa-envelope"></i>{{ ticket.email }}</span>
+                                <span><i class="fas fa-clock"></i>{{ ticket.formatted_date }}</span>
+                            </div>
+                        </div>
+                        <div class="ticket-actions" onclick="event.preventDefault(); event.stopPropagation();">
+                            <button class="ticket-action-btn star" onclick="event.preventDefault();"
+                                title="Mark Important">
+                                <i class="fas fa-star{% if not ticket.is_important %}-o{% endif %}"></i>
+                            </button>
+                            <button class="ticket-action-btn delete"
+                                onclick="event.preventDefault(); deleteTicket('{{ ticket.ticket_id }}');"
+                                title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </a>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
-
-            <!-- Show More Button -->
             {% if tickets|length > 5 %}
-            <div class="px-6 py-4 bg-gray-50 border-t">
-                <button id="showMoreTickets" class="w-full gradient-btn py-3">
-                    <i class="fas fa-chevron-down mr-2"></i>
+            <div class="show-more-section">
+                <button id="showMoreTickets" class="show-more-btn">
+                    <i class="fas fa-chevron-down"></i>
                     <span id="showMoreText">Show More Tickets ({{ tickets|length - 5 }} hidden)</span>
                 </button>
             </div>
             {% endif %}
         </div>
 
-        <!-- Technician Management Section -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-            <div class="section-header px-6 py-4">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-xl font-semibold gradient-text flex items-center">
-                        <i class="fas fa-tools mr-2"></i> Technician Management
-                    </h2>
-                    <button id="addTechnicianBtn" class="gradient-btn">
-                        <i class="fas fa-plus mr-2"></i> Add Technician
-                    </button>
-                </div>
+        <!-- Technician Management -->
+        <div class="glass-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fas fa-tools"></i>Technician Management
+                </h2>
+                <button class="btn-primary" id="addTechnicianBtn">
+                    <i class="fas fa-plus"></i>Add Technician
+                </button>
             </div>
-            <div class="p-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="techniciansContainer">
+            <div class="card-body">
+                <div class="management-grid" id="techniciansContainer">
                     {% for technician in technicians %}
-                    <div class="technician-card bg-gray-50 rounded-lg p-4 border-l-4 border-blue-500 hover-lift"
-                        data-technician-id="{{ technician._id }}">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-semibold text-gray-800">{{ technician.name }}</h3>
-                                <p class="text-sm text-gray-600">
-                                    <i class="fas fa-calendar-plus mr-1"></i>
-                                    Added: {{ technician.created_at.strftime('%Y-%m-%d') if technician.created_at
-                                    else 'N/A' }}
+                    <div class="management-card" data-technician-id="{{ technician._id }}">
+                        <div class="management-card-header">
+                            <div class="management-card-info">
+                                <h4>{{ technician.name }}</h4>
+                                <p><i class="fas fa-calendar-plus"></i> Added: {{
+                                    technician.created_at.strftime('%Y-%m-%d') if technician.created_at else 'N/A' }}
                                 </p>
-                                <span
-                                    class="priority-badge {% if technician.is_active %}badge-low{% else %}badge-urgent{% endif %} mt-2">
-                                    {% if technician.is_active %}Active{% else %}Inactive{% endif %}
-                                </span>
                             </div>
-                            <div class="flex gap-2">
-                                <button class="nav-link edit-technician-btn" data-technician-id="{{ technician._id }}"
+                            <div class="management-card-actions">
+                                <button class="management-action-btn edit" data-technician-id="{{ technician._id }}"
                                     data-technician-name="{{ technician.name }}">
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 {% if technician.is_active %}
-                                <button class="nav-link deactivate-technician-btn"
+                                <button class="management-action-btn deactivate"
                                     data-technician-id="{{ technician._id }}"
                                     data-technician-name="{{ technician.name }}">
                                     <i class="fas fa-user-times"></i>
@@ -970,111 +1181,73 @@
                                 {% endif %}
                             </div>
                         </div>
+                        <span class="status-badge {% if technician.is_active %}active{% else %}inactive{% endif %}">
+                            <i class="fas fa-{% if technician.is_active %}check{% else %}times{% endif %}-circle"></i>
+                            {{ 'Active' if technician.is_active else 'Inactive' }}
+                        </span>
                     </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
 
-        <!-- Member Management Section -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-            <div class="section-header px-6 py-4">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-xl font-semibold gradient-text flex items-center">
-                        <i class="fas fa-users-cog mr-2"></i> Member Management
-                    </h2>
-                    <button id="addMemberBtnMain" class="gradient-btn">
-                        <i class="fas fa-plus mr-2"></i> Add Member
-                    </button>
-                </div>
-            </div>
-            <div class="p-6">
-                <div class="space-y-3" id="membersMainList">
-                    {% for member in members %}
-                    <div class="ticket-card p-4 hover-lift" data-member-id="{{ member._id }}">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center">
-                                    <span class="text-pink-600">{{ '👩' if member.gender == 'female' else '👨' }}</span>
-                                </div>
-                                <div>
-                                    <div class="font-medium text-gray-900">{{ member.name }}</div>
-                                    <div class="text-sm text-gray-500">{{ member.role }} • {{ member.user_id }}</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="priority-badge {% if member.role == 'Administrator' %}badge-technical
-                                    {% elif member.role == 'Technical Director' %}badge-fast
-                                    {% else %}badge-low{% endif %}">
-                                    {{ member.role }}
-                                </span>
-                                <button class="nav-link edit-member-btn-main" data-member-id="{{ member._id }}">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                {% if member.user_id not in ['admin001', 'marc001'] %}
-                                <button class="nav-link delete-member-btn-main" data-member-id="{{ member._id }}">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                <div class="mt-4 p-4 bg-blue-50 rounded-lg bg-white">
-                    <h4 class="font-medium gradient-text mb-2">Portal Access Guide:</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
-                        <div class="flex items-center">
-                            <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
-                            <span><strong>Administrator:</strong> Admin Portal only</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="w-3 h-3 bg-orange-500 rounded-full mr-2"></span>
-                            <span><strong>Technical Director:</strong> Tech Portal only</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
-                            <span><strong>Other Roles:</strong> User Portal</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modals and additional content remain the same -->
-        <!-- Member Management Modal -->
-        <div id="memberModal" class="modal">
-            <div class="modal-content">
-                <h3 class="text-xl font-semibold mb-4 flex items-center gradient-text">
-                    <i class="fas fa-users-cog mr-2"></i> Team Members Management
-                </h3>
-                <div id="memberList" class="mb-4"></div>
-                <button id="addMemberBtn" class="gradient-btn w-full">
-                    <i class="fas fa-plus"></i> Add New Member
+        <!-- Member Management -->
+        <div class="glass-card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fas fa-users-cog"></i>Member Management
+                </h2>
+                <button class="btn-primary" id="addMemberBtnMain">
+                    <i class="fas fa-plus"></i>Add Member
                 </button>
-                <div id="memberForm" class="hidden mt-4">
-                    <!-- Form content remains the same -->
+            </div>
+            <div class="card-body">
+                <div class="ticket-list" id="membersMainList">
+                    {% for member in members %}
+                    <div class="member-item" data-member-id="{{ member._id }}">
+                        <div class="member-info">
+                            <div class="member-avatar">
+                                {{ '👩' if member.gender == 'female' else '👨' }}
+                            </div>
+                            <div class="member-details">
+                                <h5>{{ member.name }}</h5>
+                                <p>{{ member.role }} · {{ member.user_id }}</p>
+                            </div>
+                        </div>
+                        <div class="member-actions">
+                            <span
+                                class="role-badge {% if member.role == 'Administrator' %}admin{% elif member.role == 'Technical Director' %}director{% else %}member{% endif %}">
+                                {{ member.role }}
+                            </span>
+                            <button class="management-action-btn edit" data-member-id="{{ member._id }}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            {% if member.user_id not in ['admin001', 'marc001'] %}
+                            <button class="management-action-btn deactivate" data-member-id="{{ member._id }}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
-            </div>
-        </div>
 
-        <!-- Role Management Modal -->
-        <div id="roleModal" class="modal">
-            <div class="modal-content">
-                <h3 class="text-lg font-semibold mb-2 flex items-center gradient-text">
-                    <i class="fas fa-user-tag mr-2"></i> Role Management
-                </h3>
-                <!-- Form content remains the same -->
-            </div>
-        </div>
-
-        <!-- Technician Management Modal -->
-        <div id="technicianModal" class="modal">
-            <div class="modal-content">
-                <h3 class="text-xl font-semibold mb-4 flex items-center gradient-text">
-                    <i class="fas fa-tools mr-2"></i> <span id="technicianModalTitle">Add Technician</span>
-                </h3>
-                <!-- Form content remains the same -->
+                <!-- Portal Access Guide -->
+                <div class="access-guide">
+                    <div class="access-guide-title">Portal Access Guide:</div>
+                    <div class="access-item">
+                        <span class="access-dot blue"></span>
+                        <span><strong>Administrator:</strong> Admin Portal only</span>
+                    </div>
+                    <div class="access-item">
+                        <span class="access-dot orange"></span>
+                        <span><strong>Technical Director:</strong> Tech Portal only</span>
+                    </div>
+                    <div class="access-item">
+                        <span class="access-dot green"></span>
+                        <span><strong>Other Roles:</strong> User Portal</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1083,116 +1256,77 @@
     <script type="application/json" id="technicians-data">{{ technicians | tojson | safe }}</script>
 
     <script>
-        // JavaScript code remains the same as provided
-        // Global members array
-        let members = [];
-
-        // Initialize technicians data safely
-        let techniciansData = [];
-        try {
-            const dataElement = document.getElementById('technicians-data');
-            if (dataElement) {
-                techniciansData = JSON.parse(dataElement.textContent);
-            }
-        } catch (e) {
-            console.error('Error loading technicians data:', e);
-            techniciansData = [];
-        }
-
-        // Toast notification functions
-        function showSuccessToast(message) {
-            showToast(message, 'success');
-        }
-
-        function showErrorToast(message) {
-            showToast(message, 'error');
-        }
-
+        // Toast notification
         function showToast(message, type = 'success') {
             const toast = document.createElement('div');
             toast.className = `toast toast-${type}`;
             toast.innerHTML = `
-                <div class="flex items-center space-x-2">
+                <div style="display: flex; align-items: center; gap: 10px;">
                     <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
                     <span>${message}</span>
                 </div>
             `;
-
             document.body.appendChild(toast);
-
             setTimeout(() => {
-                toast.style.animation = 'toastSlideIn 0.3s ease reverse';
-                setTimeout(() => {
-                    if (toast.parentNode) {
-                        toast.parentNode.removeChild(toast);
-                    }
-                }, 300);
+                toast.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
             }, 3000);
-        }
-
-        // Delete ticket function
-        async function deleteTicket(ticketId) {
-            if (!confirm(`Are you sure you want to permanently delete ticket ${ticketId}? This action cannot be undone.`)) {
-                return;
-            }
-
-            try {
-                const response = await fetch(`/api/tickets/${ticketId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    showSuccessToast(`Ticket ${ticketId} deleted successfully`);
-                    // Remove the ticket from the DOM
-                    const ticketCard = document.querySelector(`[data-ticket-id="${ticketId}"]`);
-                    if (ticketCard) {
-                        ticketCard.closest('.ticket-item')?.remove();
-                    }
-                    // Reload page after short delay to refresh the list
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1000);
-                } else {
-                    showErrorToast(data.error || 'Failed to delete ticket');
-                }
-            } catch (error) {
-                console.error('Error deleting ticket:', error);
-                showErrorToast('An error occurred while deleting the ticket');
-            }
         }
 
         // Mobile menu toggle
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenu) {
-                mobileMenu.classList.toggle('hidden');
+            if (mobileMenu) mobileMenu.classList.toggle('open');
+        }
+
+        // Delete ticket
+        async function deleteTicket(ticketId) {
+            if (!confirm(`Are you sure you want to permanently delete ticket ${ticketId}?`)) return;
+
+            try {
+                const response = await fetch(`/api/tickets/${ticketId}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    showToast(`Ticket ${ticketId} deleted successfully`);
+                    setTimeout(() => window.location.reload(), 1000);
+                } else {
+                    showToast(data.error || 'Failed to delete ticket', 'error');
+                }
+            } catch (error) {
+                showToast('An error occurred while deleting the ticket', 'error');
             }
         }
 
-        // Initialize when DOM is loaded
+        // Show more tickets
         document.addEventListener('DOMContentLoaded', function () {
-            console.log('🚀 Modern Pink Glassmorphism Theme Loaded');
+            const showMoreBtn = document.getElementById('showMoreTickets');
+            if (showMoreBtn) {
+                let expanded = false;
+                showMoreBtn.addEventListener('click', function () {
+                    const hiddenTickets = document.querySelectorAll('.ticket-item.hidden');
+                    const allTickets = document.querySelectorAll('.ticket-item[data-ticket-index]');
 
-            // Add shimmer effect to stats cards
-            const statsCards = document.querySelectorAll('.stats-card');
-            statsCards.forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    card.classList.add('shimmer');
+                    if (!expanded) {
+                        hiddenTickets.forEach(t => t.classList.remove('hidden'));
+                        document.getElementById('showMoreText').innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
+                        expanded = true;
+                    } else {
+                        allTickets.forEach(t => {
+                            if (parseInt(t.dataset.ticketIndex) > 5) {
+                                t.classList.add('hidden');
+                            }
+                        });
+                        document.getElementById('showMoreText').innerHTML = `<i class="fas fa-chevron-down"></i> Show More Tickets (${allTickets.length - 5} hidden)`;
+                        expanded = false;
+                    }
                 });
-                card.addEventListener('mouseleave', () => {
-                    card.classList.remove('shimmer');
-                });
-            });
+            }
 
-            // Show welcome toast
-            setTimeout(() => {
-                showSuccessToast('Admin panel loaded successfully');
-            }, 1000);
+            showToast('Admin panel loaded successfully');
         });
     </script>
 </body>
