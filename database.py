@@ -320,7 +320,9 @@ class MongoDB:
             # This significantly reduces the number of documents we need to perform lookups on
             
             # 1. Sort first (using index)
-            pipeline.append({"$sort": {"has_unread_reply": -1, "is_important": -1, "created_at": -1}})
+        # CRITICAL UPDATE: User requested newest tickets on top always
+        # Prioritizing created_at, then unread/important features
+        pipeline.append({"$sort": {"created_at": -1, "has_unread_reply": -1, "is_important": -1}})
             
             # 2. Skip and Limit (Pagination)
             skip = (page - 1) * per_page
