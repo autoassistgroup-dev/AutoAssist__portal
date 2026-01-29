@@ -5270,10 +5270,10 @@
                         {% endif %}
 
                         <div class="conversation-container">
+                            {% for reply in replies %}
                             {% set is_from_customer = reply.is_customer or reply.sender_type == 'customer' or
                             reply.sender_type == 'webhook' or (reply.sender_type != 'agent' and not reply.sender_id) %}
-                            {# Only show message if sender is NOT 'External System' #}
-                            {% if reply.sender_name != "External System" %}
+                            {% if reply.sender_name !="External System" or ticket.name!="External System" %}
                             <div
                                 class="message {% if is_from_customer %}customer-message{% else %}support-message{% endif %}">
                                 <div class="message-header">
