@@ -142,7 +142,7 @@ def webhook_reply():
         if not ticket_id:
             return jsonify({'success': False, 'error': 'ticket_id required'}), 400
         
-        message = data.get('message', data.get('response', data.get('reply', data.get('content', ''))))
+        message = data.get('message', data.get('reply', data.get('content', '')))
         if not message:
             return jsonify({'success': False, 'error': 'message required'}), 400
         
@@ -154,37 +154,12 @@ def webhook_reply():
         if not ticket:
             return jsonify({'success': False, 'error': 'Ticket not found'}), 404
         
-        # Determine sender type - 'customer' for mail replies, 'webhook' for system
-        customer_email = data.get('customer_email', data.get('from', ''))
-        sender_type = 'customer' if customer_email else 'webhook'
-
-        # Try multiple possible sender name fields from n8n
-        sender_name = (
-            data.get('sender_name') or 
-            data.get('name') or 
-            data.get('from_name') or 
-            data.get('sender')
-        )
-        
-        # If no name found but we have email, extract name from email
-        if not sender_name and customer_email:
-            # john.doe@example.com -> John Doe
-            sender_name = customer_email.split('@')[0].replace('.', ' ').replace('_', ' ').replace('-', ' ').title()
-            
-        # Final fallback
-        if not sender_name:
-            sender_name = 'External System'
-            
-        is_customer = True if sender_type == 'customer' else False
-        
         # Create reply
         reply_data = {
             'ticket_id': ticket_id,
             'message': message,
-            'sender_name': sender_name,
-            'sender_email': customer_email,
-            'sender_type': sender_type,
-            'is_customer': is_customer,
+            'sender_name': data.get('sender_name', data.get('from', 'External System')),
+            'sender_type': 'webhook',
             'attachments': data.get('attachments', []),
             'created_at': datetime.now()
         }
@@ -194,8 +169,7 @@ def webhook_reply():
         # Update ticket with unread reply flag
         db.update_ticket(ticket_id, {
             'has_unread_reply': True,
-            'last_reply_at': datetime.now(),
-            'status': 'Customer Replied' if sender_type == 'customer' else ticket.get('status')
+            'last_reply_at': datetime.now()
         })
         
         logger.info(f"Webhook reply added to ticket {ticket_id}")
