@@ -4368,6 +4368,129 @@
         </div>
     </div>
 
+    <!-- Vehicle & Claim Edit Modal -->
+    <div id="vehicleClaimModal" class="modal-overlay">
+        <div class="modal-content p-6 bg-[#1a1a2e] border border-white/10"
+            style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-white">Edit Vehicle & Claim Information</h3>
+                <button id="closeVehicleClaimModal" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Vehicle Info Fields -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block text-gray-300 text-sm font-medium mb-1">Vehicle Registration</label>
+                    <input type="text" id="editVehicleRegistration"
+                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        placeholder="e.g., ABC 123">
+                </div>
+                <div>
+                    <label class="block text-gray-300 text-sm font-medium mb-1">Service Date</label>
+                    <input type="date" id="editServiceDate"
+                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-gray-300 text-sm font-medium mb-1">Claim Date</label>
+                    <input type="date" id="editClaimDate"
+                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-gray-300 text-sm font-medium mb-1">Type of Claim</label>
+                    <input type="text" id="editTypeOfClaim"
+                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        placeholder="e.g., Warranty, Repair">
+                </div>
+                <div>
+                    <label class="block text-gray-300 text-sm font-medium mb-1">VHC Link</label>
+                    <input type="url" id="editVhcLink"
+                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        placeholder="https://...">
+                </div>
+                <div>
+                    <label class="block text-gray-300 text-sm font-medium mb-1">Days Between Service & Claim</label>
+                    <input type="number" id="editDaysBetween"
+                        class="w-full px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        placeholder="0">
+                </div>
+            </div>
+
+            <!-- Checklist Options -->
+            <div class="mb-4">
+                <label class="block text-gray-300 text-sm font-medium mb-2">Claim Checklist</label>
+                <div class="grid grid-cols-2 gap-2">
+                    <label class="flex items-center text-gray-300 text-sm cursor-pointer">
+                        <input type="checkbox" id="editAdvisoriesFollowed"
+                            class="mr-2 rounded bg-white/5 border-white/10">
+                        Advisories Followed
+                    </label>
+                    <label class="flex items-center text-gray-300 text-sm cursor-pointer">
+                        <input type="checkbox" id="editWithinWarranty" class="mr-2 rounded bg-white/5 border-white/10">
+                        Within Warranty
+                    </label>
+                    <label class="flex items-center text-gray-300 text-sm cursor-pointer">
+                        <input type="checkbox" id="editNewFaultCodes" class="mr-2 rounded bg-white/5 border-white/10">
+                        New Fault Codes
+                    </label>
+                    <label class="flex items-center text-gray-300 text-sm cursor-pointer">
+                        <input type="checkbox" id="editDpfLightOn" class="mr-2 rounded bg-white/5 border-white/10">
+                        DPF Light On
+                    </label>
+                    <label class="flex items-center text-gray-300 text-sm cursor-pointer">
+                        <input type="checkbox" id="editEmlLightOn" class="mr-2 rounded bg-white/5 border-white/10">
+                        EML Light On
+                    </label>
+                </div>
+            </div>
+
+            <!-- Claim Documents Section -->
+            <div class="mb-4 border-t border-white/10 pt-4">
+                <div class="flex justify-between items-center mb-2">
+                    <label class="block text-gray-300 text-sm font-medium">Claim Documents (Receipts, Photos)</label>
+                </div>
+
+                <!-- Upload Area -->
+                <div class="mb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="file-input-wrapper flex-1">
+                            <div
+                                class="file-input-button w-full flex items-center justify-center py-2 bg-white/5 hover:bg-white/10 border border-dashed border-white/20 transition rounded-lg text-gray-400 cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt mr-2"></i> Drop files here or click to upload
+                            </div>
+                            <input type="file" id="claimDocumentFile"
+                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xlsx,.xls" multiple>
+                        </div>
+                    </div>
+                    <input type="text" id="claimDocumentDescription"
+                        class="w-full mt-2 px-3 py-2 border border-white/10 bg-white/5 text-white rounded-lg focus:ring-2 focus:ring-indigo-500 text-sm"
+                        placeholder="Description (optional)">
+                    <button type="button" id="uploadClaimDocBtn"
+                        class="mt-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm">
+                        <i class="fas fa-upload mr-1"></i> Upload
+                    </button>
+                </div>
+
+                <!-- Existing Documents List -->
+                <div id="claimDocumentsList" class="space-y-2 max-h-40 overflow-y-auto">
+                    <p class="text-gray-500 text-sm">No claim documents uploaded yet.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-end space-x-3 border-t border-white/10 pt-4">
+                <button id="cancelVehicleClaim"
+                    class="px-4 py-2 bg-white/10 text-gray-300 rounded-lg hover:bg-white/20 transition">
+                    Cancel
+                </button>
+                <button id="saveVehicleClaim"
+                    class="px-4 py-2 text-white rounded-lg hover:opacity-90 transition bg-indigo-600">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Assignment/Forward/Takeover Modal -->
     <div id="assignModal" class="modal-overlay">
         <div class="modal-content p-6">
@@ -4829,7 +4952,15 @@
                         <!-- Vehicle Information -->
                         {% if vehicle_registration %}
                         <div class="mb-3">
-                            <h3 class="text-sm font-medium text-gray-500 mb-2">Vehicle & Claim Information</h3>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-500">Vehicle & Claim Information</h3>
+                                <button id="editVehicleInfoBtn"
+                                    class="text-xs text-indigo-600 hover:text-indigo-800 flex items-center gap-1 px-2 py-1 rounded hover:bg-indigo-50 transition-colors"
+                                    title="Edit Vehicle & Claim Info">
+                                    <i class="fas fa-edit"></i>
+                                    <span>Edit</span>
+                                </button>
+                            </div>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 vehicle-info-grid">
                                 {% if vehicle_registration %}
                                 <div class="detail-card flex items-center">
@@ -5862,6 +5993,179 @@
                     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
                 }
 
+                // ===== VEHICLE & CLAIM EDIT FUNCTIONS =====
+                const ticketId = "{{ ticket.ticket_id }}";
+
+                // Current vehicle/claim data from template
+                const currentVehicleData = {
+                    vehicle_registration: "{{ vehicle_registration or '' }}",
+                    service_date: "{{ service_date or '' }}",
+                    claim_date: "{{ claim_date or '' }}",
+                    type_of_claim: "{{ type_of_claim or '' }}",
+                    vhc_link: "{{ vhc_link or '' }}",
+                    days_between_service_claim: "{{ days_between_service_claim or '' }}",
+                    advisories_followed: {% if advisories_followed %}true{% else %} false{% endif %},
+                within_warranty: {% if within_warranty %} true{% else %} false{% endif %},
+                new_fault_codes: {% if new_fault_codes %} true{% else %} false{% endif %},
+                dpf_light_on: {% if dpf_light_on %} true{% else %} false{% endif %},
+                eml_light_on: {% if eml_light_on %} true{% else %} false{% endif %}
+                };
+
+                function openVehicleClaimModal() {
+                    // Populate form with current data
+                    document.getElementById('editVehicleRegistration').value = currentVehicleData.vehicle_registration;
+                    document.getElementById('editServiceDate').value = currentVehicleData.service_date;
+                    document.getElementById('editClaimDate').value = currentVehicleData.claim_date;
+                    document.getElementById('editTypeOfClaim').value = currentVehicleData.type_of_claim;
+                    document.getElementById('editVhcLink').value = currentVehicleData.vhc_link;
+                    document.getElementById('editDaysBetween').value = currentVehicleData.days_between_service_claim;
+
+                    // Checkboxes
+                    document.getElementById('editAdvisoriesFollowed').checked = currentVehicleData.advisories_followed;
+                    document.getElementById('editWithinWarranty').checked = currentVehicleData.within_warranty;
+                    document.getElementById('editNewFaultCodes').checked = currentVehicleData.new_fault_codes;
+                    document.getElementById('editDpfLightOn').checked = currentVehicleData.dpf_light_on;
+                    document.getElementById('editEmlLightOn').checked = currentVehicleData.eml_light_on;
+
+                    // Load claim documents
+                    loadClaimDocuments();
+
+                    openModal('vehicleClaimModal');
+                }
+
+                async function saveVehicleClaimInfo() {
+                    const data = {
+                        vehicle_registration: document.getElementById('editVehicleRegistration').value.trim(),
+                        service_date: document.getElementById('editServiceDate').value,
+                        claim_date: document.getElementById('editClaimDate').value,
+                        type_of_claim: document.getElementById('editTypeOfClaim').value.trim(),
+                        vhc_link: document.getElementById('editVhcLink').value.trim(),
+                        days_between_service_claim: document.getElementById('editDaysBetween').value,
+                        advisories_followed: document.getElementById('editAdvisoriesFollowed').checked,
+                        within_warranty: document.getElementById('editWithinWarranty').checked,
+                        new_fault_codes: document.getElementById('editNewFaultCodes').checked,
+                        dpf_light_on: document.getElementById('editDpfLightOn').checked,
+                        eml_light_on: document.getElementById('editEmlLightOn').checked
+                    };
+
+                    try {
+                        const response = await fetch(`/api/tickets/${ticketId}/vehicle-info`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            showNotification('Vehicle & Claim information updated successfully', 'success');
+                            closeModal('vehicleClaimModal');
+                            // Refresh the page to show updated data
+                            setTimeout(() => location.reload(), 1000);
+                        } else {
+                            showNotification(result.message || 'Failed to update', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Error saving vehicle info:', error);
+                        showNotification('Error saving vehicle information', 'error');
+                    }
+                }
+
+                async function loadClaimDocuments() {
+                    const container = document.getElementById('claimDocumentsList');
+
+                    try {
+                        const response = await fetch(`/api/tickets/${ticketId}/claim-documents`);
+                        const result = await response.json();
+
+                        if (result.success && result.documents.length > 0) {
+                            container.innerHTML = result.documents.map(doc => `
+                                <div class="flex items-center justify-between p-2 bg-white/5 rounded-lg">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-file text-gray-400"></i>
+                                        <div>
+                                            <p class="text-sm text-white">${doc.file_name}</p>
+                                            <p class="text-xs text-gray-500">${doc.description || 'No description'}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <a href="/api/tickets/${ticketId}/claim-documents/${doc._id}/download" 
+                                           class="text-blue-400 hover:text-blue-300 text-sm" title="Download">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                        <button onclick="deleteClaimDocument('${doc._id}')" 
+                                                class="text-red-400 hover:text-red-300 text-sm" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join('');
+                        } else {
+                            container.innerHTML = '<p class="text-gray-500 text-sm">No claim documents uploaded yet.</p>';
+                        }
+                    } catch (error) {
+                        console.error('Error loading claim documents:', error);
+                        container.innerHTML = '<p class="text-red-400 text-sm">Error loading documents</p>';
+                    }
+                }
+
+                async function uploadClaimDocument() {
+                    const fileInput = document.getElementById('claimDocumentFile');
+                    const description = document.getElementById('claimDocumentDescription').value.trim();
+
+                    if (!fileInput.files.length) {
+                        showNotification('Please select a file to upload', 'error');
+                        return;
+                    }
+
+                    const formData = new FormData();
+                    formData.append('file', fileInput.files[0]);
+                    formData.append('description', description);
+
+                    try {
+                        const response = await fetch(`/api/tickets/${ticketId}/claim-documents`, {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            showNotification('Document uploaded successfully', 'success');
+                            fileInput.value = '';
+                            document.getElementById('claimDocumentDescription').value = '';
+                            loadClaimDocuments();
+                        } else {
+                            showNotification(result.message || 'Failed to upload', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Error uploading document:', error);
+                        showNotification('Error uploading document', 'error');
+                    }
+                }
+
+                async function deleteClaimDocument(docId) {
+                    if (!confirm('Are you sure you want to delete this document?')) return;
+
+                    try {
+                        const response = await fetch(`/api/tickets/${ticketId}/claim-documents/${docId}`, {
+                            method: 'DELETE'
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            showNotification('Document deleted', 'success');
+                            loadClaimDocuments();
+                        } else {
+                            showNotification(result.message || 'Failed to delete', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Error deleting document:', error);
+                        showNotification('Error deleting document', 'error');
+                    }
+                }
+
                 // Document functions
                 async function loadDocuments() {
 
@@ -6619,6 +6923,32 @@
                     setupAttachmentHandlers(); // Setup attachment handling
                     setupQuickResponseDropdown(); // Setup quick response dropdown
                     initializeStatusButton(); // Initialize status button styling
+
+                    // ===== VEHICLE & CLAIM MODAL EVENT LISTENERS =====
+                    const editVehicleBtn = document.getElementById('editVehicleInfoBtn');
+                    if (editVehicleBtn) {
+                        editVehicleBtn.addEventListener('click', openVehicleClaimModal);
+                    }
+
+                    const closeVehicleClaimBtn = document.getElementById('closeVehicleClaimModal');
+                    if (closeVehicleClaimBtn) {
+                        closeVehicleClaimBtn.addEventListener('click', () => closeModal('vehicleClaimModal'));
+                    }
+
+                    const cancelVehicleClaimBtn = document.getElementById('cancelVehicleClaim');
+                    if (cancelVehicleClaimBtn) {
+                        cancelVehicleClaimBtn.addEventListener('click', () => closeModal('vehicleClaimModal'));
+                    }
+
+                    const saveVehicleClaimBtn = document.getElementById('saveVehicleClaim');
+                    if (saveVehicleClaimBtn) {
+                        saveVehicleClaimBtn.addEventListener('click', saveVehicleClaimInfo);
+                    }
+
+                    const uploadClaimDocBtn = document.getElementById('uploadClaimDocBtn');
+                    if (uploadClaimDocBtn) {
+                        uploadClaimDocBtn.addEventListener('click', uploadClaimDocument);
+                    }
 
                     // Initialize fixed-width layout for consistent appearance across screen sizes
                     adjustLayoutForScreenSize();

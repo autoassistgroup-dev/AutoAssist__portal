@@ -227,6 +227,21 @@ def ticket_detail(ticket_id):
     
     is_tech_director = current_member.get('role') == 'Technical Director'
     
+    # Format the created_at date for display
+    created_at = ticket.get('created_at')
+    if created_at:
+        if isinstance(created_at, datetime):
+            formatted_date = created_at.strftime("%b %d, %I:%M %p")
+        else:
+            try:
+                from dateutil import parser
+                parsed_date = parser.parse(str(created_at))
+                formatted_date = parsed_date.strftime("%b %d, %I:%M %p")
+            except:
+                formatted_date = str(created_at)
+    else:
+        formatted_date = 'Unknown'
+    
     return render_template('ticket_detail.html',
                           ticket=ticket,
                           replies=replies,
@@ -254,7 +269,8 @@ def ticket_detail(ticket_id):
                           
                           members=members,
                           technicians=technicians,
-                          ticket_statuses=ticket_statuses)
+                          ticket_statuses=ticket_statuses,
+                          formatted_date=formatted_date)
 
 
 @main_bp.route('/create-ticket', methods=['GET', 'POST'])

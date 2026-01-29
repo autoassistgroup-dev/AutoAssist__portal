@@ -65,5 +65,9 @@ def register_blueprints(app):
     # Main page routes (index, dashboard, ticket detail, etc.)
     app.register_blueprint(main_bp)
     
+    # Claim document routes (receipts, photos for tickets)
+    from routes.claim_document_routes import claim_document_bp
+    app.register_blueprint(claim_document_bp)
+    
 
 
