@@ -5984,3 +5984,1311 @@ Traceback (most recent call last):
   File "C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\werkzeug\routing\map.py", line 950, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'members.delete_member' with values ['member_id']. Did you mean 'main.members_page' instead?
+2026-01-29 11:12:18,475 - app - INFO - Application initialized successfully (refactored version)
+2026-01-29 11:12:20,316 - app - INFO - Application initialized successfully (refactored version)
+2026-01-29 11:12:20,323 - werkzeug - WARNING -  * Debugger is active!
+2026-01-29 11:12:23,496 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #20
+2026-01-29 11:12:23,500 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #21
+2026-01-29 11:12:24,150 - root - INFO - Using certifi CA bundle: C:\Users\HOME\AppData\Local\Programs\Python\Python310\lib\site-packages\certifi\cacert.pem
+2026-01-29 11:12:31,171 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-29 11:12:31,449 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 11:12:31,450 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 11:12:31,450 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 11:12:31,451 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 11:12:32,478 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 11:12:32,479 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 11:12:32,609 - root - INFO - [DATABASE] Total tickets count: 8
+2026-01-29 11:12:39,240 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #22
+2026-01-29 11:12:40,526 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #23
+2026-01-29 11:12:40,533 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #23
+2026-01-29 11:12:40,945 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #23
+2026-01-29 11:12:41,377 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 11:12:55,592 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #24
+2026-01-29 11:13:10,291 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #25
+2026-01-29 11:13:25,594 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #26
+2026-01-29 11:13:40,286 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #27
+2026-01-29 11:13:55,593 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #28
+2026-01-29 11:14:10,285 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #29
+2026-01-29 11:14:28,606 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #30
+2026-01-29 11:14:29,747 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #31
+2026-01-29 11:14:29,756 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #31
+2026-01-29 11:14:30,183 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #31
+2026-01-29 11:14:30,599 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 11:14:32,771 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #32
+2026-01-29 11:14:33,301 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #33
+2026-01-29 11:14:33,429 - routes.ticket_routes - INFO - Ticket WT6855 assignment updated by Admin
+2026-01-29 11:14:37,540 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #34
+2026-01-29 11:14:38,643 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #35
+2026-01-29 11:14:38,654 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #35
+2026-01-29 11:14:38,806 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 11:14:38,974 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #35
+2026-01-29 11:14:47,315 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #36
+2026-01-29 11:15:01,502 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #37
+2026-01-29 11:15:01,680 - root - INFO - [DATABASE] Getting all active technicians from collection: technicians
+2026-01-29 11:15:01,945 - root - INFO - [DATABASE] Total technicians: 9, Active technicians: 8
+2026-01-29 11:15:02,096 - root - INFO - [DATABASE] Retrieved 8 active technicians
+2026-01-29 11:15:02,097 - root - INFO - [DATABASE] Technician 1: Craig (ID: 6971c6ef969247226ebdb228, Active: True)
+2026-01-29 11:15:02,097 - root - INFO - [DATABASE] Technician 2: Declan (ID: 6971c6ee969247226ebdb224, Active: True)
+2026-01-29 11:15:02,097 - root - INFO - [DATABASE] Technician 3: Karl (ID: 6971c6ef969247226ebdb229, Active: True)
+2026-01-29 11:15:08,551 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #38
+2026-01-29 11:15:16,222 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #39
+2026-01-29 11:15:17,001 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-29 11:15:17,234 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 11:15:17,234 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 11:15:17,234 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 11:15:17,234 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 11:15:18,259 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 11:15:18,259 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 11:19:06,585 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #40
+2026-01-29 11:19:06,585 - routes.auth_routes - INFO - User logged out: Admin (admin001)
+2026-01-29 11:19:06,589 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-29 11:19:07,993 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-29 11:19:15,721 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-29 11:19:16,011 - routes.auth_routes - INFO - User logged in: Marc (Technical Director) (marc001)
+2026-01-29 11:19:16,031 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb222 - Refresh #1
+2026-01-29 11:19:46,835 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb222 - Refresh #2
+2026-01-29 11:19:47,138 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb222 - Refresh #3
+2026-01-29 11:19:47,247 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-29 11:19:47,500 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 11:19:47,500 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 11:19:47,501 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 11:19:47,501 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 11:19:48,497 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 11:19:48,497 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 11:19:48,611 - root - INFO - [DATABASE] Total tickets count: 8
+2026-01-29 11:19:53,025 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb222 - Refresh #4
+2026-01-29 11:19:56,061 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb222 - Refresh #5
+2026-01-29 11:20:13,539 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb222 - Refresh #6
+2026-01-29 11:20:13,539 - routes.auth_routes - INFO - User logged out: Marc (Technical Director) (marc001)
+2026-01-29 11:20:13,546 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-29 11:21:11,323 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-29 11:21:19,678 - middleware.session_manager - INFO - Attempting session restoration. Session keys: []
+2026-01-29 11:21:19,987 - routes.auth_routes - INFO - User logged in: Admin (admin001)
+2026-01-29 11:21:19,990 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #1
+2026-01-29 11:21:20,126 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-29 11:21:20,385 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 11:21:20,385 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 11:21:20,386 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 11:21:20,386 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 11:21:21,357 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 11:21:21,357 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 11:21:21,476 - root - INFO - [DATABASE] Total tickets count: 8
+2026-01-29 11:21:27,667 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #2
+2026-01-29 11:21:27,837 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-29 11:21:28,108 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 11:21:28,109 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 11:21:28,109 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 11:21:28,109 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 11:21:29,124 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 11:21:29,125 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 11:21:36,399 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #3
+2026-01-29 11:21:37,489 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #4
+2026-01-29 11:21:37,536 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #4
+2026-01-29 11:21:37,866 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #4
+2026-01-29 11:21:38,368 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 11:21:40,239 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #5
+2026-01-29 11:21:52,545 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #6
+2026-01-29 11:22:07,251 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #7
+2026-01-29 11:22:22,558 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #8
+2026-01-29 11:22:37,247 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #9
+2026-01-29 11:22:48,118 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #10
+2026-01-29 11:22:48,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #11
+2026-01-29 11:22:52,244 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #12
+2026-01-29 11:22:56,481 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #13
+2026-01-29 11:22:56,720 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #13
+2026-01-29 11:23:07,243 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #14
+2026-01-29 11:23:10,825 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #15
+2026-01-29 11:23:13,522 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #16
+2026-01-29 11:23:16,835 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #17
+2026-01-29 11:23:19,514 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #18
+2026-01-29 11:23:22,559 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #19
+2026-01-29 11:23:22,824 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #19
+2026-01-29 11:23:30,651 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #20
+2026-01-29 11:23:30,777 - routes.ticket_routes - INFO - Ticket WT6855 referred to tech director by Admin
+2026-01-29 11:23:37,548 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #21
+2026-01-29 11:23:49,660 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #22
+2026-01-29 11:23:52,551 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #23
+2026-01-29 11:23:52,819 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #24
+2026-01-29 11:23:55,667 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #25
+2026-01-29 11:23:58,961 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #26
+2026-01-29 11:24:01,651 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #27
+2026-01-29 11:24:04,972 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #28
+2026-01-29 11:24:07,252 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #29
+2026-01-29 11:24:07,959 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #30
+2026-01-29 11:24:10,659 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #31
+2026-01-29 11:24:14,378 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #32
+2026-01-29 11:24:17,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #33
+2026-01-29 11:24:20,400 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #34
+2026-01-29 11:24:23,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #35
+2026-01-29 11:24:23,401 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #35
+2026-01-29 11:24:26,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #36
+2026-01-29 11:24:29,383 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #37
+2026-01-29 11:24:32,076 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #38
+2026-01-29 11:24:35,375 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #39
+2026-01-29 11:24:38,074 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #40
+2026-01-29 11:24:38,378 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #40
+2026-01-29 11:24:41,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #41
+2026-01-29 11:24:44,379 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #42
+2026-01-29 11:24:47,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #43
+2026-01-29 11:24:50,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #44
+2026-01-29 11:24:53,073 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #45
+2026-01-29 11:24:53,381 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #45
+2026-01-29 11:24:56,076 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #46
+2026-01-29 11:24:59,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #47
+2026-01-29 11:25:02,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #48
+2026-01-29 11:25:05,399 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #49
+2026-01-29 11:25:08,075 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #50
+2026-01-29 11:25:08,385 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #50
+2026-01-29 11:25:11,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #51
+2026-01-29 11:25:48,389 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #52
+2026-01-29 11:25:48,641 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #52
+2026-01-29 11:26:48,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #53
+2026-01-29 11:26:48,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #53
+2026-01-29 11:27:48,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #54
+2026-01-29 11:27:48,389 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #54
+2026-01-29 11:27:53,357 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #55
+2026-01-29 11:27:53,664 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #56
+2026-01-29 11:27:56,082 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #57
+2026-01-29 11:27:59,380 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #58
+2026-01-29 11:28:02,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #59
+2026-01-29 11:28:05,383 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #60
+2026-01-29 11:28:08,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #61
+2026-01-29 11:28:08,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #61
+2026-01-29 11:28:11,090 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #62
+2026-01-29 11:28:14,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #63
+2026-01-29 11:28:17,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #64
+2026-01-29 11:28:20,387 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #65
+2026-01-29 11:28:22,250 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #66
+2026-01-29 11:28:35,380 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #67
+2026-01-29 11:28:38,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #68
+2026-01-29 11:28:38,401 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #68
+2026-01-29 11:28:41,076 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #69
+2026-01-29 11:28:44,387 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #70
+2026-01-29 11:28:47,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #71
+2026-01-29 11:28:50,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #72
+2026-01-29 11:28:53,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #73
+2026-01-29 11:28:53,390 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #73
+2026-01-29 11:28:56,079 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #74
+2026-01-29 11:28:59,379 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #75
+2026-01-29 11:29:02,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #76
+2026-01-29 11:29:05,389 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #77
+2026-01-29 11:29:08,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #78
+2026-01-29 11:29:08,392 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #78
+2026-01-29 11:29:11,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #79
+2026-01-29 11:29:14,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #80
+2026-01-29 11:29:17,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #81
+2026-01-29 11:29:20,376 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #82
+2026-01-29 11:29:23,094 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #83
+2026-01-29 11:29:23,399 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #83
+2026-01-29 11:29:26,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #84
+2026-01-29 11:29:48,409 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #85
+2026-01-29 11:29:48,657 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #85
+2026-01-29 11:30:11,433 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #86
+2026-01-29 11:30:11,741 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #87
+2026-01-29 11:30:14,093 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #88
+2026-01-29 11:30:17,380 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #89
+2026-01-29 11:30:20,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #90
+2026-01-29 11:30:23,385 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #91
+2026-01-29 11:30:23,640 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #91
+2026-01-29 11:30:26,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #92
+2026-01-29 11:30:29,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #93
+2026-01-29 11:30:32,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #94
+2026-01-29 11:30:35,385 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #95
+2026-01-29 11:30:38,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #96
+2026-01-29 11:30:38,389 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #96
+2026-01-29 11:30:41,075 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #97
+2026-01-29 11:30:44,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #98
+2026-01-29 11:30:47,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #99
+2026-01-29 11:30:50,402 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #100
+2026-01-29 11:30:53,079 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #101
+2026-01-29 11:30:53,387 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #101
+2026-01-29 11:30:56,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #102
+2026-01-29 11:30:59,393 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #103
+2026-01-29 11:31:02,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #104
+2026-01-29 11:31:05,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #105
+2026-01-29 11:31:08,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #106
+2026-01-29 11:31:08,404 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #106
+2026-01-29 11:31:11,075 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #107
+2026-01-29 11:31:48,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #108
+2026-01-29 11:31:48,639 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #108
+2026-01-29 11:32:48,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #109
+2026-01-29 11:32:48,387 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #109
+2026-01-29 11:33:48,085 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #110
+2026-01-29 11:33:48,392 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #110
+2026-01-29 11:34:48,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #111
+2026-01-29 11:34:48,392 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #112
+2026-01-29 11:35:48,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #113
+2026-01-29 11:35:48,401 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #113
+2026-01-29 11:36:48,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #114
+2026-01-29 11:36:48,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #114
+2026-01-29 11:37:48,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #115
+2026-01-29 11:37:48,399 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #115
+2026-01-29 11:38:48,390 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #116
+2026-01-29 11:38:48,656 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #116
+2026-01-29 11:39:48,082 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #117
+2026-01-29 11:39:48,405 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #117
+2026-01-29 11:43:04,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #118
+2026-01-29 11:43:06,535 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #119
+2026-01-29 11:43:06,881 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #119
+2026-01-29 11:43:07,168 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #119
+2026-01-29 11:43:07,208 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #119
+2026-01-29 11:43:07,498 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #119
+2026-01-29 11:43:28,739 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #120
+2026-01-29 11:43:29,047 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #120
+2026-01-29 11:43:38,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #121
+2026-01-29 11:43:44,382 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #122
+2026-01-29 11:43:47,085 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #123
+2026-01-29 11:43:50,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #124
+2026-01-29 11:43:53,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #125
+2026-01-29 11:43:53,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #125
+2026-01-29 11:43:56,091 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #126
+2026-01-29 11:43:59,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #127
+2026-01-29 11:44:02,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #128
+2026-01-29 11:44:05,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #129
+2026-01-29 11:44:08,090 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #130
+2026-01-29 11:44:08,400 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #130
+2026-01-29 11:44:11,400 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #131
+2026-01-29 11:44:14,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #132
+2026-01-29 11:44:17,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #133
+2026-01-29 11:44:20,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #134
+2026-01-29 11:44:23,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #135
+2026-01-29 11:44:23,655 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #135
+2026-01-29 11:44:26,085 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #136
+2026-01-29 11:44:29,400 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #137
+2026-01-29 11:44:48,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #138
+2026-01-29 11:44:48,398 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #138
+2026-01-29 11:45:48,097 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #139
+2026-01-29 11:45:48,428 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #139
+2026-01-29 11:46:11,715 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #140
+2026-01-29 11:46:12,020 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #140
+2026-01-29 11:46:13,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #141
+2026-01-29 11:46:13,709 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #142
+2026-01-29 11:46:13,823 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-29 11:46:14,095 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 11:46:14,096 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 11:46:14,096 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 11:46:14,096 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 11:46:15,264 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 11:46:15,265 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 11:49:31,945 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #143
+2026-01-29 11:49:31,960 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #143
+2026-01-29 11:49:32,207 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #144
+2026-01-29 11:49:32,335 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-29 11:49:32,571 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 11:49:32,571 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 11:49:32,571 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 11:49:32,572 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 11:49:33,527 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 11:49:33,527 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 11:49:33,631 - root - INFO - [DATABASE] Total tickets count: 8
+2026-01-29 11:49:34,114 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #144
+2026-01-29 11:49:35,035 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-29 11:49:35,260 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 11:49:35,261 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 11:49:35,261 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 11:49:35,261 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 11:49:36,236 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 11:49:36,236 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 11:49:36,346 - root - INFO - [DATABASE] Total tickets count: 8
+2026-01-29 11:49:39,733 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #145
+2026-01-29 11:49:40,925 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #146
+2026-01-29 11:49:40,927 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #146
+2026-01-29 11:49:41,067 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 11:49:41,301 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #146
+2026-01-29 11:49:49,879 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #147
+2026-01-29 11:49:50,934 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #148
+2026-01-29 11:49:50,951 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #148
+2026-01-29 11:49:51,082 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 11:49:51,260 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #148
+2026-01-29 11:50:06,085 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #149
+2026-01-29 11:50:14,383 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #150
+2026-01-29 11:50:17,089 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #151
+2026-01-29 11:50:20,397 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #152
+2026-01-29 11:50:21,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #153
+2026-01-29 11:50:23,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #154
+2026-01-29 11:50:26,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #155
+2026-01-29 11:50:29,399 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #156
+2026-01-29 11:50:32,082 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #157
+2026-01-29 11:50:35,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #158
+2026-01-29 11:50:36,090 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #159
+2026-01-29 11:50:38,396 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #160
+2026-01-29 11:50:41,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #161
+2026-01-29 11:50:44,401 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #162
+2026-01-29 11:50:46,089 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #163
+2026-01-29 11:50:46,488 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #164
+2026-01-29 11:50:47,754 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #165
+2026-01-29 11:50:47,764 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #165
+2026-01-29 11:50:48,075 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #165
+2026-01-29 11:50:48,515 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 11:51:02,468 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #166
+2026-01-29 11:51:17,769 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #167
+2026-01-29 11:51:32,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #168
+2026-01-29 11:51:33,389 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #169
+2026-01-29 11:51:35,075 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #170
+2026-01-29 11:51:38,383 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #171
+2026-01-29 11:51:41,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #172
+2026-01-29 11:51:44,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #173
+2026-01-29 11:51:47,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #174
+2026-01-29 11:51:48,405 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #175
+2026-01-29 11:51:50,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #176
+2026-01-29 11:51:53,392 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #177
+2026-01-29 11:51:56,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #178
+2026-01-29 11:51:59,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #179
+2026-01-29 11:52:02,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #180
+2026-01-29 11:52:02,779 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #181
+2026-01-29 11:52:03,573 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #182
+2026-01-29 11:52:04,082 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #182
+2026-01-29 11:52:05,122 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #183
+2026-01-29 11:52:05,183 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #183
+2026-01-29 11:52:05,572 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #183
+2026-01-29 11:52:05,966 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 11:52:20,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #184
+2026-01-29 11:52:33,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #185
+2026-01-29 11:52:35,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #186
+2026-01-29 11:52:35,660 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #186
+2026-01-29 11:52:39,085 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #187
+2026-01-29 11:52:42,379 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #188
+2026-01-29 11:52:45,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #189
+2026-01-29 11:52:48,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #190
+2026-01-29 11:52:50,076 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #191
+2026-01-29 11:52:51,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #192
+2026-01-29 11:52:54,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #193
+2026-01-29 11:52:56,401 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #194
+2026-01-29 11:52:57,336 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #195
+2026-01-29 11:52:58,672 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #196
+2026-01-29 11:52:58,674 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #196
+2026-01-29 11:52:59,122 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #196
+2026-01-29 11:52:59,786 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 11:53:14,396 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #197
+2026-01-29 11:53:23,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #198
+2026-01-29 11:53:26,389 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #199
+2026-01-29 11:53:29,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #200
+2026-01-29 11:53:29,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #200
+2026-01-29 11:53:32,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #201
+2026-01-29 11:53:35,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #202
+2026-01-29 11:53:38,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #203
+2026-01-29 11:53:41,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #204
+2026-01-29 11:53:44,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #205
+2026-01-29 11:53:44,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #206
+2026-01-29 11:53:47,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #207
+2026-01-29 11:53:50,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #208
+2026-01-29 11:53:53,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #209
+2026-01-29 11:53:56,398 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #210
+2026-01-29 11:53:59,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #211
+2026-01-29 11:53:59,389 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #211
+2026-01-29 11:54:02,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #212
+2026-01-29 11:54:05,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #213
+2026-01-29 11:54:08,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #214
+2026-01-29 11:54:14,397 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #215
+2026-01-29 11:54:29,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #216
+2026-01-29 11:54:48,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #217
+2026-01-29 11:54:48,657 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #217
+2026-01-29 11:55:45,900 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #218
+2026-01-29 11:55:46,207 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #218
+2026-01-29 11:55:46,471 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #219
+2026-01-29 11:55:47,587 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #220
+2026-01-29 11:55:48,888 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #221
+2026-01-29 11:55:48,889 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #221
+2026-01-29 11:55:49,325 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #221
+2026-01-29 11:55:49,697 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 11:56:04,389 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #222
+2026-01-29 11:56:04,651 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #222
+2026-01-29 11:56:07,073 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #223
+2026-01-29 11:56:10,393 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #224
+2026-01-29 11:56:13,074 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #225
+2026-01-29 11:56:15,376 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #226
+2026-01-29 11:56:18,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #227
+2026-01-29 11:56:18,898 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #228
+2026-01-29 11:56:21,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #229
+2026-01-29 11:56:24,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #230
+2026-01-29 11:56:27,079 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #231
+2026-01-29 11:56:34,580 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #232
+2026-01-29 11:56:35,833 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #233
+2026-01-29 11:56:35,834 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #233
+2026-01-29 11:56:36,272 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #233
+2026-01-29 11:56:36,707 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 11:56:41,509 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #234
+2026-01-29 11:56:41,629 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-29 11:56:41,906 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 11:56:41,907 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 11:56:41,907 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 11:56:41,907 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 11:56:42,954 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 11:56:42,955 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 12:03:33,546 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #235
+2026-01-29 12:03:34,585 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #236
+2026-01-29 12:03:34,892 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #236
+2026-01-29 12:03:35,018 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:03:39,233 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #237
+2026-01-29 12:03:41,288 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #238
+2026-01-29 12:03:41,305 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #238
+2026-01-29 12:03:41,617 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #238
+2026-01-29 12:03:42,172 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:03:56,000 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #239
+2026-01-29 12:03:58,328 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #240
+2026-01-29 12:03:59,421 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #241
+2026-01-29 12:03:59,440 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #241
+2026-01-29 12:03:59,575 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:03:59,755 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #241
+2026-01-29 12:04:14,149 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #242
+2026-01-29 12:04:22,011 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #243
+2026-01-29 12:04:30,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #244
+2026-01-29 12:04:40,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #245
+2026-01-29 12:04:43,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #246
+2026-01-29 12:04:45,385 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #247
+2026-01-29 12:04:46,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #248
+2026-01-29 12:04:49,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #249
+2026-01-29 12:04:52,075 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #250
+2026-01-29 12:04:55,398 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #251
+2026-01-29 12:04:58,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #252
+2026-01-29 12:05:00,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #253
+2026-01-29 12:05:01,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #254
+2026-01-29 12:05:04,392 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #255
+2026-01-29 12:05:07,074 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #256
+2026-01-29 12:05:10,399 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #257
+2026-01-29 12:05:13,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #258
+2026-01-29 12:05:15,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #259
+2026-01-29 12:05:16,085 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #260
+2026-01-29 12:05:19,398 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #261
+2026-01-29 12:05:22,075 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #262
+2026-01-29 12:05:25,397 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #263
+2026-01-29 12:05:30,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #264
+2026-01-29 12:05:43,919 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #265
+2026-01-29 12:05:44,184 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #266
+2026-01-29 12:05:45,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #267
+2026-01-29 12:05:45,603 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #268
+2026-01-29 12:05:46,845 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #269
+2026-01-29 12:05:46,862 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #269
+2026-01-29 12:05:47,173 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #269
+2026-01-29 12:05:47,723 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:05:51,675 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #270
+2026-01-29 12:05:51,819 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-29 12:05:52,089 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 12:05:52,090 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 12:05:52,090 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 12:05:52,090 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 12:05:53,110 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 12:05:53,110 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 12:05:53,220 - root - INFO - [DATABASE] Total tickets count: 8
+2026-01-29 12:05:58,301 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #271
+2026-01-29 12:05:58,412 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-29 12:05:58,681 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 12:05:58,684 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 12:05:58,687 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 12:05:58,689 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 12:05:59,705 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 12:05:59,705 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 12:07:07,805 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #272
+2026-01-29 12:07:09,115 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #273
+2026-01-29 12:07:09,117 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #273
+2026-01-29 12:07:09,568 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #273
+2026-01-29 12:07:09,881 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:07:11,977 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #274
+2026-01-29 12:07:11,978 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #274
+2026-01-29 12:07:13,129 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #275
+2026-01-29 12:07:13,131 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #275
+2026-01-29 12:07:13,271 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:07:13,488 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #275
+2026-01-29 12:07:28,092 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #276
+2026-01-29 12:07:35,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #277
+2026-01-29 12:07:38,073 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #278
+2026-01-29 12:07:41,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #279
+2026-01-29 12:07:43,090 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #280
+2026-01-29 12:07:43,413 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #281
+2026-01-29 12:07:47,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #282
+2026-01-29 12:07:50,404 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #283
+2026-01-29 12:07:53,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #284
+2026-01-29 12:07:56,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #285
+2026-01-29 12:07:57,848 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #286
+2026-01-29 12:08:13,393 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #287
+2026-01-29 12:08:19,076 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #288
+2026-01-29 12:08:22,396 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #289
+2026-01-29 12:08:25,073 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #290
+2026-01-29 12:08:28,396 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #291
+2026-01-29 12:08:28,657 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #291
+2026-01-29 12:08:31,076 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #292
+2026-01-29 12:08:34,389 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #293
+2026-01-29 12:08:37,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #294
+2026-01-29 12:08:40,396 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #295
+2026-01-29 12:08:43,094 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #296
+2026-01-29 12:08:43,407 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #296
+2026-01-29 12:08:46,091 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #297
+2026-01-29 12:08:49,401 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #298
+2026-01-29 12:08:52,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #299
+2026-01-29 12:08:55,390 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #300
+2026-01-29 12:08:58,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #301
+2026-01-29 12:08:58,387 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #301
+2026-01-29 12:09:01,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #302
+2026-01-29 12:09:04,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #303
+2026-01-29 12:09:48,096 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #304
+2026-01-29 12:09:48,408 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #304
+2026-01-29 12:10:16,393 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #305
+2026-01-29 12:10:16,702 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #306
+2026-01-29 12:10:17,599 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #307
+2026-01-29 12:10:18,093 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #307
+2026-01-29 12:10:19,361 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #308
+2026-01-29 12:10:19,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #308
+2026-01-29 12:10:19,830 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #308
+2026-01-29 12:10:20,340 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:10:34,479 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #309
+2026-01-29 12:10:50,092 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #310
+2026-01-29 12:10:52,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #311
+2026-01-29 12:10:55,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #312
+2026-01-29 12:10:58,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #313
+2026-01-29 12:11:01,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #314
+2026-01-29 12:11:04,399 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #315
+2026-01-29 12:11:05,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #316
+2026-01-29 12:11:07,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #317
+2026-01-29 12:11:12,409 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #318
+2026-01-29 12:11:12,531 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-29 12:11:12,789 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 12:11:12,790 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 12:11:12,791 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 12:11:12,793 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 12:11:13,726 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 12:11:13,728 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 12:18:28,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #319
+2026-01-29 12:18:29,741 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #320
+2026-01-29 12:18:29,756 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #320
+2026-01-29 12:18:30,160 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #320
+2026-01-29 12:18:30,523 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:18:32,421 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #321
+2026-01-29 12:18:32,534 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-29 12:18:32,795 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 12:18:32,795 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 12:18:32,795 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 12:18:32,796 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 12:18:33,079 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #321
+2026-01-29 12:18:33,709 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 12:18:33,709 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 12:18:33,850 - root - INFO - [DATABASE] Total tickets count: 8
+2026-01-29 12:18:36,159 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #322
+2026-01-29 12:18:36,238 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #322
+2026-01-29 12:18:37,255 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #323
+2026-01-29 12:18:37,257 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #323
+2026-01-29 12:18:37,400 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:18:37,699 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #323
+2026-01-29 12:18:39,393 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #324
+2026-01-29 12:18:39,987 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #325
+2026-01-29 12:18:42,384 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #326
+2026-01-29 12:18:45,079 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #327
+2026-01-29 12:18:45,401 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #327
+2026-01-29 12:18:48,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #328
+2026-01-29 12:18:51,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #329
+2026-01-29 12:18:51,992 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #330
+2026-01-29 12:18:54,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #331
+2026-01-29 12:18:57,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #332
+2026-01-29 12:19:00,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #333
+2026-01-29 12:19:00,660 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #333
+2026-01-29 12:19:03,075 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #334
+2026-01-29 12:19:06,385 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #335
+2026-01-29 12:19:06,642 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #335
+2026-01-29 12:19:07,085 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #336
+2026-01-29 12:19:09,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #337
+2026-01-29 12:19:09,643 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #337
+2026-01-29 12:19:12,073 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #338
+2026-01-29 12:19:12,383 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #338
+2026-01-29 12:19:15,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #339
+2026-01-29 12:19:15,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #339
+2026-01-29 12:19:15,654 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #339
+2026-01-29 12:19:18,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #340
+2026-01-29 12:19:18,401 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #340
+2026-01-29 12:19:21,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #341
+2026-01-29 12:19:21,407 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #341
+2026-01-29 12:19:22,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #342
+2026-01-29 12:19:24,392 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #343
+2026-01-29 12:19:24,652 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #343
+2026-01-29 12:19:27,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #344
+2026-01-29 12:19:27,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #344
+2026-01-29 12:19:30,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #345
+2026-01-29 12:19:30,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #345
+2026-01-29 12:19:30,659 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #345
+2026-01-29 12:19:33,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #346
+2026-01-29 12:19:36,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #347
+2026-01-29 12:19:37,073 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #348
+2026-01-29 12:19:39,383 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #349
+2026-01-29 12:19:42,074 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #350
+2026-01-29 12:19:45,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #351
+2026-01-29 12:19:45,643 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #351
+2026-01-29 12:19:48,095 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #352
+2026-01-29 12:19:48,411 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #352
+2026-01-29 12:19:51,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #353
+2026-01-29 12:19:52,396 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #354
+2026-01-29 12:20:00,073 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #355
+2026-01-29 12:20:01,945 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #356
+2026-01-29 12:20:02,208 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #357
+2026-01-29 12:20:02,433 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #358
+2026-01-29 12:20:03,717 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #359
+2026-01-29 12:20:03,720 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #359
+2026-01-29 12:20:04,047 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #359
+2026-01-29 12:20:04,481 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:20:19,091 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #360
+2026-01-29 12:20:28,380 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #361
+2026-01-29 12:20:31,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #362
+2026-01-29 12:20:34,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #363
+2026-01-29 12:20:34,638 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #363
+2026-01-29 12:20:37,076 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #364
+2026-01-29 12:20:40,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #365
+2026-01-29 12:20:43,080 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #366
+2026-01-29 12:20:46,399 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #367
+2026-01-29 12:20:48,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #368
+2026-01-29 12:20:48,403 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #368
+2026-01-29 12:20:49,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #369
+2026-01-29 12:20:49,401 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #369
+2026-01-29 12:20:52,083 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #370
+2026-01-29 12:20:55,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #371
+2026-01-29 12:20:58,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #372
+2026-01-29 12:21:01,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #373
+2026-01-29 12:21:04,090 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #374
+2026-01-29 12:21:04,397 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #374
+2026-01-29 12:21:07,085 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #375
+2026-01-29 12:21:10,393 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #376
+2026-01-29 12:21:13,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #377
+2026-01-29 12:21:19,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #378
+2026-01-29 12:21:25,603 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #379
+2026-01-29 12:21:26,995 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #380
+2026-01-29 12:21:28,213 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #381
+2026-01-29 12:21:28,237 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #381
+2026-01-29 12:21:28,556 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #381
+2026-01-29 12:21:29,005 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:21:36,772 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #382
+2026-01-29 12:21:37,078 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #382
+2026-01-29 12:21:42,645 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #383
+2026-01-29 12:21:42,769 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=50
+2026-01-29 12:21:43,028 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 12:21:43,028 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 12:21:43,029 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 12:21:43,029 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 12:21:43,090 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #383
+2026-01-29 12:21:43,990 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 12:21:43,990 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 12:21:49,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #384
+2026-01-29 12:21:52,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #385
+2026-01-29 12:21:55,075 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #386
+2026-01-29 12:21:58,397 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #387
+2026-01-29 12:21:58,661 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #387
+2026-01-29 12:22:01,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #388
+2026-01-29 12:22:04,397 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #389
+2026-01-29 12:22:07,093 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #390
+2026-01-29 12:22:10,389 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #391
+2026-01-29 12:22:13,082 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #392
+2026-01-29 12:22:13,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #392
+2026-01-29 12:22:16,074 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #393
+2026-01-29 12:22:19,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #394
+2026-01-29 12:22:22,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #395
+2026-01-29 12:22:25,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #396
+2026-01-29 12:22:28,079 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #397
+2026-01-29 12:22:28,398 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #397
+2026-01-29 12:22:31,087 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #398
+2026-01-29 12:22:34,392 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #399
+2026-01-29 12:22:43,390 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #400
+2026-01-29 12:22:43,794 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #401
+2026-01-29 12:22:45,011 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #402
+2026-01-29 12:22:45,015 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #402
+2026-01-29 12:22:45,442 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #402
+2026-01-29 12:22:45,821 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:22:46,925 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #403
+2026-01-29 12:22:47,957 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #404
+2026-01-29 12:22:47,973 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #404
+2026-01-29 12:22:48,161 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:22:48,284 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #404
+2026-01-29 12:22:48,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #404
+2026-01-29 12:22:58,082 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #405
+2026-01-29 12:23:01,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #406
+2026-01-29 12:23:02,679 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #407
+2026-01-29 12:23:04,759 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #408
+2026-01-29 12:23:07,455 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #409
+2026-01-29 12:23:11,389 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #410
+2026-01-29 12:23:14,079 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #411
+2026-01-29 12:23:16,749 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #412
+2026-01-29 12:23:17,668 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #413
+2026-01-29 12:23:19,748 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #414
+2026-01-29 12:23:22,448 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #415
+2026-01-29 12:23:25,768 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #416
+2026-01-29 12:23:28,456 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #417
+2026-01-29 12:23:31,770 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #418
+2026-01-29 12:23:32,679 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #419
+2026-01-29 12:23:34,750 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #420
+2026-01-29 12:23:37,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #421
+2026-01-29 12:23:40,755 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #422
+2026-01-29 12:23:43,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #423
+2026-01-29 12:23:46,752 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #424
+2026-01-29 12:23:47,684 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #425
+2026-01-29 12:23:48,431 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #426
+2026-01-29 12:23:48,689 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #426
+2026-01-29 12:23:49,458 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #427
+2026-01-29 12:23:52,774 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #428
+2026-01-29 12:23:55,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #429
+2026-01-29 12:23:58,754 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #430
+2026-01-29 12:24:01,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #431
+2026-01-29 12:24:02,985 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #432
+2026-01-29 12:24:04,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #433
+2026-01-29 12:24:07,767 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #434
+2026-01-29 12:24:10,448 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #435
+2026-01-29 12:24:13,753 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #436
+2026-01-29 12:24:16,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #437
+2026-01-29 12:24:17,980 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #438
+2026-01-29 12:24:19,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #439
+2026-01-29 12:24:22,760 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #440
+2026-01-29 12:24:25,456 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #441
+2026-01-29 12:24:28,765 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #442
+2026-01-29 12:24:31,443 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #443
+2026-01-29 12:24:32,989 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #444
+2026-01-29 12:24:34,445 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #445
+2026-01-29 12:24:37,760 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #446
+2026-01-29 12:24:40,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #447
+2026-01-29 12:24:43,765 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #448
+2026-01-29 12:24:46,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #449
+2026-01-29 12:24:47,984 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #450
+2026-01-29 12:24:48,239 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #451
+2026-01-29 12:24:48,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #451
+2026-01-29 12:24:49,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #452
+2026-01-29 12:24:52,771 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #453
+2026-01-29 12:24:55,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #454
+2026-01-29 12:24:58,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #455
+2026-01-29 12:25:01,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #456
+2026-01-29 12:25:02,995 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #457
+2026-01-29 12:25:04,450 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #458
+2026-01-29 12:25:07,759 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #459
+2026-01-29 12:25:10,455 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #460
+2026-01-29 12:25:13,765 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #461
+2026-01-29 12:25:16,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #462
+2026-01-29 12:25:17,979 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #463
+2026-01-29 12:25:19,453 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #464
+2026-01-29 12:25:22,757 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #465
+2026-01-29 12:25:25,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #466
+2026-01-29 12:25:28,752 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #467
+2026-01-29 12:25:31,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #468
+2026-01-29 12:25:32,988 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #469
+2026-01-29 12:25:34,448 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #470
+2026-01-29 12:25:37,760 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #471
+2026-01-29 12:25:40,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #472
+2026-01-29 12:25:43,749 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #473
+2026-01-29 12:25:46,459 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #474
+2026-01-29 12:25:47,983 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #475
+2026-01-29 12:25:48,236 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #476
+2026-01-29 12:25:48,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #476
+2026-01-29 12:25:49,444 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #477
+2026-01-29 12:25:52,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #478
+2026-01-29 12:25:55,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #479
+2026-01-29 12:25:58,767 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #480
+2026-01-29 12:26:01,458 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #481
+2026-01-29 12:26:02,985 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #482
+2026-01-29 12:26:04,448 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #483
+2026-01-29 12:26:07,757 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #484
+2026-01-29 12:26:10,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #485
+2026-01-29 12:26:13,764 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #486
+2026-01-29 12:26:16,458 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #487
+2026-01-29 12:26:17,983 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #488
+2026-01-29 12:26:19,459 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #489
+2026-01-29 12:26:22,763 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #490
+2026-01-29 12:26:25,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #491
+2026-01-29 12:26:28,757 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #492
+2026-01-29 12:26:31,448 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #493
+2026-01-29 12:26:32,994 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #494
+2026-01-29 12:26:34,460 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #495
+2026-01-29 12:26:37,754 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #496
+2026-01-29 12:26:40,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #497
+2026-01-29 12:26:43,746 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #498
+2026-01-29 12:26:46,444 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #499
+2026-01-29 12:26:47,984 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #500
+2026-01-29 12:26:48,237 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #501
+2026-01-29 12:26:48,393 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #501
+2026-01-29 12:26:49,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #502
+2026-01-29 12:26:52,756 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #503
+2026-01-29 12:26:55,445 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #504
+2026-01-29 12:26:58,760 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #505
+2026-01-29 12:27:01,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #506
+2026-01-29 12:27:02,988 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #507
+2026-01-29 12:27:04,442 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #508
+2026-01-29 12:27:07,755 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #509
+2026-01-29 12:27:10,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #510
+2026-01-29 12:27:13,773 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #511
+2026-01-29 12:27:16,453 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #512
+2026-01-29 12:27:17,996 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #513
+2026-01-29 12:27:19,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #514
+2026-01-29 12:27:22,759 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #515
+2026-01-29 12:27:25,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #516
+2026-01-29 12:27:28,758 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #517
+2026-01-29 12:27:31,456 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #518
+2026-01-29 12:27:32,975 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #519
+2026-01-29 12:27:34,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #520
+2026-01-29 12:27:37,757 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #521
+2026-01-29 12:27:40,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #522
+2026-01-29 12:27:43,745 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #523
+2026-01-29 12:27:46,456 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #524
+2026-01-29 12:27:47,980 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #525
+2026-01-29 12:27:48,243 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #526
+2026-01-29 12:27:48,386 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #526
+2026-01-29 12:27:49,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #527
+2026-01-29 12:27:52,754 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #528
+2026-01-29 12:27:55,453 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #529
+2026-01-29 12:27:58,762 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #530
+2026-01-29 12:28:01,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #531
+2026-01-29 12:28:02,980 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #532
+2026-01-29 12:28:04,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #533
+2026-01-29 12:28:07,751 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #534
+2026-01-29 12:28:10,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #535
+2026-01-29 12:28:13,751 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #536
+2026-01-29 12:28:16,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #537
+2026-01-29 12:28:17,973 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #538
+2026-01-29 12:28:19,445 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #539
+2026-01-29 12:28:22,758 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #540
+2026-01-29 12:28:25,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #541
+2026-01-29 12:28:28,756 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #542
+2026-01-29 12:28:31,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #543
+2026-01-29 12:28:32,987 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #544
+2026-01-29 12:28:34,442 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #545
+2026-01-29 12:28:37,757 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #546
+2026-01-29 12:28:40,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #547
+2026-01-29 12:28:43,753 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #548
+2026-01-29 12:28:46,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #549
+2026-01-29 12:28:47,987 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #550
+2026-01-29 12:28:48,238 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #551
+2026-01-29 12:28:48,387 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #551
+2026-01-29 12:28:49,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #552
+2026-01-29 12:28:52,756 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #553
+2026-01-29 12:28:55,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #554
+2026-01-29 12:28:58,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #555
+2026-01-29 12:29:01,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #556
+2026-01-29 12:29:02,991 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #557
+2026-01-29 12:29:04,459 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #558
+2026-01-29 12:29:07,764 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #559
+2026-01-29 12:29:10,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #560
+2026-01-29 12:29:13,760 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #561
+2026-01-29 12:29:16,442 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #562
+2026-01-29 12:29:17,979 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #563
+2026-01-29 12:29:19,444 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #564
+2026-01-29 12:29:22,752 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #565
+2026-01-29 12:29:25,449 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #566
+2026-01-29 12:29:28,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #567
+2026-01-29 12:29:31,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #568
+2026-01-29 12:29:32,982 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #569
+2026-01-29 12:29:34,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #570
+2026-01-29 12:29:37,763 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #571
+2026-01-29 12:29:40,448 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #572
+2026-01-29 12:29:43,748 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #573
+2026-01-29 12:29:46,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #574
+2026-01-29 12:29:47,985 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #575
+2026-01-29 12:29:48,236 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #576
+2026-01-29 12:29:48,383 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #576
+2026-01-29 12:29:49,444 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #577
+2026-01-29 12:29:52,769 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #578
+2026-01-29 12:29:55,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #579
+2026-01-29 12:29:58,751 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #580
+2026-01-29 12:30:01,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #581
+2026-01-29 12:30:02,987 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #582
+2026-01-29 12:30:04,455 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #583
+2026-01-29 12:30:07,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #584
+2026-01-29 12:30:10,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #585
+2026-01-29 12:30:13,754 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #586
+2026-01-29 12:30:16,459 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #587
+2026-01-29 12:30:17,984 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #588
+2026-01-29 12:30:19,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #589
+2026-01-29 12:30:22,763 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #590
+2026-01-29 12:30:25,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #591
+2026-01-29 12:30:28,752 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #592
+2026-01-29 12:30:31,456 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #593
+2026-01-29 12:30:32,976 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #594
+2026-01-29 12:30:34,448 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #595
+2026-01-29 12:30:37,770 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #596
+2026-01-29 12:30:40,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #597
+2026-01-29 12:30:43,760 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #598
+2026-01-29 12:30:46,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #599
+2026-01-29 12:30:47,992 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #600
+2026-01-29 12:30:48,237 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #601
+2026-01-29 12:30:48,401 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #601
+2026-01-29 12:30:49,456 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #602
+2026-01-29 12:30:52,750 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #603
+2026-01-29 12:30:55,459 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #604
+2026-01-29 12:30:58,763 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #605
+2026-01-29 12:31:01,445 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #606
+2026-01-29 12:31:02,983 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #607
+2026-01-29 12:31:04,459 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #608
+2026-01-29 12:31:07,757 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #609
+2026-01-29 12:31:10,448 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #610
+2026-01-29 12:31:13,758 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #611
+2026-01-29 12:31:16,459 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #612
+2026-01-29 12:31:17,988 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #613
+2026-01-29 12:31:19,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #614
+2026-01-29 12:31:22,764 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #615
+2026-01-29 12:31:25,445 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #616
+2026-01-29 12:31:28,757 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #617
+2026-01-29 12:31:31,449 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #618
+2026-01-29 12:31:32,981 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #619
+2026-01-29 12:31:34,453 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #620
+2026-01-29 12:31:37,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #621
+2026-01-29 12:31:40,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #622
+2026-01-29 12:31:43,753 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #623
+2026-01-29 12:31:46,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #624
+2026-01-29 12:31:47,986 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #625
+2026-01-29 12:31:48,252 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #626
+2026-01-29 12:31:48,384 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #626
+2026-01-29 12:31:49,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #627
+2026-01-29 12:31:52,757 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #628
+2026-01-29 12:31:55,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #629
+2026-01-29 12:31:58,759 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #630
+2026-01-29 12:32:01,445 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #631
+2026-01-29 12:32:02,984 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #632
+2026-01-29 12:32:04,459 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #633
+2026-01-29 12:32:07,765 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #634
+2026-01-29 12:32:10,458 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #635
+2026-01-29 12:32:13,763 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #636
+2026-01-29 12:32:16,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #637
+2026-01-29 12:32:17,976 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #638
+2026-01-29 12:32:19,450 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #639
+2026-01-29 12:32:22,759 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #640
+2026-01-29 12:32:25,448 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #641
+2026-01-29 12:32:28,753 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #642
+2026-01-29 12:32:31,450 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #643
+2026-01-29 12:32:32,985 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #644
+2026-01-29 12:32:34,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #645
+2026-01-29 12:32:37,754 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #646
+2026-01-29 12:32:40,453 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #647
+2026-01-29 12:32:43,762 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #648
+2026-01-29 12:32:46,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #649
+2026-01-29 12:32:47,986 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #650
+2026-01-29 12:32:48,240 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #651
+2026-01-29 12:32:48,382 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #651
+2026-01-29 12:32:49,460 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #652
+2026-01-29 12:32:52,763 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #653
+2026-01-29 12:32:55,444 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #654
+2026-01-29 12:32:58,756 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #655
+2026-01-29 12:33:01,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #656
+2026-01-29 12:33:02,988 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #657
+2026-01-29 12:33:04,455 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #658
+2026-01-29 12:33:07,757 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #659
+2026-01-29 12:33:10,449 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #660
+2026-01-29 12:33:13,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #661
+2026-01-29 12:33:16,450 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #662
+2026-01-29 12:33:17,976 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #663
+2026-01-29 12:33:19,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #664
+2026-01-29 12:33:22,754 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #665
+2026-01-29 12:33:25,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #666
+2026-01-29 12:33:28,770 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #667
+2026-01-29 12:33:31,458 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #668
+2026-01-29 12:33:32,983 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #669
+2026-01-29 12:33:34,459 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #670
+2026-01-29 12:33:37,758 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #671
+2026-01-29 12:33:40,456 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #672
+2026-01-29 12:33:43,762 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #673
+2026-01-29 12:33:46,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #674
+2026-01-29 12:33:47,979 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #675
+2026-01-29 12:33:48,250 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #676
+2026-01-29 12:33:48,390 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #676
+2026-01-29 12:33:49,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #677
+2026-01-29 12:33:52,746 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #678
+2026-01-29 12:33:55,445 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #679
+2026-01-29 12:33:58,756 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #680
+2026-01-29 12:34:01,449 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #681
+2026-01-29 12:34:02,990 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #682
+2026-01-29 12:34:04,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #683
+2026-01-29 12:34:07,778 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #684
+2026-01-29 12:34:10,453 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #685
+2026-01-29 12:34:13,762 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #686
+2026-01-29 12:34:16,450 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #687
+2026-01-29 12:34:17,985 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #688
+2026-01-29 12:34:19,448 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #689
+2026-01-29 12:34:22,758 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #690
+2026-01-29 12:34:25,454 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #691
+2026-01-29 12:34:28,767 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #692
+2026-01-29 12:34:31,450 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #693
+2026-01-29 12:34:32,991 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #694
+2026-01-29 12:34:34,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #695
+2026-01-29 12:34:37,767 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #696
+2026-01-29 12:34:40,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #697
+2026-01-29 12:34:43,760 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #698
+2026-01-29 12:34:46,456 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #699
+2026-01-29 12:34:47,992 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #700
+2026-01-29 12:34:48,254 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #701
+2026-01-29 12:34:48,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #701
+2026-01-29 12:34:49,444 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #702
+2026-01-29 12:34:52,770 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #703
+2026-01-29 12:34:55,455 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #704
+2026-01-29 12:34:58,754 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #705
+2026-01-29 12:35:01,444 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #706
+2026-01-29 12:35:02,983 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #707
+2026-01-29 12:35:04,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #708
+2026-01-29 12:35:07,769 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #709
+2026-01-29 12:35:10,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #710
+2026-01-29 12:35:13,760 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #711
+2026-01-29 12:35:16,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #712
+2026-01-29 12:35:17,983 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #713
+2026-01-29 12:35:19,445 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #714
+2026-01-29 12:35:22,756 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #715
+2026-01-29 12:35:25,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #716
+2026-01-29 12:35:28,757 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #717
+2026-01-29 12:35:31,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #718
+2026-01-29 12:35:32,989 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #719
+2026-01-29 12:35:34,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #720
+2026-01-29 12:35:37,756 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #721
+2026-01-29 12:35:40,444 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #722
+2026-01-29 12:35:43,767 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #723
+2026-01-29 12:35:46,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #724
+2026-01-29 12:35:47,981 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #725
+2026-01-29 12:35:48,237 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #726
+2026-01-29 12:35:48,390 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #726
+2026-01-29 12:35:49,459 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #727
+2026-01-29 12:35:52,759 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #728
+2026-01-29 12:35:55,453 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #729
+2026-01-29 12:35:58,768 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #730
+2026-01-29 12:36:01,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #731
+2026-01-29 12:36:02,988 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #732
+2026-01-29 12:36:04,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #733
+2026-01-29 12:36:07,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #734
+2026-01-29 12:36:10,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #735
+2026-01-29 12:36:13,760 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #736
+2026-01-29 12:36:16,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #737
+2026-01-29 12:36:17,978 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #738
+2026-01-29 12:36:19,455 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #739
+2026-01-29 12:36:22,754 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #740
+2026-01-29 12:36:25,450 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #741
+2026-01-29 12:36:28,767 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #742
+2026-01-29 12:36:31,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #743
+2026-01-29 12:36:32,983 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #744
+2026-01-29 12:36:34,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #745
+2026-01-29 12:36:37,764 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #746
+2026-01-29 12:36:40,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #747
+2026-01-29 12:36:43,763 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #748
+2026-01-29 12:36:46,449 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #749
+2026-01-29 12:36:47,987 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #750
+2026-01-29 12:36:48,242 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #751
+2026-01-29 12:36:48,382 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #751
+2026-01-29 12:36:49,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #752
+2026-01-29 12:36:52,759 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #753
+2026-01-29 12:36:55,455 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #754
+2026-01-29 12:36:58,759 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #755
+2026-01-29 12:37:01,449 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #756
+2026-01-29 12:37:02,983 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #757
+2026-01-29 12:37:04,449 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #758
+2026-01-29 12:37:07,756 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #759
+2026-01-29 12:37:10,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #760
+2026-01-29 12:37:13,760 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #761
+2026-01-29 12:37:16,449 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #762
+2026-01-29 12:37:17,990 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #763
+2026-01-29 12:37:19,452 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #764
+2026-01-29 12:37:22,763 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #765
+2026-01-29 12:37:25,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #766
+2026-01-29 12:37:28,758 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #767
+2026-01-29 12:37:31,446 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #768
+2026-01-29 12:37:32,987 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #769
+2026-01-29 12:37:34,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #770
+2026-01-29 12:37:37,755 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #771
+2026-01-29 12:37:40,456 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #772
+2026-01-29 12:37:43,762 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #773
+2026-01-29 12:37:46,451 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #774
+2026-01-29 12:37:47,988 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #775
+2026-01-29 12:37:48,240 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #776
+2026-01-29 12:37:48,381 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #776
+2026-01-29 12:37:49,449 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #777
+2026-01-29 12:37:52,759 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #778
+2026-01-29 12:37:55,449 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #779
+2026-01-29 12:37:58,760 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #780
+2026-01-29 12:38:01,450 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #781
+2026-01-29 12:38:02,979 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #782
+2026-01-29 12:38:04,444 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #783
+2026-01-29 12:38:07,763 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #784
+2026-01-29 12:38:10,459 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #785
+2026-01-29 12:38:13,761 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #786
+2026-01-29 12:38:16,447 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #787
+2026-01-29 12:38:17,987 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #788
+2026-01-29 12:38:19,457 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #789
+2026-01-29 12:38:22,762 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #790
+2026-01-29 12:38:33,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #791
+2026-01-29 12:38:38,392 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #792
+2026-01-29 12:38:41,085 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #793
+2026-01-29 12:38:44,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #794
+2026-01-29 12:38:47,077 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #795
+2026-01-29 12:38:48,381 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #796
+2026-01-29 12:38:48,633 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #796
+2026-01-29 12:38:48,694 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #796
+2026-01-29 12:38:50,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #797
+2026-01-29 12:38:53,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #798
+2026-01-29 12:38:56,072 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #799
+2026-01-29 12:38:59,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #800
+2026-01-29 12:39:02,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #801
+2026-01-29 12:39:03,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #802
+2026-01-29 12:39:05,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #803
+2026-01-29 12:39:08,380 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #804
+2026-01-29 12:39:11,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #805
+2026-01-29 12:39:14,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #806
+2026-01-29 12:39:17,076 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #807
+2026-01-29 12:39:18,379 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #808
+2026-01-29 12:39:20,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #809
+2026-01-29 12:39:23,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #810
+2026-01-29 12:39:48,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #811
+2026-01-29 12:39:48,384 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #811
+2026-01-29 12:39:48,651 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #811
+2026-01-29 12:39:48,694 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #811
+2026-01-29 12:39:52,572 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #812
+2026-01-29 12:39:55,437 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #813
+2026-01-29 12:39:55,564 - root - INFO - [DATABASE] Running PAGINATED tickets aggregation: page=1, per_page=20
+2026-01-29 12:39:55,809 - root - INFO - [DATABASE] Paginated aggregation returned 8 tickets
+2026-01-29 12:39:55,809 - root - INFO - [DATABASE] Field validation complete: 4 tickets have unread replies
+2026-01-29 12:39:55,809 - root - INFO - [DATABASE] Found 0 tickets with assignments in first 5 results
+2026-01-29 12:39:55,810 - root - INFO - [DATABASE] Adding technician information to tickets...
+2026-01-29 12:39:56,861 - root - INFO - [DATABASE] Added technician information: 0 tickets now have technicians
+2026-01-29 12:39:56,862 - root - INFO - [DATABASE] FINAL VALIDATION: 4 tickets have unread replies out of 8 total tickets
+2026-01-29 12:39:56,983 - root - INFO - [DATABASE] Total tickets count: 8
+2026-01-29 12:40:05,037 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #814
+2026-01-29 12:40:06,223 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #815
+2026-01-29 12:40:06,224 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #815
+2026-01-29 12:40:06,661 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #815
+2026-01-29 12:40:07,034 - routes.ai_routes - INFO - Found AI response for ticket WT6855: 232 chars
+2026-01-29 12:40:09,251 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #816
+2026-01-29 12:40:16,132 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #817
+2026-01-29 12:40:20,265 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #818
+2026-01-29 12:40:20,967 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #819
+2026-01-29 12:40:33,287 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #820
+2026-01-29 12:40:35,963 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #821
+2026-01-29 12:40:36,280 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #822
+2026-01-29 12:40:38,978 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #823
+2026-01-29 12:40:42,291 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #824
+2026-01-29 12:40:44,976 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #825
+2026-01-29 12:40:48,280 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #826
+2026-01-29 12:40:48,559 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #826
+2026-01-29 12:40:48,586 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #826
+2026-01-29 12:40:50,960 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #827
+2026-01-29 12:40:51,277 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #828
+2026-01-29 12:40:53,976 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #829
+2026-01-29 12:40:57,285 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #830
+2026-01-29 12:40:59,981 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #831
+2026-01-29 12:41:03,290 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #832
+2026-01-29 12:41:05,964 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #833
+2026-01-29 12:41:06,282 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #834
+2026-01-29 12:41:08,989 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #835
+2026-01-29 12:41:12,284 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #836
+2026-01-29 12:41:14,986 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #837
+2026-01-29 12:41:18,278 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #838
+2026-01-29 12:41:20,960 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #839
+2026-01-29 12:41:21,284 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #840
+2026-01-29 12:41:23,980 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #841
+2026-01-29 12:41:27,282 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #842
+2026-01-29 12:41:29,983 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #843
+2026-01-29 12:41:33,278 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #844
+2026-01-29 12:41:35,952 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #845
+2026-01-29 12:41:36,291 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #846
+2026-01-29 12:41:38,986 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #847
+2026-01-29 12:41:42,285 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #848
+2026-01-29 12:41:44,974 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #849
+2026-01-29 12:41:48,293 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #850
+2026-01-29 12:41:48,529 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #850
+2026-01-29 12:41:48,607 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #850
+2026-01-29 12:41:50,951 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #851
+2026-01-29 12:41:51,285 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #852
+2026-01-29 12:41:53,977 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #853
+2026-01-29 12:41:57,275 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #854
+2026-01-29 12:41:59,975 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #855
+2026-01-29 12:42:03,278 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #856
+2026-01-29 12:42:05,954 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #857
+2026-01-29 12:42:06,292 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #858
+2026-01-29 12:42:08,979 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #859
+2026-01-29 12:42:12,287 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #860
+2026-01-29 12:42:14,980 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #861
+2026-01-29 12:42:18,282 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #862
+2026-01-29 12:42:20,960 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #863
+2026-01-29 12:42:21,277 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #864
+2026-01-29 12:42:23,975 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #865
+2026-01-29 12:42:27,279 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #866
+2026-01-29 12:42:29,979 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #867
+2026-01-29 12:42:33,278 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #868
+2026-01-29 12:42:35,956 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #869
+2026-01-29 12:42:36,294 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #870
+2026-01-29 12:42:38,987 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #871
+2026-01-29 12:42:42,294 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #872
+2026-01-29 12:42:44,981 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #873
+2026-01-29 12:42:48,280 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #874
+2026-01-29 12:42:48,541 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #874
+2026-01-29 12:42:48,587 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #874
+2026-01-29 12:42:50,952 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #875
+2026-01-29 12:42:51,288 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #876
+2026-01-29 12:42:53,980 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #877
+2026-01-29 12:42:57,281 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #878
+2026-01-29 12:42:59,983 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #879
+2026-01-29 12:43:03,282 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #880
+2026-01-29 12:43:05,953 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #881
+2026-01-29 12:43:06,287 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #882
+2026-01-29 12:43:08,975 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #883
+2026-01-29 12:43:12,290 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #884
+2026-01-29 12:43:14,977 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #885
+2026-01-29 12:43:18,283 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #886
+2026-01-29 12:43:20,961 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #887
+2026-01-29 12:43:21,287 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #888
+2026-01-29 12:43:23,978 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #889
+2026-01-29 12:43:27,288 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #890
+2026-01-29 12:43:29,974 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #891
+2026-01-29 12:43:33,298 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #892
+2026-01-29 12:43:35,951 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #893
+2026-01-29 12:43:36,288 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #894
+2026-01-29 12:43:38,983 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #895
+2026-01-29 12:43:42,281 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #896
+2026-01-29 12:43:44,978 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #897
+2026-01-29 12:43:48,284 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #898
+2026-01-29 12:43:48,547 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #898
+2026-01-29 12:43:48,597 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #898
+2026-01-29 12:43:50,957 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #899
+2026-01-29 12:43:51,301 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #900
+2026-01-29 12:43:53,986 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #901
+2026-01-29 12:43:57,290 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #902
+2026-01-29 12:43:59,989 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #903
+2026-01-29 12:44:03,294 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #904
+2026-01-29 12:44:05,949 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #905
+2026-01-29 12:44:06,289 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #906
+2026-01-29 12:44:08,988 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #907
+2026-01-29 12:44:12,295 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #908
+2026-01-29 12:44:14,975 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #909
+2026-01-29 12:44:18,289 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #910
+2026-01-29 12:44:21,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #911
+2026-01-29 12:44:21,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #911
+2026-01-29 12:44:24,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #912
+2026-01-29 12:44:27,388 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #913
+2026-01-29 12:44:30,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #914
+2026-01-29 12:44:33,387 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #915
+2026-01-29 12:44:36,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #916
+2026-01-29 12:44:36,396 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #916
+2026-01-29 12:44:39,081 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #917
+2026-01-29 12:44:42,384 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #918
+2026-01-29 12:44:45,086 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #919
+2026-01-29 12:44:48,399 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #920
+2026-01-29 12:44:48,662 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #920
+2026-01-29 12:44:48,710 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #920
+2026-01-29 12:44:51,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #921
+2026-01-29 12:44:51,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #921
+2026-01-29 12:44:54,073 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #922
+2026-01-29 12:44:57,385 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #923
+2026-01-29 12:45:00,091 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #924
+2026-01-29 12:45:03,397 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #925
+2026-01-29 12:45:06,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #926
+2026-01-29 12:45:06,398 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #926
+2026-01-29 12:45:09,084 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #927
+2026-01-29 12:45:12,391 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #928
+2026-01-29 12:45:15,094 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #929
+2026-01-29 12:45:18,394 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #930
+2026-01-29 12:45:48,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #931
+2026-01-29 12:45:48,411 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #931
+2026-01-29 12:45:48,645 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #931
+2026-01-29 12:45:48,723 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #932
+2026-01-29 12:46:48,095 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #933
+2026-01-29 12:46:48,407 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #933
+2026-01-29 12:46:48,665 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #933
+2026-01-29 12:46:48,720 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #933
+2026-01-29 12:47:48,088 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #934
+2026-01-29 12:47:48,392 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #934
+2026-01-29 12:47:48,646 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #934
+2026-01-29 12:47:48,700 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #935
+2026-01-29 12:48:48,082 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #936
+2026-01-29 12:48:48,387 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #937
+2026-01-29 12:48:48,650 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #937
+2026-01-29 12:48:48,693 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #937
+2026-01-29 12:49:48,090 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #938
+2026-01-29 12:49:48,407 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #938
+2026-01-29 12:49:48,656 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #938
+2026-01-29 12:49:48,718 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #939
+2026-01-29 12:50:48,089 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #940
+2026-01-29 12:50:48,395 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #940
+2026-01-29 12:50:48,659 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #940
+2026-01-29 12:50:48,707 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #940
+2026-01-29 12:51:48,099 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #941
+2026-01-29 12:51:48,414 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #941
+2026-01-29 12:51:48,660 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #941
+2026-01-29 12:51:48,725 - middleware.session_manager - DEBUG - Session refreshed for user 6971c6ee969247226ebdb221 - Refresh #941
