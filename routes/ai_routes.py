@@ -186,32 +186,59 @@ def get_ai_response(ticket_id):
     """
     Get AI-generated response for a specific ticket.
     
+    This endpoint fetches the AI response that was saved by n8n via the
+    /display-response endpoint, stored in the ticket's draft/n8n_draft fields.
+    
     Args:
-        ticket_id: The ticket ID to generate response for
+        ticket_id: The ticket ID to get AI response for
         
     Returns:
-        JSON with AI-generated response
+        JSON with AI response from database (saved by n8n)
     """
     try:
-        # Generate a mock AI response (replace with actual AI integration)
-        mock_response = (
-            f"Dear Customer,\n\n"
-            f"Thank you for contacting AutoAssistGroup regarding ticket #{ticket_id}.\n\n"
-            f"I have reviewed your request and I am looking into it immediately. "
-            f"We usually resolve issues like this within 24 hours.\n\n"
-            f"Is there any additional information you can provide that might help us expedite this?\n\n"
-            f"Best regards,\n"
-            f"AutoAssist AI Support"
+        from database import get_db
+        db = get_db()
+        
+        # Fetch the ticket from database
+        ticket = db.get_ticket_by_id(ticket_id)
+        
+        if not ticket:
+            logger.warning(f"Ticket {ticket_id} not found when fetching AI response")
+            return jsonify({
+                'success': False,
+                'ticket_id': ticket_id,
+                'message': 'Ticket not found'
+            }), 404
+        
+        # Get the AI response from database fields (saved by n8n via /display-response)
+        # Priority: n8n_draft > draft_body > draft
+        ai_response = (
+            ticket.get('n8n_draft') or 
+            ticket.get('draft_body') or 
+            ticket.get('draft') or 
+            ''
         )
         
-        return jsonify({
-            'success': True,
-            'ticket_id': ticket_id,
-            'ai_response': mock_response,
-            'generated_at': datetime.now().isoformat()
-        })
+        if ai_response:
+            logger.info(f"Found AI response for ticket {ticket_id}: {len(ai_response)} chars")
+            return jsonify({
+                'success': True,
+                'ticket_id': ticket_id,
+                'ai_response': ai_response,
+                'source': 'database',
+                'generated_at': datetime.now().isoformat()
+            })
+        else:
+            logger.info(f"No AI response found in database for ticket {ticket_id}")
+            return jsonify({
+                'success': False,
+                'ticket_id': ticket_id,
+                'ai_response': '',
+                'message': 'No AI response available for this ticket'
+            })
+            
     except Exception as e:
-        logger.error(f"Error generating AI response for ticket {ticket_id}: {e}")
+        logger.error(f"Error fetching AI response for ticket {ticket_id}: {e}")
         return jsonify({
             'success': False,
             'error': str(e)
