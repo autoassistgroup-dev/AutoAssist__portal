@@ -120,12 +120,12 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 12px 24px;
+            padding: 8px 24px;
         }
 
         @media (min-width: 768px) {
             .navbar {
-                padding: 12px 48px;
+                padding: 8px 48px;
             }
         }
 
@@ -139,12 +139,12 @@
         .nav-link {
             display: inline-flex;
             align-items: center;
-            padding: 8px 12px;
+            padding: 6px 10px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
+            border-radius: 6px;
             color: rgba(255, 255, 255, 0.7);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             text-decoration: none;
             transition: all 0.2s ease;
@@ -169,57 +169,60 @@
             opacity: 0.8;
         }
 
+        /* ===== USER AVATAR ===== */
         .user-avatar {
             width: 32px;
             height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            border-radius: 8px;
+            background: rgba(255, 117, 143, 0.15);
+            border: 1px solid rgba(255, 117, 143, 0.25);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 13px;
             font-weight: 600;
-            color: white;
-            font-size: 0.85rem;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: #ff758f;
         }
 
-        .menu-btn {
-            display: none;
-            color: white;
-            font-size: 1.2rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-        }
-
+        /* ===== MOBILE MENU ===== */
         .mobile-menu {
             display: none;
-            position: fixed;
-            top: 70px;
-            left: 0;
-            right: 0;
-            background: #1a1a2e;
-            background: rgba(15, 15, 26, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            z-index: 99;
+            padding: 16px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 16px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
             flex-direction: column;
             gap: 8px;
         }
 
-        .mobile-menu.active {
-            display: flex;
+        .menu-btn {
+            display: none;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
         }
 
         @media (max-width: 768px) {
-            .nav-links.desktop {
-                display: none;
+            .menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            .menu-btn {
-                display: block;
+            .nav-links.desktop {
+                display: none;
             }
         }
 
@@ -297,20 +300,7 @@
             color: var(--text-muted) !important;
         }
 
-        /* Fix navbar logout button */
-        nav a[href="/logout"],
-        .logout-btn {
-            background: rgba(239, 68, 68, 0.15) !important;
-            color: #f87171 !important;
-            padding: 6px 12px !important;
-            font-size: 12px !important;
-            border-radius: 6px !important;
-            border: 1px solid rgba(239, 68, 68, 0.3) !important;
-        }
-
-        nav a[href="/logout"]:hover {
-            background: rgba(239, 68, 68, 0.25) !important;
-        }
+        /* Logout button uses same nav-link styling as other pages */
 
         /* Compact badge styling */
         .px-3.py-1,
@@ -721,35 +711,8 @@
         /* Support vs Customer message differentiation */
         /* Legacy colored borders and icons removed */
 
-        /* ===== NAVBAR - DARK THEME ===== */
-        nav {
-            background: rgba(10, 10, 15, 0.9) !important;
-            backdrop-filter: blur(25px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-            border-bottom: 1px solid var(--glass-border) !important;
-            z-index: 1000 !important;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
-        }
 
-        .nav-link {
-            padding: 0.5rem 1rem !important;
-            border-radius: 0.5rem !important;
-            color: var(--text-secondary) !important;
-            font-weight: 500 !important;
-            font-size: 0.875rem !important;
-            transition: all 0.3s ease !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            background: transparent !important;
-            border: 1px solid transparent !important;
-        }
-
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.05) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.2);
-            border-color: var(--primary) !important;
-        }
+        /* Navbar styles defined at top of file - no duplicates needed */
 
         /* ===== GRADIENT TEXT & BUTTONS ===== */
         .gradient-text {
@@ -1287,37 +1250,12 @@
 
         /* ===== NORMAL UI STYLES - STANDARD SIZES ===== */
 
-        /* ===== NAVBAR HEIGHT REDUCTION ===== */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 10vh;
-            min-height: auto;
-            z-index: 1000;
-        }
-
-        nav .container {
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-            height: 100%;
-        }
-
-        nav .flex {
-            align-items: center;
-            min-height: 2.5rem;
-            height: 100%;
-        }
-
         /* Normal base font size - READABLE */
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f9fafb;
             font-size: 1rem !important;
             line-height: 1.5 !important;
-            padding-top: 10vh;
-            /* Account for fixed navbar */
             /* Performance optimizations */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -4181,12 +4119,14 @@
 
 <body class="min-h-screen max-w-screen-ultra">
     <!-- Animated Gradient Background -->
+    {% if system_settings.show_background %}
     <div class="background-layer">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
         <div class="gradient-orb orb-3"></div>
         <div class="gradient-orb orb-4"></div>
     </div>
+    {% endif %}
 
     <!-- Navigation -->
     <!-- Navigation -->
@@ -4194,8 +4134,9 @@
         <div class="flex items-center justify-between">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="/" class="flex items-center">
-                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-6 md:h-8">
+                <a href="{% if current_user_role == 'Technical Director' %}/tech-director-dashboard{% else %}/{% endif %}"
+                    class="flex items-center">
+                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
                 </a>
             </div>
 

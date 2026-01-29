@@ -304,6 +304,36 @@ def manage_statuses():
     return jsonify({'success': True, 'status_id': str(status_id)})
 
 
+
+# ============ SYSTEM SETTINGS API ============
+
+@admin_bp.route('/api/system-settings', methods=['GET', 'POST'])
+def manage_system_settings():
+    """GET current settings or POST to update them."""
+    if not is_authenticated():
+        return jsonify({'success': False, 'error': 'Authentication required'}), 401
+    
+    # Check for admin access for updates
+    if request.method == 'POST' and not is_admin():
+        return jsonify({'success': False, 'error': 'Admin access required'}), 403
+        
+    from database import get_db
+    db = get_db()
+    
+    if request.method == 'GET':
+        settings = db.get_system_settings()
+        return jsonify({
+            'success': True,
+            'settings': settings
+        })
+    
+    # POST - Update settings
+    data = request.get_json()
+    success = db.update_system_settings(data)
+    
+    return jsonify({'success': success})
+
+
 # ============ HELPER FUNCTIONS ============
 
 def _serialize_member(member):

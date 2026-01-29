@@ -147,6 +147,16 @@ def _register_request_hooks(app):
         # Skip for health checks
         if request.endpoint in ['health.health_check', 'health.api_status']:
             return None
+            
+        # Add system settings to global template context
+        # This is efficient because get_system_settings uses MongoDB caching and connection pooling
+        from database import get_db
+        try:
+            db = get_db()
+            app.jinja_env.globals['system_settings'] = db.get_system_settings()
+        except Exception:
+            # Fallback if DB not ready
+            app.jinja_env.globals['system_settings'] = {'show_background': True}
         
         # Try to restore session if needed
         if 'member_id' not in session:
