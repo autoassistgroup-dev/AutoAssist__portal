@@ -32,6 +32,15 @@ from bson.objectid import ObjectId
 
 
 @main_bp.route('/')
+def home():
+    """Root route - redirects based on authentication status."""
+    # If user is logged in, go to tickets; otherwise go to portal
+    if is_authenticated():
+        return redirect(url_for('main.index'))  # Tickets page
+    return redirect(url_for('main.portal'))
+
+
+@main_bp.route('/tickets')
 def index():
     """Main tickets list page."""
     if not is_authenticated():

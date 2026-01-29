@@ -7,238 +7,344 @@
     <title>AutoAssistGroup Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== MODERN PINK GLASSMORPHISM THEME ===== */
-        :root {
-            --primary: #ff758f;
-            --secondary: #ff7eb3;
-            --primary-dark: #ff6b81;
-            --primary-light: #ffe0e9;
-            --urgent: #ff4757;
-            --fast: #ffa502;
-            --low: #2ed573;
-            --waiting: #ffcc00;
-            --medium: #ff6b81;
-            --glass-white: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --glass-shadow: rgba(255, 117, 143, 0.1);
-            --glass-blur: 15px;
-            --bg-gradient-start: #ffe0e9;
-            --bg-gradient-middle: #fff0f6;
-            --bg-gradient-end: #e8f4f8;
-        }
-
+        /* ===== DARK PROFESSIONAL THEME ===== */
         * {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Poppins', sans-serif !important;
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-middle) 50%, var(--bg-gradient-end) 100%);
-            color: #4b5563;
-            line-height: 1.5;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
+            background: #0a0a0f;
+            color: #fff;
         }
 
-        .background-layer {
+        /* Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(180deg, #0a0a0f 0%, #141420 100%);
+        }
+
+        .bg-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-            animation: float 20s infinite ease-in-out;
-            mix-blend-mode: soft-light;
-        }
-
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 117, 143, 0.4), rgba(255, 126, 179, 0.2));
-            top: -100px;
-            left: -100px;
-        }
-
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 107, 129, 0.3), rgba(255, 71, 87, 0.2));
-            top: 50%;
-            right: -50px;
-            animation-delay: -5s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            transition: background-image 1s ease-in-out;
         }
 
         /* ===== NAVBAR ===== */
-        nav {
-            background: rgba(255, 255, 255, 0.15) !important;
-            backdrop-filter: blur(25px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
-            min-height: auto;
-            position: sticky;
+        .navbar {
+            position: fixed;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(255, 117, 143, 0.1) !important;
-        }
-
-        .nav-link {
-            padding: 0.5rem 1rem !important;
-            border-radius: 0.75rem !important;
-            color: #4b5563 !important;
-            font-weight: 500 !important;
-            font-size: 0.875rem !important;
-            transition: all 0.3s ease !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            background: rgba(255, 255, 255, 0.3) !important;
-            backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        }
-
-        .nav-link:hover {
-            background: rgba(255, 117, 143, 0.2) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.2);
-            border-color: var(--primary) !important;
-        }
-
-        .nav-link-active {
-            background: rgba(255, 117, 143, 0.25) !important;
-            color: var(--primary-dark) !important;
-            border-color: rgba(255, 117, 143, 0.4) !important;
-            box-shadow: 0 2px 10px rgba(255, 117, 143, 0.2);
-        }
-
-        /* ===== GLASS COMPONENTS ===== */
-        .glass-panel,
-        .stats-card,
-        .ticket-card,
-        .main-container-glass,
-        .enhanced-search-container,
-        .forwarded-glass {
-            background: rgba(255, 255, 255, 0.25) !important;
-            backdrop-filter: blur(20px) !important;
-            -webkit-backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
-            border-radius: 1rem !important;
-            box-shadow: 0 8px 32px rgba(255, 117, 143, 0.1) !important;
-            transition: all 0.3s ease;
-        }
-
-        .stats-card:hover,
-        .ticket-card:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.35) !important;
-            box-shadow: 0 12px 40px rgba(255, 117, 143, 0.15) !important;
-            border-color: var(--primary) !important;
-            cursor: pointer;
-        }
-
-        .ticket-card a {
-            text-decoration: none !important;
-            color: inherit !important;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .btn-gradient {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .btn-gradient:hover {
-            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 117, 143, 0.5);
-        }
-
-        /* ===== NEW LAYOUT STYLES ===== */
-        .compact-header {
-            padding: 1.5rem !important;
-            margin-bottom: 1.5rem !important;
-        }
-
-        .header-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 12px 24px;
         }
 
         @media (min-width: 768px) {
-            .header-content {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
+            .navbar {
+                padding: 12px 48px;
             }
         }
 
-        .user-actions {
+        .nav-links {
             display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        @media (min-width: 640px) {
-            .user-actions {
-                flex-direction: row;
-                align-items: center;
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .nav-link-active {
+            background: rgba(255, 117, 143, 0.15);
+            border-color: rgba(255, 117, 143, 0.3);
+            color: #ff758f;
+        }
+
+        .nav-link i {
+            margin-right: 6px;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            padding-top: 80px;
+            /* Account for fixed navbar */
+        }
+
+        @media (min-width: 768px) {
+            .main-container {
+                padding: 32px 48px;
+                padding-top: 80px;
             }
         }
 
-        /* Stats grid adjustment */
+        /* ===== GLASS CARDS ===== */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        /* ===== HEADER SECTION ===== */
+        .header-section {
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        @media (min-width: 768px) {
+            .page-title {
+                font-size: 28px;
+            }
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ===== STATS GRID ===== */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
-        /* Filter section adjustment */
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 16px;
+            }
+        }
+
+        .stats-card {
+            padding: 20px;
+        }
+
+        .stats-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+
+        .stats-icon.pink {
+            background: rgba(255, 117, 143, 0.15);
+            color: #ff758f;
+        }
+
+        .stats-icon.blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+        }
+
+        .stats-icon.yellow {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+        }
+
+        .stats-icon.green {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+        }
+
+        .stats-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .stats-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* ===== BREAKDOWN CARDS ===== */
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .breakdown-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .breakdown-card {
+            padding: 20px;
+        }
+
+        .breakdown-title {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 14px;
+            font-weight: 500;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .priority-badge {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .badge-urgent {
+            background: rgba(239, 68, 68, 0.12);
+            border-color: rgba(239, 68, 68, 0.25);
+            color: #ef4444;
+        }
+
+        .badge-fast {
+            background: rgba(251, 191, 36, 0.12);
+            border-color: rgba(251, 191, 36, 0.25);
+            color: #fbbf24;
+        }
+
+        .badge-medium {
+            background: rgba(168, 85, 247, 0.12);
+            border-color: rgba(168, 85, 247, 0.25);
+            color: #a855f7;
+        }
+
+        .badge-low {
+            background: rgba(34, 197, 94, 0.12);
+            border-color: rgba(34, 197, 94, 0.25);
+            color: #22c55e;
+        }
+
+        .type-badge {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .type-technical {
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            color: #3b82f6;
+        }
+
+        .type-payment {
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            color: #6366f1;
+        }
+
+        .type-support {
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            color: #a855f7;
+        }
+
+        .type-warranty {
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            color: #22c55e;
+        }
+
+        .type-spam {
+            background: rgba(107, 114, 128, 0.12);
+            border: 1px solid rgba(107, 114, 128, 0.25);
+            color: #6b7280;
+        }
+
+        .type-account {
+            background: rgba(14, 165, 233, 0.12);
+            border: 1px solid rgba(14, 165, 233, 0.25);
+            color: #0ea5e9;
+        }
+
+        /* ===== FILTER SECTION ===== */
         .filter-section {
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 20px;
+            margin-bottom: 24px;
         }
 
         .filter-row {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 14px;
         }
 
         @media (min-width: 768px) {
@@ -249,226 +355,548 @@
             }
         }
 
-        .search-container {
+        .search-input {
             flex: 1;
             max-width: 400px;
+            padding: 12px 16px 12px 42px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .search-wrapper {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
         }
 
         .filters-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.75rem;
+            gap: 10px;
             align-items: center;
         }
 
-        /* Ticket card improvements */
-        .ticket-grid {
-            display: grid;
-            gap: 1rem;
+        .custom-dropdown {
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 13px;
+            min-width: 130px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .ticket-main-content {
+        .custom-dropdown:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .custom-dropdown option {
+            background: #1a1a24;
+            color: #fff;
+        }
+
+        .clear-btn {
+            padding: 10px 16px;
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .clear-btn:hover {
+            color: #fff;
+        }
+
+        /* ===== TICKETS SECTION ===== */
+        .tickets-section {
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .total-badge {
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .tickets-grid {
+            padding: 16px;
+        }
+
+        /* ===== TICKET CARD ===== */
+        .ticket-card {
+            display: flex;
+            padding: 18px 20px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.2s ease;
+        }
+
+        .ticket-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .ticket-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .ticket-card a {
+            display: flex;
+            width: 100%;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .unread-indicator {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            margin-right: 14px;
+            margin-top: 6px;
+            flex-shrink: 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .ticket-content {
             flex: 1;
             min-width: 0;
-            /* Prevents flex item from overflowing */
         }
 
         .ticket-badges {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .ticket-id {
+            font-weight: 600;
+            color: #3b82f6;
+            font-size: 13px;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .status-open {
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            color: #3b82f6;
+        }
+
+        .status-waiting {
+            background: rgba(251, 191, 36, 0.12);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            color: #fbbf24;
+        }
+
+        .status-resolved {
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            color: #22c55e;
+        }
+
+        .status-closed {
+            background: rgba(107, 114, 128, 0.12);
+            border: 1px solid rgba(107, 114, 128, 0.25);
+            color: #6b7280;
+        }
+
+        .status-new {
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            color: #a855f7;
+        }
+
+        .ticket-subject {
+            font-size: 15px;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .ticket-body {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 12px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .ticket-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            font-size: 0.875rem;
-            color: #6b7280;
-            margin-top: 0.75rem;
+            gap: 16px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .ticket-meta i {
+            margin-right: 5px;
+            opacity: 0.7;
         }
 
         .ticket-sidebar {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 0.5rem;
-            min-width: 120px;
+            gap: 8px;
+            margin-left: 20px;
+            flex-shrink: 0;
         }
 
-        /* Priority badges */
-        .priority-badge {
-            font-size: 0.7rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 9999px;
+        .method-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .method-email {
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            color: #22c55e;
+        }
+
+        .method-manual {
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            color: #3b82f6;
+        }
+
+        /* ===== FORWARDED SECTION ===== */
+        .forwarded-section {
+            border-left: 3px solid #3b82f6;
+        }
+
+        .forwarded-header {
+            color: #3b82f6;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-primary i {
+            margin-right: 8px;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 18px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        .btn-secondary i {
+            margin-right: 8px;
+        }
+
+        /* ===== USER AVATAR ===== */
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
             font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
         }
 
-        .badge-urgent {
-            background: rgba(255, 71, 87, 0.1);
-            color: #ff4757;
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .badge-fast {
-            background: rgba(255, 165, 2, 0.1);
-            color: #ffa502;
+        .page-btn {
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.2s;
         }
 
-        .badge-medium {
-            background: rgba(255, 107, 129, 0.1);
-            color: #ff6b81;
+        .page-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
         }
 
-        .badge-low {
-            background: rgba(46, 213, 115, 0.1);
-            color: #2ed573;
+        .page-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
         }
 
-        /* Dropdown improvements */
-        .custom-dropdown {
-            background: rgba(255, 255, 255, 0.9) !important;
-            border: 1px solid rgba(209, 213, 219, 0.3) !important;
-            border-radius: 0.75rem !important;
-            padding: 0.5rem 1rem !important;
-            min-width: 150px;
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            padding: 16px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 16px;
         }
 
-        /* Mobile improvements */
+        .mobile-menu.open {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .ticket-card {
                 flex-direction: column;
             }
 
             .ticket-sidebar {
-                align-items: flex-start;
-                margin-top: 1rem;
-                padding-top: 1rem;
-                border-top: 1px solid rgba(0, 0, 0, 0.1);
-                width: 100%;
+                flex-direction: row;
+                margin-left: 0;
+                margin-top: 14px;
+                padding-top: 14px;
+                border-top: 1px solid rgba(255, 255, 255, 0.06);
             }
+
+            .header-actions {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            padding: 48px 24px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        /* Hidden utility */
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
 
-<body class="min-h-screen">
-    <!-- Background Gradient -->
-    <div class="background-layer">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-    </div>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="bg-image"></div>
 
     <!-- Navigation -->
-    <nav>
-        <div class="responsive-container px-6 md:px-12 py-4">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex-1 flex justify-start">
-                    <a href="/" class="flex items-center">
-                        <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
-                    </a>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden md:flex flex-grow justify-center space-x-2">
-                    <a href="/" class="nav-link nav-link-active">
-                        <i class="fas fa-ticket-alt mr-2"></i>Tickets
-                    </a>
-                    <a href="/dashboard" class="nav-link">
-                        <i class="fas fa-chart-line mr-2"></i>Dashboard
-                    </a>
-                    <a href="/create-ticket" class="nav-link">
-                        <i class="fas fa-plus-circle mr-2"></i>Create Ticket
-                    </a>
-                    {% if current_user_role == 'Administrator' %}
-                    <a href="/technicians" class="nav-link">
-                        <i class="fas fa-tools mr-2"></i>Technicians
-                    </a>
-                    <a href="/members" class="nav-link">
-                        <i class="fas fa-users mr-2"></i>Members
-                    </a>
-                    <a href="/admin" class="nav-link">
-                        <i class="fas fa-cog mr-2"></i>Admin Panel
-                    </a>
-                    {% endif %}
-                </div>
-
-                <!-- User Section -->
-                <div class="flex items-center space-x-3">
-                    {% if current_user %}
-                    <div class="hidden sm:flex items-center space-x-2">
-                        <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
-                            <span class="text-pink-600 text-sm">{{ current_user[0]|upper }}</span>
-                        </div>
-                        <span class="text-gray-600 text-sm">{{ current_user }}</span>
-                    </div>
-                    <a href="/logout" class="nav-link">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                    </a>
-                    {% else %}
-                    <a href="/login" class="nav-link bg-gradient-to-r from-pink-500 to-pink-600 text-white">
-                        <i class="fas fa-sign-in-alt mr-2"></i>Login
-                    </a>
-                    {% endif %}
-
-                    <!-- Mobile menu button -->
-                    <button class="md:hidden p-2 rounded-md hover:bg-gray-100 mobile-menu-btn nav-link"
-                        onclick="toggleMobileMenu()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
+    <nav class="navbar">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex-1 flex justify-start">
+                <a href="/" class="flex items-center">
+                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-7 md:h-8">
+                </a>
             </div>
 
-            <!-- Mobile menu -->
-            <div id="mobileMenu" class="md:hidden mt-3 pb-3 border-t border-pink-100 hidden">
-                <div class="flex flex-col space-y-2 pt-3">
-                    <a href="/" class="nav-link nav-link-active">
-                        <i class="fas fa-ticket-alt mr-2"></i>Tickets
-                    </a>
-                    <a href="/dashboard" class="nav-link">
-                        <i class="fas fa-chart-line mr-2"></i>Dashboard
-                    </a>
-                    <a href="/create-ticket" class="nav-link">
-                        <i class="fas fa-plus-circle mr-2"></i>Create Ticket
-                    </a>
-                    {% if current_user_role == 'Administrator' %}
-                    <a href="/technicians" class="nav-link">
-                        <i class="fas fa-tools mr-2"></i>Technicians
-                    </a>
-                    <a href="/members" class="nav-link">
-                        <i class="fas fa-users mr-2"></i>Members
-                    </a>
-                    <a href="/admin" class="nav-link">
-                        <i class="fas fa-cog mr-2"></i>Admin Panel
-                    </a>
-                    {% endif %}
-                </div>
+            <!-- Navigation Links -->
+            <div class="nav-links">
+                <a href="/" class="nav-link nav-link-active">
+                    <i class="fas fa-ticket-alt"></i>Tickets
+                </a>
+                <a href="/dashboard" class="nav-link">
+                    <i class="fas fa-chart-line"></i>Dashboard
+                </a>
+                <a href="/create-ticket" class="nav-link">
+                    <i class="fas fa-plus-circle"></i>Create Ticket
+                </a>
+                {% if current_user_role == 'Administrator' %}
+                <a href="/technicians" class="nav-link">
+                    <i class="fas fa-tools"></i>Technicians
+                </a>
+                <a href="/members" class="nav-link">
+                    <i class="fas fa-users"></i>Members
+                </a>
+                <a href="/admin" class="nav-link">
+                    <i class="fas fa-cog"></i>Admin Panel
+                </a>
+                {% endif %}
             </div>
+
+            <!-- User Section -->
+            <div class="flex items-center space-x-2">
+                {% if current_user %}
+                <span class="text-sm text-gray-400 hidden sm:inline">{{ current_user }}</span>
+                <a href="/logout" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i>Logout
+                </a>
+                {% else %}
+                <a href="/login" class="nav-link">
+                    <i class="fas fa-sign-in-alt"></i>Login
+                </a>
+                {% endif %}
+
+                <!-- Hamburger menu button -->
+                <button class="nav-link hamburger-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile menu (dropdown) -->
+        <div id="mobileMenu" class="mobile-menu">
+            <a href="/" class="nav-link nav-link-active">
+                <i class="fas fa-ticket-alt"></i>Tickets
+            </a>
+            <a href="/dashboard" class="nav-link">
+                <i class="fas fa-chart-line"></i>Dashboard
+            </a>
+            <a href="/create-ticket" class="nav-link">
+                <i class="fas fa-plus-circle"></i>Create Ticket
+            </a>
+            {% if current_user_role == 'Administrator' %}
+            <a href="/technicians" class="nav-link">
+                <i class="fas fa-tools"></i>Technicians
+            </a>
+            <a href="/members" class="nav-link">
+                <i class="fas fa-users"></i>Members
+            </a>
+            <a href="/admin" class="nav-link">
+                <i class="fas fa-cog"></i>Admin Panel
+            </a>
+            {% endif %}
         </div>
     </nav>
 
     <!-- Main Content -->
-    <div id="mainContainer" class="responsive-container py-6 mt-4">
-        <!-- Compact Header -->
-        <header class="compact-header glass-panel">
-            <div class="header-content">
+    <div class="main-container">
+        <!-- Header Section -->
+        <header class="glass-card header-section">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                    <h1 class="text-2xl md:text-3xl font-bold gradient-text mb-2">AutoAssist Support Portal</h1>
-                    <p class="text-gray-500 text-sm md:text-base">Manage and track support tickets efficiently</p>
+                    <h1 class="page-title">AutoAssist Support Portal</h1>
+                    <p class="page-subtitle">Manage and track support tickets efficiently</p>
                 </div>
-                <div class="user-actions">
-                    <span class="text-gray-600 font-medium">Welcome, {{ current_user }}</span>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 header-actions">
+                    <span class="text-gray-400 text-sm">Welcome, {{ current_user }}</span>
                     <div class="flex items-center gap-2">
-                        <a href="/create-ticket"
-                            class="btn-gradient px-4 py-2 rounded-lg text-sm font-semibold flex items-center whitespace-nowrap">
-                            <i class="fas fa-plus mr-2"></i>Create Ticket
+                        <a href="/create-ticket" class="btn-primary">
+                            <i class="fas fa-plus"></i>Create Ticket
                         </a>
-                        <button id="manualRefreshBtn"
-                            class="bg-white text-gray-700 hover:text-pink-600 px-3 py-2 rounded-lg border border-gray-200 font-medium transition flex items-center shadow-sm whitespace-nowrap">
-                            <i class="fas fa-sync-alt mr-2"></i>Refresh
+                        <button id="manualRefreshBtn" class="btn-secondary">
+                            <i class="fas fa-sync-alt"></i>Refresh
                         </button>
                     </div>
                 </div>
@@ -477,173 +905,159 @@
 
         <!-- Stats Grid -->
         <div class="stats-grid">
-            <div class="stats-card p-5">
+            <div class="glass-card stats-card">
                 <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-pink-100 mr-4">
-                        <i class="fas fa-ticket-alt text-pink-600"></i>
+                    <div class="stats-icon pink">
+                        <i class="fas fa-ticket-alt"></i>
                     </div>
                     <div>
-                        <h3 class="font-medium text-gray-500 text-sm">Total Tickets</h3>
-                        <p class="text-2xl font-bold" style="color: var(--primary);">{{ total_tickets }}</p>
+                        <div class="stats-label">Total Tickets</div>
+                        <div class="stats-value">{{ total_tickets }}</div>
                     </div>
                 </div>
             </div>
-            <div class="stats-card p-5">
+            <div class="glass-card stats-card">
                 <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-blue-100 mr-4">
-                        <i class="fas fa-folder-open text-blue-600"></i>
+                    <div class="stats-icon blue">
+                        <i class="fas fa-folder-open"></i>
                     </div>
                     <div>
-                        <h3 class="font-medium text-gray-500 text-sm">Open Tickets</h3>
-                        <p class="text-2xl font-bold" style="color: var(--medium);">{{ open_tickets }}</p>
+                        <div class="stats-label">Open Tickets</div>
+                        <div class="stats-value">{{ open_tickets }}</div>
                     </div>
                 </div>
             </div>
-            <div class="stats-card p-5">
+            <div class="glass-card stats-card">
                 <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-yellow-100 mr-4">
-                        <i class="fas fa-clock text-yellow-600"></i>
+                    <div class="stats-icon yellow">
+                        <i class="fas fa-clock"></i>
                     </div>
                     <div>
-                        <h3 class="font-medium text-gray-500 text-sm">Waiting Response</h3>
-                        <p class="text-2xl font-bold" style="color: var(--waiting);">{{ waiting_tickets }}</p>
+                        <div class="stats-label">Waiting Response</div>
+                        <div class="stats-value">{{ waiting_tickets }}</div>
                     </div>
                 </div>
             </div>
-            <div class="stats-card p-5">
+            <div class="glass-card stats-card">
                 <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-green-100 mr-4">
-                        <i class="fas fa-check-circle text-green-600"></i>
+                    <div class="stats-icon green">
+                        <i class="fas fa-check-circle"></i>
                     </div>
                     <div>
-                        <h3 class="font-medium text-gray-500 text-sm">Resolved</h3>
-                        <p class="text-2xl font-bold" style="color: var(--low);">{{ resolved_tickets }}</p>
+                        <div class="stats-label">Resolved</div>
+                        <div class="stats-value">{{ resolved_tickets }}</div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Breakdown Cards -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            <div class="stats-card p-6">
-                <div class="flex flex-col">
-                    <h3 class="font-medium text-gray-500 mb-3">Priority Breakdown</h3>
-                    <div class="flex flex-wrap gap-2">
-                        {% for priority, count in priorities.items() %}
-                        <span class="priority-badge rounded-full 
-                                {% if priority == 'Urgent' %}badge-urgent
-                                {% elif priority == 'Fast' %}badge-fast
-                                {% elif priority == 'Medium' %}badge-medium
-                                {% else %}badge-low{% endif %}" data-priority="{{ priority }}">
-                            {{ priority }}: {{ count }}
-                        </span>
-                        {% endfor %}
-                    </div>
+        <div class="breakdown-grid">
+            <div class="glass-card breakdown-card">
+                <div class="breakdown-title">Priority Breakdown</div>
+                <div class="badge-row">
+                    {% for priority, count in priorities.items() %}
+                    <span class="priority-badge 
+                            {% if priority == 'Urgent' %}badge-urgent
+                            {% elif priority == 'Fast' %}badge-fast
+                            {% elif priority == 'Medium' %}badge-medium
+                            {% else %}badge-low{% endif %}" data-priority="{{ priority }}">
+                        {{ priority }}: {{ count }}
+                    </span>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="stats-card p-6">
-                <div class="flex flex-col">
-                    <h3 class="font-medium text-gray-500 mb-3">Type Breakdown</h3>
-                    <div class="flex flex-wrap gap-2">
-                        {% for classification, count in classifications.items() %}
-                        {% if classification in ['Support', 'Technical Issue', 'Warranty Claim', 'Payment', 'Spam',
-                        'Account'] %}
-                        <span class="priority-badge rounded-full 
-                                {% if classification == 'Support' %}bg-purple-100 text-purple-700
-                                {% elif classification == 'Technical Issue' %}bg-blue-100 text-blue-700
-                                {% elif classification == 'Warranty Claim' %}bg-green-100 text-green-700
-                                {% else %}bg-gray-100 text-gray-700{% endif %}"
-                            data-classification="{{ classification }}">
-                            {% if classification == 'Warranty Claim' %}🛡️{% endif %}
-                            {{ classification }}: {{ count }}
-                        </span>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
+            <div class="glass-card breakdown-card">
+                <div class="breakdown-title">Type Breakdown</div>
+                <div class="badge-row">
+                    {% for classification, count in classifications.items() %}
+                    {% if classification in ['Support', 'Technical Issue', 'Warranty Claim', 'Payment', 'Spam',
+                    'Account'] %}
+                    <span class="type-badge 
+                            {% if classification == 'Technical Issue' %}type-technical
+                            {% elif classification == 'Payment' %}type-payment
+                            {% elif classification == 'Support' %}type-support
+                            {% elif classification == 'Warranty Claim' %}type-warranty
+                            {% elif classification == 'Spam' %}type-spam
+                            {% else %}type-account{% endif %}" data-classification="{{ classification }}">
+                        {% if classification == 'Warranty Claim' %}🛡️{% endif %}
+                        {{ classification }}: {{ count }}
+                    </span>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
 
         <!-- Filter Section -->
-        <div class="filter-section">
+        <div class="glass-card filter-section">
             <div class="filter-row">
-                <div class="search-container relative">
+                <div class="search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
                     <input type="text" id="searchInput" placeholder="Search tickets by ID, subject, email..."
-                        class="w-full px-4 py-3 pl-10 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent">
-                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        class="search-input">
                 </div>
                 <div class="filters-container">
-                    <div class="relative">
-                        <select id="typeFilter" class="custom-dropdown">
-                            <option value="All">All Types</option>
-                            <option value="Technical Issue">Technical Issue</option>
-                            <option value="Payment">Payment</option>
-                            <option value="Support">Support</option>
-                            <option value="Warranty Claim">Warranty Claim</option>
-                            <option value="Account">Account</option>
-                            <option value="Spam">Spam</option>
-                        </select>
-                    </div>
-                    <div class="relative">
-                        <select id="priorityFilter" class="custom-dropdown">
-                            <option value="All">All Priority</option>
-                            <option value="Urgent">Urgent</option>
-                            <option value="Fast">Fast</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
-                        </select>
-                    </div>
-                    <div class="relative">
-                        <select id="statusFilter" class="custom-dropdown">
-                            <option value="All">All Status</option>
-                            <option value="Open">Open</option>
-                            <option value="Waiting for Response">Waiting</option>
-                            <option value="Resolved">Resolved</option>
-                        </select>
-                    </div>
-                    <button id="clearFilters" class="px-4 py-2 text-sm text-gray-600 hover:text-pink-600 transition">
-                        Clear Filters
-                    </button>
+                    <select id="typeFilter" class="custom-dropdown">
+                        <option value="All">All Types</option>
+                        <option value="Technical Issue">Technical Issue</option>
+                        <option value="Payment">Payment</option>
+                        <option value="Support">Support</option>
+                        <option value="Warranty Claim">Warranty Claim</option>
+                        <option value="Account">Account</option>
+                        <option value="Spam">Spam</option>
+                    </select>
+                    <select id="priorityFilter" class="custom-dropdown">
+                        <option value="All">All Priority</option>
+                        <option value="Urgent">Urgent</option>
+                        <option value="Fast">Fast</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                    <select id="statusFilter" class="custom-dropdown">
+                        <option value="All">All Status</option>
+                        <option value="Open">Open</option>
+                        <option value="Waiting for Response">Waiting</option>
+                        <option value="Resolved">Resolved</option>
+                    </select>
+                    <button id="clearFilters" class="clear-btn">Clear Filters</button>
                 </div>
             </div>
         </div>
 
         <!-- Forwarded Tickets Section -->
         {% if forwarded_tickets %}
-        <div class="forwarded-glass mb-6">
-            <div class="px-6 py-4 border-b flex justify-between items-center">
-                <h2 class="text-lg font-semibold text-blue-800 flex items-center">
-                    <i class="fas fa-share mr-2"></i> Forwarded to You
+        <div class="glass-card tickets-section forwarded-section" style="margin-bottom: 24px;">
+            <div class="section-header">
+                <h2 class="section-title forwarded-header">
+                    <i class="fas fa-share"></i>Forwarded to You
                 </h2>
-                <span class="px-3 py-1 rounded-full text-sm font-medium bg-blue-600 text-white">
-                    {{ forwarded_tickets|length }}
-                </span>
+                <span class="total-badge">{{ forwarded_tickets|length }}</span>
             </div>
-            <div class="p-4">
+            <div class="tickets-grid">
                 {% for ticket in forwarded_tickets[:2] %}
-                <div class="ticket-card p-4 mb-3 border-l-4 border-blue-400">
-                    <a href="/ticket/{{ ticket.ticket_id }}" class="flex">
-                        <div class="ticket-main-content">
+                <div class="ticket-card">
+                    <a href="/ticket/{{ ticket.ticket_id }}">
+                        <div class="ticket-content">
                             <div class="ticket-badges">
-                                <span class="font-bold text-gray-800">#{{ ticket.ticket_id }}</span>
+                                <span class="ticket-id">#{{ ticket.ticket_id }}</span>
                                 {% if ticket.has_warranty %}
-                                <span class="px-2 py-1 text-xs rounded-full font-medium bg-green-100 text-green-800">
-                                    <i class="fas fa-shield-alt mr-1"></i> WARRANTY
+                                <span class="type-badge type-warranty">
+                                    <i class="fas fa-shield-alt"></i> WARRANTY
                                 </span>
                                 {% endif %}
-                                <span class="px-2 py-1 text-xs rounded-full font-medium
-                                        {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
-                                        {% elif ticket.priority == 'Fast' %}bg-yellow-100 text-yellow-800
-                                        {% elif ticket.priority == 'Medium' %}bg-pink-100 text-pink-800
-                                        {% else %}bg-green-100 text-green-800{% endif %}">
+                                <span class="priority-badge 
+                                        {% if ticket.priority == 'Urgent' %}badge-urgent
+                                        {% elif ticket.priority == 'Fast' %}badge-fast
+                                        {% elif ticket.priority == 'Medium' %}badge-medium
+                                        {% else %}badge-low{% endif %}">
                                     {{ ticket.priority }}
                                 </span>
                             </div>
-                            <h3 class="font-semibold text-gray-800 mb-1">{{ ticket.subject | default('No Subject') }}
-                            </h3>
+                            <h3 class="ticket-subject">{{ ticket.subject | default('No Subject') }}</h3>
                             <div class="ticket-meta">
-                                <span><i class="fas fa-user mr-1"></i>{{ ticket.name | default('Anonymous') }}</span>
-                                <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date }}</span>
+                                <span><i class="fas fa-user"></i>{{ ticket.name | default('Anonymous') }}</span>
+                                <span><i class="fas fa-clock"></i>{{ ticket.formatted_date }}</span>
                             </div>
                         </div>
                     </a>
@@ -654,32 +1068,26 @@
         {% endif %}
 
         <!-- Main Tickets Section -->
-        <div class="main-container-glass">
-            <div class="px-6 py-4 border-b flex justify-between items-center">
-                <h2 class="text-xl font-bold gradient-text flex items-center">
-                    <i class="fas fa-list-ul mr-2 text-pink-500"></i> Recent Tickets
+        <div class="glass-card tickets-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-list-ul"></i>Recent Tickets
                 </h2>
-                <div class="flex items-center space-x-3">
-                    <span class="px-3 py-1 rounded-full text-sm font-medium bg-pink-100 text-pink-700">
-                        Total: {{ total_tickets }}
-                    </span>
-                </div>
+                <span class="total-badge">Total: {{ total_tickets }}</span>
             </div>
-            <div class="ticket-grid p-6">
+            <div class="tickets-grid">
                 {% for ticket in tickets %}
-                <div class="ticket-card p-4">
-                    <a href="/ticket/{{ ticket.ticket_id }}" class="flex">
+                <div class="ticket-card">
+                    <a href="/ticket/{{ ticket.ticket_id }}">
                         <!-- Unread indicator -->
                         {% if ticket.has_unread_reply %}
-                        <div class="mr-3 mt-1">
-                            <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                        </div>
+                        <div class="unread-indicator"></div>
                         {% endif %}
 
-                        <div class="ticket-main-content">
+                        <div class="ticket-content">
                             <div class="ticket-badges">
-                                <span class="font-bold text-blue-800">#{{ ticket.ticket_id }}</span>
-                                <span class="priority-badge rounded-full 
+                                <span class="ticket-id">#{{ ticket.ticket_id }}</span>
+                                <span class="priority-badge 
                                         {% if ticket.priority == 'Urgent' %}badge-urgent
                                         {% elif ticket.priority == 'Fast' %}badge-fast
                                         {% elif ticket.priority == 'Medium' %}badge-medium
@@ -689,48 +1097,44 @@
 
                                 {% if ticket.classification in ['Technical Issue', 'Payment', 'Support', 'Warranty
                                 Claim', 'Spam'] %}
-                                <span
-                                    class="badge-classification px-2 py-1 text-xs rounded-full font-medium
-                                        {% if ticket.classification == 'Technical Issue' %}bg-blue-100 text-blue-800
-                                        {% elif ticket.classification == 'Payment' %}bg-indigo-100 text-indigo-800
-                                        {% elif ticket.classification == 'Support' %}bg-purple-100 text-purple-800
-                                        {% elif ticket.classification == 'Warranty Claim' %}bg-green-100 text-green-800
-                                        {% elif ticket.classification == 'Spam' %}bg-pink-100 text-pink-800{% endif %}">
+                                <span class="type-badge badge-classification
+                                        {% if ticket.classification == 'Technical Issue' %}type-technical
+                                        {% elif ticket.classification == 'Payment' %}type-payment
+                                        {% elif ticket.classification == 'Support' %}type-support
+                                        {% elif ticket.classification == 'Warranty Claim' %}type-warranty
+                                        {% elif ticket.classification == 'Spam' %}type-spam{% endif %}">
                                     {{ ticket.classification }}
                                 </span>
                                 {% endif %}
 
-                                <span class="badge-status px-2 py-1 text-xs rounded-full font-medium
-                                        {% if ticket.status == 'Open' %}bg-blue-100 text-blue-800
-                                        {% elif ticket.status == 'Waiting for Response' %}bg-yellow-100 text-yellow-800
-                                        {% elif ticket.status == 'Closed' %}bg-gray-100 text-gray-700
-                                        {% elif ticket.status == 'Resolved' %}bg-green-100 text-green-800
-                                        {% else %}bg-green-100 text-green-800{% endif %}">
+                                <span class="status-badge badge-status
+                                        {% if ticket.status == 'Open' %}status-open
+                                        {% elif ticket.status == 'Waiting for Response' %}status-waiting
+                                        {% elif ticket.status == 'Closed' %}status-closed
+                                        {% elif ticket.status == 'Resolved' %}status-resolved
+                                        {% else %}status-new{% endif %}">
                                     {{ ticket.status }}
                                 </span>
                             </div>
 
-                            <h3 class="font-semibold text-gray-800 mb-1">{{ ticket.subject | default('No Subject') }}
-                            </h3>
-                            <p class="text-gray-600 text-sm mb-2 line-clamp-2">{{ ticket.body | default('No Body') }}
-                            </p>
+                            <h3 class="ticket-subject">{{ ticket.subject | default('No Subject') }}</h3>
+                            <p class="ticket-body">{{ ticket.body | default('No Body') }}</p>
 
                             <div class="ticket-meta">
-                                <span><i class="fas fa-user mr-1"></i>{{ ticket.name | default('Anonymous') }}</span>
-                                <span><i class="fas fa-envelope mr-1"></i>{{ ticket.email | default('No Email')
-                                    }}</span>
-                                <span><i class="fas fa-clock mr-1"></i>{{ ticket.formatted_date }}</span>
+                                <span><i class="fas fa-user"></i>{{ ticket.name | default('Anonymous') }}</span>
+                                <span><i class="fas fa-envelope"></i>{{ ticket.email | default('No Email') }}</span>
+                                <span><i class="fas fa-clock"></i>{{ ticket.formatted_date }}</span>
                             </div>
                         </div>
 
                         <div class="ticket-sidebar">
-                            <span class="px-2 py-1 text-xs rounded-full font-medium 
-                                    {% if ticket.creation_method == 'manual' %}bg-blue-100 text-blue-700
-                                    {% else %}bg-green-100 text-green-700{% endif %}">
+                            <span class="method-badge 
+                                    {% if ticket.creation_method == 'manual' %}method-manual
+                                    {% else %}method-email{% endif %}">
                                 {% if ticket.creation_method == 'manual' %}
-                                <i class="fas fa-user-edit text-xs"></i> Manual
+                                <i class="fas fa-user-edit"></i> Manual
                                 {% else %}
-                                <i class="fas fa-envelope text-xs"></i> Email
+                                <i class="fas fa-envelope"></i> Email
                                 {% endif %}
                             </span>
                         </div>
@@ -739,43 +1143,40 @@
                 {% endfor %}
 
                 {% if not tickets %}
-                <div class="p-6 text-center text-gray-500">
-                    No tickets found.
+                <div class="empty-state">
+                    <i class="fas fa-inbox"></i>
+                    <p>No tickets found.</p>
                 </div>
                 {% endif %}
             </div>
 
             <!-- Pagination -->
             {% if pagination %}
-            <div class="px-6 py-4 border-t border-gray-200 flex justify-center items-center space-x-4">
+            <div class="pagination">
                 {% if pagination.has_prev %}
                 <a href="?page={{ pagination.prev_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
-                    class="px-4 py-2 btn-gradient text-white rounded-lg hover:opacity-90 transition-all">
-                    <i class="fas fa-chevron-left mr-1"></i> Previous
+                    class="page-btn">
+                    <i class="fas fa-chevron-left"></i> Previous
                 </a>
                 {% endif %}
 
-                <div class="flex space-x-2">
-                    {% for page_num in range(1, pagination.total_pages + 1) %}
-                    {% if page_num == pagination.current_page %}
-                    <span class="px-3 py-2 btn-gradient text-white rounded-lg font-semibold">
+                {% for page_num in range(1, pagination.total_pages + 1) %}
+                {% if page_num == pagination.current_page %}
+                <span class="page-btn active">{{ page_num }}</span>
+                {% elif page_num <= 3 or page_num> pagination.total_pages - 3 %}
+                    <a href="?page={{ page_num }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                        class="page-btn">
                         {{ page_num }}
-                    </span>
-                    {% elif page_num <= 3 or page_num> pagination.total_pages - 3 %}
-                        <a href="?page={{ page_num }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
-                            class="px-3 py-2 bg-white text-gray-700 rounded-lg hover:bg-pink-50 border">
-                            {{ page_num }}
-                        </a>
-                        {% endif %}
-                        {% endfor %}
-                </div>
+                    </a>
+                    {% endif %}
+                    {% endfor %}
 
-                {% if pagination.has_next %}
-                <a href="?page={{ pagination.next_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
-                    class="px-4 py-2 btn-gradient text-white rounded-lg hover:opacity-90 transition-all">
-                    Next <i class="fas fa-chevron-right ml-1"></i>
-                </a>
-                {% endif %}
+                    {% if pagination.has_next %}
+                    <a href="?page={{ pagination.next_page }}&per_page={{ pagination.per_page }}&status={{ pagination.status_filter }}&priority={{ pagination.priority_filter }}&search={{ pagination.search_query }}"
+                        class="page-btn">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </a>
+                    {% endif %}
             </div>
             {% endif %}
         </div>
@@ -785,7 +1186,7 @@
         // Mobile menu toggle
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenu) mobileMenu.classList.toggle('hidden');
+            if (mobileMenu) mobileMenu.classList.toggle('open');
         }
 
         // Filter functionality
@@ -804,9 +1205,9 @@
                 const statusValue = statusFilter.value;
 
                 ticketCards.forEach(card => {
-                    const ticketId = card.querySelector('.font-bold.text-blue-800')?.textContent.toLowerCase() || '';
-                    const subject = card.querySelector('.font-semibold.text-gray-800')?.textContent.toLowerCase() || '';
-                    const body = card.querySelector('.text-gray-600')?.textContent.toLowerCase() || '';
+                    const ticketId = card.querySelector('.ticket-id')?.textContent.toLowerCase() || '';
+                    const subject = card.querySelector('.ticket-subject')?.textContent.toLowerCase() || '';
+                    const body = card.querySelector('.ticket-body')?.textContent.toLowerCase() || '';
                     const priority = card.querySelector('.priority-badge')?.textContent || '';
                     const classification = card.querySelector('.badge-classification')?.textContent || '';
                     const status = card.querySelector('.badge-status')?.textContent || '';
@@ -821,7 +1222,7 @@
                     const matchesStatus = statusValue === 'All' || status.includes(statusValue);
 
                     if (matchesSearch && matchesType && matchesPriority && matchesStatus) {
-                        card.style.display = 'block';
+                        card.style.display = 'flex';
                     } else {
                         card.style.display = 'none';
                     }
@@ -846,6 +1247,33 @@
             document.getElementById('manualRefreshBtn')?.addEventListener('click', function () {
                 location.reload();
             });
+
+            // Background image rotation (every 60 minutes)
+            const bgImages = [
+                '/static/css/portal_bg.png',
+                '/static/css/ticket_page2.png',
+                '/static/css/ticket_page3.png'
+            ];
+
+            function setBackgroundImage() {
+                const bgElement = document.querySelector('.bg-image');
+                if (bgElement) {
+                    bgElement.style.backgroundImage = `url('${bgImages[currentBgIndex]}')`;
+                    currentBgIndex = (currentBgIndex + 1) % bgImages.length;
+                }
+            }
+
+            let currentBgIndex = 0;
+
+            // Set initial background (login_bg.png)
+            const bgElement = document.querySelector('.bg-image');
+            if (bgElement) {
+                bgElement.style.backgroundImage = `url('${bgImages[0]}')`;
+            }
+
+            // Start rotation from index 1, every 60 minutes
+            currentBgIndex = 1;
+            setInterval(setBackgroundImage, 60 * 60 * 1000);
         });
     </script>
 </body>
