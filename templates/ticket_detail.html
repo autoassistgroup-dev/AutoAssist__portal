@@ -77,126 +77,9 @@
         }
 
 
-        /* ===== NAVBAR ===== */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 8px 24px;
-        }
-
-        @media (min-width: 768px) {
-            .navbar {
-                padding: 8px 48px;
-            }
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .nav-link {
-            display: inline-flex;
-            align-items: center;
-            padding: 6px 10px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 6px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 11px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.15);
-            color: #fff;
-        }
-
-        .nav-link-active {
-            background: rgba(255, 117, 143, 0.15);
-            border-color: rgba(255, 117, 143, 0.3);
-            color: #ff758f;
-        }
-
-        .nav-link i {
-            margin-right: 6px;
-            font-size: 11px;
-            opacity: 0.8;
-        }
-
-        /* ===== USER AVATAR ===== */
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background: rgba(255, 117, 143, 0.15);
-            border: 1px solid rgba(255, 117, 143, 0.25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 600;
-            color: #ff758f;
-        }
-
-        /* ===== MOBILE MENU ===== */
-        .mobile-menu {
-            display: none;
-            padding: 16px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            margin-top: 16px;
-        }
-
-        .mobile-menu.open {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .menu-btn {
-            display: none;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            color: rgba(255, 255, 255, 0.7);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .menu-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-        }
-
-        @media (max-width: 768px) {
-            .menu-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .nav-links.desktop {
-                display: none;
-            }
-        }
-
-        /* Fix Main Content for Fixed Navbar */
+        /* ===== PAGE LAYOUT - No navbar, content starts from top ===== */
         .container.main-content {
-            padding-top: 80px !important;
+            padding-top: 0 !important;
         }
 
         /* ===== COMPACT STYLING FIXES ===== */
@@ -728,8 +611,8 @@
 
         .badge-low,
         .priority-low {
-            background: rgba(46, 213, 115, 0.15) !important;
-            color: #2ed573 !important;
+            background: rgba(99, 102, 241, 0.15) !important;
+            color: #818cf8 !important;
             backdrop-filter: blur(10px);
         }
 
@@ -791,39 +674,66 @@
             max-width: 75% !important;
         }
 
-        /* Standardized Expand Button for replies */
+        /* Standardized Expand Button for replies - Neutral colors */
         .expand-btn {
             display: none;
             width: fit-content;
             margin: 0.5rem 0 0 auto !important;
             padding: 0.25rem 0.75rem;
-            background: rgba(255, 255, 255, 0.1) !important;
+            background: rgba(255, 255, 255, 0.08) !important;
             border-radius: 9999px !important;
             font-size: 0.75rem !important;
-            font-weight: 600;
-            color: var(--text-secondary) !important;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7) !important;
             cursor: pointer;
             transition: all 0.2s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
             text-align: center;
         }
 
         .expand-btn:hover {
-            background: rgba(79, 70, 229, 0.2) !important;
-            border-color: rgba(79, 70, 229, 0.3) !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
             color: white !important;
         }
 
+        /* Reply message content - 3 line truncation */
+        .reply-message-box .message-content {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.5;
+        }
+
+        .reply-message-box.expanded .message-content {
+            display: block;
+            -webkit-line-clamp: unset;
+            overflow: visible;
+        }
+
         .message-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
             margin-bottom: 0.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            /* Subtle separator */
-            padding-bottom: 0.25rem;
+            padding-bottom: 0.5rem;
         }
 
         .message-time {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            white-space: nowrap;
+        }
+
+        .message-time i {
+            margin-right: 4px;
             font-size: 0.7rem;
-            opacity: 0.7;
         }
 
         /* ===== EMAIL TEMPLATE MODAL - DARK THEME ===== */
@@ -958,8 +868,8 @@
             display: flex !important;
             position: fixed !important;
             right: 0 !important;
-            top: 10vh !important;
-            height: 90vh !important;
+            top: 0 !important;
+            height: 100vh !important;
             width: 320px !important;
             z-index: 42 !important;
         }
@@ -1657,13 +1567,13 @@
         }
 
         .original-message-content {
-            white-space: pre-line;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
             word-break: break-word;
             overflow-wrap: break-word;
-            max-height: 200px;
-            overflow: hidden;
             position: relative;
-            hyphens: auto;
             margin-bottom: 0 !important;
             color: var(--text-primary) !important;
             font-size: 0.95rem !important;
@@ -1671,32 +1581,33 @@
         }
 
         .original-message-content.expanded {
+            display: block;
+            -webkit-line-clamp: unset;
             max-height: none !important;
+            overflow: visible;
         }
 
-        /* Standardized Read More Button */
+        /* Standardized Read More Button - Neutral colors */
         .read-more-btn {
             display: none;
             width: fit-content;
             margin: 0.75rem 0 0 auto !important;
-            /* Force to right */
             padding: 0.35rem 0.85rem;
-            background: rgba(255, 255, 255, 0.1) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
             border-radius: 9999px !important;
             text-align: center;
             cursor: pointer;
-            color: var(--text-secondary) !important;
-            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7) !important;
+            font-weight: 500;
             font-size: 0.75rem !important;
             transition: all 0.2s ease;
         }
 
         .read-more-btn:hover {
-            background: rgba(79, 70, 229, 0.2) !important;
-            border-color: rgba(79, 70, 229, 0.3) !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
             color: white !important;
-            transform: translateY(-1px);
         }
 
         .original-message-content.truncated .read-more-btn,
@@ -1993,7 +1904,7 @@
             width: 280px !important;
             position: fixed !important;
             right: 0 !important;
-            top: 10vh !important;
+            top: 0 !important;
             height: calc(100vh - 10vh) !important;
             background: #0f0f13 !important;
             /* Solid dark background */
@@ -2362,7 +2273,7 @@
                 transform: translateX(100%);
                 box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
                 width: 100%;
-                top: 118px;
+                top: 0;
                 max-width: 320px;
             }
 
@@ -2666,7 +2577,7 @@
                 max-width: 400px !important;
                 width: 400px !important;
                 right: 0 !important;
-                top: 10vh !important;
+                top: 0 !important;
                 bottom: 0 !important;
                 height: 90vh !important;
                 border-radius: 0 !important;
@@ -3397,54 +3308,55 @@
         /* Desktop sidebar behavior - REMOVED CONFLICTING STYLES */
         /* These styles were conflicting with the main layout system */
 
+        /* ===== SIDEBAR SECTIONS - Clean glass-card style from index.html ===== */
         .sidebar-section {
-            margin-bottom: 0;
-            background: transparent;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 0;
-            padding: 20px 0;
-            box-shadow: none;
-            transition: none;
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.2s ease;
         }
 
         .sidebar-section:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
         }
 
         .sidebar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 12px;
         }
 
         .sidebar-title {
             font-size: 13px;
             font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: 0.3px;
+            color: #fff;
+            letter-spacing: 0.2px;
         }
 
+        /* Add button - Small, neutral styling */
         .add-btn {
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            background: var(--primary);
-            color: white;
-            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.15s ease;
-            font-size: 11px;
+            font-size: 12px;
         }
 
         .add-btn:hover {
-            background: var(--primary-dark);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
         }
 
         /* Note card styles - dark theme */
@@ -4098,31 +4010,7 @@
 
     <!-- Navigation -->
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="flex items-center justify-between">
-            <!-- Logo -->
-            <div class="flex items-center">
-                <a href="{% if current_user_role == 'Technical Director' %}/tech-director-dashboard{% else %}/{% endif %}"
-                    class="flex items-center">
-                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
-                </a>
-            </div>
-
-            <!-- User Section -->
-            <div class="flex items-center gap-3">
-                {% if current_user %}
-                <a href="/logout" class="nav-link">
-                    <i class="fas fa-sign-out-alt"></i>Logout
-                </a>
-                {% else %}
-                <a href="/login" class="nav-link">
-                    <i class="fas fa-sign-in-alt"></i>Login
-                </a>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
-
+    <!-- Navbar removed -->
     <!-- Notification System -->
     <div id="notification" class="notification hidden">
         <i class="fas fa-check-circle mr-2"></i>
@@ -4482,7 +4370,7 @@
                         <i class="fas fa-eraser mr-2"></i>Clear
                     </button>
                     <button id="sendEmail"
-                        class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium">
+                        class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors font-medium">
                         <i class="fas fa-paper-plane mr-2"></i>Send Email
                     </button>
                 </div>
@@ -4521,7 +4409,7 @@
                                     {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
                                     {% elif ticket.priority == 'High' %}bg-orange-100 text-orange-800
                                     {% elif ticket.priority == 'Medium' %}bg-yellow-100 text-yellow-800
-                                    {% elif ticket.priority == 'Low' %}bg-green-100 text-green-800
+                                    {% elif ticket.priority == 'Low' %}bg-purple-100 text-purple-800
                                     {% else %}bg-gray-100 text-gray-800{% endif %}">
                                         <i
                                             class="fas fa-{% if ticket.priority == 'Urgent' %}exclamation-triangle{% elif ticket.priority == 'High' %}exclamation{% elif ticket.priority == 'Medium' %}circle{% else %}check{% endif %} mr-1"></i>
@@ -5912,7 +5800,7 @@
                         ${doc.description ? `<p class="text-xs text-gray-400 truncate">${doc.description}</p>` : ''}
                     </div>
                     <div class="flex space-x-2">
-                       <button type="button" class="view-document-btn text-blue-600 hover:text-blue-800 bg-blue-100 hover:bg-blue-200 px-2 py-1 rounded text-xs" title="Download">
+                       <button type="button" class="view-document-btn bg-white/10 hover:bg-white/15 text-white/80 hover:text-white px-2 py-1 rounded text-xs border border-white/10 hover:border-white/20" title="Download">
                            <i class="fas fa-download mr-1"></i> Download
                         </button>
                         <button type="button" class="edit-document-btn text-gray-500 hover:text-gray-700" title="Edit">
