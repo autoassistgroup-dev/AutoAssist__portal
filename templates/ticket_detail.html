@@ -5273,6 +5273,7 @@
                             {% for reply in replies %}
                             {% set is_from_customer = reply.is_customer or reply.sender_type == 'customer' or
                             reply.sender_type == 'webhook' or (reply.sender_type != 'agent' and not reply.sender_id) %}
+                            {% if reply.sender_name !="External System" or ticket.name!="External System" %}
                             <div
                                 class="message {% if is_from_customer %}customer-message{% else %}support-message{% endif %}">
                                 <div class="message-header">
@@ -5409,6 +5410,7 @@
                                 </div>
                                 {% endif %}
                             </div>
+                            {% endif %}
                             {% endfor %}
                         </div>
 
