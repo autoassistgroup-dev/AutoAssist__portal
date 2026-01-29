@@ -344,6 +344,398 @@
             border-left: 1px solid var(--glass-border) !important;
         }
 
+        /* ===== COMPACT PROFESSIONAL STYLING ===== */
+
+        /* 1. COMPACT TICKET HEADER - Smaller, professional green container */
+        .ticket-header,
+        [class*="ticket-header"],
+        .p-5.ticket-header {
+            padding: 12px 16px !important;
+            margin-bottom: 12px !important;
+        }
+
+        .ticket-header h1,
+        .ticket-header-main h1 {
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            margin-bottom: 6px !important;
+            line-height: 1.3 !important;
+        }
+
+        /* 2. INLINE BADGES - Small, proper line with dropdown arrows */
+        .ticket-header .flex.flex-wrap,
+        .ticket-header-main .flex.flex-wrap {
+            gap: 6px !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+        }
+
+        /* Small inline badges */
+        .ticket-header .px-3.py-1,
+        .ticket-header .px-2.py-1,
+        .ticket-header [class*="badge"],
+        .ticket-header .rounded-full,
+        .ticket-header .rounded-lg,
+        .ticket-header select,
+        .ticket-header button {
+            padding: 4px 10px !important;
+            font-size: 11px !important;
+            height: auto !important;
+            min-height: 24px !important;
+            line-height: 1.3 !important;
+            border-radius: 4px !important;
+        }
+
+        /* Fix dropdown select styling */
+        .ticket-header select,
+        select.status-select,
+        select[class*="status"],
+        select[class*="priority"],
+        select[class*="technician"] {
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a0aec0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 8px center !important;
+            padding-right: 24px !important;
+            min-width: 80px !important;
+            cursor: pointer !important;
+            background-color: rgba(30, 30, 45, 0.9) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            color: var(--text-primary) !important;
+        }
+
+        /* Matthew (Technician) dropdown - compact */
+        .ticket-header .flex.items-center.gap-1,
+        .ticket-header-main .flex.items-center.gap-1 {
+            gap: 4px !important;
+        }
+
+        /* 3. FORMAL CLOSE/STAR BUTTONS */
+        .ticket-header button[class*="star"],
+        .ticket-header button[class*="close"],
+        .ticket-header .close-btn,
+        .ticket-header .star-btn,
+        .ticket-header button svg,
+        button[title*="Close"],
+        button[title*="Star"],
+        button[aria-label*="Close"],
+        button[aria-label*="Star"] {
+            width: 28px !important;
+            height: 28px !important;
+            padding: 4px !important;
+            border-radius: 6px !important;
+            background: rgba(40, 40, 55, 0.9) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .ticket-header button:hover,
+        button[title*="Close"]:hover,
+        button[title*="Star"]:hover {
+            background: rgba(60, 60, 80, 0.95) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        /* 4. COMPACT DETAIL CARDS - Customer info, Created, Last Updated, Outcome */
+        .detail-card {
+            padding: 10px 12px !important;
+            margin-bottom: 8px !important;
+            border-radius: 6px !important;
+        }
+
+        .detail-card h3,
+        .detail-card h4,
+        .detail-card .font-semibold {
+            font-size: 11px !important;
+            font-weight: 500 !important;
+            color: var(--text-muted) !important;
+            margin-bottom: 2px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        .detail-card p,
+        .detail-card span,
+        .detail-card .text-gray-800,
+        .detail-card .text-gray-900 {
+            font-size: 12px !important;
+            color: var(--text-primary) !important;
+            font-weight: 400 !important;
+        }
+
+        /* Grid for Customer/Created/Last Updated - compact */
+        .grid.grid-cols-1.md\:grid-cols-3,
+        .grid.grid-cols-3 {
+            gap: 8px !important;
+        }
+
+        /* 5. FIX MESSAGE OVERLAP - Support/User messages */
+        .customer-message,
+        .support-message,
+        .message {
+            padding: 10px 14px !important;
+            margin-bottom: 8px !important;
+            max-width: 85% !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+        }
+
+        .customer-message .message-header,
+        .support-message .message-header {
+            font-size: 11px !important;
+            margin-bottom: 4px !important;
+        }
+
+        .message-content,
+        .message-body {
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+
+        /* 6. OUTCOME ASSESSMENT - Compact */
+        .outcome-section,
+        [class*="outcome"] {
+            padding: 12px 16px !important;
+        }
+
+        .outcome-section h2,
+        .outcome-section h3 {
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            margin-bottom: 10px !important;
+        }
+
+        /* Edit Outcome button - formal */
+        .outcome-section a,
+        .outcome-section button,
+        a[href*="outcome"],
+        button[class*="outcome"] {
+            font-size: 11px !important;
+            padding: 4px 10px !important;
+        }
+
+        /* 7. ACTION BUTTONS ROW - Compact */
+        .ticket-header-actions,
+        .ticket-header .flex.gap-2,
+        .ticket-header .flex.gap-3 {
+            gap: 6px !important;
+        }
+
+        .ticket-header-actions button,
+        .ticket-header-actions a {
+            padding: 5px 10px !important;
+            font-size: 11px !important;
+            border-radius: 4px !important;
+            height: auto !important;
+        }
+
+        /* ===== ADDITIONAL FIXES ===== */
+
+        /* 1. HIDE Welcome, Admin and logout button */
+        .welcome-text,
+        [class*="welcome"],
+        .text-gray-300:has(svg[class*="logout"]),
+        a[href="/logout"],
+        button[onclick*="logout"],
+        .logout-icon,
+        nav .flex.items-center.gap-2:last-child,
+        nav .flex.items-center.gap-3:last-child,
+        .user-welcome,
+        [class*="Welcome"],
+        span:contains("Welcome"),
+        .flex.items-center.gap-2:has(a[href="/logout"]) {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Hide the Welcome Admin row specifically */
+        .main-content>.flex.justify-between.items-center.mb-6,
+        .container>.flex.justify-between:first-child,
+        .flex.justify-between.items-center:has(.text-gray-300) {
+            display: none !important;
+        }
+
+        /* 2. STAR BUTTON - Gold/Yellow color */
+        .star-btn,
+        button[class*="star"],
+        button[title*="Star"],
+        button[aria-label*="star"],
+        .ticket-header button:first-of-type,
+        .ticket-header-main>.flex>button:first-child {
+            color: #fbbf24 !important;
+            background: rgba(251, 191, 36, 0.15) !important;
+            border: 1px solid rgba(251, 191, 36, 0.3) !important;
+        }
+
+        .star-btn svg,
+        button[class*="star"] svg,
+        button[title*="Star"] svg {
+            fill: #fbbf24 !important;
+            stroke: #fbbf24 !important;
+            color: #fbbf24 !important;
+        }
+
+        .star-btn:hover,
+        button[class*="star"]:hover {
+            background: rgba(251, 191, 36, 0.25) !important;
+            border-color: rgba(251, 191, 36, 0.5) !important;
+        }
+
+        /* 3. FIX DROPDOWN ARROW OVERLAP on badges */
+        .ticket-header select,
+        .ticket-header-main select,
+        select[class*="status"],
+        select[class*="priority"],
+        select.rounded-lg,
+        .ticket-header .flex select {
+            padding-right: 28px !important;
+            padding-left: 10px !important;
+            min-width: 90px !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+        }
+
+        /* Badge with dropdown - ensure text doesn't overlap arrow */
+        .ticket-header .px-3.py-1.rounded-lg,
+        .ticket-header .bg-green-100,
+        .ticket-header [class*="Low"],
+        .ticket-header [class*="Open"],
+        .ticket-header [class*="Closed"] {
+            padding-right: 8px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+        }
+
+        /* SVG chevron icons inside badges */
+        .ticket-header svg.w-4.h-4,
+        .ticket-header svg[class*="chevron"],
+        .ticket-header .flex svg {
+            width: 10px !important;
+            height: 10px !important;
+            flex-shrink: 0 !important;
+            margin-left: 4px !important;
+        }
+
+        /* 4. MESSAGE CARDS - Complete fix for layout */
+        .message,
+        .support-message,
+        .customer-message {
+            background: rgba(25, 25, 38, 0.95) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 10px !important;
+            padding: 12px 14px !important;
+            margin-bottom: 10px !important;
+            overflow: hidden !important;
+        }
+
+        /* Message header - Support Team row */
+        .message-header {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            margin-bottom: 8px !important;
+            font-size: 12px !important;
+        }
+
+        .message-header span,
+        .message-header .font-medium {
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            color: var(--text-primary) !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+        }
+
+        .message-header i {
+            font-size: 12px !important;
+        }
+
+        .message-time {
+            font-size: 10px !important;
+            color: var(--text-muted) !important;
+        }
+
+        /* INNER REPLY BOX - This is the bordered section */
+        .reply-message-box {
+            background: rgba(35, 35, 50, 0.9) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            border-radius: 6px !important;
+            padding: 10px 12px !important;
+            overflow: hidden !important;
+        }
+
+        /* Message content text - INSIDE the box */
+        .reply-message-box .message-content,
+        .message-content {
+            font-size: 12px !important;
+            line-height: 1.5 !important;
+            color: var(--text-secondary) !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Truncated message state */
+        .reply-message-box.truncated .message-content {
+            max-height: 40px !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        /* EXPAND BUTTON (Read More) - Much smaller */
+        .expand-btn,
+        .reply-message-box .expand-btn {
+            font-size: 10px !important;
+            color: #818cf8 !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            gap: 3px !important;
+            margin-top: 6px !important;
+            padding-top: 6px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+        }
+
+        .expand-btn i {
+            font-size: 8px !important;
+        }
+
+        .expand-btn:hover {
+            color: #a5b4fc !important;
+        }
+
+        /* Conversation container */
+        .conversation-container {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 8px !important;
+        }
+
+        /* Support vs Customer message differentiation */
+        .support-message {
+            border-left: 3px solid #818cf8 !important;
+        }
+
+        .customer-message {
+            border-left: 3px solid #10b981 !important;
+        }
+
+        /* Support/Customer icons */
+        .support-icon {
+            color: #818cf8 !important;
+        }
+
+        .customer-icon {
+            color: #10b981 !important;
+        }
+
         /* ===== NAVBAR - DARK THEME ===== */
         nav {
             background: rgba(10, 10, 15, 0.9) !important;
@@ -2162,10 +2554,7 @@
 
         /* Ensure main content inside app container expands properly */
         .app-container.sidebar-closed .main-content {
-            width: 100% !important;
-            max-width: 100% !important;
-            margin-right: 0 !important;
-            padding-right: 0 !important;
+            /* Width and margins handled by media queries */
         }
 
         .app-container.sidebar-open .main-content {
