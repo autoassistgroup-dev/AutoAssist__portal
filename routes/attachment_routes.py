@@ -160,9 +160,12 @@ def download_reply_attachment(reply_id, attachment_index):
         db = get_db()
         
         # Get reply
+        logger.info(f"Looking for reply with ID: {reply_id}")
         reply = db.replies.find_one({'_id': ObjectId(reply_id)})
         if not reply:
+            logger.error(f"Reply not found: {reply_id}")
             return jsonify({'error': 'Reply not found'}), 404
+        logger.info(f"Reply found, has {len(reply.get('attachments', []))} attachments")
         
         # Get attachments
         attachments = reply.get('attachments', [])
@@ -175,15 +178,18 @@ def download_reply_attachment(reply_id, attachment_index):
         # Get file data
         file_data = None
         filename = attachment.get('filename', attachment.get('fileName', 'download'))
+        logger.info(f"Attachment {attachment_index}: filename={filename}, has_data={bool(attachment.get('data'))}, has_fileData={bool(attachment.get('fileData'))}")
         
         if attachment.get('data') or attachment.get('fileData'):
             base64_data = attachment.get('data') or attachment.get('fileData')
             try:
                 file_data = base64.b64decode(base64_data)
-            except Exception:
-                pass
+                logger.info(f"Successfully decoded {len(file_data)} bytes")
+            except Exception as e:
+                logger.error(f"Failed to decode base64 data: {e}")
         
         if not file_data:
+            logger.error(f"No attachment data available for {filename}")
             return jsonify({'error': 'Attachment data not available'}), 404
         
         mime_type = get_mime_type(filename)
@@ -211,9 +217,12 @@ def preview_reply_attachment(reply_id, attachment_index):
         db = get_db()
         
         # Get reply
+        logger.info(f"[PREVIEW] Looking for reply with ID: {reply_id}")
         reply = db.replies.find_one({'_id': ObjectId(reply_id)})
         if not reply:
+            logger.error(f"[PREVIEW] Reply not found: {reply_id}")
             return jsonify({'error': 'Reply not found'}), 404
+        logger.info(f"[PREVIEW] Reply found, has {len(reply.get('attachments', []))} attachments")
         
         # Get attachments
         attachments = reply.get('attachments', [])
@@ -226,16 +235,19 @@ def preview_reply_attachment(reply_id, attachment_index):
         # Get file data
         file_data = None
         filename = attachment.get('filename', attachment.get('fileName', 'preview'))
+        logger.info(f"[PREVIEW] Attachment {attachment_index}: filename={filename}, has_data={bool(attachment.get('data'))}, has_fileData={bool(attachment.get('fileData'))}")
         
         if attachment.get('data') or attachment.get('fileData'):
             base64_data = attachment.get('data') or attachment.get('fileData')
             try:
                 import base64
                 file_data = base64.b64decode(base64_data)
-            except Exception:
-                pass
+                logger.info(f"[PREVIEW] Successfully decoded {len(file_data)} bytes")
+            except Exception as e:
+                logger.error(f"[PREVIEW] Failed to decode base64: {e}")
         
         if not file_data:
+            logger.error(f"[PREVIEW] No attachment data available for {filename}")
             return jsonify({'error': 'Attachment data not available'}), 404
         
         from utils.file_utils import get_mime_type
