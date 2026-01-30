@@ -1397,7 +1397,7 @@
             overflow-y: auto;
         }
 
-        /* ===== ATTACHMENT STYLING (~36px) ===== */
+        /* ===== ATTACHMENT STYLING (46px x 300px) ===== */
 
         /* HIDE "Attachments (x):" header completely */
         .text-xs.text-gray-500.mb-1,
@@ -1411,25 +1411,25 @@
         div.flex.flex-wrap.gap-2 {
             display: inline-flex !important;
             flex-wrap: wrap !important;
-            gap: 8px !important;
+            gap: 10px !important;
             align-items: center !important;
         }
 
-        /* Attachment cards - readable size ~36px */
+        /* Attachment cards - Large size 46px height, 300px width */
         .attachments-container .detail-card,
         .attachments-container>div,
         div[class*="bg-gray-50"][class*="border-gray-200"],
         div.flex.flex-wrap.gap-2>div {
             background: rgba(255, 255, 255, 0.05) !important;
             border: 1px solid rgba(255, 255, 255, 0.12) !important;
-            border-radius: 8px !important;
-            padding: 6px 12px !important;
+            border-radius: 10px !important;
+            padding: 8px 16px !important;
             margin: 0 !important;
-            max-width: 200px !important;
-            height: 36px !important;
+            width: 300px !important;
+            height: 46px !important;
             display: inline-flex !important;
             align-items: center !important;
-            gap: 8px !important;
+            gap: 12px !important;
         }
 
         /* Hide icon circle completely */
@@ -1451,43 +1451,44 @@
             display: none !important;
         }
 
-        /* File type icon */
+        /* File type icon - larger */
         .attachments-container i.fas,
         div[class*="bg-gray-50"] i.fas,
         div.flex.flex-wrap.gap-2 i.fas {
-            font-size: 14px !important;
+            font-size: 18px !important;
             margin: 0 !important;
             opacity: 0.9 !important;
         }
 
-        /* Filename - readable */
+        /* Filename - larger and readable */
         .attachments-container .text-xs,
         .attachments-container h4,
         .font-medium.truncate,
         div.flex.flex-wrap.gap-2 .font-medium {
-            font-size: 12px !important;
+            font-size: 14px !important;
             margin: 0 !important;
-            line-height: 1.3 !important;
-            max-width: 90px !important;
+            line-height: 1.4 !important;
+            max-width: 180px !important;
             white-space: nowrap !important;
             overflow: hidden !important;
             text-overflow: ellipsis !important;
-            color: rgba(255, 255, 255, 0.85) !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500 !important;
         }
 
-        /* Preview/Download buttons - visible icons */
+        /* Preview/Download buttons - nicely sized */
         .attachments-container button,
         div[class*="bg-gray-50"] .flex.gap-1 button,
         button[class*="bg-blue-100"],
         button[class*="bg-green-100"],
         div.flex.flex-wrap.gap-2 button {
-            background: rgba(255, 255, 255, 0.08) !important;
+            background: rgba(255, 255, 255, 0.1) !important;
             border: none !important;
-            padding: 4px !important;
-            min-width: 24px !important;
-            width: 24px !important;
-            height: 24px !important;
-            border-radius: 4px !important;
+            padding: 6px !important;
+            min-width: 28px !important;
+            width: 28px !important;
+            height: 28px !important;
+            border-radius: 6px !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -1498,14 +1499,14 @@
         .attachments-container button:hover,
         div.flex.flex-wrap.gap-2 button:hover {
             opacity: 1 !important;
-            background: rgba(99, 102, 241, 0.3) !important;
+            background: rgba(99, 102, 241, 0.4) !important;
         }
 
-        /* Button icons - visible */
+        /* Button icons - clear */
         button[class*="bg-blue-100"] i,
         button[class*="bg-green-100"] i,
         div.flex.flex-wrap.gap-2 button i {
-            font-size: 12px !important;
+            font-size: 14px !important;
         }
 
         /* Hide warranty badge */
