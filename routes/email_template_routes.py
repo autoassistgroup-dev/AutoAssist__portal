@@ -156,8 +156,7 @@ Best regards,
 Auto Assist Group Support Team"""
         
         # Get attachments (if any were uploaded/generated)
-        # Note: In the new system, we might want to check for generated documents
-        attachments = []
+        attachments = ticket.get('attachments', [])
         
         return jsonify({
             'status': 'success',
