@@ -4317,109 +4317,143 @@
             }
         }
 
-        /* ===== PROFESSIONAL SIDEBAR STYLING ===== */
-        /* Right sidebar rounded corners and professional styling */
-        .right-panel,
+        /* ===== PROFESSIONAL SIDEBAR STYLING - AGGRESSIVE OVERRIDES ===== */
+
+        /* Fix ticket header alignment - remove extra top padding */
+        .p-5.ticket-header,
+        .ticket-header.p-5,
+        [class*="ticket-header"].p-5,
+        div.p-5.ticket-header {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        /* Make ALL buttons in right sidebar TINY */
+        .right-sidebar button,
+        .sidebar button,
+        aside button,
+        [class*="right"] button,
+        .w-80 button,
+        .md\:w-80 button {
+            padding: 4px 8px !important;
+            /* Super tiny */
+            font-size: 10px !important;
+            /* Super tiny text */
+            min-height: auto !important;
+            height: auto !important;
+            line-height: 1.2 !important;
+        }
+
+        /* Specifically target those big + buttons */
+        button.text-4xl,
+        button[class*="text-4xl"],
+        button[class*="text-3xl"],
+        button[class*="text-2xl"],
+        button[class*="text-xl"] {
+            font-size: 12px !important;
+            /* Tiny plus signs */
+            padding: 4px !important;
+            width: 24px !important;
+            height: 24px !important;
+        }
+
+        /* Target Download buttons specifically */
+        button:contains("Download"),
+        button[class*="download"],
+        .download-btn,
+        button[onclick*="download"] {
+            padding: 4px 8px !important;
+            font-size: 9px !important;
+        }
+
+        /* Make all sidebar text TINY */
+        .right-sidebar,
+        .sidebar,
+        aside,
         [class*="right"],
         .w-80,
-        .md\:w-80,
-        aside {
+        .md\:w-80 {
+            font-size: 10px !important;
+        }
+
+        .right-sidebar h1,
+        .right-sidebar h2,
+        .right-sidebar h3,
+        .right-sidebar h4,
+        aside h1,
+        aside h2,
+        aside h3,
+        aside h4 {
+            font-size: 11px !important;
+            font-weight: 600 !important;
+            margin-bottom: 4px !important;
+        }
+
+        .right-sidebar p,
+        .right-sidebar span,
+        .right-sidebar div,
+        aside p,
+        aside span,
+        aside div {
+            font-size: 9px !important;
+        }
+
+        /* Rounded corners for sidebar */
+        .right-sidebar,
+        aside,
+        [class*="right-"],
+        .w-80,
+        .md\:w-80 {
             border-radius: 12px !important;
         }
 
-        /* Make sidebar sections more compact and professional */
-        .right-panel h3,
-        .right-panel h4,
-        aside h3,
-        aside h4 {
-            font-size: 0.75rem !important;
-            /* Tiny headings */
-            font-weight: 600 !important;
-            margin-bottom: 0.5rem !important;
+        /* Compact spacing */
+        .right-sidebar .mb-4,
+        .right-sidebar .mb-3,
+        .right-sidebar .mb-2,
+        aside .mb-4,
+        aside .mb-3,
+        aside .mb-2 {
+            margin-bottom: 6px !important;
         }
 
-        /* Smaller buttons in sidebar */
-        .right-panel button,
-        aside button {
-            padding: 0.375rem 0.75rem !important;
-            /* Tiny button padding */
-            font-size: 0.7rem !important;
-            /* Tiny font */
-            border-radius: 6px !important;
+        .right-sidebar .p-3,
+        .right-sidebar .p-4,
+        .right-sidebar .p-5,
+        aside .p-3,
+        aside .p-4,
+        aside .p-5 {
+            padding: 6px !important;
         }
 
-        /* Match button colors with dark theme */
-        .right-panel button:hover,
-        aside button:hover {
-            background-color: rgba(139, 92, 246, 0.15) !important;
-            color: #c4b5fd !important;
-            transform: translateY(-1px);
-            transition: all 0.2s ease;
-        }
-
-        /* Compact spacing in sidebar */
-        .right-panel .mb-4,
-        aside .mb-4 {
-            margin-bottom: 0.75rem !important;
-        }
-
-        .right-panel .p-3,
-        aside .p-3 {
-            padding: 0.5rem !important;
-        }
-
-        /* Align ticket header with sidebar - remove top margin discrepancy */
-        .ticket-header,
-        .p-5.ticket-header,
-        [class*="ticket-header"] {
-            margin-top: 0 !important;
-            padding-top: 12px !important;
-        }
-
-        /* Ensure both panels start at same vertical position */
-        .main-container>.flex,
-        .main-container>div[class*="flex"] {
-            align-items: flex-start !important;
-        }
-
-        /* Make sure grid columns align properly */
-        .grid.gap-6,
-        [class*="grid"][class*="gap"] {
-            align-items: start !important;
-        }
-
-        /* Sidebar background matching theme */
-        .right-panel,
-        aside {
-            background: var(--bg-card) !important;
-            border: 1px solid var(--glass-border) !important;
-        }
-
-        /* Compact detail cards in sidebar */
-        .right-panel .detail-card,
-        aside .detail-card {
-            padding: 0.5rem !important;
-            margin-bottom: 0.5rem !important;
-        }
-
-        /* Tiny text in sidebar */
-        .right-panel p,
-        .right-panel span,
-        aside p,
-        aside span {
-            font-size: 0.7rem !important;
-        }
-
-        /* Icons in sidebar - smaller */
-        .right-panel i,
+        /* Tiny icons */
+        .right-sidebar i,
         aside i {
-            font-size: 0.65rem !important;
+            font-size: 9px !important;
         }
 
-        /* Add subtle shadow to sidebar for depth */
-        .right-panel,
+        /* Ensure parallel alignment */
+        .parallel-container {
+            display: flex !important;
+            align-items: flex-start !important;
+            gap: 1rem !important;
+        }
+
+        .parallel-container>* {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Override any conflicting Tailwind classes */
+        .container.main-content {
+            padding-top: 0 !important;
+        }
+
+        /* Make sure both main content and sidebar start at same Y position */
+        .app-container,
+        .right-sidebar,
         aside {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            align-self: flex-start !important;
         }
     </style>
 </head>
