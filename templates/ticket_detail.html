@@ -1397,32 +1397,39 @@
             overflow-y: auto;
         }
 
-        /* ===== ULTRA-COMPACT ATTACHMENT STYLING (~20px) ===== */
+        /* ===== COMPACT ATTACHMENT STYLING (~28px) ===== */
+
+        /* HIDE "Attachments (x):" header completely */
+        .text-xs.text-gray-500.mb-1,
+        h3.text-sm.font-medium.text-gray-500.mb-2,
+        div.text-xs.text-gray-500.mb-1 {
+            display: none !important;
+        }
 
         /* Attachments container - single inline row */
         .attachments-container,
         div.flex.flex-wrap.gap-2 {
             display: inline-flex !important;
             flex-wrap: wrap !important;
-            gap: 4px !important;
+            gap: 6px !important;
             align-items: center !important;
         }
 
-        /* Attachment chips - tiny pills ~20px height */
+        /* Attachment chips - compact pills ~28px height */
         .attachments-container .detail-card,
         .attachments-container>div,
         div[class*="bg-gray-50"][class*="border-gray-200"],
         div.flex.flex-wrap.gap-2>div {
             background: rgba(255, 255, 255, 0.06) !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
-            border-radius: 10px !important;
-            padding: 2px 6px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 8px !important;
+            padding: 4px 10px !important;
             margin: 0 !important;
-            max-width: 120px !important;
-            height: 20px !important;
+            max-width: 160px !important;
+            height: 28px !important;
             display: inline-flex !important;
             align-items: center !important;
-            gap: 3px !important;
+            gap: 6px !important;
         }
 
         /* Hide icon circle completely */
@@ -1444,31 +1451,31 @@
             display: none !important;
         }
 
-        /* File icon - tiny */
+        /* File icon */
         .attachments-container i.fas,
         div[class*="bg-gray-50"] i.fas,
         div.flex.flex-wrap.gap-2 i.fas {
-            font-size: 9px !important;
-            margin: 0 2px 0 0 !important;
-            opacity: 0.7 !important;
+            font-size: 12px !important;
+            margin: 0 !important;
+            opacity: 0.8 !important;
         }
 
-        /* Filename - tiny truncated */
+        /* Filename - compact */
         .attachments-container .text-xs,
         .attachments-container h4,
         .font-medium.truncate,
         div.flex.flex-wrap.gap-2 .font-medium {
-            font-size: 9px !important;
+            font-size: 11px !important;
             margin: 0 !important;
-            line-height: 1 !important;
-            max-width: 50px !important;
+            line-height: 1.2 !important;
+            max-width: 70px !important;
             white-space: nowrap !important;
             overflow: hidden !important;
             text-overflow: ellipsis !important;
-            color: rgba(255, 255, 255, 0.7) !important;
+            color: rgba(255, 255, 255, 0.8) !important;
         }
 
-        /* Preview/Download buttons - micro icons */
+        /* Preview/Download buttons - small icons */
         .attachments-container button,
         div[class*="bg-gray-50"] .flex.gap-1 button,
         button[class*="bg-blue-100"],
@@ -1476,14 +1483,15 @@
         div.flex.flex-wrap.gap-2 button {
             background: transparent !important;
             border: none !important;
-            padding: 0 !important;
-            min-width: 12px !important;
-            width: 12px !important;
-            height: 12px !important;
+            padding: 2px !important;
+            min-width: 18px !important;
+            width: 18px !important;
+            height: 18px !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
-            opacity: 0.5 !important;
+            opacity: 0.6 !important;
+            transition: opacity 0.2s !important;
         }
 
         .attachments-container button:hover,
@@ -1491,11 +1499,11 @@
             opacity: 1 !important;
         }
 
-        /* Button icons - micro */
+        /* Button icons */
         button[class*="bg-blue-100"] i,
         button[class*="bg-green-100"] i,
         div.flex.flex-wrap.gap-2 button i {
-            font-size: 8px !important;
+            font-size: 11px !important;
         }
 
         /* Hide warranty badge in compact mode */
