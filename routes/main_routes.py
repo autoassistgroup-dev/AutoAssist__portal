@@ -299,8 +299,12 @@ def create_ticket():
     db = get_db()
     
     if request.method == 'POST':
+        # Generate ticket ID first to use in thread_id
+        ticket_id = 'M' + str(uuid.uuid4())[:5].upper()
+        
         ticket_data = {
-            'ticket_id': 'M' + str(uuid.uuid4())[:5].upper(),
+            'ticket_id': ticket_id,
+            'thread_id': f'manual_{ticket_id}',  # Ensure unique thread_id for database constraint
             'subject': request.form.get('subject', ''),
             'body': request.form.get('body', ''),
             'name': request.form.get('name', current_member.get('name', '')),
