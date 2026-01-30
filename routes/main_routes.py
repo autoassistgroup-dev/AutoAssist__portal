@@ -268,6 +268,16 @@ def ticket_detail(ticket_id):
                           vehicle_registration=ticket.get('vehicle_registration'),
                           service_date=ticket.get('service_date'),
                           claim_date=ticket.get('claim_date'),
+                          type_of_claim=ticket.get('type_of_claim'),
+                          days_between_service_claim=ticket.get('days_between_service_claim'),
+                          vhc_link=ticket.get('vhc_link'),
+                          
+                          # Checklist fields
+                          advisories_followed=ticket.get('advisories_followed'),
+                          within_warranty=ticket.get('within_warranty'),
+                          new_fault_codes=ticket.get('new_fault_codes'),
+                          dpf_light_on=ticket.get('dpf_light_on'),
+                          eml_light_on=ticket.get('eml_light_on'),
                           
                           # Technician details
                           technician_name=ticket.get('assigned_technician'),
