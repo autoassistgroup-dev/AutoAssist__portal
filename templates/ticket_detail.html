@@ -6460,7 +6460,7 @@
                     }
 
                     try {
-                        const response = await fetch('/api/common-documents');
+                        const response = await fetch('/api/common-documents', { credentials: 'include' });
                         const data = await response.json();
 
                         if (!response.ok) {
@@ -6879,7 +6879,8 @@
                             response = await fetch(`/api/common-documents/${documentId}`, {
                                 method: 'PUT',
                                 headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(documentData)
+                                body: JSON.stringify(documentData),
+                                credentials: 'include'
                             });
                         } else {
                             // Create new document with file upload (FormData)
@@ -6891,7 +6892,8 @@
 
                             response = await fetch('/api/common-documents', {
                                 method: 'POST',
-                                body: formData
+                                body: formData,
+                                credentials: 'include'
                             });
                         }
 
@@ -6928,7 +6930,8 @@
 
                     try {
                         const response = await fetch(`/api/common-documents/${documentId}`, {
-                            method: 'DELETE'
+                            method: 'DELETE',
+                            credentials: 'include'
                         });
 
                         const data = await response.json();
