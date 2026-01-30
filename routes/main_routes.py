@@ -60,18 +60,26 @@ def index():
     priority_filter = request.args.get('priority', 'All')
     search_query = request.args.get('search', '')
     
+    # Technical Director can ONLY see referred tickets
+    is_tech_director = current_member.get('role') == 'Technical Director'
+    if is_tech_director:
+        # Force status filter to only show Referred tickets
+        status_filter = 'Referred to Marc'  # Or use regex pattern in query
+    
     tickets = db.get_tickets_with_assignments(
         page=page, 
         per_page=per_page,
         status_filter=status_filter if status_filter != 'All' else None,
         priority_filter=priority_filter if priority_filter != 'All' else None,
-        search_query=search_query if search_query else None
+        search_query=search_query if search_query else None,
+        referred_only=is_tech_director  # New parameter for regex-based filtering
     )
     
     total_count = db.get_tickets_count(
         status_filter=status_filter if status_filter != 'All' else None,
         priority_filter=priority_filter if priority_filter != 'All' else None,
-        search_query=search_query if search_query else None
+        search_query=search_query if search_query else None,
+        referred_only=is_tech_director
     )
     
     total_pages = (total_count + per_page - 1) // per_page if total_count > 0 else 1
@@ -159,8 +167,11 @@ def dashboard():
     from database import get_db
     db = get_db()
     
+    # Technical Director can ONLY see referred tickets
+    is_tech_director = current_member.get('role') == 'Technical Director'
+    
     # Get base data
-    tickets = db.get_tickets_with_assignments(page=1, per_page=50)
+    tickets = db.get_tickets_with_assignments(page=1, per_page=50, referred_only=is_tech_director)
     members = db.get_all_members()
     technicians = list(db.technicians.find({"is_active": True}))
     ticket_statuses = list(db.ticket_statuses.find({"is_active": True}).sort("order", 1))
@@ -225,15 +236,52 @@ def ticket_detail(ticket_id):
     technicians = list(db.technicians.find({"is_active": True}))
     ticket_statuses = list(db.ticket_statuses.find({"is_active": True}).sort("order", 1))
     
+    is_tech_director = current_member.get('role') == 'Technical Director'
+    
+    # Format the created_at date for display
+    created_at = ticket.get('created_at')
+    if created_at:
+        if isinstance(created_at, datetime):
+            formatted_date = created_at.strftime("%b %d, %I:%M %p")
+        else:
+            try:
+                from dateutil import parser
+                parsed_date = parser.parse(str(created_at))
+                formatted_date = parsed_date.strftime("%b %d, %I:%M %p")
+            except:
+                formatted_date = str(created_at)
+    else:
+        formatted_date = 'Unknown'
+    
     return render_template('ticket_detail.html',
                           ticket=ticket,
                           replies=replies,
                           current_member=current_member,
                           current_user=current_member.get('name') or 'User',
                           current_user_role=current_member.get('role') or 'User',
+                          is_tech_director=is_tech_director,
+                          
+                          # Unpack common ticket fields for template convenience
+                          customer_title=ticket.get('customer_title'),
+                          customer_first_name=ticket.get('customer_first_name'),
+                          customer_surname=ticket.get('customer_surname'),
+                          vehicle_registration=ticket.get('vehicle_registration'),
+                          service_date=ticket.get('service_date'),
+                          claim_date=ticket.get('claim_date'),
+                          
+                          # Technician details
+                          technician_name=ticket.get('assigned_technician'),
+                          technician_id=ticket.get('technician_id') or ticket.get('assigned_technician_id'),
+                          
+                          # Outcome details
+                          outcome_category=ticket.get('outcome_category'),
+                          outcome_notes=ticket.get('outcome_notes'),
+                          revisit_carried_out=ticket.get('revisit_carried_out'),
+                          
                           members=members,
                           technicians=technicians,
-                          ticket_statuses=ticket_statuses)
+                          ticket_statuses=ticket_statuses,
+                          formatted_date=formatted_date)
 
 
 @main_bp.route('/create-ticket', methods=['GET', 'POST'])
@@ -251,8 +299,12 @@ def create_ticket():
     db = get_db()
     
     if request.method == 'POST':
+        # Generate ticket ID first to use in thread_id
+        ticket_id = 'M' + str(uuid.uuid4())[:5].upper()
+        
         ticket_data = {
-            'ticket_id': 'M' + str(uuid.uuid4())[:5].upper(),
+            'ticket_id': ticket_id,
+            'thread_id': f'manual_{ticket_id}',  # Ensure unique thread_id for database constraint
             'subject': request.form.get('subject', ''),
             'body': request.form.get('body', ''),
             'name': request.form.get('name', current_member.get('name', '')),

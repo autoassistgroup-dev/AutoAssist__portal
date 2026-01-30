@@ -114,6 +114,7 @@ class MongoDB:
             self.roles = self.db.roles  # Role management collection
             self.common_documents = self.db.common_documents  # Common documents collection
             self.common_document_metadata = self.db.common_document_metadata  # 🚀 NEW: Common document metadata collection
+            self.claim_documents = self.db.claim_documents  # Claim documents collection (receipts, photos, etc.)
             
             # Initialize database with indexes and admin user
             self.init_database()
@@ -159,6 +160,14 @@ class MongoDB:
                 self.common_document_metadata.create_index([("document_id", 1)], background=False)
             except Exception as e:
                 logging.warning(f"Could not create common document metadata indexes: {e}")
+            
+            # Claim documents indexes
+            try:
+                self.claim_documents.create_index([("ticket_id", 1)], background=False)
+                self.claim_documents.create_index([("ticket_id", 1), ("is_deleted", 1)], background=False)
+                self.claim_documents.create_index([("uploaded_at", -1)], background=False)
+            except Exception as e:
+                logging.warning(f"Could not create claim documents indexes: {e}")
                 
             self.tickets.create_index([("status", 1), ("priority", 1)], background=False)
             self.replies.create_index([("ticket_id", 1), ("created_at", 1)], background=False)
@@ -293,13 +302,18 @@ class MongoDB:
             logging.error(f"[DATABASE] Error during has_unread_reply migration: {e}")
             return False
 
-    def get_tickets_with_assignments(self, page=1, per_page=20, status_filter=None, priority_filter=None, search_query=None):
+    def get_tickets_with_assignments(self, page=1, per_page=20, status_filter=None, priority_filter=None, search_query=None, referred_only=False):
         """Get tickets with assignment information and technician data - PAGINATED VERSION"""
         try:
             # Build match stage for filtering
             match_stage = {}
-            if status_filter and status_filter != 'All':
+            
+            # Technical Director filtering - only show referred tickets
+            if referred_only:
+                match_stage["status"] = {"$regex": "Referred", "$options": "i"}
+            elif status_filter and status_filter != 'All':
                 match_stage["status"] = status_filter
+                
             if priority_filter and priority_filter != 'All':
                 match_stage["priority"] = priority_filter
             if search_query:
@@ -464,13 +478,18 @@ class MongoDB:
             logging.error(f"[DATABASE] Unexpected error getting tickets: {e}")
             return []
     
-    def get_tickets_count(self, status_filter=None, priority_filter=None, search_query=None):
+    def get_tickets_count(self, status_filter=None, priority_filter=None, search_query=None, referred_only=False):
         """Get total count of tickets for pagination"""
         try:
             # Build match stage for filtering (same as get_tickets_with_assignments)
             match_stage = {}
-            if status_filter and status_filter != 'All':
+            
+            # Technical Director filtering - only count referred tickets
+            if referred_only:
+                match_stage["status"] = {"$regex": "Referred", "$options": "i"}
+            elif status_filter and status_filter != 'All':
                 match_stage["status"] = status_filter
+                
             if priority_filter and priority_filter != 'All':
                 match_stage["priority"] = priority_filter
             if search_query:

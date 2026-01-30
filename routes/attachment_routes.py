@@ -197,3 +197,56 @@ def download_reply_attachment(reply_id, attachment_index):
     except Exception as e:
         logger.error(f"Error downloading reply attachment: {e}")
         return jsonify({'error': str(e)}), 500
+
+
+@attachment_bp.route('/reply/<reply_id>/<int:attachment_index>/preview', methods=['GET'])
+def preview_reply_attachment(reply_id, attachment_index):
+    """Preview attachment from a specific reply inline."""
+    try:
+        if not is_authenticated():
+            return jsonify({'error': 'Authentication required'}), 401
+        
+        from database import get_db
+        from bson.objectid import ObjectId
+        db = get_db()
+        
+        # Get reply
+        reply = db.replies.find_one({'_id': ObjectId(reply_id)})
+        if not reply:
+            return jsonify({'error': 'Reply not found'}), 404
+        
+        # Get attachments
+        attachments = reply.get('attachments', [])
+        
+        if attachment_index < 0 or attachment_index >= len(attachments):
+            return jsonify({'error': 'Attachment not found'}), 404
+        
+        attachment = attachments[attachment_index]
+        
+        # Get file data
+        file_data = None
+        filename = attachment.get('filename', attachment.get('fileName', 'preview'))
+        
+        if attachment.get('data') or attachment.get('fileData'):
+            base64_data = attachment.get('data') or attachment.get('fileData')
+            try:
+                import base64
+                file_data = base64.b64decode(base64_data)
+            except Exception:
+                pass
+        
+        if not file_data:
+            return jsonify({'error': 'Attachment data not available'}), 404
+        
+        from utils.file_utils import get_mime_type
+        mime_type = get_mime_type(filename)
+        
+        response = make_response(file_data)
+        response.headers['Content-Type'] = mime_type
+        response.headers['Content-Disposition'] = f'inline; filename="{filename}"'
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"Error previewing reply attachment: {e}")
+        return jsonify({'error': str(e)}), 500

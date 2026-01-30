@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -64,6 +64,38 @@
             scroll-behavior: auto !important;
         }
 
+        /* ===== CUSTOM SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 20, 30, 0.6);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(100, 100, 120, 0.6);
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(130, 130, 150, 0.8);
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: rgba(20, 20, 30, 0.6);
+        }
+
+        /* Firefox scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(100, 100, 120, 0.6) rgba(20, 20, 30, 0.6);
+        }
+
+
         /* ===== GLOBAL STYLES ===== */
         body {
             font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
@@ -77,9 +109,126 @@
         }
 
 
-        /* ===== PAGE LAYOUT - No navbar, content starts from top ===== */
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background: #1c1c26;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px 24px;
+        }
+
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 8px 48px;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 11px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .nav-link-active {
+            background: rgba(255, 117, 143, 0.15);
+            border-color: rgba(255, 117, 143, 0.3);
+            color: #ff758f;
+        }
+
+        .nav-link i {
+            margin-right: 6px;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        /* ===== USER AVATAR ===== */
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255, 117, 143, 0.15);
+            border: 1px solid rgba(255, 117, 143, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #ff758f;
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            padding: 16px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 16px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .menu-btn {
+            display: none;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-links.desktop {
+                display: none;
+            }
+        }
+
+        /* Fix Main Content for Fixed Navbar */
         .container.main-content {
-            padding-top: 0 !important;
+            padding-top: 80px !important;
         }
 
         /* ===== COMPACT STYLING FIXES ===== */
@@ -674,66 +823,39 @@
             max-width: 75% !important;
         }
 
-        /* Standardized Expand Button for replies - Neutral colors */
+        /* Standardized Expand Button for replies */
         .expand-btn {
             display: none;
             width: fit-content;
             margin: 0.5rem 0 0 auto !important;
             padding: 0.25rem 0.75rem;
-            background: rgba(255, 255, 255, 0.08) !important;
+            background: rgba(255, 255, 255, 0.1) !important;
             border-radius: 9999px !important;
             font-size: 0.75rem !important;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.7) !important;
+            font-weight: 600;
+            color: var(--text-secondary) !important;
             cursor: pointer;
             transition: all 0.2s ease;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
             text-align: center;
         }
 
         .expand-btn:hover {
-            background: rgba(255, 255, 255, 0.12) !important;
-            border-color: rgba(255, 255, 255, 0.2) !important;
+            background: rgba(79, 70, 229, 0.2) !important;
+            border-color: rgba(79, 70, 229, 0.3) !important;
             color: white !important;
         }
 
-        /* Reply message content - 3 line truncation */
-        .reply-message-box .message-content {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            line-height: 1.5;
-        }
-
-        .reply-message-box.expanded .message-content {
-            display: block;
-            -webkit-line-clamp: unset;
-            overflow: visible;
-        }
-
         .message-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.5rem;
             margin-bottom: 0.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 0.5rem;
+            /* Subtle separator */
+            padding-bottom: 0.25rem;
         }
 
         .message-time {
-            display: inline-flex;
-            align-items: center;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.5);
-            white-space: nowrap;
-        }
-
-        .message-time i {
-            margin-right: 4px;
             font-size: 0.7rem;
+            opacity: 0.7;
         }
 
         /* ===== EMAIL TEMPLATE MODAL - DARK THEME ===== */
@@ -868,8 +990,8 @@
             display: flex !important;
             position: fixed !important;
             right: 0 !important;
-            top: 0 !important;
-            height: 100vh !important;
+            top: 10vh !important;
+            height: 90vh !important;
             width: 320px !important;
             z-index: 42 !important;
         }
@@ -1231,7 +1353,7 @@
         }
 
         .priority-low {
-            border-left-color: var(--low);
+            border-left-color: #6366f1;
         }
 
         .btn-primary {
@@ -1567,13 +1689,13 @@
         }
 
         .original-message-content {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            white-space: pre-line;
             word-break: break-word;
             overflow-wrap: break-word;
+            max-height: 200px;
+            overflow: hidden;
             position: relative;
+            hyphens: auto;
             margin-bottom: 0 !important;
             color: var(--text-primary) !important;
             font-size: 0.95rem !important;
@@ -1581,33 +1703,32 @@
         }
 
         .original-message-content.expanded {
-            display: block;
-            -webkit-line-clamp: unset;
             max-height: none !important;
-            overflow: visible;
         }
 
-        /* Standardized Read More Button - Neutral colors */
+        /* Standardized Read More Button */
         .read-more-btn {
             display: none;
             width: fit-content;
             margin: 0.75rem 0 0 auto !important;
+            /* Force to right */
             padding: 0.35rem 0.85rem;
-            background: rgba(255, 255, 255, 0.08) !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
             border-radius: 9999px !important;
             text-align: center;
             cursor: pointer;
-            color: rgba(255, 255, 255, 0.7) !important;
-            font-weight: 500;
+            color: var(--text-secondary) !important;
+            font-weight: 600;
             font-size: 0.75rem !important;
             transition: all 0.2s ease;
         }
 
         .read-more-btn:hover {
-            background: rgba(255, 255, 255, 0.12) !important;
-            border-color: rgba(255, 255, 255, 0.2) !important;
+            background: rgba(79, 70, 229, 0.2) !important;
+            border-color: rgba(79, 70, 229, 0.3) !important;
             color: white !important;
+            transform: translateY(-1px);
         }
 
         .original-message-content.truncated .read-more-btn,
@@ -1725,6 +1846,215 @@
 
         .modal-overlay.active .modal-content {
             transform: translateY(0);
+        }
+
+        /* Vehicle & Claim Modal Specific Styles */
+        #vehicleClaimModal .modal-content {
+            width: 800px;
+            max-width: 95%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 0;
+        }
+
+        #vehicleClaimModal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        #vehicleClaimModal .modal-body {
+            padding: 1.5rem;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        #vehicleClaimModal .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        #vehicleClaimModal .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        #vehicleClaimModal .section-title i {
+            font-size: 1rem;
+        }
+
+        #vehicleClaimModal .form-group {
+            margin-bottom: 1rem;
+        }
+
+        #vehicleClaimModal .form-label {
+            display: block;
+            color: #9ca3af;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        #vehicleClaimModal .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            padding-left: 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        #vehicleClaimModal .form-input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        #vehicleClaimModal .form-input::placeholder {
+            color: #6b7280;
+        }
+
+        #vehicleClaimModal .input-wrapper {
+            position: relative;
+        }
+
+        #vehicleClaimModal .input-icon {
+            position: absolute;
+            left: 0.875rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        #vehicleClaimModal .section-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #vehicleClaimModal .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 0.75rem;
+        }
+
+        #vehicleClaimModal .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #vehicleClaimModal .checkbox-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        #vehicleClaimModal .checkbox-item input {
+            width: 18px;
+            height: 18px;
+            accent-color: #6366f1;
+        }
+
+        #vehicleClaimModal .checkbox-item span {
+            color: #d1d5db;
+            font-size: 0.85rem;
+        }
+
+        #vehicleClaimModal .upload-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.08));
+            border: 2px dashed rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #vehicleClaimModal .upload-zone:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.12));
+        }
+
+        #vehicleClaimModal .upload-zone i {
+            font-size: 2rem;
+            color: #818cf8;
+            margin-bottom: 0.5rem;
+        }
+
+        #vehicleClaimModal .btn-cancel {
+            padding: 0.625rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #d1d5db;
+            border: none;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #vehicleClaimModal .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        #vehicleClaimModal .btn-save {
+            padding: 0.625rem 1.5rem;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        #vehicleClaimModal .btn-save:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+        }
+
+        #vehicleClaimModal .btn-upload {
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #vehicleClaimModal .btn-upload:hover {
+            transform: translateY(-1px);
         }
 
         /* Mobile responsive improvements */
@@ -1904,7 +2234,7 @@
             width: 280px !important;
             position: fixed !important;
             right: 0 !important;
-            top: 0 !important;
+            top: 10vh !important;
             height: calc(100vh - 10vh) !important;
             background: #0f0f13 !important;
             /* Solid dark background */
@@ -2273,7 +2603,7 @@
                 transform: translateX(100%);
                 box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
                 width: 100%;
-                top: 0;
+                top: 118px;
                 max-width: 320px;
             }
 
@@ -2452,14 +2782,7 @@
             padding-right: 2rem !important;
         }
 
-        /* Ensure main content inside app container expands properly */
-        .app-container.sidebar-closed .main-content {
-            /* Width and margins handled by media queries */
-        }
 
-        .app-container.sidebar-open .main-content {
-            /* Width and margins handled by media queries */
-        }
 
         /* Smooth transition for all expandable elements */
         .main-content,
@@ -2577,7 +2900,7 @@
                 max-width: 400px !important;
                 width: 400px !important;
                 right: 0 !important;
-                top: 0 !important;
+                top: 10vh !important;
                 bottom: 0 !important;
                 height: 90vh !important;
                 border-radius: 0 !important;
@@ -3308,55 +3631,54 @@
         /* Desktop sidebar behavior - REMOVED CONFLICTING STYLES */
         /* These styles were conflicting with the main layout system */
 
-        /* ===== SIDEBAR SECTIONS - Clean glass-card style from index.html ===== */
         .sidebar-section {
-            margin-bottom: 16px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 16px;
-            transition: all 0.2s ease;
+            margin-bottom: 0;
+            background: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0;
+            padding: 20px 0;
+            box-shadow: none;
+            transition: none;
         }
 
         .sidebar-section:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
         }
 
         .sidebar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .sidebar-title {
             font-size: 13px;
             font-weight: 600;
-            color: #fff;
-            letter-spacing: 0.2px;
+            color: var(--text-primary);
+            letter-spacing: 0.3px;
         }
 
-        /* Add button - Small, neutral styling */
         .add-btn {
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: rgba(255, 255, 255, 0.7);
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background: var(--primary);
+            color: white;
+            border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.15s ease;
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .add-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: #fff;
+            background: var(--primary-dark);
         }
 
         /* Note card styles - dark theme */
@@ -4010,7 +4332,32 @@
 
     <!-- Navigation -->
     <!-- Navigation -->
-    <!-- Navbar removed -->
+    <nav class="navbar">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="{% if current_user_role == 'Technical Director' %}/tech-director-dashboard{% else %}/{% endif %}"
+                    class="flex items-center">
+                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
+                </a>
+            </div>
+
+            <!-- User Section -->
+            <div class="flex items-center gap-3">
+                {% if current_user %}
+                <a href="/logout" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i>Logout
+                </a>
+                {% else %}
+                <a href="/login" class="nav-link">
+                    <i class="fas fa-sign-in-alt"></i>Login
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+
     <!-- Notification System -->
     <div id="notification" class="notification hidden">
         <i class="fas fa-check-circle mr-2"></i>
@@ -4067,7 +4414,8 @@
                     class="w-full px-4 py-3 border border-white/10 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white/5 text-white shadow-sm transition-all duration-200 font-medium">
                     <option value="" class="bg-[#1a1a2e] text-gray-500">Select a member...</option>
                     {% for member in members %}
-                    <option value="{{ member.id }}" class="bg-[#1a1a2e]">{{ member.name }} ({{ member.role }})</option>
+                    <option value="{{ member['_id'] }}" class="bg-[#1a1a2e]">{{ member.name }} ({{ member.role }})
+                    </option>
                     {% endfor %}
                 </select>
             </div>
@@ -4223,6 +4571,173 @@
         </div>
     </div>
 
+    <!-- Vehicle & Claim Edit Modal -->
+    <div id="vehicleClaimModal" class="modal-overlay">
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div
+                        style="width: 44px; height: 44px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-car-side" style="color: white; font-size: 18px;"></i>
+                    </div>
+                    <div>
+                        <h3 style="color: white; font-size: 1.125rem; font-weight: 600; margin: 0;">Vehicle & Claim
+                            Information</h3>
+                        <p style="color: #9ca3af; font-size: 0.8rem; margin: 0;">Edit vehicle details and upload claim
+                            documents</p>
+                    </div>
+                </div>
+                <button id="closeVehicleClaimModal"
+                    style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-times" style="color: #9ca3af; font-size: 16px;"></i>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body">
+                <!-- Vehicle Details Section -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-car" style="color: #818cf8;"></i>
+                        <span>Vehicle Details</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                        <div class="form-group">
+                            <label class="form-label">Registration</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-id-card input-icon"></i>
+                                <input type="text" id="editVehicleRegistration" class="form-input"
+                                    placeholder="e.g., ABC 123">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Service Date</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-calendar-check input-icon"></i>
+                                <input type="date" id="editServiceDate" class="form-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Claim Date</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-calendar-alt input-icon"></i>
+                                <input type="date" id="editClaimDate" class="form-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Claim Details Section -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-clipboard-list" style="color: #a78bfa;"></i>
+                        <span>Claim Details</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                        <div class="form-group">
+                            <label class="form-label">Type of Claim</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-tag input-icon"></i>
+                                <input type="text" id="editTypeOfClaim" class="form-input"
+                                    placeholder="e.g., Warranty, Repair">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">VHC Link</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-link input-icon"></i>
+                                <input type="url" id="editVhcLink" class="form-input" placeholder="https://...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Days Between</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-clock input-icon"></i>
+                                <input type="number" id="editDaysBetween" class="form-input" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checklist Section -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i class="fas fa-tasks" style="color: #34d399;"></i>
+                        <span>Claim Checklist</span>
+                    </div>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="editAdvisoriesFollowed">
+                            <span>Advisories Followed</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="editWithinWarranty">
+                            <span>Within Warranty</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="editNewFaultCodes">
+                            <span>New Fault Codes</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="editDpfLightOn">
+                            <span>DPF Light On</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="editEmlLightOn">
+                            <span>EML Light On</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Documents Section -->
+                <div class="section-card" style="margin-bottom: 0;">
+                    <div class="section-title">
+                        <i class="fas fa-file-alt" style="color: #60a5fa;"></i>
+                        <span>Claim Documents</span>
+                        <span style="margin-left: auto; font-size: 0.7rem; color: #6b7280; font-weight: 400;">Receipts,
+                            Photos, Reports</span>
+                    </div>
+
+                    <!-- Upload Zone -->
+                    <div class="file-input-wrapper" style="margin-bottom: 12px;">
+                        <div class="upload-zone file-input-button">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span style="color: #d1d5db; font-size: 0.9rem;">Drop files here or click to upload</span>
+                            <span style="color: #6b7280; font-size: 0.75rem;">PDF, DOC, JPG, PNG, XLS</span>
+                        </div>
+                        <input type="file" id="claimDocumentFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xlsx,.xls"
+                            multiple>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                        <input type="text" id="claimDocumentDescription" class="form-input"
+                            style="padding-left: 1rem; flex: 1;" placeholder="Description (optional)">
+                        <button type="button" id="uploadClaimDocBtn" class="btn-upload">
+                            <i class="fas fa-upload" style="margin-right: 6px;"></i>Upload
+                        </button>
+                    </div>
+
+                    <!-- Existing Documents List -->
+                    <div id="claimDocumentsList" style="max-height: 100px; overflow-y: auto;">
+                        <p style="color: #6b7280; font-size: 0.85rem; text-align: center; padding: 8px 0;">No claim
+                            documents uploaded yet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button id="cancelVehicleClaim" class="btn-cancel">
+                    <i class="fas fa-times" style="margin-right: 6px;"></i>Cancel
+                </button>
+                <button id="saveVehicleClaim" class="btn-save">
+                    <i class="fas fa-save" style="margin-right: 6px;"></i>Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Assignment/Forward/Takeover Modal -->
     <div id="assignModal" class="modal-overlay">
         <div class="modal-content p-6">
@@ -4370,7 +4885,7 @@
                         <i class="fas fa-eraser mr-2"></i>Clear
                     </button>
                     <button id="sendEmail"
-                        class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors font-medium">
+                        class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium">
                         <i class="fas fa-paper-plane mr-2"></i>Send Email
                     </button>
                 </div>
@@ -4409,7 +4924,7 @@
                                     {% if ticket.priority == 'Urgent' %}bg-red-100 text-red-800
                                     {% elif ticket.priority == 'High' %}bg-orange-100 text-orange-800
                                     {% elif ticket.priority == 'Medium' %}bg-yellow-100 text-yellow-800
-                                    {% elif ticket.priority == 'Low' %}bg-purple-100 text-purple-800
+                                    {% elif ticket.priority == 'Low' %}bg-green-100 text-green-800
                                     {% else %}bg-gray-100 text-gray-800{% endif %}">
                                         <i
                                             class="fas fa-{% if ticket.priority == 'Urgent' %}exclamation-triangle{% elif ticket.priority == 'High' %}exclamation{% elif ticket.priority == 'Medium' %}circle{% else %}check{% endif %} mr-1"></i>
@@ -4433,7 +4948,8 @@
                                             data-ticket-id="{{ ticket.ticket_id }}">
                                             <option value="Urgent" {% if ticket.priority=='Urgent' %}selected{% endif
                                                 %}>🔴 Urgent</option>
-                                            <option value="High" {% if ticket.priority=='High' %}selected{% endif %}>🟠
+                                            <option value="High" {% if ticket.priority=='High' %}selected{% endif %}>
+                                                🟠
                                                 High</option>
                                             <option value="Medium" {% if ticket.priority=='Medium' %}selected{% endif
                                                 %}>🟡 Medium</option>
@@ -4681,10 +5197,19 @@
                             </div>
                         </div>
 
-                        <!-- Vehicle Information -->
-                        {% if vehicle_registration %}
+                        <!-- Vehicle Information - Always visible -->
                         <div class="mb-3">
-                            <h3 class="text-sm font-medium text-gray-500 mb-2">Vehicle & Claim Information</h3>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-500">Vehicle & Claim Information</h3>
+                                <button id="editVehicleInfoBtn"
+                                    class="text-xs text-indigo-600 hover:text-indigo-800 flex items-center gap-1 px-2 py-1 rounded hover:bg-indigo-50 transition-colors"
+                                    title="Edit Vehicle & Claim Info">
+                                    <i class="fas fa-edit"></i>
+                                    <span>Edit</span>
+                                </button>
+                            </div>
+
+                            {% if vehicle_registration or service_date or claim_date or type_of_claim %}
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 vehicle-info-grid">
                                 {% if vehicle_registration %}
                                 <div class="detail-card flex items-center">
@@ -4713,8 +5238,8 @@
 
                                 {% if claim_date %}
                                 <div class="detail-card flex items-center">
-                                    <div class="p-3 rounded-full bg-yellow-100 mr-4">
-                                        <i class="fas fa-calendar-alt text-yellow-600"></i>
+                                    <div class="p-3 rounded-full bg-green-100 mr-4">
+                                        <i class="fas fa-file-invoice text-green-600"></i>
                                     </div>
                                     <div>
                                         <h4 class="text-xs font-medium text-gray-500">Claim Date</h4>
@@ -4792,8 +5317,17 @@
                                 </div>
                                 {% endif %}
                             </div>
+                            {% else %}
+                            <!-- Empty state when no vehicle data exists -->
+                            <div class="detail-card p-4 text-center">
+                                <div class="text-gray-400 mb-2">
+                                    <i class="fas fa-car text-3xl"></i>
+                                </div>
+                                <p class="text-gray-500 text-sm">No vehicle or claim information added yet.</p>
+                                <p class="text-gray-400 text-xs mt-1">Click "Edit" to add details.</p>
+                            </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
 
                         <!-- Checklist Information -->
                         {% if advisories_followed or within_warranty or new_fault_codes or dpf_light_on or
@@ -4846,6 +5380,19 @@
                             </div>
                         </div>
                         {% endif %}
+
+                        <!-- Claim Documents Section -->
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-500 flex items-center">
+                                    <i class="fas fa-file-alt mr-2 text-indigo-500"></i>Claim Documents
+                                </h3>
+                                <span id="ticketClaimDocsCount" class="text-xs text-gray-400"></span>
+                            </div>
+                            <div id="ticketClaimDocsList" class="space-y-2">
+                                <p class="text-gray-400 text-sm text-center py-4">Loading documents...</p>
+                            </div>
+                        </div>
 
                         <!-- Enhanced Outcome Section -->
                         <div class="mb-4 bg-white border border-gray-200 rounded-lg p-4 shadow-sm outcome-section">
@@ -5230,7 +5777,7 @@
                                                 {% set can_download = attachment.type == 'file' or attachment.source
                                                 ==
                                                 'webhook_base64' or attachment.source == 'webhook' %}
-                                                {% if can_preview and can_download %}
+                                                {% if can_preview %}
                                                 <button
                                                     onclick="previewAttachment('{{ reply._id|e }}', '{{ loop.index0 }}', '{{ filename|e }}', '{{ source|e }}')"
                                                     class="bg-blue-100 hover:bg-blue-200 text-blue-600 px-1.5 py-1 rounded text-[10px] transition"
@@ -5238,14 +5785,12 @@
                                                     <i class="fas fa-eye"></i>
                                                 </button>
                                                 {% endif %}
-                                                {% if can_download %}
                                                 <button
                                                     onclick="downloadAttachment('{{ reply._id|e }}', '{{ loop.index0 }}', '{{ filename|e }}', '{{ source|e }}')"
                                                     class="bg-green-100 hover:bg-green-200 text-green-600 px-1.5 py-1 rounded text-[10px] transition"
                                                     title="Download {{ filename }}">
                                                     <i class="fas fa-download"></i>
                                                 </button>
-                                                {% endif %}
                                             </div>
                                         </div>
                                         {% elif attachment.type == 'common-document' %}
@@ -5432,6 +5977,21 @@
         {{ (attachments|default([]))|tojson|safe }}
     </script>
 
+            <script type="application/json" id="vehicle-data">
+        {
+            "vehicle_registration": {{ vehicle_registration|default('')|tojson }},
+            "service_date": {{ service_date|default('')|tojson }},
+            "claim_date": {{ claim_date|default('')|tojson }},
+            "type_of_claim": {{ type_of_claim|default('')|tojson }},
+            "vhc_link": {{ vhc_link|default('')|tojson }},
+            "days_between_service_claim": {{ days_between_service_claim|default('')|tojson }},
+            "advisories_followed": {{ 'true' if advisories_followed else 'false' }},
+            "within_warranty": {{ 'true' if within_warranty else 'false' }},
+            "new_fault_codes": {{ 'true' if new_fault_codes else 'false' }},
+            "dpf_light_on": {{ 'true' if dpf_light_on else 'false' }},
+            "eml_light_on": {{ 'true' if eml_light_on else 'false' }}
+        }
+    </script>
             <script>
 
                 let processedDocuments = new Set(); // Track all processed documents in this session
@@ -5717,6 +6277,452 @@
                     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
                 }
 
+                // ===== VEHICLE & CLAIM EDIT FUNCTIONS =====
+                const ticketId = "{{ ticket.ticket_id }}";
+
+                // Current vehicle/claim data from template
+                // Current vehicle/claim data from template
+                let currentVehicleData = {
+                    vehicle_registration: '',
+                    service_date: '',
+                    claim_date: '',
+                    type_of_claim: '',
+                    vhc_link: '',
+                    days_between_service_claim: '',
+                    advisories_followed: false,
+                    within_warranty: false,
+                    new_fault_codes: false,
+                    dpf_light_on: false,
+                    eml_light_on: false
+                };
+
+                try {
+                    const vDataElement = document.getElementById('vehicle-data');
+                    if (vDataElement) {
+                        const parsedData = JSON.parse(vDataElement.textContent);
+                        currentVehicleData = { ...currentVehicleData, ...parsedData };
+                    }
+                } catch (e) {
+                    console.error('Error parsing vehicle data:', e);
+                }
+
+                function openVehicleClaimModal() {
+                    // Populate form with current data
+                    document.getElementById('editVehicleRegistration').value = currentVehicleData.vehicle_registration;
+                    document.getElementById('editServiceDate').value = currentVehicleData.service_date;
+                    document.getElementById('editClaimDate').value = currentVehicleData.claim_date;
+                    document.getElementById('editTypeOfClaim').value = currentVehicleData.type_of_claim;
+                    document.getElementById('editVhcLink').value = currentVehicleData.vhc_link;
+                    document.getElementById('editDaysBetween').value = currentVehicleData.days_between_service_claim;
+
+                    // Checkboxes
+                    document.getElementById('editAdvisoriesFollowed').checked = currentVehicleData.advisories_followed;
+                    document.getElementById('editWithinWarranty').checked = currentVehicleData.within_warranty;
+                    document.getElementById('editNewFaultCodes').checked = currentVehicleData.new_fault_codes;
+                    document.getElementById('editDpfLightOn').checked = currentVehicleData.dpf_light_on;
+                    document.getElementById('editEmlLightOn').checked = currentVehicleData.eml_light_on;
+
+                    // Load claim documents
+                    loadClaimDocuments();
+
+                    openModal('vehicleClaimModal');
+                }
+
+                async function saveVehicleClaimInfo() {
+                    const data = {
+                        vehicle_registration: document.getElementById('editVehicleRegistration').value.trim(),
+                        service_date: document.getElementById('editServiceDate').value,
+                        claim_date: document.getElementById('editClaimDate').value,
+                        type_of_claim: document.getElementById('editTypeOfClaim').value.trim(),
+                        vhc_link: document.getElementById('editVhcLink').value.trim(),
+                        days_between_service_claim: document.getElementById('editDaysBetween').value,
+                        advisories_followed: document.getElementById('editAdvisoriesFollowed').checked,
+                        within_warranty: document.getElementById('editWithinWarranty').checked,
+                        new_fault_codes: document.getElementById('editNewFaultCodes').checked,
+                        dpf_light_on: document.getElementById('editDpfLightOn').checked,
+                        eml_light_on: document.getElementById('editEmlLightOn').checked
+                    };
+
+                    try {
+                        const response = await fetch(`/api/tickets/${ticketId}/vehicle-info`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data),
+                            credentials: 'include'
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            showNotification('Vehicle & Claim information updated successfully', 'success');
+                            closeModal('vehicleClaimModal');
+                            // Refresh the page to show updated data
+                            setTimeout(() => location.reload(), 1000);
+                        } else {
+                            showNotification(result.message || 'Failed to update', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Error saving vehicle info:', error);
+                        showNotification('Error saving vehicle information', 'error');
+                    }
+                }
+
+                async function loadClaimDocuments() {
+                    const container = document.getElementById('claimDocumentsList');
+
+                    // Helper function to get file icon based on file type
+                    function getFileIcon(fileName, fileType) {
+                        const ext = fileName.split('.').pop().toLowerCase();
+                        if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) || fileType?.startsWith('image/')) {
+                            return 'fa-file-image text-green-400';
+                        } else if (ext === 'pdf' || fileType === 'application/pdf') {
+                            return 'fa-file-pdf text-red-400';
+                        } else if (['doc', 'docx'].includes(ext) || fileType?.includes('word')) {
+                            return 'fa-file-word text-blue-400';
+                        } else if (['xls', 'xlsx'].includes(ext) || fileType?.includes('excel') || fileType?.includes('spreadsheet')) {
+                            return 'fa-file-excel text-green-500';
+                        } else {
+                            return 'fa-file text-gray-400';
+                        }
+                    }
+
+                    // Helper function to check if file is previewable
+                    function isPreviewable(fileName, fileType) {
+                        const ext = fileName.split('.').pop().toLowerCase();
+                        return ['jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf'].includes(ext) ||
+                            fileType?.startsWith('image/') ||
+                            fileType === 'application/pdf';
+                    }
+
+                    // Helper function to format file size
+                    function formatSize(bytes) {
+                        if (!bytes || bytes === 0) return '';
+                        const k = 1024;
+                        const sizes = ['B', 'KB', 'MB', 'GB'];
+                        const i = Math.floor(Math.log(bytes) / Math.log(k));
+                        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+                    }
+
+                    try {
+                        const response = await fetch(`/api/tickets/${ticketId}/claim-documents`, { credentials: 'include' });
+                        const result = await response.json();
+
+                        if (result.success && result.documents.length > 0) {
+                            container.innerHTML = result.documents.map(doc => {
+                                const iconClass = getFileIcon(doc.file_name, doc.file_type);
+                                const canPreview = isPreviewable(doc.file_name, doc.file_type);
+                                const sizeText = formatSize(doc.file_size);
+
+                                return `
+                                <div class="flex items-center justify-between p-2 bg-white/5 rounded-lg mb-2 hover:bg-white/10 transition-colors">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas ${iconClass} text-lg"></i>
+                                        <div>
+                                            <p class="text-sm text-white truncate" style="max-width: 180px;">${doc.file_name}</p>
+                                            <p class="text-xs text-gray-500">${doc.description || 'No description'}${sizeText ? ' · ' + sizeText : ''}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        ${canPreview ? `
+                                        <a href="/api/tickets/${ticketId}/claim-documents/${doc._id}/download" 
+                                           target="_blank"
+                                           class="text-purple-400 hover:text-purple-300 text-sm p-1" title="Preview">
+                                            <i class="fas fa-eye"></i>
+                                        </a>` : ''}
+                                        <a href="/api/tickets/${ticketId}/claim-documents/${doc._id}/download" 
+                                           class="text-blue-400 hover:text-blue-300 text-sm p-1" title="Download">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                        <button onclick="deleteClaimDocument('${doc._id}')" 
+                                                class="text-red-400 hover:text-red-300 text-sm p-1" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            `}).join('');
+                        } else {
+                            container.innerHTML = '<p class="text-gray-500 text-sm text-center py-2">No claim documents uploaded yet.</p>';
+                        }
+                    } catch (error) {
+                        console.error('Error loading claim documents:', error);
+                        container.innerHTML = '<p class="text-red-400 text-sm text-center py-2">Error loading documents</p>';
+                    }
+                }
+
+                async function uploadClaimDocument() {
+                    console.log('📤 uploadClaimDocument called');
+                    const fileInput = document.getElementById('claimDocumentFile');
+                    const description = document.getElementById('claimDocumentDescription').value.trim();
+
+                    console.log('📤 File input:', fileInput);
+                    console.log('📤 Files:', fileInput ? fileInput.files : 'null');
+                    console.log('📤 Files length:', fileInput ? fileInput.files.length : 'null');
+
+                    if (!fileInput.files.length) {
+                        showNotification('Please select a file to upload', 'error');
+                        return;
+                    }
+
+                    const formData = new FormData();
+                    formData.append('file', fileInput.files[0]);
+                    formData.append('description', description);
+
+                    console.log('📤 Uploading file:', fileInput.files[0].name, 'Size:', fileInput.files[0].size);
+                    console.log('📤 Ticket ID:', ticketId);
+
+                    try {
+                        const response = await fetch(`/api/tickets/${ticketId}/claim-documents`, {
+                            method: 'POST',
+                            body: formData,
+                            credentials: 'include'
+                        });
+
+                        console.log('📤 Response status:', response.status);
+                        const result = await response.json();
+                        console.log('📤 Response result:', result);
+
+                        if (result.success) {
+                            showNotification('Document uploaded successfully', 'success');
+                            fileInput.value = '';
+                            document.getElementById('claimDocumentDescription').value = '';
+
+                            // Reset upload zone text
+                            const uploadZone = document.querySelector('#vehicleClaimModal .upload-zone');
+                            if (uploadZone) {
+                                const textSpan = uploadZone.querySelector('span:first-of-type');
+                                if (textSpan) {
+                                    textSpan.textContent = 'Drop files here or click to upload';
+                                    textSpan.style.color = '#d1d5db';
+                                }
+                            }
+
+                            loadClaimDocuments(); // Refresh modal list
+                            loadTicketClaimDocs(); // Refresh main page list
+                        } else {
+                            showNotification(result.message || 'Failed to upload', 'error');
+                        }
+                    } catch (error) {
+                        console.error('❌ Error uploading document:', error);
+                        showNotification('Error uploading document', 'error');
+                    }
+                }
+
+                async function deleteClaimDocument(docId) {
+                    if (!confirm('Are you sure you want to delete this document?')) return;
+
+                    try {
+                        const response = await fetch(`/api/tickets/${ticketId}/claim-documents/${docId}`, {
+                            method: 'DELETE',
+                            credentials: 'include'
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            showNotification('Document deleted', 'success');
+                            loadClaimDocuments(); // Refresh modal list
+                            loadTicketClaimDocs(); // Refresh main page list
+                        } else {
+                            showNotification(result.message || 'Failed to delete', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Error deleting document:', error);
+                        showNotification('Error deleting document', 'error');
+                    }
+                }
+
+                // Load claim documents on main ticket page
+                async function loadTicketClaimDocs() {
+                    const container = document.getElementById('ticketClaimDocsList');
+                    const countSpan = document.getElementById('ticketClaimDocsCount');
+
+                    if (!container) return;
+
+                    // Helper function to get file icon based on file type
+                    function getFileIcon(fileName, fileType) {
+                        const ext = fileName.split('.').pop().toLowerCase();
+                        if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) || fileType?.startsWith('image/')) {
+                            return 'fa-file-image text-green-500';
+                        } else if (ext === 'pdf' || fileType === 'application/pdf') {
+                            return 'fa-file-pdf text-red-500';
+                        } else if (['doc', 'docx'].includes(ext) || fileType?.includes('word')) {
+                            return 'fa-file-word text-blue-500';
+                        } else if (['xls', 'xlsx'].includes(ext) || fileType?.includes('excel') || fileType?.includes('spreadsheet')) {
+                            return 'fa-file-excel text-green-600';
+                        } else {
+                            return 'fa-file text-gray-500';
+                        }
+                    }
+
+                    // Helper function to check if file is previewable
+                    function isPreviewable(fileName, fileType) {
+                        const ext = fileName.split('.').pop().toLowerCase();
+                        return ['jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf'].includes(ext) ||
+                            fileType?.startsWith('image/') ||
+                            fileType === 'application/pdf';
+                    }
+
+                    // Helper function to format file size
+                    function formatSize(bytes) {
+                        if (!bytes || bytes === 0) return '';
+                        const k = 1024;
+                        const sizes = ['B', 'KB', 'MB', 'GB'];
+                        const i = Math.floor(Math.log(bytes) / Math.log(k));
+                        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+                    }
+
+                    try {
+                        const response = await fetch(`/api/tickets/${ticketId}/claim-documents`, { credentials: 'include' });
+                        const result = await response.json();
+
+                        if (result.success && result.documents.length > 0) {
+                            if (countSpan) countSpan.textContent = `(${result.documents.length} file${result.documents.length > 1 ? 's' : ''})`;
+
+                            container.innerHTML = result.documents.map(doc => {
+                                const iconClass = getFileIcon(doc.file_name, doc.file_type);
+                                const canPreview = isPreviewable(doc.file_name, doc.file_type);
+                                const sizeText = formatSize(doc.file_size);
+
+                                return `
+                                <div class="detail-card flex items-center justify-between p-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="p-2 rounded-full bg-gray-100">
+                                            <i class="fas ${iconClass}"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-gray-800 font-medium">${doc.file_name}</p>
+                                            <p class="text-xs text-gray-500">${doc.description || 'No description'}${sizeText ? ' · ' + sizeText : ''}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        ${canPreview ? `
+                                        <a href="/api/tickets/${ticketId}/claim-documents/${doc._id}/download" 
+                                           target="_blank"
+                                           class="p-2 text-purple-600 hover:bg-purple-100 rounded-full transition" title="Preview">
+                                            <i class="fas fa-eye"></i>
+                                        </a>` : ''}
+                                        <a href="/api/tickets/${ticketId}/claim-documents/${doc._id}/download" 
+                                           class="p-2 text-blue-600 hover:bg-blue-100 rounded-full transition" title="Download">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            `}).join('');
+                        } else {
+                            if (countSpan) countSpan.textContent = '';
+                            container.innerHTML = `
+                                <div class="detail-card p-4 text-center">
+                                    <div class="text-gray-400 mb-2">
+                                        <i class="fas fa-folder-open text-2xl"></i>
+                                    </div>
+                                    <p class="text-gray-500 text-sm">No claim documents uploaded yet.</p>
+                                    <p class="text-gray-400 text-xs mt-1">Click "Edit" to upload documents.</p>
+                                </div>`;
+                        }
+                    } catch (error) {
+                        console.error('Error loading ticket claim documents:', error);
+                        container.innerHTML = '<p class="text-red-400 text-sm text-center py-4">Error loading documents</p>';
+                    }
+                }
+
+                // Make functions globally available for onclick handlers
+                window.deleteClaimDocument = deleteClaimDocument;
+                window.loadTicketClaimDocs = loadTicketClaimDocs;
+                window.uploadClaimDocument = uploadClaimDocument;
+                window.previewAttachment = previewAttachment;
+                window.downloadAttachment = downloadAttachment;
+                window.previewEmailAttachment = previewEmailAttachment;
+                window.downloadEmailAttachment = downloadEmailAttachment;
+                window.setupAttachmentHandlers = setupAttachmentHandlers;
+
+                // ==========================================
+                // ATTACHMENT HANDLING FUNCTIONS
+                // ==========================================
+
+                function previewAttachment(messageId, attachmentIndex, filename, source) {
+                    console.log('previewAttachment called:', { messageId, attachmentIndex, filename, source });
+                    const url = `/api/attachments/reply/${messageId}/${attachmentIndex}/preview`;
+                    console.log('Opening URL:', url);
+                    window.open(url, '_blank');
+                }
+
+                function downloadAttachment(messageId, attachmentIndex, filename, source) {
+                    console.log('downloadAttachment called:', { messageId, attachmentIndex, filename, source });
+                    const url = `/api/attachments/reply/${messageId}/${attachmentIndex}`;
+                    console.log('Downloading from URL:', url);
+                    window.location.href = url;
+                }
+
+                function previewEmailAttachment(ticketId, attachmentIndex, filename) {
+                    console.log('previewEmailAttachment called:', { ticketId, attachmentIndex, filename });
+                    const url = `/api/attachments/preview/${ticketId}/${attachmentIndex}`;
+                    console.log('Opening URL:', url);
+                    window.open(url, '_blank');
+                }
+
+                function downloadEmailAttachment(ticketId, attachmentIndex, filename) {
+                    console.log('downloadEmailAttachment called:', { ticketId, attachmentIndex, filename });
+                    const url = `/api/attachments/ticket/${ticketId}/${attachmentIndex}`;
+                    console.log('Downloading from URL:', url);
+                    window.location.href = url;
+                }
+
+                function setupAttachmentHandlers() {
+                    // This function is called in DOMContentLoaded
+                    console.log('Attachment handlers initialized');
+
+                    const dropzone = document.getElementById('replyDropzone');
+                    const fileInput = document.getElementById('response_attachments');
+
+                    if (dropzone && fileInput) {
+                        dropzone.addEventListener('click', (e) => {
+                            // Only trigger if clicking the background, not textarea or buttons
+                            if (e.target.id === 'replyDropzone' || e.target.closest('#attachmentSection')) {
+                                fileInput.click();
+                            }
+                        });
+
+                        fileInput.addEventListener('change', handleFileSelect);
+                    }
+
+                    // Also enable the generic attachment button
+                    const attachmentBtn = document.getElementById('attachmentBtn');
+                    if (attachmentBtn && fileInput) {
+                        attachmentBtn.addEventListener('click', () => fileInput.click());
+                    }
+                }
+
+                function handleFileSelect(e) {
+                    const files = e.target.files;
+                    const previewContainer = document.getElementById('enhancedAttachmentPreview');
+                    const list = document.getElementById('attachmentPreviewList');
+
+                    if (files.length > 0) {
+                        previewContainer.classList.remove('hidden');
+                        list.innerHTML = '';
+
+                        Array.from(files).forEach((file, index) => {
+                            const item = document.createElement('div');
+                            item.className = 'flex items-center justify-between text-xs bg-white/5 p-2 rounded';
+                            item.innerHTML = `
+                                <div class="flex items-center">
+                                    <i class="fas fa-file text-gray-400 mr-2"></i>
+                                    <span class="text-gray-300 truncate max-w-[200px]">${file.name}</span>
+                                </div>
+                                <span class="text-gray-500 ml-2">${(file.size / 1024).toFixed(1)} KB</span>
+                            `;
+                            list.appendChild(item);
+                        });
+
+                        // Update button counter
+                        const countBadge = document.querySelector('.attachment-count');
+                        if (countBadge) {
+                            countBadge.textContent = files.length;
+                            countBadge.classList.remove('hidden');
+                        }
+                    }
+                }
+
                 // Document functions
                 async function loadDocuments() {
 
@@ -5728,7 +6734,7 @@
                     }
 
                     try {
-                        const response = await fetch('/api/common-documents');
+                        const response = await fetch('/api/common-documents', { credentials: 'include' });
                         const data = await response.json();
 
                         if (!response.ok) {
@@ -5800,7 +6806,7 @@
                         ${doc.description ? `<p class="text-xs text-gray-400 truncate">${doc.description}</p>` : ''}
                     </div>
                     <div class="flex space-x-2">
-                       <button type="button" class="view-document-btn bg-white/10 hover:bg-white/15 text-white/80 hover:text-white px-2 py-1 rounded text-xs border border-white/10 hover:border-white/20" title="Download">
+                       <button type="button" class="view-document-btn text-blue-600 hover:text-blue-800 bg-blue-100 hover:bg-blue-200 px-2 py-1 rounded text-xs" title="Download">
                            <i class="fas fa-download mr-1"></i> Download
                         </button>
                         <button type="button" class="edit-document-btn text-gray-500 hover:text-gray-700" title="Edit">
@@ -6147,7 +7153,8 @@
                             response = await fetch(`/api/common-documents/${documentId}`, {
                                 method: 'PUT',
                                 headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(documentData)
+                                body: JSON.stringify(documentData),
+                                credentials: 'include'
                             });
                         } else {
                             // Create new document with file upload (FormData)
@@ -6159,7 +7166,8 @@
 
                             response = await fetch('/api/common-documents', {
                                 method: 'POST',
-                                body: formData
+                                body: formData,
+                                credentials: 'include'
                             });
                         }
 
@@ -6196,7 +7204,8 @@
 
                     try {
                         const response = await fetch(`/api/common-documents/${documentId}`, {
-                            method: 'DELETE'
+                            method: 'DELETE',
+                            credentials: 'include'
                         });
 
                         const data = await response.json();
@@ -6469,11 +7478,67 @@
                     initMessageBoxes();
                     loadNotes();
                     loadTemplates();
-                    loadDocuments(); // Load documents on page load
+                    loadDocuments(); // Load common documents on page load
+                    loadTicketClaimDocs(); // Load claim documents on main ticket page
                     setupStatusDropdown();
                     setupAttachmentHandlers(); // Setup attachment handling
                     setupQuickResponseDropdown(); // Setup quick response dropdown
                     initializeStatusButton(); // Initialize status button styling
+
+                    // ===== VEHICLE & CLAIM MODAL EVENT LISTENERS =====
+                    const editVehicleBtn = document.getElementById('editVehicleInfoBtn');
+                    if (editVehicleBtn) {
+                        editVehicleBtn.addEventListener('click', openVehicleClaimModal);
+                    }
+
+                    const closeVehicleClaimBtn = document.getElementById('closeVehicleClaimModal');
+                    if (closeVehicleClaimBtn) {
+                        closeVehicleClaimBtn.addEventListener('click', () => closeModal('vehicleClaimModal'));
+                    }
+
+                    const cancelVehicleClaimBtn = document.getElementById('cancelVehicleClaim');
+                    if (cancelVehicleClaimBtn) {
+                        cancelVehicleClaimBtn.addEventListener('click', () => closeModal('vehicleClaimModal'));
+                    }
+
+                    const saveVehicleClaimBtn = document.getElementById('saveVehicleClaim');
+                    if (saveVehicleClaimBtn) {
+                        saveVehicleClaimBtn.addEventListener('click', saveVehicleClaimInfo);
+                    }
+
+                    const uploadClaimDocBtn = document.getElementById('uploadClaimDocBtn');
+                    if (uploadClaimDocBtn) {
+                        uploadClaimDocBtn.addEventListener('click', uploadClaimDocument);
+                    }
+
+                    // Make upload zone clickable to trigger file input
+                    const uploadZone = document.querySelector('#vehicleClaimModal .upload-zone');
+                    const claimFileInput = document.getElementById('claimDocumentFile');
+
+                    if (uploadZone && claimFileInput) {
+                        // Style the upload zone for clickability
+                        uploadZone.style.cursor = 'pointer';
+
+                        // Click on zone triggers file input
+                        uploadZone.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            claimFileInput.click();
+                        });
+
+                        // Show selected file name
+                        claimFileInput.addEventListener('change', function () {
+                            const files = this.files;
+                            if (files.length > 0) {
+                                const fileNames = Array.from(files).map(f => f.name).join(', ');
+                                // Update the upload zone text to show selected files
+                                const textSpan = uploadZone.querySelector('span:first-of-type');
+                                if (textSpan) {
+                                    textSpan.textContent = files.length === 1 ? files[0].name : `${files.length} files selected`;
+                                    textSpan.style.color = '#10b981'; // Green color for success
+                                }
+                            }
+                        });
+                    }
 
                     // Initialize fixed-width layout for consistent appearance across screen sizes
                     adjustLayoutForScreenSize();
@@ -6686,8 +7751,8 @@
 
                             try {
                                 const requestData = {
-                                    member_id: currentUserId,
-                                    notes: '',
+                                    assigned_to: currentUserId,
+                                    note: '',
                                     is_forwarded: false,
                                     forwarded_from: null
                                 };
@@ -6697,7 +7762,8 @@
                                 const response = await fetch(`/api/tickets/${ticketId}/assign`, {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify(requestData)
+                                    body: JSON.stringify(requestData),
+                                    credentials: 'include'
                                 });
 
                                 const data = await response.json();
@@ -6829,15 +7895,10 @@
                         });
                     }
 
-                    // Forward Button - Show modal to select member
-                    const forwardBtn = document.getElementById('forwardBtn');
-                    if (forwardBtn) {
-                        forwardBtn.addEventListener('click', function () {
-                            assignModalTitle.textContent = 'Forward Ticket';
-                            forwardNotesContainer.style.display = 'block';
-                            assignModal.classList.add('active');
-                        });
-                    }
+                    // Forward Button - DUPLICATE LISTENER REMOVED
+                    // This was conflicting with the main forward modal listener at line ~9294
+                    // const forwardBtn = document.getElementById('forwardBtn');
+                    // if (forwardBtn) { ... }
 
                     // Close assign modal
                     function closeAssignModalFunc() {
@@ -6863,11 +7924,12 @@
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({
-                                        member_id: memberId,
-                                        notes: notes,
+                                        assigned_to: memberId,
+                                        note: notes,
                                         is_forwarded: true,
                                         forwarded_from: currentUserId
-                                    })
+                                    }),
+                                    credentials: 'include'
                                 });
 
                                 const data = await response.json();
@@ -7662,7 +8724,7 @@
                                 throw new Error('Document ID not found in document data');
                             }
 
-                            const response = await fetch(`/api/common-documents/${documentId}/download`);
+                            const response = await fetch(`/api/common-documents/${documentId}/download`, { credentials: 'include' });
 
                             if (!response.ok) {
                                 throw new Error(`Failed to fetch document: ${response.status} ${response.statusText}`);
@@ -7890,16 +8952,31 @@
                             if (window.currentAttachments && window.currentAttachments.length > 0) {
                                 console.log('📎 Processing attachments for submission:', window.currentAttachments.length);
 
-                                window.currentAttachments.forEach((attachment, index) => {
+                                for (let index = 0; index < window.currentAttachments.length; index++) {
+                                    const attachment = window.currentAttachments[index];
                                     if (attachment.file) {
                                         // For common documents and regular files, use the actual file
                                         formData.append(`attachment_${index}`, attachment.file);
                                         console.log(`📎 Added attachment ${index}: ${attachment.name} (${attachment.size} bytes)`);
                                     } else if (attachment.type === 'common_document' && attachment.documentId) {
-                                        // For common documents without file data, fetch it now
-                                        console.log(`📎 Common document ${index}: ${attachment.name} - will be processed by backend`);
+                                        // Missing file object - fetch binary data now
+                                        console.log(`📎 Fetching binary for common document ${index}: ${attachment.name}`);
+                                        try {
+                                            const fetchResponse = await fetch(`/api/common-documents/${attachment.documentId}/download`, { credentials: 'include' });
+                                            if (fetchResponse.ok) {
+                                                const blob = await fetchResponse.blob();
+                                                const fileName = attachment.name || 'document';
+                                                const file = new File([blob], fileName, { type: blob.type || 'application/octet-stream' });
+                                                formData.append(`attachment_${index}`, file);
+                                                console.log(`📎 Fetched and added attachment ${index}: ${fileName} (${file.size} bytes)`);
+                                            } else {
+                                                console.error(`Failed to fetch document ${attachment.documentId}: ${fetchResponse.status}`);
+                                            }
+                                        } catch (fetchError) {
+                                            console.error(`Error fetching document ${attachment.documentId}:`, fetchError);
+                                        }
                                     }
-                                });
+                                }
                             }
 
                             try {
@@ -8055,6 +9132,7 @@
                     // Make the entire text area a drop zone
                     textarea.addEventListener('dragover', function (e) {
                         e.preventDefault();
+                        e.stopPropagation();
                         textarea.classList.add('bg-gray-50');
                     });
 
@@ -8065,6 +9143,7 @@
 
                     textarea.addEventListener('drop', function (e) {
                         e.preventDefault();
+                        e.stopPropagation();
                         textarea.classList.remove('bg-gray-50');
 
                         if (e.dataTransfer.files.length > 0) {
@@ -8130,55 +9209,7 @@
                         }
                     });
 
-                    // Handle drag and drop in the dedicated dropzone
-                    if (dropzone) {
-                        dropzone.addEventListener('dragover', function (e) {
-                            e.preventDefault();
-                            dropzone.classList.add('border-indigo-500', 'bg-indigo-50');
-                        });
 
-                        dropzone.addEventListener('dragleave', function (e) {
-                            e.preventDefault();
-                            dropzone.classList.remove('border-indigo-500', 'bg-indigo-50');
-                        });
-
-                        dropzone.addEventListener('drop', function (e) {
-                            e.preventDefault();
-                            dropzone.classList.remove('border-indigo-500', 'bg-indigo-50');
-
-                            if (e.dataTransfer.files.length > 0) {
-                                console.log('📎 Files dropped in dropzone - using enhanced system');
-                                // Process files using enhanced attachment system
-                                Array.from(e.dataTransfer.files).forEach(file => {
-                                    if (isValidFile(file)) {
-                                        const attachment = {
-                                            id: generateAttachmentId(),
-                                            type: 'file',
-                                            file: file,
-                                            name: file.name,
-                                            size: file.size,
-                                            fileType: file.type || getFileTypeFromName(file.name)
-                                        };
-                                        addAttachmentToPreview(attachment);
-                                    }
-                                });
-                            } else if (e.dataTransfer.getData('text')) {
-                                try {
-                                    const docData = JSON.parse(e.dataTransfer.getData('text'));
-                                    console.log('Received dragged data in dropzone:', docData);
-
-                                    if (docData && docData.type === 'common-document') {
-                                        console.log('📄 Common document detected in second dropzone - forwarding to primary handler');
-                                        // Forward common documents to the primary handler instead of processing here
-                                        handleCommonDocumentDrop(docData);
-                                        return; // Exit early to prevent duplicate processing
-                                    }
-                                } catch (err) {
-                                    console.error('Error parsing dragged data in dropzone:', err);
-                                }
-                            }
-                        });
-                    }
 
                     // Note: makeDocumentsDraggable function removed - drag and drop is now handled directly in loadDocuments
 
@@ -8588,23 +9619,46 @@
                                 const memberId = memberSelectEl.value;
                                 const notes = notesEl.value;
 
+                                // SAFE TICKET ID handling
+                                const ticketId = "{{ ticket.ticket_id }}";
+                                console.log('🆔 Forwarding Ticket ID:', ticketId);
+
                                 // Validation
+                                console.log('👤 Selected Member ID:', memberId);
                                 if (!memberId || memberId.trim() === '' || memberId === 'Select a member...') {
+                                    console.warn('⚠️ Member validation failed');
                                     showNotification('Please select a member to forward the ticket to', 'error');
+
+                                    // VISUAL FEEDBACK
+                                    memberSelectEl.classList.add('border-red-500', 'ring-2', 'ring-red-500');
+                                    memberSelectEl.focus();
+
+                                    // Remove error class after 3 seconds or on change
+                                    setTimeout(() => {
+                                        memberSelectEl.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+                                    }, 3000);
+
+                                    memberSelectEl.addEventListener('change', function () {
+                                        memberSelectEl.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+                                    }, { once: true });
+
                                     return;
                                 }
 
                                 // Validate session member_id for forwarding
                                 const sessionMemberId = "{{ session.member_id if session.member_id else '' }}";
+                                console.log('🆔 Session Member ID:', sessionMemberId);
+
                                 if (!sessionMemberId || sessionMemberId === 'None' || sessionMemberId === 'null' || sessionMemberId === '') {
+                                    console.warn('⚠️ Session validation failed');
                                     showNotification('Session expired. Please refresh the page and log in again.', 'error');
                                     return;
                                 }
 
                                 // Prepare API request
                                 const requestBody = {
-                                    member_id: memberId.trim(),
-                                    notes: notes.trim(),
+                                    assigned_to: memberId.trim(),
+                                    note: notes.trim(),
                                     is_forwarded: true,
                                     forwarded_from: sessionMemberId
                                 };
@@ -8615,13 +9669,19 @@
                                 confirmForwardBtn.disabled = true;
                                 confirmForwardBtn.innerHTML = '⏳ Forwarding...';
 
-                                const response = await fetch(`/api/tickets/{{ ticket.ticket_id }}/assign`, {
+                                console.log('📡 Sending API request to:', `/api/tickets/${ticketId}/assign`);
+
+                                const response = await fetch(`/api/tickets/${ticketId}/assign`, {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify(requestBody)
+                                    body: JSON.stringify(requestBody),
+                                    credentials: 'include'
                                 });
 
+                                console.log('📥 Response received. Status:', response.status);
+
                                 const data = await response.json();
+                                console.log('📦 Response data:', data);
 
                                 if (response.ok && data.status === 'success') {
                                     console.log('✅ Forward SUCCESS!');
@@ -8659,7 +9719,7 @@
                                     confirmForwardBtn.innerHTML = 'Forward Ticket';
                                 }
                             } catch (error) {
-                                console.error('❌ Forward Error:', error);
+                                console.error('❌ Forward Exception:', error);
 
                                 // Reset button
                                 confirmForwardBtn.disabled = false;
@@ -9275,8 +10335,9 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
 
                             console.log('📧 EMAIL DATA:', emailData);
 
-                            // Send to API endpoint (if implemented)
-                            const response = await fetch('/api/email/send-template', {
+                            // Send to API endpoint
+                            const ticketId = '{{ ticket.ticket_id }}';
+                            const response = await fetch(`/api/tickets/${ticketId}/send-email`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',

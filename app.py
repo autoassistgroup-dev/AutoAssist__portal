@@ -91,6 +91,14 @@ def create_app(config_class=None):
             os.path.join(app.static_folder, 'favicon.ico')
         ) else ('', 204)
     
+    # N8N compatibility: /webhook/reply forwards to /api/webhook/reply
+    # The "Mail => Portal" workflow sends customer replies to this endpoint
+    @app.route('/webhook/reply', methods=['POST'])
+    def webhook_reply_alias():
+        """Forward webhook/reply to api/webhook/reply for N8N compatibility."""
+        from routes.webhook_routes import webhook_reply
+        return webhook_reply()
+    
     app.logger.info("Application initialized successfully (refactored version)")
     
     return app
