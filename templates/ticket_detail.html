@@ -4455,6 +4455,22 @@
         aside {
             align-self: flex-start !important;
         }
+
+        /* ===== VEHICLE & CLAIM MODAL PROFESSIONAL STYLING ===== */
+        #closeVehicleClaimModal:hover {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        #cancelVehicleClaim:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+
+        #saveVehicleClaim:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35) !important;
+        }
     </style>
 </head>
 
@@ -4686,23 +4702,21 @@
     <div id="vehicleClaimModal" class="modal-overlay">
         <div class="modal-content">
             <!-- Header -->
-            <div class="modal-header">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <div
-                        style="width: 44px; height: 44px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-car-side" style="color: white; font-size: 18px;"></i>
-                    </div>
+            <div class="modal-header"
+                style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-bottom: 1px solid rgba(99, 102, 241, 0.2); padding: 20px 24px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                     <div>
-                        <h3 style="color: white; font-size: 1.125rem; font-weight: 600; margin: 0;">Vehicle & Claim
-                            Information</h3>
-                        <p style="color: #9ca3af; font-size: 0.8rem; margin: 0;">Edit vehicle details and upload claim
-                            documents</p>
+                        <h3
+                            style="color: #f8fafc; font-size: 1.25rem; font-weight: 600; margin: 0; letter-spacing: -0.01em;">
+                            Vehicle & Claim Information</h3>
+                        <p style="color: #94a3b8; font-size: 0.875rem; margin: 4px 0 0 0; font-weight: 400;">Edit
+                            vehicle details and upload claim documents</p>
                     </div>
+                    <button id="closeVehicleClaimModal"
+                        style="width: 32px; height: 32px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
+                        <i class="fas fa-times" style="color: #cbd5e1; font-size: 14px;"></i>
+                    </button>
                 </div>
-                <button id="closeVehicleClaimModal"
-                    style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-times" style="color: #9ca3af; font-size: 16px;"></i>
-                </button>
             </div>
 
             <!-- Body -->
@@ -4838,12 +4852,15 @@
             </div>
 
             <!-- Footer -->
-            <div class="modal-footer">
-                <button id="cancelVehicleClaim" class="btn-cancel">
-                    <i class="fas fa-times" style="margin-right: 6px;"></i>Cancel
+            <div class="modal-footer"
+                style="background: #0f172a; border-top: 1px solid rgba(99, 102, 241, 0.15); padding: 16px 24px; display: flex; justify-content: flex-end; gap: 12px;">
+                <button id="cancelVehicleClaim"
+                    style="padding: 10px 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: #cbd5e1; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 6px;">
+                    <i class="fas fa-times" style="font-size: 12px;"></i>Cancel
                 </button>
-                <button id="saveVehicleClaim" class="btn-save">
-                    <i class="fas fa-save" style="margin-right: 6px;"></i>Save Changes
+                <button id="saveVehicleClaim"
+                    style="padding: 10px 20px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border: none; border-radius: 6px; color: #ffffff; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);">
+                    <i class="fas fa-save" style="font-size: 12px;"></i>Save Changes
                 </button>
             </div>
         </div>
