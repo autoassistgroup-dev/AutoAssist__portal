@@ -4330,34 +4330,6 @@
     </div>
     {% endif %}
 
-    <!-- Navigation -->
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="flex items-center justify-between">
-            <!-- Logo -->
-            <div class="flex items-center">
-                <a href="{% if current_user_role == 'Technical Director' %}/tech-director-dashboard{% else %}/{% endif %}"
-                    class="flex items-center">
-                    <img src="/static/logo.png" alt="AutoAssistGroup Logo" class="h-8 md:h-10">
-                </a>
-            </div>
-
-            <!-- User Section -->
-            <div class="flex items-center gap-3">
-                {% if current_user %}
-                <a href="/logout" class="nav-link">
-                    <i class="fas fa-sign-out-alt"></i>Logout
-                </a>
-                {% else %}
-                <a href="/login" class="nav-link">
-                    <i class="fas fa-sign-in-alt"></i>Login
-                </a>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
-
-
     <!-- Notification System -->
     <div id="notification" class="notification hidden">
         <i class="fas fa-check-circle mr-2"></i>
