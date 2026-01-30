@@ -302,13 +302,18 @@ class MongoDB:
             logging.error(f"[DATABASE] Error during has_unread_reply migration: {e}")
             return False
 
-    def get_tickets_with_assignments(self, page=1, per_page=20, status_filter=None, priority_filter=None, search_query=None):
+    def get_tickets_with_assignments(self, page=1, per_page=20, status_filter=None, priority_filter=None, search_query=None, referred_only=False):
         """Get tickets with assignment information and technician data - PAGINATED VERSION"""
         try:
             # Build match stage for filtering
             match_stage = {}
-            if status_filter and status_filter != 'All':
+            
+            # Technical Director filtering - only show referred tickets
+            if referred_only:
+                match_stage["status"] = {"$regex": "Referred", "$options": "i"}
+            elif status_filter and status_filter != 'All':
                 match_stage["status"] = status_filter
+                
             if priority_filter and priority_filter != 'All':
                 match_stage["priority"] = priority_filter
             if search_query:
@@ -473,13 +478,18 @@ class MongoDB:
             logging.error(f"[DATABASE] Unexpected error getting tickets: {e}")
             return []
     
-    def get_tickets_count(self, status_filter=None, priority_filter=None, search_query=None):
+    def get_tickets_count(self, status_filter=None, priority_filter=None, search_query=None, referred_only=False):
         """Get total count of tickets for pagination"""
         try:
             # Build match stage for filtering (same as get_tickets_with_assignments)
             match_stage = {}
-            if status_filter and status_filter != 'All':
+            
+            # Technical Director filtering - only count referred tickets
+            if referred_only:
+                match_stage["status"] = {"$regex": "Referred", "$options": "i"}
+            elif status_filter and status_filter != 'All':
                 match_stage["status"] = status_filter
+                
             if priority_filter and priority_filter != 'All':
                 match_stage["priority"] = priority_filter
             if search_query:

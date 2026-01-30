@@ -60,18 +60,26 @@ def index():
     priority_filter = request.args.get('priority', 'All')
     search_query = request.args.get('search', '')
     
+    # Technical Director can ONLY see referred tickets
+    is_tech_director = current_member.get('role') == 'Technical Director'
+    if is_tech_director:
+        # Force status filter to only show Referred tickets
+        status_filter = 'Referred to Marc'  # Or use regex pattern in query
+    
     tickets = db.get_tickets_with_assignments(
         page=page, 
         per_page=per_page,
         status_filter=status_filter if status_filter != 'All' else None,
         priority_filter=priority_filter if priority_filter != 'All' else None,
-        search_query=search_query if search_query else None
+        search_query=search_query if search_query else None,
+        referred_only=is_tech_director  # New parameter for regex-based filtering
     )
     
     total_count = db.get_tickets_count(
         status_filter=status_filter if status_filter != 'All' else None,
         priority_filter=priority_filter if priority_filter != 'All' else None,
-        search_query=search_query if search_query else None
+        search_query=search_query if search_query else None,
+        referred_only=is_tech_director
     )
     
     total_pages = (total_count + per_page - 1) // per_page if total_count > 0 else 1
@@ -159,8 +167,11 @@ def dashboard():
     from database import get_db
     db = get_db()
     
+    # Technical Director can ONLY see referred tickets
+    is_tech_director = current_member.get('role') == 'Technical Director'
+    
     # Get base data
-    tickets = db.get_tickets_with_assignments(page=1, per_page=50)
+    tickets = db.get_tickets_with_assignments(page=1, per_page=50, referred_only=is_tech_director)
     members = db.get_all_members()
     technicians = list(db.technicians.find({"is_active": True}))
     ticket_statuses = list(db.ticket_statuses.find({"is_active": True}).sort("order", 1))
