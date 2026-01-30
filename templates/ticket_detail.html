@@ -4567,24 +4567,51 @@
         /* Input Icons - Subtle */
         #vehicleClaimModal .input-icon {
             color: #64748b !important;
+            font-size: 11px !important;
+        }
+
+        /* Compact Section Cards */
+        #vehicleClaimModal .section-card {
+            padding: 14px !important;
+            margin-bottom: 12px !important;
+        }
+
+        #vehicleClaimModal .section-title {
+            margin-bottom: 12px !important;
+            padding-bottom: 8px !important;
+        }
+
+        #vehicleClaimModal .section-title i {
             font-size: 12px !important;
         }
 
-        /* Checkbox Grid */
+        #vehicleClaimModal .section-title span {
+            font-size: 0.8rem !important;
+        }
+
+        /* Compact Inputs */
+        #vehicleClaimModal .form-input,
+        #vehicleClaimModal input,
+        #vehicleClaimModal select {
+            padding: 8px 10px !important;
+            font-size: 0.8rem !important;
+        }
+
+        /* Checkbox Grid - SMALLER */
         #vehicleClaimModal .checkbox-grid {
             display: grid !important;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
-            gap: 12px !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 8px !important;
         }
 
         #vehicleClaimModal .checkbox-item {
             display: flex !important;
             align-items: center !important;
-            gap: 10px !important;
-            padding: 10px 14px !important;
+            gap: 6px !important;
+            padding: 6px 10px !important;
             background: rgba(15, 23, 42, 0.6) !important;
             border: 1px solid rgba(255, 255, 255, 0.06) !important;
-            border-radius: 8px !important;
+            border-radius: 6px !important;
             cursor: pointer !important;
             transition: all 0.2s ease !important;
         }
@@ -4594,24 +4621,28 @@
             border-color: rgba(99, 102, 241, 0.3) !important;
         }
 
+        /* SMALLER Checkboxes */
         #vehicleClaimModal .checkbox-item input[type="checkbox"] {
-            width: 16px !important;
-            height: 16px !important;
+            width: 12px !important;
+            height: 12px !important;
+            min-width: 12px !important;
             accent-color: #6366f1 !important;
+            margin: 0 !important;
         }
 
         #vehicleClaimModal .checkbox-item span {
             color: #cbd5e1 !important;
-            font-size: 0.8rem !important;
+            font-size: 0.7rem !important;
             font-weight: 400 !important;
+            line-height: 1.2 !important;
         }
 
-        /* Upload Zone */
+        /* Upload Zone - Compact */
         #vehicleClaimModal .upload-zone {
             background: rgba(99, 102, 241, 0.05) !important;
-            border: 2px dashed rgba(99, 102, 241, 0.3) !important;
-            border-radius: 10px !important;
-            padding: 24px !important;
+            border: 1px dashed rgba(99, 102, 241, 0.3) !important;
+            border-radius: 8px !important;
+            padding: 16px !important;
             text-align: center !important;
             cursor: pointer !important;
             transition: all 0.2s ease !important;
@@ -4624,26 +4655,30 @@
 
         #vehicleClaimModal .upload-zone i {
             color: #6366f1 !important;
-            font-size: 24px !important;
-            margin-bottom: 8px !important;
+            font-size: 18px !important;
+            margin-bottom: 4px !important;
         }
 
-        /* Footer Buttons */
+        #vehicleClaimModal .upload-zone span {
+            font-size: 0.75rem !important;
+        }
+
+        /* Footer - Compact */
         #vehicleClaimModal .modal-footer {
             background: #1a1a2e !important;
             border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
-            padding: 16px 24px !important;
+            padding: 12px 20px !important;
         }
 
-        /* Upload Button */
+        /* SMALLER Buttons */
         #vehicleClaimModal .btn-upload,
         #vehicleClaimModal #uploadClaimDocBtn {
             background: rgba(99, 102, 241, 0.15) !important;
             border: 1px solid rgba(99, 102, 241, 0.3) !important;
             color: #a5b4fc !important;
-            padding: 10px 16px !important;
-            border-radius: 8px !important;
-            font-size: 0.8rem !important;
+            padding: 6px 12px !important;
+            border-radius: 6px !important;
+            font-size: 0.7rem !important;
             font-weight: 500 !important;
             cursor: pointer !important;
             transition: all 0.2s ease !important;
@@ -4652,6 +4687,39 @@
         #vehicleClaimModal .btn-upload:hover,
         #vehicleClaimModal #uploadClaimDocBtn:hover {
             background: rgba(99, 102, 241, 0.25) !important;
+        }
+
+        /* Save/Cancel Buttons - Smaller */
+        #vehicleClaimModal #cancelVehicleClaim,
+        #vehicleClaimModal #saveVehicleClaim {
+            padding: 8px 16px !important;
+            font-size: 0.8rem !important;
+            border-radius: 6px !important;
+        }
+
+        /* File Input Styling */
+        #vehicleClaimModal .file-input-wrapper {
+            margin-bottom: 8px !important;
+        }
+
+        #vehicleClaimModal input[type="file"] {
+            font-size: 0.7rem !important;
+            padding: 4px !important;
+        }
+
+        /* Form Groups - Compact */
+        #vehicleClaimModal .form-group {
+            margin-bottom: 0 !important;
+        }
+
+        #vehicleClaimModal .form-label {
+            font-size: 0.65rem !important;
+            margin-bottom: 4px !important;
+        }
+
+        /* Grid Gap - Tighter */
+        #vehicleClaimModal [style*="grid-template-columns"] {
+            gap: 12px !important;
         }
     </style>
 </head>
