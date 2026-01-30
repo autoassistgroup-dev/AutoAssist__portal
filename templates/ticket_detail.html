@@ -5785,14 +5785,12 @@
                                                     <i class="fas fa-eye"></i>
                                                 </button>
                                                 {% endif %}
-                                                {% if can_download or not can_preview %}
                                                 <button
                                                     onclick="downloadAttachment('{{ reply._id|e }}', '{{ loop.index0 }}', '{{ filename|e }}', '{{ source|e }}')"
                                                     class="bg-green-100 hover:bg-green-200 text-green-600 px-1.5 py-1 rounded text-[10px] transition"
                                                     title="Download {{ filename }}">
                                                     <i class="fas fa-download"></i>
                                                 </button>
-                                                {% endif %}
                                             </div>
                                         </div>
                                         {% elif attachment.type == 'common-document' %}
