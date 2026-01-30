@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -2782,14 +2782,7 @@
             padding-right: 2rem !important;
         }
 
-        /* Ensure main content inside app container expands properly */
-        .app-container.sidebar-closed .main-content {
-            /* Width and margins handled by media queries */
-        }
 
-        .app-container.sidebar-open .main-content {
-            /* Width and margins handled by media queries */
-        }
 
         /* Smooth transition for all expandable elements */
         .main-content,
@@ -4954,7 +4947,8 @@
                                             data-ticket-id="{{ ticket.ticket_id }}">
                                             <option value="Urgent" {% if ticket.priority=='Urgent' %}selected{% endif
                                                 %}>🔴 Urgent</option>
-                                            <option value="High" {% if ticket.priority=='High' %}selected{% endif %}>🟠
+                                            <option value="High" {% if ticket.priority=='High' %}selected{% endif %}>
+                                                🟠
                                                 High</option>
                                             <option value="Medium" {% if ticket.priority=='Medium' %}selected{% endif
                                                 %}>🟡 Medium</option>
@@ -5971,6 +5965,21 @@
         {{ (attachments|default([]))|tojson|safe }}
     </script>
 
+            <script type="application/json" id="vehicle-data">
+        {
+            "vehicle_registration": {{ vehicle_registration|default('')|tojson }},
+            "service_date": {{ service_date|default('')|tojson }},
+            "claim_date": {{ claim_date|default('')|tojson }},
+            "type_of_claim": {{ type_of_claim|default('')|tojson }},
+            "vhc_link": {{ vhc_link|default('')|tojson }},
+            "days_between_service_claim": {{ days_between_service_claim|default('')|tojson }},
+            "advisories_followed": {{ 'true' if advisories_followed else 'false' }},
+            "within_warranty": {{ 'true' if within_warranty else 'false' }},
+            "new_fault_codes": {{ 'true' if new_fault_codes else 'false' }},
+            "dpf_light_on": {{ 'true' if dpf_light_on else 'false' }},
+            "eml_light_on": {{ 'true' if eml_light_on else 'false' }}
+        }
+    </script>
             <script>
 
                 let processedDocuments = new Set(); // Track all processed documents in this session
@@ -6260,19 +6269,30 @@
                 const ticketId = "{{ ticket.ticket_id }}";
 
                 // Current vehicle/claim data from template
-                const currentVehicleData = {
-                    vehicle_registration: "{{ vehicle_registration or '' }}",
-                    service_date: "{{ service_date or '' }}",
-                    claim_date: "{{ claim_date or '' }}",
-                    type_of_claim: "{{ type_of_claim or '' }}",
-                    vhc_link: "{{ vhc_link or '' }}",
-                    days_between_service_claim: "{{ days_between_service_claim or '' }}",
-                    advisories_followed: {% if advisories_followed %}true{% else %} false{% endif %},
-                within_warranty: {% if within_warranty %} true{% else %} false{% endif %},
-                new_fault_codes: {% if new_fault_codes %} true{% else %} false{% endif %},
-                dpf_light_on: {% if dpf_light_on %} true{% else %} false{% endif %},
-                eml_light_on: {% if eml_light_on %} true{% else %} false{% endif %}
+                // Current vehicle/claim data from template
+                let currentVehicleData = {
+                    vehicle_registration: '',
+                    service_date: '',
+                    claim_date: '',
+                    type_of_claim: '',
+                    vhc_link: '',
+                    days_between_service_claim: '',
+                    advisories_followed: false,
+                    within_warranty: false,
+                    new_fault_codes: false,
+                    dpf_light_on: false,
+                    eml_light_on: false
                 };
+
+                try {
+                    const vDataElement = document.getElementById('vehicle-data');
+                    if (vDataElement) {
+                        const parsedData = JSON.parse(vDataElement.textContent);
+                        currentVehicleData = { ...currentVehicleData, ...parsedData };
+                    }
+                } catch (e) {
+                    console.error('Error parsing vehicle data:', e);
+                }
 
                 function openVehicleClaimModal() {
                     // Populate form with current data
@@ -8628,16 +8648,31 @@
                             if (window.currentAttachments && window.currentAttachments.length > 0) {
                                 console.log('📎 Processing attachments for submission:', window.currentAttachments.length);
 
-                                window.currentAttachments.forEach((attachment, index) => {
+                                for (let index = 0; index < window.currentAttachments.length; index++) {
+                                    const attachment = window.currentAttachments[index];
                                     if (attachment.file) {
                                         // For common documents and regular files, use the actual file
                                         formData.append(`attachment_${index}`, attachment.file);
                                         console.log(`📎 Added attachment ${index}: ${attachment.name} (${attachment.size} bytes)`);
                                     } else if (attachment.type === 'common_document' && attachment.documentId) {
-                                        // For common documents without file data, fetch it now
-                                        console.log(`📎 Common document ${index}: ${attachment.name} - will be processed by backend`);
+                                        // Missing file object - fetch binary data now
+                                        console.log(`📎 Fetching binary for common document ${index}: ${attachment.name}`);
+                                        try {
+                                            const fetchResponse = await fetch(`/api/common-documents/${attachment.documentId}/download`);
+                                            if (fetchResponse.ok) {
+                                                const blob = await fetchResponse.blob();
+                                                const fileName = attachment.name || 'document';
+                                                const file = new File([blob], fileName, { type: blob.type || 'application/octet-stream' });
+                                                formData.append(`attachment_${index}`, file);
+                                                console.log(`📎 Fetched and added attachment ${index}: ${fileName} (${file.size} bytes)`);
+                                            } else {
+                                                console.error(`Failed to fetch document ${attachment.documentId}: ${fetchResponse.status}`);
+                                            }
+                                        } catch (fetchError) {
+                                            console.error(`Error fetching document ${attachment.documentId}:`, fetchError);
+                                        }
                                     }
-                                });
+                                }
                             }
 
                             try {
@@ -8793,6 +8828,7 @@
                     // Make the entire text area a drop zone
                     textarea.addEventListener('dragover', function (e) {
                         e.preventDefault();
+                        e.stopPropagation();
                         textarea.classList.add('bg-gray-50');
                     });
 
@@ -8803,6 +8839,7 @@
 
                     textarea.addEventListener('drop', function (e) {
                         e.preventDefault();
+                        e.stopPropagation();
                         textarea.classList.remove('bg-gray-50');
 
                         if (e.dataTransfer.files.length > 0) {
@@ -8868,55 +8905,7 @@
                         }
                     });
 
-                    // Handle drag and drop in the dedicated dropzone
-                    if (dropzone) {
-                        dropzone.addEventListener('dragover', function (e) {
-                            e.preventDefault();
-                            dropzone.classList.add('border-indigo-500', 'bg-indigo-50');
-                        });
 
-                        dropzone.addEventListener('dragleave', function (e) {
-                            e.preventDefault();
-                            dropzone.classList.remove('border-indigo-500', 'bg-indigo-50');
-                        });
-
-                        dropzone.addEventListener('drop', function (e) {
-                            e.preventDefault();
-                            dropzone.classList.remove('border-indigo-500', 'bg-indigo-50');
-
-                            if (e.dataTransfer.files.length > 0) {
-                                console.log('📎 Files dropped in dropzone - using enhanced system');
-                                // Process files using enhanced attachment system
-                                Array.from(e.dataTransfer.files).forEach(file => {
-                                    if (isValidFile(file)) {
-                                        const attachment = {
-                                            id: generateAttachmentId(),
-                                            type: 'file',
-                                            file: file,
-                                            name: file.name,
-                                            size: file.size,
-                                            fileType: file.type || getFileTypeFromName(file.name)
-                                        };
-                                        addAttachmentToPreview(attachment);
-                                    }
-                                });
-                            } else if (e.dataTransfer.getData('text')) {
-                                try {
-                                    const docData = JSON.parse(e.dataTransfer.getData('text'));
-                                    console.log('Received dragged data in dropzone:', docData);
-
-                                    if (docData && docData.type === 'common-document') {
-                                        console.log('📄 Common document detected in second dropzone - forwarding to primary handler');
-                                        // Forward common documents to the primary handler instead of processing here
-                                        handleCommonDocumentDrop(docData);
-                                        return; // Exit early to prevent duplicate processing
-                                    }
-                                } catch (err) {
-                                    console.error('Error parsing dragged data in dropzone:', err);
-                                }
-                            }
-                        });
-                    }
 
                     // Note: makeDocumentsDraggable function removed - drag and drop is now handled directly in loadDocuments
 
