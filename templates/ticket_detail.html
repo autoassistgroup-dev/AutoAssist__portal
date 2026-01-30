@@ -6640,22 +6640,31 @@
                 // ==========================================
 
                 function previewAttachment(messageId, attachmentIndex, filename, source) {
-                    // For Webhook/N8N attachments that are base64
-                    // We need a specific route that can decode and show them
-                    // This uses a NEW backend route we will create
-                    window.open(`/api/attachments/reply/${messageId}/${attachmentIndex}/preview`, '_blank');
+                    console.log('previewAttachment called:', { messageId, attachmentIndex, filename, source });
+                    const url = `/api/attachments/reply/${messageId}/${attachmentIndex}/preview`;
+                    console.log('Opening URL:', url);
+                    window.open(url, '_blank');
                 }
 
                 function downloadAttachment(messageId, attachmentIndex, filename, source) {
-                    window.location.href = `/api/attachments/reply/${messageId}/${attachmentIndex}`;
+                    console.log('downloadAttachment called:', { messageId, attachmentIndex, filename, source });
+                    const url = `/api/attachments/reply/${messageId}/${attachmentIndex}`;
+                    console.log('Downloading from URL:', url);
+                    window.location.href = url;
                 }
 
                 function previewEmailAttachment(ticketId, attachmentIndex, filename) {
-                    window.open(`/api/attachments/preview/${ticketId}/${attachmentIndex}`, '_blank');
+                    console.log('previewEmailAttachment called:', { ticketId, attachmentIndex, filename });
+                    const url = `/api/attachments/preview/${ticketId}/${attachmentIndex}`;
+                    console.log('Opening URL:', url);
+                    window.open(url, '_blank');
                 }
 
                 function downloadEmailAttachment(ticketId, attachmentIndex, filename) {
-                    window.location.href = `/api/attachments/ticket/${ticketId}/${attachmentIndex}`;
+                    console.log('downloadEmailAttachment called:', { ticketId, attachmentIndex, filename });
+                    const url = `/api/attachments/ticket/${ticketId}/${attachmentIndex}`;
+                    console.log('Downloading from URL:', url);
+                    window.location.href = url;
                 }
 
                 function setupAttachmentHandlers() {
