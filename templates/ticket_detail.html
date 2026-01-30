@@ -5381,6 +5381,19 @@
                         </div>
                         {% endif %}
 
+                        <!-- Claim Documents Section -->
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-500 flex items-center">
+                                    <i class="fas fa-file-alt mr-2 text-indigo-500"></i>Claim Documents
+                                </h3>
+                                <span id="ticketClaimDocsCount" class="text-xs text-gray-400"></span>
+                            </div>
+                            <div id="ticketClaimDocsList" class="space-y-2">
+                                <p class="text-gray-400 text-sm text-center py-4">Loading documents...</p>
+                            </div>
+                        </div>
+
                         <!-- Enhanced Outcome Section -->
                         <div class="mb-4 bg-white border border-gray-200 rounded-lg p-4 shadow-sm outcome-section">
                             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-3">
@@ -6359,38 +6372,82 @@
                 async function loadClaimDocuments() {
                     const container = document.getElementById('claimDocumentsList');
 
+                    // Helper function to get file icon based on file type
+                    function getFileIcon(fileName, fileType) {
+                        const ext = fileName.split('.').pop().toLowerCase();
+                        if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) || fileType?.startsWith('image/')) {
+                            return 'fa-file-image text-green-400';
+                        } else if (ext === 'pdf' || fileType === 'application/pdf') {
+                            return 'fa-file-pdf text-red-400';
+                        } else if (['doc', 'docx'].includes(ext) || fileType?.includes('word')) {
+                            return 'fa-file-word text-blue-400';
+                        } else if (['xls', 'xlsx'].includes(ext) || fileType?.includes('excel') || fileType?.includes('spreadsheet')) {
+                            return 'fa-file-excel text-green-500';
+                        } else {
+                            return 'fa-file text-gray-400';
+                        }
+                    }
+
+                    // Helper function to check if file is previewable
+                    function isPreviewable(fileName, fileType) {
+                        const ext = fileName.split('.').pop().toLowerCase();
+                        return ['jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf'].includes(ext) ||
+                            fileType?.startsWith('image/') ||
+                            fileType === 'application/pdf';
+                    }
+
+                    // Helper function to format file size
+                    function formatSize(bytes) {
+                        if (!bytes || bytes === 0) return '';
+                        const k = 1024;
+                        const sizes = ['B', 'KB', 'MB', 'GB'];
+                        const i = Math.floor(Math.log(bytes) / Math.log(k));
+                        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+                    }
+
                     try {
                         const response = await fetch(`/api/tickets/${ticketId}/claim-documents`, { credentials: 'include' });
                         const result = await response.json();
 
                         if (result.success && result.documents.length > 0) {
-                            container.innerHTML = result.documents.map(doc => `
-                                <div class="flex items-center justify-between p-2 bg-white/5 rounded-lg">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fas fa-file text-gray-400"></i>
+                            container.innerHTML = result.documents.map(doc => {
+                                const iconClass = getFileIcon(doc.file_name, doc.file_type);
+                                const canPreview = isPreviewable(doc.file_name, doc.file_type);
+                                const sizeText = formatSize(doc.file_size);
+
+                                return `
+                                <div class="flex items-center justify-between p-2 bg-white/5 rounded-lg mb-2 hover:bg-white/10 transition-colors">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas ${iconClass} text-lg"></i>
                                         <div>
-                                            <p class="text-sm text-white">${doc.file_name}</p>
-                                            <p class="text-xs text-gray-500">${doc.description || 'No description'}</p>
+                                            <p class="text-sm text-white truncate" style="max-width: 180px;">${doc.file_name}</p>
+                                            <p class="text-xs text-gray-500">${doc.description || 'No description'}${sizeText ? ' · ' + sizeText : ''}</p>
                                         </div>
                                     </div>
                                     <div class="flex gap-2">
+                                        ${canPreview ? `
                                         <a href="/api/tickets/${ticketId}/claim-documents/${doc._id}/download" 
-                                           class="text-blue-400 hover:text-blue-300 text-sm" title="Download">
+                                           target="_blank"
+                                           class="text-purple-400 hover:text-purple-300 text-sm p-1" title="Preview">
+                                            <i class="fas fa-eye"></i>
+                                        </a>` : ''}
+                                        <a href="/api/tickets/${ticketId}/claim-documents/${doc._id}/download" 
+                                           class="text-blue-400 hover:text-blue-300 text-sm p-1" title="Download">
                                             <i class="fas fa-download"></i>
                                         </a>
                                         <button onclick="deleteClaimDocument('${doc._id}')" 
-                                                class="text-red-400 hover:text-red-300 text-sm" title="Delete">
+                                                class="text-red-400 hover:text-red-300 text-sm p-1" title="Delete">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
                                 </div>
-                            `).join('');
+                            `}).join('');
                         } else {
-                            container.innerHTML = '<p class="text-gray-500 text-sm">No claim documents uploaded yet.</p>';
+                            container.innerHTML = '<p class="text-gray-500 text-sm text-center py-2">No claim documents uploaded yet.</p>';
                         }
                     } catch (error) {
                         console.error('Error loading claim documents:', error);
-                        container.innerHTML = '<p class="text-red-400 text-sm">Error loading documents</p>';
+                        container.innerHTML = '<p class="text-red-400 text-sm text-center py-2">Error loading documents</p>';
                     }
                 }
 
@@ -6430,7 +6487,19 @@
                             showNotification('Document uploaded successfully', 'success');
                             fileInput.value = '';
                             document.getElementById('claimDocumentDescription').value = '';
-                            loadClaimDocuments();
+
+                            // Reset upload zone text
+                            const uploadZone = document.querySelector('#vehicleClaimModal .upload-zone');
+                            if (uploadZone) {
+                                const textSpan = uploadZone.querySelector('span:first-of-type');
+                                if (textSpan) {
+                                    textSpan.textContent = 'Drop files here or click to upload';
+                                    textSpan.style.color = '#d1d5db';
+                                }
+                            }
+
+                            loadClaimDocuments(); // Refresh modal list
+                            loadTicketClaimDocs(); // Refresh main page list
                         } else {
                             showNotification(result.message || 'Failed to upload', 'error');
                         }
@@ -6453,13 +6522,197 @@
 
                         if (result.success) {
                             showNotification('Document deleted', 'success');
-                            loadClaimDocuments();
+                            loadClaimDocuments(); // Refresh modal list
+                            loadTicketClaimDocs(); // Refresh main page list
                         } else {
                             showNotification(result.message || 'Failed to delete', 'error');
                         }
                     } catch (error) {
                         console.error('Error deleting document:', error);
                         showNotification('Error deleting document', 'error');
+                    }
+                }
+
+                // Load claim documents on main ticket page
+                async function loadTicketClaimDocs() {
+                    const container = document.getElementById('ticketClaimDocsList');
+                    const countSpan = document.getElementById('ticketClaimDocsCount');
+
+                    if (!container) return;
+
+                    // Helper function to get file icon based on file type
+                    function getFileIcon(fileName, fileType) {
+                        const ext = fileName.split('.').pop().toLowerCase();
+                        if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) || fileType?.startsWith('image/')) {
+                            return 'fa-file-image text-green-500';
+                        } else if (ext === 'pdf' || fileType === 'application/pdf') {
+                            return 'fa-file-pdf text-red-500';
+                        } else if (['doc', 'docx'].includes(ext) || fileType?.includes('word')) {
+                            return 'fa-file-word text-blue-500';
+                        } else if (['xls', 'xlsx'].includes(ext) || fileType?.includes('excel') || fileType?.includes('spreadsheet')) {
+                            return 'fa-file-excel text-green-600';
+                        } else {
+                            return 'fa-file text-gray-500';
+                        }
+                    }
+
+                    // Helper function to check if file is previewable
+                    function isPreviewable(fileName, fileType) {
+                        const ext = fileName.split('.').pop().toLowerCase();
+                        return ['jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf'].includes(ext) ||
+                            fileType?.startsWith('image/') ||
+                            fileType === 'application/pdf';
+                    }
+
+                    // Helper function to format file size
+                    function formatSize(bytes) {
+                        if (!bytes || bytes === 0) return '';
+                        const k = 1024;
+                        const sizes = ['B', 'KB', 'MB', 'GB'];
+                        const i = Math.floor(Math.log(bytes) / Math.log(k));
+                        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+                    }
+
+                    try {
+                        const response = await fetch(`/api/tickets/${ticketId}/claim-documents`, { credentials: 'include' });
+                        const result = await response.json();
+
+                        if (result.success && result.documents.length > 0) {
+                            if (countSpan) countSpan.textContent = `(${result.documents.length} file${result.documents.length > 1 ? 's' : ''})`;
+
+                            container.innerHTML = result.documents.map(doc => {
+                                const iconClass = getFileIcon(doc.file_name, doc.file_type);
+                                const canPreview = isPreviewable(doc.file_name, doc.file_type);
+                                const sizeText = formatSize(doc.file_size);
+
+                                return `
+                                <div class="detail-card flex items-center justify-between p-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="p-2 rounded-full bg-gray-100">
+                                            <i class="fas ${iconClass}"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-gray-800 font-medium">${doc.file_name}</p>
+                                            <p class="text-xs text-gray-500">${doc.description || 'No description'}${sizeText ? ' · ' + sizeText : ''}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        ${canPreview ? `
+                                        <a href="/api/tickets/${ticketId}/claim-documents/${doc._id}/download" 
+                                           target="_blank"
+                                           class="p-2 text-purple-600 hover:bg-purple-100 rounded-full transition" title="Preview">
+                                            <i class="fas fa-eye"></i>
+                                        </a>` : ''}
+                                        <a href="/api/tickets/${ticketId}/claim-documents/${doc._id}/download" 
+                                           class="p-2 text-blue-600 hover:bg-blue-100 rounded-full transition" title="Download">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            `}).join('');
+                        } else {
+                            if (countSpan) countSpan.textContent = '';
+                            container.innerHTML = `
+                                <div class="detail-card p-4 text-center">
+                                    <div class="text-gray-400 mb-2">
+                                        <i class="fas fa-folder-open text-2xl"></i>
+                                    </div>
+                                    <p class="text-gray-500 text-sm">No claim documents uploaded yet.</p>
+                                    <p class="text-gray-400 text-xs mt-1">Click "Edit" to upload documents.</p>
+                                </div>`;
+                        }
+                    } catch (error) {
+                        console.error('Error loading ticket claim documents:', error);
+                        container.innerHTML = '<p class="text-red-400 text-sm text-center py-4">Error loading documents</p>';
+                    }
+                }
+
+                // Make functions globally available for onclick handlers
+                window.deleteClaimDocument = deleteClaimDocument;
+                window.loadTicketClaimDocs = loadTicketClaimDocs;
+                window.uploadClaimDocument = uploadClaimDocument;
+                window.previewAttachment = previewAttachment;
+                window.downloadAttachment = downloadAttachment;
+                window.previewEmailAttachment = previewEmailAttachment;
+                window.downloadEmailAttachment = downloadEmailAttachment;
+                window.setupAttachmentHandlers = setupAttachmentHandlers;
+
+                // ==========================================
+                // ATTACHMENT HANDLING FUNCTIONS
+                // ==========================================
+
+                function previewAttachment(messageId, attachmentIndex, filename, source) {
+                    // For Webhook/N8N attachments that are base64
+                    // We need a specific route that can decode and show them
+                    // This uses a NEW backend route we will create
+                    window.open(`/api/attachments/reply/${messageId}/${attachmentIndex}/preview`, '_blank');
+                }
+
+                function downloadAttachment(messageId, attachmentIndex, filename, source) {
+                    window.location.href = `/api/attachments/reply/${messageId}/${attachmentIndex}`;
+                }
+
+                function previewEmailAttachment(ticketId, attachmentIndex, filename) {
+                    window.open(`/api/attachments/preview/${ticketId}/${attachmentIndex}`, '_blank');
+                }
+
+                function downloadEmailAttachment(ticketId, attachmentIndex, filename) {
+                    window.location.href = `/api/attachments/ticket/${ticketId}/${attachmentIndex}`;
+                }
+
+                function setupAttachmentHandlers() {
+                    // This function is called in DOMContentLoaded
+                    console.log('Attachment handlers initialized');
+
+                    const dropzone = document.getElementById('replyDropzone');
+                    const fileInput = document.getElementById('response_attachments');
+
+                    if (dropzone && fileInput) {
+                        dropzone.addEventListener('click', (e) => {
+                            // Only trigger if clicking the background, not textarea or buttons
+                            if (e.target.id === 'replyDropzone' || e.target.closest('#attachmentSection')) {
+                                fileInput.click();
+                            }
+                        });
+
+                        fileInput.addEventListener('change', handleFileSelect);
+                    }
+
+                    // Also enable the generic attachment button
+                    const attachmentBtn = document.getElementById('attachmentBtn');
+                    if (attachmentBtn && fileInput) {
+                        attachmentBtn.addEventListener('click', () => fileInput.click());
+                    }
+                }
+
+                function handleFileSelect(e) {
+                    const files = e.target.files;
+                    const previewContainer = document.getElementById('enhancedAttachmentPreview');
+                    const list = document.getElementById('attachmentPreviewList');
+
+                    if (files.length > 0) {
+                        previewContainer.classList.remove('hidden');
+                        list.innerHTML = '';
+
+                        Array.from(files).forEach((file, index) => {
+                            const item = document.createElement('div');
+                            item.className = 'flex items-center justify-between text-xs bg-white/5 p-2 rounded';
+                            item.innerHTML = `
+                                <div class="flex items-center">
+                                    <i class="fas fa-file text-gray-400 mr-2"></i>
+                                    <span class="text-gray-300 truncate max-w-[200px]">${file.name}</span>
+                                </div>
+                                <span class="text-gray-500 ml-2">${(file.size / 1024).toFixed(1)} KB</span>
+                            `;
+                            list.appendChild(item);
+                        });
+
+                        // Update button counter
+                        const countBadge = document.querySelector('.attachment-count');
+                        if (countBadge) {
+                            countBadge.textContent = files.length;
+                            countBadge.classList.remove('hidden');
+                        }
                     }
                 }
 
@@ -7218,7 +7471,8 @@
                     initMessageBoxes();
                     loadNotes();
                     loadTemplates();
-                    loadDocuments(); // Load documents on page load
+                    loadDocuments(); // Load common documents on page load
+                    loadTicketClaimDocs(); // Load claim documents on main ticket page
                     setupStatusDropdown();
                     setupAttachmentHandlers(); // Setup attachment handling
                     setupQuickResponseDropdown(); // Setup quick response dropdown
@@ -7248,6 +7502,35 @@
                     const uploadClaimDocBtn = document.getElementById('uploadClaimDocBtn');
                     if (uploadClaimDocBtn) {
                         uploadClaimDocBtn.addEventListener('click', uploadClaimDocument);
+                    }
+
+                    // Make upload zone clickable to trigger file input
+                    const uploadZone = document.querySelector('#vehicleClaimModal .upload-zone');
+                    const claimFileInput = document.getElementById('claimDocumentFile');
+
+                    if (uploadZone && claimFileInput) {
+                        // Style the upload zone for clickability
+                        uploadZone.style.cursor = 'pointer';
+
+                        // Click on zone triggers file input
+                        uploadZone.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            claimFileInput.click();
+                        });
+
+                        // Show selected file name
+                        claimFileInput.addEventListener('change', function () {
+                            const files = this.files;
+                            if (files.length > 0) {
+                                const fileNames = Array.from(files).map(f => f.name).join(', ');
+                                // Update the upload zone text to show selected files
+                                const textSpan = uploadZone.querySelector('span:first-of-type');
+                                if (textSpan) {
+                                    textSpan.textContent = files.length === 1 ? files[0].name : `${files.length} files selected`;
+                                    textSpan.style.color = '#10b981'; // Green color for success
+                                }
+                            }
+                        });
                     }
 
                     // Initialize fixed-width layout for consistent appearance across screen sizes
