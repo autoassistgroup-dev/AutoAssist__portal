@@ -9361,7 +9361,8 @@
                                 const response = await fetch(`/api/tickets/{{ ticket.ticket_id }}/assign`, {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify(requestBody)
+                                    body: JSON.stringify(requestBody),
+                                    credentials: 'include'
                                 });
 
                                 const data = await response.json();
