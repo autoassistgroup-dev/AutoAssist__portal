@@ -202,12 +202,57 @@ def create_ticket():
             'is_forwarded': False
         }
         
-        # Handle field mapping (create_ticket.html inputs vs DB schema)
-        # HTML inputs: subject, customer_first_name, customer_surname, email, vehicle_registration, type_of_claim, priority, technician
-        # No 'body' input in HTML form view? 
-        # HTML shows: <input type="text" name="subject">. Where is description?
-        # HTML was cut off at line 800. I need to assume there is a description/body field.
-        # But 'request.form.get' is safe.
+        # Helper function to process file
+        def process_file(file_obj):
+            if not file_obj or not file_obj.filename:
+                return None
+            try:
+                import base64
+                file_content = file_obj.read()
+                return {
+                    "filename": file_obj.filename,
+                    "contentType": file_obj.content_type,
+                    "data": base64.b64encode(file_content).decode('utf-8'),
+                    "size": len(file_content)
+                }
+            except Exception as e:
+                logger.error(f"Error processing file {file_obj.filename}: {e}")
+                return None
+
+        # Process attachments
+        attachments = []
+        has_warranty = False
+        
+        # 1. DPF Report
+        if 'dpf_report' in request.files:
+            file = request.files['dpf_report']
+            processed = process_file(file)
+            if processed:
+                attachments.append(processed)
+        
+        # 2. Warranty Form
+        if 'warranty_form' in request.files:
+            file = request.files['warranty_form']
+            processed = process_file(file)
+            if processed:
+                attachments.append(processed)
+                has_warranty = True
+        
+        # 3. Other Attachments (multiple)
+        if 'other_attachments' in request.files:
+            files = request.files.getlist('other_attachments')
+            for file in files:
+                processed = process_file(file)
+                if processed:
+                    attachments.append(processed)
+                    # Check if any is warranty form (by name)
+                    if 'warranty' in processed['filename'].lower():
+                        has_warranty = True
+
+        ticket_data['attachments'] = attachments
+        ticket_data['has_attachments'] = len(attachments) > 0
+        ticket_data['total_attachments'] = len(attachments)
+        ticket_data['has_warranty'] = has_warranty
         
         db.create_ticket(ticket_data)
         
