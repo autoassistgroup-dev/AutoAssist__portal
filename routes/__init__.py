@@ -15,6 +15,7 @@ from routes.admin_routes import admin_bp
 from routes.n8n_routes import n8n_bp
 from routes.webhook_routes import webhook_bp
 from routes.attachment_routes import attachment_bp
+from routes.reply_routes import reply_bp
 from routes.ai_routes import ai_bp
 from routes.document_routes import document_bp
 from routes.email_template_routes import email_template_bp
@@ -48,6 +49,9 @@ def register_blueprints(app):
     
     # Attachment routes
     app.register_blueprint(attachment_bp)
+    
+    # Reply routes (backwards compatibility for legacy attachment URLs)
+    app.register_blueprint(reply_bp)
     
     # Common Document routes
     from routes.common_document_routes import common_docs_bp
