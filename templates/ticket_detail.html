@@ -8420,7 +8420,7 @@
                                 throw new Error('Document ID not found in document data');
                             }
 
-                            const response = await fetch(`/api/common-documents/${documentId}/download`);
+                            const response = await fetch(`/api/common-documents/${documentId}/download`, { credentials: 'include' });
 
                             if (!response.ok) {
                                 throw new Error(`Failed to fetch document: ${response.status} ${response.statusText}`);
@@ -8658,7 +8658,7 @@
                                         // Missing file object - fetch binary data now
                                         console.log(`📎 Fetching binary for common document ${index}: ${attachment.name}`);
                                         try {
-                                            const fetchResponse = await fetch(`/api/common-documents/${attachment.documentId}/download`);
+                                            const fetchResponse = await fetch(`/api/common-documents/${attachment.documentId}/download`, { credentials: 'include' });
                                             if (fetchResponse.ok) {
                                                 const blob = await fetchResponse.blob();
                                                 const fileName = attachment.name || 'document';
