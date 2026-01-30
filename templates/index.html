@@ -1132,9 +1132,9 @@
 
                         <div class="ticket-sidebar">
                             <span class="method-badge 
-                                    {% if ticket.creation_method == 'manual' %}method-manual
+                                    {% if ticket.ticket_id and ticket.ticket_id[:1] == 'M' %}method-manual
                                     {% else %}method-email{% endif %}">
-                                {% if ticket.creation_method == 'manual' %}
+                                {% if ticket.ticket_id and ticket.ticket_id[:1] == 'M' %}
                                 <i class="fas fa-user-edit"></i> Manual
                                 {% else %}
                                 <i class="fas fa-envelope"></i> Email
