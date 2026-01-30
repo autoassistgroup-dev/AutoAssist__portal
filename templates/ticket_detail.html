@@ -4637,8 +4637,12 @@
             line-height: 1.2 !important;
         }
 
-        /* Upload Zone - Compact */
+        /* Upload Zone - Compact, Clickable Label */
         #vehicleClaimModal .upload-zone {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
             background: rgba(99, 102, 241, 0.05) !important;
             border: 1px dashed rgba(99, 102, 241, 0.3) !important;
             border-radius: 8px !important;
@@ -5074,15 +5078,15 @@
                             Photos, Reports</span>
                     </div>
 
-                    <!-- Upload Zone -->
+                    <!-- Upload Zone - Clickable -->
                     <div class="file-input-wrapper" style="margin-bottom: 12px;">
-                        <div class="upload-zone file-input-button">
+                        <label for="claimDocumentFile" class="upload-zone file-input-button" style="cursor: pointer;">
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <span style="color: #d1d5db; font-size: 0.9rem;">Drop files here or click to upload</span>
-                            <span style="color: #6b7280; font-size: 0.75rem;">PDF, DOC, JPG, PNG, XLS</span>
-                        </div>
+                            <span style="color: #d1d5db; font-size: 0.8rem;">Drop files here or click to upload</span>
+                            <span style="color: #6b7280; font-size: 0.7rem;">PDF, DOC, JPG, PNG, XLS</span>
+                        </label>
                         <input type="file" id="claimDocumentFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xlsx,.xls"
-                            multiple>
+                            multiple style="display: none;">
                     </div>
 
                     <div style="display: flex; gap: 10px; margin-bottom: 12px;">
