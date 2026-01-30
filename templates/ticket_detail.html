@@ -10045,8 +10045,9 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
 
                             console.log('📧 EMAIL DATA:', emailData);
 
-                            // Send to API endpoint (if implemented)
-                            const response = await fetch('/api/email/send-template', {
+                            // Send to API endpoint
+                            const ticketId = '{{ ticket.ticket_id }}';
+                            const response = await fetch(`/api/tickets/${ticketId}/send-email`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
