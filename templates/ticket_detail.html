@@ -5381,6 +5381,63 @@
                         </div>
                         {% endif %}
 
+                        <!-- Original Ticket Attachments Section -->
+                        {% if ticket.attachments and ticket.attachments|length > 0 %}
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-500 flex items-center">
+                                    <i class="fas fa-paperclip mr-2 text-purple-500"></i>Original Ticket Attachments
+                                </h3>
+                                <span class="text-xs text-gray-400">({{ ticket.attachments|length }})</span>
+                            </div>
+                            <div class="space-y-2">
+                                {% for attachment in ticket.attachments %}
+                                <div
+                                    class="detail-card p-3 flex items-center justify-between hover:bg-opacity-80 transition">
+                                    <div class="flex items-center flex-1 min-w-0">
+                                        {% if attachment.filename.endswith('.pdf') %}
+                                        <i class="fas fa-file-pdf text-red-500 mr-2"></i>
+                                        {% elif attachment.filename.endswith(('.jpg', '.jpeg', '.png', '.gif')) %}
+                                        <i class="fas fa-file-image text-blue-500 mr-2"></i>
+                                        {% elif attachment.filename.endswith(('.doc', '.docx')) %}
+                                        <i class="fas fa-file-word text-blue-600 mr-2"></i>
+                                        {% else %}
+                                        <i class="fas fa-file text-gray-500 mr-2"></i>
+                                        {% endif %}
+                                        <span class="text-sm text-gray-300 truncate mr-2"
+                                            title="{{ attachment.filename }}">
+                                            {{ attachment.filename }}
+                                        </span>
+                                        {% if attachment.size %}
+                                        <span class="text-xs text-gray-500">
+                                            ({{ (attachment.size / 1024) | round(1) }} KB)
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="flex gap-1 ml-2 flex-shrink-0">
+                                        {% set can_preview = attachment.filename.endswith(('.jpg', '.jpeg', '.png',
+                                        '.gif', '.pdf', '.txt', '.md')) %}
+                                        {% if can_preview %}
+                                        <button
+                                            onclick="previewTicketAttachment('{{ ticket.ticket_id|e }}', {{ loop.index0 }}, '{{ attachment.filename|e }}')"
+                                            class="bg-blue-100 hover:bg-blue-200 text-blue-600 px-1.5 py-1 rounded text-[10px] transition"
+                                            title="Preview {{ attachment.filename }}">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        {% endif %}
+                                        <button
+                                            onclick="downloadTicketAttachment('{{ ticket.ticket_id|e }}', {{ loop.index0 }}, '{{ attachment.filename|e }}')"
+                                            class="bg-green-100 hover:bg-green-200 text-green-600 px-1.5 py-1 rounded text-[10px] transition"
+                                            title="Download {{ attachment.filename }}">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
                         <!-- Claim Documents Section -->
                         <div class="mb-4">
                             <div class="flex items-center justify-between mb-2">
@@ -6633,6 +6690,8 @@
                 window.downloadAttachment = downloadAttachment;
                 window.previewEmailAttachment = previewEmailAttachment;
                 window.downloadEmailAttachment = downloadEmailAttachment;
+                window.previewTicketAttachment = previewTicketAttachment;
+                window.downloadTicketAttachment = downloadTicketAttachment;
                 window.setupAttachmentHandlers = setupAttachmentHandlers;
 
                 // ==========================================
@@ -6662,6 +6721,21 @@
 
                 function downloadEmailAttachment(ticketId, attachmentIndex, filename) {
                     console.log('downloadEmailAttachment called:', { ticketId, attachmentIndex, filename });
+                    const url = `/api/attachments/ticket/${ticketId}/${attachmentIndex}`;
+                    console.log('Downloading from URL:', url);
+                    window.location.href = url;
+                }
+
+                // Original Ticket Attachment Functions
+                function previewTicketAttachment(ticketId, attachmentIndex, filename) {
+                    console.log('previewTicketAttachment called:', { ticketId, attachmentIndex, filename });
+                    const url = `/api/attachments/preview/${ticketId}/${attachmentIndex}`;
+                    console.log('Opening URL:', url);
+                    window.open(url, '_blank');
+                }
+
+                function downloadTicketAttachment(ticketId, attachmentIndex, filename) {
+                    console.log('downloadTicketAttachment called:', { ticketId, attachmentIndex, filename });
                     const url = `/api/attachments/ticket/${ticketId}/${attachmentIndex}`;
                     console.log('Downloading from URL:', url);
                     window.location.href = url;
