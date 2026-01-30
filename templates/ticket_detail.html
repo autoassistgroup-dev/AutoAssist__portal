@@ -9328,6 +9328,10 @@
                                 const memberId = memberSelectEl.value;
                                 const notes = notesEl.value;
 
+                                // SAFE TICKET ID handling
+                                const ticketId = "{{ ticket.ticket_id }}";
+                                console.log('🆔 Forwarding Ticket ID:', ticketId);
+
                                 // Validation
                                 if (!memberId || memberId.trim() === '' || memberId === 'Select a member...') {
                                     showNotification('Please select a member to forward the ticket to', 'error');
@@ -9355,14 +9359,19 @@
                                 confirmForwardBtn.disabled = true;
                                 confirmForwardBtn.innerHTML = '⏳ Forwarding...';
 
-                                const response = await fetch(`/api/tickets/{{ ticket.ticket_id }}/assign`, {
+                                console.log('📡 Sending API request to:', `/api/tickets/${ticketId}/assign`);
+
+                                const response = await fetch(`/api/tickets/${ticketId}/assign`, {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify(requestBody),
                                     credentials: 'include'
                                 });
 
+                                console.log('📥 Response received. Status:', response.status);
+
                                 const data = await response.json();
+                                console.log('📦 Response data:', data);
 
                                 if (response.ok && data.status === 'success') {
                                     console.log('✅ Forward SUCCESS!');
@@ -9400,7 +9409,7 @@
                                     confirmForwardBtn.innerHTML = 'Forward Ticket';
                                 }
                             } catch (error) {
-                                console.error('❌ Forward Error:', error);
+                                console.error('❌ Forward Exception:', error);
 
                                 // Reset button
                                 confirmForwardBtn.disabled = false;
