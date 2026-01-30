@@ -6394,8 +6394,13 @@
                 }
 
                 async function uploadClaimDocument() {
+                    console.log('📤 uploadClaimDocument called');
                     const fileInput = document.getElementById('claimDocumentFile');
                     const description = document.getElementById('claimDocumentDescription').value.trim();
+
+                    console.log('📤 File input:', fileInput);
+                    console.log('📤 Files:', fileInput ? fileInput.files : 'null');
+                    console.log('📤 Files length:', fileInput ? fileInput.files.length : 'null');
 
                     if (!fileInput.files.length) {
                         showNotification('Please select a file to upload', 'error');
@@ -6406,6 +6411,9 @@
                     formData.append('file', fileInput.files[0]);
                     formData.append('description', description);
 
+                    console.log('📤 Uploading file:', fileInput.files[0].name, 'Size:', fileInput.files[0].size);
+                    console.log('📤 Ticket ID:', ticketId);
+
                     try {
                         const response = await fetch(`/api/tickets/${ticketId}/claim-documents`, {
                             method: 'POST',
@@ -6413,7 +6421,9 @@
                             credentials: 'include'
                         });
 
+                        console.log('📤 Response status:', response.status);
                         const result = await response.json();
+                        console.log('📤 Response result:', result);
 
                         if (result.success) {
                             showNotification('Document uploaded successfully', 'success');
@@ -6424,7 +6434,7 @@
                             showNotification(result.message || 'Failed to upload', 'error');
                         }
                     } catch (error) {
-                        console.error('Error uploading document:', error);
+                        console.error('❌ Error uploading document:', error);
                         showNotification('Error uploading document', 'error');
                     }
                 }
