@@ -6335,7 +6335,8 @@
                         const response = await fetch(`/api/tickets/${ticketId}/vehicle-info`, {
                             method: 'PUT',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(data)
+                            body: JSON.stringify(data),
+                            credentials: 'include'
                         });
 
                         const result = await response.json();
