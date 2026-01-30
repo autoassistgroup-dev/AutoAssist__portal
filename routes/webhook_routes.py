@@ -166,6 +166,21 @@ def webhook_reply():
         
         reply_id = db.create_reply(reply_data)
         
+        # Emit real-time notification for new customer reply
+        try:
+            from socket_events import emit_new_reply
+            emit_new_reply(ticket_id, {
+                'reply_id': str(reply_id),
+                'ticket_id': ticket_id,
+                'message': message,
+                'sender_name': reply_data['sender_name'],
+                'sender_type': 'customer',
+                'attachments': len(data.get('attachments', [])),
+                'created_at': datetime.now().isoformat()
+            })
+        except Exception as e:
+            logger.warning(f"Failed to emit customer reply event: {e}")
+        
         # Update ticket with unread reply flag
         db.update_ticket(ticket_id, {
             'has_unread_reply': True,

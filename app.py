@@ -27,6 +27,9 @@ from routes import register_blueprints
 # Import template filters
 from utils.template_filters import register_template_filters
 
+# Import SocketIO for real-time updates
+from socket_events import socketio, init_socketio
+
 
 def create_app(config_class=None):
     """
@@ -98,6 +101,9 @@ def create_app(config_class=None):
         """Forward webhook/reply to api/webhook/reply for N8N compatibility."""
         from routes.webhook_routes import webhook_reply
         return webhook_reply()
+    
+    # Initialize SocketIO for real-time updates
+    init_socketio(app)
     
     app.logger.info("Application initialized successfully (refactored version)")
     
@@ -186,4 +192,5 @@ if __name__ == '__main__':
 ╚══════════════════════════════════════════════════════════════╝
     """)
     
-    app.run(host='0.0.0.0', port=port, debug=debug)
+    # Use SocketIO to run the app for WebSocket support
+    socketio.run(app, host='0.0.0.0', port=port, debug=debug)

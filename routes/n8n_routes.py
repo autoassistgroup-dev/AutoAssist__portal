@@ -59,6 +59,21 @@ def n8n_email_tickets():
         
         logger.info(f"N8N ticket created: {processed.get('ticket_id')}")
         
+        # Emit real-time notification for new ticket
+        try:
+            from socket_events import emit_new_ticket
+            emit_new_ticket({
+                'ticket_id': processed.get('ticket_id'),
+                'subject': processed.get('subject', 'No Subject'),
+                'name': processed.get('name', 'Anonymous'),
+                'email': processed.get('email', ''),
+                'priority': processed.get('priority', 'Medium'),
+                'status': 'Open',
+                'created_at': processed.get('created_at').isoformat() if processed.get('created_at') else None
+            })
+        except Exception as e:
+            logger.warning(f"Failed to emit new ticket event: {e}")
+        
         return jsonify({
             'success': True,
             'message': 'Ticket created from email',

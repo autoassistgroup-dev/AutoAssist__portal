@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Socket.IO for real-time updates -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
     <style>
         /* ===== DARK PROFESSIONAL THEME ===== */
         * {
@@ -1278,6 +1280,151 @@
             currentBgIndex = 1;
             setInterval(setBackgroundImage, 60 * 60 * 1000);
         });
+
+        // ===== SOCKET.IO REAL-TIME UPDATES =====
+        (function () {
+            // Connect to Socket.IO server
+            const socket = io();
+
+            socket.on('connect', function () {
+                console.log('[SOCKET] Connected to real-time server');
+                // Join dashboard room for ticket notifications
+                socket.emit('join_dashboard');
+            });
+
+            socket.on('disconnect', function () {
+                console.log('[SOCKET] Disconnected from server');
+            });
+
+            // Listen for new tickets
+            socket.on('new_ticket', function (data) {
+                console.log('[SOCKET] New ticket received:', data);
+                showToast('New Ticket', `#${data.ticket_id}: ${data.subject}`, 'info');
+
+                // Optionally refresh the page or prepend ticket to list
+                addNewTicketToList(data);
+            });
+
+            // Toast notification function
+            function showToast(title, message, type = 'info') {
+                // Create toast container if not exists
+                let container = document.getElementById('toast-container');
+                if (!container) {
+                    container = document.createElement('div');
+                    container.id = 'toast-container';
+                    container.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;';
+                    document.body.appendChild(container);
+                }
+
+                const toast = document.createElement('div');
+                toast.className = 'toast-notification';
+                toast.style.cssText = `
+                    background: linear-gradient(135deg, rgba(30, 30, 40, 0.95), rgba(40, 40, 55, 0.95));
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(147, 51, 234, 0.4);
+                    border-radius: 12px;
+                    padding: 16px 20px;
+                    min-width: 300px;
+                    max-width: 400px;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+                    animation: slideIn 0.3s ease-out;
+                    cursor: pointer;
+                `;
+
+                const icon = type === 'info' ? 'fa-ticket-alt' : type === 'success' ? 'fa-check-circle' : 'fa-bell';
+                const iconColor = type === 'info' ? '#a855f7' : type === 'success' ? '#22c55e' : '#fbbf24';
+
+                toast.innerHTML = `
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas ${icon}" style="color: ${iconColor}; font-size: 20px; margin-top: 2px;"></i>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">${title}</div>
+                            <div style="color: rgba(255,255,255,0.7); font-size: 13px;">${message}</div>
+                        </div>
+                        <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; padding: 0;"><i class="fas fa-times"></i></button>
+                    </div>
+                `;
+
+                container.appendChild(toast);
+
+                // Auto remove after 5 seconds
+                setTimeout(() => {
+                    toast.style.animation = 'slideOut 0.3s ease-in forwards';
+                    setTimeout(() => toast.remove(), 300);
+                }, 5000);
+            }
+
+            // Add new ticket to list dynamically
+            function addNewTicketToList(ticketData) {
+                const ticketGrid = document.querySelector('.tickets-grid');
+                if (!ticketGrid) return;
+
+                // Check if ticket already exists
+                if (document.querySelector(`a[href="/ticket/${ticketData.ticket_id}"]`)) {
+                    return; // Already in list
+                }
+
+                // Create ticket card HTML
+                const priorityClass = ticketData.priority === 'Urgent' ? 'badge-urgent' :
+                    ticketData.priority === 'Fast' ? 'badge-fast' :
+                        ticketData.priority === 'Medium' ? 'badge-medium' : 'badge-low';
+                const isManual = ticketData.ticket_id && ticketData.ticket_id.charAt(0) === 'M';
+                const methodClass = isManual ? 'method-manual' : 'method-email';
+                const methodIcon = isManual ? 'fa-user-edit' : 'fa-envelope';
+                const methodText = isManual ? 'Manual' : 'Email';
+
+                const ticketCard = document.createElement('div');
+                ticketCard.className = 'ticket-card';
+                ticketCard.style.animation = 'slideIn 0.3s ease-out';
+                ticketCard.innerHTML = `
+                    <a href="/ticket/${ticketData.ticket_id}">
+                        <div class="unread-indicator"></div>
+                        <div class="ticket-content">
+                            <div class="ticket-badges">
+                                <span class="ticket-id">#${ticketData.ticket_id}</span>
+                                <span class="priority-badge ${priorityClass}">${ticketData.priority || 'Medium'}</span>
+                                <span class="status-badge status-new">New</span>
+                            </div>
+                            <h3 class="ticket-subject">${ticketData.subject || 'No Subject'}</h3>
+                            <div class="ticket-meta">
+                                <span><i class="fas fa-user"></i>${ticketData.name || 'Anonymous'}</span>
+                                <span><i class="fas fa-envelope"></i>${ticketData.email || 'No Email'}</span>
+                                <span><i class="fas fa-clock"></i>Just now</span>
+                            </div>
+                        </div>
+                        <div class="ticket-sidebar">
+                            <span class="method-badge ${methodClass}">
+                                <i class="fas ${methodIcon}"></i> ${methodText}
+                            </span>
+                        </div>
+                    </a>
+                `;
+
+                // Prepend to list (newest first)
+                ticketGrid.prepend(ticketCard);
+
+                // Update total count
+                const totalBadge = document.querySelector('.total-badge');
+                if (totalBadge) {
+                    const currentTotal = parseInt(totalBadge.textContent.replace('Total: ', '')) || 0;
+                    totalBadge.textContent = `Total: ${currentTotal + 1}`;
+                }
+            }
+
+            // Add CSS animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        })();
     </script>
 </body>
 

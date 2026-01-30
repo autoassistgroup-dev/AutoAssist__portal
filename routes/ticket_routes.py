@@ -510,6 +510,21 @@ def send_ticket_reply(ticket_id):
         
         reply_id = db.create_reply(reply_data)
         
+        # Emit real-time notification for new reply
+        try:
+            from socket_events import emit_new_reply, emit_reply_sent
+            emit_new_reply(ticket_id, {
+                'reply_id': str(reply_id),
+                'ticket_id': ticket_id,
+                'message': message,
+                'sender_name': sender_name,
+                'sender_type': 'agent',
+                'attachments': len(attachments),
+                'created_at': datetime.now().isoformat()
+            })
+        except Exception as e:
+            logger.warning(f"Failed to emit new reply event: {e}")
+        
         # Update ticket with last reply info
         db.update_ticket(ticket_id, {
             'last_reply_at': datetime.now(),
