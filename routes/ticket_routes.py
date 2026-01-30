@@ -699,10 +699,16 @@ def send_ticket_email(ticket_id):
                     'customer_name': ticket.get('customer_name', ticket.get('name', '')),
                     'priority': ticket.get('priority', 'Medium'),
                     'ticket_status': ticket.get('status', 'Waiting for Response'),
-                    'ticketSource': ticket.get('source', 'manual'),
+                    'ticketSource': 'email template',
+                    'source': 'email template',
                     'user_id': session.get('member_id'),
                     'has_attachments': len(attachments) > 0,
-                    'attachments': attachments,
+                    'attachments': [
+                        {
+                            'filename': att.get('name', att.get('filename', 'file')),
+                            'data': att.get('fileData', att.get('data', ''))
+                        } for att in attachments
+                    ],
                     'attachment_count': len(attachments),
                     'body': ticket.get('body', ''), 
                     'message': body,
