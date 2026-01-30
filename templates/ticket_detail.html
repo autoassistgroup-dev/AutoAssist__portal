@@ -4471,6 +4471,188 @@
             transform: translateY(-1px);
             box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35) !important;
         }
+
+        /* ===== VEHICLE & CLAIM MODAL - COMPLETE OVERRIDE ===== */
+        /* Match application theme from dashboard */
+
+        #vehicleClaimModal .modal-content {
+            background: #1a1a2e !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 16px !important;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5) !important;
+            max-width: 700px !important;
+        }
+
+        #vehicleClaimModal .modal-header {
+            background: #1a1a2e !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+            padding: 24px !important;
+        }
+
+        #vehicleClaimModal .modal-body {
+            background: #1a1a2e !important;
+            padding: 24px !important;
+        }
+
+        /* Section Cards - Match dashboard cards */
+        #vehicleClaimModal .section-card {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(255, 255, 255, 0.06) !important;
+            border-radius: 12px !important;
+            padding: 20px !important;
+            margin-bottom: 16px !important;
+        }
+
+        /* Section Titles - Clean, no emoji icons */
+        #vehicleClaimModal .section-title {
+            display: flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            margin-bottom: 16px !important;
+            padding-bottom: 12px !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        }
+
+        #vehicleClaimModal .section-title i {
+            color: #6366f1 !important;
+            font-size: 14px !important;
+            opacity: 0.8 !important;
+        }
+
+        #vehicleClaimModal .section-title span {
+            color: #e2e8f0 !important;
+            font-size: 0.875rem !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.02em !important;
+        }
+
+        /* Form Labels - UPPERCASE like dashboard */
+        #vehicleClaimModal .form-label {
+            color: #94a3b8 !important;
+            font-size: 0.7rem !important;
+            font-weight: 500 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+            margin-bottom: 8px !important;
+            display: block !important;
+        }
+
+        /* Input Fields - Match application inputs */
+        #vehicleClaimModal .form-input,
+        #vehicleClaimModal input,
+        #vehicleClaimModal select,
+        #vehicleClaimModal textarea {
+            background: rgba(15, 23, 42, 0.8) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 8px !important;
+            color: #f1f5f9 !important;
+            font-size: 0.875rem !important;
+            padding: 12px 14px !important;
+            width: 100% !important;
+            transition: all 0.2s ease !important;
+        }
+
+        #vehicleClaimModal .form-input:focus,
+        #vehicleClaimModal input:focus {
+            border-color: rgba(99, 102, 241, 0.5) !important;
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+        }
+
+        #vehicleClaimModal .form-input::placeholder,
+        #vehicleClaimModal input::placeholder {
+            color: #64748b !important;
+        }
+
+        /* Input Icons - Subtle */
+        #vehicleClaimModal .input-icon {
+            color: #64748b !important;
+            font-size: 12px !important;
+        }
+
+        /* Checkbox Grid */
+        #vehicleClaimModal .checkbox-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+            gap: 12px !important;
+        }
+
+        #vehicleClaimModal .checkbox-item {
+            display: flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            padding: 10px 14px !important;
+            background: rgba(15, 23, 42, 0.6) !important;
+            border: 1px solid rgba(255, 255, 255, 0.06) !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+        }
+
+        #vehicleClaimModal .checkbox-item:hover {
+            background: rgba(99, 102, 241, 0.1) !important;
+            border-color: rgba(99, 102, 241, 0.3) !important;
+        }
+
+        #vehicleClaimModal .checkbox-item input[type="checkbox"] {
+            width: 16px !important;
+            height: 16px !important;
+            accent-color: #6366f1 !important;
+        }
+
+        #vehicleClaimModal .checkbox-item span {
+            color: #cbd5e1 !important;
+            font-size: 0.8rem !important;
+            font-weight: 400 !important;
+        }
+
+        /* Upload Zone */
+        #vehicleClaimModal .upload-zone {
+            background: rgba(99, 102, 241, 0.05) !important;
+            border: 2px dashed rgba(99, 102, 241, 0.3) !important;
+            border-radius: 10px !important;
+            padding: 24px !important;
+            text-align: center !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+        }
+
+        #vehicleClaimModal .upload-zone:hover {
+            background: rgba(99, 102, 241, 0.08) !important;
+            border-color: rgba(99, 102, 241, 0.5) !important;
+        }
+
+        #vehicleClaimModal .upload-zone i {
+            color: #6366f1 !important;
+            font-size: 24px !important;
+            margin-bottom: 8px !important;
+        }
+
+        /* Footer Buttons */
+        #vehicleClaimModal .modal-footer {
+            background: #1a1a2e !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+            padding: 16px 24px !important;
+        }
+
+        /* Upload Button */
+        #vehicleClaimModal .btn-upload,
+        #vehicleClaimModal #uploadClaimDocBtn {
+            background: rgba(99, 102, 241, 0.15) !important;
+            border: 1px solid rgba(99, 102, 241, 0.3) !important;
+            color: #a5b4fc !important;
+            padding: 10px 16px !important;
+            border-radius: 8px !important;
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+        }
+
+        #vehicleClaimModal .btn-upload:hover,
+        #vehicleClaimModal #uploadClaimDocBtn:hover {
+            background: rgba(99, 102, 241, 0.25) !important;
+        }
     </style>
 </head>
 
