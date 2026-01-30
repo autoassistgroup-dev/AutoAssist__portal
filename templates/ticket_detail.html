@@ -23,6 +23,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"
         media="all">
     <link href="/static/css/animations.css" rel="stylesheet">
+    <!-- Socket.IO for real-time updates -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
     <style>
         /* ===== PROFESSIONAL DARK THEME ===== */
         :root {
@@ -12511,6 +12513,125 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
     <!-- Sidebar overlay for mobile -->
     <div id="sidebarOverlay" class="sidebar-overlay"></div>
     </div> <!-- Close main-layout -->
+
+    <!-- Socket.IO Real-Time Reply Updates -->
+    <script>
+        (function () {
+            // Get ticket ID from URL
+            const ticketId = '{{ ticket.ticket_id }}';
+
+            // Connect to Socket.IO server
+            const socket = io();
+
+            socket.on('connect', function () {
+                console.log('[SOCKET] Connected - joining ticket room:', ticketId);
+                socket.emit('join_ticket', { ticket_id: ticketId });
+            });
+
+            socket.on('disconnect', function () {
+                console.log('[SOCKET] Disconnected');
+            });
+
+            // Listen for new replies
+            socket.on('new_reply', function (data) {
+                console.log('[SOCKET] New reply received:', data);
+
+                // Show toast notification
+                showReplyToast(data.sender_name, data.message);
+
+                // Add reply to conversation if not from current user
+                if (data.sender_type !== 'agent') {
+                    addReplyToConversation(data);
+                }
+            });
+
+            // Toast notification for new replies
+            function showReplyToast(sender, message) {
+                let container = document.getElementById('toast-container');
+                if (!container) {
+                    container = document.createElement('div');
+                    container.id = 'toast-container';
+                    container.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;';
+                    document.body.appendChild(container);
+                }
+
+                const toast = document.createElement('div');
+                toast.style.cssText = `
+                background: linear-gradient(135deg, rgba(30, 30, 40, 0.95), rgba(40, 40, 55, 0.95));
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(34, 197, 94, 0.4);
+                border-radius: 12px;
+                padding: 16px 20px;
+                min-width: 300px;
+                max-width: 400px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+                animation: slideIn 0.3s ease-out;
+            `;
+
+                toast.innerHTML = `
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                    <i class="fas fa-comment" style="color: #22c55e; font-size: 20px;"></i>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">New Reply from ${sender}</div>
+                        <div style="color: rgba(255,255,255,0.7); font-size: 13px;">${message.substring(0, 100)}${message.length > 100 ? '...' : ''}</div>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer;"><i class="fas fa-times"></i></button>
+                </div>
+            `;
+
+                container.appendChild(toast);
+                setTimeout(() => toast.remove(), 5000);
+            }
+
+            // Add reply to conversation dynamically
+            function addReplyToConversation(data) {
+                // Find conversation container - look for message wrapper/container
+                const msgWrappers = document.querySelectorAll('.message-wrapper, .msg-wrapper, [class*="message"]');
+                let container = null;
+
+                for (const wrapper of msgWrappers) {
+                    if (wrapper.children.length > 0) {
+                        container = wrapper;
+                        break;
+                    }
+                }
+
+                if (!container) {
+                    console.log('[SOCKET] Could not find message container, reloading page...');
+                    location.reload();
+                    return;
+                }
+
+                // Create new message element
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'message message-customer';
+                msgDiv.style.animation = 'slideIn 0.3s ease-out';
+                msgDiv.innerHTML = `
+                <div class="message-header">
+                    <span class="message-sender">${data.sender_name || 'Customer'}</span>
+                    <span class="message-time">Just now</span>
+                </div>
+                <div class="message-content">${data.message}</div>
+            `;
+
+                container.appendChild(msgDiv);
+                msgDiv.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Add CSS animation if not exists
+            if (!document.getElementById('socket-styles')) {
+                const style = document.createElement('style');
+                style.id = 'socket-styles';
+                style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+                document.head.appendChild(style);
+            }
+        })();
+    </script>
 
 </body>
 
