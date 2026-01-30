@@ -9337,6 +9337,20 @@
                                 if (!memberId || memberId.trim() === '' || memberId === 'Select a member...') {
                                     console.warn('⚠️ Member validation failed');
                                     showNotification('Please select a member to forward the ticket to', 'error');
+
+                                    // VISUAL FEEDBACK
+                                    memberSelectEl.classList.add('border-red-500', 'ring-2', 'ring-red-500');
+                                    memberSelectEl.focus();
+
+                                    // Remove error class after 3 seconds or on change
+                                    setTimeout(() => {
+                                        memberSelectEl.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+                                    }, 3000);
+
+                                    memberSelectEl.addEventListener('change', function () {
+                                        memberSelectEl.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+                                    }, { once: true });
+
                                     return;
                                 }
 
