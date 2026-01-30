@@ -7604,15 +7604,10 @@
                         });
                     }
 
-                    // Forward Button - Show modal to select member
-                    const forwardBtn = document.getElementById('forwardBtn');
-                    if (forwardBtn) {
-                        forwardBtn.addEventListener('click', function () {
-                            assignModalTitle.textContent = 'Forward Ticket';
-                            forwardNotesContainer.style.display = 'block';
-                            assignModal.classList.add('active');
-                        });
-                    }
+                    // Forward Button - DUPLICATE LISTENER REMOVED
+                    // This was conflicting with the main forward modal listener at line ~9294
+                    // const forwardBtn = document.getElementById('forwardBtn');
+                    // if (forwardBtn) { ... }
 
                     // Close assign modal
                     function closeAssignModalFunc() {
