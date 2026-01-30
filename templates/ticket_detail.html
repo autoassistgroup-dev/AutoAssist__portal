@@ -5777,7 +5777,7 @@
                                                 {% set can_download = attachment.type == 'file' or attachment.source
                                                 ==
                                                 'webhook_base64' or attachment.source == 'webhook' %}
-                                                {% if can_preview and can_download %}
+                                                {% if can_preview %}
                                                 <button
                                                     onclick="previewAttachment('{{ reply._id|e }}', '{{ loop.index0 }}', '{{ filename|e }}', '{{ source|e }}')"
                                                     class="bg-blue-100 hover:bg-blue-200 text-blue-600 px-1.5 py-1 rounded text-[10px] transition"
@@ -5785,7 +5785,7 @@
                                                     <i class="fas fa-eye"></i>
                                                 </button>
                                                 {% endif %}
-                                                {% if can_download %}
+                                                {% if can_download or not can_preview %}
                                                 <button
                                                     onclick="downloadAttachment('{{ reply._id|e }}', '{{ loop.index0 }}', '{{ filename|e }}', '{{ source|e }}')"
                                                     class="bg-green-100 hover:bg-green-200 text-green-600 px-1.5 py-1 rounded text-[10px] transition"
