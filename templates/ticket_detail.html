@@ -9333,14 +9333,19 @@
                                 console.log('🆔 Forwarding Ticket ID:', ticketId);
 
                                 // Validation
+                                console.log('👤 Selected Member ID:', memberId);
                                 if (!memberId || memberId.trim() === '' || memberId === 'Select a member...') {
+                                    console.warn('⚠️ Member validation failed');
                                     showNotification('Please select a member to forward the ticket to', 'error');
                                     return;
                                 }
 
                                 // Validate session member_id for forwarding
                                 const sessionMemberId = "{{ session.member_id if session.member_id else '' }}";
+                                console.log('🆔 Session Member ID:', sessionMemberId);
+
                                 if (!sessionMemberId || sessionMemberId === 'None' || sessionMemberId === 'null' || sessionMemberId === '') {
+                                    console.warn('⚠️ Session validation failed');
                                     showNotification('Session expired. Please refresh the page and log in again.', 'error');
                                     return;
                                 }
