@@ -7460,8 +7460,8 @@
 
                             try {
                                 const requestData = {
-                                    member_id: currentUserId,
-                                    notes: '',
+                                    assigned_to: currentUserId,
+                                    note: '',
                                     is_forwarded: false,
                                     forwarded_from: null
                                 };
@@ -7471,7 +7471,8 @@
                                 const response = await fetch(`/api/tickets/${ticketId}/assign`, {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify(requestData)
+                                    body: JSON.stringify(requestData),
+                                    credentials: 'include'
                                 });
 
                                 const data = await response.json();
@@ -7637,11 +7638,12 @@
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({
-                                        member_id: memberId,
-                                        notes: notes,
+                                        assigned_to: memberId,
+                                        note: notes,
                                         is_forwarded: true,
                                         forwarded_from: currentUserId
-                                    })
+                                    }),
+                                    credentials: 'include'
                                 });
 
                                 const data = await response.json();
@@ -9346,8 +9348,8 @@
 
                                 // Prepare API request
                                 const requestBody = {
-                                    member_id: memberId.trim(),
-                                    notes: notes.trim(),
+                                    assigned_to: memberId.trim(),
+                                    note: notes.trim(),
                                     is_forwarded: true,
                                     forwarded_from: sessionMemberId
                                 };
