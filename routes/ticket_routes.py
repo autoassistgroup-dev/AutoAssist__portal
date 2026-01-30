@@ -897,7 +897,7 @@ def refer_to_tech_director(ticket_id):
             'referred_to_director': True,
             'referred_at': datetime.now(),
             'referred_by': session.get('member_id'),
-            'status': 'Under Review' # Or keep current?
+            'status': 'Referred to Tech Director'  # Status MUST contain "Referred" for Tech Director to see it
         }
         
         db.update_ticket(ticket_id, update_data)
