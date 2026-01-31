@@ -4,6 +4,9 @@ WSGI Entry Point for AutoAssistGroup Support System
 Production deployment configuration for AWS EC2
 """
 
+import eventlet
+eventlet.monkey_patch()
+
 import os
 import sys
 from pathlib import Path
