@@ -1305,6 +1305,50 @@
                 addNewTicketToList(data);
             });
 
+            // Listen for ticket updates (status/priority)
+            socket.on('ticket_updated', function (data) {
+                console.log('[SOCKET] Ticket updated:', data);
+
+                // Find ticket card
+                const ticketCard = document.querySelector(`a[href="/ticket/${data.ticket_id}"]`);
+
+                if (ticketCard) {
+                    // Update Status Badge
+                    if (data.status) {
+                        const statusBadge = ticketCard.querySelector('.status-badge');
+                        if (statusBadge) {
+                            // Update text
+                            statusBadge.textContent = data.status;
+                            // Update class
+                            // Simplify status to common format (lowercase, hyphens)
+                            const statusClass = 'status-' + data.status.toLowerCase().replace(/ /g, '-').replace('–', '');
+                            statusBadge.className = `status-badge ${statusClass}`;
+                        }
+                    }
+
+                    // Update Priority Badge
+                    if (data.priority) {
+                        const priorityBadge = ticketCard.querySelector('.priority-badge');
+                        if (priorityBadge) {
+                            const newPriorityClass = data.priority === 'Urgent' ? 'badge-urgent' :
+                                data.priority === 'Fast' ? 'badge-fast' :
+                                    data.priority === 'Medium' ? 'badge-medium' : 'badge-low';
+                            priorityBadge.className = `priority-badge ${newPriorityClass}`;
+                            priorityBadge.textContent = data.priority;
+                        }
+                    }
+
+                    // Update Subject
+                    if (data.subject) {
+                        const subjectEl = ticketCard.querySelector('.ticket-subject');
+                        if (subjectEl) subjectEl.textContent = data.subject;
+                    }
+
+                    // Show toast
+                    showToast('Ticket Updated', `#${data.ticket_id} updated`, 'info');
+                }
+            });
+
             // Toast notification function
             function showToast(title, message, type = 'info') {
                 // Create toast container if not exists
