@@ -1080,7 +1080,7 @@
                 </h2>
                 <span class="total-badge">Total: {{ total_tickets }}</span>
             </div>
-            <div class="tickets-grid">
+            <div class="tickets-grid" id="mainTicketsGrid">
                 {% for ticket in tickets %}
                 <div class="ticket-card">
                     <a href="/ticket/{{ ticket.ticket_id }}">
@@ -1286,6 +1286,9 @@
             // Connect to Socket.IO server
             const socket = io();
 
+            // Notification Sound
+            const notificationSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+
             socket.on('connect', function () {
                 console.log('[SOCKET] Connected to real-time server');
                 // Join dashboard room for ticket notifications
@@ -1299,6 +1302,10 @@
             // Listen for new tickets
             socket.on('new_ticket', function (data) {
                 console.log('[SOCKET] New ticket received:', data);
+
+                // Play sound
+                notificationSound.play().catch(e => console.log('Audio autoplay blocked:', e));
+
                 showToast('New Ticket', `#${data.ticket_id}: ${data.subject}`, 'info');
 
                 // Optionally refresh the page or prepend ticket to list
@@ -1400,7 +1407,7 @@
 
             // Add new ticket to list dynamically
             function addNewTicketToList(ticketData) {
-                const ticketGrid = document.querySelector('.tickets-grid');
+                const ticketGrid = document.getElementById('mainTicketsGrid') || document.querySelector('.tickets-grid');
                 if (!ticketGrid) return;
 
                 // Check if ticket already exists
