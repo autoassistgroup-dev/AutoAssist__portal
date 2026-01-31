@@ -120,10 +120,11 @@ def emit_new_ticket(ticket_data):
         ticket_data: dict containing ticket information
     """
     try:
+        logger.info(f"[SOCKETIO] Attempting to emit new_ticket: {ticket_data.get('ticket_id')}")
         socketio.emit('new_ticket', ticket_data, room='dashboard')
-        logger.info(f"[SOCKETIO] Emitted new_ticket: {ticket_data.get('ticket_id')}")
+        logger.info(f"[SOCKETIO] Successfully emitted new_ticket: {ticket_data.get('ticket_id')}")
     except Exception as e:
-        logger.error(f"[SOCKETIO] Error emitting new_ticket: {e}")
+        logger.error(f"[SOCKETIO] Error emitting new_ticket: {str(e)}", exc_info=True)
 
 
 def emit_new_reply(ticket_id, reply_data):

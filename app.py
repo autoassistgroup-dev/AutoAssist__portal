@@ -1,3 +1,6 @@
+import eventlet
+eventlet.monkey_patch()
+
 """
 AutoAssistGroup Support Ticket Management System - Refactored Entry Point
 
