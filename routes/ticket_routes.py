@@ -133,7 +133,12 @@ def create_ticket_webhook():
                 'priority': processed.get('priority', 'Medium'),
                 'status': 'Open',
                 'created_at': processed.get('created_at').isoformat() if processed.get('created_at') else None,
-                'is_manual': False
+                'email': processed.get('email', ''),
+                'priority': processed.get('priority', 'Medium'),
+                'status': 'Open',
+                'created_at': processed.get('created_at').isoformat() if processed.get('created_at') else None,
+                'is_manual': False,
+                'body': processed.get('body', '') or processed.get('description', '')
             })
         except Exception as e:
             logger.warning(f"Failed to emit new ticket event: {e}")
@@ -285,7 +290,10 @@ def create_ticket():
                 'priority': ticket_data.get('priority', 'Medium'),
                 'status': 'New',
                 'created_at': ticket_data.get('created_at').isoformat() if ticket_data.get('created_at') else None,
-                'is_manual': True
+                'status': 'New',
+                'created_at': ticket_data.get('created_at').isoformat() if ticket_data.get('created_at') else None,
+                'is_manual': True,
+                'body': ticket_data.get('body', '')
             })
         except Exception as e:
             logger.warning(f"Failed to emit new ticket event: {e}")

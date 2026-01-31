@@ -1411,58 +1411,92 @@
 
             // Add new ticket to list dynamically
             function addNewTicketToList(ticketData) {
-                const ticketGrid = document.getElementById('mainTicketsGrid') || document.querySelector('.tickets-grid');
-                if (!ticketGrid) return;
+                try {
+                    const ticketGrid = document.getElementById('mainTicketsGrid') || document.querySelector('.tickets-grid');
+                    if (!ticketGrid) {
+                        console.error('[SOCKET] Ticket grid not found!');
+                        return;
+                    }
 
-                // Check if ticket already exists
-                if (document.querySelector(`a[href="/ticket/${ticketData.ticket_id}"]`)) {
-                    return; // Already in list
-                }
+                    // Check if ticket already exists
+                    if (document.querySelector(`a[href="/ticket/${ticketData.ticket_id}"]`)) {
+                        console.log('[SOCKET] Ticket already in list:', ticketData.ticket_id);
+                        return; // Already in list
+                    }
 
-                // Create ticket card HTML
-                const priorityClass = ticketData.priority === 'Urgent' ? 'badge-urgent' :
-                    ticketData.priority === 'Fast' ? 'badge-fast' :
-                        ticketData.priority === 'Medium' ? 'badge-medium' : 'badge-low';
-                const isManual = ticketData.ticket_id && ticketData.ticket_id.charAt(0) === 'M';
-                const methodClass = isManual ? 'method-manual' : 'method-email';
-                const methodIcon = isManual ? 'fa-user-edit' : 'fa-envelope';
-                const methodText = isManual ? 'Manual' : 'Email';
+                    console.log('[SOCKET] Rendering new ticket:', ticketData);
 
-                const ticketCard = document.createElement('div');
-                ticketCard.className = 'ticket-card';
-                ticketCard.style.animation = 'slideIn 0.3s ease-out';
-                ticketCard.innerHTML = `
-                    <a href="/ticket/${ticketData.ticket_id}">
-                        <div class="unread-indicator"></div>
-                        <div class="ticket-content">
-                            <div class="ticket-badges">
-                                <span class="ticket-id">#${ticketData.ticket_id}</span>
-                                <span class="priority-badge ${priorityClass}">${ticketData.priority || 'Medium'}</span>
-                                <span class="status-badge status-new">New</span>
+                    // Safe Defaults
+                    const priority = ticketData.priority || 'Medium';
+                    const status = ticketData.status || 'New';
+                    const subject = ticketData.subject || 'No Subject';
+                    const name = ticketData.name || 'Anonymous';
+                    const email = ticketData.email || 'No Email';
+                    const ticketId = ticketData.ticket_id || 'Unknown';
+                    const isManual = ticketId.startsWith('M');
+                    const methodClass = isManual ? 'method-manual' : 'method-email';
+                    const methodIcon = isManual ? 'fa-user-edit' : 'fa-envelope';
+                    const methodText = isManual ? 'Manual' : 'Email';
+
+                    // Classes
+                    const priorityClass = priority === 'Urgent' ? 'badge-urgent' :
+                        priority === 'Fast' ? 'badge-fast' :
+                            priority === 'Medium' ? 'badge-medium' : 'badge-low';
+
+                    const statusClass = status === 'Open' ? 'status-open' :
+                        status === 'Waiting for Response' ? 'status-waiting' :
+                            status === 'Resolved' ? 'status-resolved' : 'status-new';
+
+                    const ticketCard = document.createElement('div');
+                    ticketCard.className = 'ticket-card';
+                    ticketCard.style.animation = 'slideIn 0.5s ease-out';
+
+                    // Unread indicator for new tickets
+                    const unreadHtml = '<div class="unread-indicator"></div>';
+
+                    ticketCard.innerHTML = `
+                        <a href="/ticket/${ticketId}">
+                            ${unreadHtml}
+                            <div class="ticket-content">
+                                <div class="ticket-badges">
+                                    <span class="ticket-id">#${ticketId}</span>
+                                    <span class="priority-badge ${priorityClass}">${priority}</span>
+                                    <!-- Classification omitted for simplicity in dynamic render -->
+                                    <span class="status-badge ${statusClass}">${status}</span>
+                                </div>
+                                <h3 class="ticket-subject">${subject}</h3>
+                                <p class="ticket-body">${ticketData.body || 'No Body'}</p>
+                                <div class="ticket-meta">
+                                    <span><i class="fas fa-user"></i>${name}</span>
+                                    <span><i class="fas fa-envelope"></i>${email}</span>
+                                    <span><i class="fas fa-clock"></i>Just now</span>
+                                </div>
                             </div>
-                            <h3 class="ticket-subject">${ticketData.subject || 'No Subject'}</h3>
-                            <div class="ticket-meta">
-                                <span><i class="fas fa-user"></i>${ticketData.name || 'Anonymous'}</span>
-                                <span><i class="fas fa-envelope"></i>${ticketData.email || 'No Email'}</span>
-                                <span><i class="fas fa-clock"></i>Just now</span>
+                            <div class="ticket-sidebar">
+                                <span class="method-badge ${methodClass}">
+                                    <i class="fas ${methodIcon}"></i> ${methodText}
+                                </span>
                             </div>
-                        </div>
-                        <div class="ticket-sidebar">
-                            <span class="method-badge ${methodClass}">
-                                <i class="fas ${methodIcon}"></i> ${methodText}
-                            </span>
-                        </div>
-                    </a>
-                `;
+                        </a>
+                    `;
 
-                // Prepend to list (newest first)
-                ticketGrid.prepend(ticketCard);
+                    // Prepend to list (newest first)
+                    ticketGrid.prepend(ticketCard);
 
-                // Update total count
-                const totalBadge = document.querySelector('.total-badge');
-                if (totalBadge) {
-                    const currentTotal = parseInt(totalBadge.textContent.replace('Total: ', '')) || 0;
-                    totalBadge.textContent = `Total: ${currentTotal + 1}`;
+                    // Update total count
+                    const totalBadge = document.querySelector('.total-badge');
+                    if (totalBadge) {
+                        const currentText = totalBadge.textContent;
+                        const match = currentText.match(/(\d+)/);
+                        if (match) {
+                            const currentTotal = parseInt(match[0]);
+                            totalBadge.textContent = `Total: ${currentTotal + 1}`;
+                        } else {
+                            totalBadge.textContent = 'Total: Updated';
+                        }
+                    }
+                } catch (e) {
+                    console.error('[SOCKET] Error rendering ticket:', e);
                 }
             }
 

@@ -11,6 +11,7 @@ Author: AutoAssistGroup Development Team
 
 import logging
 from flask_socketio import SocketIO, emit, join_room, leave_room
+from flask_login import current_user
 
 logger = logging.getLogger(__name__)
 
@@ -52,9 +53,15 @@ def handle_disconnect():
 def handle_join_ticket(data):
     """Join a ticket-specific room for live updates"""
     ticket_id = data.get('ticket_id')
+    
+    # SECURITY: Ensure user is authenticated
+    if not current_user.is_authenticated:
+        logger.warning(f"[SOCKETIO] Unauthenticated attempt to join ticket_{ticket_id}")
+        return
+        
     if ticket_id:
         join_room(f'ticket_{ticket_id}')
-        logger.info(f"[SOCKETIO] Client joined room: ticket_{ticket_id}")
+        logger.info(f"[SOCKETIO] Client joined room: ticket_{ticket_id} (User: {current_user.id})")
         emit('joined_ticket', {'ticket_id': ticket_id})
 
 
@@ -70,8 +77,14 @@ def handle_leave_ticket(data):
 @socketio.on('join_dashboard')
 def handle_join_dashboard():
     """Join the dashboard room for new ticket notifications"""
+    
+    # SECURITY: Ensure user is authenticated
+    if not current_user.is_authenticated:
+        logger.warning("[SOCKETIO] Unauthenticated attempt to join dashboard")
+        return
+
     join_room('dashboard')
-    logger.info("[SOCKETIO] Client joined dashboard room")
+    logger.info(f"[SOCKETIO] Client joined dashboard room (User: {current_user.id})")
     emit('joined_dashboard', {'status': 'joined'})
 
 

@@ -848,6 +848,117 @@
                 }
             });
         </script>
+        <!-- Socket.IO for Real-Time Updates -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+        <script>
+            (function () {
+                // Connect to Socket.IO
+                const socket = io();
+
+                socket.on('connect', function () {
+                    console.log('[SOCKET] Connected to dashboard');
+                    socket.emit('join_dashboard');
+                });
+
+                socket.on('disconnect', function () {
+                    console.log('[SOCKET] Disconnected from dashboard');
+                });
+
+                // Handle New Ticket
+                socket.on('new_ticket', function (ticket) {
+                    console.log('[SOCKET] New ticket received:', ticket);
+
+                    // Update stats counters
+                    incrementCounter('totalTicketsCount');
+                    incrementCounter('activeTicketsCount'); // Assuming new tickets are active
+                    incrementCounter('receivedTodayCount');
+
+                    // Add to table
+                    const tbody = document.querySelector('table tbody');
+                    if (tbody) {
+                        const row = document.createElement('tr');
+                        row.className = 'animate-pulse'; // Simple highlight effect
+                        row.style.animation = 'fadeIn 0.5s ease-out';
+
+                        // Determine priority icon/class
+                        let priorityIcon = '🕒';
+                        let priorityClass = 'badge-medium';
+                        if (ticket.priority === 'Urgent') { priorityIcon = '🚨'; priorityClass = 'badge-urgent'; }
+                        else if (ticket.priority === 'Fast') { priorityIcon = '⚡'; priorityClass = 'badge-fast'; }
+                        else if (ticket.priority === 'Low') { priorityIcon = '🐢'; priorityClass = 'badge-low'; }
+
+                        row.innerHTML = `
+                        <td>
+                            <a href="/ticket/${ticket.ticket_id}">#${ticket.ticket_id}</a>
+                        </td>
+                        <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis;">
+                            ${ticket.subject || 'No Subject'}
+                        </td>
+                        <td>
+                            <span class="priority-badge badge-open">Open</span>
+                        </td>
+                        <td>
+                            <span class="priority-badge ${priorityClass}">
+                                ${priorityIcon} ${ticket.priority}
+                            </span>
+                        </td>
+                        <td style="color: rgba(255,255,255,0.5);">Just now</td>
+                        <td>
+                            <span style="color: rgba(255,255,255,0.3); font-style: italic;">Unassigned</span>
+                        </td>
+                    `;
+
+                        // Insert at top
+                        tbody.insertBefore(row, tbody.firstChild);
+
+                        // Remove highlight after a few seconds
+                        setTimeout(() => row.classList.remove('animate-pulse'), 3000);
+                    }
+                });
+
+                // Handle Ticket Update
+                socket.on('ticket_updated', function (data) {
+                    console.log('[SOCKET] Ticket updated:', data);
+                    // Find row by ticket ID (requires looking at the link text or adding ID to TR)
+                    // For now, let's scan links
+                    const links = document.querySelectorAll('table tbody tr td:first-child a');
+                    let targetRow = null;
+
+                    links.forEach(link => {
+                        if (link.textContent.trim().includes(data.ticket_id)) {
+                            targetRow = link.closest('tr');
+                        }
+                    });
+
+                    if (targetRow) {
+                        if (data.status) {
+                            const statusBadge = targetRow.querySelector('td:nth-child(3) .priority-badge');
+                            if (statusBadge) {
+                                statusBadge.className = 'priority-badge'; // Reset
+                                let statusClass = 'badge-closed';
+                                if (data.status === 'Open') statusClass = 'badge-open';
+                                else if (data.status === 'Waiting for Response') statusClass = 'badge-waiting';
+                                else if (data.status === 'Resolved') statusClass = 'badge-resolved';
+
+                                statusBadge.classList.add(statusClass);
+                                statusBadge.textContent = data.status;
+                            }
+                        }
+
+                        // Highlight update
+                        targetRow.classList.add('bg-white', 'bg-opacity-5');
+                        setTimeout(() => targetRow.classList.remove('bg-white', 'bg-opacity-5'), 1000);
+                    }
+                });
+
+                // Helper to safely increment text counters
+                function incrementCounter(id) {
+                    // Elements not currently having IDs in the template, so strictly speaking
+                    // we'd need to add IDs to the stats cards first. 
+                    // For now this is a placeholder or we can DOM traverse if structure is rigid.
+                }
+            })();
+        </script>
 </body>
 
 </html>
