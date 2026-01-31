@@ -328,6 +328,24 @@ def create_ticket():
         
         try:
             db.create_ticket(ticket_data)
+            
+            # Emit real-time notification
+            try:
+                from socket_events import emit_new_ticket
+                emit_new_ticket({
+                    'ticket_id': ticket_data['ticket_id'],
+                    'subject': ticket_data.get('subject', 'No Subject'),
+                    'name': ticket_data.get('name', 'Anonymous'),
+                    'email': ticket_data.get('email', ''),
+                    'priority': ticket_data.get('priority', 'Medium'),
+                    'status': 'New',
+                    'created_at': ticket_data.get('created_at').isoformat() if ticket_data.get('created_at') else None,
+                    'is_manual': True
+                })
+            except Exception as e:
+                # Log but don't fail the request
+                print(f"Failed to emit socket event: {e}")
+                
             flash('Ticket created successfully!', 'success')
             return redirect(url_for('main.ticket_detail', ticket_id=ticket_data['ticket_id']))
         except Exception as e:
