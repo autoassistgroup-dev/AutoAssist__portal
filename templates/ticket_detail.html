@@ -5420,7 +5420,7 @@
 
                                     <!-- Status Badge -->
                                     <span id="statusBadge"
-                                        class="status-badge px-3 py-1 text-xs rounded-lg font-medium status-{{ ticket.status|lower|replace(' ', '-')|replace('–', '') }}">
+                                        class="px-3 py-1 text-xs rounded-lg font-medium status-{{ ticket.status|lower|replace(' ', '-')|replace('–', '') }}">
                                         {{ ticket.status }}
                                     </span>
 
@@ -5469,7 +5469,7 @@
                             </div>
 
                             <!-- Action Buttons -->
-                            <div class="ticket-header-actions flex flex-wrap items-center gap-3 mt-2">
+                            <div class="flex flex-wrap items-center gap-3 mt-2">
                                 <!-- Importance Button - Available for ALL users including Technical Director -->
                                 <button id="importantBtn"
                                     class="importance-btn {% if ticket.is_important %}important{% endif %} transition-all"
@@ -12823,11 +12823,10 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
                         return 'status-new'; // default
                     };
 
-                    // Remove only status-* color classes, NOT status-badge or other utilities
-                    statusBadge.className = statusBadge.className.replace(/\bstatus-(?!badge)[\w-]+\b/g, '');
-                    // Add new class and ensure status-badge is present
+                    // Remove all status-* classes
+                    statusBadge.className = statusBadge.className.replace(/status-[\w-]+/g, '');
+                    // Add new class
                     statusBadge.classList.add(getStatusColor(status));
-                    statusBadge.classList.add('status-badge');
 
                     // Also update the dropdown text if it exists
                     const currentStatusDisplay = document.getElementById('currentStatusDisplay');
