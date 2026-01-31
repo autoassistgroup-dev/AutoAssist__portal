@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -4196,6 +4196,11 @@
             color: #93c5fd;
         }
 
+        .status-open {
+            background-color: rgba(59, 130, 246, 0.12);
+            color: #3b82f6;
+        }
+
         .status-form-sent {
             background-color: rgba(245, 158, 11, 0.2);
             color: #fcd34d;
@@ -4251,6 +4256,12 @@
             background-color: rgba(59, 130, 246, 0.1) !important;
             color: #93c5fd !important;
             border-color: rgba(59, 130, 246, 0.3) !important;
+        }
+
+        .status-dropdown-btn.status-open {
+            background-color: rgba(59, 130, 246, 0.12) !important;
+            color: #3b82f6 !important;
+            border-color: rgba(59, 130, 246, 0.25) !important;
         }
 
         .status-dropdown-btn.status-form-sent {
@@ -5512,6 +5523,7 @@
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
                                     <div id="statusDropdownContent" class="status-dropdown-content">
+                                        <div class="status-option" data-status="Open">Open</div>
                                         <div class="status-option" data-status="New">New</div>
                                         <div class="status-option" data-status="Form Sent">Form Sent</div>
                                         <div class="status-option" data-status="Awaiting Submission">Awaiting
@@ -7916,7 +7928,7 @@
 
                             try {
                                 const response = await fetch(`/api/tickets/{{ ticket.ticket_id }}/status`, {
-                                    method: 'POST',
+                                    method: 'PUT',
                                     headers: {
                                         'Content-Type': 'application/json',
                                     },
@@ -7926,46 +7938,32 @@
                                 });
 
                                 if (response.ok) {
-                                    // Update ALL status badges on the page with comprehensive search
-                                    const oldStatus = '{{ ticket.status }}';
+                                    // Get the CURRENT status from the DOM (not the static template value)
+                                    const statusDisplay = document.getElementById('currentStatusDisplay');
+                                    const oldStatus = statusDisplay ? statusDisplay.textContent.trim() : '';
                                     const newStatusClass = newStatus.toLowerCase().replace(/ /g, '-').replace(/–/g, '');
 
-                                    // Method 1: Update by class selector
-                                    const statusBadges = document.querySelectorAll('[class*="status-"]');
-                                    statusBadges.forEach(badge => {
-                                        if (badge.textContent === oldStatus || badge.textContent.includes(oldStatus)) {
-                                            badge.textContent = newStatus;
-                                            badge.className = `px-3 py-1 text-xs rounded-lg font-medium status-${newStatusClass}`;
-                                        }
-                                    });
-
-                                    // Method 2: Update by text content search
-                                    const allElements = document.querySelectorAll('*');
-                                    allElements.forEach(element => {
-                                        if (element.textContent === oldStatus && element.tagName !== 'SCRIPT') {
-                                            element.textContent = newStatus;
-                                        }
-                                    });
-
-                                    // Method 3: Update status dropdown button text
-                                    const statusDisplay = document.getElementById('currentStatusDisplay');
+                                    // Update the status dropdown button text
                                     if (statusDisplay) {
                                         statusDisplay.textContent = newStatus;
                                     }
 
-                                    // Method 4: Update the status dropdown button styling
+                                    // Update the status dropdown button styling
                                     const statusDropdownBtn = document.getElementById('statusDropdownBtn');
                                     if (statusDropdownBtn) {
-                                        // Remove old status classes and add new one
-                                        statusDropdownBtn.className = statusDropdownBtn.className.replace(/status-\S+/g, '');
+                                        // Remove ALL old status classes and add new one
+                                        statusDropdownBtn.className = 'status-dropdown-btn whitespace-nowrap flex-shrink-0 h-9 flex items-center justify-center';
                                         statusDropdownBtn.classList.add(`status-${newStatusClass}`);
                                     }
 
-                                    // Method 5: Update any elements with data-status attribute
-                                    const statusElements = document.querySelectorAll('[data-status]');
-                                    statusElements.forEach(element => {
-                                        if (element.textContent === oldStatus) {
-                                            element.textContent = newStatus;
+                                    // Update ALL status badges on the page
+                                    const statusBadges = document.querySelectorAll('[class*="status-"]');
+                                    statusBadges.forEach(badge => {
+                                        if (badge.textContent.trim() === oldStatus) {
+                                            badge.textContent = newStatus;
+                                            // Update badge classes
+                                            badge.className = badge.className.replace(/status-\S+/g, '');
+                                            badge.classList.add(`status-${newStatusClass}`);
                                         }
                                     });
 
