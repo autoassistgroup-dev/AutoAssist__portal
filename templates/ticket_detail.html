@@ -1875,6 +1875,26 @@
             color: #f59e0b;
         }
 
+        /* User Requested Button Styles */
+        .attachments-container button,
+        div[class*="bg-gray-50"] .flex.gap-1 button,
+        button[class*="bg-blue-100"],
+        button[class*="bg-green-100"],
+        div.flex.flex-wrap.gap-2 button {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: none !important;
+            padding: 6px !important;
+            min-width: 28px !important;
+            width: 96px !important;
+            height: 28px !important;
+            border-radius: 6px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            opacity: 0.8 !important;
+            transition: all 0.2s !important;
+        }
+
         /* Conversation styles */
         .conversation-container {
             display: flex;
@@ -5420,18 +5440,20 @@
 
                                     <!-- Status Badge -->
                                     <span id="statusBadge"
-                                        class="px-3 py-1 text-xs rounded-lg font-medium status-{{ ticket.status|lower|replace(' ', '-')|replace('–', '') }}">
+                                        class="status-badge px-3 h-9 flex items-center justify-center text-xs rounded-lg font-medium status-{{ ticket.status|lower|replace(' ', '-')|replace('–', '') }}">
                                         {{ ticket.status }}
                                     </span>
 
                                     <!-- Priority Selection Dropdown -->
                                     <div class="relative inline-block">
-                                        <select id="prioritySelect" class="pl-3 pr-8 py-1 text-xs rounded-lg font-medium border-none bg-transparent appearance-none cursor-pointer
+                                        <select id="prioritySelect"
+                                            class="pl-3 pr-8 py-1 text-xs rounded-lg font-medium border border-transparent bg-transparent appearance-none cursor-pointer
                                         {% if ticket.priority == 'Urgent' %}text-red-400 bg-red-900/30
                                         {% elif ticket.priority == 'High' %}text-orange-400 bg-orange-900/30
                                         {% elif ticket.priority == 'Medium' %}text-yellow-400 bg-yellow-900/30
                                         {% elif ticket.priority == 'Low' %}text-emerald-400 bg-emerald-900/30
-                                        {% else %}text-gray-300 bg-gray-800{% endif %} hover:opacity-80 transition"
+                                        {% else %}text-gray-400 bg-transparent border-gray-600{% endif %} hover:opacity-80 transition inline-block custom-select"
+                                            style="background: rgba(255, 255, 255, 0.1) !important; border: none !important; padding: 6px !important; min-width: 28px !important; width: 118px !important; height: 28px !important; border-radius: 6px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; opacity: 0.8 !important; transition: all 0.2s !important;"
                                             data-ticket-id="{{ ticket.ticket_id }}">
                                             <option value="Urgent" {% if ticket.priority=='Urgent' %}selected{% endif
                                                 %}>🔴 Urgent</option>
@@ -5451,8 +5473,8 @@
                                     <!-- Technician Assignment Dropdown -->
                                     <div class="relative inline-block">
                                         <select id="technicianSelect"
-                                            class="pl-3 pr-8 py-1 text-xs rounded-lg font-medium border-none bg-transparent appearance-none cursor-pointer
-                                        {% if technician_name %}text-indigo-400 bg-indigo-900/30{% else %}text-gray-400 bg-gray-800{% endif %} hover:opacity-80 transition"
+                                            class="pl-3 pr-8 py-1 text-xs rounded-lg font-medium border border-transparent bg-transparent appearance-none cursor-pointer
+                                        {% if technician_name %}text-indigo-400 bg-indigo-900/30{% else %}text-gray-400 bg-transparent border-gray-600{% endif %} hover:opacity-80 transition inline-block w-auto h-9 flex items-center custom-select"
                                             data-ticket-id="{{ ticket.ticket_id }}">
                                             <option value="">👤 Select Technician</option>
                                             {% for tech in technicians %}
@@ -5482,8 +5504,10 @@
 
 
                                 <!-- Status Dropdown - Available for ALL users including Technical Director -->
+                                <!-- Status Dropdown -->
                                 <div class="status-dropdown">
-                                    <button id="statusDropdownBtn" class="status-dropdown-btn">
+                                    <button id="statusDropdownBtn"
+                                        class="status-dropdown-btn whitespace-nowrap flex-shrink-0 h-9 flex items-center justify-center">
                                         <span id="currentStatusDisplay">{{ ticket.status or 'Set Status' }}</span>
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
@@ -5517,7 +5541,7 @@
                                 'declined',
                                 'cancelled'] %}
                                 <button id="closeResolvedBtn"
-                                    class="px-3 py-1 rounded-xl bg-red-100 text-red-800 hover:bg-red-200 transition">
+                                    class="px-3 h-9 flex items-center justify-center rounded-xl bg-red-100 text-red-800 hover:bg-red-200 transition whitespace-nowrap flex-shrink-0">
                                     <i class="fas fa-lock mr-1"></i> Close Ticket
                                 </button>
                                 {% endif %}
@@ -5527,7 +5551,7 @@
                                 <!-- Take Over Button (Not for Tech Director) -->
                                 {% if not ticket.assignment or ticket.assignment|length == 0 %}
                                 <button id="takeOverBtn"
-                                    class="px-3 py-1 rounded-xl bg-blue-100 text-blue-800 hover:bg-blue-200 transition">
+                                    class="px-3 h-9 flex items-center justify-center rounded-xl bg-blue-100 text-blue-800 hover:bg-blue-200 transition whitespace-nowrap flex-shrink-0">
                                     <i class="fas fa-hand-paper mr-1"></i> Take Over
                                 </button>
                                 {% elif ticket.assignment and ticket.assignment|length > 0 and
@@ -5581,13 +5605,13 @@
                                 {% if can_refer_to_td %}
                                 {% if was_forwarded_back %}
                                 <button id="referToTechDirectorBtn"
-                                    class="px-3 py-1 rounded-xl bg-blue-100 text-blue-800 hover:bg-blue-200 transition"
+                                    class="px-3 h-9 flex items-center justify-center rounded-xl bg-blue-100 text-blue-800 hover:bg-blue-200 transition whitespace-nowrap flex-shrink-0"
                                     title="Re-refer this ticket to Technical Director (previously returned)">
                                     <i class="fas fa-redo mr-1"></i> Re-refer to Tech Director
                                 </button>
                                 {% else %}
                                 <button id="referToTechDirectorBtn"
-                                    class="px-3 py-1 rounded-xl bg-orange-100 text-orange-800 hover:bg-orange-200 transition"
+                                    class="px-3 h-9 flex items-center justify-center rounded-xl bg-orange-100 text-orange-800 hover:bg-orange-200 transition whitespace-nowrap flex-shrink-0"
                                     title="Refer this ticket to Technical Director for expert review">
                                     <i class="fas fa-user-cog mr-1"></i> Refer to Tech Director
                                 </button>
@@ -5610,7 +5634,7 @@
                                 'declined',
                                 'cancelled'] %}
                                 <button id="emailTemplateBtn"
-                                    class="px-3 py-1 rounded-xl bg-purple-100 text-purple-800 hover:bg-purple-200 transition"
+                                    class="px-3 h-9 flex items-center justify-center rounded-xl bg-purple-100 text-purple-800 hover:bg-purple-200 transition whitespace-nowrap flex-shrink-0"
                                     title="Send email using template">
                                     <i class="fas fa-envelope-open-text mr-1"></i> Email Template
                                 </button>
@@ -5621,7 +5645,7 @@
                                 'declined',
                                 'cancelled'] %}
                                 <button id="forwardBtn"
-                                    class="px-3 py-1 rounded-xl {% if is_tech_director %}bg-blue-100 text-blue-800 hover:bg-blue-200{% else %}bg-green-100 text-green-800 hover:bg-green-200{% endif %} transition">
+                                    class="px-3 h-9 flex items-center justify-center rounded-xl {% if is_tech_director %}bg-blue-100 text-blue-800 hover:bg-blue-200{% else %}bg-green-100 text-green-800 hover:bg-green-200{% endif %} transition whitespace-nowrap flex-shrink-0">
                                     <i class="fas fa-share mr-1"></i> {% if is_tech_director %}Forward to Support
                                     Team{%
                                     else %}Forward{% endif %}
@@ -12823,8 +12847,11 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
                         return 'status-new'; // default
                     };
 
-                    // Remove all status-* classes
-                    statusBadge.className = statusBadge.className.replace(/status-[\w-]+/g, '');
+                    // Remove only status-* color classes, NOT status-badge or other utilities
+                    statusBadge.className = statusBadge.className.replace(/\bstatus-(?!badge)[\w-]+\b/g, '');
+                    // Add new class and ensure status-badge is present
+                    statusBadge.classList.add(getStatusColor(status));
+                    statusBadge.classList.add('status-badge');
                     // Add new class
                     statusBadge.classList.add(getStatusColor(status));
 
