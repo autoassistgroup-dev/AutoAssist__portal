@@ -5419,7 +5419,7 @@
                                     </span>
 
                                     <!-- Status Badge -->
-                                    <span
+                                    <span id="statusBadge"
                                         class="px-3 py-1 text-xs rounded-lg font-medium status-{{ ticket.status|lower|replace(' ', '-')|replace('–', '') }}">
                                         {{ ticket.status }}
                                     </span>
@@ -9082,9 +9082,15 @@
                                         console.log('Could not notify parent window:', error);
                                     }
 
+                                    // NO RELOAD - Update UI dynamically
                                     setTimeout(() => {
-                                        window.location.href = `/ticket/{{ ticket.ticket_id }}`;
-                                    }, 500);
+                                        // Scroll to bottom
+                                        const container = document.querySelector('.conversation-container');
+                                        if (container) {
+                                            container.scrollTop = container.scrollHeight;
+                                            window.scrollTo(0, document.body.scrollHeight);
+                                        }
+                                    }, 100);
                                 } else {
                                     const error = await response.json();
                                     console.error('❌ API ERROR:', error);
@@ -12616,9 +12622,12 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
         (function () {
             // Get ticket ID from URL
             const ticketId = '{{ ticket.ticket_id }}';
+            const currentUserId = '{{ session.user_id if session.user_id else "customer" }}';
+            const currentUserType = '{{ "agent" if session.is_agent else "customer" }}';
 
             // Connect to Socket.IO server
             const socket = io();
+            let typingTimeout = null;
 
             socket.on('connect', function () {
                 console.log('[SOCKET] Connected - joining ticket room:', ticketId);
@@ -12633,14 +12642,64 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
             socket.on('new_reply', function (data) {
                 console.log('[SOCKET] New reply received:', data);
 
-                // Show toast notification
-                showReplyToast(data.sender_name, data.message);
-
-                // Add reply to conversation if not from current user
-                if (data.sender_type !== 'agent') {
-                    addReplyToConversation(data);
+                // Check for duplicates (if manually appended or received twice)
+                // We assume data has a unique ID or timestamp we can check, or we check content + sender
+                const lastMessage = document.querySelector('.message:last-child .message-content');
+                if (lastMessage && lastMessage.textContent.trim() === data.message.trim() &&
+                    document.querySelector('.message:last-child .message-sender').textContent.includes(data.sender_name)) {
+                    console.log('[SOCKET] Duplicate message detected, skipping');
+                    return;
                 }
+
+                // Show toast notification only if it's NOT from me
+                if (data.sender_type !== currentUserType && data.sender_name !== '{{ session.name }}') {
+                    showReplyToast(data.sender_name, data.message);
+                }
+
+                // Always add to conversation (deduplication logic above handles double-adds)
+                addReplyToConversation(data);
+
+                // Clear typing indicator if it exists
+                removeTypingIndicator();
             });
+
+            // Listen for typing events
+            socket.on('typing', function (data) {
+                // Don't show typing indicator for myself
+                if (data.user_name === '{{ session.name }}') return;
+                showTypingIndicator(data.user_name);
+            });
+
+            socket.on('stop_typing', function (data) {
+                removeTypingIndicator();
+            });
+
+            // Listen for ticket updates (status/priority)
+            socket.on('ticket_updated', function (data) {
+                console.log('[SOCKET] Ticket updated:', data);
+                if (data.status) updateStatusUI(data.status);
+                if (data.priority) updatePriorityUI(data.priority);
+            });
+
+            // Emit typing events
+            const responseTextarea = document.getElementById('response');
+            if (responseTextarea) {
+                responseTextarea.addEventListener('input', function () {
+                    socket.emit('typing', {
+                        ticket_id: ticketId,
+                        user_name: '{{ session.name or "User" }}',
+                        user_id: currentUserId
+                    });
+
+                    if (typingTimeout) clearTimeout(typingTimeout);
+                    typingTimeout = setTimeout(function () {
+                        socket.emit('stop_typing', {
+                            ticket_id: ticketId,
+                            user_id: currentUserId
+                        });
+                    }, 2000);
+                });
+            }
 
             // Toast notification for new replies
             function showReplyToast(sender, message) {
@@ -12682,40 +12741,100 @@ Email Ticket: ${debugInfo.ticket_source.is_email_ticket}`;
 
             // Add reply to conversation dynamically
             function addReplyToConversation(data) {
-                // Find conversation container - look for message wrapper/container
-                const msgWrappers = document.querySelectorAll('.message-wrapper, .msg-wrapper, [class*="message"]');
-                let container = null;
+                const container = document.querySelector('.conversation-container');
+                if (!container) return;
 
-                for (const wrapper of msgWrappers) {
-                    if (wrapper.children.length > 0) {
-                        container = wrapper;
-                        break;
-                    }
-                }
+                const isCustomer = data.sender_type !== 'agent';
+                const msgClass = isCustomer ? 'customer-message' : 'support-message';
+                const iconClass = isCustomer ? 'fas fa-user-circle customer-icon' : 'fas fa-headset support-icon';
+                const senderName = data.sender_name || (isCustomer ? '{{ ticket.name }}' : 'Support Team');
 
-                if (!container) {
-                    console.log('[SOCKET] Could not find message container, reloading page...');
-                    location.reload();
-                    return;
-                }
-
-                // Create new message element
                 const msgDiv = document.createElement('div');
-                msgDiv.className = 'message message-customer';
+                msgDiv.className = `message ${msgClass}`;
                 msgDiv.style.animation = 'slideIn 0.3s ease-out';
+
+                // Basic structure matching server-side template
                 msgDiv.innerHTML = `
-                <div class="message-header">
-                    <span class="message-sender">${data.sender_name || 'Customer'}</span>
-                    <span class="message-time">Just now</span>
-                </div>
-                <div class="message-content">${data.message}</div>
-            `;
+                    <div class="message-header">
+                        <span class="font-medium flex items-center">
+                            <i class="${iconClass}"></i> ${senderName}
+                        </span>
+                        <span class="message-time">Just now</span>
+                    </div>
+                    <div class="reply-message-box">
+                        <div class="message-content">${data.message}</div>
+                    </div>
+                `;
+
+                // Handle attachments if present (simplified text representation for now or rudimentary HTML)
+                if (data.attachments && data.attachments.length > 0) {
+                    // TODO: Build attachment HTML dynamically if needed
+                    // For now just appending a note
+                    const attDiv = document.createElement('div');
+                    attDiv.className = 'mt-2 text-xs text-gray-500';
+                    attDiv.innerHTML = `<i class="fas fa-paperclip"></i> ${data.attachments.length} Attachment(s) (Reload to view)`;
+                    msgDiv.querySelector('.reply-message-box').appendChild(attDiv);
+                }
 
                 container.appendChild(msgDiv);
-                msgDiv.scrollIntoView({ behavior: 'smooth' });
+                window.scrollTo(0, document.body.scrollHeight);
             }
 
-            // Add CSS animation if not exists
+            // Typing Indicator
+            function showTypingIndicator(username) {
+                const container = document.querySelector('.conversation-container');
+                if (!container) return;
+
+                let indicator = document.getElementById('typing-indicator');
+                if (!indicator) {
+                    indicator = document.createElement('div');
+                    indicator.id = 'typing-indicator';
+                    indicator.className = 'message customer-message'; // Default style
+                    indicator.style.opacity = '0.7';
+                    indicator.innerHTML = `
+                        <div class="message-header">
+                            <span class="font-medium text-xs text-gray-400">
+                                <i class="fas fa-keyboard mr-1 animate-pulse"></i> ${username} is typing...
+                            </span>
+                        </div>
+                    `;
+                    container.appendChild(indicator);
+                    container.scrollTop = container.scrollHeight;
+                }
+            }
+
+            function removeTypingIndicator() {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
+            }
+
+            // Update Status UI
+            function updateStatusUI(status) {
+                const statusBadge = document.getElementById('statusBadge');
+                if (statusBadge) {
+                    statusBadge.textContent = status;
+
+                    // Helper to get color class based on status
+                    const getStatusColor = (s) => {
+                        s = s.toLowerCase();
+                        if (s.includes('open')) return 'status-open';
+                        if (s.includes('pending')) return 'status-pending';
+                        if (s.includes('closed') || s.includes('solved')) return 'status-closed';
+                        return 'status-new'; // default
+                    };
+
+                    // Remove all status-* classes
+                    statusBadge.className = statusBadge.className.replace(/status-[\w-]+/g, '');
+                    // Add new class
+                    statusBadge.classList.add(getStatusColor(status));
+
+                    // Also update the dropdown text if it exists
+                    const currentStatusDisplay = document.getElementById('currentStatusDisplay');
+                    if (currentStatusDisplay) currentStatusDisplay.textContent = status;
+                }
+            }
+
+            // Add CSS animation
             if (!document.getElementById('socket-styles')) {
                 const style = document.createElement('style');
                 style.id = 'socket-styles';

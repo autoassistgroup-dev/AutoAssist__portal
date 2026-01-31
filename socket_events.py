@@ -75,6 +75,41 @@ def handle_join_dashboard():
     emit('joined_dashboard', {'status': 'joined'})
 
 
+@socketio.on('typing')
+def handle_typing(data):
+    """
+    Handle typing start event
+    
+    Args:
+        data: { 'ticket_id': '...', 'user_name': '...' }
+    """
+    ticket_id = data.get('ticket_id')
+    user_name = data.get('user_name')
+    if ticket_id and user_name:
+        # Broadcast to others in the room
+        socketio.emit('typing', {
+            'ticket_id': ticket_id,
+            'user_name': user_name,
+            'user_id': data.get('user_id')
+        }, room=f'ticket_{ticket_id}', include_self=False)
+
+
+@socketio.on('stop_typing')
+def handle_stop_typing(data):
+    """
+    Handle typing stop event
+    
+    Args:
+        data: { 'ticket_id': '...', 'user_name': '...' }
+    """
+    ticket_id = data.get('ticket_id')
+    if ticket_id:
+        socketio.emit('stop_typing', {
+            'ticket_id': ticket_id,
+            'user_id': data.get('user_id')
+        }, room=f'ticket_{ticket_id}', include_self=False)
+
+
 # ============== Broadcast Functions ==============
 
 def emit_new_ticket(ticket_data):

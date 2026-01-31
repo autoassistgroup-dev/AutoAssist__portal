@@ -122,6 +122,22 @@ def create_ticket_webhook():
         
         logger.info(f"Ticket created via webhook: {processed.get('ticket_id')}")
         
+        # Emit real-time notification
+        try:
+            from socket_events import emit_new_ticket
+            emit_new_ticket({
+                'ticket_id': processed.get('ticket_id'),
+                'subject': processed.get('subject', 'No Subject'),
+                'name': processed.get('name', 'Anonymous'),
+                'email': processed.get('email', ''),
+                'priority': processed.get('priority', 'Medium'),
+                'status': 'Open',
+                'created_at': processed.get('created_at').isoformat() if processed.get('created_at') else None,
+                'is_manual': False
+            })
+        except Exception as e:
+            logger.warning(f"Failed to emit new ticket event: {e}")
+
         return jsonify({
             'success': True, 
             'message': 'Ticket created successfully',
@@ -258,6 +274,22 @@ def create_ticket():
         
         logger.info(f"Ticket {ticket_data['ticket_id']} created by {current_member.get('name')}")
         
+        # Emit real-time notification
+        try:
+            from socket_events import emit_new_ticket
+            emit_new_ticket({
+                'ticket_id': ticket_data['ticket_id'],
+                'subject': ticket_data.get('subject', 'No Subject'),
+                'name': f"{ticket_data.get('customer_first_name', '')} {ticket_data.get('customer_surname', '')}".strip() or 'Anonymous',
+                'email': ticket_data.get('email', ''),
+                'priority': ticket_data.get('priority', 'Medium'),
+                'status': 'New',
+                'created_at': ticket_data.get('created_at').isoformat() if ticket_data.get('created_at') else None,
+                'is_manual': True
+            })
+        except Exception as e:
+            logger.warning(f"Failed to emit new ticket event: {e}")
+
         return jsonify({
             'status': 'success',
             'success': True,
